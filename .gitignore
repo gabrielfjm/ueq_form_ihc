@@ -1,2 +1,16 @@
 CLAUDE.md
 .claude/
+
+node_modules/
+.next/
+next-env.d.ts
+*.tsbuildinfo
+
+.env
+.env.local
+
+src/generated/
+
+coverage/
+playwright-report/
+test-results/
