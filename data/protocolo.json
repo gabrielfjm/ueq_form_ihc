@@ -1,0 +1,16 @@
+{
+  "fonte": "PREENCHER: UEQ Handbook, seção/página",
+  "faixaNeutra": {
+    "inferior": -0.8,
+    "superior": 0.8
+  },
+  "alfaMinimo": 0.7,
+  "inconsistencia": {
+    "amplitudeMaxima": 3,
+    "escalasParaSuspeita": 3
+  },
+  "ic": {
+    "z": 1.96
+  },
+  "_confirmar": "amplitudeMaxima, escalasParaSuspeita, z e inclusividade da faixa neutra precisam ser conferidos no handbook/planilha antes da implementacao"
+}

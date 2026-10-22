@@ -1,0 +1,41 @@
+{
+  "fonte": "PREENCHER: UEQ Data Analysis Tool vX, aba Benchmark, acessado em DD/MM/2026",
+  "escalas": {
+    "atratividade": {
+      "excelente": null,
+      "bom": null,
+      "acimaDaMedia": null,
+      "abaixoDaMedia": null
+    },
+    "perspicuidade": {
+      "excelente": null,
+      "bom": null,
+      "acimaDaMedia": null,
+      "abaixoDaMedia": null
+    },
+    "eficiencia": {
+      "excelente": null,
+      "bom": null,
+      "acimaDaMedia": null,
+      "abaixoDaMedia": null
+    },
+    "confiabilidade": {
+      "excelente": null,
+      "bom": null,
+      "acimaDaMedia": null,
+      "abaixoDaMedia": null
+    },
+    "estimulacao": {
+      "excelente": null,
+      "bom": null,
+      "acimaDaMedia": null,
+      "abaixoDaMedia": null
+    },
+    "novidade": {
+      "excelente": null,
+      "bom": null,
+      "acimaDaMedia": null,
+      "abaixoDaMedia": null
+    }
+  }
+}

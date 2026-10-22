@@ -1,0 +1,291 @@
+{
+  "fonte": "PREENCHER: arquivo do pacote oficial de idiomas UEQ (Portuguese/Brazilian Portuguese), versão e data de download",
+  "itens": [
+    {
+      "numero": 1,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "atratividade",
+      "polaridade": "+",
+      "referenciaEN": [
+        "annoying",
+        "enjoyable"
+      ]
+    },
+    {
+      "numero": 2,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "perspicuidade",
+      "polaridade": "+",
+      "referenciaEN": [
+        "not understandable",
+        "understandable"
+      ]
+    },
+    {
+      "numero": 3,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "novidade",
+      "polaridade": "-",
+      "referenciaEN": [
+        "creative",
+        "dull"
+      ]
+    },
+    {
+      "numero": 4,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "perspicuidade",
+      "polaridade": "-",
+      "referenciaEN": [
+        "easy to learn",
+        "difficult to learn"
+      ]
+    },
+    {
+      "numero": 5,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "estimulacao",
+      "polaridade": "-",
+      "referenciaEN": [
+        "valuable",
+        "inferior"
+      ]
+    },
+    {
+      "numero": 6,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "estimulacao",
+      "polaridade": "+",
+      "referenciaEN": [
+        "boring",
+        "exciting"
+      ]
+    },
+    {
+      "numero": 7,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "estimulacao",
+      "polaridade": "+",
+      "referenciaEN": [
+        "not interesting",
+        "interesting"
+      ]
+    },
+    {
+      "numero": 8,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "confiabilidade",
+      "polaridade": "+",
+      "referenciaEN": [
+        "unpredictable",
+        "predictable"
+      ]
+    },
+    {
+      "numero": 9,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "eficiencia",
+      "polaridade": "-",
+      "referenciaEN": [
+        "fast",
+        "slow"
+      ]
+    },
+    {
+      "numero": 10,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "novidade",
+      "polaridade": "-",
+      "referenciaEN": [
+        "inventive",
+        "conventional"
+      ]
+    },
+    {
+      "numero": 11,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "confiabilidade",
+      "polaridade": "+",
+      "referenciaEN": [
+        "obstructive",
+        "supportive"
+      ]
+    },
+    {
+      "numero": 12,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "atratividade",
+      "polaridade": "-",
+      "referenciaEN": [
+        "good",
+        "bad"
+      ]
+    },
+    {
+      "numero": 13,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "perspicuidade",
+      "polaridade": "+",
+      "referenciaEN": [
+        "complicated",
+        "easy"
+      ]
+    },
+    {
+      "numero": 14,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "atratividade",
+      "polaridade": "+",
+      "referenciaEN": [
+        "unlikable",
+        "pleasing"
+      ]
+    },
+    {
+      "numero": 15,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "novidade",
+      "polaridade": "+",
+      "referenciaEN": [
+        "usual",
+        "leading edge"
+      ]
+    },
+    {
+      "numero": 16,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "atratividade",
+      "polaridade": "+",
+      "referenciaEN": [
+        "unpleasant",
+        "pleasant"
+      ]
+    },
+    {
+      "numero": 17,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "confiabilidade",
+      "polaridade": "-",
+      "referenciaEN": [
+        "secure",
+        "not secure"
+      ]
+    },
+    {
+      "numero": 18,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "estimulacao",
+      "polaridade": "-",
+      "referenciaEN": [
+        "motivating",
+        "demotivating"
+      ]
+    },
+    {
+      "numero": 19,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "confiabilidade",
+      "polaridade": "-",
+      "referenciaEN": [
+        "meets expectations",
+        "does not meet expectations"
+      ]
+    },
+    {
+      "numero": 20,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "eficiencia",
+      "polaridade": "+",
+      "referenciaEN": [
+        "inefficient",
+        "efficient"
+      ]
+    },
+    {
+      "numero": 21,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "perspicuidade",
+      "polaridade": "-",
+      "referenciaEN": [
+        "clear",
+        "confusing"
+      ]
+    },
+    {
+      "numero": 22,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "eficiencia",
+      "polaridade": "+",
+      "referenciaEN": [
+        "impractical",
+        "practical"
+      ]
+    },
+    {
+      "numero": 23,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "eficiencia",
+      "polaridade": "-",
+      "referenciaEN": [
+        "organized",
+        "cluttered"
+      ]
+    },
+    {
+      "numero": 24,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "atratividade",
+      "polaridade": "-",
+      "referenciaEN": [
+        "attractive",
+        "unattractive"
+      ]
+    },
+    {
+      "numero": 25,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "atratividade",
+      "polaridade": "-",
+      "referenciaEN": [
+        "friendly",
+        "unfriendly"
+      ]
+    },
+    {
+      "numero": 26,
+      "termoEsquerdo": "",
+      "termoDireito": "",
+      "escala": "novidade",
+      "polaridade": "+",
+      "referenciaEN": [
+        "conservative",
+        "innovative"
+      ]
+    }
+  ]
+}
