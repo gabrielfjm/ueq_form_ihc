@@ -1,0 +1,54 @@
+/* Valores de docs/design.md. Contrastes conferidos em __tests__/contraste.test.ts */
+:root {
+  --papel:        #F4F1EA;
+  --papel-fundo:  #EAE5DA;
+  --papel-claro:  #FBFAF6;
+  --tinta:        #1B1F27;
+  --tinta-suave:  #4A4F59;
+  --tinta-fraca:  #5E6470;
+  --linha:        #CFC8B8;  /* só réguas e divisórias. Borda de campo usa --borda-campo (WCAG 1.4.11) */
+  --borda-campo:  #7D818A;
+  --linha-forte:  #1B1F27;
+
+  --acento:       #9A3B26;
+  --acento-fundo: #F1E2DC;
+
+  --atratividade: #1B1F27;
+  --pragmatica:   #2F4A6B;
+  --hedonica:     #8C6014;
+
+  --bench-excelente: #CFC6B2;
+  --bench-bom:       #DAD2C1;
+  --bench-acima:     #E3DCCD;
+  --bench-abaixo:    #EBE6DA;
+  --bench-ruim:      #F2EEE5;
+
+  --alerta:       #9A3B26;
+
+  /* as variáveis --fonte-*-carregada vêm do next/font, no layout raiz */
+  --fonte-titulo: var(--fonte-newsreader-carregada), Georgia, "Times New Roman", serif;
+  --fonte-texto:  var(--fonte-atkinson-carregada), Verdana, sans-serif;
+  --fonte-numero: var(--fonte-plex-mono-carregada), "Courier New", monospace;
+
+  --texto-xs:  0.8125rem;
+  --texto-sm:  0.9375rem;
+  --texto-md:  1.0625rem;
+  --texto-lg:  1.25rem;
+  --texto-xl:  1.625rem;
+  --texto-2xl: 2.25rem;
+
+  --entrelinha: 1.5;
+
+  --espaco-1: 0.5rem;
+  --espaco-2: 1rem;
+  --espaco-3: 1.5rem;
+  --espaco-4: 2rem;
+  --espaco-6: 3rem;
+  --espaco-8: 4rem;
+
+  --largura-leitura: 72ch;
+  --largura-painel:  1120px;
+
+  --raio: 2px;
+  --transicao: 120ms ease-out;
+}
