@@ -66,7 +66,7 @@ Média dos valores recodificados dos itens daquela escala, para aquele participa
 - `ic95` = `media ± z · dp / √n`, com `z = 1,959963984540054`, o quantil 0,975 exato da normal. A planilha usa `CONFIDENCE(0.05; dp; n)`, que não arredonda para 1,96, e com 1,96 os testes erram já na sexta casa. `[OK · planilha, aba Confidence_Intervals]`
 - também por item: média, dp, n e distribuição das respostas 1 a 7 (para o gráfico por item)
 
-Com `n < 2` não existe dp nem IC. A função devolve `null` nesses campos e a UI mostra "amostra insuficiente".
+Com `n < 2` não existe dp nem IC. Com `dp = 0` (todos deram o mesmo escore) a planilha também não calcula o IC, porque `CONFIDENCE` exige dp maior que zero (`#NUM!`), e seguimos a planilha. A função devolve `null` nesses campos e a UI mostra "amostra insuficiente".
 
 ## 5. Faixas de interpretação
 
