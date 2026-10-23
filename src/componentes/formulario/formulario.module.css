@@ -35,6 +35,12 @@
   font: inherit;
 }
 
+.areaTexto {
+  height: auto;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
 .campo[aria-invalid="true"] {
   border: 2px solid var(--alerta);
 }
@@ -108,6 +114,29 @@
 
 .icone {
   flex: none;
+}
+
+/* ação secundária em texto sublinhado, como "Remover versão 2" no protótipo r4 */
+.botaoTexto {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 4px;
+  background: none;
+  border: 0;
+  color: var(--tinta);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.linkAcao {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .resumoErros {

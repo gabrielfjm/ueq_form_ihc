@@ -1,0 +1,173 @@
+/* Tela r4 do protótipo (Criar estudo), também usada em Editar estudo */
+
+.pagina {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.formulario {
+  flex: 999 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 28px;
+  border-top: 1px solid var(--linha);
+}
+
+.secaoPrimeira {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.secaoTitulo {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.secaoNumero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--destaque);
+}
+
+.secaoNome {
+  margin: 0;
+  font-size: 1.625rem;
+  line-height: 1.15;
+}
+
+.datas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 16px;
+}
+
+.linhaVersao {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.adicionar {
+  align-self: flex-start;
+}
+
+.rodape {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  padding-top: 28px;
+  border-top: 1px solid var(--tinta);
+}
+
+.enviar {
+  padding: 0 28px;
+}
+
+.previa {
+  flex: 1 1 320px;
+  min-width: 0;
+  position: sticky;
+  top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.previaRotulo {
+  margin: 0;
+  font-size: var(--texto-sm);
+  font-weight: 400;
+  color: var(--tinta-fraca);
+}
+
+.cartao {
+  overflow: hidden;
+  background: var(--fundo);
+  border: 1px solid var(--tinta);
+  border-radius: 4px;
+}
+
+.cartaoTopo {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 20px 16px;
+  background: var(--fundo-faixa);
+  border-bottom: 1px solid var(--linha);
+}
+
+.cartaoEtapa {
+  margin: 0;
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  color: var(--tinta-fraca);
+}
+
+.cartaoTitulo {
+  margin: 0;
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.cartaoCorpo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 20px 20px;
+}
+
+.cartaoObjetivo {
+  margin: 0;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+  overflow-wrap: anywhere;
+  white-space: pre-line;
+}
+
+.cartaoDuracao {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--linha);
+  font-size: var(--texto-sm);
+}
+
+.cartaoBotao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  background: var(--tinta);
+  color: var(--fundo);
+  border-radius: var(--raio);
+  font-size: var(--texto-sm);
+  font-weight: 700;
+}
+
+.marcador {
+  color: var(--tinta-fraca);
+  font-style: italic;
+}
+
+@media (max-width: 960px) {
+  .previa {
+    position: static;
+  }
+}

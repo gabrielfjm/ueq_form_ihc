@@ -2,7 +2,7 @@
 
 import { Eye } from "lucide-react";
 import Link from "next/link";
-import { useState, type InputHTMLAttributes, type Ref } from "react";
+import { useState, type InputHTMLAttributes, type Ref, type TextareaHTMLAttributes } from "react";
 import type { ErroCampo } from "@/lib/formulario";
 import estilos from "./formulario.module.css";
 
@@ -52,6 +52,36 @@ export function Campo({ id, rotulo, ajuda, erro, ...entrada }: PropriedadesCampo
       <input
         id={id}
         className={estilos.campo}
+        aria-invalid={erro ? true : undefined}
+        aria-describedby={descricoes(id, ajuda, erro)}
+        {...entrada}
+      />
+      {erro && <MensagemErro id={`${id}-erro`} erro={erro} />}
+    </div>
+  );
+}
+
+type PropriedadesAreaTexto = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "id" | "className"> & {
+  id: string;
+  rotulo: string;
+  ajuda?: string;
+  erro?: ErroCampo;
+};
+
+export function AreaTexto({ id, rotulo, ajuda, erro, ...entrada }: PropriedadesAreaTexto) {
+  return (
+    <div className={estilos.grupo}>
+      <label htmlFor={id} className={estilos.rotulo}>
+        {rotulo}
+      </label>
+      {ajuda && (
+        <p id={`${id}-ajuda`} className={estilos.ajuda}>
+          {ajuda}
+        </p>
+      )}
+      <textarea
+        id={id}
+        className={`${estilos.campo} ${estilos.areaTexto}`}
         aria-invalid={erro ? true : undefined}
         aria-describedby={descricoes(id, ajuda, erro)}
         {...entrada}
