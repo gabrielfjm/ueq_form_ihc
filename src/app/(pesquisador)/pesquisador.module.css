@@ -98,6 +98,14 @@
   color: var(--tinta-suave);
 }
 
+.resumo {
+  margin: 0;
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--tinta-suave);
+}
+
 .conteudo {
   max-width: var(--largura-painel);
   margin: 0 auto;

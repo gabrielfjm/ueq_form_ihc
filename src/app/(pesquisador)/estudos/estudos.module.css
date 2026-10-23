@@ -1,10 +1,143 @@
+/* Tela r3 do protótipo (Seus estudos) e peças que as outras telas de estudo reaproveitam */
+
 .conteudo {
   max-width: var(--largura-painel);
   margin: 0 auto;
   padding: 40px 24px 64px;
 }
 
-/* docs/design.md, Estados vazios: uma frase direta e a ação, sem ilustração além das 7 marcações */
+.regiaoStatus:not(:empty) {
+  margin-bottom: 32px;
+}
+
+.rolagemTabela {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+.tabela caption {
+  padding-bottom: 16px;
+  text-align: left;
+  color: var(--tinta-suave);
+}
+
+.tabela th,
+.tabela td {
+  padding: 16px 20px 16px 0;
+  border-bottom: 1px solid var(--linha);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.tabela thead th {
+  padding-top: 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--tinta);
+  font-size: var(--texto-sm);
+}
+
+.tabela tbody tr:hover {
+  background: var(--fundo-painel);
+}
+
+.tabela tbody th {
+  font-weight: 400;
+}
+
+.tabela th:last-child,
+.tabela td:last-child {
+  padding-right: 0;
+}
+
+.tituloEstudo {
+  font-weight: 700;
+}
+
+.produto {
+  display: block;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+.numero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.direita {
+  text-align: right !important;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.ponto {
+  display: inline-block;
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.pontoAberto {
+  background: var(--destaque);
+}
+
+.pontoRascunho {
+  border: 2px solid var(--tinta-fraca);
+}
+
+.pontoEncerrado {
+  background: var(--tinta);
+}
+
+.regua {
+  display: block;
+}
+
+.regua line {
+  stroke-width: 2;
+}
+
+.reguaFundo {
+  stroke: var(--linha);
+}
+
+.reguaPrevista {
+  stroke: var(--linha);
+  stroke-dasharray: 4 4;
+}
+
+.reguaPassada {
+  stroke: var(--tinta);
+}
+
+.reguaHoje {
+  fill: var(--destaque);
+}
+
+.reguaFim {
+  fill: var(--tinta);
+}
+
+.reguaTexto {
+  display: block;
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-xs);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--tinta-suave);
+}
+
+/* docs/design.md, Estados vazios: uma frase direta e a ação */
 .vazio {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
@@ -48,4 +181,22 @@
   fill: var(--fundo);
   stroke: var(--borda-campo);
   stroke-width: 1.5;
+}
+
+@media (forced-colors: active) {
+  .pontoAberto,
+  .pontoEncerrado,
+  .reguaHoje,
+  .reguaFim {
+    background: CanvasText;
+    fill: CanvasText;
+  }
+
+  .pontoRascunho {
+    border-color: CanvasText;
+  }
+
+  .reguaPassada {
+    stroke: CanvasText;
+  }
 }
