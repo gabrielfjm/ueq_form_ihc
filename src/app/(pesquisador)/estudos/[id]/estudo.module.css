@@ -1,0 +1,141 @@
+/* Telas r4b (rascunho) e r5 (coleta aberta ou encerrada) do protótipo */
+
+.faixa {
+  background: var(--fundo-faixa);
+  border-bottom: 1px solid var(--linha);
+}
+
+.faixaInterna {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 36px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.migalha {
+  font-size: var(--texto-sm);
+}
+
+.titulo {
+  margin: 0;
+  font-size: 2.75rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.linhaStatus {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 20px;
+}
+
+.resumo {
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--tinta-suave);
+}
+
+.abas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 32px;
+  margin-top: 14px;
+}
+
+.aba {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 3px solid transparent;
+  color: var(--tinta-suave);
+  text-decoration: none;
+}
+
+.aba:hover {
+  border-bottom-color: var(--linha);
+  color: var(--tinta);
+}
+
+.aba[aria-current="page"] {
+  border-bottom-color: var(--destaque);
+  color: var(--tinta);
+  font-weight: 700;
+}
+
+.conteudo {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.regiaoStatus:not(:empty) {
+  margin-bottom: 32px;
+}
+
+.colunas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.secoes {
+  flex: 999 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-top: 28px;
+  border-top: 1px solid var(--linha);
+}
+
+.secaoPrimeira {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.secaoTitulo {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.secaoNumero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--destaque);
+}
+
+.secaoNome {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.texto {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.numero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+@media (forced-colors: active) {
+  .aba[aria-current="page"] {
+    border-bottom-color: Highlight;
+  }
+}

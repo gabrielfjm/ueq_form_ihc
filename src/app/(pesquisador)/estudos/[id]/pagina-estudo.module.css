@@ -1,0 +1,347 @@
+/* Seções da Visão geral do estudo (r4b e r5) */
+
+.link {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.endereco {
+  flex: 1 1 280px;
+  min-width: 0;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--tinta);
+  border-radius: var(--raio) 0 0 var(--raio);
+  font-family: var(--fonte-numero);
+  font-size: 1rem;
+  overflow-wrap: anywhere;
+}
+
+.copiar {
+  height: auto;
+  min-height: 52px;
+  /* encosta na caixa do endereço sem borda dupla; em tela estreita o botão desce e a caixa segue fechada */
+  margin-left: -1px;
+  border-radius: 0 var(--raio) var(--raio) 0;
+}
+
+.avisoCopia {
+  margin: 0;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+.avisoCopia:empty {
+  margin-top: -16px;
+}
+
+.coleta {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.coleta thead th {
+  padding: 0 0 8px;
+  border-bottom: 1px solid var(--tinta);
+  font-size: var(--texto-sm);
+  text-align: left;
+}
+
+.coleta thead th + th {
+  width: 45%;
+  padding-left: 16px;
+}
+
+.coleta tbody th,
+.coleta tbody td {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--linha);
+  text-align: left;
+}
+
+.coleta tbody th {
+  font-weight: 400;
+}
+
+.coleta tbody td {
+  padding-left: 16px;
+}
+
+.barra {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.barra > span:first-child {
+  height: 10px;
+  background: var(--tinta);
+}
+
+.passos {
+  border-top: 1px solid var(--linha);
+}
+
+.passo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin: 0 -12px;
+  padding: 18px 12px;
+  border-bottom: 1px solid var(--linha);
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.passo:hover {
+  background: var(--destaque-fundo);
+  color: var(--tinta);
+}
+
+.passoTitulo {
+  display: block;
+  font-size: 1.3125rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+.passoTexto {
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+.passo svg {
+  flex: none;
+  color: var(--destaque);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+}
+
+.confirmacao {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  background: var(--alerta-fundo);
+  border: 1px solid var(--alerta);
+  border-radius: var(--raio);
+}
+
+.confirmacao[hidden] {
+  display: none;
+}
+
+.confirmacao p {
+  margin: 0;
+}
+
+.acoesConfirmacao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Rascunho sem respostas: o estado vazio é a abertura da página (r4b) */
+.vazio {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+}
+
+.vazio svg {
+  width: 100%;
+  max-width: 420px;
+}
+
+.vazio line {
+  stroke: var(--linha);
+}
+
+.vazio circle {
+  fill: var(--fundo-painel);
+  stroke: var(--borda-campo);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+}
+
+.vazioTitulo {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.15;
+}
+
+.vazioTexto {
+  margin: 0;
+  max-width: 56ch;
+  color: var(--tinta-suave);
+}
+
+.vazioAcoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
+.abrir {
+  height: 48px;
+  padding: 0 24px;
+}
+
+.enderecoSolto {
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+  overflow-wrap: anywhere;
+}
+
+.conferir {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--tinta);
+}
+
+.conferir li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--linha);
+}
+
+.letra {
+  font-family: var(--fonte-numero);
+  color: var(--tinta-fraca);
+}
+
+.detalhe {
+  display: block;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+@media (forced-colors: active) {
+  .barra > span:first-child {
+    background: CanvasText;
+  }
+
+  .confirmacao {
+    border-color: Mark;
+  }
+}
+
+.ficha {
+  flex: 1 1 300px;
+  min-width: 0;
+  padding: 24px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+}
+
+.fichaTitulo {
+  margin: 0 0 8px;
+  font-size: 1.3125rem;
+  line-height: 1.15;
+}
+
+.fichaLista {
+  margin: 0;
+}
+
+.fichaLista > div {
+  padding: 16px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.fichaLista > div:last-child {
+  padding-bottom: 0;
+}
+
+.fichaLista dt {
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-fraca);
+}
+
+.fichaLista dd {
+  margin: 2px 0 0;
+}
+
+.numeroGrande {
+  font-family: var(--fonte-numero);
+  font-size: 2.5rem;
+  font-variant-numeric: tabular-nums lining-nums;
+  line-height: 1.1;
+}
+
+.numeroPequeno {
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.reguaFicha {
+  display: block;
+  width: 100%;
+  margin: 8px 0 4px;
+}
+
+.reguaFicha line {
+  stroke-width: 2;
+  stroke: var(--linha);
+}
+
+.reguaFicha .prevista {
+  stroke-dasharray: 5 4;
+}
+
+.reguaFicha .passada {
+  stroke: var(--tinta);
+}
+
+.reguaFicha .marco {
+  fill: var(--tinta);
+}
+
+.reguaFicha .marcoVazio {
+  fill: var(--fundo);
+  stroke: var(--tinta);
+  stroke-width: 1.5;
+}
+
+.reguaFicha .hoje {
+  fill: var(--destaque);
+}
+
+.datasRegua {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-xs);
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--tinta-suave);
+}
+
+.situacaoRegua {
+  display: block;
+  margin-top: 4px;
+  font-size: var(--texto-sm);
+}
