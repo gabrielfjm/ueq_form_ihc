@@ -11,6 +11,11 @@ const config = [
     },
   },
   {
+    // O seed roda no terminal: a saída é o resultado dele, não log esquecido
+    files: ["prisma/**"],
+    rules: { "no-console": "off" },
+  },
+  {
     ignores: [
       ".next/**",
       "node_modules/**",

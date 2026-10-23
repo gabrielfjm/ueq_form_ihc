@@ -6,3 +6,114 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+enum StatusEstudo {
+  RASCUNHO
+  ABERTO
+  ENCERRADO
+}
+
+enum Escala {
+  ATRATIVIDADE
+  PERSPICUIDADE
+  EFICIENCIA
+  CONFIABILIDADE
+  ESTIMULACAO
+  NOVIDADE
+}
+
+// docs/ueq-protocolo.md, seção 1: '+' = termo positivo à direita, '-' = à esquerda
+enum Polaridade {
+  POSITIVA_DIREITA
+  POSITIVA_ESQUERDA
+}
+
+model Pesquisador {
+  id        String   @id @default(cuid())
+  nome      String
+  email     String   @unique
+  senhaHash String   @map("senha_hash")
+  criadoEm  DateTime @default(now()) @map("criado_em")
+
+  estudos Estudo[]
+
+  @@map("pesquisador")
+}
+
+model Estudo {
+  id              String       @id @default(cuid())
+  pesquisadorId   String       @map("pesquisador_id")
+  titulo          String
+  produtoAvaliado String       @map("produto_avaliado")
+  objetivo        String
+  status          StatusEstudo @default(RASCUNHO)
+  dataInicio      DateTime     @map("data_inicio") @db.Date
+  dataFim         DateTime     @map("data_fim") @db.Date
+  slugPublico     String       @unique @map("slug_publico")
+  criadoEm        DateTime     @default(now()) @map("criado_em")
+  atualizadoEm    DateTime     @updatedAt @map("atualizado_em")
+
+  pesquisador Pesquisador @relation(fields: [pesquisadorId], references: [id], onDelete: Cascade)
+  versoes     Versao[]
+
+  @@index([pesquisadorId])
+  @@map("estudo")
+}
+
+model Versao {
+  id       String @id @default(cuid())
+  estudoId String @map("estudo_id")
+  nome     String
+  ordem    Int
+
+  estudo        Estudo         @relation(fields: [estudoId], references: [id], onDelete: Cascade)
+  participacoes Participacao[]
+
+  @@unique([estudoId, ordem])
+  @@map("versao")
+}
+
+model Item {
+  id            Int        @id @default(autoincrement())
+  numero        Int        @unique
+  termoEsquerdo String     @map("termo_esquerdo")
+  termoDireito  String     @map("termo_direito")
+  escala        Escala
+  polaridade    Polaridade
+
+  respostas Resposta[]
+
+  @@map("item")
+}
+
+model Participacao {
+  id                String    @id @default(cuid())
+  versaoId          String    @map("versao_id")
+  consentiuEm       DateTime  @map("consentiu_em")
+  criadaEm          DateTime  @default(now()) @map("criada_em")
+  concluidaEm       DateTime? @map("concluida_em")
+  // faixaEtaria, genero, escolaridade, familiaridadeComProduto; todos opcionais
+  demografia        Json?
+  suspeita          Boolean   @default(false)
+  incluidaNaAnalise Boolean   @default(true) @map("incluida_na_analise")
+
+  versao    Versao     @relation(fields: [versaoId], references: [id], onDelete: Cascade)
+  respostas Resposta[]
+
+  @@index([versaoId])
+  @@map("participacao")
+}
+
+model Resposta {
+  id             String @id @default(cuid())
+  participacaoId String @map("participacao_id")
+  itemId         Int    @map("item_id")
+  // CHECK de 1 a 7 na migration init: 1 = polo esquerdo, 7 = polo direito
+  valor          Int
+
+  participacao Participacao @relation(fields: [participacaoId], references: [id], onDelete: Cascade)
+  item         Item         @relation(fields: [itemId], references: [id])
+
+  @@unique([participacaoId, itemId])
+  @@map("resposta")
+}
