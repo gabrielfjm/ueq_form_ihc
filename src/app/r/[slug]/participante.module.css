@@ -1,0 +1,27 @@
+/* Telas do participante: sem ícones e sem nada além do necessário (docs/ihc.md, seção 3) */
+
+.pagina {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 48px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.etapa {
+  margin: 0;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-fraca);
+}
+
+.titulo {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.2;
+}
+
+.texto {
+  margin: 0;
+}
