@@ -1,8 +1,10 @@
 import "dotenv/config";
 import { readFileSync } from "node:fs";
 import { PrismaPg } from "@prisma/adapter-pg";
+import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { Escala, Polaridade, PrismaClient } from "../src/generated/prisma/client";
+import { MINIMO_SENHA } from "../src/lib/validacao-conta";
 
 const escalaPorNome = {
   atratividade: Escala.ATRATIVIDADE,
@@ -91,5 +93,24 @@ await prisma.$transaction(
   }),
 );
 console.log(`${validacao.data.itens.length} itens do UEQ gravados.`);
+
+// Pesquisador para testar a área logada em desenvolvimento. Sem as duas variáveis no .env, o seed pula esta parte
+const emailTeste = process.env.PESQUISADOR_TESTE_EMAIL?.trim().toLowerCase();
+const senhaTeste = process.env.PESQUISADOR_TESTE_SENHA;
+if (emailTeste && senhaTeste) {
+  if (senhaTeste.length < MINIMO_SENHA) {
+    console.error(`Seed interrompido: PESQUISADOR_TESTE_SENHA precisa ter pelo menos ${MINIMO_SENHA} caracteres.`);
+    process.exit(1);
+  }
+  const senhaHash = await bcrypt.hash(senhaTeste, 10);
+  await prisma.pesquisador.upsert({
+    where: { email: emailTeste },
+    create: { nome: "Pesquisador de teste", email: emailTeste, senhaHash },
+    update: { senhaHash },
+  });
+  console.log(`Pesquisador de teste pronto: ${emailTeste}.`);
+} else {
+  console.log("Sem PESQUISADOR_TESTE_EMAIL e PESQUISADOR_TESTE_SENHA no .env: pesquisador de teste não criado.");
+}
 
 await prisma.$disconnect();
