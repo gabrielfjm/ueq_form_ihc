@@ -1,0 +1,154 @@
+/* Tela r9 do protótipo */
+
+.regiaoStatus:not(:empty) {
+  margin-bottom: 32px;
+}
+
+.colunas {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.secoes {
+  flex: 999 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 44px;
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 28px;
+  border-top: 1px solid var(--linha);
+}
+
+.secao:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.secaoTitulo {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.secaoNumero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.secaoNome {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
+.alinharInicio {
+  align-self: flex-start;
+}
+
+.texto {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.confirmacao {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  background: var(--alerta-fundo);
+  border: 1px solid var(--alerta);
+  border-radius: var(--raio);
+}
+
+.confirmacao[hidden] {
+  display: none;
+}
+
+.confirmacao p {
+  margin: 0;
+}
+
+.acoesConfirmacao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.ficha {
+  flex: 1 1 300px;
+  min-width: 0;
+  padding: 24px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+}
+
+.fichaTitulo {
+  margin: 0 0 8px;
+  font-size: 1.3125rem;
+  line-height: 1.15;
+}
+
+.fichaLista {
+  margin: 0;
+}
+
+.fichaLista > div {
+  padding: 16px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.fichaLista > .fichaUltimo {
+  padding-bottom: 0;
+}
+
+.fichaLista dt {
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+.fichaLista dd {
+  margin: 2px 0 0;
+}
+
+.numero,
+.numeroGrande {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.numeroGrande {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.detalhe {
+  display: block;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+@media (forced-colors: active) {
+  .confirmacao {
+    border-color: Mark;
+  }
+}

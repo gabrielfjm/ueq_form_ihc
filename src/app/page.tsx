@@ -1,13 +1,7 @@
-import estilos from "./page.module.css";
+import { redirect } from "next/navigation";
+import { pesquisadorDaSessao } from "@/lib/sessao";
 
-export default function PaginaInicial() {
-  return (
-    <main id="conteudo" tabIndex={-1} className={estilos.pagina}>
-      <h1 className={estilos.titulo}>Ferramenta UEQ</h1>
-      <p className={estilos.descricao}>
-        Conduza estudos de avaliação de experiência do usuário com o User Experience Questionnaire,
-        do cadastro do estudo à exportação dos dados.
-      </p>
-    </main>
-  );
+// A ferramenta não tem página de apresentação: quem chega pela raiz vai direto para onde trabalha
+export default async function PaginaInicial() {
+  redirect((await pesquisadorDaSessao()) ? "/estudos" : "/entrar");
 }

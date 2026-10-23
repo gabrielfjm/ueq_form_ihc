@@ -1,0 +1,51 @@
+.conteudo {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+}
+
+/* docs/design.md, Estados vazios: uma frase direta e a ação, sem ilustração além das 7 marcações */
+.vazio {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 32px;
+  align-items: center;
+  padding: 40px;
+  border: 1px dashed var(--linha);
+  border-radius: var(--raio);
+}
+
+.vazioTextos {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vazioTitulo {
+  margin: 0;
+  font-size: 1.625rem;
+  line-height: 1.15;
+}
+
+.vazioTexto {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.vazioAcao {
+  align-self: flex-start;
+}
+
+.marcacoes {
+  width: 100%;
+}
+
+.marcacoes line {
+  stroke: var(--linha);
+}
+
+.marcacoes circle {
+  fill: var(--fundo);
+  stroke: var(--borda-campo);
+  stroke-width: 1.5;
+}
