@@ -1,5 +1,6 @@
 import { contagemDeRespostas, estudoDoPesquisador } from "@/lib/estudos";
 import { exigirPesquisador } from "@/lib/sessao";
+import { plural } from "@/lib/texto";
 import estilos from "./estudo.module.css";
 import { FaixaEstudo, resumoDoEstudo } from "./FaixaEstudo";
 import pagina from "./pagina-estudo.module.css";
@@ -30,9 +31,11 @@ export async function SemRespostas({ id, texto }: { id: string; texto: string })
             ))}
           </svg>
           <h2 id="titulo-vazio" className={pagina.vazioTitulo}>
-            Nenhuma resposta ainda.
+            {respostas.total === 0 ? "Nenhuma resposta ainda." : `${plural(respostas.total, "resposta coletada", "respostas coletadas")}.`}
           </h2>
-          <p className={pagina.vazioTexto}>{texto}</p>
+          <p className={pagina.vazioTexto}>
+            {respostas.total === 0 ? texto : "As respostas já estão gravadas. Esta aba ainda está em construção na ferramenta."}
+          </p>
         </section>
       </div>
     </>
