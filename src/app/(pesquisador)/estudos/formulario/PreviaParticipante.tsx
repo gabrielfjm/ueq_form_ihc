@@ -1,0 +1,31 @@
+import formulario from "@/componentes/formulario/formulario.module.css";
+import estilos from "./formulario-estudo.module.css";
+
+// Mostra o começo do termo de consentimento como o participante vai ver (protótipo r4)
+export function PreviaParticipante({ titulo, objetivo }: { titulo: string; objetivo: string }) {
+  return (
+    <aside aria-labelledby="titulo-previa" className={estilos.previa}>
+      <h2 id="titulo-previa" className={estilos.previaRotulo}>
+        Prévia para o participante
+      </h2>
+      <div className={estilos.cartao}>
+        <div className={estilos.cartaoTopo}>
+          <p className={estilos.cartaoEtapa}>Etapa 1 de 3 · Consentimento</p>
+          <p className={estilos.cartaoTitulo}>
+            {titulo.trim() || <span className={estilos.marcador}>Título do estudo</span>}
+          </p>
+        </div>
+        <div className={estilos.cartaoCorpo}>
+          <p className={estilos.cartaoObjetivo}>
+            {objetivo.trim() || <span className={estilos.marcador}>O objetivo aparece aqui.</span>}
+          </p>
+          <p className={estilos.cartaoDuracao}>De 3 a 5 minutos · voluntária e anônima</p>
+          <span className={estilos.cartaoBotao} aria-hidden="true">
+            Concordo e quero participar
+          </span>
+        </div>
+      </div>
+      <p className={formulario.ajuda}>A prévia acompanha o que você digita. O texto fixo do termo vem da própria ferramenta.</p>
+    </aside>
+  );
+}
