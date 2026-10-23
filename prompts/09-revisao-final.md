@@ -12,6 +12,14 @@ Depois percorra a checklist da seção 5 de docs/ihc.md critério por critério 
 Por fim, gere docs/rastreabilidade-ihc.md: uma tabela com cada decisão de interface relevante da ferramenta, o princípio que a justifica (Nielsen, Shneiderman, Norman, ISO 9241-110, WCAG) e onde está no código. Essa tabela vai para o relatório e para a apresentação.
 ```
 
+## Validação dos cálculos contra a planilha oficial
+
+> Antes: a equipe colou cada `data/fixtures/**/respostas.csv` na UEQ Data Analysis Tool e preencheu os `esperado.json` (passo a passo em data/fixtures/LEIA-ME.md). Sem isso os testes das fixtures continuam pulados.
+
+```
+Rode pnpm test e me mostre os testes de src/ueq/__tests__/fixtures.test.ts. Nenhum pode estar pulado. Se algum número não bater, descubra se a diferença está no cálculo ou na cópia da planilha antes de mudar código, e me diga qual foi.
+```
+
 ## Revisão visual
 
 ```
