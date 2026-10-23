@@ -5,6 +5,8 @@ export default defineConfig({
   globalTeardown: "./tests/e2e/limpeza.ts",
   // o servidor de desenvolvimento compila cada rota na primeira visita, o que passa dos 5 s padrão
   expect: { timeout: 10_000 },
+  // os fluxos do participante criam um estudo antes e passam dos 30 s padrão com 6 workers no servidor de dev
+  timeout: 60_000,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
