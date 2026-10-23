@@ -1,6 +1,6 @@
 # Protocolo UEQ · especificação de cálculo
 
-Fonte: Schrepp, M. *User Experience Questionnaire Handbook* e planilha oficial *UEQ Data Analysis Tool* (ueq-online.org). Todo valor marcado com **[CONFIRMAR]** precisa ser conferido pela equipe no handbook ou na planilha antes de ser implementado. Quando confirmar, troque a marca por `[OK · handbook p. X]` ou `[OK · planilha, aba Y]`.
+Fonte: Schrepp, M. *User Experience Questionnaire Handbook* e planilha oficial *UEQ Data Analysis Tool* (ueq-online.org). Versões conferidas em 23/10/2026: Handbook versão 11 (12/09/2023) e `UEQ_Data_Analysis_Tool_V15.xlsx` (22/10/2026). Quando o handbook e a planilha divergem, vale a planilha, porque é contra ela que os testes comparam. Todo valor marcado com **[CONFIRMAR]** precisa ser conferido pela equipe no handbook ou na planilha antes de ser implementado. Quando confirmar, troque a marca por `[OK · handbook p. X]` ou `[OK · planilha, aba Y]`.
 
 ## 1. Itens, escalas e polaridade
 
@@ -41,7 +41,7 @@ Polaridade:
 
 Conferência rápida: Atratividade 1, 12, 14, 16, 24, 25 · Perspicuidade 2, 4, 13, 21 · Eficiência 9, 20, 22, 23 · Confiabilidade 8, 11, 17, 19 · Estimulação 5, 6, 7, 18 · Novidade 3, 10, 15, 26. São 13 itens com polaridade `-`.
 
-Os termos em português **não** estão aqui de propósito. Eles vêm do pacote oficial de idiomas e ficam em `data/ueq-itens-ptbr.json` (ver `data/LEIA-ME.md`). **[CONFIRMAR]** a tabela acima contra a aba de itens da planilha oficial.
+Os termos em português **não** estão aqui de propósito. Eles vêm do pacote oficial de idiomas e ficam em `data/ueq-itens-ptbr.json` (ver `data/LEIA-ME.md`). `[OK · planilha, aba DT]`: as fórmulas de recodificação da linha 4 e as médias por escala (colunas AC a AH) batem com a tabela acima.
 
 Agrupamento:
 - Qualidade pragmática = média de Perspicuidade, Eficiência, Confiabilidade
@@ -56,14 +56,14 @@ Agrupamento:
 
 Média dos valores recodificados dos itens daquela escala, para aquele participante.
 
-**[CONFIRMAR]** como a planilha trata item sem resposta. Nossa ferramenta exige os 26 itens (validação no formulário), então não deve existir valor ausente vindo da coleta. Se houver importação por CSV no futuro, decidir a regra aqui.
+`[OK · planilha, aba DT]`: célula vazia é ignorada. O escore da escala é a média só dos itens respondidos (`AVERAGE`), e fica vazio se nenhum item da escala foi respondido. Nossa ferramenta exige os 26 itens (validação no formulário), então não deve existir valor ausente vindo da coleta. Se houver importação por CSV no futuro, decidir a regra aqui.
 
 ## 4. Estatísticas por escala (entre participantes incluídos na análise)
 
 - `n` = participantes incluídos
 - `media` = média dos escores por participante
-- `dp` = desvio-padrão amostral (divisor `n - 1`) **[CONFIRMAR]**
-- `ic95` = `media ± z · dp / √n`, com `z = 1,96` (função `CONFIDENCE` da planilha, distribuição normal) **[CONFIRMAR]**
+- `dp` = desvio-padrão amostral (divisor `n - 1`) `[OK · planilha, aba Confidence_Intervals: STDEV]`
+- `ic95` = `media ± z · dp / √n`, com `z = 1,959963984540054`, o quantil 0,975 exato da normal. A planilha usa `CONFIDENCE(0.05; dp; n)`, que não arredonda para 1,96, e com 1,96 os testes erram já na sexta casa. `[OK · planilha, aba Confidence_Intervals]`
 - também por item: média, dp, n e distribuição das respostas 1 a 7 (para o gráfico por item)
 
 Com `n < 2` não existe dp nem IC. A função devolve `null` nesses campos e a UI mostra "amostra insuficiente".
@@ -76,28 +76,37 @@ Com `n < 2` não existe dp nem IC. A função devolve `null` nesses campos e a U
 | entre -0,8 e +0,8 | neutra |
 | < -0,8 | negativa |
 
-**[CONFIRMAR]** se os limites são inclusivos (≥ 0,8 ou > 0,8) conforme a planilha.
+`[OK · handbook p. 5]`: "values between -0.8 and 0.8 represent a neutral evaluation, values > 0,8 positive, values < -0,8 negative". Então -0,8 e 0,8 caem em neutra. A planilha só repete esse texto na aba Results e não calcula a faixa.
 
 ## 6. Alfa de Cronbach por escala
 
+A planilha não usa a fórmula de variâncias, e sim o alfa padronizado, calculado pela média das correlações entre os itens:
+
 ```
-alfa = (k / (k - 1)) · (1 - Σ var(item_i) / var(soma dos itens))
+r̄    = média das correlações de Pearson entre todos os pares de itens da escala
+alfa = k · r̄ / (1 + (k - 1) · r̄)
 ```
-`k` = número de itens da escala, variâncias amostrais, calculado sobre os valores recodificados. Valor abaixo de **0,7** é sinalizado no painel com texto explicando que a escala pode estar sendo mal interpretada por esse grupo. **[CONFIRMAR]** se a planilha usa variância amostral ou populacional (o alfa resultante é o mesmo se o critério for consistente, mas os testes precisam bater com a planilha).
+`k` = número de itens da escala (6 em Atratividade, 4 nas outras), que dá 15 pares em Atratividade e 6 nas outras. O cálculo usa os valores recodificados. `[OK · handbook p. 10 e planilha, aba Scale_Consistency: CORREL e (4*r̄)/(1+(3*r̄))]`
+
+Se algum item da escala não variar entre os participantes, a correlação não existe (a planilha mostra `#DIV/0!`), e com `n < 2` também não. Nesses casos o alfa é `null`. Valor abaixo de **0,7** é sinalizado no painel com texto explicando que a escala pode estar sendo mal interpretada por esse grupo. O handbook trata 0,6 ou 0,7 como regra prática e pede cautela com amostras pequenas (menos de 50).
+
+A planilha também mostra o intervalo de confiança do alfa (Bonett, 2002) e o Lambda2 de Guttman. Os dois ficam fora do escopo.
 
 ## 7. Respostas inconsistentes
 
 Para cada participante e cada escala: `amplitude = max(itens recodificados) - min(itens recodificados)`.
-- `amplitude > 3` → escala inconsistente para esse participante **[CONFIRMAR limiar exato]**
-- participante com inconsistência em **3 ou mais escalas** → marcado como suspeito **[CONFIRMAR número de escalas]**
+- `amplitude > 3` → escala inconsistente para esse participante `[OK · handbook p. 7-8 e planilha, aba Inconsistencies]`
+- participante com inconsistência em **3 ou mais escalas** → marcado como suspeito. O handbook deixa a escolha entre 2 e 3 escalas para o pesquisador. A planilha sugere remover quem tem 3 ou mais na coluna "Critical?", e seguimos a planilha. `[OK · handbook p. 8 e planilha, aba Inconsistencies]`
 
-O limiar e o número mínimo de escalas ficam em `data/protocolo.json`, não no código.
+Segunda regra, do handbook e da planilha: participante com **mais de 15 respostas iguais** nos 26 itens (contadas na escala original de 1 a 7, por exemplo tudo no 4) também é marcado como suspeito. `[OK · handbook p. 8 (Schrepp, 2023) e planilha, aba Inconsistencies, coluna "Critical length"]`
+
+O participante é suspeito se cair em qualquer uma das duas regras, e a interface mostra qual delas foi. Os três limiares (`amplitudeMaxima`, `escalasParaSuspeita`, `respostasIguaisMaximas`) ficam em `data/protocolo.json`, não no código.
 
 O pesquisador vê a lista de suspeitos e decide quem sai da análise. Excluir não apaga a resposta: só muda `incluidaNaAnalise = false`. Todo número do painel e da exportação de resultados considera apenas participações incluídas. A exportação de respostas brutas traz todas, com uma coluna indicando inclusão.
 
 ## 8. Benchmark
 
-Cada média de escala é classificada em uma de cinco faixas: Excelente, Bom, Acima da média, Abaixo da média, Ruim. Os limites por escala ficam em `data/benchmark.json` com o campo `fonte` preenchido (versão do benchmark, ano, página ou aba). **[CONFIRMAR todos os limites na planilha oficial atual]** Não usar valores tirados de blog, artigo de terceiros ou memória de modelo.
+Cada média de escala é classificada em uma de cinco faixas: Excelente, Bom, Acima da média, Abaixo da média, Ruim. Os limites por escala ficam em `data/benchmark.json` com o campo `fonte` preenchido (versão do benchmark, ano, página ou aba). `[OK · planilha V15, aba Benchmark, tabela "Benchmark borders"]`: os limites são os quantis 0,25 (`abaixoDaMedia`), 0,5 (`acimaDaMedia`), 0,75 (`bom`) e 0,9 (`excelente`), com base em 21175 pessoas de 468 estudos. O benchmark é atualizado uma vez por ano (handbook p. 5), então confira a versão da planilha antes da apresentação. Não usar valores tirados de blog, artigo de terceiros ou memória de modelo.
 
 Formato esperado:
 ```json
@@ -108,7 +117,7 @@ Formato esperado:
   }
 }
 ```
-Leitura: `media >= excelente` → Excelente, `>= bom` → Bom, `>= acimaDaMedia` → Acima da média, `>= abaixoDaMedia` → Abaixo da média, senão Ruim.
+Leitura, com maior estrito como na fórmula da planilha: `media > excelente` → Excelente, `> bom` → Bom, `> acimaDaMedia` → Acima da média, `> abaixoDaMedia` → Abaixo da média, senão Ruim. Uma média exatamente igual ao limite fica na faixa de baixo.
 
 ## 9. Exportações
 

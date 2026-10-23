@@ -1,5 +1,5 @@
 {
-  "fonte": "PREENCHER: UEQ Handbook, seção/página",
+  "fonte": "UEQ Handbook versão 11 (12/09/2023): faixa neutra p. 5, dados suspeitos p. 7-8, alfa p. 10. Conferido contra UEQ Data Analysis Tool V15 (22/10/2026): abas Results, Confidence_Intervals, Scale_Consistency e Inconsistencies. Acessado em 23/10/2026",
   "faixaNeutra": {
     "inferior": -0.8,
     "superior": 0.8
@@ -7,10 +7,10 @@
   "alfaMinimo": 0.7,
   "inconsistencia": {
     "amplitudeMaxima": 3,
-    "escalasParaSuspeita": 3
+    "escalasParaSuspeita": 3,
+    "respostasIguaisMaximas": 15
   },
   "ic": {
-    "z": 1.96
-  },
-  "_confirmar": "amplitudeMaxima, escalasParaSuspeita, z e inclusividade da faixa neutra precisam ser conferidos no handbook/planilha antes da implementacao"
+    "z": 1.959963984540054
+  }
 }
