@@ -1,4 +1,8 @@
+import "dotenv/config";
+import { readFileSync } from "node:fs";
+import { PrismaPg } from "@prisma/adapter-pg";
 import { expect, type Browser, type Page, type TestInfo } from "@playwright/test";
+import { PrismaClient } from "../../src/generated/prisma/client";
 import { cadastrarComTeclado, emailDeTeste } from "./contas";
 
 export const TITULO_ESTUDO = "Avaliação do checkout da loja virtual";
@@ -27,4 +31,35 @@ export async function estudoAberto(browser: Browser, info: TestInfo) {
   await expect(pesquisador.getByText("Aberto · aceitando respostas")).toBeVisible();
   const link = (await pesquisador.locator("code").textContent()) ?? "";
   return { link, pesquisador, fechar: () => contexto.close() };
+}
+
+// Grava respostas direto no banco, sem passar pelo questionário: os testes do painel precisam de
+// dezenas de participações, e o fluxo do participante já tem os próprios testes
+export async function inserirRespostas(link: string, conjuntos: { versao: number; pasta: string; limite?: number }[]) {
+  const slug = link.split("/r/")[1] ?? "";
+  const banco = new PrismaClient({ adapter: new PrismaPg(process.env.DATABASE_URL ?? "") });
+  const estudo = await banco.estudo.findUniqueOrThrow({
+    where: { slugPublico: slug },
+    include: { versoes: { orderBy: { ordem: "asc" } } },
+  });
+  const itens = await banco.item.findMany({ orderBy: { numero: "asc" } });
+  for (const { versao, pasta, limite } of conjuntos) {
+    const versaoId = estudo.versoes[versao - 1]?.id ?? "";
+    const linhas = readFileSync(`data/fixtures/${pasta}/respostas.csv`, "utf8")
+      .split(/\r?\n/)
+      .filter((linha) => linha.trim() !== "")
+      .slice(0, limite);
+    for (const linha of linhas) {
+      const valores = linha.split(";").map(Number);
+      await banco.participacao.create({
+        data: {
+          versaoId,
+          consentiuEm: new Date(),
+          concluidaEm: new Date(),
+          respostas: { create: itens.map((item) => ({ itemId: item.id, valor: valores[item.numero - 1] ?? 4 })) },
+        },
+      });
+    }
+  }
+  await banco.$disconnect();
 }

@@ -2,6 +2,10 @@ import { expect, test, type Page } from "@playwright/test";
 import { verificarAcessibilidade } from "./acessibilidade";
 import { estudoAberto } from "./preparacao";
 
+// Cada teste cria pesquisador, estudo e respostas antes de começar: com a suíte inteira no servidor de
+// desenvolvimento, 60 s não bastam
+test.describe.configure({ timeout: 120_000 });
+
 // Marca uma posição em cada item, pulando os números pedidos
 async function responder(page: Page, pular: number[] = []) {
   for (let numero = 1; numero <= 26; numero++) {
