@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useTransition, type FormEvent } from "react";
+import { useRef, useState, useTransition, type FormEvent } from "react";
 import { estadoInicial, type EstadoFormulario } from "@/lib/formulario";
 
 type Acao<Campo extends string> = (anterior: EstadoFormulario<Campo>, dados: FormData) => Promise<EstadoFormulario<Campo>>;
@@ -13,16 +13,25 @@ export function useEnvioFormulario<Campo extends string>(
 ) {
   const [estado, setEstado] = useState<EstadoFormulario<Campo>>(estadoInicial);
   const [enviando, iniciarEnvio] = useTransition();
+  // Trava só enquanto a ação roda, contra clique duplo (que criaria dois estudos, por exemplo).
+  // A transição continua pendente enquanto a página recarrega os dados; travar por ela descartaria,
+  // sem aviso, um segundo envio feito logo depois do "Dados salvos."
+  const acaoEmAndamento = useRef(false);
 
   function aoEnviar(evento: FormEvent<HTMLFormElement>) {
     evento.preventDefault();
-    if (enviando) return;
+    if (acaoEmAndamento.current) return;
+    acaoEmAndamento.current = true;
     const formulario = evento.currentTarget;
     const dados = new FormData(formulario);
     iniciarEnvio(async () => {
-      const resultado = await acao(estado, dados);
-      setEstado(resultado);
-      if (resultado.sucesso) aoConcluir?.(resultado.sucesso, formulario);
+      try {
+        const resultado = await acao(estado, dados);
+        setEstado(resultado);
+        if (resultado.sucesso) aoConcluir?.(resultado.sucesso, formulario);
+      } finally {
+        acaoEmAndamento.current = false;
+      }
     });
   }
 
