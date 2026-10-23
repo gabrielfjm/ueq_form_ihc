@@ -14,6 +14,13 @@ export function formatarData(data: Date): string {
   return FORMATO_DATA.format(data);
 }
 
+// docs/design.md, Tom de voz: vírgula decimal. Sempre 2 casas, como na planilha oficial
+const FORMATO_DECIMAL = new Intl.NumberFormat("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+export function formatarDecimal(valor: number | null | undefined): string {
+  return valor === null || valor === undefined ? "—" : FORMATO_DECIMAL.format(valor);
+}
+
 // "a, b e c"
 export function juntarComE(partes: readonly string[]): string {
   if (partes.length <= 1) return partes.join("");
