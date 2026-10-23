@@ -1,0 +1,64 @@
+"use client";
+
+import { UserPlus } from "lucide-react";
+import Link from "next/link";
+import { startTransition, useActionState, type FormEvent } from "react";
+import { Campo, CampoSenha } from "@/componentes/formulario/Campo";
+import formulario from "@/componentes/formulario/formulario.module.css";
+import { ResumoErros } from "@/componentes/formulario/ResumoErros";
+import { estadoInicial } from "@/lib/formulario";
+import { MINIMO_SENHA } from "@/lib/validacao-conta";
+import { cadastrar, type CampoCadastro } from "../acoes";
+import estilos from "../acesso.module.css";
+
+const CAMPOS = [
+  { nome: "nome", rotulo: "Nome", id: "cadastro-nome" },
+  { nome: "email", rotulo: "E-mail", id: "cadastro-email" },
+  { nome: "senha", rotulo: "Senha", id: "cadastro-senha" },
+] as const;
+
+export function FormularioCadastro() {
+  const [estado, enviar, enviando] = useActionState(cadastrar, estadoInicial<CampoCadastro>());
+
+  // Mesmo motivo do FormularioEntrar: sem o reset automático, os campos certos continuam preenchidos
+  function aoEnviar(evento: FormEvent<HTMLFormElement>) {
+    evento.preventDefault();
+    if (enviando) return;
+    const dados = new FormData(evento.currentTarget);
+    startTransition(() => enviar(dados));
+  }
+
+  return (
+    <form className={estilos.formulario} noValidate onSubmit={aoEnviar}>
+      <div className={estilos.cabecalho}>
+        <p className={estilos.area}>Área do pesquisador</p>
+        <h1 className={estilos.titulo}>Criar conta</h1>
+      </div>
+      <ResumoErros envio={estado.envio} erros={estado.erros} campos={CAMPOS} />
+      <Campo id="cadastro-nome" name="nome" type="text" rotulo="Nome" autoComplete="name" erro={estado.erros?.nome} />
+      <Campo
+        id="cadastro-email"
+        name="email"
+        type="email"
+        rotulo="E-mail"
+        autoComplete="email"
+        erro={estado.erros?.email}
+      />
+      <CampoSenha
+        id="cadastro-senha"
+        name="senha"
+        rotulo="Senha"
+        ajuda={`Use pelo menos ${MINIMO_SENHA} caracteres. Pode colar de um gerenciador de senhas.`}
+        autoComplete="new-password"
+        erro={estado.erros?.senha}
+      />
+      <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}>
+        <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
+        <span>Criar conta</span>
+      </button>
+      <p className={estilos.alternativa}>
+        Já tem conta? <Link href="/entrar">Entrar</Link>
+      </p>
+    </form>
+  );
+}

@@ -1,0 +1,37 @@
+.logotipo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marcacoes {
+  flex: none;
+}
+
+.vazia {
+  fill: none;
+  stroke: var(--tinta);
+  stroke-width: 1.25;
+}
+
+.marcada {
+  fill: var(--destaque);
+}
+
+.nome {
+  font-size: 1.1875rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+  color: var(--tinta);
+}
+
+@media (forced-colors: active) {
+  .vazia {
+    stroke: CanvasText;
+  }
+
+  .marcada {
+    fill: Highlight;
+  }
+}
