@@ -36,8 +36,23 @@ model Pesquisador {
   criadoEm  DateTime @default(now()) @map("criado_em")
 
   estudos Estudo[]
+  sessoes Sessao[]
 
   @@map("pesquisador")
+}
+
+// Sessão no banco para poder encerrar as outras ao trocar a senha. O id é o hash SHA-256
+// do token do cookie: quem lê o banco não consegue montar um cookie válido
+model Sessao {
+  id            String   @id
+  pesquisadorId String   @map("pesquisador_id")
+  criadaEm      DateTime @default(now()) @map("criada_em")
+  expiraEm      DateTime @map("expira_em")
+
+  pesquisador Pesquisador @relation(fields: [pesquisadorId], references: [id], onDelete: Cascade)
+
+  @@index([pesquisadorId])
+  @@map("sessao")
 }
 
 model Estudo {
