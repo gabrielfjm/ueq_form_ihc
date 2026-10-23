@@ -4,10 +4,13 @@ import { media } from "./estatistica";
 import { avaliarSuspeita, type AvaliacaoSuspeita, type ParametrosInconsistencia } from "./inconsistencia";
 import { GRUPOS, type Escala, type ItemUEQ } from "./itens";
 
+// Mesmo formato de data/protocolo.json e de data/benchmark.json (campo escalas)
 export type ConfigAnalise = {
-  protocolo: ParametrosEscala & {
+  protocolo: {
+    faixaNeutra: ParametrosEscala["faixaNeutra"];
     alfaMinimo: number;
     inconsistencia: ParametrosInconsistencia;
+    ic: { z: number };
   };
   benchmark: TabelaBenchmark;
 };
@@ -54,7 +57,8 @@ export function analisarEstudo(
     .filter((participacao) => participacao.incluidaNaAnalise)
     .map((participacao) => participacao.valores);
 
-  const escalas = resultadoPorEscala(incluidas, itens, protocolo).map((resultado) => ({
+  const parametrosEscala = { z: protocolo.ic.z, faixaNeutra: protocolo.faixaNeutra };
+  const escalas = resultadoPorEscala(incluidas, itens, parametrosEscala).map((resultado) => ({
     ...resultado,
     benchmark: classificarBenchmark(resultado.escala, resultado.media, config.benchmark),
     alfaAbaixoDoMinimo: resultado.alfa !== null && resultado.alfa < protocolo.alfaMinimo,
@@ -68,7 +72,7 @@ export function analisarEstudo(
       pragmatica: mediaDoGrupo(escalas, GRUPOS.pragmatica),
       hedonica: mediaDoGrupo(escalas, GRUPOS.hedonica),
     },
-    itens: resultadoPorItem(incluidas, itens, protocolo.z),
+    itens: resultadoPorItem(incluidas, itens, protocolo.ic.z),
     participantes: participacoes.map((participacao) => ({
       ...avaliarSuspeita(participacao.valores, itens, protocolo.inconsistencia),
       incluidaNaAnalise: participacao.incluidaNaAnalise,
