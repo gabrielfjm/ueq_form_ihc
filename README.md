@@ -77,9 +77,52 @@ docs/             especificação, requisitos e protótipos
 tests/e2e/        testes Playwright
 ```
 
+## Protótipos
+
+Nos dois níveis, os termos dos itens e os valores do gráfico são marcadores: os termos reais vêm do pacote oficial de idiomas do UEQ e os limites do benchmark, da planilha oficial.
+
+## Protótipos de alta fidelidade
+
+Como as telas vão ficar em produção, em [docs/prototipos/alta-fidelidade/](docs/prototipos/alta-fidelidade/). Seguem [docs/design.md](docs/design.md): fundo branco, azul-petróleo para destaque, vermelho só para alerta, Atkinson Hyperlegible no texto e Source Sans 3 nos números. Ícones aparecem só nas ações do pesquisador, sempre com texto; as telas do participante não têm ícones, para não interferir na resposta.
+
+### Participante
+
+<p>
+<img src="docs/prototipos/alta-fidelidade/p1-consentimento.png" alt="Consentimento: etapas no topo, fileira de sete marcações, termo com tempo, participação, anonimato e uso dos dados, botão Concordo e quero participar" width="200">
+<img src="docs/prototipos/alta-fidelidade/p2-questionario-celular.png" alt="Questionário no celular: cada item com os dois termos acima de sete círculos, rodapé com 8 de 26 respondidos e Sair sem enviar" width="200">
+<img src="docs/prototipos/alta-fidelidade/p3-questionario-item-faltando.png" alt="Envio com item faltando: resumo Faltam 2 itens em vermelho com links, item 7 com borda e texto Este item não foi respondido" width="200">
+<img src="docs/prototipos/alta-fidelidade/p4-dados-opcionais.png" alt="Dados opcionais: faixa etária, gênero, escolaridade e familiaridade, todas com Prefiro não responder, botões Continuar e Pular esta etapa" width="200">
+<img src="docs/prototipos/alta-fidelidade/p5-fim.png" alt="Fim: etapas concluídas, sete marcações preenchidas e Respostas registradas" width="200">
+<img src="docs/prototipos/alta-fidelidade/p6-link-fechado.png" alt="Link fechado: estudo em rascunho ou coleta encerrada" width="200">
+</p>
+
+<img src="docs/prototipos/alta-fidelidade/p7-questionario-desktop.png" alt="Questionário no desktop com os 26 itens e rodapé fixo com confirmação de saída em linha" width="800">
+
+### Pesquisador
+
+Entrar e criar conta, com o painel lateral sobre o instrumento:
+
+<img src="docs/prototipos/alta-fidelidade/r1-entrar.png" alt="Entrar: formulário à esquerda e painel com a fileira de sete marcações e as seis escalas do UEQ" width="400"> <img src="docs/prototipos/alta-fidelidade/r2-cadastrar-com-erro.png" alt="Criar conta com erro no e-mail e painel com o percurso da ferramenta em quatro passos" width="400">
+
+Lista de estudos, criação com prévia do termo e estudo em rascunho:
+
+<img src="docs/prototipos/alta-fidelidade/r3-estudos.png" alt="Seus estudos: tabela com status em ponto colorido e régua do período de coleta" width="400"> <img src="docs/prototipos/alta-fidelidade/r4-criar-estudo.png" alt="Criar estudo: seções numeradas e prévia do termo para o participante ao lado" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r4b-estudo-em-rascunho.png" alt="Estudo em rascunho: estado vazio com Abrir coleta, lista Antes de abrir confira e ficha do estudo" width="400">
+
+Página do estudo e resultados:
+
+<img src="docs/prototipos/alta-fidelidade/r5-pagina-do-estudo.png" alt="Página do estudo: link para participantes, coleta por versão, próximos passos, ações com exclusão em linha e ficha lateral" width="400"> <img src="docs/prototipos/alta-fidelidade/r6-resultados.png" alt="Resultados: leitura rápida, gráfico das seis escalas com benchmark e IC95, tabela, médias por item e exportação" width="400">
+
+Comparação entre versões, respostas suspeitas e minha conta:
+
+<img src="docs/prototipos/alta-fidelidade/r7-comparar-versoes.png" alt="Comparar versões: marcador cheio e vazado por escala, leitura rápida das diferenças e tabela" width="400"> <img src="docs/prototipos/alta-fidelidade/r8-respostas-e-suspeitas.png" alt="Respostas: faixa com as 34 participações, tabela com suspeitas e regra de suspeita ao lado" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r9-minha-conta.png" alt="Minha conta: dados cadastrais, troca de senha, exclusão da conta e resumo da conta" width="400">
+
 ## Protótipos de baixa fidelidade
 
-Esboços das telas antes da implementação, em [docs/prototipos/](docs/prototipos/). Os termos dos itens e os valores do gráfico são marcadores: os termos reais vêm do pacote oficial de idiomas do UEQ e os limites do benchmark, da planilha oficial.
+Esboços desenhados à mão antes da alta fidelidade, em [docs/prototipos/](docs/prototipos/).
 
 ### Participante
 
@@ -117,3 +160,7 @@ Resultados por escala com benchmark, tabela, médias por item e exportação:
 Comparação entre versões e controle de respostas suspeitas:
 
 <img src="docs/prototipos/r7-comparar-versoes.png" alt="Comparar versões: um marcador cheio e um vazado por escala" width="400"> <img src="docs/prototipos/r8-respostas-e-suspeitas.png" alt="Respostas: tabela de participações com escalas inconsistentes, suspeita e caixa Na análise" width="400">
+
+Minha conta:
+
+<img src="docs/prototipos/r9-minha-conta.png" alt="Minha conta: dados cadastrais, senha e exclusão da conta" width="400">

@@ -14,7 +14,7 @@ html {
 
 body {
   margin: 0;
-  background: var(--papel);
+  background: var(--fundo);
   color: var(--tinta);
   font-family: var(--fonte-texto);
   font-size: var(--texto-md);
@@ -24,20 +24,19 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--fonte-titulo);
-  font-weight: 500;
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: -0.015em;
   line-height: 1.2;
 }
 
 a {
-  color: var(--acento);
+  color: var(--destaque);
   text-underline-offset: 0.15em;
   transition: color var(--transicao);
 }
 
 :focus-visible {
-  outline: 2px solid var(--acento);
+  outline: 2px solid var(--destaque);
   outline-offset: 2px;
 }
 
@@ -48,7 +47,7 @@ a {
   z-index: 10;
   padding: var(--espaco-1) var(--espaco-2);
   background: var(--tinta);
-  color: var(--papel);
+  color: var(--fundo);
   border-radius: var(--raio);
   transform: translateY(-200%);
 }
@@ -72,7 +71,7 @@ main:focus {
   }
 }
 
-/* No alto contraste do Windows o outline em --acento seria trocado; Highlight garante foco visível */
+/* No alto contraste do Windows o outline em --destaque seria trocado; Highlight garante foco visível */
 @media (forced-colors: active) {
   :focus-visible {
     outline-color: Highlight;

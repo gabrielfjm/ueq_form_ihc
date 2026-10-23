@@ -1,13 +1,6 @@
 import type { Metadata } from "next";
-import { Atkinson_Hyperlegible_Next, IBM_Plex_Mono, Newsreader } from "next/font/google";
+import { Atkinson_Hyperlegible_Next, Source_Sans_3 } from "next/font/google";
 import "./globals.css";
-
-const newsreader = Newsreader({
-  subsets: ["latin", "latin-ext"],
-  weight: "variable",
-  axes: ["opsz"],
-  variable: "--fonte-newsreader-carregada",
-});
 
 const atkinson = Atkinson_Hyperlegible_Next({
   subsets: ["latin", "latin-ext"],
@@ -17,10 +10,11 @@ const atkinson = Atkinson_Hyperlegible_Next({
   variable: "--fonte-atkinson-carregada",
 });
 
-const plexMono = IBM_Plex_Mono({
+// Só para números: a Atkinson tem zero cortado e algarismos tabulares largos (docs/design.md, Tipografia)
+const sourceSans = Source_Sans_3({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500"],
-  variable: "--fonte-plex-mono-carregada",
+  weight: "variable",
+  variable: "--fonte-source-sans-carregada",
 });
 
 export const metadata: Metadata = {
@@ -30,10 +24,7 @@ export const metadata: Metadata = {
 
 export default function LayoutRaiz({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="pt-BR"
-      className={`${newsreader.variable} ${atkinson.variable} ${plexMono.variable}`}
-    >
+    <html lang="pt-BR" className={`${atkinson.variable} ${sourceSans.variable}`}>
       <body>
         <a href="#conteudo" className="pular-conteudo">
           Pular para o conteúdo
