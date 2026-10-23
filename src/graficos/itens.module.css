@@ -1,0 +1,103 @@
+/* Médias por item (protótipo r6, seção 03) */
+
+.lista {
+  border-top: 1px solid var(--tinta);
+}
+
+.grupo {
+  margin: 0;
+  padding: 16px 0 6px;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+.itens {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.linha {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) minmax(0, 2fr) minmax(0, 1fr) 56px;
+  grid-template-areas: "numero esquerdo trilho direito media";
+  align-items: center;
+  gap: 16px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--linha);
+  font-size: var(--texto-sm);
+}
+
+.numero {
+  grid-area: numero;
+  font-family: var(--fonte-numero);
+  color: var(--tinta-fraca);
+}
+
+.esquerdo {
+  grid-area: esquerdo;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.direito {
+  grid-area: direito;
+  overflow-wrap: anywhere;
+}
+
+.trilho {
+  grid-area: trilho;
+  display: block;
+  overflow: visible;
+}
+
+.media {
+  grid-area: media;
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  text-align: right;
+}
+
+.eixo {
+  stroke: var(--borda-campo);
+  stroke-width: 1;
+}
+
+.centro {
+  stroke: var(--tinta-fraca);
+  stroke-dasharray: 3 3;
+}
+
+.ponto {
+  fill: var(--tinta);
+}
+
+/* Telas estreitas: os termos em cima, como no questionário do celular */
+@media (max-width: 640px) {
+  .linha {
+    grid-template-columns: 28px minmax(0, 1fr) minmax(0, 1fr) 48px;
+    grid-template-areas:
+      "numero esquerdo direito media"
+      ". trilho trilho .";
+    gap: 4px 8px;
+  }
+
+  .esquerdo {
+    text-align: left;
+  }
+
+  .direito {
+    text-align: right;
+  }
+}
+
+@media (forced-colors: active) {
+  .ponto {
+    fill: CanvasText;
+  }
+
+  .eixo,
+  .centro {
+    stroke: CanvasText;
+  }
+}
