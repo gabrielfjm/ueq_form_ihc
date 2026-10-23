@@ -1,0 +1,195 @@
+/* Protótipos p2 (celular), p3 (item faltando) e p7 (desktop) */
+
+.pagina {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.principal {
+  flex: 1;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 32px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.etapa {
+  margin: 0;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-fraca);
+}
+
+.cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.titulo {
+  margin: 0;
+  font-size: 1.875rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.instrucao {
+  max-width: 72ch;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: var(--tinta-suave);
+}
+
+.instrucao p {
+  margin: 0;
+}
+
+.instrucaoTitulo {
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.itens {
+  border-top: 1px solid var(--linha);
+}
+
+.enviar {
+  align-self: flex-start;
+  padding: 0 24px;
+}
+
+.resumo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  background: var(--alerta-fundo);
+  border: 1px solid var(--alerta);
+  border-radius: var(--raio);
+}
+
+.resumo:focus {
+  outline: 2px solid var(--destaque);
+  outline-offset: 2px;
+}
+
+.resumoTitulo {
+  margin: 0;
+  font-size: 1.375rem;
+  line-height: 1.2;
+}
+
+.resumo p,
+.resumo ul {
+  margin: 0;
+}
+
+.resumo ul {
+  padding-left: 20px;
+}
+
+.rodape {
+  position: sticky;
+  bottom: 0;
+  background: var(--fundo);
+  border-top: 1px solid var(--tinta);
+}
+
+.rodapeInterno {
+  max-width: 960px;
+  min-height: 64px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+.progresso {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.progresso svg circle {
+  stroke: var(--tinta);
+  stroke-width: 1.25;
+  fill: none;
+}
+
+.progresso svg .cheia {
+  fill: var(--tinta);
+  stroke: none;
+}
+
+.contagem {
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.sair {
+  padding: 10px 0;
+  background: none;
+  border: 0;
+  color: var(--destaque);
+  font: inherit;
+  font-size: var(--texto-sm);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+.confirmarSaida {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.confirmarSaida .botaoRodape {
+  height: 40px;
+}
+
+@media (min-width: 640px) {
+  .principal {
+    padding: 48px 24px 64px;
+    gap: 24px;
+  }
+
+  .titulo {
+    font-size: 2.25rem;
+  }
+
+  .rodapeInterno {
+    padding: 12px 24px;
+  }
+}
+
+@media (forced-colors: active) {
+  .progresso svg circle {
+    stroke: CanvasText;
+  }
+
+  .progresso svg .cheia {
+    fill: CanvasText;
+  }
+
+  .resumo {
+    border-color: Mark;
+  }
+}

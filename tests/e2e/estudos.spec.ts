@@ -1,21 +1,9 @@
-import { expect, test, type Page } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { verificarAcessibilidade } from "./acessibilidade";
 import { cadastrarComTeclado, emailDeTeste } from "./contas";
+import { TITULO_ESTUDO, criarEstudo } from "./preparacao";
 
-const TITULO = "Avaliação do checkout da loja virtual";
-
-async function criarEstudo(page: Page, titulo = TITULO) {
-  await page.goto("/estudos/novo");
-  await page.getByLabel("Título do estudo").fill(titulo);
-  await page.getByLabel("Produto avaliado").fill("Checkout da loja virtual");
-  await page.getByLabel("Objetivo").fill("Queremos entender como as pessoas percebem o novo checkout da loja.");
-  await page.getByRole("button", { name: "Adicionar versão" }).click();
-  await page.getByLabel("Versão 2").fill("Checkout em uma página");
-  await page.getByRole("main").getByRole("button", { name: "Criar estudo" }).click();
-  await expect(page.getByRole("status")).toHaveText(
-    "Estudo criado em rascunho. Confira os dados e abra a coleta quando estiver pronto.",
-  );
-}
+const TITULO = TITULO_ESTUDO;
 
 test.beforeEach(async ({ page }, info) => {
   await cadastrarComTeclado(page, emailDeTeste(info));

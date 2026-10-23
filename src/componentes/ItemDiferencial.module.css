@@ -1,0 +1,151 @@
+/* docs/ihc.md §3 e §4.1, protótipos p2, p3 e p7 */
+
+.item {
+  margin: 0;
+  min-width: 0;
+  padding: 16px 0 12px;
+  border: 0;
+  border-bottom: 1px solid var(--linha);
+}
+
+.faltando {
+  padding-left: 10px;
+  border-left: 3px solid var(--alerta);
+}
+
+.legenda {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.erro {
+  margin: 0 0 6px;
+  font-weight: 700;
+  color: var(--alerta);
+}
+
+/* Celular: os dois termos numa linha acima dos círculos, um em cada ponta */
+.linha {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-areas:
+    "esquerdo direito"
+    "circulos circulos";
+  row-gap: 4px;
+}
+
+.termoEsquerdo,
+.termoDireito {
+  padding: 0 6px;
+  overflow-wrap: anywhere;
+}
+
+.termoEsquerdo {
+  grid-area: esquerdo;
+}
+
+.termoDireito {
+  grid-area: direito;
+  text-align: right;
+}
+
+.circulos {
+  grid-area: circulos;
+  display: flex;
+  justify-content: space-between;
+}
+
+/* A área de toque é o label de 44×44; o círculo desenhado é menor (WCAG 2.5.8, Fitts).
+   Abaixo de 352 px úteis (320 px de tela ou zoom de 400%) os 7 alvos encolhem juntos até caber,
+   em vez de criar rolagem horizontal (WCAG 1.4.10); ficam perto de 40 px, bem acima dos 24 px do AA */
+.alvo {
+  flex: 0 1 44px;
+  min-width: 34px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.circulo {
+  appearance: none;
+  width: 26px;
+  height: 26px;
+  margin: 0;
+  border: 1.5px solid var(--tinta);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color var(--transicao);
+}
+
+.circulo:hover {
+  background: var(--destaque-fundo);
+}
+
+.circulo:checked {
+  background: var(--tinta);
+}
+
+.circulo:focus-visible {
+  outline: 2px solid var(--destaque);
+  outline-offset: 3px;
+}
+
+/* Desktop: termo à esquerda alinhado à direita, círculos no centro, termo à direita (docs/design.md) */
+@media (min-width: 640px) {
+  .item {
+    padding: 8px 0;
+  }
+
+  .faltando {
+    padding-left: 10px;
+  }
+
+  .linha {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-areas: "esquerdo circulos direito";
+    align-items: center;
+    column-gap: 16px;
+  }
+
+  .termoEsquerdo {
+    padding: 0;
+    text-align: right;
+  }
+
+  .termoDireito {
+    padding: 0;
+    text-align: left;
+  }
+
+  .alvo {
+    flex-basis: 48px;
+  }
+}
+
+@media (forced-colors: active) {
+  .circulo {
+    border-color: CanvasText;
+    forced-color-adjust: none;
+    background: Canvas;
+  }
+
+  .circulo:checked {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  .circulo:focus-visible {
+    outline-color: Highlight;
+  }
+
+  .faltando {
+    border-left-color: Mark;
+  }
+}

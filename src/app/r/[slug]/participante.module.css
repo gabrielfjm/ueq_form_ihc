@@ -1,4 +1,4 @@
-/* Telas do participante: sem ícones e sem nada além do necessário (docs/ihc.md, seção 3) */
+/* Telas do participante (p1 a p7): sem ícones e sem nada além do necessário (docs/ihc.md §3) */
 
 .pagina {
   max-width: 40rem;
@@ -24,4 +24,199 @@
 
 .texto {
   margin: 0;
+}
+
+/* Faixa de cabeçalho do consentimento e do fim (p1, p5) */
+.faixa {
+  background: var(--fundo-faixa);
+  border-bottom: 1px solid var(--linha);
+}
+
+.faixaInterna {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 28px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.faixaFim {
+  padding-bottom: 40px;
+  gap: 40px;
+}
+
+.etapas {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.etapas li {
+  padding-top: 8px;
+  border-top: 3px solid var(--linha);
+  font-size: var(--texto-xs);
+  color: var(--tinta-suave);
+}
+
+.etapas li[aria-current="step"] {
+  border-top-color: var(--destaque);
+  color: var(--tinta);
+  font-weight: 700;
+}
+
+.etapas .concluida {
+  border-top-color: var(--tinta);
+  color: var(--tinta);
+}
+
+.marcacoes {
+  width: 100%;
+  max-width: 400px;
+}
+
+.marcacoes line {
+  stroke: var(--linha);
+}
+
+.marcacoes circle {
+  fill: var(--fundo-faixa);
+  stroke: var(--tinta);
+  stroke-width: 1.5;
+}
+
+.marcacoesCheias line {
+  stroke: var(--tinta);
+}
+
+.marcacoesCheias circle {
+  fill: var(--tinta);
+}
+
+.nomeEstudo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tituloGrande {
+  margin: 0;
+  font-size: 2rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.subtitulo {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.corpo {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.termo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.termoTitulo {
+  margin: 0;
+  font-size: 1.5rem;
+  line-height: 1.15;
+}
+
+.condicoes {
+  margin: 0;
+}
+
+.condicoes > div {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 2px 12px;
+  padding: 14px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.condicoes > div:last-child {
+  border-bottom: 1px solid var(--linha);
+}
+
+.condicoes dt {
+  grid-column: 2;
+  font-weight: 700;
+}
+
+.condicoes dd {
+  grid-column: 2;
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.condicaoNumero {
+  grid-row: 1 / span 2;
+  grid-column: 1;
+  padding-top: 2px;
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.decisao {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.concordo {
+  height: 52px;
+  padding: 0 16px;
+}
+
+.naoQuero {
+  align-self: center;
+  padding: 10px 4px;
+}
+
+.fimTitulo {
+  margin: 0;
+  font-size: 2.25rem;
+  line-height: 1.15;
+}
+
+.fimTexto {
+  margin: 0;
+  font-size: 1.1875rem;
+}
+
+.fimNota {
+  margin: 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--linha);
+  color: var(--tinta-suave);
+}
+
+@media (forced-colors: active) {
+  .etapas li[aria-current="step"],
+  .etapas .concluida {
+    border-top-color: Highlight;
+  }
+
+  .marcacoes circle {
+    stroke: CanvasText;
+  }
+
+  .marcacoesCheias circle {
+    fill: CanvasText;
+  }
 }
