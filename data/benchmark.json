@@ -1,41 +1,41 @@
 {
-  "fonte": "PREENCHER: UEQ Data Analysis Tool vX, aba Benchmark, acessado em DD/MM/2026",
+  "fonte": "UEQ Data Analysis Tool V15 (UEQ_Data_Analysis_Tool_V15.xlsx, de 22/10/2026, em Data_Analysis_Tools.zip de ueq-online.org), aba Benchmark, tabela 'Benchmark borders' (linhas 36 a 42, colunas quantis 0.25, 0.5, 0.75 e 0.9). Base: 21175 pessoas de 468 estudos. Acessado em 23/10/2026",
   "escalas": {
     "atratividade": {
-      "excelente": null,
-      "bom": null,
-      "acimaDaMedia": null,
-      "abaixoDaMedia": null
+      "excelente": 1.84,
+      "bom": 1.58,
+      "acimaDaMedia": 1.18,
+      "abaixoDaMedia": 0.69
     },
     "perspicuidade": {
-      "excelente": null,
-      "bom": null,
-      "acimaDaMedia": null,
-      "abaixoDaMedia": null
+      "excelente": 2,
+      "bom": 1.73,
+      "acimaDaMedia": 1.2,
+      "abaixoDaMedia": 0.72
     },
     "eficiencia": {
-      "excelente": null,
-      "bom": null,
-      "acimaDaMedia": null,
-      "abaixoDaMedia": null
+      "excelente": 1.88,
+      "bom": 1.5,
+      "acimaDaMedia": 1.05,
+      "abaixoDaMedia": 0.6
     },
     "confiabilidade": {
-      "excelente": null,
-      "bom": null,
-      "acimaDaMedia": null,
-      "abaixoDaMedia": null
+      "excelente": 1.7,
+      "bom": 1.48,
+      "acimaDaMedia": 1.14,
+      "abaixoDaMedia": 0.78
     },
     "estimulacao": {
-      "excelente": null,
-      "bom": null,
-      "acimaDaMedia": null,
-      "abaixoDaMedia": null
+      "excelente": 1.7,
+      "bom": 1.35,
+      "acimaDaMedia": 1,
+      "abaixoDaMedia": 0.5
     },
     "novidade": {
-      "excelente": null,
-      "bom": null,
-      "acimaDaMedia": null,
-      "abaixoDaMedia": null
+      "excelente": 1.6,
+      "bom": 1.12,
+      "acimaDaMedia": 0.7,
+      "abaixoDaMedia": 0.16
     }
   }
 }
