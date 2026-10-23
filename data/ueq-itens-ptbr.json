@@ -1,10 +1,10 @@
 {
-  "fonte": "PREENCHER: arquivo do pacote oficial de idiomas UEQ (Portuguese/Brazilian Portuguese), versão e data de download",
+  "fonte": "Pacote oficial UEQ_All_Languages.zip (https://www.ueq-online.org/Material/UEQ_All_Languages.zip), arquivo UEQ_Portuguese.pdf (datado de 30/11/2012 no ZIP; tradução de Manuel Pérez Cota e Ramiro Gonçalves), baixado em 23/10/2026. É a única versão em português do pacote, em português europeu; os termos foram copiados sem alteração.",
   "itens": [
     {
       "numero": 1,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Desagradável",
+      "termoDireito": "Agradável",
       "escala": "atratividade",
       "polaridade": "+",
       "referenciaEN": [
@@ -14,8 +14,8 @@
     },
     {
       "numero": 2,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Incompreensível",
+      "termoDireito": "Compreensível",
       "escala": "perspicuidade",
       "polaridade": "+",
       "referenciaEN": [
@@ -25,8 +25,8 @@
     },
     {
       "numero": 3,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Criativo",
+      "termoDireito": "Sem criatividade",
       "escala": "novidade",
       "polaridade": "-",
       "referenciaEN": [
@@ -36,8 +36,8 @@
     },
     {
       "numero": 4,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "De Fácil aprendizagem",
+      "termoDireito": "De difícil aprendizagem",
       "escala": "perspicuidade",
       "polaridade": "-",
       "referenciaEN": [
@@ -47,8 +47,8 @@
     },
     {
       "numero": 5,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Valioso",
+      "termoDireito": "Sem valor",
       "escala": "estimulacao",
       "polaridade": "-",
       "referenciaEN": [
@@ -58,8 +58,8 @@
     },
     {
       "numero": 6,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Aborrecido",
+      "termoDireito": "Excitante",
       "escala": "estimulacao",
       "polaridade": "+",
       "referenciaEN": [
@@ -69,8 +69,8 @@
     },
     {
       "numero": 7,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Desinteressante",
+      "termoDireito": "Interessante",
       "escala": "estimulacao",
       "polaridade": "+",
       "referenciaEN": [
@@ -80,8 +80,8 @@
     },
     {
       "numero": 8,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Imprevisível",
+      "termoDireito": "Previsível",
       "escala": "confiabilidade",
       "polaridade": "+",
       "referenciaEN": [
@@ -91,8 +91,8 @@
     },
     {
       "numero": 9,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Rápido",
+      "termoDireito": "Lento",
       "escala": "eficiencia",
       "polaridade": "-",
       "referenciaEN": [
@@ -102,8 +102,8 @@
     },
     {
       "numero": 10,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Original",
+      "termoDireito": "Convencional",
       "escala": "novidade",
       "polaridade": "-",
       "referenciaEN": [
@@ -113,8 +113,8 @@
     },
     {
       "numero": 11,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Obstrutivo",
+      "termoDireito": "Condutor",
       "escala": "confiabilidade",
       "polaridade": "+",
       "referenciaEN": [
@@ -124,8 +124,8 @@
     },
     {
       "numero": 12,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Bom",
+      "termoDireito": "Mau",
       "escala": "atratividade",
       "polaridade": "-",
       "referenciaEN": [
@@ -135,8 +135,8 @@
     },
     {
       "numero": 13,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Complicado",
+      "termoDireito": "Fácil",
       "escala": "perspicuidade",
       "polaridade": "+",
       "referenciaEN": [
@@ -146,8 +146,8 @@
     },
     {
       "numero": 14,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Desinteressante",
+      "termoDireito": "Atrativo",
       "escala": "atratividade",
       "polaridade": "+",
       "referenciaEN": [
@@ -157,8 +157,8 @@
     },
     {
       "numero": 15,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Comum",
+      "termoDireito": "Vanguardista",
       "escala": "novidade",
       "polaridade": "+",
       "referenciaEN": [
@@ -168,8 +168,8 @@
     },
     {
       "numero": 16,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Incómodo",
+      "termoDireito": "Cómodo",
       "escala": "atratividade",
       "polaridade": "+",
       "referenciaEN": [
@@ -179,8 +179,8 @@
     },
     {
       "numero": 17,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Seguro",
+      "termoDireito": "Inseguro",
       "escala": "confiabilidade",
       "polaridade": "-",
       "referenciaEN": [
@@ -190,8 +190,8 @@
     },
     {
       "numero": 18,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Motivante",
+      "termoDireito": "Desmotivante",
       "escala": "estimulacao",
       "polaridade": "-",
       "referenciaEN": [
@@ -201,8 +201,8 @@
     },
     {
       "numero": 19,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Atende as expectativas",
+      "termoDireito": "Não atende as expectativas",
       "escala": "confiabilidade",
       "polaridade": "-",
       "referenciaEN": [
@@ -212,8 +212,8 @@
     },
     {
       "numero": 20,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Ineficiente",
+      "termoDireito": "Eficiente",
       "escala": "eficiencia",
       "polaridade": "+",
       "referenciaEN": [
@@ -223,8 +223,8 @@
     },
     {
       "numero": 21,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Evidente",
+      "termoDireito": "Confuso",
       "escala": "perspicuidade",
       "polaridade": "-",
       "referenciaEN": [
@@ -234,8 +234,8 @@
     },
     {
       "numero": 22,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Impraticável",
+      "termoDireito": "Prático",
       "escala": "eficiencia",
       "polaridade": "+",
       "referenciaEN": [
@@ -245,8 +245,8 @@
     },
     {
       "numero": 23,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Organizado",
+      "termoDireito": "Desorganizado",
       "escala": "eficiencia",
       "polaridade": "-",
       "referenciaEN": [
@@ -256,8 +256,8 @@
     },
     {
       "numero": 24,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Atraente",
+      "termoDireito": "Feio",
       "escala": "atratividade",
       "polaridade": "-",
       "referenciaEN": [
@@ -267,8 +267,8 @@
     },
     {
       "numero": 25,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Simpático",
+      "termoDireito": "Antipático",
       "escala": "atratividade",
       "polaridade": "-",
       "referenciaEN": [
@@ -278,8 +278,8 @@
     },
     {
       "numero": 26,
-      "termoEsquerdo": "",
-      "termoDireito": "",
+      "termoEsquerdo": "Conservador",
+      "termoDireito": "Inovador",
       "escala": "novidade",
       "polaridade": "+",
       "referenciaEN": [
