@@ -79,6 +79,10 @@ tests/e2e/        testes Playwright
 
 ## Protótipos
 
+**Protótipo navegável:** https://claude.ai/artifact/GTXgzTaWbf5STw3z9r76U1
+
+Todas as telas, de baixa e alta fidelidade, num canvas único. No modo Play, os botões e links levam de uma tela para a outra, como no sistema. As notas ao lado de cada fileira explicam as decisões de interface e o princípio de IHC de cada uma.
+
 Nos dois níveis, os termos dos itens e os valores do gráfico são marcadores: os termos reais vêm do pacote oficial de idiomas do UEQ e os limites do benchmark, da planilha oficial.
 
 ## Protótipos de alta fidelidade
