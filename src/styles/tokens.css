@@ -1,34 +1,34 @@
 /* Valores de docs/design.md. Contrastes conferidos em __tests__/contraste.test.ts */
 :root {
-  --papel:        #F4F1EA;
-  --papel-fundo:  #EAE5DA;
-  --papel-claro:  #FBFAF6;
-  --tinta:        #1B1F27;
-  --tinta-suave:  #4A4F59;
-  --tinta-fraca:  #5E6470;
-  --linha:        #CFC8B8;  /* só réguas e divisórias. Borda de campo usa --borda-campo (WCAG 1.4.11) */
-  --borda-campo:  #7D818A;
-  --linha-forte:  #1B1F27;
+  --fundo:          #FFFFFF;
+  --fundo-faixa:    #F3F5F7;
+  --fundo-painel:   #F8FAFB;
+  --tinta:          #0F1720;
+  --tinta-suave:    #46525E;
+  --tinta-fraca:    #5B6672;
+  --linha:          #D5DBE1;  /* só réguas e divisórias. Borda de campo usa --borda-campo (WCAG 1.4.11) */
+  --borda-campo:    #7A8691;
+  --linha-forte:    #0F1720;
 
-  --acento:       #9A3B26;
-  --acento-fundo: #F1E2DC;
+  --destaque:       #0B6A78;
+  --destaque-fundo: #E6F2F4;
 
-  --atratividade: #1B1F27;
-  --pragmatica:   #2F4A6B;
-  --hedonica:     #8C6014;
+  --alerta:         #B42318;
+  --alerta-fundo:   #FEF3F2;
 
-  --bench-excelente: #CFC6B2;
-  --bench-bom:       #DAD2C1;
-  --bench-acima:     #E3DCCD;
-  --bench-abaixo:    #EBE6DA;
-  --bench-ruim:      #F2EEE5;
+  --atratividade:   #0F1720;
+  --pragmatica:     #1D4E89;
+  --hedonica:       #9A5B00;
 
-  --alerta:       #9A3B26;
+  --bench-excelente: #C7D0D9;
+  --bench-bom:       #D5DCE3;
+  --bench-acima:     #E1E6EB;
+  --bench-abaixo:    #EBEFF2;
+  --bench-ruim:      #F4F6F8;
 
   /* as variáveis --fonte-*-carregada vêm do next/font, no layout raiz */
-  --fonte-titulo: var(--fonte-newsreader-carregada), Georgia, "Times New Roman", serif;
   --fonte-texto:  var(--fonte-atkinson-carregada), Verdana, sans-serif;
-  --fonte-numero: var(--fonte-plex-mono-carregada), "Courier New", monospace;
+  --fonte-numero: var(--fonte-source-sans-carregada), "Segoe UI", sans-serif;
 
   --texto-xs:  0.8125rem;
   --texto-sm:  0.9375rem;

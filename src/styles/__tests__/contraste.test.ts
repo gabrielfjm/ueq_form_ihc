@@ -37,16 +37,19 @@ function cor(nome: string): string {
 }
 
 const faixasBenchmark = ["bench-excelente", "bench-bom", "bench-acima", "bench-abaixo", "bench-ruim"];
-const fundosDePapel = ["papel", "papel-fundo", "papel-claro"];
+const fundosDaInterface = ["fundo", "fundo-faixa", "fundo-painel"];
 
 type Par = [frente: string, fundo: string];
 
 const paresDeTexto: Par[] = [
-  ...["tinta", "tinta-suave", "tinta-fraca", "acento", "alerta"].flatMap((frente) =>
-    fundosDePapel.map((fundo): Par => [frente, fundo]),
+  ...["tinta", "tinta-suave", "tinta-fraca", "destaque", "alerta"].flatMap((frente) =>
+    fundosDaInterface.map((fundo): Par => [frente, fundo]),
   ),
-  ["acento", "acento-fundo"],
-  ["papel", "tinta"],
+  ["tinta", "destaque-fundo"],
+  ["destaque", "destaque-fundo"],
+  ["tinta", "alerta-fundo"],
+  ["alerta", "alerta-fundo"],
+  ["fundo", "tinta"],
   // design.md: sobre as faixas do benchmark, texto usa só --tinta ou --tinta-suave
   ...["tinta", "tinta-suave"].flatMap((frente) =>
     faixasBenchmark.map((fundo): Par => [frente, fundo]),
@@ -54,10 +57,10 @@ const paresDeTexto: Par[] = [
 ];
 
 const paresNaoTextuais: Par[] = [
-  ...fundosDePapel.map((fundo): Par => ["borda-campo", fundo]),
-  ...fundosDePapel.map((fundo): Par => ["acento", fundo]),
+  ...fundosDaInterface.map((fundo): Par => ["borda-campo", fundo]),
+  ...fundosDaInterface.map((fundo): Par => ["destaque", fundo]),
   ...["atratividade", "pragmatica", "hedonica"].flatMap((marcador) =>
-    ["papel", ...faixasBenchmark].map((fundo): Par => [marcador, fundo]),
+    ["fundo", "fundo-painel", ...faixasBenchmark].map((fundo): Par => [marcador, fundo]),
   ),
 ];
 
