@@ -3,7 +3,11 @@ import { readFileSync } from "node:fs";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { expect, type Browser, type Page, type TestInfo } from "@playwright/test";
 import { PrismaClient } from "../../src/generated/prisma/client";
+import { avaliarSuspeita, type ItemUEQ } from "../../src/ueq";
 import { cadastrarComTeclado, emailDeTeste } from "./contas";
+
+// Lido do disco: o Playwright carrega os testes como ESM, que não importa JSON sem atributo de tipo
+const protocolo = JSON.parse(readFileSync("data/protocolo.json", "utf8")) as { inconsistencia: Parameters<typeof avaliarSuspeita>[2] };
 
 export const TITULO_ESTUDO = "Avaliação do checkout da loja virtual";
 
@@ -43,6 +47,11 @@ export async function inserirRespostas(link: string, conjuntos: { versao: number
     include: { versoes: { orderBy: { ordem: "asc" } } },
   });
   const itens = await banco.item.findMany({ orderBy: { numero: "asc" } });
+  const itensUeq: ItemUEQ[] = itens.map((item) => ({
+    numero: item.numero,
+    escala: item.escala.toLowerCase() as ItemUEQ["escala"],
+    polaridade: item.polaridade === "POSITIVA_DIREITA" ? "+" : "-",
+  }));
   for (const { versao, pasta, limite } of conjuntos) {
     const versaoId = estudo.versoes[versao - 1]?.id ?? "";
     const linhas = readFileSync(`data/fixtures/${pasta}/respostas.csv`, "utf8")
@@ -56,6 +65,8 @@ export async function inserirRespostas(link: string, conjuntos: { versao: number
           versaoId,
           consentiuEm: new Date(),
           concluidaEm: new Date(),
+          // a mesma marca que a conclusão de verdade grava (src/app/r/[slug]/acoes.ts)
+          suspeita: avaliarSuspeita(valores, itensUeq, protocolo.inconsistencia).suspeita,
           respostas: { create: itens.map((item) => ({ itemId: item.id, valor: valores[item.numero - 1] ?? 4 })) },
         },
       });
