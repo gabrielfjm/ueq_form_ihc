@@ -1,13 +1,16 @@
 import "server-only";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { cache } from "react";
+import { ehIdioma, negociarIdioma, type CodigoIdioma } from "@/idiomas";
 import { banco } from "./banco";
 
 // Os cookies valem só dentro do link do estudo (/r/<slug>) e não guardam nada sobre a pessoa:
-// um é o id aleatório da participação em andamento, o outro só marca que o link já foi respondido
+// um é o id aleatório da participação em andamento, outro só marca que o link já foi respondido
+// e o terceiro guarda o idioma escolhido
 const COOKIE_PARTICIPACAO = "ueq_participacao";
 const COOKIE_RESPONDIDO = "ueq_respondido";
+const COOKIE_IDIOMA = "ueq_idioma";
 const TRINTA_DIAS_S = 30 * 24 * 60 * 60;
 
 const opcoes = (slug: string) => ({
@@ -50,6 +53,17 @@ export async function esquecerParticipacao(slug: string) {
 
 export async function marcarRespondido(slug: string) {
   (await cookies()).set(COOKIE_RESPONDIDO, "1", { ...opcoes(slug), maxAge: TRINTA_DIAS_S });
+}
+
+// O idioma escolhido no seletor; antes de escolher, o primeiro dos 37 que o navegador pede (Accept-Language)
+export const idiomaDoParticipante = cache(async (): Promise<CodigoIdioma> => {
+  const escolhido = (await cookies()).get(COOKIE_IDIOMA)?.value;
+  if (ehIdioma(escolhido)) return escolhido;
+  return negociarIdioma((await headers()).get("accept-language"));
+});
+
+export async function guardarIdioma(slug: string, codigo: CodigoIdioma) {
+  (await cookies()).set(COOKIE_IDIOMA, codigo, { ...opcoes(slug), maxAge: TRINTA_DIAS_S });
 }
 
 export async function jaRespondeu(): Promise<boolean> {

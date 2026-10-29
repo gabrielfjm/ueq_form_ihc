@@ -1,4 +1,5 @@
 import "server-only";
+import { ehIdioma, IDIOMA_PADRAO, infoIdioma } from "@/idiomas";
 import { banco } from "./banco";
 import { slugDoTitulo } from "./csv";
 import type { Demografia } from "./demografia";
@@ -31,6 +32,7 @@ async function participacoesExportadas(estudoId: string): Promise<ParticipacaoEx
         concluidaEm: true,
         incluidaNaAnalise: true,
         suspeita: true,
+        idioma: true,
         demografia: true,
         versao: { select: { nome: true } },
         respostas: { select: { valor: true, item: { select: { numero: true } } } },
@@ -40,12 +42,15 @@ async function participacoesExportadas(estudoId: string): Promise<ParticipacaoEx
   return participacoes.map((participacao) => {
     const valores = Array<number>(itens.length).fill(0);
     for (const resposta of participacao.respostas) valores[resposta.item.numero - 1] = resposta.valor;
+    const idioma = infoIdioma(ehIdioma(participacao.idioma) ? participacao.idioma : IDIOMA_PADRAO);
     return {
       id: participacao.id,
       versao: participacao.versao.nome,
       concluidaEm: participacao.concluidaEm ? DATA_HORA.format(participacao.concluidaEm) : "",
       incluidaNaAnalise: participacao.incluidaNaAnalise,
       suspeita: participacao.suspeita,
+      idioma: idioma.codigo,
+      traducaoAprovada: idioma.traducaoAprovada,
       demografia: (participacao.demografia ?? null) as Demografia | null,
       valores,
     };

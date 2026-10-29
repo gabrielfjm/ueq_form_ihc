@@ -111,6 +111,8 @@ model Participacao {
   demografia        Json?
   suspeita          Boolean   @default(false)
   incluidaNaAnalise Boolean   @default(true) @map("incluida_na_analise")
+  // Código do idioma em que a pessoa respondeu (data/ueq-idiomas.json); quem respondeu antes era "pt"
+  idioma            String    @default("pt")
 
   versao    Versao     @relation(fields: [versaoId], references: [id], onDelete: Cascade)
   respostas Resposta[]

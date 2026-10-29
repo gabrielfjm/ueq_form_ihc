@@ -1,20 +1,22 @@
+import type { TextosParticipante } from "@/idiomas";
 import estilos from "./participante.module.css";
-
-const ETAPAS = ["Consentimento", "Questionário", "Dados opcionais"] as const;
 
 const CENTROS = [24, 73, 122, 172, 221, 270, 320];
 
+type Propriedades = {
+  // Posição da etapa atual (0 = consentimento) ou todas concluídas
+  atual: 0 | 1 | 2 | "concluidas";
+  textos: TextosParticipante["etapas"];
+};
+
 // Shneiderman 4 (diálogos com fechamento): a pessoa sabe em que etapa está e quantas faltam
-export function Etapas({ atual }: { atual: (typeof ETAPAS)[number] | "concluidas" }) {
+export function Etapas({ atual, textos }: Propriedades) {
   return (
-    <ol
-      className={estilos.etapas}
-      aria-label={atual === "concluidas" ? "Etapas da participação, todas concluídas" : "Etapas da participação"}
-    >
-      {ETAPAS.map((etapa, posicao) => (
+    <ol className={estilos.etapas} aria-label={atual === "concluidas" ? textos.rotuloConcluidas : textos.rotulo}>
+      {textos.nomes.map((etapa, posicao) => (
         <li
           key={etapa}
-          aria-current={etapa === atual ? "step" : undefined}
+          aria-current={posicao === atual ? "step" : undefined}
           className={atual === "concluidas" ? estilos.concluida : undefined}
         >
           {posicao + 1} · {etapa}

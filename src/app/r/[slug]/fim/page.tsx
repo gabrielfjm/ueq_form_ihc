@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { estudoPublico } from "@/lib/participacao";
+import { textosDoIdioma } from "@/idiomas";
+import { estudoPublico, idiomaDoParticipante } from "@/lib/participacao";
 import { Etapas, Marcacoes } from "../Etapas";
 import estilos from "../participante.module.css";
 
@@ -7,24 +8,26 @@ type Propriedades = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
   const estudo = await estudoPublico((await params).slug);
-  return { title: `Respostas registradas · ${estudo.titulo}` };
+  const { titulos } = textosDoIdioma(await idiomaDoParticipante());
+  return { title: `${titulos.registradas} · ${estudo.titulo}` };
 }
 
 // Protótipo p5: fechamento curto e sem animação (docs/design.md, Fim)
 export default async function PaginaFim({ params }: Propriedades) {
   await estudoPublico((await params).slug);
+  const textos = textosDoIdioma(await idiomaDoParticipante());
   return (
     <>
       <header className={estilos.faixa}>
         <div className={`${estilos.faixaInterna} ${estilos.faixaFim}`}>
-          <Etapas atual="concluidas" />
+          <Etapas atual="concluidas" textos={textos.etapas} />
           <Marcacoes cheias />
         </div>
       </header>
       <main id="conteudo" tabIndex={-1} className={estilos.corpo}>
-        <h1 className={estilos.fimTitulo}>Respostas registradas</h1>
-        <p className={estilos.fimTexto}>Obrigado por participar. Suas respostas foram gravadas de forma anônima.</p>
-        <p className={estilos.fimNota}>Você já pode fechar esta página. Nada mais será pedido.</p>
+        <h1 className={estilos.fimTitulo}>{textos.fim.titulo}</h1>
+        <p className={estilos.fimTexto}>{textos.fim.texto}</p>
+        <p className={estilos.fimNota}>{textos.fim.nota}</p>
       </main>
     </>
   );

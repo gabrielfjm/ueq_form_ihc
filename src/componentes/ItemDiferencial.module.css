@@ -44,8 +44,10 @@
   overflow-wrap: anywhere;
 }
 
+/* Alinhamento físico, não start/end: em árabe, hebraico e persa o termo da esquerda continua colado à esquerda */
 .termoEsquerdo {
   grid-area: esquerdo;
+  text-align: left;
 }
 
 .termoDireito {

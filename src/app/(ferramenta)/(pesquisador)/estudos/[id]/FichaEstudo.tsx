@@ -1,4 +1,5 @@
 import type { StatusEstudo } from "@/generated/prisma/enums";
+import { IDIOMAS } from "@/idiomas";
 import { formatarDia, situacaoDoPeriodo } from "@/lib/periodo";
 import { formatarData } from "@/lib/texto";
 import { textoDoPeriodo } from "../ReguaPeriodo";
@@ -70,7 +71,7 @@ export function FichaEstudo(propriedades: Propriedades) {
         )}
         <div>
           <dt>Instrumento</dt>
-          <dd>UEQ completo · 26 itens</dd>
+          <dd>UEQ completo · 26 itens · {IDIOMAS.length} idiomas</dd>
         </div>
         <div>
           <dt>Criado em</dt>

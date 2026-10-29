@@ -1,5 +1,6 @@
 import "server-only";
 import protocolo from "../../data/protocolo.json";
+import { ehIdioma, IDIOMA_PADRAO, infoIdioma, type InfoIdioma } from "@/idiomas";
 import { avaliarSuspeita, type AvaliacaoSuspeita } from "@/ueq";
 import { banco } from "./banco";
 import { itensDoQuestionario } from "./itens-ueq";
@@ -10,6 +11,7 @@ export type ParticipacaoAvaliada = {
   id: string;
   concluidaEm: Date;
   versao: string;
+  idioma: InfoIdioma;
   suspeita: boolean;
   incluidaNaAnalise: boolean;
   avaliacao: AvaliacaoSuspeita;
@@ -22,6 +24,7 @@ async function participacoesConcluidas(estudoId: string) {
     select: {
       id: true,
       concluidaEm: true,
+      idioma: true,
       suspeita: true,
       incluidaNaAnalise: true,
       versao: { select: { nome: true } },
@@ -41,6 +44,7 @@ export async function participacoesAvaliadas(estudoId: string): Promise<Particip
       id: participacao.id,
       concluidaEm: participacao.concluidaEm ?? new Date(0),
       versao: participacao.versao.nome,
+      idioma: infoIdioma(ehIdioma(participacao.idioma) ? participacao.idioma : IDIOMA_PADRAO),
       suspeita: participacao.suspeita,
       incluidaNaAnalise: participacao.incluidaNaAnalise,
       avaliacao: avaliarSuspeita(valores, itens, PARAMETROS_SUSPEITA),

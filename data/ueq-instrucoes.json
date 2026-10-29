@@ -1,0 +1,407 @@
+{
+  "fonte": "Instrução do PDF de cada idioma no pacote oficial UEQ_All_Languages.zip (ueq-online.org), baixado em 29/10/2026. Como em português, o exemplo com um círculo já marcado e a frase que o explica ficaram de fora: mostrariam uma resposta antes do primeiro item.",
+  "idiomas": {
+    "pt": {
+      "titulo": "Por favor dê-nos a sua opinião.",
+      "paragrafos": [
+        "A fim de avaliar o produto, por favor preencha o seguinte questionário. É constituído por pares de opostos relativos às propriedades que o produto possa ter. As graduações entre os opostos são representadas por círculos. Ao marcar um dos círculos, você pode expressar sua opinião sobre um conceito.",
+        "Marque a sua resposta da forma mais espontânea possível. É importante que não pense demasiado na resposta porque a sua avaliação imediata é que é importante.",
+        "Por favor, assinale sempre uma resposta, mesmo que não tenha certezas sobre um par de termos ou que os termos não se enquadrem com o produto.",
+        "Não há respostas \"certas\" ou respostas \"erradas\". A sua opinião pessoal é que conta!",
+        "Por favor, dê-nos a sua avaliação atual do produto em causa.",
+        "Por favor, marque apenas um círculo por linha."
+      ],
+      "origem": "Texto do PDF oficial, conferido em 23/10/2026."
+    },
+    "en": {
+      "titulo": "Please make your evaluation now.",
+      "paragrafos": [
+        "For the assessment of the product, please fill out the following questionnaire. The questionnaire consists of pairs of contrasting attributes that may apply to the product. The circles between the attributes represent gradations between the opposites. You can express your agreement with the attributes by ticking the circle that most closely reflects your impression.",
+        "Please decide spontaneously. Don’t think too long about your decision to make sure that you convey your original impression.",
+        "Sometimes you may not be completely sure about your agreement with a particular attribute or you may find that the attribute does not apply completely to the particular product. Nevertheless, please tick a circle in every line.",
+        "It is your personal opinion that counts. Please remember: there is no wrong or right answer!",
+        "Please assess the product now by ticking one circle per line."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "es": {
+      "titulo": "Por favor realice su evaluación ahora.",
+      "paragrafos": [
+        "Por favor, rellene el siguiente cuestionario con el fin de evaluar el producto. Se compone de pares de propiedades opuestas que el producto puede tener. Las gradaciones entre los opuestos están representadas por círculos. Usted puede expresar su conformidad con una propiedad marcando uno de estos círculos que mejor refleje su impresión.",
+        "Por favor, decida espontáneamente. No piense demasiado su opinión y asegúrese que expresa su sensación inicial.",
+        "Por favor, marque un círculo para cada par de propiedades, aunque piense que no son aplicables o que hay propiedades parecidas o prácticamente iguales.",
+        "Su opinión personal cuenta. Recuerde: ¡no hay respuesta correcta o incorrecta!",
+        "Por favor dé su evaluación actual del producto.",
+        "Por favor, marque sólo un círculo por línea."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "de": {
+      "titulo": "Bitte geben Sie Ihre Beurteilung ab.",
+      "paragrafos": [
+        "Um das Produkt zu bewerten, füllen Sie bitte den nachfolgenden Fragebogen aus. Er besteht aus Gegensatzpaaren von Eigenschaften, die das Produkt haben kann. Abstufungen zwischen den Gegensätzen sind durch Kreise dargestellt. Durch Ankreuzen eines dieser Kreise können Sie Ihre Zustimmung zu einem Begriff äußern.",
+        "Entscheiden Sie möglichst spontan. Es ist wichtig, dass Sie nicht lange über die Begriffe nachdenken, damit Ihre unmittelbare Einschätzung zum Tragen kommt.",
+        "Bitte kreuzen Sie immer eine Antwort an, auch wenn Sie bei der Einschätzung zu einem Begriffspaar unsicher sind oder finden, dass es nicht so gut zum Produkt passt.",
+        "Es gibt keine „richtige“ oder „falsche“ Antwort. Ihre persönliche Meinung zählt!",
+        "Bitte geben Sie nun Ihre Einschätzung des Produkts ab.",
+        "Kreuzen Sie bitte nur einen Kreis pro Zeile an."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "fr": {
+      "titulo": "S'il vous plaît donnez-nous votre avis",
+      "paragrafos": [
+        "Afin d'évaluer le produit, veuillez remplir le questionnaire ci-dessous. Il se compose de paires opposées de propriétés que peuvent avoir le produit. La gradation entre les contraires est représentée par des cercles. En cochant l'un de ces cercles, vous pouvez exprimer votre approbation d'un concept.",
+        "Répondez le plus spontanément possible.",
+        "Veuillez répondre à toutes les questions, même si vous n'êtes pas sûr de l'évaluation.",
+        "Il n’y a pas de «bonne» ou de «mauvaise» réponse, seul votre avis compte !",
+        "Dites-nous maintenant ce que vous pensez de notre produit (une seule réponse possible par qualité/défaut)."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "it": {
+      "titulo": "Inserisca per favore il Suo giudizio",
+      "paragrafos": [
+        "Per valutare il nuovo prodotto La invitiamo a compilare il seguente questionario. Si tratta di coppie di caratteristiche, in antitesi tra loro, che il prodotto può avere.",
+        "Scelga in modo spontaneo senza troppi ragionamenti.",
+        "Non esiste una risposta “giusta” o “sbagliata”, ma è importante la Sua opinione personale!",
+        "Ora inserisca per favore la Sua valutazione del prodotto. Per ogni coppia di aggettivi è possibile dare una sola risposta."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "nl": {
+      "titulo": "Maak dan nu uw evaluatie.",
+      "paragrafos": [
+        "Voor de beoordeling van het product, vragen we u de onderstaande vragenlijst in te vullen. De vragenlijst bestaat uit twee tegengestelde eigenschappen die van toepassing zijn op het product. De rondjes staan voor verschillende gradaties. U kunt uw beoordeling geven door het rondje, die het meest uw indruk weerspiegelt, aan te vinken.",
+        "Graag uw eerst ingeving invullen. Wacht niet te lang met invullen om te voorkomen dat u gaat twijfelen over uw eerste ingeving.",
+        "Soms bent u misschien niet helemaal zeker van uw antwoord of u vindt de eigenschap niet volledig van toepassing, kruis dan toch een rondje aan.",
+        "Het is uw mening die telt. Let op: er is geen goed of fout antwoord!",
+        "Gelieve beoordeel het product nu door het aanvinken van een rondje per regel."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "da": {
+      "titulo": "Giv os venligst din mening.",
+      "paragrafos": [
+        "Tak for at du udfylder spørgeskemaet til vurdering af produktet. Spørgeskemaet indeholder modsatte egenskaber for produktet. Kvalitetsklasserne mellem de modsatte egenskaber angives med cirkler. Sæt flueben ved en af cirklerne for at beskrive i hvor høj grad du er enig med de individuelle betegnelser.",
+        "Sæt fluebenet uden at tænke for meget over det! Din første indskydelse er ofte den som er mest korrekt. Svar på alle spørgsmål selvom du er lidt usikker, eller måske ikke synes at de to modsatte egenskabet passer sammen med produktet.",
+        "Der er ikke \"korrekte\" eller \"ukorrekte\" svar. Det er udelukkende din personlige mening der tæller!",
+        "Du bedes kun sætte flueben ved en cirkel for hver linje."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "sv": {
+      "titulo": "Gör din bedömning nu.",
+      "paragrafos": [
+        "För bedömning av produkten, fyll i följande frågeformulär. Frågeformuläret består av par av kontrasterande attribut som kan gälla för produkten. Cirklarna mellan attributen representerar graderingar mellan motsatser. Du kan uttrycka din överenskommelse med attributen genom att kryssa i cirkeln som bäst speglar din intryck.",
+        "Bestäm spontant. Tänk inte för länge om ditt beslut att se till att du förmedla din ursprungliga intryck.",
+        "Ibland kanske du inte vara helt säker på ditt avtal med en särskild egenskap eller du kanske upptäcker att attributet inte gäller helt till viss produkt. Ändå kryssa en cirkel i varje rad.",
+        "Det är din personliga åsikt som räknas. Kom ihåg: det finns ingen rätt eller fel svar!",
+        "Vänligen bedöma produkten nu genom att kryssa en cirkel per rad."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "nb": {
+      "titulo": "Gi oss din vurdering.",
+      "paragrafos": [
+        "Fyll ut spørreskjemaet nedenfor for å vurdere produktet. I spørreskjemaet finner du par med motstående produktegenskaper. Trinnene mellom motsetningene er angitt av rundinger. Merk av én av rundingene for å angi hvor enig du er med de individuelle betegnelsene.",
+        "Forsøk å gi en spontan avgjørelse! Ikke tenk for lenge på betegnelsene for å gi en direkte vurdering. Kryss alltid av et svar selv om du er usikker på vurderingen av et par med betegnelser, eller hvis du mener at det ikke passer for produktet.",
+        "Det finnes ingen \"riktige\" eller \"feil\" svar. Det er kun din personlige mening som gjelder!",
+        "Merk kun av én runding på hver linje."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "fi": {
+      "titulo": "Anna meille arviosi.",
+      "paragrafos": [
+        "Tuotteen arvioimiseksi pyydän sinua täyttämään seuraavan kyselylomakkeen. Kysely koostuu arvioitavaa tuotetta koskevista vastakohtapareista. Vastakohtaparien välissä olevat ympyrät edustavat asteikkoa. Valitse asteikolta kohta, joka parhaiten kuvastaa vaikutelmaasi tuotteesta.",
+        "Yritä tehdä päätös spontaanisti! Älä mieti valintaasi liian kauan, jotta alkuperäinen vaikutelmasi tuotteesta välittyy.",
+        "Joskus voi olla, että et ole täysin varma, mitä mieltä olet jostakin lomakkeen kohdasta tai jokin kohta ei mielestäsi kuvaa täysin arvosteltavaa tuotetta. Tästä huolimatta valitse kohta jokaiselta riviltä.",
+        "Kyseessä on sinun henkilökohtainen mielipiteesi. Muista, että ei ole olemassa oikeita tai vääriä vastauksia!",
+        "Valitse yksi kohta joka riviltä."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "et": {
+      "titulo": "Hinnake toodet!",
+      "paragrafos": [
+        "Toote hindamiseks saab kasutada alljärgnevat küsimustikku (User Experience Questionnaire-UEQ), milles iga küsimus koosneb kahest vastandtähendusega sõnast, mis võiksid toodet iseloomustada. Vastandsõnade vahelisele skaalale saate märkida toodet kõige enam iseloomustava vastuse.",
+        "Palun andke hinnang esmamulje järgi ja pikalt mõtlemata.",
+        "Märkige vastus ka juhul, kui tabelis toodud omadused konkreetse toote puhul täielikult ei kehti.",
+        "Teie isiklik arvamus loeb! Ei ole valesid ega õigeid vastuseid!",
+        "Palun andke tootele hinnang, märkides ristikesega igas reas sobilik vastus."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "pl": {
+      "titulo": "Proszę teraz dokonać ewaluacji.",
+      "paragrafos": [
+        "W celu dokonania oceny produktu, proszę wypełnić poniższy kwestionariusz. Kwestionariusz składa się z par przeciwstawnych cech, które mogą być użyte podczas opisywania produktu. Kółka pomiędzy cechami oznaczają stopień nasilenia występowania danej cechy. Swoją opinię można wyrazić poprzez zakreślenie kółka najlepiej odpowiadającego Państwa ocenie.",
+        "Proszę udzielać odpowiedzi spontanicznie, czyli nie zastanawiać się zbyt długo nad odpowiedzią, tak aby ocena korespondowała z początkowym odczuciem w stosunku do produktu.",
+        "Czasem mogą mieć Państwo trudności z podjęciem decyzji co do gradacji danej cechy lub uważać, że nie odnosi się ona w sposób bezpośredni do ocenianego produktu. Proszę jednak udzielić odpowiedzi w każdej linijce kwestionariusza.",
+        "Liczy się Państwa indywidualna opinia. Proszę pamiętać, że nie ma złych ani dobrych odpowiedzi!",
+        "Proszę ocenić produkt przez zaznaczenie jednego kółka w każdej linii tekstu."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "cs": {
+      "titulo": "Nyní prosím proveďte hodnocení.",
+      "paragrafos": [
+        "Pro posouzení produktu prosím vyplňte tento dotazník. Dotazník se skládá z opačných vlastností, které se mohou vztahovat k produktu. Kroužky mezi vlastnostmi představují odstupňování mezi opaky. Míru svého souhlasu s vlastnostmi vyjádříte tím, že označíte kroužek, který je nejblíže vašemu názoru.",
+        "Rozhodujte se prosím spontánně. Nepřemýšlejte nad vaším rozhodnutím příliš dlouho, sdělte svůj první dojem.",
+        "Někdy si nemusíte být úplně jisti ohledně míry svého souhlasu s určitou vlastností, nebo se vám může zdát, že se nějaká vlastnost k produktu nevztahuje. I přesto prosím označte všechny odpovědi.",
+        "Váš osobní názor je to, co se počítá. A pamatujte: neexistují správné nebo špatné odpovědi!",
+        "Nyní prosím ohodnoťte produkt tím, že na každém řádku označíte jeden kroužek."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "sk": {
+      "titulo": "Prosím vykonajte teraz svoje hodnotenie.",
+      "paragrafos": [
+        "Pre účely ohodnotenia daného produktu vyplňte prosím nasledujúci dotazník. Položky dotazníka sú dvojice protikladných vlastností, ktorými posudzujete produkt. Krúžky medzi vlastnosťami reprezentujú jednotlivé stupne medzi protikladmi. Mieru svojho súhlasu s danými vlastnosťami vyjadríte označením toho krúžku, ktorý najviac odráža váš dojem.",
+        "Rozhodujte sa prosím spontánne. Nepremýšľajte nad svojim rozhodnutím príliš dlho, aby ste naozaj sprostredkovali svoj prvý pôvodný dojem.",
+        "Niekedy si nemusíte byť úplne istí vo vašom súhlase s konkrétnou vlastnosťou, alebo možno zistíte, že daná vlastnosť sa úplne nevzťahuje na daný produkt. Aj napriek tomu prosím zaškrtnite krúžok v každom riadku.",
+        "Váš osobný názor je to, čo sa ráta. Prosím pamätajte si, že neexistuje žiadna nesprávna alebo správna odpoveď!",
+        "Teraz prosím ohodnoťte daný produkt označením jedného krúžku v každom riadku."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "sl": {
+      "titulo": "Prosimo vas, da vstavite svojo oceno produkta.",
+      "paragrafos": [
+        "Vljudno vas vabimo in prosimo, da izpolnite anketni vprašalnik. Sestavljen je iz med seboj nasprotujočih si lastnosti, ki bi jih naj imel produkt. Stopnje med obema nasprotujočima si lastnostima so označene s krogi. Z vstavljanjem križca prikažete vašo oceno glede na omenjeno lastnost.",
+        "Odločite se čim bolj spontano in hitro. Pomembno je, da se ne odločate predolgo, temveč vpišite takoj in neposredno vašo oceno.",
+        "Prosimo, da vedno prekrižate samo en odgovor, četudi imate pri ocenitvi neke lastnosti težave ali pa da vidite, da lastnosti nista ravno primerni za ocenitev produkta.",
+        "Ni „pravilnih“ ali „napačnih“ odgovorov. Šteje samo vaše osebno mnenje!",
+        "Prosimo, vstavite vašo oceno produkta.",
+        "Prekrižajte samo en krog v vrstici."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "hr": {
+      "titulo": "Molimo iznesite svoje mišljenje.",
+      "paragrafos": [
+        "Kako biste ocijenili proizvod molimo ispunite sljedeći upitnik. Upitnik sadrži parove suprotnih obilježja koja se mogu odnositi na proizvod. Stupnjevanje među suprotnostima predstavljeno je kružićima. Odabirom jednog od navedenih kružića izražavate stupanj slaganja s obilježjem proizvoda koji najbliže odražava Vaš dojam.",
+        "Odlučite se što je više moguće spontano. Važno je da ne razmišljate dugo o pojmovima kako bi Vaša neposredna prosudba bila čim bliža prvom dojmu. Ponekad možda nećete biti potpuno sigurni u svoje slaganje s određenim obilježjem ili ćete smatrati da se obilježje ne odnosi na određeni proizvod. Bez obzira na to, molimo odaberite jedan kružić u svakom retku.",
+        "Ne postoji \"točan\" ili \"pogrešan\" odgovor. Važno nam je samo Vaše osobno mišljenje!",
+        "Označite samo jedan kružić u svakom retku."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "bs": {
+      "titulo": "Prosledite nam svoju procenu.",
+      "paragrafos": [
+        "Ispunite sledeću anketu kako biste ocenili proizvod. Anketa sadrži parove suprotnosti koji se odnose na svojstva proizvoda. Kružići između suprotnosti predstavljaju ocene. Potvrdite jedan kružić kako biste naznačili u kojoj meri se slažete sa datim opisom.",
+        "Pokušajte da spontano odlučite. Važno je da ne razmišljate previše o opisima kako biste dali pravu procenu.",
+        "Uvek potvrdite jedan odgovor, čak i ako niste sigurni u vezi sa ocenom za neki par suprotnosti ili ako smatrate da opisi uopšte ne odgovaraju proizvodu.",
+        "Ne postoje „tačni“ ili „netačni“ odgovori. Važno je vaše mišljenje.",
+        "U svakom redu izaberite samo jedan kružić."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "hu": {
+      "titulo": "Kérjük, küldje el nekünk értékelését.",
+      "paragrafos": [
+        "Kérjük, értékelje a terméket az alábbi kérdőív kitöltésével. A kérdőív ellentétes tulajdonságpárokat tartalmaz a termékről. A két ellentét közötti átmenetet karikák jelölik. A megfelelő karika bejelölésével fejezheti ki az egyetértését az adott kifejezéssel.",
+        "Törekedjen spontán döntésekre! Fontos, hogy ne gondolkodjon túl sokat a kifejezéseken, hogy közvetlen értékelést kaphassunk. Kérjük mindig csak egy választ jelöljön be, még ha bizonytalan is az adott kifejezéspár értékelésével kapcsolatban, vagy ha úgy gondolja, nem illik a termékre.",
+        "Nincsen \"jó\" vagy \"rossz\" válasz. Csupán az Ön személyes véleménye számít!",
+        "Minden sorban csak egy karikát jelöljön be."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "bg": {
+      "titulo": "Моля, дайте своята оценка",
+      "paragrafos": [
+        "За оценяването на продукта, моля попълнете въпросника, който следва. Въпросникът се състои от двойки въпроси с противоположни определения, които може да се отнасят за продукта. Кръгчетата между стойностите на въпросите, показват градацията между двете противоположности. Задраскайте съответното кръгче, което най-близо отговаря на вашето впечатление.",
+        "Вземете своето решение спонтанно. Не мислете много за това какво решение да вземете, защото така ще се отклоните от първото си впечатление.",
+        "Понякога може да не сте напълно съгласни с някое определение или да смятате, че то не отговаря напълно на конкретния продукт, въпреки това моля отбележете кръгче на всеки ред от въпросника.",
+        "От значение е вашето лично мнение. Запомнете, че няма правилен или грешен отговор!",
+        "Моля, оценете продукта, като зачертете по едно кръче на всеки ред."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "ru": {
+      "titulo": "Теперь дайте свою оценку, пожалуйста.",
+      "paragrafos": [
+        "Для оценки продукта заполните, пожалуйста, следующую анкету. Опросный лист состоит из пар противоположных по значению определений, которые можно употребить в отношении продукта. Кружки между парными определениями означают степень градации между ними. Вы можете выразить согласие с определением, отметив кружок, который наиболее точно отражает Ваше впечатление о продукте.",
+        "Пожалуйста, постарайтесь отвечать быстро. Не раздумывайте над ответом слишком долго, поскольку ответ должен отражать Ваше первое впечатление.",
+        "Возможно, в некоторых случаях Вы будете не уверены, согласны ли Вы с определением, или Вам покажется, что определение не совсем подходит данному продукту. Тем не менее, выберите, пожалуйста, один из кружков в каждой строчке.",
+        "Нам важно Ваше личное мнение. Пожалуйста, помните, что здесь нет правильных и неправильных ответов!",
+        "Дайте, пожалуйста, свою оценку продукта, выбрав по одному кружочку в каждой строчке."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "el": {
+      "titulo": "Παρακαλούμε να κάνετε την αξιολόγησή σας τώρα.",
+      "paragrafos": [
+        "Για την αξιολόγηση του προϊόντος, παρακαλείστε να συμπληρώσετε το παρακάτω ερωτηματολόγιο. Το ερωτηματολόγιο αποτελείται από ζεύγη αντίθετων χαρακτηριστικών που ενδέχεται να ισχύουν για το προϊόν. Οι κύκλοι μεταξύ των χαρακτηριστικών αντιπροσωπεύουν διαβαθμίσεις μεταξύ των αντιθέτων. Μπορείτε να εκφράσετε τη συμφωνία σας με τα χαρακτηριστικά επιλέγοντας τον κύκλο που αντανακλά καλύτερα τις εντυπώσεις σας.",
+        "Παρακαλούμε, αποφασίστε αυθόρμητα. Μην σκέφτεστε για πάρα πολύ ώρα ώστε να διασφαλιστεί ότι μεταφέρετε την αρχική σας εντύπωση.",
+        "Μερικές φορές μπορεί να μην είστε εντελώς σίγουροι/ες για τη συμφωνία σας με ένα συγκεκριμένο χαρακτηριστικό ή μπορεί να διαπιστώσετε ότι το χαρακτηριστικό δεν ισχύει απόλυτα για το συγκεκριμένο προϊόν. Ωστόσο, παρακαλούμε επιλέξτε μόνο έναν κύκλο ανά γραμμή.",
+        "Είναι η προσωπική σας άποψη που μετράει. Θυμηθείτε: δεν υπάρχει σωστή ή λανθασμένη απάντηση!",
+        "Παρακαλούμε να αξιολογήσετε το προϊόν τώρα, επιλέγοντας έναν κύκλο ανά γραμμή."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "tr": {
+      "titulo": "Lütfen değerlendirmenizi yapınız.",
+      "paragrafos": [
+        "Ürünün değerlendirmesi için lütfen aşağıdaki anket formunu doldurun. Anket, bir ürünle ilişkilendirilebilecek birbirine zıt özellikler (toplamda 26 çift) içermektedir. Bu özellikler arasındaki kareler, zıtlıklar arasındaki dereceleri temsil etmektedir. Ürüne dair izleniminizi, her özellik için dairelerden yalnızca birini işaretleyerek göstermelisiniz.",
+        "Lütfen üzerinde çok düşünmeden karar verin ve ilk izleniminizi yansıtacak yanıtı vermeye çalışın.",
+        "Bazen verdiğiniz karardan tamamiyle emin olamayabilirsiniz veya seçtiğiniz yanıtın ürünle tam olarak ilişkili olamayacağını düşünebilirsiniz. Yine de, mutlaka her satırdaki karelerden birini işaretleyerek bir seçim yapınız.",
+        "Önemli olan sizin kişisel fikriniz. Lütfen burada doğru veya yanlış yanıt olmadığını unutmayın!",
+        "Lütfen ürüne ilişkin değerlendirmenizi, her sıradan yanlızca bir kutucuğu işaretleyerek yapınız."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "ar": {
+      "titulo": "نرجو منكَ أن تمنحنا تقييمك.",
+      "paragrafos": [
+        "أكمل رجاءً الاستبيان التالي كي تقيِّم المنتج. يشتمل الاستبيان على أزواجٍ متضادة من خواص المنتج. تُمثَّل التدرجات بين الخواص المتناقضة بواسطة دوائر. ظلِّل واحدةً من الدوائر لتمييز درجة توافقك مع البنود المفردة.",
+        "حاول أن تتخذ قرارًا تلقائيًا! من المهم ألا تفكِّر في البنود لفترةٍ أطول من اللازم حتى تصل إلى تقييمٍ مباشر. ظلّل دائمًا من فضلك إجابةً واحدة، حتى إذا لم تكن واثقًا بشأن تقييمك لواحدٍ من البنود أو إذا كنت تظن أنه لا يناسب المنتج.",
+        "ليست هناك إجاباتٌ \"صحيحة\" أو \"خاطئة\". رأيُك الشخصيّ هو فقط ما يهم!",
+        "يُرجى منك تظليل دائرة واحدة فقط في كل سطر."
+      ],
+      "origem": "Transcrito da imagem do PDF oficial: a camada de texto separa letras e perde a ligadura lam-alif. Conferir com falante nativo."
+    },
+    "he": {
+      "titulo": "נא מסור לנו את הערכתך.",
+      "paragrafos": [
+        "נא השלם את השאלון הבא לצורך הערכת המוצר. השאלון כולל זוגות מנוגדים של מאפייני המוצר. הציונים בין הניגודים מסומנים באמצעות עיגולים. סמן את אחד מהעיגולים כדי לציין את רמת הסכמתך לכל מאפיין.",
+        "נסה לקבל החלטה ספונטנית! חשוב לא לחשוב זמן רב מדי על המאפיינים כדי להגיע להערכה ישירה. סמן תמיד תשובה אחת, אפילו אם אינך בטוח לגבי ההערכה של זוג מאפיינים או אם לדעתך הם אינם מתאימים למוצר.",
+        "אין תשובות 'נכונות' או 'שגויות'. דעתך האישית היא הדבר היחיד שחשוב!",
+        "סמן בבקשה עיגול אחד בלבד בכל שורה."
+      ],
+      "origem": "Texto do PDF oficial, com os espaços que a extração pôs dentro de palavras conferidos contra a imagem.",
+      "observacao": "Ficaram de fora duas frases do PDF que falam de pares agrupados por aspecto e de indicar a importância de cada aspecto: descrevem outro formulário, não o UEQ de 26 itens."
+    },
+    "fa": {
+      "titulo": "هم اکنون ارزیابی خود را انجام دهید.",
+      "paragrafos": [
+        "کاربر گرامی لطفا برای ارزیابی، محصول پرسشنامه ی زیر را پر کنید. پرسشنامه شامل جفت ویژگی های متضاد است که ممکن است به محصول اعمال شود. دایره های بین صفات میزان تضاد را نشان میدهد. شما میتوانید توافق خود را با تیک زدن در دایره هایی که به حس شما نسبت به محصول نزدیکتر است اعلام کنید.",
+        "لطفا سریع تصمیم خودرا بگیرید و در مورد آن خیلی فکر نکنید تا احساس واقعی شما ثبت شود.",
+        "به یاد داشته باشید که این نظر شخصی شماست، پاسخ اشتباه یا درستی وجود ندارد.",
+        "لطفا هم اکنون با تیک زدن در دایره ها ارزیابی را شروع کنید."
+      ],
+      "origem": "Texto do PDF oficial, conferido contra a imagem (a extração perde a ligadura lam-alif).",
+      "observacao": "Ficou de fora a frase do PDF que pede para riscar o item que não der para avaliar: no formulário digital todos os itens são obrigatórios."
+    },
+    "hi": {
+      "titulo": "अब अपने मूल्यांकन सुनिश्चित करें।",
+      "paragrafos": [
+        "उत्पाद के मूल्यांकन के लिए, निम्न प्रश्नावली भरें। प्रश्नावली में जोड़ों में विषम गुण हैं जो कि उत्पाद पर लागू हो सकते हैं। विशेषताओं के बीच के घेरे सनमुक्खों के बीच उन्नयन को दर्शाते हैं। आप उन विशेषताओं के घेरों पर चिन्ह लगाकर अपनी सहमति व्यक्त कर सकते हैं जिसने आप पर गहरी छाप छोड़ी हो।",
+        "लंबे समय तक अपने निर्णय के बारे में मत सोचिये यह निश्चित करने के लिए की वह आपके मूल्य धारणा को वक्त करता है। कभी कभी आप एक विशेष गुण के साथ अपने समझौते के बारे में पूरी तरह से निश्चित नहीं होंगे या आप पा सकते हैं कि विशेषता विशेष उत्पाद के लिए पूरी तरह से लागू नहीं होता। फिर भी, हर पंक्ति में एक चक्र को टिक करें।",
+        "वह आपकी राय है जो कि मायने रखती है। कृपया याद रखें: की कोई सही या गलत जवाब नहीं है!",
+        "कृपया उत्पाद का आकलन हर पंक्ति में घेरे पर चिन्ह लगाकर करें।"
+      ],
+      "origem": "Transcrito da imagem do PDF oficial, porque a camada de texto usa fonte legada. Conferir com falante nativo."
+    },
+    "mr": {
+      "titulo": "कृपया आम्हाला तुमचे मूल्यांकन करा",
+      "paragrafos": [
+        "कृपया उत्पादनाचे मूल्यांकन करण्यासाठी खालील प्रश्नावली पूर्ण करा. प्रश्नावलीमध्ये उत्पादनाच्या गुणधर्मांचे विरोधी जोड आहेत. विरोधाभासांमधील वर्ग मंडळे दर्शवितात. वैयक्तिक अटींसह आपल्या कराराची पातळी सूचित करण्यासाठी मंडळांपैकी एक तपासा.",
+        "उत्स्फूर्त निर्णय घेण्याचा प्रयत्न करा! थेट मूल्यमापनापर्यंत पोहोचण्यासाठी अटींविषयी जास्त विचार न करणे महत्वाचे आहे. कृपया आपल्या एका अटींच्या जोडीच्या मूल्यांकनाबद्दल असुरक्षित असल्यास किंवा ते उत्पादन योग्य नसल्याचे आपल्याला वाटत असल्यास देखील नेहमीच एक उत्तर तपासा.",
+        "कोणतीही \"बरोबर\" किंवा \"चुकीची\" उत्तरे नाहीत. आपले वैयक्तिक मत सर्व काही मोजले जाते!",
+        "कृपया प्रत्येक ओळीतील फक्त एक मंडळ तपासा"
+      ],
+      "origem": "Transcrito da imagem do PDF oficial, porque a camada de texto usa fonte legada. Conferir com falante nativo."
+    },
+    "bn": {
+      "titulo": "অনুগ্রহ করে মূল্যায়ন করুন",
+      "paragrafos": [
+        "জিনিসটির মূল্যায়ন করার জন্য অনুগ্রহ করে নীচের প্রশ্নপত্রটি সম্পূর্ণ করুন। কোয়েশ্চেনেয়ারটিতে বিপরীত জোড়া জিনিস বিষয়ক বৈশিষ্ট্য রয়েছে। বিপরীতের মধ্যে গ্রেডগুলো গোল দ্বারা নির্দেশ করা আছে। প্রতিটি বক্তব্য বা শর্তাদির সাথে আপনার সম্মতির মাত্রা নির্দেশ করতে গোলগুলির একটিতে চেক করুন।",
+        "স্বতঃস্ফূর্তভাবে সিদ্ধান্ত নেওয়ার চেষ্টা করুন! সঠিক মূল্যায়নে করার জন্য বক্তব্য বা শর্তাদি সম্পর্কে খুব বেশি চিন্তা না করাই বেশি গুরুত্বপূর্ণ। আপনি যদি এক জোড়া বক্তব্য বা শর্তাদি মূল্যায়নের বিষয়ে অনিশ্চিত থাকেন বা আপনি যদি মনে করেন যে এটি জিনিসটির সাথে মানানসই নয় তবুও সবসময় একটি উত্তর বেছে নিন।",
+        "এখানে কোনো ঠিক অথবা ভুল উত্তর নেই। আপনার সকল ব্যক্তিগত মতামতই শুধুমাত্র গন্য করা হবে!",
+        "অনুগ্রহ করে একটি লাইনের এটি গোলে চেক করুন।"
+      ],
+      "origem": "Transcrito da imagem do PDF oficial, que traz o texto sem espaço entre as palavras; os espaços foram postos pela equipe. Conferir com falante nativo."
+    },
+    "ta": {
+      "titulo": "தயவு செய்து உங்கள் மதிப்பீட்டை எங்களுக்கு வழங்கவும்.",
+      "paragrafos": [
+        "தயவு செய்து பொருளை மதிப்பிடுவதற்கு பின்வரும் கேள்வித்தாளை பூர்த்தி செய்யவும். கேள்வித்தாளில் பொருள் பண்புகளின் ஜோடிகள் உள்ளன. எதிர் திசைகளுக்கு இடையிலான தரங்கள் வட்டங்களால் அவை குறிக்கப்படுகின்றன. தனிப்பட்ட விதிமுறைகளுடன் உங்கள் ஒத்துக் கொள்ளும் அளவை அளவைக் குறிக்க வட்டங்களில் ஒன்றைச் சரிபார்க்கவும்.",
+        "தன்னிச்சையான முடிவை எடுக்க முயற்சி செய்யுங்கள்! நேரடி மதிப்பீட்டை அடைய விதிமுறைகளைப் பற்றி அதிக நேரம் சிந்திக்காமல் இருப்பது முக்கியம். ஒரு ஜோடி சொற்களை மதிப்பீடு செய்வது குறித்து நீங்கள் உறுதியாக இல்லாமல் இருந்தாலும் அல்லது அந்த பொருளுக்கு பொருந்தாது என்று நீங்கள் நினைத்தாலும், தயவுசெய்து எப்போதும் ஒரு பதிலைச் சரிபார்க்கவும்.",
+        "இதில் \"சரியான\" அல்லது \"தவறான\" பதில்கள் என்று ஏதுமில்லை. உங்கள் தனிப்பட்ட கருத்து எல்லாவற்றையும் கணக்கிடுகிறது!",
+        "தயவு செய்து ஒரு வட்டத்தில் மற்றும் ஒவ்வொரு வரியிலும் தேர்வு செய்யவும்"
+      ],
+      "origem": "Transcrito da imagem do PDF oficial, porque a camada de texto usa fonte legada. Conferir com falante nativo."
+    },
+    "kn": {
+      "titulo": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಮೌಲ್ಯಮಾಪನವನ್ನು ಹೊಂದೋಣ",
+      "paragrafos": [
+        "ಪ್ರಾಡಕ್ಟ್‌ನ್ನು ಮೌಲ್ಯಮಾಪನಮಾಡುವುದಕ್ಕೆ ಕೆಳಗಿನ ಪ್ರಶ್ನೆಗಳನ್ನು ಪೂರ್ಣಗೊಳಿಸಿ. ಪ್ರಶ್ನಾವಳಿಯು ಉತ್ಪನ್ನ ವಿಷಯಗಳ ವಿರುದ್ಧ ಜೋಡಿಗಳನ್ನು ಒಳಗೊಂಡಿದೆ. ವಿರುದ್ಧಗಳ ನಡುವಿನ ಗ್ರೇಡ್‌ಗಳನ್ನು ಸರ್ಕಲ್‌ನಿಂದ ಸೂಚಿಸಲಾಗುವುದು. ವ್ಯಕ್ತಿಗತ ಅಂಶಗಳೊಂದಿಗೆ ನಿಮ್ಮ ಒಪ್ಪಿಗೆಯ ಮಟ್ಟವನ್ನು ಸೂಚಿಸುವುದಕ್ಕೆ ಒಂದು ಸರ್ಕಲ್ಲು ಪರೀಕ್ಷಿಸಿ.",
+        "ಸ್ವಾಭಾವಿಕ ನಿರ್ಧಾರವನ್ನು ಮಾಡುವುದಕ್ಕೆ ಪ್ರಯತ್ನಿಸಿರಿ! ನೇರವಾದ ಮೌಲ್ಯಮಾಪನವನ್ನು ತಲುಪುವುದಕ್ಕೆ ಸಂಬಂಧಿಸಿದಂತೆ ಹೆಚ್ಚು ಸಮಯ ಯೋಚಿಸಬೇಕಾಗಿರುವುದು ಮುಖ್ಯವಾಗಿಲ್ಲ. ದಯವಿಟ್ಟು ಯಾವಾಗಲು ಒಂದು ಉತ್ತರಕ್ಕೆ ಪರೀಕ್ಷಿಸಿ, ನಿಯಮಗಳ ಒಂದು ಜೋಡಿಯ ನಿಮ್ಮ ಮೌಲ್ಯಮಾಪನವನ್ನು ಕುರಿತು ಅಥವಾ ನೀವು ಉತ್ಪನ್ನಕ್ಕೆ ಯಾವುದು ಹೊಂದುವುದಿಲ್ಲ ಎಂದು ಯೋಚಿಸಿದ್ದೀರಿ ಎಂಬುವುದನ್ನು ಕುರಿತು ಆಕರ್ಷಕವಾಗಿಲ್ಲವಾಗಿದ್ದರೂ ಸಹ, ಯಾವಾಗಲು ಒಂದು ಉತ್ತರವನ್ನು ಪರೀಕ್ಷಿಸಿ.",
+        "ಇಲ್ಲಿ ಸರಿ ಅಥವಾ ತಪ್ಪು ಉತ್ತರಗಳು ಇಲ್ಲ. ನಿಮ್ಮ ವೈಯುಕ್ತಿಕ ಅಭಿಪ್ರಾಯಗಳು ಇಲ್ಲಿ ಪರಿಗಣಿಸಲಾಗುತ್ತದೆ!",
+        "ದಯವಿಟ್ಟು ಒಂದು ಸಾಲಿನಲ್ಲಿ ಒಂದು ಗೋಲವನ್ನು ಆಯ್ಕೆ ಮಾಡಿ"
+      ],
+      "origem": "Transcrito da imagem do PDF oficial, porque a camada de texto usa fonte legada. Conferir com falante nativo."
+    },
+    "th": {
+      "titulo": "แบบสอบถามประสบการณ์ผู้ใช้",
+      "paragrafos": [
+        "โปรดประเมินผลการใช้งานเครื่องมือของคุณได้ ณ บัดนี้ โดยตอบคำถามอันประกอบด้วย คุณสมบัติของเครื่องมือที่มีวงกลมระดับความแตกต่างกันในแต่ละคู่ คุณสามารถเห็นด้วยและใส่เครื่องมือกากบาทตรงระดับความแตกต่างที่ตรงกับความรู้สึกมากที่สุด",
+        "โปรดตัดสินใจทันที ไม่ควรคิดตัดสินใจนานเกินไป เพื่อแสดงความมั่นใจว่า คุณสื่อสารได้เข้าใจตรงกับความรู้สึกที่แท้จริง",
+        "ในบางครั้งคุณอาจไม่แน่ใจที่จะเลือกคำตอบได้ตรงตามความคิดเห็นของคุณอย่างสมบูรณ์ หรือ คุณอาจพบว่าคำตอบนั้นประยุกต์ใช้กับเครื่องมือเฉพาะไม่ได้สมบูรณ์ ขอช่วยกาเครื่องหมายในวงกลมให้ครบทุกข้อ",
+        "ถือเป็นการแสดงความคิดเห็นของคุณที่นับเป็นคะแนนของแบบสอบถาม โปรดจำไว้ว่า ไม่มีคำตอบที่ผิดหรือถูก"
+      ],
+      "origem": "Texto do PDF oficial, conferido contra a imagem (a extração separa a vogal ำ).",
+      "observacao": "O título é o cabeçalho do PDF sem 'ฉบับภาษาไทย' (versão em tailandês). O PDF não tem a frase final de marcar um círculo por linha."
+    },
+    "ms": {
+      "titulo": "Sila lengkapkan penilaian ini.",
+      "paragrafos": [
+        "Sila isikan soal selidik di bawah untuk penilaian produk. Soal selidik ini adalah berkaitan dengan produk dan soalannya terdiri daripada pasangan atribut yang bertentangan. Bulatan jawapan di antara atribut mewakili tahap di antara dua atribut yang bertentangan ini. Anda boleh memilih jawapan anda dengan menandakan bulatan.",
+        "Anda diminta untuk membuat keputusan secara spontan dan tidak mengambil masa yang terlalu lama untuk berfikir kerana pilihan pertama anda menggambarkan pendapat anda yang sebenarnya.",
+        "Kadang kala anda mungkin kurang pasti mengenai pilihan anda atau atribut yang dipilih juga tidak begitu menggambarkan produk tersebut. Namun, anda diminta untuk menandakan bulatan jawapan anda bagi setiap baris.",
+        "Pendapat anda amatlah penting dan berharga. Peringatan: Tiada jawapan yang benar atau salah!",
+        "Sila mulakan penilaian anda dengan menandakan bulatan jawapan pada setiap baris."
+      ],
+      "origem": "Texto do PDF oficial.",
+      "observacao": "A frase 'seperti contoh di bawah' (como no exemplo abaixo) saiu junto com o exemplo."
+    },
+    "id": {
+      "titulo": "Silakan Anda melakukan evaluasi atas produk yang telah ditentukan.",
+      "paragrafos": [
+        "Untuk melakukan asesmen atau evaluasi terhadap produk dimaksud, silakan mengisi kuisioner berikut ini. Kuisioner terdiri dari pasangan atribut bertolak belakang secara makna yang dapat merepresentasikan produk. Lingkaran-lingkaran yang berada di antara atribut merepresentasikan gradasi antar atribut yang bertolak belakang. Anda dapat mengekspresikan persetujuan terhadap atribut yang ada dengan cara memilih lingkaran yang lebih dekat dengan impresi Anda.",
+        "Silakan memutuskan penilaian secara spontan. Jangan berpikir terlalu lama tentang keputusan Anda untuk meyakinkan bahwa Anda memberikan impresi yang orisinal.",
+        "Terkadang Anda bisa saja tidak terlalu yakin terkait atribut tertentu atau Anda melihat bahwa sebuah atribut tidak relevan atas produk yang sedang Anda evaluasi. Kendatipun demikian, silakan putuskan evaluasi Anda atas setiap item.",
+        "Pendapat Anda sangat penting. Mohon diperhatikan: tidak ada jawaban salah atau benar!",
+        "Saat ini silakan evaluasi produk dengan memilih satu lingkaran tiap baris item."
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "zh": {
+      "titulo": "请告诉我们你的看法。",
+      "paragrafos": [
+        "请填写以下问卷来评价该产品。问卷由26 对语义相反的形容词组成，每组词分别描述产品的某方面属性。每对反义词之间划分为7 个评分等级，每个等级由一个圆圈表示。请根据产品与形容词的相符程度评判该产品，在你认为最适合表达你的主观感受的圆圈处打勾。",
+        "请尽量凭直觉回答，不必过多考虑。这样才能最有效地告诉我们你的第一印象。",
+        "有时你可能对某一项的评价不完全确定，或者觉得两个形容词都不太适合用来描述该产品，即使出现这些情况也请务必选择一个选项。",
+        "答案并无对错之分。我们关心的是你的个人看法！",
+        "现在请你对该产品进行评价。",
+        "每行只能选择一个圆圈。"
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "ja": {
+      "titulo": "あなたの評価をお願いします",
+      "paragrafos": [
+        "製品の評価のため、以下のアンケートにご記入ください.",
+        "質問は2相対する属性で構成されています.",
+        "自然発生的に決定してください.",
+        "それはカウントするあなたの個人的な意見です. 権利または間違った答えはありません.",
+        "今、製品を評価してください"
+      ],
+      "origem": "Texto do PDF oficial."
+    },
+    "ko": {
+      "titulo": "귀하의 의견이 알고 싶습니다. 평가해주세요.",
+      "paragrafos": [
+        "대화형 서비스 제품을 평가하기 위해 아래에 있는 설문지를 작성해주세요. 이 질문들을 제품의 서로 대조되는 특성들을 단계별로 나타낸 것으로 동그라미 안에 표시하여 귀하의 의견을 말해주세요.",
+        "가능하면 바로 답변해주세요.",
+        "귀하의 평가내용에 확신이 없더라도 모든 질문에 답해주시갈 바랍니다.",
+        "좋은 답변과 나쁜 답변은 없습니다. 단지 귀하의 의견만이 중요합니다!",
+        "각각의 라인에 있는 동그라미 안에 표시하여 대화형 서비스 제품을 평가해주세요."
+      ],
+      "origem": "Texto do PDF oficial."
+    }
+  }
+}
