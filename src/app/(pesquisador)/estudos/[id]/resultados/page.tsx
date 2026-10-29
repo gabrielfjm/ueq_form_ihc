@@ -5,6 +5,7 @@ import { exigirPesquisador } from "@/lib/sessao";
 import { FaixaEstudo, resumoDoEstudo } from "../FaixaEstudo";
 import { ControlesResultados } from "./ControlesResultados";
 import estilos from "./resultados.module.css";
+import { SecaoExportar } from "./SecaoExportar";
 import { LegendaVersoes, VisaoComparacao } from "./VisaoComparacao";
 import { VisaoUmaVersao } from "./VisaoUmaVersao";
 
@@ -90,6 +91,8 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
             enderecoOrdem={enderecoOrdem}
           />
         )}
+        {/* As exportações saem do estudo inteiro; ficam no fim do modo "Uma versão", como no protótipo r6 */}
+        {respostas.total > 0 && !comparando && <SecaoExportar estudoId={estudo.id} titulo={estudo.titulo} numero={resultados.todas.n === 0 ? 1 : 4} />}
       </div>
     </>
   );
