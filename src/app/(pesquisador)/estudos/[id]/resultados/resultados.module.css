@@ -249,6 +249,8 @@
 }
 
 .rolagem {
+  /* contém o texto visualmente oculto (position: absolute), que senão escaparia do corte e criaria rolagem na página */
+  position: relative;
   overflow-x: auto;
 }
 
