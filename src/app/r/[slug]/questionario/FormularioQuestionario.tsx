@@ -4,7 +4,9 @@ import { useEffect, useRef, useState, useTransition, type FormEvent } from "reac
 import { MensagemStatus } from "@/componentes/formulario/MensagemStatus";
 import formulario from "@/componentes/formulario/formulario.module.css";
 import { ItemDiferencial } from "@/componentes/ItemDiferencial";
-import { desistir, enviarRespostas } from "../acoes";
+import { formatar, listaDeNumeros, plural } from "@/idiomas/formatar";
+import type { TextosParticipante } from "@/idiomas/tipos";
+import { desistir, enviarRespostas, type ResultadoEnvio } from "../acoes";
 import estilos from "./questionario.module.css";
 import { RodapeProgresso } from "./RodapeProgresso";
 import { useRascunho } from "./useRascunho";
@@ -15,31 +17,42 @@ type Propriedades = {
   slug: string;
   participacaoId: string;
   tituloDocumento: string;
+  etapa: string;
   itens: Item[];
+  textos: TextosParticipante["questionario"];
+  lang: string;
+  direcao: "ltr" | "rtl";
   children: React.ReactNode;
 };
 
-// Anuncia o progresso só a cada 5 itens e ao completar, para não poluir o leitor de tela (docs/ihc.md §4.1)
-function anuncioDeProgresso(respondidos: number, total: number): string | null {
-  if (respondidos === total) return `Todos os ${total} itens respondidos. Você já pode enviar.`;
-  return respondidos > 0 && respondidos % 5 === 0 ? `${respondidos} de ${total} respondidos.` : null;
-}
-
-// "Falta 1 item" / "Faltam 2 itens" (protótipo p3)
-function quantosFaltam(quantidade: number): string {
-  return quantidade === 1 ? "Falta 1 item" : `Faltam ${quantidade} itens`;
-}
-
-export function FormularioQuestionario({ slug, participacaoId, tituloDocumento, itens, children }: Propriedades) {
+export function FormularioQuestionario({
+  slug,
+  participacaoId,
+  tituloDocumento,
+  etapa,
+  itens,
+  textos,
+  lang,
+  direcao,
+  children,
+}: Propriedades) {
   const { respostas, setRespostas, recuperadas, limparRascunho } = useRascunho(`ueq:${slug}:${participacaoId}`);
   const [faltando, setFaltando] = useState<number[]>([]);
-  const [erroEnvio, setErroEnvio] = useState("");
+  const [erroEnvio, setErroEnvio] = useState<ResultadoEnvio["erro"]>();
   const [envio, setEnvio] = useState(0);
   const [anuncio, setAnuncio] = useState("");
   const [enviando, iniciarEnvio] = useTransition();
   const resumo = useRef<HTMLDivElement>(null);
   const total = itens.length;
   const respondidos = itens.filter((item) => respostas[item.numero] !== undefined).length;
+  // "Falta 1 item" / "Faltam 2 itens" (protótipo p3), com o plural de cada idioma
+  const quantosFaltam = (quantidade: number) => plural(textos.faltam, quantidade, lang);
+
+  // Anuncia o progresso só a cada 5 itens e ao completar, para não poluir o leitor de tela (docs/ihc.md §4.1)
+  function anuncioDeProgresso(contagem: number): string | null {
+    if (contagem === total) return formatar(textos.todosRespondidos, { total });
+    return contagem > 0 && contagem % 5 === 0 ? formatar(textos.parcial, { n: contagem, total }) : null;
+  }
 
   useEffect(() => {
     if (envio === 0) return;
@@ -54,7 +67,7 @@ export function FormularioQuestionario({ slug, participacaoId, tituloDocumento, 
     setRespostas(proximas);
     setFaltando((atual) => atual.filter((n) => n !== numero));
     const contagem = itens.filter((item) => proximas[item.numero] !== undefined).length;
-    if (contagem !== respondidos) setAnuncio(anuncioDeProgresso(contagem, total) ?? anuncio);
+    if (contagem !== respondidos) setAnuncio(anuncioDeProgresso(contagem) ?? anuncio);
   }
 
   function aoEnviar(evento: FormEvent<HTMLFormElement>) {
@@ -62,7 +75,7 @@ export function FormularioQuestionario({ slug, participacaoId, tituloDocumento, 
     if (enviando) return;
     // Validação só no envio, nunca a cada item (docs/ihc.md §4.1)
     const semResposta = itens.filter((item) => respostas[item.numero] === undefined).map((item) => item.numero);
-    setErroEnvio("");
+    setErroEnvio(undefined);
     if (semResposta.length > 0) {
       setFaltando(semResposta);
       setEnvio((atual) => atual + 1);
@@ -73,7 +86,7 @@ export function FormularioQuestionario({ slug, participacaoId, tituloDocumento, 
       const resultado = await enviarRespostas(slug, respostas);
       setRespostas(respostas);
       setFaltando(resultado.faltando ?? []);
-      setErroEnvio(resultado.erro ?? "");
+      setErroEnvio(resultado.erro);
       setEnvio((atual) => atual + 1);
     });
   }
@@ -87,19 +100,20 @@ export function FormularioQuestionario({ slug, participacaoId, tituloDocumento, 
     void desistir(slug);
   }
 
-  const lista = faltando.join(", ").replace(/, (\d+)$/, " e $1");
+  const mensagemErro =
+    erroEnvio === "encerrada" ? textos.erroEncerrada : erroEnvio === "sem-participacao" ? textos.erroSemParticipacao : "";
 
   return (
     <>
       <main id="conteudo" tabIndex={-1} className={estilos.principal}>
-        <p className={estilos.etapa}>Etapa 2 de 3 · Questionário</p>
-        {recuperadas && <MensagemStatus mensagem="Recuperamos as respostas que você já tinha marcado." />}
+        <p className={estilos.etapa}>{etapa}</p>
+        {recuperadas && <MensagemStatus mensagem={textos.recuperadas} />}
         {(faltando.length > 0 || erroEnvio) && (
           <div ref={resumo} tabIndex={-1} role="alert" aria-labelledby="resumo-erros" className={estilos.resumo}>
             <h2 id="resumo-erros" className={estilos.resumoTitulo}>
-              {erroEnvio ? "Não deu para enviar" : `${quantosFaltam(faltando.length)}: ${lista}`}
+              {erroEnvio ? textos.naoDeuEnviar : `${quantosFaltam(faltando.length)}: ${listaDeNumeros(faltando, lang)}`}
             </h2>
-            <p>{erroEnvio || "Marque uma opção em cada um para enviar. Suas outras respostas continuam marcadas."}</p>
+            <p>{mensagemErro || textos.marqueCadaUm}</p>
             {faltando.length > 0 && (
               <ul>
                 {faltando.map((numero) => (
@@ -111,7 +125,7 @@ export function FormularioQuestionario({ slug, participacaoId, tituloDocumento, 
                         irParaItem(numero);
                       }}
                     >
-                      Ir para o item {numero}
+                      {formatar(textos.irParaItem, { n: numero })}
                     </a>
                   </li>
                 ))}
@@ -132,18 +146,20 @@ export function FormularioQuestionario({ slug, participacaoId, tituloDocumento, 
                 valor={respostas[item.numero]}
                 faltando={faltando.includes(item.numero)}
                 aoMarcar={(valor) => marcar(item.numero, valor)}
+                textos={textos}
+                direcao={direcao}
               />
             ))}
           </div>
           <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}>
-            Enviar respostas
+            {textos.enviar}
           </button>
         </form>
         <p aria-live="polite" className="visualmente-oculto">
           {anuncio}
         </p>
       </main>
-      <RodapeProgresso respondidos={respondidos} total={total} aoSair={sair} />
+      <RodapeProgresso respondidos={respondidos} total={total} aoSair={sair} textos={textos} />
     </>
   );
 }

@@ -66,7 +66,11 @@
 
 .enviar {
   align-self: flex-start;
-  padding: 0 24px;
+  max-width: 100%;
+  height: auto;
+  min-height: 44px;
+  padding: 10px 24px;
+  white-space: normal;
 }
 
 .resumo {
@@ -162,7 +166,10 @@
 }
 
 .confirmarSaida .botaoRodape {
-  height: 40px;
+  height: auto;
+  min-height: 40px;
+  padding-block: 6px;
+  white-space: normal;
 }
 
 @media (min-width: 640px) {

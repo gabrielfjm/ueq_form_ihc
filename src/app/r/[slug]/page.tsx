@@ -2,32 +2,21 @@ import type { Metadata, Route } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import formulario from "@/componentes/formulario/formulario.module.css";
-import { estudoPublico, jaRespondeu, participacaoAtual } from "@/lib/participacao";
+import { infoIdioma, textosDoIdioma } from "@/idiomas";
+import { estudoPublico, idiomaDoParticipante, jaRespondeu, participacaoAtual } from "@/lib/participacao";
 import { consentir } from "./acoes";
 import { Etapas, Marcacoes } from "./Etapas";
 import estilos from "./participante.module.css";
+import { SeletorIdioma } from "./SeletorIdioma";
 
 type Propriedades = { params: Promise<{ slug: string }> };
 
-// Protótipo p6: link de estudo em rascunho ou com a coleta encerrada
-const FECHADO = {
-  RASCUNHO: {
-    etapa: "Rascunho",
-    titulo: "Este estudo ainda não está aberto",
-    texto: "A coleta de respostas ainda não começou. Tente de novo mais tarde ou fale com quem enviou o link.",
-  },
-  ENCERRADO: {
-    etapa: "Encerrado",
-    titulo: "A coleta deste estudo foi encerrada",
-    texto: "O estudo não aceita mais respostas. Obrigado pelo interesse em participar.",
-  },
-} as const;
-
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
   const estudo = await estudoPublico((await params).slug);
-  if (estudo.status !== "ABERTO") return { title: `Estudo indisponível · ${estudo.titulo}` };
-  if (await jaRespondeu()) return { title: `Você já respondeu · ${estudo.titulo}` };
-  return { title: `Consentimento · ${estudo.titulo}` };
+  const { titulos } = textosDoIdioma(await idiomaDoParticipante());
+  if (estudo.status !== "ABERTO") return { title: `${titulos.indisponivel} · ${estudo.titulo}` };
+  if (await jaRespondeu()) return { title: `${titulos.jaRespondeu} · ${estudo.titulo}` };
+  return { title: `${titulos.consentimento} · ${estudo.titulo}` };
 }
 
 function Aviso({ etapa, titulo, texto }: { etapa: string; titulo: string; texto: string }) {
@@ -43,48 +32,44 @@ function Aviso({ etapa, titulo, texto }: { etapa: string; titulo: string; texto:
 export default async function PaginaConsentimento({ params }: Propriedades) {
   const { slug } = await params;
   const estudo = await estudoPublico(slug);
+  const idioma = infoIdioma(await idiomaDoParticipante());
+  const textos = textosDoIdioma(idioma.codigo);
 
-  if (estudo.status !== "ABERTO") return <Aviso {...FECHADO[estudo.status]} />;
+  // Protótipo p6: link de estudo em rascunho ou com a coleta encerrada
+  if (estudo.status === "RASCUNHO") return <Aviso {...textos.fechado.rascunho} />;
+  if (estudo.status === "ENCERRADO") return <Aviso {...textos.fechado.encerrado} />;
   // Cookie de "já respondeu": evita um segundo envio sem querer pelo mesmo navegador (prompts/05, item 11)
-  if (await jaRespondeu()) {
-    return (
-      <Aviso
-        etapa={estudo.titulo}
-        titulo="Você já respondeu este estudo"
-        texto="Suas respostas foram registradas. Obrigado por participar. Você já pode fechar esta página."
-      />
-    );
-  }
+  if (await jaRespondeu()) return <Aviso etapa={estudo.titulo} {...textos.jaRespondeu} />;
   const atual = await participacaoAtual(estudo.id);
   if (atual && !atual.concluidaEm) redirect(`/r/${slug}/questionario` as Route);
 
+  const { consentimento } = textos;
   return (
     <>
       <header className={estilos.faixa}>
         <div className={estilos.faixaInterna}>
-          <Etapas atual="Consentimento" />
+          <SeletorIdioma slug={slug} idioma={idioma} textos={textos.idioma} />
+          <Etapas atual={0} textos={textos.etapas} />
           <Marcacoes />
           <div className={estilos.nomeEstudo}>
-            <h1 className={estilos.tituloGrande}>{estudo.titulo}</h1>
-            <p className={estilos.subtitulo}>Pesquisa de experiência do usuário · PPGIa PUCPR</p>
+            {/* Título e objetivo são escritos pelo pesquisador, em português */}
+            <h1 className={estilos.tituloGrande} lang="pt-BR">
+              {estudo.titulo}
+            </h1>
+            <p className={estilos.subtitulo}>{consentimento.subtitulo}</p>
           </div>
         </div>
       </header>
       <main id="conteudo" tabIndex={-1} className={estilos.corpo}>
         <section aria-labelledby="titulo-termo" className={estilos.termo}>
           <h2 id="titulo-termo" className={estilos.termoTitulo}>
-            Termo de consentimento
+            {consentimento.termoTitulo}
           </h2>
           <p className={estilos.texto}>
-            {estudo.objetivo} Você vai indicar sua impressão sobre o produto em 26 pares de palavras opostas.
+            <span lang="pt-BR">{estudo.objetivo}</span> {consentimento.termoTexto}
           </p>
           <dl className={estilos.condicoes}>
-            {[
-              ["Tempo", "De 3 a 5 minutos."],
-              ["Participação", "Voluntária. Você pode desistir a qualquer momento, sem dar motivo, e nada do que marcou será gravado."],
-              ["Anonimato", "Não coletamos nome, e-mail, endereço IP nem outro dado que identifique você."],
-              ["Uso dos dados", "As respostas são analisadas em conjunto, apenas para esta pesquisa."],
-            ].map(([condicao, explicacao], posicao) => (
+            {consentimento.condicoes.map(([condicao, explicacao], posicao) => (
               <div key={condicao}>
                 <span className={estilos.condicaoNumero} aria-hidden="true">
                   {String(posicao + 1).padStart(2, "0")}
@@ -98,10 +83,10 @@ export default async function PaginaConsentimento({ params }: Propriedades) {
         {/* Uma ação principal só (Hick, Nielsen 8); recusar é um link igualmente visível (§3.7) */}
         <form action={consentir.bind(null, slug)} className={estilos.decisao}>
           <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.concordo}`}>
-            Concordo e quero participar
+            {consentimento.concordo}
           </button>
           <Link href={`/r/${slug}/saiu` as Route} className={estilos.naoQuero}>
-            Não quero participar
+            {consentimento.naoQuero}
           </Link>
         </form>
       </main>

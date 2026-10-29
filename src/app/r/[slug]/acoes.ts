@@ -7,16 +7,27 @@ import { versaoComMenosRespostas } from "@/lib/balanceamento";
 import { banco } from "@/lib/banco";
 import { lerDemografia } from "@/lib/demografia";
 import { itensDoQuestionario } from "@/lib/itens-ueq";
+import { ehIdioma } from "@/idiomas";
 import {
   esquecerParticipacao,
   estudoPublico,
+  guardarIdioma,
   guardarParticipacao,
+  idiomaDoParticipante,
   marcarRespondido,
   participacaoAtual,
 } from "@/lib/participacao";
 import { avaliarSuspeita } from "@/ueq";
 
 const rota = (slug: string, etapa = "") => `/r/${slug}${etapa}` as Route;
+
+// Seletor de idioma do consentimento: só muda com o botão "Aplicar", nunca ao escolher (WCAG 3.2.2)
+export async function escolherIdioma(slug: string, dados: FormData): Promise<void> {
+  await estudoPublico(slug);
+  const codigo = dados.get("idioma");
+  if (ehIdioma(codigo)) await guardarIdioma(slug, codigo);
+  redirect(rota(slug));
+}
 
 // Só aqui nasce a Participacao: antes de concordar, nada sobre a pessoa é gravado (docs/ihc.md §3.7)
 export async function consentir(slug: string): Promise<void> {
@@ -32,22 +43,21 @@ export async function consentir(slug: string): Promise<void> {
   if (!versao) redirect(rota(slug));
 
   const participacao = await banco.participacao.create({
-    data: { versaoId: versao.id, consentiuEm: new Date() },
+    data: { versaoId: versao.id, consentiuEm: new Date(), idioma: await idiomaDoParticipante() },
     select: { id: true },
   });
   await guardarParticipacao(slug, participacao.id);
   redirect(rota(slug, "/questionario"));
 }
 
-export type ResultadoEnvio = { faltando?: number[]; erro?: string };
+// O erro vai como código: quem mostra a mensagem é a tela, no idioma da pessoa
+export type ResultadoEnvio = { faltando?: number[]; erro?: "encerrada" | "sem-participacao" };
 
 export async function enviarRespostas(slug: string, valores: Record<number, number>): Promise<ResultadoEnvio> {
   const estudo = await estudoPublico(slug);
-  if (estudo.status !== "ABERTO") {
-    return { erro: "A coleta deste estudo foi encerrada enquanto você respondia. Suas respostas não foram gravadas." };
-  }
+  if (estudo.status !== "ABERTO") return { erro: "encerrada" };
   const participacao = await participacaoAtual(estudo.id);
-  if (!participacao) return { erro: "Não encontramos sua participação. Abra o link do estudo de novo para recomeçar." };
+  if (!participacao) return { erro: "sem-participacao" };
   if (participacao.concluidaEm) redirect(rota(slug, "/sobre-voce"));
 
   const itens = await itensDoQuestionario();

@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import formulario from "@/componentes/formulario/formulario.module.css";
+import { formatar } from "@/idiomas/formatar";
+import type { TextosParticipante } from "@/idiomas/tipos";
 import estilos from "./questionario.module.css";
 
 const CENTROS = [5, 13.5, 22, 30.5, 39, 47.5, 56];
@@ -10,10 +12,11 @@ type Propriedades = {
   respondidos: number;
   total: number;
   aoSair: () => void;
+  textos: Pick<TextosParticipante["questionario"], "contagem" | "sair" | "perguntaSair" | "continuar">;
 };
 
 // Rodapé fixo de progresso (docs/ihc.md §4.1): Nielsen 1, e "Sair sem enviar" sempre à mão (§3.7)
-export function RodapeProgresso({ respondidos, total, aoSair }: Propriedades) {
+export function RodapeProgresso({ respondidos, total, aoSair, textos }: Propriedades) {
   const rodape = useRef<HTMLElement>(null);
   const [confirmando, setConfirmando] = useState(false);
   const continuar = useRef<HTMLButtonElement>(null);
@@ -57,14 +60,14 @@ export function RodapeProgresso({ respondidos, total, aoSair }: Propriedades) {
             ))}
           </svg>
           <span className={estilos.contagem}>
-            {respondidos} de {total} respondidos
+            {formatar(textos.contagem, { n: respondidos, total })}
           </span>
         </p>
         {confirmando ? (
           <div role="group" aria-labelledby="pergunta-sair" className={estilos.confirmarSaida}>
-            <span id="pergunta-sair">Sair sem enviar? Nada do que você marcou será gravado.</span>
+            <span id="pergunta-sair">{textos.perguntaSair}</span>
             <button type="button" className={`${formulario.botao} ${formulario.secundario} ${estilos.botaoRodape}`} onClick={aoSair}>
-              Sair sem enviar
+              {textos.sair}
             </button>
             <button
               ref={continuar}
@@ -72,12 +75,12 @@ export function RodapeProgresso({ respondidos, total, aoSair }: Propriedades) {
               className={`${formulario.botao} ${formulario.primario} ${estilos.botaoRodape}`}
               onClick={fecharConfirmacao}
             >
-              Continuar respondendo
+              {textos.continuar}
             </button>
           </div>
         ) : (
           <button ref={botaoSair} type="button" className={estilos.sair} onClick={abrirConfirmacao}>
-            Sair sem enviar
+            {textos.sair}
           </button>
         )}
       </div>
