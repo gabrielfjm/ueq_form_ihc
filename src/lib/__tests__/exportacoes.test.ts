@@ -21,6 +21,8 @@ function participacoes(pasta: string): ParticipacaoExportada[] {
     concluidaEm: "2026-10-29 17:11",
     incluidaNaAnalise: true,
     suspeita: false,
+    idioma: "pt",
+    traducaoAprovada: true,
     demografia: null,
     valores,
   }));
@@ -44,7 +46,7 @@ describe("exportarBrutas", () => {
     const texto = exportarBrutas(participacoes("basico"));
     expect(texto.startsWith(BOM)).toBe(true);
     const [cabecalho] = texto.slice(1).split("\r\n");
-    expect(cabecalho?.split(";")).toHaveLength(9 + 26);
+    expect(cabecalho?.split(";")).toHaveLength(11 + 26);
     expect(cabecalho).toContain("item01");
     expect(cabecalho).toContain("item26");
   });
@@ -60,7 +62,15 @@ describe("exportarBrutas", () => {
     ]);
     expect(texto).toContain('"Checkout ""novo""; com cupom"');
     expect(texto).toContain('"Outro\nnão listado"');
-    expect(texto).toContain(";sim;não;25 a 34 anos;");
+    expect(texto).toContain(";sim;não;pt;sim;25 a 34 anos;");
+  });
+});
+
+describe("idioma nas exportações", () => {
+  it("diz em que idioma a pessoa respondeu e se a tradução é aprovada", () => {
+    const [primeira] = participacoes("basico");
+    const [, linha] = exportarBrutas([{ ...primeira!, idioma: "kn", traducaoAprovada: false }]).split("\r\n");
+    expect(linha?.split(";").slice(5, 7)).toEqual(["kn", "não"]);
   });
 });
 
@@ -69,8 +79,8 @@ describe("exportarRecodificadas", () => {
     const texto = exportarRecodificadas([{ ...participacoes("basico")[0]!, valores: Array(26).fill(7) }], itens);
     const linha = texto.split("\r\n")[1]?.split(";") ?? [];
     // item 1 tem positivo à direita (+3), item 3 à esquerda (-3)
-    expect(linha[9]).toBe("3");
-    expect(linha[11]).toBe("-3");
+    expect(linha[11]).toBe("3");
+    expect(linha[13]).toBe("-3");
   });
 });
 

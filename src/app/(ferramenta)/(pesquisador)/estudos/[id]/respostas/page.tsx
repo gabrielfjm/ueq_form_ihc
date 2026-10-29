@@ -36,6 +36,8 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
       id: participacao.id,
       quando: formatarDiaHora(participacao.concluidaEm),
       versao: participacao.versao,
+      idioma: participacao.idioma.nomeEmPortugues,
+      traducaoAprovada: participacao.idioma.traducaoAprovada,
       inconsistentes: participacao.avaliacao.escalasInconsistentes.length,
       iguais: participacao.avaliacao.respostasIguais,
       suspeita: participacao.suspeita,

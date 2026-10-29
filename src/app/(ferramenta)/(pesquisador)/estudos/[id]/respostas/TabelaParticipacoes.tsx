@@ -14,6 +14,9 @@ export type LinhaParticipacao = {
   id: string;
   quando: string;
   versao: string;
+  // Nome do idioma em português e se o PDF oficial dele já é tradução aprovada
+  idioma: string;
+  traducaoAprovada: boolean;
   inconsistentes: number;
   iguais: number;
   suspeita: boolean;
@@ -94,6 +97,7 @@ export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limi
             <tr>
               <th scope="col">Concluída em</th>
               <th scope="col">Versão</th>
+              <th scope="col">Idioma</th>
               <th scope="col" className={estilos.direita}>Inconsistentes</th>
               <th scope="col" className={estilos.direita}>Iguais</th>
               <th scope="col">Situação</th>
@@ -114,6 +118,10 @@ export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limi
                       {linha.quando}
                     </th>
                     <td>{linha.versao}</td>
+                    <td>
+                      {linha.idioma}
+                      {!linha.traducaoAprovada && <span className={estilos.motivo}>tradução não aprovada</span>}
+                    </td>
                     <td className={`${estilos.numero} ${estilos.direita}`}>{linha.inconsistentes}</td>
                     <td className={`${estilos.numero} ${estilos.direita}`}>{linha.iguais}</td>
                     <td className={linha.suspeita ? estilos.suspeita : undefined}>
@@ -144,7 +152,7 @@ export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limi
                     </td>
                   </tr>
                   <tr id={idDetalhe} hidden={!estaAberta} className={`${estilos.detalhe} ${estilos.aberta}`}>
-                    <td colSpan={7}>
+                    <td colSpan={8}>
                       <ul className={estilos.escalas} aria-label={`Amplitude por escala na participação de ${linha.quando}`}>
                         {linha.escalas.map((escala) => (
                           <li
