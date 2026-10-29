@@ -124,7 +124,7 @@ Leitura, com maior estrito como na fórmula da planilha: `media > excelente` →
 1. **Respostas brutas** (CSV): uma linha por participação. Colunas: id da participação, versão, data, incluída (sim/não), suspeita (sim/não), demográficos, `item01` a `item26` com valores 1 a 7.
 2. **Respostas recodificadas** (CSV): mesmo formato, valores -3 a 3.
 3. **Resultados por escala** (CSV): versão, escala, n, média, dp, ic95 inferior, ic95 superior, alfa, faixa de interpretação, faixa do benchmark.
-4. **Compatível com a planilha oficial**: só os 26 valores 1 a 7 por linha, na ordem oficial, sem cabeçalho e sem colunas extras, prontos para colar na aba de dados da planilha. **[CONFIRMAR]** separador e formato que a planilha aceita colar.
+4. **Compatível com a planilha oficial**: só os 26 valores 1 a 7 por linha, na ordem oficial, sem cabeçalho e sem colunas extras, só das participações na análise. Mesmo formato das fixtures: separador `;`, quebra de linha CRLF e **sem BOM**. `[OK · planilha V15, aba Data]`: os dados começam em `Data!A4`, uma coluna por item de A a Z. O Excel em pt-BR abre o arquivo `;` já separado em colunas; daí é copiar as linhas e colar em `Data!A4` (passo a passo em `data/fixtures/LEIA-ME.md`). Um teste confere que a exportação da fixture `basico` sai idêntica ao `respostas.csv` original.
 
 CSV em UTF-8 com BOM e separador `;` (abre direto no Excel em pt-BR). Números com vírgula decimal no CSV de resultados. A exportação compatível com a planilha segue o que a planilha exigir.
 
