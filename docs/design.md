@@ -87,6 +87,7 @@ Escala (rem): 0.8125 · 0.9375 · 1.0625 · 1.25 · 1.625 · 2.25. Corpo em 1.06
 - Conteúdo alinhado à esquerda, largura máxima de leitura ~72ch, painéis de dados até 1120px
 - Grid de 8px. Espaço vertical generoso entre seções (48 a 64px), apertado dentro de tabelas
 - Navegação do pesquisador: barra superior fina com nome da ferramenta à esquerda e 5 links com ícone e texto: Estudos, Criar estudo, Documentação, Minha conta, Sair. Sem sidebar. Na documentação, quem não entrou vê a mesma barra só com Documentação, Entrar (`log-in`) e Criar conta (`user-plus`). O link do participante não tem barra nenhuma
+- A barra fica fixa no topo durante toda a rolagem, no computador e no celular. Até 56rem de largura os links ficam atrás de um botão Menu (`menu`, e `x` quando aberto, sempre com o texto "Menu"), para a barra fixa ocupar uma linha só; o menu abre os links em coluna logo abaixo e fecha com Esc ou ao trocar de página. Em 320 px a fileira de marcações do logotipo sai da barra para o nome e o Menu caberem
 - Tabelas são cidadãs de primeira classe: cabeçalho em negrito, linhas separadas por régua de 1px, números alinhados à direita
 - Botão primário: fundo `--tinta`, texto `--fundo`, raio 2px, altura 40px. Secundário: borda 1px `--tinta`, fundo transparente. Ação destrutiva: texto `--alerta` sublinhado, com confirmação em linha (não modal)
 - Foco visível sempre: `outline: 2px solid var(--destaque); outline-offset: 2px`
@@ -98,7 +99,7 @@ Escala (rem): 0.8125 · 0.9375 · 1.0625 · 1.25 · 1.625 · 2.25. Corpo em 1.06
 Lucide (`lucide-react`), contorno de 1,5 px, 18 px, na cor do texto ao lado.
 
 - Ícone só acompanha texto em **ações**: botões, links de ação, navegação principal e abas. O texto continua sempre visível; o ícone tem `aria-hidden="true"`
-- Ícone sozinho só em fechar e menu, com `aria-label`
+- Ícone sozinho só em fechar e menu, com `aria-label`. Exceção: no celular, os botões de zoom do diagrama em tela cheia (`zoom-out`, `zoom-in`, `maximize`) mostram só o ícone para Voltar e o zoom caberem numa linha; o texto (Diminuir, Aumentar, Ajustar à tela) continua como nome acessível e aparece no computador
 - Ação destrutiva usa o ícone na cor `--alerta`, junto com o texto
 - **Nenhum ícone nas telas do participante dentro do questionário** (ihc.md, seção 3: qualquer elemento a mais pode influenciar a resposta)
 - Mapa usado nas telas: Estudos `folder`, Criar estudo `plus`, Minha conta `user`, Salvar alterações `save`, Trocar senha `lock`, Sair `log-out`, Entrar `log-in`, Criar conta `user-plus`, Visão geral `layout-dashboard`, Resultados `bar-chart-3`, Respostas `list`, Copiar link `copy`, Abrir coleta `play`, Encerrar coleta `square`, Reabrir `rotate-ccw`, Editar `pencil`, Excluir `trash-2`, Exportar `download`, Mostrar senha `eye`, Adicionar versão `plus`, Remover `x`, Tirar da análise `minus-circle`, mensagem de status `check-circle`, Documentação `book-open`, Ver no GitHub e Abrir em tamanho real `external-link`, Baixar `download`. Abas da documentação: Visão geral `layout-dashboard`, Requisitos `list-checks`, Usuários `users`, Modelagem `shapes`, Arquitetura `layers`, Testes `flask-conical`, Especificação `file-text`

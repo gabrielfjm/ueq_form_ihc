@@ -4,7 +4,7 @@ A Ferramenta UEQ é uma aplicação web de código aberto para conduzir estudos 
 
 Tudo aqui está em formatos abertos e aparece direto no GitHub: Markdown, CSV e diagramas em Mermaid. A planilha de requisitos também está em `.xlsx`, para abrir no Excel ou no LibreOffice.
 
-Os mesmos arquivos aparecem dentro da ferramenta, na aba **Documentação**, aberta a qualquer pessoa, sem login, organizados em seções (Visão geral, Requisitos, Usuários, Modelagem, Arquitetura, Testes e Especificação), com uma ficha que explica cada documento. As telas dessa aba estão nos protótipos de baixa e alta fidelidade (R10 a R13) do [protótipo navegável](https://claude.ai/artifact/GTXgzTaWbf5STw3z9r76U1).
+Os mesmos arquivos aparecem dentro da ferramenta, na aba **Documentação**, aberta a qualquer pessoa, sem login, organizados em seções (Visão geral, Requisitos, Usuários, Modelagem, Arquitetura, Testes e Especificação), com uma ficha que explica cada documento. As telas dessa aba estão nos protótipos de baixa e alta fidelidade (R10 a R15) do [protótipo navegável](https://claude.ai/artifact/GTXgzTaWbf5STw3z9r76U1).
 
 O código e esta documentação estão sob a [licença MIT](../../LICENSE). O material oficial do UEQ em `data/` pertence aos autores do questionário (veja a seção Licença do [README](../../README.md#licença)).
 
@@ -12,10 +12,10 @@ O código e esta documentação estão sob a [licença MIT](../../LICENSE). O ma
 
 | Documento | O que tem |
 |---|---|
-| [Requisitos](requisitos.md) | Os 52 requisitos funcionais e os 23 não funcionais, com prioridade, sprint de entrega, status e critério de aceitação |
+| [Requisitos](requisitos.md) | Os 52 requisitos funcionais e os 24 não funcionais, com prioridade, sprint de entrega, status e critério de aceitação |
 | [Planilha de requisitos](planilha-requisitos.xlsx) | A mesma lista em planilha, com filtros, e abas de sprints, histórias, casos de uso, matrizes, cenários e casos de teste. Também em [requisitos.csv](requisitos.csv) |
 | [Matriz de rastreabilidade](matriz-rastreabilidade.md) | Cada requisito ligado a histórias, casos de uso, personas, casos de teste, sprint e código. Também em [matriz-rastreabilidade.csv](matriz-rastreabilidade.csv) |
-| [Casos e cenários de teste](casos-de-teste.md) | Estratégia de teste, 18 cenários e 128 casos (de ponta a ponta, de unidade e manuais), com passos, resultado esperado e o resultado da execução de 30/10/2026. Também em [casos-de-teste.csv](casos-de-teste.csv) |
+| [Casos e cenários de teste](casos-de-teste.md) | Estratégia de teste, 19 cenários e 133 casos (de ponta a ponta, de unidade e manuais), com passos, resultado esperado e o resultado da execução de 30/10/2026. Também em [casos-de-teste.csv](casos-de-teste.csv) |
 | [Personas](personas.md) | Seis personas: duas de pesquisador, três de participante e uma de quem mantém o código |
 | [Histórias de usuário](historias-de-usuario.md) | 38 histórias com critérios de aceitação. Também em [historias-de-usuario.csv](historias-de-usuario.csv) |
 | [Casos de uso](casos-de-uso.md) | Diagramas de casos de uso, lista dos 25 casos e especificação dos principais |
@@ -46,8 +46,8 @@ As sprints seguem os prompts de [`prompts/`](../../prompts/): S00 a S08 e S10 t�
 
 ## Situação em 30/10/2026
 
-- 73 requisitos entregues e 2 parciais.
-- Testes: as 104 execuções de ponta a ponta passaram (52 casos, no desktop e no celular). Dos 258 testes de unidade, 250 passaram e 8 estão pulados à espera dos dados da equipe. Os 19 casos manuais estão por fazer.
+- 74 requisitos entregues e 2 parciais.
+- Testes: as 114 execuções de ponta a ponta passaram (57 casos, no desktop e no celular). Dos 258 testes de unidade, 250 passaram e 8 estão pulados à espera dos dados da equipe. Os 19 casos manuais estão por fazer.
 - **RNF07, cálculo igual ao da planilha oficial:** os testes de comparação com a planilha esperam a equipe preencher os `esperado.json` das fixtures (passo a passo em [data/fixtures/LEIA-ME.md](../../data/fixtures/LEIA-ME.md)). As bordas e as regras das fixtures já passam.
 - **RF51, UEQ-S:** existem só a estrutura de dados e o teste. Falta a equipe preencher os itens e o benchmark oficiais do UEQ-S (passo 5 de [data/LEIA-ME.md](../../data/LEIA-ME.md)).
 

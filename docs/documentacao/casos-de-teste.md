@@ -1,6 +1,6 @@
 # Casos e cenários de teste
 
-Os testes que já existem na Ferramenta UEQ, organizados em **18 cenários** e **128 casos de teste**: 52 de ponta a ponta, 57 de unidade e 19 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
+Os testes que já existem na Ferramenta UEQ, organizados em **19 cenários** e **133 casos de teste**: 57 de ponta a ponta, 57 de unidade e 19 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
 
 A mesma lista está nas abas Cenários de teste e Casos de teste de [planilha-requisitos.xlsx](planilha-requisitos.xlsx) e em [casos-de-teste.csv](casos-de-teste.csv). A coluna Casos de teste da [matriz de rastreabilidade](matriz-rastreabilidade.md) liga cada requisito aos casos que o verificam.
 
@@ -8,11 +8,11 @@ A mesma lista está nas abas Cenários de teste e Casos de teste de [planilha-re
 
 | Nível | Ferramenta | Casos | Execuções | Passaram | Pulados | Falharam |
 |---|---|---|---|---|---|---|
-| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 52 | 104 | 104 | 0 | 0 |
+| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 57 | 114 | 114 | 0 | 0 |
 | Unidade | Vitest 5 | 57 | 258 | 250 | 8 | 0 |
 | Manual | Pessoas da equipe | 19 | — | — | — | — |
 
-- **Ponta a ponta:** cada um dos 52 casos rodou duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7). As 104 execuções passaram.
+- **Ponta a ponta:** cada um dos 57 casos rodou duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7). As 114 execuções passaram.
 - **Unidade:** 258 execuções, porque alguns casos são parametrizados (um por idioma, um por par de cores). 8 ficaram puladas de propósito: esperam dados que só a equipe pode copiar das fontes oficiais ([CT-U29](#ct-u29) e [CT-U53](#ct-u53)).
 - **Manual:** a checklist de [docs/checklist-manual.md](../checklist-manual.md) e as conferências que dependem de pessoas ainda estão por fazer.
 
@@ -72,7 +72,8 @@ pnpm exec playwright show-report   # relatório com as capturas de daltonismo do
 | <a id="cn14"></a>CN14 | **Cores e contraste** | Garantir o contraste de todos os pares de cor do tema | [RNF04](requisitos.md#rnf04) | [CT-U51](casos-de-teste.md#ct-u51), [CT-U52](casos-de-teste.md#ct-u52) | Passou |
 | <a id="cn15"></a>CN15 | **Validação contra a planilha oficial** | Comparar cada número da ferramenta com a UEQ Data Analysis Tool, com tolerância de 1e-6 | [RNF07](requisitos.md#rnf07) | [CT-U29](casos-de-teste.md#ct-u29), [CT-M15](casos-de-teste.md#ct-m15) | Pendente |
 | <a id="cn16"></a>CN16 | **UEQ-S** | Conferir os 8 itens e o benchmark do UEQ-S quando a equipe preencher os dados | [RF51](requisitos.md#rf51) | [CT-U53](casos-de-teste.md#ct-u53) | Pendente |
-| <a id="cn18"></a>CN18 | **Documentação na ferramenta** | Navegar pelas seções e documentos com e sem conta, seguir links e âncoras, ver os diagramas e baixar os arquivos, sem violações de acessibilidade | [RF52](requisitos.md#rf52), [RNF01](requisitos.md#rnf01), [RNF03](requisitos.md#rnf03), [RNF11](requisitos.md#rnf11), [RNF23](requisitos.md#rnf23) | [CT-U54](casos-de-teste.md#ct-u54), [CT-U55](casos-de-teste.md#ct-u55), [CT-U56](casos-de-teste.md#ct-u56), [CT-U57](casos-de-teste.md#ct-u57), [CT-E47](casos-de-teste.md#ct-e47), [CT-E48](casos-de-teste.md#ct-e48), [CT-E49](casos-de-teste.md#ct-e49), [CT-E50](casos-de-teste.md#ct-e50), [CT-E51](casos-de-teste.md#ct-e51) | Passou |
+| <a id="cn18"></a>CN18 | **Documentação na ferramenta** | Navegar pelas seções e documentos com e sem conta, seguir links e âncoras, ver os diagramas e baixar os arquivos, sem violações de acessibilidade | [RF52](requisitos.md#rf52), [RNF01](requisitos.md#rnf01), [RNF03](requisitos.md#rnf03), [RNF11](requisitos.md#rnf11), [RNF23](requisitos.md#rnf23) | [CT-U54](casos-de-teste.md#ct-u54), [CT-U55](casos-de-teste.md#ct-u55), [CT-U56](casos-de-teste.md#ct-u56), [CT-U57](casos-de-teste.md#ct-u57), [CT-E47](casos-de-teste.md#ct-e47), [CT-E48](casos-de-teste.md#ct-e48), [CT-E49](casos-de-teste.md#ct-e49), [CT-E50](casos-de-teste.md#ct-e50), [CT-E51](casos-de-teste.md#ct-e51), [CT-E57](casos-de-teste.md#ct-e57) | Passou |
+| <a id="cn19"></a>CN19 | **Navegação e barra fixa** | Manter a barra superior à vista durante a rolagem, sem esconder o foco nem as âncoras, com menu no celular | [RNF24](requisitos.md#rnf24), [RNF02](requisitos.md#rnf02) | [CT-E53](casos-de-teste.md#ct-e53), [CT-E54](casos-de-teste.md#ct-e54), [CT-E55](casos-de-teste.md#ct-e55), [CT-E56](casos-de-teste.md#ct-e56) | Passou |
 | <a id="cn17"></a>CN17 | **Verificação manual com pessoas** | O que a automação não vê: leitor de tela real, celular real, zoom, espaçamento de texto, avaliação heurística e teste com usuários | [RNF01](requisitos.md#rnf01), [RNF02](requisitos.md#rnf02), [RNF03](requisitos.md#rnf03), [RNF05](requisitos.md#rnf05), [RNF20](requisitos.md#rnf20) | [CT-M01](casos-de-teste.md#ct-m01), [CT-M02](casos-de-teste.md#ct-m02), [CT-M03](casos-de-teste.md#ct-m03), [CT-M04](casos-de-teste.md#ct-m04), [CT-M05](casos-de-teste.md#ct-m05), [CT-M06](casos-de-teste.md#ct-m06), [CT-M07](casos-de-teste.md#ct-m07), [CT-M08](casos-de-teste.md#ct-m08), [CT-M09](casos-de-teste.md#ct-m09), [CT-M10](casos-de-teste.md#ct-m10), [CT-M11](casos-de-teste.md#ct-m11), [CT-M12](casos-de-teste.md#ct-m12), [CT-M13](casos-de-teste.md#ct-m13), [CT-M14](casos-de-teste.md#ct-m14), [CT-M18](casos-de-teste.md#ct-m18), [CT-M19](casos-de-teste.md#ct-m19) | Manual, a fazer |
 
 ## Casos de ponta a ponta
@@ -1103,6 +1104,106 @@ Passos:
 
 Resultado esperado: Em cada etapa (consentimento, questionário, dados opcionais e fim) não há barra Principal e todo link aponta para o próprio formulário (/r/…) ou para uma âncora da página. Nenhum caminho leva à documentação, aos estudos ou a Entrar.
 
+### CT-E53
+
+**A barra superior continua no topo depois de rolar, com a barra pública e com a do pesquisador.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN19 · Navegação e barra fixa](#cn19) |
+| Teste | `tests/e2e/barra.spec.ts` › "a barra fica fixa no topo ao rolar, com e sem conta" |
+| Pré-condições | Uma página longa (Requisitos). |
+| Requisitos | [RNF24](requisitos.md#rnf24) |
+| Resultado em 30/10/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Sem conta, abrir Requisitos e rolar até o fim.
+2. Criar conta, abrir Requisitos e rolar até o meio.
+
+Resultado esperado: Nos dois casos a página rolou mais de 1000 px e a barra está na tela com o topo em 0.
+
+### CT-E54
+
+**Nem o destino de uma âncora nem o elemento com foco ficam escondidos pela barra.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN19 · Navegação e barra fixa](#cn19) |
+| Teste | `tests/e2e/barra.spec.ts` › "o foco e as âncoras nunca ficam embaixo da barra fixa" |
+| Pré-condições | Nenhuma. |
+| Requisitos | [RNF24](requisitos.md#rnf24), [RNF02](requisitos.md#rnf02) |
+| Resultado em 30/10/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir Requisitos em #rf52.
+2. Na matriz de rastreabilidade, focar o último link e subir 40 vezes com Shift+Tab.
+
+Resultado esperado: A âncora começa abaixo da barra, e cada elemento que recebe o foco fora da barra também (WCAG 2.4.11).
+
+### CT-E55
+
+**No celular a barra fixa fica numa linha só e o menu se comporta como um controle de abrir e fechar.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN19 · Navegação e barra fixa](#cn19) |
+| Teste | `tests/e2e/barra.spec.ts` › "no celular os links ficam no menu, que fecha com Esc e devolve o foco" |
+| Pré-condições | Janela de 390 × 844. |
+| Requisitos | [RNF24](requisitos.md#rnf24), [RNF01](requisitos.md#rnf01) |
+| Resultado em 30/10/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Conferir o botão Menu fechado.
+2. Abrir o menu e rodar o axe.
+3. Apertar Esc com o foco num link.
+4. Abrir o menu, ir para Criar conta e voltar.
+
+Resultado esperado: Fechado: aria-expanded=false, links escondidos e barra com menos de 80 px. Aberto: aria-expanded=true, links visíveis e zero violações. Esc fecha e devolve o foco ao botão. Ao trocar de página, o menu volta fechado.
+
+### CT-E56
+
+**No computador os links ficam sempre à vista na barra.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN19 · Navegação e barra fixa](#cn19) |
+| Teste | `tests/e2e/barra.spec.ts` › "no computador o botão Menu não aparece e os links ficam na barra" |
+| Pré-condições | Janela de 1280 × 800. |
+| Requisitos | [RNF24](requisitos.md#rnf24) |
+| Resultado em 30/10/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir a documentação.
+
+Resultado esperado: O botão Menu não aparece e o link Entrar está visível na barra.
+
+### CT-E57
+
+**O diagrama abre em tela cheia, com zoom e arrasto, e fecha devolvendo o foco.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN18 · Documentação na ferramenta](#cn18) |
+| Teste | `tests/e2e/documentacao.spec.ts` › "clicar no diagrama abre em tela cheia, com zoom, arrasto, Voltar e Esc" |
+| Pré-condições | Navegador sem cookie de sessão. |
+| Requisitos | [RF52](requisitos.md#rf52), [RNF01](requisitos.md#rnf01), [RNF02](requisitos.md#rnf02) |
+| Resultado em 30/10/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Em Casos de uso, clicar no Diagrama 1 e rodar o axe.
+2. Clicar duas vezes em Aumentar.
+3. Arrastar o diagrama com o mouse.
+4. Apertar - e depois 0.
+5. Clicar em Voltar.
+6. Com o foco no diagrama, apertar Enter e depois Esc.
+
+Resultado esperado: A janela "Diagrama 1 · Área do pesquisador" ocupa toda a largura, Voltar recebe o foco e a imagem carrega; zero violações. O zoom vai a 150% e a área passa a rolar; arrastar muda a posição e Voltar continua no topo. - leva a 125% e 0 volta a 100%. Voltar e Esc fecham, e o foco volta ao diagrama.
+
 ## Casos de unidade
 
 Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções conta os testes reais: um caso parametrizado roda uma vez por idioma ou por par de cores.
@@ -1217,7 +1318,7 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 | <a id="ct-u54"></a>CT-U54 | `documentacao.test.ts` | `catálogo da documentação` | Todo documento e download do catálogo existe; cada documento tem um endereço só; todo .md de docs/documentacao está no catálogo; endereço fora do catálogo não vira documento | 3 | [RF52](requisitos.md#rf52), [RNF23](requisitos.md#rnf23) | Passou (3 de 3) |
 | <a id="ct-u55"></a>CT-U55 | `documentacao.test.ts` | `diagramas` | Cada diagrama Mermaid dos documentos tem o SVG gerado e não sobra SVG sem uso | 2 | [RF52](requisitos.md#rf52), [RNF23](requisitos.md#rnf23) | Passou (2 de 2) |
 | <a id="ct-u56"></a>CT-U56 | `documentacao.test.ts` | `destinoDoLink` | Link para outro documento abre na aba Documentação com a âncora; arquivo para baixar sai pela rota de download; o resto do repositório abre no GitHub; nenhum link relativo dos documentos aponta para arquivo que não existe | 4 | [RF52](requisitos.md#rf52), [RNF23](requisitos.md#rnf23) | Passou (4 de 4) |
-| <a id="ct-u57"></a>CT-U57 | `documentacao.test.ts` | `renderizarMarkdown` | Título separado, âncoras iguais às do GitHub (inclusive repetidas), tabela numa região rolável com nome, links reescritos e diagrama como imagem com texto alternativo e o código à vista | 3 | [RF52](requisitos.md#rf52), [RNF01](requisitos.md#rnf01) | Passou (3 de 3) |
+| <a id="ct-u57"></a>CT-U57 | `documentacao.test.ts` | `renderizarMarkdown` | Título separado, âncoras iguais às do GitHub (inclusive repetidas), tabela numa região rolável com nome, links reescritos e diagrama como botão de ampliar com imagem de texto alternativo e o código à vista | 3 | [RF52](requisitos.md#rf52), [RNF01](requisitos.md#rnf01) | Passou (3 de 3) |
 
 ## Casos manuais
 

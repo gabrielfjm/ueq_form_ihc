@@ -130,8 +130,9 @@ Critérios de aceitação:
 - A tabela mostra título, produto, status, versões, respostas e última resposta, do mais recente para o mais antigo.
 - Sem estudos, vejo o estado vazio com o caminho para criar o primeiro.
 - Só vejo os meus estudos: o endereço de um estudo de outra pessoa responde como se ele não existisse.
+- A barra superior continua à vista enquanto rolo a página, no computador e no celular.
 
-Requisitos: [RF09](requisitos.md#rf09), [RNF11](requisitos.md#rnf11)
+Requisitos: [RF09](requisitos.md#rf09), [RNF11](requisitos.md#rnf11), [RNF24](requisitos.md#rnf24)
 
 ### HU07
 
@@ -567,5 +568,6 @@ Critérios de aceitação:
 - Cada documento tem uma ficha que diz o que é, para que serve e quem deve ler.
 - Um link para outro documento ou para um requisito abre dentro da ferramenta, no lugar certo da página.
 - Posso baixar a planilha de requisitos e os CSV pela ficha.
+- Clicando num diagrama, ele abre em tela cheia com zoom e posso arrastar para ver um detalhe; Voltar ou Esc fecham.
 
 Requisitos: [RF52](requisitos.md#rf52), [RNF01](requisitos.md#rnf01), [RNF03](requisitos.md#rnf03)

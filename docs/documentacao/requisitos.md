@@ -1,6 +1,6 @@
 # Requisitos
 
-Todos os requisitos da Ferramenta UEQ implementados até a sprint de documentação: **52 funcionais (RF)** e **23 não funcionais (RNF)**. 73 estão entregues e 2 estão parciais.
+Todos os requisitos da Ferramenta UEQ implementados até a sprint de documentação: **52 funcionais (RF)** e **24 não funcionais (RNF)**. 74 estão entregues e 2 estão parciais.
 
 A mesma lista, com todas as colunas, está em [planilha-requisitos.xlsx](planilha-requisitos.xlsx) e em [requisitos.csv](requisitos.csv). A ligação de cada requisito com histórias, casos de uso, código e testes está na [matriz de rastreabilidade](matriz-rastreabilidade.md).
 
@@ -53,9 +53,9 @@ A mesma lista, com todas as colunas, está em [planilha-requisitos.xlsx](planilh
 | Sprint 08 · Exportação | 4 | 1 | RF45, RF46, RF47, RF48, RNF21 |
 | Sprint de idiomas | 4 | 1 | RF28, RF29, RF30, RF31, RNF15 |
 | Sprint 10 · Extensões | 3 | 1 | RF49, RF50, RF51, RNF22 |
-| Sprint de documentação | 1 | 1 | RF52, RNF23 |
+| Sprint de documentação | 1 | 2 | RF52, RNF24, RNF23 |
 
-Por prioridade: 44 alta, 24 média e 7 baixa.
+Por prioridade: 44 alta, 25 média e 7 baixa.
 
 Pendências abertas:
 
@@ -169,7 +169,7 @@ Pendências abertas:
 
 | ID | Requisito | Descrição | Critério de aceitação | Prioridade | Sprint | Status |
 |---|---|---|---|---|---|---|
-| <a id="rf52"></a>RF52 | **Consultar a documentação na ferramenta** | A aba Documentação, pública (sem login) e também na barra superior do pesquisador, mostra os documentos do repositório (docs/) em seções (Visão geral, Requisitos, Usuários, Modelagem, Arquitetura, Testes, Especificação) e sub-abas por documento. Cada documento tem uma ficha que diz o que é, para que serve e quem deve ler, com o arquivo no GitHub, os downloads e o índice da página. Os links entre documentos e as âncoras funcionam dentro da ferramenta, e os diagramas aparecem como imagem com texto alternativo. Quem não entrou vê uma barra só com Documentação, Entrar e Criar conta. O link do participante não leva à documentação nem a nenhuma outra parte da ferramenta: só o formulário e o seletor de idioma. | Sem login, /documentacao abre com a barra pública e a área do pesquisador continua fechada. Em cada etapa do link do participante, todo link aponta para o próprio formulário. A aba marca a seção e o documento atuais com aria-current. Um link para requisitos.md#rf01 abre /documentacao/requisitos#rf01. Os diagramas carregam e têm texto alternativo. Endereço fora do catálogo dá 404 e a rota de arquivos só entrega o que está na lista. Sem violação do axe e sem rolagem horizontal em 320 px. | Média | SDOC | Entregue |
+| <a id="rf52"></a>RF52 | **Consultar a documentação na ferramenta** | A aba Documentação, pública (sem login) e também na barra superior do pesquisador, mostra os documentos do repositório (docs/) em seções (Visão geral, Requisitos, Usuários, Modelagem, Arquitetura, Testes, Especificação) e sub-abas por documento. Cada documento tem uma ficha que diz o que é, para que serve e quem deve ler, com o arquivo no GitHub, os downloads e o índice da página. Os links entre documentos e as âncoras funcionam dentro da ferramenta, e os diagramas aparecem como imagem com texto alternativo. Clicar num diagrama abre em tela cheia, com a barra de Voltar parada no topo, zoom de 50% a 400% (botões, Ctrl + roda do mouse ou + e -) e arrasto para mover; Voltar ou Esc fecham e devolvem o foco ao diagrama. Nos casos de uso, os atores aparecem como boneco, com os secundários à direita. Quem não entrou vê uma barra só com Documentação, Entrar e Criar conta. O link do participante não leva à documentação nem a nenhuma outra parte da ferramenta: só o formulário e o seletor de idioma. | Sem login, /documentacao abre com a barra pública e a área do pesquisador continua fechada. Em cada etapa do link do participante, todo link aponta para o próprio formulário. A aba marca a seção e o documento atuais com aria-current. Um link para requisitos.md#rf01 abre /documentacao/requisitos#rf01. Os diagramas carregam e têm texto alternativo. Endereço fora do catálogo dá 404 e a rota de arquivos só entrega o que está na lista. Sem violação do axe e sem rolagem horizontal em 320 px. | Média | SDOC | Entregue |
 
 ## Requisitos não funcionais
 
@@ -186,6 +186,7 @@ Pendências abertas:
 | <a id="rnf14"></a>RNF14 | **Autenticação acessível**<br>Acessibilidade | Login sem teste cognitivo: aceita colar senha e gerenciador de senhas, tem botão "Mostrar senha" com aria-pressed e autocomplete correto (name, email, current-password, new-password). | O botão alterna a visibilidade e anuncia o estado. | Alta | S03 | Entregue |
 | <a id="rnf19"></a>RNF19 | **Identidade visual consistente**<br>Estética | As telas seguem o protótipo de alta fidelidade e docs/design.md: fundo branco, azul-petróleo para destaque, vermelho só para alerta, Atkinson Hyperlegible no texto, Source Sans 3 nos números com tabular-nums. Ícones só nas ações do pesquisador e sempre com texto; nenhum ícone nas telas do participante. | Cada tela com protótipo confere com o PNG correspondente. | Média | SP, S03 a S10 | Entregue |
 | <a id="rnf20"></a>RNF20 | **Preferências do sistema**<br>Acessibilidade | A interface respeita prefers-reduced-motion e forced-colors (alto contraste do Windows): círculos, foco e gráficos continuam visíveis. | Com forced-colors ativo os círculos do questionário e os marcadores do gráfico continuam visíveis. | Média | S00, S05, S06 | Entregue |
+| <a id="rnf24"></a>RNF24 | **Barra de navegação sempre à vista**<br>Operabilidade | A barra superior fica fixa no topo durante toda a rolagem, no computador e no celular. No celular (até 56rem) os links ficam atrás de um botão Menu, para a barra fixa ocupar uma linha só (cerca de 60 px); o menu fecha com Esc, devolvendo o foco ao botão, e ao trocar de página. O foco e o destino das âncoras param sempre abaixo da barra. | Depois de rolar, o topo da barra continua em 0. No celular, fechada, ela tem menos de 80 px. Subindo com Shift+Tab, nenhum elemento com foco fica embaixo da barra. Esc fecha o menu e devolve o foco ao botão. | Média | SDOC | Entregue |
 
 ### Adequação funcional
 
