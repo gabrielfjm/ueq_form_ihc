@@ -1,6 +1,6 @@
 # Casos e cenários de teste
 
-Os testes que já existem na Ferramenta UEQ, organizados em **19 cenários** e **133 casos de teste**: 57 de ponta a ponta, 57 de unidade e 19 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
+Os testes que já existem na Ferramenta UEQ, organizados em **20 cenários** e **138 casos de teste**: 62 de ponta a ponta, 57 de unidade e 19 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
 
 A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). A ligação de cada cenário e de cada caso com os requisitos entra quando a lista de requisitos estiver pronta.
 
@@ -8,11 +8,11 @@ A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). A ligação de 
 
 | Nível | Ferramenta | Casos | Execuções | Passaram | Pulados | Falharam |
 |---|---|---|---|---|---|---|
-| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 57 | 114 | 114 | 0 | 0 |
+| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 62 | 124 | 120 | 4 | 0 |
 | Unidade | Vitest 5 | 57 | 258 | 250 | 8 | 0 |
 | Manual | Pessoas da equipe | 19 | — | — | — | — |
 
-- **Ponta a ponta:** cada um dos 57 casos rodou duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7). As 114 execuções passaram.
+- **Ponta a ponta:** cada um dos 62 casos rodou duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7). Das 124 execuções, 120 passaram e 4 ficaram puladas de propósito: os casos [CT-E49](casos-de-teste.md#ct-e49) e [CT-E57](casos-de-teste.md#ct-e57) só rodam quando os documentos que eles usam forem publicados.
 - **Unidade:** 258 execuções, porque alguns casos são parametrizados (um por idioma, um por par de cores). 8 ficaram puladas de propósito: esperam dados que só a equipe pode copiar das fontes oficiais ([CT-U29](#ct-u29) e [CT-U53](#ct-u53)).
 - **Manual:** a checklist de [docs/checklist-manual.md](../checklist-manual.md) e as conferências que dependem de pessoas ainda estão por fazer.
 
@@ -72,8 +72,9 @@ pnpm exec playwright show-report   # relatório com as capturas de daltonismo do
 | <a id="cn14"></a>CN14 | **Cores e contraste** | Garantir o contraste de todos os pares de cor do tema | a definir | [CT-U51](casos-de-teste.md#ct-u51), [CT-U52](casos-de-teste.md#ct-u52) | Passou |
 | <a id="cn15"></a>CN15 | **Validação contra a planilha oficial** | Comparar cada número da ferramenta com a UEQ Data Analysis Tool, com tolerância de 1e-6 | a definir | [CT-U29](casos-de-teste.md#ct-u29), [CT-M15](casos-de-teste.md#ct-m15) | Pendente |
 | <a id="cn16"></a>CN16 | **UEQ-S** | Conferir os 8 itens e o benchmark do UEQ-S quando a equipe preencher os dados | a definir | [CT-U53](casos-de-teste.md#ct-u53) | Pendente |
-| <a id="cn18"></a>CN18 | **Documentação na ferramenta** | Navegar pelas seções e documentos com e sem conta, seguir links e âncoras, ver os diagramas e baixar os arquivos, sem violações de acessibilidade | a definir | [CT-U54](casos-de-teste.md#ct-u54), [CT-U55](casos-de-teste.md#ct-u55), [CT-U56](casos-de-teste.md#ct-u56), [CT-U57](casos-de-teste.md#ct-u57), [CT-E47](casos-de-teste.md#ct-e47), [CT-E48](casos-de-teste.md#ct-e48), [CT-E49](casos-de-teste.md#ct-e49), [CT-E50](casos-de-teste.md#ct-e50), [CT-E51](casos-de-teste.md#ct-e51), [CT-E57](casos-de-teste.md#ct-e57) | Passou |
+| <a id="cn18"></a>CN18 | **Documentação na ferramenta** | Navegar pelas seções e documentos com e sem conta, seguir links e âncoras, ver os diagramas e baixar os arquivos, sem violações de acessibilidade | a definir | [CT-U54](casos-de-teste.md#ct-u54), [CT-U55](casos-de-teste.md#ct-u55), [CT-U56](casos-de-teste.md#ct-u56), [CT-U57](casos-de-teste.md#ct-u57), [CT-E47](casos-de-teste.md#ct-e47), [CT-E48](casos-de-teste.md#ct-e48), [CT-E49](casos-de-teste.md#ct-e49), [CT-E50](casos-de-teste.md#ct-e50), [CT-E51](casos-de-teste.md#ct-e51), [CT-E57](casos-de-teste.md#ct-e57), [CT-E62](casos-de-teste.md#ct-e62) | Passou, com casos pulados até os documentos serem publicados |
 | <a id="cn19"></a>CN19 | **Navegação e barra fixa** | Manter a barra superior à vista durante a rolagem, sem esconder o foco nem as âncoras, com menu no celular | a definir | [CT-E53](casos-de-teste.md#ct-e53), [CT-E54](casos-de-teste.md#ct-e54), [CT-E55](casos-de-teste.md#ct-e55), [CT-E56](casos-de-teste.md#ct-e56) | Passou |
+| <a id="cn20"></a>CN20 | **Página inicial e janelas** | Apresentar a ferramenta a quem não tem conta, abrir Entrar e Criar conta numa janela sem rolar, fechar devolvendo o foco e entregar o ícone do site | a definir | [CT-E58](casos-de-teste.md#ct-e58), [CT-E59](casos-de-teste.md#ct-e59), [CT-E60](casos-de-teste.md#ct-e60), [CT-E61](casos-de-teste.md#ct-e61) | Passou |
 | <a id="cn17"></a>CN17 | **Verificação manual com pessoas** | O que a automação não vê: leitor de tela real, celular real, zoom, espaçamento de texto, avaliação heurística e teste com usuários | a definir | [CT-M01](casos-de-teste.md#ct-m01), [CT-M02](casos-de-teste.md#ct-m02), [CT-M03](casos-de-teste.md#ct-m03), [CT-M04](casos-de-teste.md#ct-m04), [CT-M05](casos-de-teste.md#ct-m05), [CT-M06](casos-de-teste.md#ct-m06), [CT-M07](casos-de-teste.md#ct-m07), [CT-M08](casos-de-teste.md#ct-m08), [CT-M09](casos-de-teste.md#ct-m09), [CT-M10](casos-de-teste.md#ct-m10), [CT-M11](casos-de-teste.md#ct-m11), [CT-M12](casos-de-teste.md#ct-m12), [CT-M13](casos-de-teste.md#ct-m13), [CT-M14](casos-de-teste.md#ct-m14), [CT-M18](casos-de-teste.md#ct-m18), [CT-M19](casos-de-teste.md#ct-m19) | Manual, a fazer |
 
 ## Casos de ponta a ponta
@@ -82,12 +83,12 @@ Cada caso é um `test(...)` do Playwright. O título no código é o que aparece
 
 ### CT-E01
 
-**Quem abre a ferramenta sem conta cai na tela de entrada.**
+**Quem abre a ferramenta sem conta vê a página inicial, que explica o que ela faz.**
 
 | Campo | Valor |
 |---|---|
 | Cenário | [CN01 · Acesso e autenticação](#cn01) |
-| Teste | `tests/e2e/inicial.spec.ts` › "a raiz leva quem não tem sessão para Entrar" |
+| Teste | `tests/e2e/inicial.spec.ts` › "a raiz apresenta a ferramenta para quem não tem sessão e passa no axe" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
 | Resultado em 30/10/2026 | Passou (celular e desktop) |
@@ -95,8 +96,10 @@ Cada caso é um `test(...)` do Playwright. O título no código é o que aparece
 Passos:
 
 1. Abrir /.
+2. Abrir o menu, se a tela for estreita.
+3. Rodar o axe.
 
-Resultado esperado: A URL termina em /entrar e o título de nível 1 é "Entrar".
+Resultado esperado: A URL continua em /. O h1 é "Estudos de experiência do usuário com o UEQ" e aparecem as seções Como funciona, O questionário, Para o participante, Resultados e dados e Documentação. A tabela "As seis escalas do UEQ" tem 7 linhas. A barra tem Documentação (sem aria-current) e o botão Entrar, e nada de Estudos. Zero violações.
 
 ### CT-E02
 
@@ -106,7 +109,7 @@ Resultado esperado: A URL termina em /entrar e o título de nível 1 é "Entrar"
 |---|---|
 | Cenário | [CN01 · Acesso e autenticação](#cn01) |
 | Teste | `tests/e2e/inicial.spec.ts` › "o primeiro Tab leva ao link de pular para o conteúdo" |
-| Pré-condições | Página /entrar aberta. |
+| Pré-condições | Página inicial (/) aberta. |
 | Requisitos | a definir |
 | Resultado em 30/10/2026 | Passou (celular e desktop) |
 
@@ -119,7 +122,7 @@ Resultado esperado: O primeiro Tab foca "Pular para o conteúdo"; o Enter leva o
 
 ### CT-E03
 
-**Cadastro, saída e entrada funcionam sem mouse.**
+**Cadastrar, sair e entrar de novo funciona só com o teclado.**
 
 | Campo | Valor |
 |---|---|
@@ -131,12 +134,13 @@ Resultado esperado: O primeiro Tab foca "Pular para o conteúdo"; o Enter leva o
 
 Passos:
 
-1. Em /cadastrar, chegar a cada campo com Tab e digitar nome, e-mail e senha.
+1. Em /cadastrar, chegar a cada campo da janela com Tab e digitar nome, e-mail e senha.
 2. Apertar Enter.
 3. Chegar com Tab ao botão Sair e apertar Enter.
-4. Entrar de novo só com teclado.
+4. Na janela de confirmação, apertar Enter.
+5. Na página inicial, chegar com Tab ao botão Entrar da barra, apertar Enter e entrar só com teclado.
 
-Resultado esperado: Depois do cadastro aparece "Seus estudos". Sair leva a /entrar?aviso=saiu com "Você saiu da sua conta." em role=status. A nova entrada volta a /estudos.
+Resultado esperado: Depois do cadastro aparece "Seus estudos". Sair abre a janela "Sair da conta?" com o foco no botão Sair; confirmar leva a /?aviso=saiu com "Você saiu da sua conta." em role=status. Entrar abre a janela com o foco no E-mail, e a nova entrada volta a /estudos.
 
 ### CT-E04
 
@@ -177,7 +181,7 @@ Resultado esperado: A URL continua em /r/qualquer-estudo e a resposta não é o 
 
 ### CT-E06
 
-**As telas de acesso não têm violação WCAG 2.2 A/AA, nem no estado de erro.**
+**As janelas de acesso não têm violação WCAG 2.2 A/AA, nem no estado de erro.**
 
 | Campo | Valor |
 |---|---|
@@ -189,9 +193,9 @@ Resultado esperado: A URL continua em /r/qualquer-estudo e a resposta não é o 
 
 Passos:
 
-1. Rodar o axe em /entrar.
+1. Abrir /entrar e rodar o axe com a janela aberta.
 2. Entrar com credenciais inexistentes e rodar o axe.
-3. Rodar o axe em /cadastrar.
+3. Abrir /cadastrar e rodar o axe.
 4. Enviar o cadastro vazio e rodar o axe.
 
 Resultado esperado: Zero violações nos quatro estados. O erro de login mostra "Não foi possível entrar". O cadastro vazio mostra o resumo "Corrija 3 campos para continuar" com o foco, o Nome com aria-invalid e "Informe seu nome."
@@ -277,7 +281,7 @@ Resultado esperado: Senha atual errada mostra "A senha atual não confere…". C
 
 ### CT-E11
 
-**Excluir a conta pede confirmação digitada e apaga tudo.**
+**Excluir a conta pede confirmação numa janela, com o e-mail digitado, e apaga o acesso.**
 
 | Campo | Valor |
 |---|---|
@@ -289,13 +293,13 @@ Resultado esperado: Senha atual errada mostra "A senha atual não confere…". C
 
 Passos:
 
-1. Abrir "Excluir minha conta".
-2. Cancelar.
+1. Clicar em "Excluir minha conta".
+2. Cancelar; abrir de novo e apertar Esc.
 3. Abrir de novo e digitar outro e-mail.
 4. Digitar o e-mail certo e confirmar.
 5. Tentar entrar.
 
-Resultado esperado: O painel abre com aria-expanded e foco no campo; Cancelar devolve o foco ao botão. E-mail errado: "Esse não é o e-mail da sua conta. Nada foi excluído.". E-mail certo: /entrar?aviso=excluida com "Conta excluída…". O login seguinte falha.
+Resultado esperado: Abre a janela "Excluir sua conta?" com o aviso do que vai junto e o foco no campo; zero violações. Cancelar e Esc fecham e devolvem o foco ao botão. E-mail errado: "Esse não é o e-mail da sua conta. Nada foi excluído.". E-mail certo: /?aviso=excluida com "Conta excluída…". O login seguinte falha.
 
 ### CT-E12
 
@@ -317,7 +321,7 @@ Resultado esperado: Aparece "Você ainda não tem estudos." e o axe não acha vi
 
 ### CT-E13
 
-**O produto vira sugestão da primeira versão e o foco não se perde.**
+**O produto vira sugestão de nome da primeira versão e o foco acompanha adicionar e remover.**
 
 | Campo | Valor |
 |---|---|
@@ -331,9 +335,10 @@ Passos:
 
 1. Em /estudos/novo, digitar o produto "Portal do aluno".
 2. Clicar em Adicionar versão.
-3. Clicar em Remover versão 2.
+3. Clicar em Remover versão 2 e cancelar na janela.
+4. Clicar de novo em Remover versão 2 e confirmar com Enter.
 
-Resultado esperado: A Versão 1 recebe "Portal do aluno" com a nota "Sugerido a partir do produto avaliado. Pode trocar.". Adicionar foca a Versão 2; remover devolve o foco a Adicionar versão.
+Resultado esperado: A Versão 1 recebe "Portal do aluno" com a nota "Sugerido a partir do produto avaliado. Pode trocar.". Adicionar foca a Versão 2. Remover abre a janela "Remover a versão 2?": Cancelar mantém a versão; confirmar (o foco já está no botão) remove e devolve o foco a Adicionar versão.
 
 ### CT-E14
 
@@ -592,24 +597,25 @@ Resultado esperado: Aparece "Recuperamos as respostas que você já tinha marcad
 
 ### CT-E27
 
-**Desistir pede confirmação e não deixa dados.**
+**Desistir pede confirmação numa janela e não grava nada.**
 
 | Campo | Valor |
 |---|---|
 | Cenário | [CN05 · Participação no estudo](#cn05) |
-| Teste | `tests/e2e/questionario.spec.ts` › "sair sem enviar confirma em linha e não grava nada" |
+| Teste | `tests/e2e/questionario.spec.ts` › "sair sem enviar confirma numa janela e não grava nada" |
 | Pré-condições | Participação iniciada com um item marcado. |
 | Requisitos | a definir |
 | Resultado em 30/10/2026 | Passou (celular e desktop) |
 
 Passos:
 
-1. Clicar em Sair sem enviar.
-2. Confirmar Sair sem enviar.
-3. Abrir o link de novo.
-4. Recarregar a página do pesquisador.
+1. Clicar em Sair sem enviar no rodapé e rodar o axe.
+2. Apertar Esc.
+3. Clicar de novo em Sair sem enviar e confirmar na janela.
+4. Abrir o link de novo.
+5. Recarregar a página do pesquisador.
 
-Resultado esperado: Abre o grupo "Sair sem enviar? Nada do que você marcou será gravado." com o foco em Continuar respondendo. Confirmar leva a /saiu ("Você saiu do estudo", sem violações). O link volta ao termo, e o pesquisador vê "0 respostas · 0 na análise".
+Resultado esperado: Abre a janela "Sair sem enviar? Nada do que você marcou será gravado." com o foco em Continuar respondendo; zero violações. Esc fecha, a resposta continua marcada e o foco volta para Sair sem enviar. Confirmar leva a /saiu ("Você saiu do estudo", sem violações). O link volta ao termo, e o pesquisador vê "0 respostas · 0 na análise".
 
 ### CT-E28
 
@@ -1035,7 +1041,7 @@ Resultado esperado: A URL vira /documentacao, o link Documentação fica com ari
 | Teste | `tests/e2e/documentacao.spec.ts` › "os links entre documentos levam à âncora dentro da ferramenta e a planilha baixa sem conta" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 30/10/2026 | Passou (celular e desktop) |
+| Resultado em 30/10/2026 | Pulado até o documento ser publicado |
 
 Passos:
 
@@ -1081,7 +1087,7 @@ Passos:
 2. Pedir /api/documentacao/package.json, ..%2F..%2F.env e um diagrama com nome inválido.
 3. Pedir requisitos.csv e /estudos sem cookie.
 
-Resultado esperado: A página dá 404; os três pedidos de arquivo dão 404; requisitos.csv sai (200); /estudos continua mandando para /entrar (307).
+Resultado esperado: A página dá 404; os três pedidos de arquivo dão 404; requisitos.csv sai (200) só se Requisitos estiver publicado, senão dá 404; /estudos continua mandando para /entrar (307).
 
 ### CT-E52
 
@@ -1106,20 +1112,20 @@ Resultado esperado: Em cada etapa (consentimento, questionário, dados opcionais
 
 ### CT-E53
 
-**A barra superior continua no topo depois de rolar, com a barra pública e com a do pesquisador.**
+**A barra superior fica no topo durante a rolagem, com e sem conta.**
 
 | Campo | Valor |
 |---|---|
 | Cenário | [CN19 · Navegação e barra fixa](#cn19) |
 | Teste | `tests/e2e/barra.spec.ts` › "a barra fica fixa no topo ao rolar, com e sem conta" |
-| Pré-condições | Uma página longa (Requisitos). |
+| Pré-condições | Uma página longa (a página inicial). |
 | Requisitos | a definir |
 | Resultado em 30/10/2026 | Passou (celular e desktop) |
 
 Passos:
 
-1. Sem conta, abrir Requisitos e rolar até o fim.
-2. Criar conta, abrir Requisitos e rolar até o meio.
+1. Sem conta, abrir a página inicial e rolar até o fim.
+2. Criar conta, abrir a página inicial e rolar até o meio.
 
 Resultado esperado: Nos dois casos a página rolou mais de 1000 px e a barra está na tela com o topo em 0.
 
@@ -1158,10 +1164,10 @@ Passos:
 
 1. Conferir o botão Menu fechado.
 2. Abrir o menu e rodar o axe.
-3. Apertar Esc com o foco num link.
-4. Abrir o menu, ir para Criar conta e voltar.
+3. Apertar Esc com o foco no botão Entrar.
+4. Abrir o menu, clicar no logotipo (vai para /) e voltar.
 
-Resultado esperado: Fechado: aria-expanded=false, links escondidos e barra com menos de 80 px. Aberto: aria-expanded=true, links visíveis e zero violações. Esc fecha e devolve o foco ao botão. Ao trocar de página, o menu volta fechado.
+Resultado esperado: Fechado: aria-expanded=false, botão Entrar escondido e barra com menos de 80 px. Aberto: aria-expanded=true, Entrar visível e zero violações. Esc fecha e devolve o foco ao botão. Ao trocar de página o menu fecha, e ao voltar continua fechado.
 
 ### CT-E56
 
@@ -1179,7 +1185,7 @@ Passos:
 
 1. Abrir a documentação.
 
-Resultado esperado: O botão Menu não aparece e o link Entrar está visível na barra.
+Resultado esperado: O botão Menu não aparece e o botão Entrar está visível na barra.
 
 ### CT-E57
 
@@ -1191,7 +1197,7 @@ Resultado esperado: O botão Menu não aparece e o link Entrar está visível na
 | Teste | `tests/e2e/documentacao.spec.ts` › "clicar no diagrama abre em tela cheia, com zoom, arrasto, Voltar e Esc" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 30/10/2026 | Passou (celular e desktop) |
+| Resultado em 30/10/2026 | Pulado até o documento ser publicado |
 
 Passos:
 
@@ -1203,6 +1209,104 @@ Passos:
 6. Com o foco no diagrama, apertar Enter e depois Esc.
 
 Resultado esperado: A janela com o título do diagrama ocupa toda a largura, Voltar recebe o foco e a imagem carrega; zero violações. O zoom vai a 150% e a área passa a rolar; arrastar muda a posição e Voltar continua no topo. - leva a 125% e 0 volta a 100%. Voltar e Esc fecham, e o foco volta ao diagrama.
+
+### CT-E58
+
+**Entrar e Criar conta abrem numa janela por cima da página, cabem sem rolar e fecham devolvendo o foco.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN20 · Página inicial e janelas](#cn20) |
+| Teste | `tests/e2e/inicial.spec.ts` › "Entrar abre a janela por cima da página, sem rolar, e Esc fecha devolvendo o foco" |
+| Pré-condições | Página inicial (/) sem sessão. |
+| Requisitos | a definir |
+| Resultado em 30/10/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Clicar em Entrar na barra.
+2. Medir a caixa da janela e rodar o axe.
+3. Clicar em Criar conta dentro da janela.
+4. Apertar Esc.
+
+Resultado esperado: Abre a janela "Entrar" com o foco no E-mail, e a URL continua em /. O conteúdo cabe sem barra de rolagem; zero violações. Criar conta troca o formulário na mesma janela, com o foco no Nome. Esc fecha e devolve o foco ao botão Entrar.
+
+### CT-E59
+
+**Fechar a janela aberta pelo endereço /entrar leva à página inicial.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN20 · Página inicial e janelas](#cn20) |
+| Teste | `tests/e2e/inicial.spec.ts` › "fechar a janela em /entrar volta para a página inicial" |
+| Pré-condições | Navegador sem cookie de sessão. |
+| Requisitos | a definir |
+| Resultado em 30/10/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir /entrar.
+2. Clicar em Fechar (x).
+
+Resultado esperado: A janela some e a URL vira /.
+
+### CT-E60
+
+**Quem já entrou vê a página inicial com a barra do pesquisador.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN20 · Página inicial e janelas](#cn20) |
+| Teste | `tests/e2e/inicial.spec.ts` › "quem entrou vê a página inicial com a barra do pesquisador e o caminho para os estudos" |
+| Pré-condições | Pesquisador logado. |
+| Requisitos | a definir |
+| Resultado em 30/10/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir /.
+2. Clicar em "Ver seus estudos".
+
+Resultado esperado: A barra tem o botão Sair. "Ver seus estudos" leva a /estudos.
+
+### CT-E61
+
+**O navegador recebe o ícone do site, também sem sessão.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN20 · Página inicial e janelas](#cn20) |
+| Teste | `tests/e2e/inicial.spec.ts` › "o navegador recebe o ícone do site" |
+| Pré-condições | Navegador sem cookie de sessão. |
+| Requisitos | a definir |
+| Resultado em 30/10/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir / e ler o link rel=icon.
+2. Pedir o ícone SVG e o apple-touch-icon.
+
+Resultado esperado: O link aponta para /icon.svg; o SVG sai com 200 e image/svg+xml, e o apple-touch-icon sai como image/png.
+
+### CT-E62
+
+**Documento em produção mostra só o aviso e a ficha, e a rota não serve os arquivos dele.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN18 · Documentação na ferramenta](#cn18) |
+| Teste | `tests/e2e/documentacao.spec.ts` › "documento em produção mostra o aviso e a ficha, sem texto, arquivo nem downloads" |
+| Pré-condições | Navegador sem cookie de sessão; Requisitos ainda em produção. |
+| Requisitos | a definir |
+| Resultado em 30/10/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir /documentacao e rodar o axe.
+2. Na tabela Situação dos documentos, clicar em Requisitos e rodar o axe.
+3. Pedir requisitos.csv e planilha-requisitos.xlsx.
+
+Resultado esperado: A visão geral mostra "A documentação está sendo escrita pela equipe." e a tabela com Requisitos "Em produção". Requisitos mostra o h1, o aviso "Requisitos: em produção." e a ficha com "Em produção", sem Ver no GitHub, sem downloads e sem article. Os dois arquivos dão 404. Zero violações.
 
 ## Casos de unidade
 
