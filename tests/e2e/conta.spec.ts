@@ -55,12 +55,21 @@ test("excluir a conta exige digitar o e-mail e apaga o acesso", async ({ page },
   await page.goto("/conta");
 
   const abrir = page.getByRole("button", { name: "Excluir minha conta" });
-  await expect(abrir).toHaveAttribute("aria-expanded", "false");
+  await expect(abrir).toHaveAttribute("aria-haspopup", "dialog");
   await abrir.click();
+  const janela = page.getByRole("alertdialog", { name: "Excluir sua conta?" });
+  await expect(janela).toBeVisible();
   await expect(page.getByLabel("Digite seu e-mail para confirmar")).toBeFocused();
-  await expect(page.getByText("Excluir apaga sua conta.")).toBeVisible();
+  await expect(janela.getByText("Excluir apaga sua conta.")).toBeVisible();
+  await verificarAcessibilidade(page);
 
-  await page.getByRole("button", { name: "Cancelar" }).click();
+  // Cancelar e Esc fecham sem excluir, e o foco volta para o botão que abriu a janela
+  await janela.getByRole("button", { name: "Cancelar" }).click();
+  await expect(janela).toBeHidden();
+  await expect(abrir).toBeFocused();
+  await abrir.click();
+  await page.keyboard.press("Escape");
+  await expect(janela).toBeHidden();
   await expect(abrir).toBeFocused();
   await abrir.click();
 
@@ -70,9 +79,10 @@ test("excluir a conta exige digitar o e-mail e apaga o acesso", async ({ page },
 
   await page.getByLabel("Digite seu e-mail para confirmar").fill(email);
   await page.getByRole("button", { name: "Excluir conta definitivamente" }).click();
-  await expect(page).toHaveURL(/\/entrar\?aviso=excluida$/);
+  await expect(page).toHaveURL(/\/\?aviso=excluida$/);
   await expect(page.getByRole("status")).toHaveText("Conta excluída. Os estudos e as respostas foram apagados.");
 
+  await page.goto("/entrar");
   await entrarComTeclado(page, email);
   await expect(page.getByRole("heading", { name: "Não foi possível entrar" })).toBeVisible();
 });

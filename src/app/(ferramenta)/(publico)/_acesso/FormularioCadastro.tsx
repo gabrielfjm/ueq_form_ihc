@@ -8,8 +8,8 @@ import formulario from "@/componentes/formulario/formulario.module.css";
 import { ResumoErros } from "@/componentes/formulario/ResumoErros";
 import { estadoInicial } from "@/lib/formulario";
 import { MINIMO_SENHA } from "@/lib/validacao-conta";
-import { cadastrar, type CampoCadastro } from "../acoes";
-import estilos from "../acesso.module.css";
+import { cadastrar, type CampoCadastro } from "./acoes";
+import estilos from "./acesso.module.css";
 
 const CAMPOS = [
   { nome: "nome", rotulo: "Nome", id: "cadastro-nome" },
@@ -17,7 +17,7 @@ const CAMPOS = [
   { nome: "senha", rotulo: "Senha", id: "cadastro-senha" },
 ] as const;
 
-export function FormularioCadastro() {
+export function FormularioCadastro({ idTitulo }: { idTitulo: string }) {
   const [estado, enviar, enviando] = useActionState(cadastrar, estadoInicial<CampoCadastro>());
 
   // Mesmo motivo do FormularioEntrar: sem o reset automático, os campos certos continuam preenchidos
@@ -32,10 +32,20 @@ export function FormularioCadastro() {
     <form className={estilos.formulario} noValidate onSubmit={aoEnviar}>
       <div className={estilos.cabecalho}>
         <p className={estilos.area}>Área do pesquisador</p>
-        <h1 className={estilos.titulo}>Criar conta</h1>
+        <h2 id={idTitulo} className={estilos.titulo}>
+          Criar conta
+        </h2>
       </div>
       <ResumoErros envio={estado.envio} erros={estado.erros} campos={CAMPOS} />
-      <Campo id="cadastro-nome" name="nome" type="text" rotulo="Nome" autoComplete="name" erro={estado.erros?.nome} />
+      <Campo
+        id="cadastro-nome"
+        name="nome"
+        type="text"
+        rotulo="Nome"
+        autoComplete="name"
+        erro={estado.erros?.nome}
+        data-foco-inicial=""
+      />
       <Campo
         id="cadastro-email"
         name="email"

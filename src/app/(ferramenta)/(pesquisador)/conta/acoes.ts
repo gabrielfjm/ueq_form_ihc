@@ -86,5 +86,5 @@ export async function excluirConta(
   await encerrarSessao();
   // Cascata do schema: estudos, versões, participações, respostas e sessões vão junto
   await banco.pesquisador.delete({ where: { id: pesquisador.id } });
-  redirect("/entrar?aviso=excluida");
+  redirect("/?aviso=excluida");
 }

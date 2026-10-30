@@ -2,8 +2,8 @@ import { expect, test, type Page } from "@playwright/test";
 import { verificarAcessibilidade } from "./acessibilidade";
 import { cadastrarComTeclado, emailDeTeste } from "./contas";
 
-// Uma página longa, que rola bastante, com links ao longo do texto
-const PAGINA_LONGA = "/documentacao/requisitos";
+// Uma página longa, que rola bastante, com links ao longo do texto (a documentação está em produção)
+const PAGINA_LONGA = "/";
 
 async function fundoDaBarra(page: Page) {
   return page.locator("header[data-barra-fixa]").evaluate((barra) => barra.getBoundingClientRect().bottom);
@@ -29,15 +29,17 @@ test("a barra fica fixa no topo ao rolar, com e sem conta", async ({ page }, inf
 });
 
 test("o foco e as âncoras nunca ficam embaixo da barra fixa", async ({ page }) => {
-  await page.goto(`${PAGINA_LONGA}#rf52`);
+  await page.goto(`${PAGINA_LONGA}#inicio-resultados`);
   await barraNoTopo(page);
   const fundo = await fundoDaBarra(page);
-  await expect.poll(() => page.locator("#rf52").evaluate((ancora) => ancora.getBoundingClientRect().top)).toBeGreaterThanOrEqual(fundo);
+  await expect
+    .poll(() => page.locator("#inicio-resultados").evaluate((ancora) => ancora.getBoundingClientRect().top))
+    .toBeGreaterThanOrEqual(fundo);
 
   // Subindo com Shift+Tab, o navegador traz cada elemento pela borda de cima, onde está a barra:
   // o elemento com foco tem de parar abaixo dela (WCAG 2.4.11)
-  await page.goto("/documentacao/matriz-de-rastreabilidade");
-  await page.locator("article a[href]").last().focus();
+  await page.goto(PAGINA_LONGA);
+  await page.getByRole("link", { name: "Abrir a documentação" }).focus();
   for (let i = 0; i < 40; i++) {
     await page.keyboard.press("Shift+Tab");
     const posicao = await page.evaluate(() => {
@@ -57,23 +59,24 @@ test("no celular os links ficam no menu, que fecha com Esc e devolve o foco", as
 
   // Fechado, a barra fica numa linha só
   await expect(menu).toHaveAttribute("aria-expanded", "false");
-  await expect(principal.getByRole("link", { name: "Entrar" })).toBeHidden();
+  await expect(principal.getByRole("button", { name: "Entrar" })).toBeHidden();
   expect(await page.locator("header[data-barra-fixa]").evaluate((barra) => barra.getBoundingClientRect().height)).toBeLessThan(80);
 
   await menu.click();
   await expect(menu).toHaveAttribute("aria-expanded", "true");
-  await expect(principal.getByRole("link", { name: "Entrar" })).toBeVisible();
+  await expect(principal.getByRole("button", { name: "Entrar" })).toBeVisible();
   await verificarAcessibilidade(page);
 
-  await principal.getByRole("link", { name: "Entrar" }).focus();
+  await principal.getByRole("button", { name: "Entrar" }).focus();
   await page.keyboard.press("Escape");
   await expect(menu).toHaveAttribute("aria-expanded", "false");
   await expect(menu).toBeFocused();
 
   // Ao trocar de página, o menu fecha sozinho
   await menu.click();
-  await principal.getByRole("link", { name: "Criar conta" }).click();
-  await expect(page).toHaveURL(/\/cadastrar$/);
+  await page.getByRole("banner").getByRole("link", { name: "Ferramenta UEQ" }).click();
+  await expect(page).toHaveURL(/\/$/);
+  await expect(menu).toHaveAttribute("aria-expanded", "false");
   await page.goBack();
   await expect(menu).toHaveAttribute("aria-expanded", "false");
 });
@@ -82,5 +85,5 @@ test("no computador o botão Menu não aparece e os links ficam na barra", async
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/documentacao");
   await expect(page.getByRole("button", { name: "Menu" })).toBeHidden();
-  await expect(page.getByRole("navigation", { name: "Principal" }).getByRole("link", { name: "Entrar" })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Principal" }).getByRole("button", { name: "Entrar" })).toBeVisible();
 });

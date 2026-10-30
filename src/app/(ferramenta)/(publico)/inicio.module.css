@@ -1,0 +1,355 @@
+/* Página inicial (protótipo r16): faixa de apresentação com o item do questionário como figura,
+   seções numeradas como em Minha conta (r9) e a tabela das escalas */
+
+.faixa {
+  background: var(--fundo-faixa);
+  border-bottom: 1px solid var(--linha);
+}
+
+.faixaInterna {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 64px 24px 56px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 48px 64px;
+}
+
+.apresentacao {
+  flex: 1 1 520px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.regiaoStatus:not(:empty) {
+  margin-bottom: 8px;
+}
+
+.area {
+  margin: 0;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-fraca);
+}
+
+.titulo {
+  margin: 0;
+  max-width: 16em;
+  font-size: 2.75rem;
+  line-height: 1.15;
+}
+
+.descricao {
+  margin: 0;
+  max-width: 60ch;
+  color: var(--tinta-suave);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.figura {
+  flex: 1 1 380px;
+  min-width: 0;
+  margin: 0;
+  padding: 28px 28px 20px;
+  background: var(--fundo);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+}
+
+.legenda {
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+.item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  padding: 20px 0 24px;
+  border-bottom: 1px solid var(--linha);
+}
+
+.termoEsquerdo,
+.termoDireito {
+  font-size: var(--texto-md);
+}
+
+.termoDireito {
+  text-align: right;
+}
+
+.circulos {
+  width: 100%;
+  max-width: 340px;
+  justify-self: center;
+}
+
+.circulos line {
+  stroke: var(--linha);
+}
+
+.circulos .vazia {
+  fill: var(--fundo);
+  stroke: var(--tinta);
+  stroke-width: 1.5;
+}
+
+.circulos .marcada {
+  fill: var(--tinta);
+  stroke: var(--tinta);
+  stroke-width: 1.5;
+}
+
+/* Com espaço, o item fica como no questionário do computador: termo, círculos, termo, numa linha */
+@media (min-width: 30rem) {
+  .item {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .termoEsquerdo {
+    text-align: right;
+  }
+
+  .termoDireito {
+    text-align: left;
+  }
+}
+
+.numeros {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding-top: 16px;
+}
+
+.numeros dt {
+  order: 2;
+  font-size: var(--texto-xs);
+  color: var(--tinta-suave);
+}
+
+.numeros dd {
+  order: 1;
+  margin: 0;
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-xl);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.numeros > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.conteudo {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 56px 24px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding-top: 32px;
+  border-top: 1px solid var(--linha);
+}
+
+.secao:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+.secaoTitulo {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.secaoNumero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.secaoNome {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.paragrafo {
+  margin: 0;
+  max-width: var(--largura-leitura);
+  color: var(--tinta-suave);
+}
+
+.textoSuave {
+  color: var(--tinta-suave);
+}
+
+.passos {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0 32px;
+}
+
+.passo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 0 20px;
+  border-top: 1px solid var(--linha-forte);
+}
+
+.passoNumero {
+  font-family: var(--fonte-numero);
+  font-size: 1.625rem;
+  font-variant-numeric: tabular-nums lining-nums;
+  line-height: 1.2;
+  color: var(--destaque);
+}
+
+.passoTitulo {
+  font-size: var(--texto-lg);
+}
+
+.rolagemTabela {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  min-width: 36rem;
+  border-collapse: collapse;
+}
+
+.tabela th,
+.tabela td {
+  padding: 12px 16px 12px 0;
+  border-bottom: 1px solid var(--linha);
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.tabela thead th {
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+  border-bottom-color: var(--linha-forte);
+}
+
+.tabela .colunaNumero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  text-align: right;
+  padding-right: 32px;
+}
+
+.lista {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 0 32px;
+}
+
+.itemLista {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0 18px;
+  border-top: 1px solid var(--linha);
+}
+
+.itemLista dt {
+  font-weight: 700;
+}
+
+.itemLista dd {
+  margin: 0;
+}
+
+.linkDocumentacao {
+  align-self: flex-start;
+  min-height: 44px;
+  font-weight: 700;
+}
+
+.rodape {
+  border-top: 1px solid var(--linha);
+}
+
+.rodapeInterno {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 24px 24px 32px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  font-size: var(--texto-sm);
+  color: var(--tinta-fraca);
+}
+
+.rodapeInterno p {
+  margin: 0;
+}
+
+@media (max-width: 40rem) {
+  .faixaInterna {
+    padding: 40px 16px 40px;
+    gap: 32px;
+  }
+
+  .titulo {
+    font-size: 2.125rem;
+  }
+
+  .figura {
+    padding: 20px 16px 16px;
+  }
+
+  .conteudo {
+    padding: 40px 16px 56px;
+    gap: 44px;
+  }
+
+  .secaoNome {
+    font-size: 1.5rem;
+  }
+
+  .acoes > * {
+    flex: 1 1 auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .circulos .vazia {
+    stroke: CanvasText;
+  }
+
+  .circulos .marcada {
+    fill: CanvasText;
+  }
+}

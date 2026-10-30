@@ -5,5 +5,5 @@ import { encerrarSessao } from "@/lib/sessao";
 
 export async function sair(): Promise<void> {
   await encerrarSessao();
-  redirect("/entrar?aviso=saiu");
+  redirect("/?aviso=saiu");
 }

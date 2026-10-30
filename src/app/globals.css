@@ -66,6 +66,11 @@ main:focus {
   outline: none;
 }
 
+/* Com uma janela modal aberta, a página atrás não rola junto */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
 /* Some da tela e continua para o leitor de tela (ex.: caption de tabela que o título da seção já explica) */
 .visualmente-oculto {
   position: absolute;
