@@ -44,7 +44,9 @@ test("o foco e as âncoras nunca ficam embaixo da barra fixa", async ({ page }) 
     await page.keyboard.press("Shift+Tab");
     const posicao = await page.evaluate(() => {
       const foco = document.activeElement;
-      if (!foco || foco.closest("header")) return null;
+      // A barra, o "Pular para o conteúdo" (que aparece por cima de tudo, de propósito) e o foco fora da
+      // página (body, depois do primeiro elemento) não contam
+      if (!foco || foco === document.body || foco.closest("header") || foco.classList.contains("pular-conteudo")) return null;
       return foco.getBoundingClientRect().top;
     });
     if (posicao !== null) expect(posicao).toBeGreaterThanOrEqual(fundo - 1);
