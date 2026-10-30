@@ -18,8 +18,10 @@ export function AbasEstudo({ estudoId }: { estudoId: string }) {
     <nav aria-label="Seções do estudo" className={estilos.abas}>
       {ABAS.map(({ sufixo, texto, Icone }) => {
         const href = `/estudos/${estudoId}${sufixo}`;
+        // A subpágina (Respostas › Importar) mantém a aba de origem marcada
+        const atual = caminho === href || (sufixo !== "" && caminho.startsWith(`${href}/`));
         return (
-          <Link key={texto} href={href as Route} className={estilos.aba} aria-current={caminho === href ? "page" : undefined}>
+          <Link key={texto} href={href as Route} className={estilos.aba} aria-current={atual ? "page" : undefined}>
             <Icone size={18} strokeWidth={1.5} aria-hidden="true" />
             <span>{texto}</span>
           </Link>

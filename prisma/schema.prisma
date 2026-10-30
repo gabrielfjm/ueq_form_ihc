@@ -28,6 +28,12 @@ enum Polaridade {
   POSITIVA_ESQUERDA
 }
 
+// LINK: respondida pelo link do estudo. IMPORTADA: veio de um CSV no formato da planilha oficial
+enum OrigemParticipacao {
+  LINK
+  IMPORTADA
+}
+
 model Pesquisador {
   id        String   @id @default(cuid())
   nome      String
@@ -111,8 +117,10 @@ model Participacao {
   demografia        Json?
   suspeita          Boolean   @default(false)
   incluidaNaAnalise Boolean   @default(true) @map("incluida_na_analise")
-  // Código do idioma em que a pessoa respondeu (data/ueq-idiomas.json); quem respondeu antes era "pt"
-  idioma            String    @default("pt")
+  // Código do idioma em que a pessoa respondeu (data/ueq-idiomas.json); quem respondeu antes era "pt".
+  // Vazio nas importadas, porque o CSV não diz em que idioma o questionário foi aplicado
+  idioma            String?   @default("pt")
+  origem            OrigemParticipacao @default(LINK)
 
   versao    Versao     @relation(fields: [versaoId], references: [id], onDelete: Cascade)
   respostas Resposta[]

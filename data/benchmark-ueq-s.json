@@ -1,0 +1,9 @@
+{
+  "fonte": "",
+  "comoPreencher": "Preenchido pela equipe, não pelo Claude (prompts/10-extensoes.md). Copiar da ferramenta oficial de análise do UEQ-S (ueq-online.org), aba de benchmark, os 4 limites de cada escala no mesmo formato de benchmark.json: excelente, bom, acimaDaMedia e abaixoDaMedia, do maior para o menor. Preencha fonte com o nome do arquivo, a versão e a data. O teste src/ueq/__tests__/ueq-s.test.ts confere o formato assim que houver números.",
+  "escalas": {
+    "pragmatica": { "excelente": null, "bom": null, "acimaDaMedia": null, "abaixoDaMedia": null },
+    "hedonica": { "excelente": null, "bom": null, "acimaDaMedia": null, "abaixoDaMedia": null },
+    "geral": { "excelente": null, "bom": null, "acimaDaMedia": null, "abaixoDaMedia": null }
+  }
+}

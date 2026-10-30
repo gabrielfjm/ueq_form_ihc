@@ -354,3 +354,16 @@
   padding: 0;
   list-style: none;
 }
+
+.importar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+}
+
+.regraSecao {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--linha);
+}

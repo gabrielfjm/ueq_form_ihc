@@ -61,8 +61,8 @@ test("em espanhol pelo navegador: o link inteiro sai no idioma e o pesquisador v
     pesquisador.getByRole("link", { name: "Respostas brutas (CSV)" }).click(),
   ]);
   const [cabecalho, primeira] = readFileSync(await download.path(), "utf8").slice(1).split("\r\n");
-  expect(cabecalho).toContain(";suspeita;idioma;traducao_aprovada;faixa_etaria;");
-  expect(primeira).toMatch(/;es;sim;25 a 34 anos;/);
+  expect(cabecalho).toContain(";suspeita;origem;idioma;traducao_aprovada;faixa_etaria;");
+  expect(primeira).toMatch(/;link;es;sim;25 a 34 anos;/);
   await estudo.fechar();
 });
 

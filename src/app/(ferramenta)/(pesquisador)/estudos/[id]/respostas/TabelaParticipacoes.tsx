@@ -14,9 +14,10 @@ export type LinhaParticipacao = {
   id: string;
   quando: string;
   versao: string;
-  // Nome do idioma em português e se o PDF oficial dele já é tradução aprovada
-  idioma: string;
+  // Nome do idioma em português e se o PDF oficial dele já é tradução aprovada; null nas importadas
+  idioma: string | null;
   traducaoAprovada: boolean;
+  importada: boolean;
   inconsistentes: number;
   iguais: number;
   suspeita: boolean;
@@ -116,10 +117,11 @@ export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limi
                   <tr className={estaAberta ? estilos.aberta : undefined}>
                     <th scope="row" className={estilos.dataHora}>
                       {linha.quando}
+                      {linha.importada && <span className={estilos.motivo}>importada de CSV</span>}
                     </th>
                     <td>{linha.versao}</td>
                     <td>
-                      {linha.idioma}
+                      {linha.idioma ?? "—"}
                       {!linha.traducaoAprovada && <span className={estilos.motivo}>tradução não aprovada</span>}
                     </td>
                     <td className={`${estilos.numero} ${estilos.direita}`}>{linha.inconsistentes}</td>

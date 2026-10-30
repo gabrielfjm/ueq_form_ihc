@@ -117,3 +117,10 @@
     border-bottom-color: Highlight;
   }
 }
+
+/* Na impressão a barra de navegação não serve para nada no papel */
+@media print {
+  .barra {
+    display: none;
+  }
+}

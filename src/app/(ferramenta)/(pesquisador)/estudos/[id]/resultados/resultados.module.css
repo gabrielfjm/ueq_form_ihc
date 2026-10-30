@@ -380,3 +380,38 @@
   color: var(--tinta-fraca);
   overflow-wrap: anywhere;
 }
+
+/* Impressão e PDF: some o que é controle de tela, a tabela mostra todas as colunas e nenhum
+   gráfico ou tabela é cortado ao meio entre duas páginas */
+@media print {
+  /* As explicações são <details> fechados: no papel viram só a pergunta, sem resposta */
+  .alternar,
+  .explicacoes {
+    display: none;
+  }
+
+  .rolagem {
+    overflow: visible;
+  }
+
+  .leitura,
+  .tabela,
+  .secao figure {
+    break-inside: avoid;
+  }
+
+  .secao h2,
+  .secao h3 {
+    break-after: avoid;
+  }
+}
+
+/* Link do PDF no modo comparação, que não tem a seção Exportar */
+.pdfComparacao {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  color: var(--tinta-suave);
+}
