@@ -23,6 +23,13 @@ test("o produto sugere o nome da primeira versão e o foco acompanha adicionar e
   await page.getByRole("button", { name: "Adicionar versão" }).click();
   await expect(page.getByLabel("Versão 2")).toBeFocused();
   await page.getByRole("button", { name: "Remover versão 2" }).click();
+  // Toda exclusão passa por uma janela de confirmação; Cancelar mantém a versão
+  const confirmacao = page.getByRole("alertdialog", { name: "Remover a versão 2?" });
+  await confirmacao.getByRole("button", { name: "Cancelar" }).click();
+  await expect(page.getByLabel("Versão 2")).toHaveCount(1);
+  await page.getByRole("button", { name: "Remover versão 2" }).click();
+  await expect(confirmacao.getByRole("button", { name: "Remover versão" })).toBeFocused();
+  await page.keyboard.press("Enter");
   await expect(page.getByRole("button", { name: "Adicionar versão" })).toBeFocused();
   await expect(page.getByLabel("Versão 2")).toHaveCount(0);
 });
@@ -95,6 +102,7 @@ test("editar salva as mudanças e avisa", async ({ page }) => {
 test("excluir pede o título e apaga o estudo", async ({ page }) => {
   await criarEstudo(page);
   await page.getByRole("button", { name: "Excluir estudo" }).click();
+  await expect(page.getByRole("alertdialog", { name: "Excluir este estudo?" })).toBeVisible();
   await expect(page.getByLabel("Digite o título do estudo para confirmar")).toBeFocused();
   await expect(page.getByText("Excluir apaga o estudo e as 2 versões.")).toBeVisible();
 

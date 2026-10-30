@@ -1,0 +1,170 @@
+/* Janelas modais (protótipos r16 a r21): borda de 1px e fundo escurecido, sem sombra nem desfoque
+   (docs/design.md, Proibido). A caixa nunca passa da altura da tela: se o conteúdo não couber
+   (zoom de 200%, tela muito baixa), rola dentro dela, e a página atrás fica parada */
+
+.janela {
+  max-width: calc(100vw - 32px);
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--linha-forte);
+  border-radius: var(--raio);
+  background: var(--fundo);
+  color: var(--tinta);
+  overflow: hidden;
+}
+
+.janela::backdrop {
+  background: color-mix(in srgb, var(--tinta) 62%, transparent);
+}
+
+.janela[open] {
+  display: flex;
+}
+
+.caixa {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.fechar {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--raio);
+  background: var(--fundo);
+  color: var(--tinta);
+  cursor: pointer;
+  transition:
+    background-color var(--transicao),
+    border-color var(--transicao);
+}
+
+.fechar:hover {
+  border-color: var(--tinta);
+  background: var(--destaque-fundo);
+}
+
+.acesso {
+  width: 60rem;
+}
+
+.confirmacao {
+  width: 33rem;
+}
+
+/* Celular: Entrar e Criar conta ocupam a tela inteira, como uma página, para o formulário caber sem rolar */
+@media (max-width: 40rem) {
+  .acesso {
+    width: 100vw;
+    max-width: none;
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .confirmacao {
+    width: 100%;
+    margin-bottom: 16px;
+    margin-top: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .janela {
+    border: 2px solid CanvasText;
+  }
+
+  .janela::backdrop {
+    background: Canvas;
+    opacity: 0.8;
+  }
+}
+
+@media print {
+  .janela {
+    display: none;
+  }
+}
+
+/* --- Conteúdo das confirmações (Sair, Excluir estudo, Excluir conta, Remover versão) --- */
+
+.formulario {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 28px 28px 24px;
+}
+
+.titulo {
+  margin: 0;
+  padding: 6px 48px 0 0;
+  font-size: var(--texto-xl);
+  line-height: 1.2;
+}
+
+.corpo {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.corpo p {
+  margin: 0;
+}
+
+.texto {
+  color: var(--tinta-suave);
+}
+
+.aviso {
+  padding: 14px 16px;
+  background: var(--alerta-fundo);
+  border: 1px solid var(--alerta);
+  border-radius: var(--raio);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid var(--linha);
+}
+
+@media (max-width: 40rem) {
+  .formulario {
+    padding: 24px 20px 20px;
+  }
+
+  .acoes {
+    flex-direction: column-reverse;
+  }
+
+  .acoes > * {
+    width: 100%;
+  }
+}
+
+@media (forced-colors: active) {
+  .aviso {
+    border-color: Mark;
+  }
+}

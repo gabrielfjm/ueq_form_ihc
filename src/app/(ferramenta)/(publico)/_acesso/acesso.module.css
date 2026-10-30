@@ -1,0 +1,249 @@
+/* Janela de Entrar e Criar conta (protótipos r17 a r19): formulário à esquerda e, no computador, o painel
+   sobre o instrumento à direita, como nas telas r1 e r2. As medidas encolhem com a altura da tela para o
+   formulário caber inteiro sem rolar, do notebook de 768 px de altura ao celular */
+
+.janela {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+}
+
+.principal {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 36px 44px 40px;
+}
+
+.formulario {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.area {
+  margin: 0;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-fraca);
+}
+
+.titulo {
+  margin: 0;
+  font-size: var(--texto-2xl);
+  line-height: 1.15;
+}
+
+.enviar {
+  align-self: flex-start;
+}
+
+.alternativa {
+  margin: 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--linha);
+}
+
+.painel {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 28px;
+  padding: 72px 44px 48px;
+  background: var(--fundo-faixa);
+  border-left: 1px solid var(--linha);
+}
+
+.painelTitulo {
+  margin: 0;
+  max-width: 15em;
+  font-size: var(--texto-xl);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.marcacoes {
+  width: 100%;
+  max-width: 320px;
+}
+
+.marcacoes line {
+  stroke: var(--linha);
+}
+
+.marcacoes .vazia {
+  fill: var(--fundo-faixa);
+  stroke: var(--tinta);
+  stroke-width: 1.5;
+}
+
+.marcacoes .marcada {
+  fill: var(--destaque);
+}
+
+.lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listaTitulo {
+  margin: 0 0 4px;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+.escala {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--linha);
+}
+
+.escala:last-child {
+  border-bottom: 0;
+}
+
+.itens {
+  font-family: var(--fonte-numero);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--tinta-suave);
+}
+
+.passo {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--linha);
+  font-size: var(--texto-sm);
+}
+
+.passo:last-child {
+  border-bottom: 1px solid var(--linha);
+}
+
+.passoNumero {
+  font-family: var(--fonte-numero);
+  font-size: 1.25rem;
+  font-variant-numeric: tabular-nums lining-nums;
+  line-height: 1.2;
+  color: var(--destaque);
+}
+
+.passoTexto {
+  color: var(--tinta-suave);
+}
+
+/* Notebook e janela baixa: menos espaço entre os blocos, para Criar conta (3 campos) caber sem rolar */
+@media (max-height: 50rem) {
+  .principal {
+    gap: 24px;
+    padding: 28px 40px 28px;
+  }
+
+  .formulario {
+    gap: 16px;
+  }
+
+  .titulo {
+    font-size: 2rem;
+  }
+
+  .alternativa {
+    padding-top: 14px;
+  }
+
+  .painel {
+    gap: 20px;
+    padding: 64px 40px 32px;
+  }
+}
+
+/* Muito baixa (paisagem, zoom): o painel fica só com o título e as marcações; o formulário vem primeiro */
+@media (max-height: 40rem) {
+  .lista {
+    display: none;
+  }
+}
+
+/* Celular: tela inteira, uma coluna. O painel só aparece, abaixo do formulário e sem a lista, quando a tela
+   é alta o bastante para os dois caberem sem rolar */
+@media (max-width: 40rem) {
+  .janela {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+
+  .painel {
+    display: none;
+  }
+
+  .principal {
+    gap: 28px;
+    padding: 22px 20px 28px;
+  }
+
+  .formulario {
+    max-width: none;
+  }
+}
+
+@media (max-width: 40rem) and (min-height: 52rem) {
+  .painel {
+    display: flex;
+    justify-content: flex-start;
+    gap: 16px;
+    padding: 24px 20px 28px;
+    border-left: 0;
+    border-top: 1px solid var(--linha);
+  }
+
+  .painel .lista {
+    display: none;
+  }
+
+  .marcacoes {
+    max-width: 240px;
+  }
+}
+
+@media (max-width: 40rem) and (max-height: 45rem) {
+  .principal {
+    gap: 16px;
+    padding: 16px 16px 16px;
+  }
+
+  .formulario {
+    gap: 12px;
+  }
+
+  .titulo {
+    font-size: 1.75rem;
+  }
+}
+
+@media (forced-colors: active) {
+  .marcacoes .vazia {
+    stroke: CanvasText;
+  }
+
+  .marcacoes .marcada {
+    fill: Highlight;
+  }
+}

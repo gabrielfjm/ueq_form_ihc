@@ -158,17 +158,16 @@
   cursor: pointer;
 }
 
-.confirmarSaida {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
+/* Janela de "Sair sem enviar": a pergunta é o título, sem o espaço do x, e os botões quebram linha
+   nos idiomas de textos longos */
+.perguntaSair {
+  padding-right: 0;
 }
 
-.confirmarSaida .botaoRodape {
+.botaoJanela {
   height: auto;
-  min-height: 40px;
-  padding-block: 6px;
+  min-height: 44px;
+  padding-block: 8px;
   white-space: normal;
 }
 

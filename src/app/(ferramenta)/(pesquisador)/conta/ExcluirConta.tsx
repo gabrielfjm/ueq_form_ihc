@@ -5,24 +5,25 @@ import { useEffect, useRef, useState } from "react";
 import { Campo } from "@/componentes/formulario/Campo";
 import formulario from "@/componentes/formulario/formulario.module.css";
 import { useEnvioFormulario } from "@/componentes/formulario/useEnvioFormulario";
+import { Confirmacao } from "@/componentes/janela/Confirmacao";
+import janela from "@/componentes/janela/janela.module.css";
 import { excluirConta } from "./acoes";
 import estilos from "./conta.module.css";
 
-// docs/ihc.md, 4.2: confirmação em linha digitando o dado, dizendo o que vai junto (Nielsen 5, WCAG 3.3.4)
+// docs/ihc.md, 4.2: confirmação numa janela, digitando o dado e dizendo o que vai junto (Nielsen 5, WCAG 3.3.4)
 export function ExcluirConta({ aviso }: { aviso: { destaque: string; complemento: string } }) {
   const [aberta, setAberta] = useState(false);
   const { estado, aoEnviar, limpar } = useEnvioFormulario(excluirConta);
-  const botaoAbrir = useRef<HTMLButtonElement>(null);
   const campo = useRef<HTMLInputElement>(null);
 
+  // Com o e-mail errado, o foco volta para o campo, junto da mensagem de erro
   useEffect(() => {
-    if (aberta || estado.erros?.confirmacao) campo.current?.focus();
-  }, [aberta, estado]);
+    if (estado.erros?.confirmacao) campo.current?.focus();
+  }, [estado]);
 
-  function cancelar() {
+  function fechar() {
     setAberta(false);
     limpar();
-    botaoAbrir.current?.focus();
   }
 
   return (
@@ -37,24 +38,24 @@ export function ExcluirConta({ aviso }: { aviso: { destaque: string; complemento
         Apaga sua conta e tudo o que está nela. Se quiser guardar os dados, exporte as respostas de cada estudo antes.
       </p>
       <button
-        ref={botaoAbrir}
         type="button"
         className={`${formulario.destrutivo} ${estilos.alinharInicio}`}
-        aria-expanded={aberta}
-        aria-controls="confirmar-exclusao-conta"
+        aria-haspopup="dialog"
         onClick={() => setAberta(true)}
       >
         <Trash2 size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
         <span>Excluir minha conta</span>
       </button>
-      <form
-        id="confirmar-exclusao-conta"
-        className={estilos.confirmacao}
-        hidden={!aberta}
-        noValidate
+      <Confirmacao
+        aberta={aberta}
+        aoFechar={fechar}
+        titulo="Excluir sua conta?"
+        textoConfirmar="Excluir conta definitivamente"
+        Icone={Trash2}
+        perigo
         onSubmit={aoEnviar}
       >
-        <p>
+        <p className={janela.aviso}>
           <strong>{aviso.destaque}</strong> {aviso.complemento}
         </p>
         <Campo
@@ -65,17 +66,9 @@ export function ExcluirConta({ aviso }: { aviso: { destaque: string; complemento
           rotulo="Digite seu e-mail para confirmar"
           autoComplete="off"
           erro={estado.erros?.confirmacao}
+          data-foco-inicial=""
         />
-        <div className={estilos.acoesConfirmacao}>
-          <button type="submit" className={`${formulario.botao} ${formulario.perigo}`}>
-            <Trash2 size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-            <span>Excluir conta definitivamente</span>
-          </button>
-          <button type="button" className={`${formulario.botao} ${formulario.secundario}`} onClick={cancelar}>
-            <span>Cancelar</span>
-          </button>
-        </div>
-      </form>
+      </Confirmacao>
     </section>
   );
 }

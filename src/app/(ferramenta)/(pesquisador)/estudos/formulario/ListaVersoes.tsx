@@ -1,8 +1,9 @@
 "use client";
 
 import { Plus, X } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import formulario from "@/componentes/formulario/formulario.module.css";
+import { Confirmacao } from "@/componentes/janela/Confirmacao";
 import type { ErroCampo } from "@/lib/formulario";
 import { MAXIMO_VERSOES } from "@/lib/validacao-estudo";
 import estilos from "./formulario-estudo.module.css";
@@ -32,6 +33,8 @@ export function ListaVersoes({ versoes, sugerida, erros, aoMudarNome, aoAdiciona
   const botaoAdicionar = useRef<HTMLButtonElement>(null);
   // Para onde o foco vai depois que a lista renderizar: o campo novo ou o botão de adicionar
   const focarDepois = useRef<string | "adicionar" | null>(null);
+  // Versão esperando a confirmação de "Remover" (protótipo r21): toda exclusão passa por uma janela
+  const [removendo, setRemovendo] = useState<{ chave: string; posicao: number; nome: string } | null>(null);
 
   useEffect(() => {
     if (!focarDepois.current) return;
@@ -79,10 +82,8 @@ export function ListaVersoes({ versoes, sugerida, erros, aoMudarNome, aoAdiciona
                 <button
                   type="button"
                   className={formulario.botaoTexto}
-                  onClick={() => {
-                    focarDepois.current = "adicionar";
-                    aoRemover(versao.chave);
-                  }}
+                  aria-haspopup="dialog"
+                  onClick={() => setRemovendo({ chave: versao.chave, posicao: posicao + 1, nome: versao.nome.trim() })}
                 >
                   <X size={18} strokeWidth={1.5} aria-hidden="true" />
                   <span>Remover versão {posicao + 1}</span>
@@ -112,6 +113,26 @@ export function ListaVersoes({ versoes, sugerida, erros, aoMudarNome, aoAdiciona
       ) : (
         <p className={formulario.ajuda}>Chegou ao limite de {MAXIMO_VERSOES} versões por estudo.</p>
       )}
+      <Confirmacao
+        aberta={removendo !== null}
+        aoFechar={() => setRemovendo(null)}
+        titulo={`Remover a versão ${removendo?.posicao ?? ""}?`}
+        textoConfirmar="Remover versão"
+        Icone={X}
+        perigo
+        focarConfirmar
+        aoConfirmar={() => {
+          if (!removendo) return;
+          focarDepois.current = "adicionar";
+          aoRemover(removendo.chave);
+          setRemovendo(null);
+        }}
+      >
+        <p>
+          {removendo?.nome ? <strong>{removendo.nome}</strong> : "A versão sem nome"} sai da lista. Ela ainda não tem
+          respostas; a mudança só vale quando você salvar o estudo.
+        </p>
+      </Confirmacao>
     </>
   );
 }

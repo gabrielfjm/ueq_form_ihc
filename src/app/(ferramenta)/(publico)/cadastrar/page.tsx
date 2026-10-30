@@ -1,18 +1,19 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { pesquisadorDaSessao } from "@/lib/sessao";
-import { LayoutAcesso } from "../LayoutAcesso";
-import { PainelPercurso } from "../Paineis";
-import { FormularioCadastro } from "./FormularioCadastro";
+import { AbrirAcesso } from "../_acesso/Acesso";
+import { PaginaInicial } from "../PaginaInicial";
 
 export const metadata: Metadata = { title: "Criar conta · Ferramenta UEQ" };
 
+// A página inicial com a janela de Criar conta já aberta
 export default async function PaginaCadastrar() {
   if (await pesquisadorDaSessao()) redirect("/estudos");
 
   return (
-    <LayoutAcesso painel={<PainelPercurso />}>
-      <FormularioCadastro />
-    </LayoutAcesso>
+    <>
+      <PaginaInicial logado={false} />
+      <AbrirAcesso modo="cadastrar" />
+    </>
   );
 }

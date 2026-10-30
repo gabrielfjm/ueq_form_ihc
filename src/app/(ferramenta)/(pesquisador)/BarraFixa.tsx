@@ -20,9 +20,14 @@ export function BarraFixa({ inicio, children }: Propriedades) {
   const barra = useRef<HTMLElement>(null);
   const botao = useRef<HTMLButtonElement>(null);
   const caminho = usePathname();
-  // Guarda em que página o menu foi aberto: ao navegar, ele fecha sozinho
-  const [abertoEm, setAbertoEm] = useState<string | null>(null);
-  const aberto = abertoEm === caminho;
+  const [aberto, setAberto] = useState(false);
+  // Ao navegar, o menu fecha sozinho. Ajuste durante a renderização (e não num efeito) para o menu nunca
+  // aparecer aberto na página nova, nem reabrir ao voltar para a página em que foi aberto
+  const [caminhoDoMenu, setCaminhoDoMenu] = useState(caminho);
+  if (caminhoDoMenu !== caminho) {
+    setCaminhoDoMenu(caminho);
+    setAberto(false);
+  }
 
   useEffect(() => {
     const elemento = barra.current;
@@ -41,7 +46,7 @@ export function BarraFixa({ inicio, children }: Propriedades) {
   // Esc fecha o menu e devolve o foco ao botão, sem prender o teclado (WCAG 2.1.2)
   function aoTeclar(evento: KeyboardEvent<HTMLElement>) {
     if (evento.key !== "Escape" || !aberto) return;
-    setAbertoEm(null);
+    setAberto(false);
     botao.current?.focus();
   }
 
@@ -55,7 +60,7 @@ export function BarraFixa({ inicio, children }: Propriedades) {
           className={estilos.botaoMenu}
           aria-expanded={aberto}
           aria-controls="navegacao-principal"
-          onClick={() => setAbertoEm(aberto ? null : caminho)}
+          onClick={() => setAberto(!aberto)}
         >
           {aberto ? <X size={18} strokeWidth={1.5} aria-hidden="true" /> : <Menu size={18} strokeWidth={1.5} aria-hidden="true" />}
           <span>Menu</span>

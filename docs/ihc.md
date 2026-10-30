@@ -44,7 +44,7 @@ Aqui IHC encontra metodologia de pesquisa. Qualquer viés de interface contamina
 4. **Instrução oficial do UEQ** no topo, em linguagem do pacote de idiomas
 5. **Layout idêntico para os 26 itens.** Mudança de layout entre itens muda a resposta
 6. **O participante nunca vê resultados** nem a média de outros participantes
-7. **Desistir é fácil e explícito** (ética em pesquisa com humanos). Link "Sair sem enviar" sempre disponível, com confirmação em linha, e nada é gravado em Resposta antes do envio
+7. **Desistir é fácil e explícito** (ética em pesquisa com humanos). Link "Sair sem enviar" sempre disponível, com confirmação numa janela, e nada é gravado em Resposta antes do envio
 8. **Anonimato real.** Não coletar IP, nome ou e-mail. Demografia só em faixas e sempre com "Prefiro não responder"
 
 ## 4. Requisitos por tela, com o princípio que justifica
@@ -81,6 +81,8 @@ Formato: requisito → princípio (fonte).
 | Login aceita colar senha e gerenciador de senhas. Botão "Mostrar senha" | Autenticação acessível (3.3.8) |
 | Ao criar estudo, não pedir de novo o que já foi dito (nome do produto vira sugestão do nome da primeira versão) | Entrada redundante (3.3.7) |
 | Excluir estudo: confirmação digitando o título, mostrando quantas respostas serão perdidas. Encerrar coleta é reversível (Reabrir) | Prevenção de erros (Nielsen 5, WCAG 3.3.4), reversão fácil (Shneiderman 6) |
+| Sair e toda exclusão confirmam numa janela (`<dialog>` nativo) que diz o que vai acontecer, com Cancelar ao lado. Foco preso dentro, Esc fecha sem fazer nada e o foco volta para quem abriu | Prevenção de erros (Nielsen 5), controle do usuário (Nielsen 3), 2.1.2, 2.4.3, 3.3.4 |
+| Entrar e Criar conta abrem numa janela sobre a página atual, sem perder o lugar, e cabem na tela sem rolar | Controle do usuário (Nielsen 3), carga de memória (Shneiderman 8), 1.4.10 |
 | Toda ação dá retorno visível e anunciado: "Coleta aberta. O link já aceita respostas." em região `role="status"` | Feedback (Norman, Shneiderman 3), 4.1.3 |
 | Status do estudo escrito, sempre no mesmo lugar, com a consequência ("Aberto · aceitando respostas") | Visibilidade do status (Nielsen 1) |
 | Termos do UEQ com nome oficial e uma explicação curta acessível por `<details>` ("O que é Perspicuidade?") | Correspondência com o mundo real (Nielsen 2), ajuda e documentação (Nielsen 10), revelação progressiva |

@@ -67,30 +67,6 @@
   color: var(--tinta-suave);
 }
 
-.confirmacao {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding: 20px;
-  background: var(--alerta-fundo);
-  border: 1px solid var(--alerta);
-  border-radius: var(--raio);
-}
-
-.confirmacao[hidden] {
-  display: none;
-}
-
-.confirmacao p {
-  margin: 0;
-}
-
-.acoesConfirmacao {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
 .ficha {
   flex: 1 1 300px;
   min-width: 0;
@@ -145,10 +121,4 @@
   display: block;
   font-size: var(--texto-sm);
   color: var(--tinta-suave);
-}
-
-@media (forced-colors: active) {
-  .confirmacao {
-    border-color: Mark;
-  }
 }

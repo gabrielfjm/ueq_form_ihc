@@ -11,8 +11,8 @@ export function proxy(request: NextRequest) {
   return NextResponse.redirect(entrar);
 }
 
-// Tudo é da área do pesquisador, menos as páginas de acesso, as do participante (/r/...) e a
-// documentação, que nunca exigem sessão. Rota nova do pesquisador já nasce protegida
+// Tudo é da área do pesquisador, menos a página inicial, as de acesso, as do participante (/r/...),
+// a documentação e os ícones do site, que nunca exigem sessão. Rota nova do pesquisador já nasce protegida
 export const config = {
-  matcher: ["/((?!entrar|cadastrar|r/|documentacao|api/documentacao|_next/|favicon.ico).*)"],
+  matcher: ["/((?!entrar|cadastrar|r/|documentacao|api/documentacao|_next/|favicon.ico|icon.svg|apple-icon).*)"],
 };

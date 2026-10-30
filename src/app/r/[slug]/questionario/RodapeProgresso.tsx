@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import formulario from "@/componentes/formulario/formulario.module.css";
+import { Janela } from "@/componentes/janela/Janela";
+import janela from "@/componentes/janela/janela.module.css";
 import { formatar } from "@/idiomas/formatar";
 import type { TextosParticipante } from "@/idiomas/tipos";
 import estilos from "./questionario.module.css";
@@ -15,12 +17,13 @@ type Propriedades = {
   textos: Pick<TextosParticipante["questionario"], "contagem" | "sair" | "perguntaSair" | "continuar">;
 };
 
-// Rodapé fixo de progresso (docs/ihc.md §4.1): Nielsen 1, e "Sair sem enviar" sempre à mão (§3.7)
+// Rodapé fixo de progresso (docs/ihc.md §4.1): Nielsen 1, e "Sair sem enviar" sempre à mão (§3.7).
+// Sair pede confirmação numa janela, como toda ação que descarta algo (protótipo p8): o foco começa em
+// Continuar respondendo, Esc também continua, e o foco volta para "Sair sem enviar" (WCAG 2.4.3)
 export function RodapeProgresso({ respondidos, total, aoSair, textos }: Propriedades) {
   const rodape = useRef<HTMLElement>(null);
   const [confirmando, setConfirmando] = useState(false);
-  const continuar = useRef<HTMLButtonElement>(null);
-  const botaoSair = useRef<HTMLButtonElement>(null);
+  const idPergunta = useId();
   const cheias = Math.round((respondidos / total) * CENTROS.length);
 
   // WCAG 2.4.11: a página rola deixando livre a altura do rodapé, então o item em foco nunca fica embaixo dele
@@ -40,16 +43,6 @@ export function RodapeProgresso({ respondidos, total, aoSair, textos }: Propried
     };
   }, []);
 
-  function abrirConfirmacao() {
-    setConfirmando(true);
-    requestAnimationFrame(() => continuar.current?.focus());
-  }
-
-  function fecharConfirmacao() {
-    setConfirmando(false);
-    requestAnimationFrame(() => botaoSair.current?.focus());
-  }
-
   return (
     <footer ref={rodape} className={estilos.rodape}>
       <div className={estilos.rodapeInterno}>
@@ -63,27 +56,42 @@ export function RodapeProgresso({ respondidos, total, aoSair, textos }: Propried
             {formatar(textos.contagem, { n: respondidos, total })}
           </span>
         </p>
-        {confirmando ? (
-          <div role="group" aria-labelledby="pergunta-sair" className={estilos.confirmarSaida}>
-            <span id="pergunta-sair">{textos.perguntaSair}</span>
-            <button type="button" className={`${formulario.botao} ${formulario.secundario} ${estilos.botaoRodape}`} onClick={aoSair}>
+        <button type="button" className={estilos.sair} aria-haspopup="dialog" onClick={() => setConfirmando(true)}>
+          {textos.sair}
+        </button>
+      </div>
+      {/* Sem ícone e sem o x: as telas do participante não têm ícones (docs/design.md, Ícones) */}
+      <Janela
+        aberta={confirmando}
+        aoFechar={() => setConfirmando(false)}
+        idTitulo={idPergunta}
+        tipo="confirmacao"
+        papel="alertdialog"
+        rotuloFechar={null}
+      >
+        <div className={janela.formulario}>
+          <h2 id={idPergunta} className={`${janela.titulo} ${estilos.perguntaSair}`}>
+            {textos.perguntaSair}
+          </h2>
+          <div className={janela.acoes}>
+            <button
+              type="button"
+              className={`${formulario.botao} ${formulario.secundario} ${estilos.botaoJanela}`}
+              onClick={aoSair}
+            >
               {textos.sair}
             </button>
             <button
-              ref={continuar}
               type="button"
-              className={`${formulario.botao} ${formulario.primario} ${estilos.botaoRodape}`}
-              onClick={fecharConfirmacao}
+              className={`${formulario.botao} ${formulario.primario} ${estilos.botaoJanela}`}
+              data-foco-inicial=""
+              onClick={() => setConfirmando(false)}
             >
               {textos.continuar}
             </button>
           </div>
-        ) : (
-          <button ref={botaoSair} type="button" className={estilos.sair} onClick={abrirConfirmacao}>
-            {textos.sair}
-          </button>
-        )}
-      </div>
+        </div>
+      </Janela>
     </footer>
   );
 }

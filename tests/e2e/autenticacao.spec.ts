@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { verificarAcessibilidade } from "./acessibilidade";
-import { abrirMenuComTeclado, cadastrarComTeclado, emailDeTeste, entrarComTeclado, tabAte } from "./contas";
+import { abrirMenuComTeclado, cadastrarComTeclado, emailDeTeste, entrarComTeclado, janelaDeAcesso, tabAte } from "./contas";
 
 test("cadastra, sai e entra de novo usando só o teclado", async ({ page }, info) => {
   const email = emailDeTeste(info);
@@ -10,9 +10,19 @@ test("cadastra, sai e entra de novo usando só o teclado", async ({ page }, info
   await abrirMenuComTeclado(page);
   await tabAte(page, page.getByRole("button", { name: "Sair" }));
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/\/entrar\?aviso=saiu$/);
+  // Sair pede confirmação numa janela, com o foco já no botão de confirmar
+  const confirmacao = page.getByRole("alertdialog", { name: "Sair da conta?" });
+  await expect(confirmacao.getByRole("button", { name: "Sair" })).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page).toHaveURL(/\/\?aviso=saiu$/);
   await expect(page.getByRole("status")).toHaveText("Você saiu da sua conta.");
 
+  // A página inicial abre a janela de Entrar pela barra
+  await abrirMenuComTeclado(page);
+  await tabAte(page, page.getByRole("navigation", { name: "Principal" }).getByRole("button", { name: "Entrar" }));
+  await page.keyboard.press("Enter");
+  await expect(janelaDeAcesso(page, "Entrar")).toBeVisible();
+  await expect(page.getByLabel("E-mail")).toBeFocused();
   await entrarComTeclado(page, email);
   await expect(page).toHaveURL(/\/estudos$/);
 });
@@ -38,18 +48,22 @@ test("participante nunca precisa de sessão", async ({ page }) => {
 
 test("Entrar e Criar conta passam no axe, inclusive com erro", async ({ page }) => {
   await page.goto("/entrar");
+  const entrar = janelaDeAcesso(page, "Entrar");
+  await expect(entrar).toBeVisible();
   await verificarAcessibilidade(page);
 
   await page.getByLabel("E-mail").fill("ninguem@exemplo.com");
   await page.getByLabel("Senha", { exact: true }).fill("senha-que-nao-existe");
-  await page.getByRole("button", { name: "Entrar" }).click();
+  await entrar.getByRole("button", { name: "Entrar" }).click();
   await expect(page.getByRole("heading", { name: "Não foi possível entrar" })).toBeVisible();
   await verificarAcessibilidade(page);
 
   await page.goto("/cadastrar");
+  const cadastrar = janelaDeAcesso(page, "Criar conta");
+  await expect(cadastrar).toBeVisible();
   await verificarAcessibilidade(page);
 
-  await page.getByRole("button", { name: "Criar conta" }).click();
+  await cadastrar.getByRole("button", { name: "Criar conta" }).click();
   const resumo = page.getByRole("alert").filter({ hasText: "Corrija 3 campos para continuar" });
   await expect(resumo).toBeFocused();
   await expect(page.getByLabel("Nome")).toHaveAttribute("aria-invalid", "true");
@@ -62,7 +76,7 @@ test("o link do resumo de erros leva ao campo", async ({ page }) => {
   await page.getByLabel("Nome").fill("Alguém");
   await page.getByLabel("E-mail").fill("alguem@exemplo.com");
   await page.getByLabel("Senha", { exact: true }).fill("curta");
-  await page.getByRole("button", { name: "Criar conta" }).click();
+  await janelaDeAcesso(page, "Criar conta").getByRole("button", { name: "Criar conta" }).click();
 
   await page.getByRole("link", { name: "Senha: a senha precisa ter pelo menos 8 caracteres" }).click();
   await expect(page.getByLabel("Senha", { exact: true })).toBeFocused();

@@ -40,8 +40,14 @@ export async function abrirMenuComTeclado(page: Page) {
   await page.keyboard.press("Enter");
 }
 
+// /entrar e /cadastrar mostram a página inicial com a janela de acesso já aberta
+export function janelaDeAcesso(page: Page, titulo: "Entrar" | "Criar conta") {
+  return page.getByRole("dialog", { name: titulo });
+}
+
 export async function cadastrarComTeclado(page: Page, email: string) {
   await page.goto("/cadastrar");
+  await expect(janelaDeAcesso(page, "Criar conta")).toBeVisible();
   await tabAte(page, page.getByLabel("Nome"));
   await page.keyboard.type("Pesquisadora E2E");
   await tabAte(page, page.getByLabel("E-mail"));

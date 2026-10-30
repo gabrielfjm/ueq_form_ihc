@@ -1,31 +1,34 @@
-import { BookOpen, LogIn, UserPlus } from "lucide-react";
+"use client";
+
+import { BookOpen, LogIn } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Logotipo } from "@/componentes/Logotipo";
 import { BarraFixa } from "../(pesquisador)/BarraFixa";
 import estilos from "../(pesquisador)/pesquisador.module.css";
+import { BotaoAcesso } from "./_acesso/Acesso";
 
-// Protótipo r13 (sem login): a mesma barra do pesquisador, só com o que quem não tem conta pode fazer
+// Protótipos r13 e r16 (sem login): a mesma barra do pesquisador, só com a documentação e Entrar.
+// Entrar abre a janela por cima da página; Criar conta fica dentro dela e na página inicial
 export function BarraPublica() {
+  const caminho = usePathname();
+  const naDocumentacao = caminho === "/documentacao" || caminho.startsWith("/documentacao/");
   return (
     <BarraFixa
       inicio={
-        <Link href="/documentacao" className={estilos.inicio}>
+        <Link href="/" className={estilos.inicio}>
           <Logotipo />
         </Link>
       }
     >
-      <Link href="/documentacao" className={estilos.linkNavegacao} aria-current="page">
+      <Link href="/documentacao" className={estilos.linkNavegacao} aria-current={naDocumentacao ? "page" : undefined}>
         <BookOpen size={18} strokeWidth={1.5} aria-hidden="true" />
         <span>Documentação</span>
       </Link>
-      <Link href="/entrar" className={estilos.linkNavegacao}>
+      <BotaoAcesso modo="entrar" className={estilos.linkNavegacao}>
         <LogIn size={18} strokeWidth={1.5} aria-hidden="true" />
         <span>Entrar</span>
-      </Link>
-      <Link href="/cadastrar" className={estilos.linkNavegacao}>
-        <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" />
-        <span>Criar conta</span>
-      </Link>
+      </BotaoAcesso>
     </BarraFixa>
   );
 }

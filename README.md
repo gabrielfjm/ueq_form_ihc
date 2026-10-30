@@ -12,11 +12,11 @@ Código aberto sob a [licença MIT](LICENSE).
 
 ## Documentação
 
-A documentação completa da ferramenta está em [docs/documentacao/](docs/documentacao/) e também dentro da própria ferramenta, na aba **Documentação**, pública (http://localhost:3000/documentacao): requisitos com a sprint em que cada um foi entregue, planilha de requisitos, matriz de rastreabilidade, personas, histórias de usuário, casos de uso, casos e cenários de teste, diagramas de classes e de sequência e a arquitetura no modelo C4.
+A documentação da ferramenta está sendo escrita pela equipe, em [docs/documentacao/](docs/documentacao/) e em [docs/](docs/); os arquivos aparecem lá à medida que cada um fica pronto. Dentro da própria ferramenta, na aba **Documentação**, pública (http://localhost:3000/documentacao), cada documento aparece como "Em produção" até ser publicado (lista `PRONTOS` em `src/lib/documentacao/catalogo.ts`). O conjunto: requisitos com a sprint em que cada um foi entregue, planilha de requisitos, matriz de rastreabilidade, personas, histórias de usuário, casos de uso, casos e cenários de teste, diagramas de classes e de sequência e a arquitetura no modelo C4.
 
 | Arquivo | Conteúdo |
 |---|---|
-| [docs/documentacao/](docs/documentacao/) | Requisitos, rastreabilidade, personas, histórias, casos de uso, casos de teste, diagramas UML e arquitetura |
+| [docs/documentacao/](docs/documentacao/) | Arquitetura C4, diagramas de sequência e casos de teste; requisitos, rastreabilidade, personas, histórias, casos de uso, diagrama de classes, modelo lógico e verificação do cálculo em produção |
 | [docs/ueq-protocolo.md](docs/ueq-protocolo.md) | Itens, escalas, polaridade e todas as fórmulas do cálculo |
 | [docs/ihc.md](docs/ihc.md) | Requisitos de usabilidade e acessibilidade, cada um ligado ao princípio da literatura que o justifica |
 | [docs/design.md](docs/design.md) | Identidade visual |
@@ -109,6 +109,10 @@ Como as telas vão ficar em produção, em [docs/prototipos/alta-fidelidade/](do
 
 <img src="docs/prototipos/alta-fidelidade/p7-questionario-desktop.png" alt="Questionário no desktop com os 26 itens e rodapé fixo com confirmação de saída em linha" width="800">
 
+"Sair sem enviar" confirma numa janela, com o foco em Continuar respondendo:
+
+<img src="docs/prototipos/alta-fidelidade/p8-sair-sem-enviar.png" alt="Janela Sair sem enviar? Nada do que você marcou será gravado, com os botões Sair sem enviar e Continuar respondendo sobre o questionário escurecido" width="800">
+
 ### Pesquisador
 
 Entrar e criar conta, com o painel lateral sobre o instrumento:
@@ -123,7 +127,7 @@ Lista de estudos, criação com prévia do termo e estudo em rascunho:
 
 Página do estudo e resultados:
 
-<img src="docs/prototipos/alta-fidelidade/r5-pagina-do-estudo.png" alt="Página do estudo: link para participantes, coleta por versão, próximos passos, ações com exclusão em linha e ficha lateral" width="400"> <img src="docs/prototipos/alta-fidelidade/r6-resultados.png" alt="Resultados: leitura rápida, gráfico das seis escalas com benchmark e IC95, tabela, médias por item e exportação" width="400">
+<img src="docs/prototipos/alta-fidelidade/r5-pagina-do-estudo.png" alt="Página do estudo: link para participantes, coleta por versão, próximos passos, ações e ficha lateral" width="400"> <img src="docs/prototipos/alta-fidelidade/r6-resultados.png" alt="Resultados: leitura rápida, gráfico das seis escalas com benchmark e IC95, tabela, médias por item e exportação" width="400">
 
 Comparação entre versões, respostas suspeitas e minha conta:
 
@@ -135,11 +139,27 @@ Documentação dentro da ferramenta: visão geral, documento com diagrama e docu
 
 <img src="docs/prototipos/alta-fidelidade/r10-documentacao.png" alt="Documentação: abas das sete seções, índice dos documentos e ficha Sobre este documento" width="400"> <img src="docs/prototipos/alta-fidelidade/r11-documento-casos-de-uso.png" alt="Modelagem, Casos de uso: sub-abas dos documentos, diagrama com legenda e Abrir em tamanho real, ficha com Nesta página" width="400">
 
-<img src="docs/prototipos/alta-fidelidade/r12-documento-requisitos.png" alt="Requisitos: tabela dos requisitos e ficha com os downloads da planilha e do CSV" width="400"> <img src="docs/prototipos/alta-fidelidade/r13-documentacao-sem-login.png" alt="Documentação sem login: barra só com Documentação, Entrar e Criar conta" width="400">
+<img src="docs/prototipos/alta-fidelidade/r12-documento-requisitos.png" alt="Requisitos: tabela dos requisitos e ficha com os downloads da planilha e do CSV" width="400"> <img src="docs/prototipos/alta-fidelidade/r13-documentacao-sem-login.png" alt="Documentação sem login: barra só com Documentação e Entrar" width="400">
 
 Diagrama em tela cheia, com zoom, e barra fixa no celular com o menu aberto:
 
-<img src="docs/prototipos/alta-fidelidade/r14-diagrama-tela-cheia.png" alt="Diagrama em tela cheia: Voltar, título e zoom em 150% parados no topo, diagrama de casos de uso com atores em boneco" width="400"> <img src="docs/prototipos/alta-fidelidade/r15-barra-celular.png" alt="Barra fixa no celular com o menu aberto: Estudos, Criar estudo, Documentação, Minha conta e Sair" width="200">
+<img src="docs/prototipos/alta-fidelidade/r14-diagrama-tela-cheia.png" alt="Diagrama em tela cheia: Voltar, título e zoom em 150% parados no topo, com o diagrama ampliado embaixo" width="400"> <img src="docs/prototipos/alta-fidelidade/r15-barra-celular.png" alt="Barra fixa no celular com o menu aberto: Estudos, Criar estudo, Documentação, Minha conta e Sair" width="200">
+
+Página inicial, para quem ainda não tem conta, e Entrar e Criar conta numa janela por cima da página:
+
+<img src="docs/prototipos/alta-fidelidade/r16-pagina-inicial.png" alt="Página inicial: apresentação com o item 1 do questionário como figura, Como funciona em quatro passos, tabela das seis escalas, participante, resultados e documentação" width="400"> <img src="docs/prototipos/alta-fidelidade/r17-entrar-janela.png" alt="Janela de Entrar sobre a página inicial escurecida: formulário à esquerda e painel com as escalas do UEQ à direita" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r19-criar-conta-janela.png" alt="Janela de Criar conta: nome, e-mail e senha à esquerda e os quatro passos do estudo à direita" width="400"> <img src="docs/prototipos/alta-fidelidade/r18-entrar-celular.png" alt="Entrar no celular: a janela ocupa a tela inteira, com o formulário em cima e o resumo do instrumento embaixo" width="200">
+
+Confirmações em janela, para sair e para toda exclusão:
+
+<img src="docs/prototipos/alta-fidelidade/r20-sair-confirmacao.png" alt="Sair da conta? Janela com o aviso de que os estudos continuam salvos, Cancelar e Sair" width="400"> <img src="docs/prototipos/alta-fidelidade/r21-excluir-estudo.png" alt="Excluir este estudo? Janela com o aviso em vermelho do que vai junto, o campo para digitar o título, Cancelar e Excluir definitivamente" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r22-excluir-conta.png" alt="Excluir sua conta? Janela com o aviso dos estudos e respostas que vão junto e o campo para digitar o e-mail" width="400">
+
+Enquanto a equipe escreve a documentação, cada documento aparece como em produção:
+
+<img src="docs/prototipos/alta-fidelidade/r23-documento-em-producao.png" alt="Casos de uso em produção: abas e sub-abas da documentação, fileira de marcações vazia, aviso Em produção e ficha com o que o documento vai trazer" width="400">
 
 ## Protótipos de baixa fidelidade
 
