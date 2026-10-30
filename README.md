@@ -8,10 +8,15 @@ Projeto da disciplina Fundamentos da Interação Humano-Computador, PPGIa · PUC
 
 Equipe: Gabriel Meira, Jean Weiss e Luiza Pedralli.
 
+Código aberto sob a [licença MIT](LICENSE).
+
 ## Documentação
+
+A documentação completa da ferramenta está em [docs/documentacao/](docs/documentacao/) e também dentro da própria ferramenta, na aba **Documentação**, pública (http://localhost:3000/documentacao): requisitos com a sprint em que cada um foi entregue, planilha de requisitos, matriz de rastreabilidade, personas, histórias de usuário, casos de uso, casos e cenários de teste, diagramas de classes e de sequência e a arquitetura no modelo C4.
 
 | Arquivo | Conteúdo |
 |---|---|
+| [docs/documentacao/](docs/documentacao/) | Requisitos, rastreabilidade, personas, histórias, casos de uso, casos de teste, diagramas UML e arquitetura |
 | [docs/ueq-protocolo.md](docs/ueq-protocolo.md) | Itens, escalas, polaridade e todas as fórmulas do cálculo |
 | [docs/ihc.md](docs/ihc.md) | Requisitos de usabilidade e acessibilidade, cada um ligado ao princípio da literatura que o justifica |
 | [docs/design.md](docs/design.md) | Identidade visual |
@@ -58,6 +63,7 @@ O seed carrega os 26 itens do UEQ a partir de `data/ueq-itens-ptbr.json`. Enquan
 | `pnpm typecheck` | Checagem de tipos |
 | `pnpm test` | Testes de unidade (inclui o contraste das cores do tema) |
 | `pnpm test:e2e` | Testes de ponta a ponta, com verificação WCAG 2.2 A/AA |
+| `pnpm docs:diagramas` | Gera os SVG dos diagramas da documentação, depois de mudar um diagrama Mermaid num `.md` |
 
 Antes de abrir um pull request, `pnpm lint && pnpm typecheck && pnpm test` precisa passar.
 
@@ -72,6 +78,7 @@ src/
   styles/         tokens de cor, tipografia e espaçamento
   lib/            banco, sessão e validação
 prisma/           schema e seed
+scripts/          geração dos diagramas da documentação
 data/             itens, benchmark, parâmetros do protocolo e fixtures de teste
 docs/             especificação, requisitos e protótipos
 tests/e2e/        testes Playwright
@@ -124,6 +131,12 @@ Comparação entre versões, respostas suspeitas e minha conta:
 
 <img src="docs/prototipos/alta-fidelidade/r9-minha-conta.png" alt="Minha conta: dados cadastrais, troca de senha, exclusão da conta e resumo da conta" width="400">
 
+Documentação dentro da ferramenta: visão geral, documento com diagrama e documento com downloads:
+
+<img src="docs/prototipos/alta-fidelidade/r10-documentacao.png" alt="Documentação: abas das sete seções, índice dos documentos e ficha Sobre este documento" width="400"> <img src="docs/prototipos/alta-fidelidade/r11-documento-casos-de-uso.png" alt="Modelagem, Casos de uso: sub-abas dos documentos, diagrama com legenda e Abrir em tamanho real, ficha com Nesta página" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r12-documento-requisitos.png" alt="Requisitos: tabela dos requisitos e ficha com os downloads da planilha e do CSV" width="400"> <img src="docs/prototipos/alta-fidelidade/r13-documentacao-sem-login.png" alt="Documentação sem login: barra só com Documentação, Entrar e Criar conta" width="400">
+
 ## Protótipos de baixa fidelidade
 
 Esboços desenhados à mão antes da alta fidelidade, em [docs/prototipos/](docs/prototipos/).
@@ -168,3 +181,15 @@ Comparação entre versões e controle de respostas suspeitas:
 Minha conta:
 
 <img src="docs/prototipos/r9-minha-conta.png" alt="Minha conta: dados cadastrais, senha e exclusão da conta" width="400">
+
+Documentação: visão geral e documento com sub-abas:
+
+<img src="docs/prototipos/r10-documentacao.png" alt="Documentação: abas das seções, tabela de documentos e ficha lateral" width="400"> <img src="docs/prototipos/r11-documento.png" alt="Documento: seção Modelagem, sub-abas, diagrama e ficha Sobre este documento" width="400">
+
+## Licença
+
+O código, a documentação e os protótipos da equipe estão sob a [licença MIT](LICENSE): qualquer pessoa pode usar, copiar, modificar e distribuir, inclusive para fins comerciais, desde que mantenha o aviso de copyright e o texto da licença. O software é oferecido sem garantia.
+
+A licença MIT não cobre o material oficial do UEQ copiado para `data/`: os termos dos itens nos 37 idiomas, as instruções e os limites do benchmark. Esse material pertence aos autores do UEQ (Laugwitz, Held, Schrepp e colaboradores) e é distribuído em [ueq-online.org](https://www.ueq-online.org). Antes de usar esses dados fora desta ferramenta, confira as condições de uso no site oficial.
+
+As fontes Atkinson Hyperlegible Next e Source Sans 3 são carregadas pelo `next/font` e seguem a SIL Open Font License.
