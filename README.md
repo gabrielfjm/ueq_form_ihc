@@ -107,7 +107,7 @@ Como as telas vão ficar em produção, em [docs/prototipos/alta-fidelidade/](do
 <img src="docs/prototipos/alta-fidelidade/p6-link-fechado.png" alt="Link fechado: estudo em rascunho ou coleta encerrada" width="200">
 </p>
 
-<img src="docs/prototipos/alta-fidelidade/p7-questionario-desktop.png" alt="Questionário no desktop com os 26 itens e rodapé fixo com confirmação de saída em linha" width="800">
+<img src="docs/prototipos/alta-fidelidade/p7-questionario-desktop.png" alt="Questionário no desktop com os 26 itens e rodapé fixo com o progresso e o link Sair sem enviar" width="800">
 
 "Sair sem enviar" confirma numa janela, com o foco em Continuar respondendo:
 
