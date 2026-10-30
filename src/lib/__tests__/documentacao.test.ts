@@ -1,15 +1,21 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { posix } from "node:path";
 import { describe, expect, it } from "vitest";
-import { DOCUMENTOS, DOWNLOADS, REPOSITORIO, SECOES, documentoPeloSlug } from "../documentacao/catalogo";
+import { DOCUMENTOS, DOWNLOADS, REPOSITORIO, SECOES, documentoPeloSlug, documentoPronto } from "../documentacao/catalogo";
 import { NOME_DIAGRAMA, PASTA_DIAGRAMAS, blocosMermaid, nomeDoDiagrama } from "../documentacao/diagramas";
 import { destinoDoLink, renderizarMarkdown, slugDoTitulo } from "../documentacao/markdown";
 
 const ler = (arquivo: string) => readFileSync(arquivo, "utf8");
 
+// Documentos em produção podem ainda não ter arquivo; os que existem entram em todas as conferências
+const EXISTENTES = DOCUMENTOS.filter(({ arquivo }) => existsSync(arquivo));
+const CAMINHOS_DO_CATALOGO = new Set([...DOCUMENTOS, ...DOWNLOADS].map(({ arquivo }) => arquivo));
+
 describe("catálogo da documentação", () => {
-  it("todo documento e todo download existem no repositório", () => {
-    for (const { arquivo } of [...DOCUMENTOS, ...DOWNLOADS]) expect(existsSync(arquivo), arquivo).toBe(true);
+  it("todo documento publicado e seus downloads existem no repositório", () => {
+    for (const documento of DOCUMENTOS.filter(documentoPronto)) {
+      for (const { arquivo } of [documento, ...(documento.downloads ?? [])]) expect(existsSync(arquivo), arquivo).toBe(true);
+    }
   });
 
   it("cada documento tem um endereço só e toda seção tem documento", () => {
@@ -30,7 +36,7 @@ describe("catálogo da documentação", () => {
 });
 
 describe("diagramas", () => {
-  const usados = new Set(DOCUMENTOS.flatMap((documento) => blocosMermaid(ler(documento.arquivo)).map(nomeDoDiagrama)));
+  const usados = new Set(EXISTENTES.flatMap((documento) => blocosMermaid(ler(documento.arquivo)).map(nomeDoDiagrama)));
 
   it("cada diagrama dos documentos tem o SVG gerado (senão: pnpm docs:diagramas)", () => {
     for (const nome of usados) expect(existsSync(posix.join(PASTA_DIAGRAMAS, nome)), `${nome}: rode pnpm docs:diagramas`).toBe(true);
@@ -62,13 +68,15 @@ describe("destinoDoLink", () => {
     expect(destinoDoLink("https://c4model.com", atual)).toBe("https://c4model.com");
   });
 
+  // Link para outro documento do catálogo vale mesmo antes de ele ser escrito: na ferramenta abre o aviso
+  // "Em produção" e, quando o arquivo chegar, o próprio documento
   it("nenhum link relativo dos documentos aponta para arquivo que não existe", () => {
-    for (const documento of DOCUMENTOS) {
+    for (const documento of EXISTENTES) {
       const semCodigo = ler(documento.arquivo).replace(/```[\s\S]*?```/g, "");
       for (const [, href = ""] of semCodigo.matchAll(/\]\(([^)\s]+)\)/g)) {
         if (/^[a-z]+:/i.test(href) || href.startsWith("#")) continue;
         const caminho = posix.normalize(posix.join(posix.dirname(documento.arquivo), decodeURIComponent(href.split("#")[0] ?? "")));
-        expect(existsSync(caminho), `${documento.arquivo} → ${href}`).toBe(true);
+        expect(existsSync(caminho) || CAMINHOS_DO_CATALOGO.has(caminho), `${documento.arquivo} → ${href}`).toBe(true);
       }
     }
   });
@@ -105,9 +113,9 @@ describe("renderizarMarkdown", () => {
   });
 
   it("troca o diagrama Mermaid por imagem com texto alternativo e deixa o código à vista", () => {
-    const documento = DOCUMENTOS.find((candidato) => candidato.slug === "casos-de-uso");
+    const documento = DOCUMENTOS.find((candidato) => candidato.slug === "arquitetura");
     const { html } = renderizarMarkdown(ler(documento?.arquivo ?? ""), documento?.arquivo ?? "");
-    expect(html).toMatch(/<img src="\/api\/documentacao\/diagramas\/[0-9a-f]{12}\.svg" alt="Diagrama: Diagrama 1 · Área do pesquisador\./);
+    expect(html).toMatch(/<img src="\/api\/documentacao\/diagramas\/[0-9a-f]{12}\.svg" alt="Diagrama: [^"]+"/);
     expect(html).toContain("<summary>Ver o código do diagrama</summary>");
     expect(html).toMatch(/<button type="button" class="ampliar" data-ampliar="\/api\/documentacao\/diagramas\/[0-9a-f]{12}\.svg"/);
     expect(html).not.toContain('class="language-mermaid"');

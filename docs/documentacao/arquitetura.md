@@ -179,11 +179,11 @@ O link do participante e a documentação não passam pelo proxy: o `matcher` de
 
 ### Regras de dependência
 
-- **`src/ueq/` não depende de nada do projeto.** Não importa Prisma, React, Next nem `src/lib`. Recebe números e devolve objetos. É o que permite testá-lo contra a planilha oficial ([RNF16](requisitos.md#rnf16)).
+- **`src/ueq/` não depende de nada do projeto.** Não importa Prisma, React, Next nem `src/lib`. Recebe números e devolve objetos. É o que permite testá-lo contra a planilha oficial.
 - **Componentes e gráficos não sabem de Prisma.** Recebem dados prontos por props.
-- **Toda página, Server Action e rota do pesquisador confere a sessão no banco e o dono do estudo**, não só o proxy ([RNF11](requisitos.md#rnf11)).
-- **As rotas do participante só leem o que o participante pode ver:** título, produto, objetivo e status do estudo. Nada do pesquisador e nada da análise ([RNF06](requisitos.md#rnf06)).
-- **Parâmetros do protocolo nunca ficam no código.** Vêm de `data/protocolo.json` e `data/benchmark.json` ([RNF08](requisitos.md#rnf08)).
+- **Toda página, Server Action e rota do pesquisador confere a sessão no banco e o dono do estudo**, não só o proxy.
+- **As rotas do participante só leem o que o participante pode ver:** título, produto, objetivo e status do estudo. Nada do pesquisador e nada da análise.
+- **Parâmetros do protocolo nunca ficam no código.** Vêm de `data/protocolo.json` e `data/benchmark.json`.
 
 ## Decisões de arquitetura
 

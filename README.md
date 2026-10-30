@@ -12,11 +12,11 @@ Código aberto sob a [licença MIT](LICENSE).
 
 ## Documentação
 
-A documentação da ferramenta está sendo escrita pela equipe, em [docs/documentacao/](docs/documentacao/). Dentro da própria ferramenta, na aba **Documentação**, pública (http://localhost:3000/documentacao), cada documento aparece como "Em produção" até ser publicado (lista `PRONTOS` em `src/lib/documentacao/catalogo.ts`). O conjunto: requisitos com a sprint em que cada um foi entregue, planilha de requisitos, matriz de rastreabilidade, personas, histórias de usuário, casos de uso, casos e cenários de teste, diagramas de classes e de sequência e a arquitetura no modelo C4.
+A documentação da ferramenta está sendo escrita pela equipe, em [docs/documentacao/](docs/documentacao/) e em [docs/](docs/); os arquivos aparecem lá à medida que cada um fica pronto. Dentro da própria ferramenta, na aba **Documentação**, pública (http://localhost:3000/documentacao), cada documento aparece como "Em produção" até ser publicado (lista `PRONTOS` em `src/lib/documentacao/catalogo.ts`). O conjunto: requisitos com a sprint em que cada um foi entregue, planilha de requisitos, matriz de rastreabilidade, personas, histórias de usuário, casos de uso, casos e cenários de teste, diagramas de classes e de sequência e a arquitetura no modelo C4.
 
 | Arquivo | Conteúdo |
 |---|---|
-| [docs/documentacao/](docs/documentacao/) | Requisitos, rastreabilidade, personas, histórias, casos de uso, casos de teste, diagramas UML e arquitetura |
+| [docs/documentacao/](docs/documentacao/) | Arquitetura C4, diagramas de sequência e casos de teste; requisitos, rastreabilidade, personas, histórias, casos de uso, diagrama de classes, modelo lógico e verificação do cálculo em produção |
 | [docs/ueq-protocolo.md](docs/ueq-protocolo.md) | Itens, escalas, polaridade e todas as fórmulas do cálculo |
 | [docs/ihc.md](docs/ihc.md) | Requisitos de usabilidade e acessibilidade, cada um ligado ao princípio da literatura que o justifica |
 | [docs/design.md](docs/design.md) | Identidade visual |
@@ -143,7 +143,7 @@ Documentação dentro da ferramenta: visão geral, documento com diagrama e docu
 
 Diagrama em tela cheia, com zoom, e barra fixa no celular com o menu aberto:
 
-<img src="docs/prototipos/alta-fidelidade/r14-diagrama-tela-cheia.png" alt="Diagrama em tela cheia: Voltar, título e zoom em 150% parados no topo, diagrama de casos de uso com atores em boneco" width="400"> <img src="docs/prototipos/alta-fidelidade/r15-barra-celular.png" alt="Barra fixa no celular com o menu aberto: Estudos, Criar estudo, Documentação, Minha conta e Sair" width="200">
+<img src="docs/prototipos/alta-fidelidade/r14-diagrama-tela-cheia.png" alt="Diagrama em tela cheia: Voltar, título e zoom em 150% parados no topo, com o diagrama ampliado embaixo" width="400"> <img src="docs/prototipos/alta-fidelidade/r15-barra-celular.png" alt="Barra fixa no celular com o menu aberto: Estudos, Criar estudo, Documentação, Minha conta e Sair" width="200">
 
 Página inicial, para quem ainda não tem conta, e Entrar e Criar conta numa janela por cima da página:
 

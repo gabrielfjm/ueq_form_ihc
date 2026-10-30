@@ -1,4 +1,4 @@
-import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { chromium } from "playwright";
@@ -10,8 +10,9 @@ import { NOME_DIAGRAMA, PASTA_DIAGRAMAS, blocosMermaid, nomeDoDiagrama } from ".
 const require = createRequire(import.meta.url);
 const mermaid = readFileSync(require.resolve("mermaid/dist/mermaid.min.js"), "utf8");
 
+// Documento em produção pode ainda não ter arquivo: entra quando a equipe escrever
 const diagramas = new Map<string, string>();
-for (const documento of DOCUMENTOS) {
+for (const documento of DOCUMENTOS.filter(({ arquivo }) => existsSync(arquivo))) {
   for (const codigo of blocosMermaid(readFileSync(documento.arquivo, "utf8"))) diagramas.set(nomeDoDiagrama(codigo), codigo);
 }
 

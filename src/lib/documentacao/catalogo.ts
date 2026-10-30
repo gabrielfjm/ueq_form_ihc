@@ -19,7 +19,8 @@ export type Secao = { slug: string; titulo: string; documentos: readonly Documen
 
 // Documentos que já podem aparecer na ferramenta. A equipe está escrevendo a documentação: enquanto o
 // arquivo não entra nesta lista, a aba mostra "Em produção" no lugar dele, sem o texto, os diagramas e os
-// downloads. Para publicar um documento pronto, acrescente aqui o caminho do arquivo (o mesmo de `arquivo`)
+// downloads, e o arquivo nem precisa existir ainda. Para publicar um documento pronto, acrescente aqui o
+// caminho do arquivo (o mesmo de `arquivo`)
 const PRONTOS: ReadonlySet<string> = new Set<string>([]);
 
 export function documentoPronto(documento: Documento): boolean {
@@ -116,6 +117,15 @@ export const SECOES: readonly Secao[] = [
         quemDeveLer: "Quem mexe no banco ou no cálculo.",
       },
       {
+        slug: "modelo-logico",
+        arquivo: "docs/documentacao/modelo-logico.md",
+        rotulo: "Modelo lógico do banco",
+        descricao: "As tabelas do banco de dados, suas colunas, chaves e relacionamentos.",
+        oQueE: "O modelo lógico do PostgreSQL da ferramenta: tabelas, tipos, chaves primárias e estrangeiras e cardinalidades.",
+        paraQueServe: "Entender como os dados ficam guardados e o que apagar um estudo ou uma conta leva junto.",
+        quemDeveLer: "Quem mexe no banco, nas migrações ou nas exportações.",
+      },
+      {
         slug: "diagramas-de-sequencia",
         arquivo: "docs/documentacao/diagramas-de-sequencia.md",
         rotulo: "Diagramas de sequência",
@@ -153,7 +163,16 @@ export const SECOES: readonly Secao[] = [
         oQueE: "Os testes que já existem, de ponta a ponta, de unidade e manuais, com passos e resultado esperado.",
         paraQueServe: "Saber o que está provado, como rodar os testes e o que ainda falta verificar.",
         quemDeveLer: "Quem avalia a qualidade do projeto e quem escreve um teste novo.",
-        downloads: [PLANILHA, { arquivo: "docs/documentacao/casos-de-teste.csv", rotulo: "casos-de-teste.csv" }],
+        downloads: [{ arquivo: "docs/documentacao/casos-de-teste.csv", rotulo: "casos-de-teste.csv" }],
+      },
+      {
+        slug: "verificacao-do-calculo",
+        arquivo: "docs/documentacao/verificacao-do-calculo.md",
+        rotulo: "Verificação do cálculo",
+        descricao: "O cálculo da ferramenta conferido à mão, com os dados do estudo de exemplo.",
+        oQueE: "As médias, desvios, intervalos de confiança, alfa, benchmark e suspeitas do estudo de exemplo calculados à mão e comparados com o painel.",
+        paraQueServe: "Mostrar que os números da ferramenta conferem com o handbook e a planilha oficial do UEQ.",
+        quemDeveLer: "Quem avalia o projeto e quem interpreta os resultados de um estudo.",
       },
       {
         slug: "checklist-manual",

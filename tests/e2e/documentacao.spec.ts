@@ -37,7 +37,7 @@ test("sem conta, a documentação abre com a barra pública, as seções e as su
 
   if (publicado("casos-de-uso")) {
     // O diagrama é uma imagem com texto alternativo, que carrega de verdade, também sem sessão
-    const diagrama = page.getByRole("img", { name: /^Diagrama: Diagrama 1 · Área do pesquisador/ });
+    const diagrama = page.getByRole("img", { name: /^Diagrama: / }).first();
     await diagrama.scrollIntoViewIfNeeded();
     await expect.poll(() => diagrama.evaluate((imagem: HTMLImageElement) => imagem.naturalWidth)).toBeGreaterThan(0);
   } else {
@@ -128,18 +128,19 @@ test("endereço fora do catálogo dá 404 e os arquivos só saem da lista", asyn
 test("clicar no diagrama abre em tela cheia, com zoom, arrasto, Voltar e Esc", async ({ page }) => {
   test.skip(!publicado("casos-de-uso"), "Casos de uso ainda em produção");
   await page.goto("/documentacao/casos-de-uso");
-  const ampliar = page.getByRole("button", { name: "Ampliar em tela cheia: Diagrama 1 · Área do pesquisador" });
+  const ampliar = page.getByRole("button", { name: /^Ampliar em tela cheia: / }).first();
+  const titulo = ((await ampliar.getAttribute("aria-label")) ?? "").replace("Ampliar em tela cheia: ", "");
   await ampliar.scrollIntoViewIfNeeded();
   await ampliar.click();
 
-  const janela = page.getByRole("dialog", { name: "Diagrama 1 · Área do pesquisador" });
+  const janela = page.getByRole("dialog", { name: titulo });
   await expect(janela).toBeVisible();
   await expect(janela.getByRole("button", { name: "Voltar" })).toBeFocused();
   // A tela cheia cobre a janela do navegador
   const tela = page.viewportSize();
   const caixa = await janela.boundingBox();
   expect(Math.round(caixa?.width ?? 0)).toBe(tela?.width);
-  const imagem = janela.getByRole("img", { name: /^Diagrama: Diagrama 1/ });
+  const imagem = janela.getByRole("img", { name: /^Diagrama: / });
   await expect.poll(() => imagem.evaluate((elemento: HTMLImageElement) => elemento.naturalWidth)).toBeGreaterThan(0);
   await verificarAcessibilidade(page);
 

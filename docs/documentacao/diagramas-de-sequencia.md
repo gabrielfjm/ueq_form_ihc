@@ -15,12 +15,12 @@ Seta cheia é chamada; seta tracejada é resposta.
 
 | Diagrama | Caso de uso | Requisitos principais |
 |---|---|---|
-| [1. Entrar e voltar à página pedida](#1-entrar-e-voltar-à-página-pedida) | [UC02](casos-de-uso.md#uc02) | RF02, RF04, RNF10 |
-| [2. Responder o questionário](#2-responder-o-questionário) | [UC10](casos-de-uso.md#uc10) | RF17 a RF27, RNF09 |
-| [3. Ver resultados](#3-ver-resultados) | [UC14](casos-de-uso.md#uc14), [UC15](casos-de-uso.md#uc15) | RF33 a RF37, RNF11 |
-| [4. Tirar uma participação da análise](#4-tirar-uma-participação-da-análise) | [UC17](casos-de-uso.md#uc17) | RF43 |
-| [5. Exportar o painel em PDF](#5-exportar-o-painel-em-pdf) | [UC19](casos-de-uso.md#uc19) | RF49, RNF11 |
-| [6. Importar respostas por CSV](#6-importar-respostas-por-csv) | [UC20](casos-de-uso.md#uc20) | RF50, RNF12, RNF22 |
+| [1. Entrar e voltar à página pedida](#1-entrar-e-voltar-à-página-pedida) | a definir | a definir |
+| [2. Responder o questionário](#2-responder-o-questionário) | a definir | a definir |
+| [3. Ver resultados](#3-ver-resultados) | a definir | a definir |
+| [4. Tirar uma participação da análise](#4-tirar-uma-participação-da-análise) | a definir | a definir |
+| [5. Exportar o painel em PDF](#5-exportar-o-painel-em-pdf) | a definir | a definir |
+| [6. Importar respostas por CSV](#6-importar-respostas-por-csv) | a definir | a definir |
 
 ## 1. Entrar e voltar à página pedida
 
