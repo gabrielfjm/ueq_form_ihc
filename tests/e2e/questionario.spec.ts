@@ -176,15 +176,26 @@ test("recarregar a página recupera as respostas marcadas", async ({ page, brows
   await estudo.fechar();
 });
 
-test("sair sem enviar confirma em linha e não grava nada", async ({ page, browser }, info) => {
+test("sair sem enviar confirma numa janela e não grava nada", async ({ page, browser }, info) => {
   const estudo = await estudoAberto(browser, info);
   await concordar(page, estudo.link);
   await page.locator('input[name="item-1"]').nth(2).check();
 
-  await page.getByRole("button", { name: "Sair sem enviar" }).click();
-  await expect(page.getByRole("group", { name: "Sair sem enviar? Nada do que você marcou será gravado." })).toBeVisible();
-  await expect(page.getByRole("button", { name: "Continuar respondendo" })).toBeFocused();
-  await page.getByRole("button", { name: "Sair sem enviar" }).click();
+  const sair = page.getByRole("contentinfo").getByRole("button", { name: "Sair sem enviar" });
+  const janela = page.getByRole("alertdialog", { name: "Sair sem enviar? Nada do que você marcou será gravado." });
+  await sair.click();
+  await expect(janela).toBeVisible();
+  await expect(janela.getByRole("button", { name: "Continuar respondendo" })).toBeFocused();
+  await verificarAcessibilidade(page);
+
+  // Esc continua respondendo, com a resposta marcada e o foco de volta em Sair sem enviar
+  await page.keyboard.press("Escape");
+  await expect(janela).toBeHidden();
+  await expect(sair).toBeFocused();
+  await expect(page.locator('input[name="item-1"]').nth(2)).toBeChecked();
+
+  await sair.click();
+  await janela.getByRole("button", { name: "Sair sem enviar" }).click();
 
   await expect(page).toHaveURL(/\/saiu$/);
   await expect(page.getByRole("heading", { name: "Você saiu do estudo" })).toBeVisible();
