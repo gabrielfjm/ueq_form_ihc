@@ -4,6 +4,7 @@ import { BookOpen, Folder, LogOut, Plus, User, type LucideIcon } from "lucide-re
 import type { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { BarraFixa } from "./BarraFixa";
 import { Logotipo } from "@/componentes/Logotipo";
 import { sair } from "./acoes";
 import estilos from "./pesquisador.module.css";
@@ -36,32 +37,26 @@ const ITENS: readonly ItemNavegacao[] = [
 export function BarraSuperior() {
   const caminho = usePathname();
   return (
-    <header className={estilos.barra}>
-      <div className={estilos.barraInterna}>
+    <BarraFixa
+      inicio={
         <Link href="/estudos" className={estilos.inicio}>
           <Logotipo />
         </Link>
-        <nav aria-label="Principal" className={estilos.navegacao}>
-          {ITENS.map(({ href, texto, Icone, atual }) => (
-            <Link
-              key={href}
-              href={href}
-              className={estilos.linkNavegacao}
-              aria-current={atual(caminho) ? "page" : undefined}
-            >
-              <Icone size={18} strokeWidth={1.5} aria-hidden="true" />
-              <span>{texto}</span>
-            </Link>
-          ))}
-          {/* Sair muda estado no servidor, por isso é botão de formulário e não link */}
-          <form action={sair}>
-            <button type="submit" className={estilos.linkNavegacao}>
-              <LogOut size={18} strokeWidth={1.5} aria-hidden="true" />
-              <span>Sair</span>
-            </button>
-          </form>
-        </nav>
-      </div>
-    </header>
+      }
+    >
+      {ITENS.map(({ href, texto, Icone, atual }) => (
+        <Link key={href} href={href} className={estilos.linkNavegacao} aria-current={atual(caminho) ? "page" : undefined}>
+          <Icone size={18} strokeWidth={1.5} aria-hidden="true" />
+          <span>{texto}</span>
+        </Link>
+      ))}
+      {/* Sair muda estado no servidor, por isso é botão de formulário e não link */}
+      <form action={sair}>
+        <button type="submit" className={estilos.linkNavegacao}>
+          <LogOut size={18} strokeWidth={1.5} aria-hidden="true" />
+          <span>Sair</span>
+        </button>
+      </form>
+    </BarraFixa>
   );
 }
