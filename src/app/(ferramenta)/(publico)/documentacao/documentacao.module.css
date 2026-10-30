@@ -170,6 +170,99 @@
   margin-top: 4px;
 }
 
+/* Documento em produção (protótipo r23): ocupa o lugar do texto, ao lado da ficha */
+.emProducao {
+  flex: 999 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.marcacoesVazias {
+  width: 182px;
+  margin-bottom: 8px;
+}
+
+.marcacoesVazias line {
+  stroke: var(--linha);
+}
+
+.marcacoesVazias circle {
+  fill: var(--fundo);
+  stroke: var(--tinta-fraca);
+  stroke-width: 1.5;
+}
+
+/* Status escrito com um ponto vazado antes, como o rascunho do estudo (docs/design.md, Cores) */
+.situacao {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+
+.pontoProducao {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border: 1.5px solid var(--tinta-fraca);
+  border-radius: 50%;
+}
+
+.emProducaoTitulo {
+  margin: 0;
+  font-size: var(--texto-xl);
+  line-height: 1.2;
+}
+
+.emProducaoTexto {
+  margin: 0;
+  max-width: var(--largura-leitura);
+  color: var(--tinta-suave);
+}
+
+.rolagemSituacao {
+  margin-top: 18px;
+  overflow-x: auto;
+}
+
+.tabelaSituacao {
+  width: 100%;
+  min-width: 30rem;
+  border-collapse: collapse;
+}
+
+.tabelaSituacao caption {
+  margin-bottom: 6px;
+  text-align: left;
+  font-size: var(--texto-lg);
+  font-weight: 700;
+}
+
+.tabelaSituacao th,
+.tabelaSituacao td {
+  padding: 10px 16px 10px 0;
+  border-bottom: 1px solid var(--linha);
+  text-align: left;
+  vertical-align: baseline;
+}
+
+.tabelaSituacao thead th {
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+  border-bottom-color: var(--linha-forte);
+}
+
+.tabelaSituacao tbody th {
+  font-weight: 400;
+}
+
+.tabelaSituacao td {
+  color: var(--tinta-suave);
+}
+
 @media (forced-colors: active) {
   .aba[aria-current="page"],
   .subaba[aria-current="page"] {

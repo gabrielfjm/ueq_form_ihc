@@ -17,6 +17,15 @@ export type Documento = {
 
 export type Secao = { slug: string; titulo: string; documentos: readonly Documento[] };
 
+// Documentos que já podem aparecer na ferramenta. A equipe está escrevendo a documentação: enquanto o
+// arquivo não entra nesta lista, a aba mostra "Em produção" no lugar dele, sem o texto, os diagramas e os
+// downloads. Para publicar um documento pronto, acrescente aqui o caminho do arquivo (o mesmo de `arquivo`)
+const PRONTOS: ReadonlySet<string> = new Set<string>([]);
+
+export function documentoPronto(documento: Documento): boolean {
+  return PRONTOS.has(documento.arquivo);
+}
+
 const PLANILHA: Download = { arquivo: "docs/documentacao/planilha-requisitos.xlsx", rotulo: "Planilha de requisitos (XLSX)" };
 
 export const VISAO_GERAL: Documento = {
@@ -67,8 +76,8 @@ export const SECOES: readonly Secao[] = [
         slug: "personas",
         arquivo: "docs/documentacao/personas.md",
         rotulo: "Personas",
-        descricao: "Quem usa a ferramenta: dois pesquisadores, três participantes e quem mantém o código.",
-        oQueE: "Seis pessoas fictícias que representam quem usa a ferramenta, construídas a partir do perfil de usuários de IHC.",
+        descricao: "Quem usa a ferramenta: pesquisadores, participantes e quem mantém o código.",
+        oQueE: "Pessoas fictícias que representam quem usa a ferramenta, construídas a partir do perfil de usuários de IHC.",
         paraQueServe: "Decidir uma tela pensando em alguém concreto: a participante no celular, o pesquisador que confere a planilha.",
         quemDeveLer: "Quem desenha ou muda uma tela.",
       },
@@ -93,7 +102,7 @@ export const SECOES: readonly Secao[] = [
         arquivo: "docs/documentacao/casos-de-uso.md",
         rotulo: "Casos de uso",
         descricao: "O que cada ator faz com a ferramenta, em diagrama e por escrito.",
-        oQueE: "Os 24 casos de uso da ferramenta em diagramas UML, com a especificação dos principais.",
+        oQueE: "Os casos de uso da ferramenta em diagramas UML, com a especificação dos principais.",
         paraQueServe: "Ver quem faz o quê na ferramenta e quais requisitos cada caso de uso exerce.",
         quemDeveLer: "Quem avalia o projeto e quem vai mudar um fluxo.",
       },
@@ -110,8 +119,8 @@ export const SECOES: readonly Secao[] = [
         slug: "diagramas-de-sequencia",
         arquivo: "docs/documentacao/diagramas-de-sequencia.md",
         rotulo: "Diagramas de sequência",
-        descricao: "Como as partes da ferramenta conversam nos seis fluxos mais importantes.",
-        oQueE: "Seis fluxos passo a passo: entrar, responder, ver resultados, tirar da análise, exportar PDF e importar CSV.",
+        descricao: "Como as partes da ferramenta conversam nos fluxos mais importantes.",
+        oQueE: "Os fluxos mais importantes passo a passo, do clique até o banco, como entrar, responder e exportar.",
         paraQueServe: "Seguir uma requisição do clique até o banco e de volta, inclusive os desvios de erro.",
         quemDeveLer: "Quem vai depurar ou mudar um desses fluxos.",
       },
@@ -244,9 +253,16 @@ export function enderecoDoDocumento(documento: Documento): string {
   return documento.slug ? `/documentacao/${documento.slug}` : "/documentacao";
 }
 
+function downloadsDe(documentos: readonly Documento[]): readonly Download[] {
+  return [
+    ...new Map(documentos.flatMap((documento) => documento.downloads ?? []).map((download) => [download.arquivo, download])).values(),
+  ];
+}
+
 // Só o que está no catálogo sai pela rota de download: nenhum caminho vem do pedido
-export const DOWNLOADS: readonly Download[] = [
-  ...new Map(DOCUMENTOS.flatMap((documento) => documento.downloads ?? []).map((download) => [download.arquivo, download])).values(),
-];
+export const DOWNLOADS: readonly Download[] = downloadsDe(DOCUMENTOS);
+
+// Só os arquivos dos documentos prontos saem de fato pela rota; os outros ficam para quando forem publicados
+export const DOWNLOADS_PUBLICADOS: readonly Download[] = downloadsDe(DOCUMENTOS.filter(documentoPronto));
 
 export const REPOSITORIO = "https://github.com/gabrielfjm/ueq_form_ihc";

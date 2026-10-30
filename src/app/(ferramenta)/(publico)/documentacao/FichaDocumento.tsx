@@ -6,7 +6,14 @@ import estilos from "./documentacao.module.css";
 
 // Protótipo r10 a r12: a ficha explica o documento antes de a pessoa ler (Nielsen 10) e "Nesta página"
 // lista as seções para reconhecer em vez de lembrar (Nielsen 6)
-export function FichaDocumento({ documento, secoes }: { documento: Documento; secoes: readonly Titulo[] }) {
+type Propriedades = {
+  documento: Documento;
+  secoes: readonly Titulo[];
+  // em produção, a ficha diz o que o documento vai ser, sem arquivo, downloads nem índice
+  pronto: boolean;
+};
+
+export function FichaDocumento({ documento, secoes, pronto }: Propriedades) {
   return (
     <aside aria-labelledby="titulo-sobre" className={estilos.ficha}>
       <h2 id="titulo-sobre" className={estilos.fichaTitulo}>
@@ -25,17 +32,28 @@ export function FichaDocumento({ documento, secoes }: { documento: Documento; se
           <dt>Quem deve ler</dt>
           <dd>{documento.quemDeveLer}</dd>
         </div>
-        <div>
-          <dt>Arquivo</dt>
-          <dd className={estilos.arquivo}>{documento.arquivo}</dd>
-          <dd>
-            <a className={estilos.acao} href={`${REPOSITORIO}/blob/main/${documento.arquivo}`} rel="noreferrer">
-              <ExternalLink size={18} strokeWidth={1.5} aria-hidden="true" />
-              <span>Ver no GitHub</span>
-            </a>
-          </dd>
-        </div>
-        {documento.downloads && (
+        {!pronto && (
+          <div>
+            <dt>Situação</dt>
+            <dd className={estilos.situacao}>
+              <span className={estilos.pontoProducao} aria-hidden="true" />
+              Em produção
+            </dd>
+          </div>
+        )}
+        {pronto && (
+          <div>
+            <dt>Arquivo</dt>
+            <dd className={estilos.arquivo}>{documento.arquivo}</dd>
+            <dd>
+              <a className={estilos.acao} href={`${REPOSITORIO}/blob/main/${documento.arquivo}`} rel="noreferrer">
+                <ExternalLink size={18} strokeWidth={1.5} aria-hidden="true" />
+                <span>Ver no GitHub</span>
+              </a>
+            </dd>
+          </div>
+        )}
+        {pronto && documento.downloads && (
           <div>
             <dt>Baixar</dt>
             {documento.downloads.map((download) => (

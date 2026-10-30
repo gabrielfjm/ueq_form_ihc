@@ -5,6 +5,7 @@ import { SECOES, VISAO_GERAL, enderecoDoDocumento, secaoDoDocumento, type Docume
 import type { DocumentoRenderizado } from "@/lib/documentacao/markdown";
 import estilos from "./documentacao.module.css";
 import { ArtigoDocumento } from "./ArtigoDocumento";
+import { EmProducao } from "./EmProducao";
 import { FichaDocumento } from "./FichaDocumento";
 import texto from "./texto.module.css";
 
@@ -22,7 +23,8 @@ const endereco = (documento: Documento) => enderecoDoDocumento(documento) as Rou
 
 // Protótipo r10 a r12: abas das seções na faixa (como as do estudo) e sub-abas dos documentos logo abaixo,
 // as duas com aria-current, para a pessoa sempre saber onde está (Nielsen 1, WCAG 2.4.8)
-export function PaginaDocumento({ documento, renderizado }: { documento: Documento; renderizado: DocumentoRenderizado }) {
+// renderizado é null quando o documento ainda está em produção (catalogo.ts, PRONTOS)
+export function PaginaDocumento({ documento, renderizado }: { documento: Documento; renderizado: DocumentoRenderizado | null }) {
   const atual = secaoDoDocumento(documento);
   const visaoGeral = documento === VISAO_GERAL;
   return (
@@ -36,7 +38,7 @@ export function PaginaDocumento({ documento, renderizado }: { documento: Documen
               <Link href="/documentacao">Documentação</Link> <span aria-hidden="true">›</span> {atual.titulo}
             </p>
           )}
-          <h1 className={estilos.titulo}>{visaoGeral ? "Documentação" : renderizado.titulo}</h1>
+          <h1 className={estilos.titulo}>{visaoGeral ? "Documentação" : (renderizado?.titulo ?? documento.rotulo)}</h1>
           <p className={estilos.descricao}>{documento.descricao}</p>
           <nav aria-label="Seções da documentação" className={estilos.abas}>
             {SECOES.map((secao) => {
@@ -75,8 +77,12 @@ export function PaginaDocumento({ documento, renderizado }: { documento: Documen
         </div>
       )}
       <div className={estilos.conteudo}>
-        <ArtigoDocumento className={texto.texto} html={renderizado.html} />
-        <FichaDocumento documento={documento} secoes={renderizado.secoes} />
+        {renderizado ? (
+          <ArtigoDocumento className={texto.texto} html={renderizado.html} />
+        ) : (
+          <EmProducao documento={documento} visaoGeral={visaoGeral} />
+        )}
+        <FichaDocumento documento={documento} secoes={renderizado?.secoes ?? []} pronto={renderizado !== null} />
       </div>
     </>
   );
