@@ -11,7 +11,9 @@ export type ParticipacaoAvaliada = {
   id: string;
   concluidaEm: Date;
   versao: string;
-  idioma: InfoIdioma;
+  // null nas importadas de CSV, que não dizem em que idioma o questionário foi aplicado
+  idioma: InfoIdioma | null;
+  importada: boolean;
   suspeita: boolean;
   incluidaNaAnalise: boolean;
   avaliacao: AvaliacaoSuspeita;
@@ -25,6 +27,7 @@ async function participacoesConcluidas(estudoId: string) {
       id: true,
       concluidaEm: true,
       idioma: true,
+      origem: true,
       suspeita: true,
       incluidaNaAnalise: true,
       versao: { select: { nome: true } },
@@ -44,7 +47,11 @@ export async function participacoesAvaliadas(estudoId: string): Promise<Particip
       id: participacao.id,
       concluidaEm: participacao.concluidaEm ?? new Date(0),
       versao: participacao.versao.nome,
-      idioma: infoIdioma(ehIdioma(participacao.idioma) ? participacao.idioma : IDIOMA_PADRAO),
+      idioma:
+        participacao.origem === "IMPORTADA"
+          ? null
+          : infoIdioma(ehIdioma(participacao.idioma) ? participacao.idioma : IDIOMA_PADRAO),
+      importada: participacao.origem === "IMPORTADA",
       suspeita: participacao.suspeita,
       incluidaNaAnalise: participacao.incluidaNaAnalise,
       avaliacao: avaliarSuspeita(valores, itens, PARAMETROS_SUSPEITA),

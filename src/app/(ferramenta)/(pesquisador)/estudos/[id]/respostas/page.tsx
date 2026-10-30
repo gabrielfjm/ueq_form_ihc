@@ -1,4 +1,6 @@
-import type { Metadata } from "next";
+import { Upload } from "lucide-react";
+import type { Metadata, Route } from "next";
+import Link from "next/link";
 import { Avisos } from "@/componentes/Avisos";
 import { contagemDeRespostas, estudoDoPesquisador } from "@/lib/estudos";
 import { NOME_ESCALA } from "@/lib/nomes-ueq";
@@ -26,7 +28,15 @@ const MOTIVO: Record<MotivoSuspeita, string> = { amplitude: "amplitude", respost
 export default async function PaginaRespostas({ params, searchParams }: Propriedades) {
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
-  const soSuspeitas = (await searchParams).suspeitas === "1";
+  const { suspeitas, importadas } = await searchParams;
+  const soSuspeitas = suspeitas === "1";
+  // Volta da importação (respostas/importar): o resultado é anunciado no topo, como nas outras ações
+  const quantasImportadas = Number(importadas);
+  const aviso =
+    Number.isInteger(quantasImportadas) && quantasImportadas > 0
+      ? `${plural(quantasImportadas, "resposta importada", "respostas importadas")}. Elas aparecem na lista com a marca “importada de CSV”.`
+      : null;
+  const linkImportar = `/estudos/${estudo.id}/respostas/importar` as Route;
   const [respostas, participacoes] = await Promise.all([contagemDeRespostas(estudo.id), participacoesAvaliadas(estudo.id)]);
   const fora = participacoes.filter((participacao) => !participacao.incluidaNaAnalise).length;
 
@@ -36,8 +46,9 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
       id: participacao.id,
       quando: formatarDiaHora(participacao.concluidaEm),
       versao: participacao.versao,
-      idioma: participacao.idioma.nomeEmPortugues,
-      traducaoAprovada: participacao.idioma.traducaoAprovada,
+      idioma: participacao.idioma?.nomeEmPortugues ?? null,
+      traducaoAprovada: participacao.idioma?.traducaoAprovada ?? true,
+      importada: participacao.importada,
       inconsistentes: participacao.avaliacao.escalasInconsistentes.length,
       iguais: participacao.avaliacao.respostasIguais,
       suspeita: participacao.suspeita,
@@ -59,13 +70,16 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
         resumo={resumoDoEstudo(estudo.status, estudo.versoes.length, respostas)}
       />
       <div className={estilos.conteudo}>
-        <Avisos className={estilos.regiaoStatus}>
+        <Avisos className={estilos.regiaoStatus} inicial={aviso}>
           {participacoes.length === 0 ? (
             <section aria-labelledby="titulo-vazio" className={estilos.vazio}>
               <h2 id="titulo-vazio">Nenhuma resposta ainda.</h2>
               <p>
                 Cada participação concluída aparece aqui, com as respostas suspeitas marcadas para você decidir se ficam na
                 análise.
+              </p>
+              <p>
+                Já tem respostas coletadas fora da ferramenta? <Link href={linkImportar}>Importar respostas de um CSV</Link>
               </p>
             </section>
           ) : (
@@ -144,6 +158,14 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
                       </dd>
                     </div>
                   </dl>
+                  <h2 className={`${estilos.regraTitulo} ${estilos.regraSecao}`}>Respostas de fora da ferramenta</h2>
+                  <p className={estilos.regraTexto}>
+                    Coletadas em papel ou em outro formulário, entram por um CSV no formato da planilha oficial.
+                  </p>
+                  <Link href={linkImportar} className={estilos.importar}>
+                    <Upload size={18} strokeWidth={1.5} aria-hidden="true" />
+                    <span>Importar respostas de um CSV</span>
+                  </Link>
                 </aside>
               </div>
             </div>

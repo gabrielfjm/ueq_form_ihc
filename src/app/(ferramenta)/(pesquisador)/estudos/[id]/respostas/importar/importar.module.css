@@ -1,0 +1,135 @@
+/* Importar respostas: fora do protótipo, então montada só com as peças das outras telas do pesquisador
+   (faixa do estudo, campos e botões do formulário, tabela da página de respostas) */
+
+.conteudo {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 32px 24px 72px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.cabecalho {
+  max-width: var(--largura-leitura);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.titulo {
+  margin: 0;
+  font-size: var(--texto-xl);
+  line-height: 1.2;
+}
+
+.cabecalho p {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.formulario {
+  max-width: 36rem;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.versaoUnica {
+  margin: 0;
+}
+
+.arquivo {
+  max-width: 100%;
+  padding: 10px 0;
+  font: inherit;
+}
+
+.arquivo:focus-visible {
+  outline: 2px solid var(--destaque);
+  outline-offset: 2px;
+}
+
+.botoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+}
+
+.previa {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.previa > p {
+  max-width: var(--largura-leitura);
+  margin: 0;
+}
+
+.tituloPrevia {
+  margin: 0;
+  font-size: var(--texto-lg);
+}
+
+.tituloPrevia:focus-visible {
+  outline: 2px solid var(--destaque);
+  outline-offset: 4px;
+}
+
+.rolagem {
+  /* contém o texto visualmente oculto (position: absolute), que senão escaparia do corte */
+  position: relative;
+  overflow-x: auto;
+}
+
+.rolagem:focus-visible {
+  outline: 2px solid var(--destaque);
+  outline-offset: 2px;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.tabela caption {
+  padding-bottom: 8px;
+  text-align: left;
+  color: var(--tinta-suave);
+}
+
+.tabela th,
+.tabela td {
+  padding: 10px 16px 10px 0;
+  border-bottom: 1px solid var(--linha);
+  text-align: left;
+  vertical-align: top;
+}
+
+.tabela thead th {
+  border-bottom: 1px solid var(--tinta);
+  font-size: var(--texto-sm);
+}
+
+.tabela tbody th {
+  font-weight: 400;
+}
+
+.tabelaValores th,
+.tabelaValores td {
+  padding-right: 10px;
+  text-align: right;
+}
+
+.numero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+@media (max-width: 639px) {
+  .conteudo {
+    padding: 24px 16px 56px;
+  }
+}
