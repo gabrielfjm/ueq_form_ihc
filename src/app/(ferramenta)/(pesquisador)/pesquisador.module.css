@@ -1,6 +1,11 @@
 /* Barra superior, faixa de cabeçalho e área de conteúdo das telas r3 a r9 do protótipo */
 
+/* Fixa no topo ao rolar, no computador e no celular; a altura vai para --altura-barra (BarraFixa) */
 .barra {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--fundo);
   border-bottom: 1px solid var(--linha);
 }
 
@@ -48,6 +53,57 @@
 .linkNavegacao[aria-current="page"] {
   border-bottom-color: var(--destaque);
   font-weight: 700;
+}
+
+.botaoMenu {
+  display: none;
+}
+
+/* No celular e em janela estreita, os links ficam atrás do botão Menu: a barra fixa fica numa linha só */
+@media (max-width: 56rem) {
+  .barraInterna {
+    padding: 8px 16px;
+    gap: 8px 16px;
+  }
+
+  .botaoMenu {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--tinta);
+    border-radius: var(--raio);
+    background: var(--fundo);
+    color: var(--tinta);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .navegacao {
+    display: none;
+  }
+
+  .navegacao[data-aberto] {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    gap: 0;
+    padding: 4px 0 8px;
+    border-top: 1px solid var(--linha);
+  }
+
+  .navegacao[data-aberto] .linkNavegacao {
+    min-height: 44px;
+  }
+}
+
+/* Em 320 px a fileira de marcações do logotipo sai da barra, para o nome e o Menu caberem numa linha */
+@media (max-width: 22.5rem) {
+  .inicio svg {
+    display: none;
+  }
 }
 
 .faixa {

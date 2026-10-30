@@ -1,12 +1,13 @@
 import { expect, test } from "@playwright/test";
 import { verificarAcessibilidade } from "./acessibilidade";
-import { cadastrarComTeclado, emailDeTeste, entrarComTeclado, tabAte } from "./contas";
+import { abrirMenuComTeclado, cadastrarComTeclado, emailDeTeste, entrarComTeclado, tabAte } from "./contas";
 
 test("cadastra, sai e entra de novo usando só o teclado", async ({ page }, info) => {
   const email = emailDeTeste(info);
   await cadastrarComTeclado(page, email);
   await expect(page.getByRole("heading", { level: 1, name: "Seus estudos" })).toBeVisible();
 
+  await abrirMenuComTeclado(page);
   await tabAte(page, page.getByRole("button", { name: "Sair" }));
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/entrar\?aviso=saiu$/);

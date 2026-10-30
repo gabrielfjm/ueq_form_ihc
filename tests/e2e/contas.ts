@@ -27,6 +27,19 @@ export async function tabAte(page: Page, alvo: Locator, limite = 30) {
   throw new Error(`O Tab não chegou em ${alvo} depois de ${limite} tentativas`);
 }
 
+// No celular os links da barra ficam atrás do botão Menu; no computador o botão não aparece
+export async function abrirMenu(page: Page) {
+  const menu = page.getByRole("button", { name: "Menu" });
+  if ((await menu.isVisible()) && (await menu.getAttribute("aria-expanded")) === "false") await menu.click();
+}
+
+export async function abrirMenuComTeclado(page: Page) {
+  const menu = page.getByRole("button", { name: "Menu" });
+  if (!(await menu.isVisible()) || (await menu.getAttribute("aria-expanded")) === "true") return;
+  await tabAte(page, menu);
+  await page.keyboard.press("Enter");
+}
+
 export async function cadastrarComTeclado(page: Page, email: string) {
   await page.goto("/cadastrar");
   await tabAte(page, page.getByLabel("Nome"));

@@ -1,0 +1,159 @@
+/* Diagrama em tela cheia: um <dialog> que ocupa a janela inteira, com Voltar fixo no topo */
+
+.janela {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--fundo);
+  color: var(--tinta);
+}
+
+.janela[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.janela::backdrop {
+  background: var(--tinta);
+}
+
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 20px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--linha);
+  background: var(--fundo);
+}
+
+.botao {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--tinta);
+  border-radius: var(--raio);
+  background: var(--fundo);
+  color: var(--tinta);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.botao:hover:not(:disabled) {
+  background: var(--destaque-fundo);
+}
+
+.botao:disabled {
+  border-color: var(--borda-campo);
+  color: var(--tinta-fraca);
+  cursor: not-allowed;
+}
+
+.zoom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.nivel {
+  min-width: 4.5ch;
+  margin: 0;
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 700;
+  text-align: center;
+}
+
+.titulo {
+  flex: 1 1 240px;
+  margin: 0;
+  font-size: var(--texto-lg);
+}
+
+.dica {
+  margin: 0;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+/* No celular a barra fica mais curta: sem a dica de teclado, com o título numa linha própria */
+@media (max-width: 40rem) {
+  .dica {
+    display: none;
+  }
+
+  .titulo {
+    order: 3;
+    flex-basis: 100%;
+    font-size: var(--texto-md);
+  }
+
+  /* Voltar e o zoom numa linha só: os botões de zoom mostram só o ícone, e o texto continua como
+     nome acessível (o leitor de tela diz "Diminuir", "Aumentar", "Ajustar à tela") */
+  .zoom {
+    margin-left: auto;
+    gap: 6px;
+  }
+
+  .zoom .botao {
+    width: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .rotuloZoom {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+/* Em 100% o diagrama ocupa a largura da área; com zoom ele cresce e a área rola nas duas direções */
+.area {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 16px;
+  cursor: grab;
+  /* o dedo rola a área nas duas direções; a pinça do navegador continua funcionando */
+  touch-action: pan-x pan-y pinch-zoom;
+}
+
+.arrastando {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.imagem {
+  display: block;
+  max-width: none;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* Com o diagrama aberto, a página de trás não rola junto */
+:global(html:has(dialog[open])) {
+  overflow: hidden;
+}
+
+@media (forced-colors: active) {
+  .botao {
+    border-color: ButtonText;
+  }
+
+  .botao:disabled {
+    border-color: GrayText;
+    color: GrayText;
+  }
+}

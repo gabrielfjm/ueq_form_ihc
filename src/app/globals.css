@@ -56,6 +56,12 @@ a {
   transform: none;
 }
 
+/* Com a barra fixa, o foco e o destino de uma âncora param abaixo dela, nunca embaixo (WCAG 2.4.11).
+   64px vale até o JavaScript medir a barra de verdade */
+html:has(header[data-barra-fixa]) {
+  scroll-padding-top: calc(var(--altura-barra, 64px) + 16px);
+}
+
 main:focus {
   outline: none;
 }

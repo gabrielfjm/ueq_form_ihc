@@ -137,6 +137,10 @@ Documentação dentro da ferramenta: visão geral, documento com diagrama e docu
 
 <img src="docs/prototipos/alta-fidelidade/r12-documento-requisitos.png" alt="Requisitos: tabela dos requisitos e ficha com os downloads da planilha e do CSV" width="400"> <img src="docs/prototipos/alta-fidelidade/r13-documentacao-sem-login.png" alt="Documentação sem login: barra só com Documentação, Entrar e Criar conta" width="400">
 
+Diagrama em tela cheia, com zoom, e barra fixa no celular com o menu aberto:
+
+<img src="docs/prototipos/alta-fidelidade/r14-diagrama-tela-cheia.png" alt="Diagrama em tela cheia: Voltar, título e zoom em 150% parados no topo, diagrama de casos de uso com atores em boneco" width="400"> <img src="docs/prototipos/alta-fidelidade/r15-barra-celular.png" alt="Barra fixa no celular com o menu aberto: Estudos, Criar estudo, Documentação, Minha conta e Sair" width="200">
+
 ## Protótipos de baixa fidelidade
 
 Esboços desenhados à mão antes da alta fidelidade, em [docs/prototipos/](docs/prototipos/).

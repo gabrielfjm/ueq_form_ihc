@@ -109,6 +109,7 @@ describe("renderizarMarkdown", () => {
     const { html } = renderizarMarkdown(ler(documento?.arquivo ?? ""), documento?.arquivo ?? "");
     expect(html).toMatch(/<img src="\/api\/documentacao\/diagramas\/[0-9a-f]{12}\.svg" alt="Diagrama: Diagrama 1 · Área do pesquisador\./);
     expect(html).toContain("<summary>Ver o código do diagrama</summary>");
+    expect(html).toMatch(/<button type="button" class="ampliar" data-ampliar="\/api\/documentacao\/diagramas\/[0-9a-f]{12}\.svg"/);
     expect(html).not.toContain('class="language-mermaid"');
   });
 });

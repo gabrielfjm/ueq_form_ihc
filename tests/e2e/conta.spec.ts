@@ -1,10 +1,13 @@
 import { expect, test } from "@playwright/test";
 import { verificarAcessibilidade } from "./acessibilidade";
-import { SENHA, cadastrarComTeclado, emailDeTeste, entrarComTeclado } from "./contas";
+import { SENHA, abrirMenu, cadastrarComTeclado, emailDeTeste, entrarComTeclado } from "./contas";
 
 test("Minha conta salva os dados, anuncia o resultado e passa no axe", async ({ page }, info) => {
   await cadastrarComTeclado(page, emailDeTeste(info));
+  await abrirMenu(page);
   await page.getByRole("link", { name: "Minha conta" }).click();
+  await expect(page).toHaveURL(/\/conta$/);
+  await abrirMenu(page);
   await expect(page.getByRole("link", { name: "Minha conta" })).toHaveAttribute("aria-current", "page");
   await verificarAcessibilidade(page);
 

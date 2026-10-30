@@ -21,7 +21,8 @@ export async function GET(_request: Request, { params }: { params: Promise<{ cam
         "Content-Type": "image/svg+xml",
         // o nome é o hash do diagrama: o mesmo nome é sempre o mesmo desenho
         "Cache-Control": "public, max-age=31536000, immutable",
-        "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'",
+        // img-src data: só para o boneco dos atores, que vem embutido no próprio SVG dos casos de uso
+        "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; img-src data:",
         "X-Content-Type-Options": "nosniff",
       },
     });
