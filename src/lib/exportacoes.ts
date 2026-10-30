@@ -11,9 +11,10 @@ export type ParticipacaoExportada = {
   concluidaEm: string;
   incluidaNaAnalise: boolean;
   suspeita: boolean;
-  // Código do idioma em que a pessoa respondeu (data/ueq-idiomas.json)
-  idioma: string;
-  traducaoAprovada: boolean;
+  origem: "link" | "importada";
+  // Código do idioma em que a pessoa respondeu (data/ueq-idiomas.json); null nas importadas, que não dizem
+  idioma: string | null;
+  traducaoAprovada: boolean | null;
   demografia: Demografia | null;
   // os 26 valores de 1 a 7, na ordem oficial
   valores: number[];
@@ -30,6 +31,7 @@ function cabecalhoRespostas(): string[] {
     "concluida_em",
     "incluida_na_analise",
     "suspeita",
+    "origem",
     "idioma",
     "traducao_aprovada",
     "faixa_etaria",
@@ -48,8 +50,9 @@ function linhaRespostas(participacao: ParticipacaoExportada, valores: readonly n
     participacao.concluidaEm,
     simNao(participacao.incluidaNaAnalise),
     simNao(participacao.suspeita),
+    participacao.origem,
     participacao.idioma,
-    simNao(participacao.traducaoAprovada),
+    participacao.traducaoAprovada === null ? null : simNao(participacao.traducaoAprovada),
     demografia?.faixaEtaria,
     demografia?.genero,
     demografia?.escolaridade,

@@ -33,6 +33,7 @@ async function participacoesExportadas(estudoId: string): Promise<ParticipacaoEx
         incluidaNaAnalise: true,
         suspeita: true,
         idioma: true,
+        origem: true,
         demografia: true,
         versao: { select: { nome: true } },
         respostas: { select: { valor: true, item: { select: { numero: true } } } },
@@ -42,15 +43,17 @@ async function participacoesExportadas(estudoId: string): Promise<ParticipacaoEx
   return participacoes.map((participacao) => {
     const valores = Array<number>(itens.length).fill(0);
     for (const resposta of participacao.respostas) valores[resposta.item.numero - 1] = resposta.valor;
-    const idioma = infoIdioma(ehIdioma(participacao.idioma) ? participacao.idioma : IDIOMA_PADRAO);
+    const importada = participacao.origem === "IMPORTADA";
+    const idioma = importada ? null : infoIdioma(ehIdioma(participacao.idioma) ? participacao.idioma : IDIOMA_PADRAO);
     return {
       id: participacao.id,
       versao: participacao.versao.nome,
       concluidaEm: participacao.concluidaEm ? DATA_HORA.format(participacao.concluidaEm) : "",
       incluidaNaAnalise: participacao.incluidaNaAnalise,
       suspeita: participacao.suspeita,
-      idioma: idioma.codigo,
-      traducaoAprovada: idioma.traducaoAprovada,
+      origem: importada ? "importada" : "link",
+      idioma: idioma?.codigo ?? null,
+      traducaoAprovada: idioma?.traducaoAprovada ?? null,
       demografia: (participacao.demografia ?? null) as Demografia | null,
       valores,
     };
