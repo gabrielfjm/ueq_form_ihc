@@ -197,6 +197,32 @@ test("sair sem enviar confirma em linha e não grava nada", async ({ page, brows
   await estudo.fechar();
 });
 
+// Quem responde só vê o formulário e o seletor de idioma: nenhum link sai do próprio estudo
+async function soLinksDoFormulario(page: Page) {
+  await expect(page.getByRole("navigation", { name: "Principal" })).toHaveCount(0);
+  const destinos = await page.locator("a[href]").evaluateAll((links) => links.map((link) => link.getAttribute("href") ?? ""));
+  for (const destino of destinos) expect(destino, destino).toMatch(/^(#|\/r\/)/);
+}
+
+test("o link do participante só mostra o formulário e o seletor de idioma, sem caminho para a ferramenta", async ({ page, browser }, info) => {
+  const estudo = await estudoAberto(browser, info);
+  await page.goto(estudo.link);
+  await expect(page.getByLabel("Idioma")).toBeVisible();
+  await soLinksDoFormulario(page);
+
+  await page.getByRole("button", { name: "Concordo e quero participar" }).click();
+  await expect(page).toHaveURL(/\/questionario$/);
+  await soLinksDoFormulario(page);
+  await responder(page);
+  await page.getByRole("button", { name: "Enviar respostas" }).click();
+  await expect(page).toHaveURL(/\/sobre-voce$/);
+  await soLinksDoFormulario(page);
+  await page.getByRole("button", { name: "Pular esta etapa" }).click();
+  await expect(page).toHaveURL(/\/fim$/);
+  await soLinksDoFormulario(page);
+  await estudo.fechar();
+});
+
 test("não quero participar sai sem gravar e o link respondido não aceita outro envio", async ({ page, browser }, info) => {
   const estudo = await estudoAberto(browser, info);
   await page.goto(estudo.link);

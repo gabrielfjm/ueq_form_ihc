@@ -11,8 +11,8 @@ const config = [
     },
   },
   {
-    // O seed roda no terminal: a saída é o resultado dele, não log esquecido
-    files: ["prisma/**"],
+    // O seed e os scripts rodam no terminal: a saída é o resultado deles, não log esquecido
+    files: ["prisma/**", "scripts/**"],
     rules: { "no-console": "off" },
   },
   {

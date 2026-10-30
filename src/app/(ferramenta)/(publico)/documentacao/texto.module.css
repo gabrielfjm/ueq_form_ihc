@@ -1,0 +1,167 @@
+/* O HTML vem do Markdown dos documentos: os estilos alcançam os elementos por :global dentro do artigo */
+
+.texto {
+  flex: 999 1 560px;
+  min-width: 0;
+}
+
+.texto :global(h2) {
+  margin: 40px 0 12px;
+  font-size: 1.625rem;
+  line-height: 1.2;
+}
+
+.texto > :global(h2:first-child) {
+  margin-top: 8px;
+}
+
+.texto :global(h3) {
+  margin: 28px 0 10px;
+  font-size: var(--texto-lg);
+  line-height: 1.25;
+}
+
+.texto :global(h4) {
+  margin: 24px 0 8px;
+  font-size: var(--texto-md);
+}
+
+.texto :global(p),
+.texto :global(ul),
+.texto :global(ol),
+.texto :global(blockquote) {
+  margin: 0 0 14px;
+  max-width: var(--largura-leitura);
+}
+
+.texto :global(ul),
+.texto :global(ol) {
+  padding-left: 22px;
+}
+
+.texto :global(li) + :global(li) {
+  margin-top: 6px;
+}
+
+.texto :global(blockquote) {
+  padding: 12px 16px;
+  border-left: 3px solid var(--destaque);
+  background: var(--fundo-painel);
+}
+
+.texto :global(blockquote p:last-child) {
+  margin-bottom: 0;
+}
+
+.texto :global(code) {
+  padding: 0 4px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--fundo-painel);
+  font-size: var(--texto-sm);
+  overflow-wrap: anywhere;
+}
+
+/* Bloco de código (comandos, árvore de pastas) é conteúdo do documento, não interface: a fonte
+   monoespaçada é o que mantém o alinhamento das colunas */
+.texto :global(pre) {
+  margin: 0 0 16px;
+  padding: 16px;
+  overflow-x: auto;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--fundo-painel);
+}
+
+.texto :global(pre code) {
+  padding: 0;
+  border: 0;
+  background: none;
+  font-family: ui-monospace, Consolas, monospace;
+  overflow-wrap: normal;
+}
+
+.texto :global(.rolagem) {
+  margin: 0 0 16px;
+  overflow-x: auto;
+}
+
+.texto :global(table) {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--texto-sm);
+}
+
+.texto :global(th) {
+  padding: 8px 16px 8px 0;
+  border-bottom: 2px solid var(--tinta);
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.texto :global(td) {
+  padding: 10px 16px 10px 0;
+  border-bottom: 1px solid var(--linha);
+  vertical-align: top;
+}
+
+.texto :global(.figura) {
+  margin: 8px 0 12px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+}
+
+.texto :global(.figura-imagem) {
+  padding: 16px;
+  overflow-x: auto;
+  background: var(--fundo);
+}
+
+.texto :global(.figura-imagem img) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+
+.texto :global(figcaption) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding: 4px 16px;
+  border-top: 1px solid var(--linha);
+  background: var(--fundo-painel);
+  font-size: var(--texto-sm);
+}
+
+.texto :global(.acao) {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-weight: 700;
+}
+
+.texto :global(.codigo-diagrama) {
+  margin: 0 0 20px;
+}
+
+/* Sem display: flex no summary, que esconderia o triângulo de abrir e fechar */
+.texto :global(.codigo-diagrama summary) {
+  padding: 10px 0;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.texto :global(.aviso-diagrama) {
+  padding: 12px 16px;
+  border: 1px solid var(--alerta);
+  background: var(--alerta-fundo);
+}
+
+/* Âncoras de requisito (requisitos.md#rf19) e títulos não ficam colados no topo ao pular para eles */
+.texto :global([id]) {
+  scroll-margin-top: 16px;
+}

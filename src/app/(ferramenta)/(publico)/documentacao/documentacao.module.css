@@ -1,0 +1,178 @@
+/* Telas r10 a r12 do protótipo: faixa com as abas das seções, sub-abas dos documentos e ficha lateral */
+
+.faixa {
+  background: var(--fundo-faixa);
+  border-bottom: 1px solid var(--linha);
+}
+
+.faixaInterna {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 40px 24px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.area {
+  margin: 0;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-fraca);
+}
+
+.migalha {
+  margin: 0;
+  font-size: var(--texto-sm);
+}
+
+.titulo {
+  margin: 0;
+  font-size: 2.75rem;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.descricao {
+  margin: 0;
+  max-width: var(--largura-leitura);
+  color: var(--tinta-suave);
+}
+
+.abas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 28px;
+  margin-top: 14px;
+}
+
+.aba {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  border-bottom: 3px solid transparent;
+  color: var(--tinta-suave);
+  text-decoration: none;
+}
+
+.aba:hover {
+  color: var(--tinta);
+  border-bottom-color: var(--linha);
+}
+
+.aba[aria-current="page"] {
+  color: var(--tinta);
+  font-weight: 700;
+  border-bottom-color: var(--destaque);
+}
+
+.faixaSubabas {
+  border-bottom: 1px solid var(--linha);
+}
+
+.subabas {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 4px 24px 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 28px;
+}
+
+.subaba {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  border-bottom: 2px solid transparent;
+  color: var(--tinta-suave);
+  font-size: var(--texto-md);
+  text-decoration: none;
+}
+
+.subaba:hover {
+  color: var(--tinta);
+  border-bottom-color: var(--linha);
+}
+
+.subaba[aria-current="page"] {
+  color: var(--tinta);
+  font-weight: 700;
+  border-bottom-color: var(--destaque);
+}
+
+.conteudo {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 48px;
+}
+
+.ficha {
+  flex: 1 1 300px;
+  min-width: 0;
+  box-sizing: border-box;
+  padding: 24px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+}
+
+.fichaTitulo {
+  margin: 0 0 8px;
+  font-size: 1.3125rem;
+}
+
+.fichaLista {
+  margin: 0;
+}
+
+.fichaLista > div {
+  padding: 14px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.fichaLista > div:last-child {
+  padding-bottom: 0;
+}
+
+.fichaLista dt {
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+.fichaLista dd {
+  margin: 2px 0 0;
+}
+
+.arquivo {
+  overflow-wrap: anywhere;
+}
+
+.acao {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-weight: 700;
+}
+
+.indice {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+
+.indice li + li {
+  margin-top: 4px;
+}
+
+@media (forced-colors: active) {
+  .aba[aria-current="page"],
+  .subaba[aria-current="page"] {
+    border-bottom-color: Highlight;
+  }
+}

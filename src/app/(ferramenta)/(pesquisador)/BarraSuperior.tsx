@@ -1,6 +1,6 @@
 "use client";
 
-import { Folder, LogOut, Plus, User, type LucideIcon } from "lucide-react";
+import { BookOpen, Folder, LogOut, Plus, User, type LucideIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,7 +15,7 @@ type ItemNavegacao = {
   atual: (caminho: string) => boolean;
 };
 
-// docs/design.md, Layout: barra fina com 4 links de ícone e texto, sem sidebar
+// docs/design.md, Layout: barra fina com links de ícone e texto, sem sidebar
 const ITENS: readonly ItemNavegacao[] = [
   {
     href: "/estudos",
@@ -24,6 +24,12 @@ const ITENS: readonly ItemNavegacao[] = [
     atual: (caminho) => caminho.startsWith("/estudos") && caminho !== "/estudos/novo",
   },
   { href: "/estudos/novo", texto: "Criar estudo", Icone: Plus, atual: (caminho) => caminho === "/estudos/novo" },
+  {
+    href: "/documentacao",
+    texto: "Documentação",
+    Icone: BookOpen,
+    atual: (caminho) => caminho === "/documentacao" || caminho.startsWith("/documentacao/"),
+  },
   { href: "/conta", texto: "Minha conta", Icone: User, atual: (caminho) => caminho === "/conta" },
 ];
 
