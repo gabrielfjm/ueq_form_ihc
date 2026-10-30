@@ -86,13 +86,25 @@ Escala (rem): 0.8125 · 0.9375 · 1.0625 · 1.25 · 1.625 · 2.25. Corpo em 1.06
 
 - Conteúdo alinhado à esquerda, largura máxima de leitura ~72ch, painéis de dados até 1120px
 - Grid de 8px. Espaço vertical generoso entre seções (48 a 64px), apertado dentro de tabelas
-- Navegação do pesquisador: barra superior fina com nome da ferramenta à esquerda e 5 links com ícone e texto: Estudos, Criar estudo, Documentação, Minha conta, Sair. Sem sidebar. Na documentação, quem não entrou vê a mesma barra só com Documentação, Entrar (`log-in`) e Criar conta (`user-plus`). O link do participante não tem barra nenhuma
+- Navegação do pesquisador: barra superior fina com nome da ferramenta à esquerda e 5 links com ícone e texto: Estudos, Criar estudo, Documentação, Minha conta, Sair. Sem sidebar. Quem não entrou (página inicial e documentação) vê a mesma barra só com Documentação e Entrar (`log-in`); Criar conta (`user-plus`) fica na página inicial e dentro da janela de Entrar. O link do participante não tem barra nenhuma
 - A barra fica fixa no topo durante toda a rolagem, no computador e no celular. Até 56rem de largura os links ficam atrás de um botão Menu (`menu`, e `x` quando aberto, sempre com o texto "Menu"), para a barra fixa ocupar uma linha só; o menu abre os links em coluna logo abaixo e fecha com Esc ou ao trocar de página. Em 320 px a fileira de marcações do logotipo sai da barra para o nome e o Menu caberem
 - Tabelas são cidadãs de primeira classe: cabeçalho em negrito, linhas separadas por régua de 1px, números alinhados à direita
-- Botão primário: fundo `--tinta`, texto `--fundo`, raio 2px, altura 40px. Secundário: borda 1px `--tinta`, fundo transparente. Ação destrutiva: texto `--alerta` sublinhado, com confirmação em linha (não modal)
+- Botão primário: fundo `--tinta`, texto `--fundo`, raio 2px, altura 40px. Secundário: borda 1px `--tinta`, fundo transparente. Ação destrutiva: texto `--alerta` sublinhado, que abre uma janela de confirmação (ver "Janelas")
 - Foco visível sempre: `outline: 2px solid var(--destaque); outline-offset: 2px`
 - Faixa de cabeçalho em `--fundo-faixa` no topo das páginas do estudo, com título, status, resumo e abas
 - Telas largas do pesquisador usam duas colunas (conteúdo + ficha lateral) em vez de uma coluna estreita com a direita vazia
+- Página inicial (`/`): apresenta a ferramenta para quem não tem conta. Texto alinhado à esquerda com o item 1 do questionário como figura, seções numeradas (Como funciona, O questionário, Para o participante, Resultados e dados, Documentação) e a tabela das escalas. Sem hero centralizado nem cards
+
+## Janelas
+
+- Entrar e Criar conta abrem numa janela por cima da página em que a pessoa está, com o formulário à esquerda e o painel do instrumento à direita (as telas r1 e r2 dentro da janela). Criar conta e Entrar trocam o formulário dentro da mesma janela. `/entrar` e `/cadastrar` mostram a página inicial com a janela aberta
+- A janela de acesso cabe inteira na tela, sem rolar: as medidas encolhem com a altura (notebook de 768 px) e, até 40rem de largura, ela ocupa a tela toda, sem o painel (que volta, só com o título, quando a tela é alta)
+- Sair e toda exclusão (estudo, conta, versão do estudo) pedem confirmação numa janela estreita: título em pergunta ("Excluir este estudo?"), o que vai acontecer, Cancelar e o botão da ação. Nas exclusões, o aviso fica em `--alerta-fundo` com borda `--alerta`, o campo de confirmação (título ou e-mail digitado) continua e o botão é `--alerta`. Sair usa o botão primário, porque não apaga nada. No celular, os botões ficam em coluna, com a ação em cima
+- `<dialog>` nativo com `showModal()`: foco preso dentro, página atrás inerte e sem rolar, Esc e o `x` (Fechar) fecham, e o foco volta para quem abriu. Fundo da página escurecido com `--tinta` a 62%, borda de 1px `--linha-forte`, raio 2px. Sem sombra nem desfoque
+- Foco inicial: no primeiro campo (Entrar, Criar conta, exclusões) ou no botão da ação quando não há campo (Sair, Remover versão)
+- "Sair sem enviar", no questionário do participante, também confirma numa janela (protótipo p8): a pergunta é o título, "Continuar respondendo" é o botão primário e começa com o foco, e Esc também continua. Sem ícone e sem o `x`, como todas as telas do participante; os textos vêm do idioma escolhido
+- Documento em produção (protótipo r23): enquanto o arquivo não entra na lista `PRONTOS` de `src/lib/documentacao/catalogo.ts`, a aba Documentação mostra as mesmas abas e sub-abas, a fileira de marcações vazia, "Em produção" com o ponto vazado do rascunho e a ficha com o que o documento vai trazer, sem arquivo, downloads nem índice. A visão geral lista a situação de cada documento
+- Ícone do site (`src/app/icon.svg` e `apple-icon.tsx`): três marcações do diferencial semântico, a última preenchida, em branco sobre `--destaque`
 
 ## Ícones
 
@@ -115,7 +127,7 @@ A tela mais importante. É onde a equipe mostra que entende de IHC.
 - Itens em linhas, uma por item, com régua fina entre elas. Termo da esquerda alinhado à direita, 7 círculos no centro, termo da direita alinhado à esquerda. Nada de números visíveis
 - Círculos com área de toque de 44×44px, contorno 1.5px `--tinta`, preenchido em `--tinta` quando marcado
 - Teclado: comportamento nativo de rádio (Tab entre itens, setas dentro do item). Sem atalho de tecla única, que conflita com leitor de tela (WCAG 2.1.4). Cada item é um `<fieldset>` com `<legend>`, detalhes em `docs/ihc.md` seção 4.1
-- Link discreto "Sair sem enviar" no rodapé, com confirmação em linha
+- Link discreto "Sair sem enviar" no rodapé, que pede confirmação numa janela (ver "Janelas")
 - Celular (< 640px): os dois termos ficam numa linha acima dos 7 círculos, um em cada ponta
 - Progresso: texto "14 de 26" fixo no rodapé + a fileira de 7 marcações como ícone. Sem barra de progresso colorida
 - Ao enviar com item faltando: resumo de erros no topo com link para cada item ("Faltam 2 itens: 7 e 19"), foco vai para o resumo, e cada item faltando ganha borda esquerda `--alerta` + o texto "Este item não foi respondido"
