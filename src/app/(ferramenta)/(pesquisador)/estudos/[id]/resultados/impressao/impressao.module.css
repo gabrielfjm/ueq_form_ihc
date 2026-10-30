@@ -1,0 +1,66 @@
+/* Painel para impressão e PDF: A4, margens de 18 mm (prompts/10-extensoes.md). O tamanho e as
+   margens vêm do @page em globals.css; o resto do layout é o do painel na tela */
+
+.pagina {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.voltar {
+  margin: 0;
+}
+
+.cabecalho {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--tinta);
+}
+
+.ferramenta {
+  margin: 0;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+.titulo {
+  margin: 0;
+  font-size: var(--texto-2xl);
+  line-height: 1.15;
+}
+
+.dados {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+}
+
+.dados dt {
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+.dados dd {
+  margin: 0;
+  font-weight: 700;
+}
+
+@media print {
+  .pagina {
+    max-width: none;
+    padding: 0;
+    gap: 20px;
+  }
+
+  .voltar {
+    display: none;
+  }
+
+  .titulo {
+    font-size: 1.75rem;
+  }
+}
