@@ -2,7 +2,7 @@
 
 25 casos de uso descrevem o que cada ator faz com a Ferramenta UEQ. Os diagramas seguem a notação UML de casos de uso, desenhada em Mermaid para aparecer direto no GitHub:
 
-- o retângulo com «ator» é o ator;
+- o boneco é o ator: os primários, que iniciam o caso de uso, ficam à esquerda; os secundários, que participam sem iniciar, à direita. Quando o ator é outro sistema, o nome leva «sistema»;
 - a forma arredondada é o caso de uso;
 - a moldura é o limite do sistema;
 - a linha cheia liga o ator ao caso de uso que ele inicia;
@@ -21,15 +21,24 @@ A ligação de cada caso de uso com os requisitos está na [matriz de rastreabil
 | Mantenedor | Quem roda comandos na instalação: seed, migrations, recálculo | [PE06](personas.md#pe06) |
 | Sistema | Comportamento disparado pela própria ferramenta, sem ação direta de um ator (cálculo, regra de suspeita) | — |
 
+Atores secundários: participam de um caso de uso sem iniciá-lo.
+
+| Ator secundário | Onde participa | O que troca com a ferramenta |
+|---|---|---|
+| Planilha oficial do UEQ «sistema» | [UC18](#uc18) Exportar dados em CSV, [UC20](#uc20) Importar respostas | Recebe as respostas no formato dela (UEQ Data Analysis Tool) e é a origem do CSV importado |
+| GitHub «sistema» | [UC25](#uc25) Consultar a documentação | Guarda o arquivo de cada documento, aberto pelo link Ver no GitHub |
+| ueq-online.org «sistema» | [UC23](#uc23) Carregar os itens oficiais | Fonte dos termos, instruções e benchmark oficiais copiados para `data/` |
+
 ## Diagrama 1 · Área do pesquisador
 
 ```mermaid
 flowchart LR
-    visitante["«ator»<br/>Visitante"]
-    pesquisador["«ator»<br/>Pesquisador"]
+    subgraph primarios[" "]
+    visitante@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "Visitante", pos: "b", w: 40, h: 64, constraint: "on" }
+    pesquisador@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "Pesquisador", pos: "b", w: 40, h: 64, constraint: "on" }
+    end
 
     subgraph sistema["Ferramenta UEQ · área do pesquisador"]
-        direction TB
         uc01(["UC01 Cadastrar conta"])
         uc02(["UC02 Entrar e sair"])
         uc03(["UC03 Gerenciar a conta"])
@@ -75,8 +84,20 @@ flowchart LR
     uc18 -. "«include»" .-> uc15
     uc20 -. "«include»" .-> uc22
 
+    uc18 --- planilha
+    uc20 --- planilha
+    uc25 --- github
+
     classDef pendente stroke-dasharray: 5 5
     class uc24 pendente
+    subgraph secundarios[" "]
+    planilha@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "«sistema»<br/>Planilha oficial do UEQ", pos: "b", w: 40, h: 64, constraint: "on" }
+    github@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "«sistema»<br/>GitHub", pos: "b", w: 40, h: 64, constraint: "on" }
+    end
+    style primarios fill:transparent,stroke:transparent
+    style secundarios fill:transparent,stroke:transparent
+    classDef ator fill:transparent,stroke:transparent
+    class visitante,pesquisador,planilha,github ator
 ```
 
 UC24 está tracejado porque está pendente: só existe a estrutura de dados (ver [RF51](requisitos.md#rf51)).
@@ -85,11 +106,12 @@ UC24 está tracejado porque está pendente: só existe a estrutura de dados (ver
 
 ```mermaid
 flowchart LR
-    participante["«ator»<br/>Participante"]
-    mantenedor["«ator»<br/>Mantenedor"]
+    subgraph primarios[" "]
+    participante@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "Participante", pos: "b", w: 40, h: 64, constraint: "on" }
+    mantenedor@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "Mantenedor", pos: "b", w: 40, h: 64, constraint: "on" }
+    end
 
     subgraph sistema["Ferramenta UEQ · link público e manutenção"]
-        direction TB
         uc10(["UC10 Responder o questionário"])
         uc11(["UC11 Escolher o idioma"])
         uc12(["UC12 Informar dados opcionais"])
@@ -102,6 +124,15 @@ flowchart LR
     participante --- uc10
     mantenedor --- uc21
     mantenedor --- uc23
+    uc23 --- ueqonline
+
+    subgraph secundarios[" "]
+    ueqonline@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "«sistema»<br/>ueq-online.org", pos: "b", w: 40, h: 64, constraint: "on" }
+    end
+    style primarios fill:transparent,stroke:transparent
+    style secundarios fill:transparent,stroke:transparent
+    classDef ator fill:transparent,stroke:transparent
+    class participante,mantenedor,ueqonline ator
 
     uc11 -. "«extend»" .-> uc10
     uc12 -. "«extend»" .-> uc10
