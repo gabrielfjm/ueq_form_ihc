@@ -1,4 +1,6 @@
+import { Download } from "lucide-react";
 import type { Metadata, Route } from "next";
+import { nomeDoArquivo } from "@/lib/exportar-estudo";
 import { contagemDeRespostas, estudoDoPesquisador } from "@/lib/estudos";
 import { analisarResultados } from "@/lib/resultados";
 import { exigirPesquisador } from "@/lib/sessao";
@@ -48,6 +50,14 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
     return `/estudos/${estudo.id}/resultados${consulta ? `?${consulta}` : ""}` as Route;
   };
 
+  // A seleção atual vai junto para o PDF do painel
+  const selecao = new URLSearchParams();
+  for (const chave of ["versao", "modo", "itens"]) {
+    const valor = texto(busca[chave]);
+    if (valor) selecao.set(chave, valor);
+  }
+  const consultaPainel = selecao.size > 0 ? `?${selecao.toString()}` : "";
+
   return (
     <>
       <FaixaEstudo
@@ -79,7 +89,20 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
             </p>
           </section>
         ) : comparando ? (
-          <VisaoComparacao versoes={resultados.porVersao} benchmark={resultados.benchmark} faixaNeutra={resultados.faixaNeutra} />
+          <>
+            <VisaoComparacao versoes={resultados.porVersao} benchmark={resultados.benchmark} faixaNeutra={resultados.faixaNeutra} />
+            <p className={estilos.pdfComparacao}>
+              <a
+                href={`/api/estudos/${estudo.id}/painel-pdf${consultaPainel}`}
+                download={nomeDoArquivo(estudo.titulo, "painel")}
+                className={estilos.linkExportar}
+              >
+                <Download size={18} strokeWidth={1.5} aria-hidden="true" />
+                <span>Painel em PDF</span>
+              </a>
+              <span>Esta comparação em A4, com os gráficos em vetor.</span>
+            </p>
+          </>
         ) : (
           <VisaoUmaVersao
             analise={analise}
@@ -92,7 +115,7 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
           />
         )}
         {/* As exportações saem do estudo inteiro; ficam no fim do modo "Uma versão", como no protótipo r6 */}
-        {respostas.total > 0 && !comparando && <SecaoExportar estudoId={estudo.id} titulo={estudo.titulo} numero={resultados.todas.n === 0 ? 1 : 4} />}
+        {respostas.total > 0 && !comparando && <SecaoExportar estudoId={estudo.id} titulo={estudo.titulo} numero={resultados.todas.n === 0 ? 1 : 4} consulta={consultaPainel} />}
       </div>
     </>
   );

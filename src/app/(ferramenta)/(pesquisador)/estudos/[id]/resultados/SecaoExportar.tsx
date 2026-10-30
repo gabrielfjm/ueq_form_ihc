@@ -27,11 +27,26 @@ const EXPORTACOES: readonly { tipo: TipoExportacao; nome: string; uso: string }[
   },
 ];
 
-export function SecaoExportar({ estudoId, titulo, numero }: { estudoId: string; titulo: string; numero: number }) {
+type Propriedades = {
+  estudoId: string;
+  titulo: string;
+  numero: number;
+  // A mesma seleção da tela (?versao=…), para o PDF sair igual ao que a pessoa está vendo
+  consulta: string;
+};
+
+export function SecaoExportar({ estudoId, titulo, numero, consulta }: Propriedades) {
   return (
     <section aria-labelledby="titulo-exportar" className={estilos.secao}>
       <TituloSecao id="titulo-exportar" numero={numero}>Exportar</TituloSecao>
       <ul className={estilos.exportar}>
+        <li>
+          <a href={`/api/estudos/${estudoId}/painel-pdf${consulta}`} download={nomeDoArquivo(titulo, "painel")} className={estilos.linkExportar}>
+            <Download size={18} strokeWidth={1.5} aria-hidden="true" />
+            <span>Painel em PDF</span>
+          </a>
+          <p>Este painel, com a versão escolhida, em A4 e com os gráficos em vetor. Para anexar ao relatório ou imprimir.</p>
+        </li>
         {EXPORTACOES.map(({ tipo, nome, uso }) => (
           <li key={tipo}>
             {/* Download direto, sem abrir aba nova; o servidor manda o arquivo como anexo */}

@@ -61,8 +61,9 @@ async function participacoesExportadas(estudoId: string): Promise<ParticipacaoEx
 }
 
 // docs/ihc.md §4.4: nome legível e datado, ueq_[slug-do-titulo]_[tipo]_[aaaa-mm-dd].csv
-export function nomeDoArquivo(titulo: string, tipo: TipoExportacao): string {
-  return `ueq_${slugDoTitulo(titulo)}_${tipo}_${hojeEmBrasilia().toISOString().slice(0, 10)}.csv`;
+export function nomeDoArquivo(titulo: string, tipo: TipoExportacao | "painel"): string {
+  const extensao = tipo === "painel" ? "pdf" : "csv";
+  return `ueq_${slugDoTitulo(titulo)}_${tipo}_${hojeEmBrasilia().toISOString().slice(0, 10)}.${extensao}`;
 }
 
 export async function gerarExportacao(
