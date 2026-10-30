@@ -74,10 +74,14 @@ class RenderizadorDocumento extends Renderer {
       return `<p class="aviso-diagrama">Este diagrama ainda não foi gerado. Rode <code>pnpm docs:diagramas</code>.</p>\n${codigo}`;
     }
     const endereco = `/api/documentacao/diagramas/${nome}`;
-    // O diagrama é uma imagem: o texto da seção e o código logo abaixo são a alternativa em texto (WCAG 1.1.1)
+    // O diagrama é uma imagem: o texto da seção e o código logo abaixo são a alternativa em texto (WCAG 1.1.1).
+    // Clicar nele ou em "Abrir em tamanho real" abre a tela cheia (ArtigoDocumento); sem JavaScript, o link
+    // ainda abre o SVG
+    const ampliar = `data-ampliar="${endereco}" data-legenda="${legenda}"`;
     return (
-      `<figure class="figura"><div class="figura-imagem"><img src="${endereco}" alt="Diagrama: ${legenda}. A descrição está no texto desta seção." loading="lazy"></div>` +
-      `<figcaption><span>${legenda}</span><a class="acao" href="${endereco}">${ICONE_LINK}<span>Abrir em tamanho real</span></a></figcaption></figure>\n${codigo}`
+      `<figure class="figura"><div class="figura-imagem"><button type="button" class="ampliar" ${ampliar} aria-label="Ampliar em tela cheia: ${legenda}">` +
+      `<img src="${endereco}" alt="Diagrama: ${legenda}. A descrição está no texto desta seção." loading="lazy"></button></div>` +
+      `<figcaption><span>${legenda}</span><a class="acao" href="${endereco}" ${ampliar}>${ICONE_LINK}<span>Abrir em tamanho real</span></a></figcaption></figure>\n${codigo}`
     );
   }
 

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { SECOES, VISAO_GERAL, enderecoDoDocumento, secaoDoDocumento, type Documento } from "@/lib/documentacao/catalogo";
 import type { DocumentoRenderizado } from "@/lib/documentacao/markdown";
 import estilos from "./documentacao.module.css";
+import { ArtigoDocumento } from "./ArtigoDocumento";
 import { FichaDocumento } from "./FichaDocumento";
 import texto from "./texto.module.css";
 
@@ -74,8 +75,7 @@ export function PaginaDocumento({ documento, renderizado }: { documento: Documen
         </div>
       )}
       <div className={estilos.conteudo}>
-        {/* HTML gerado dos .md do próprio repositório (src/lib/documentacao/markdown.ts) */}
-        <article className={texto.texto} dangerouslySetInnerHTML={{ __html: renderizado.html }} />
+        <ArtigoDocumento className={texto.texto} html={renderizado.html} />
         <FichaDocumento documento={documento} secoes={renderizado.secoes} />
       </div>
     </>

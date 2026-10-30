@@ -117,6 +117,16 @@
   background: var(--fundo);
 }
 
+/* O diagrama é um botão: clicar abre a tela cheia */
+.texto :global(.ampliar) {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
+}
+
 .texto :global(.figura-imagem img) {
   display: block;
   max-width: 100%;
@@ -161,7 +171,3 @@
   background: var(--alerta-fundo);
 }
 
-/* Âncoras de requisito (requisitos.md#rf19) e títulos não ficam colados no topo ao pular para eles */
-.texto :global([id]) {
-  scroll-margin-top: 16px;
-}

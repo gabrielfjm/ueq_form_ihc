@@ -1,11 +1,12 @@
 import { expect, test } from "@playwright/test";
 import { verificarAcessibilidade } from "./acessibilidade";
-import { cadastrarComTeclado, emailDeTeste } from "./contas";
+import { abrirMenu, cadastrarComTeclado, emailDeTeste } from "./contas";
 
 test("sem conta, a documentação abre com a barra pública, as seções e as sub-abas, e passa no axe", async ({ page }) => {
   await page.goto("/documentacao");
   await expect(page).toHaveURL(/\/documentacao$/);
   const principal = page.getByRole("navigation", { name: "Principal" });
+  await abrirMenu(page);
   await expect(principal.getByRole("link", { name: "Documentação" })).toHaveAttribute("aria-current", "page");
   await expect(principal.getByRole("link", { name: "Entrar" })).toBeVisible();
   await expect(principal.getByRole("link", { name: "Criar conta" })).toBeVisible();
@@ -39,8 +40,10 @@ test("sem conta, a documentação abre com a barra pública, as seções e as su
 test("quem entrou chega à documentação pela barra do pesquisador e continua com ela", async ({ page }, info) => {
   await cadastrarComTeclado(page, emailDeTeste(info));
   const principal = page.getByRole("navigation", { name: "Principal" });
+  await abrirMenu(page);
   await principal.getByRole("link", { name: "Documentação" }).click();
   await expect(page).toHaveURL(/\/documentacao$/);
+  await abrirMenu(page);
   await expect(principal.getByRole("link", { name: "Documentação" })).toHaveAttribute("aria-current", "page");
   await expect(principal.getByRole("link", { name: "Estudos" })).toBeVisible();
   await expect(principal.getByRole("button", { name: "Sair" })).toBeVisible();
@@ -83,4 +86,63 @@ test("endereço fora do catálogo dá 404 e os arquivos só saem da lista", asyn
   // A área do pesquisador continua fechada
   const estudos = await request.get("/estudos", { maxRedirects: 0 });
   expect(estudos.status()).toBe(307);
+});
+
+test("clicar no diagrama abre em tela cheia, com zoom, arrasto, Voltar e Esc", async ({ page }) => {
+  await page.goto("/documentacao/casos-de-uso");
+  const ampliar = page.getByRole("button", { name: "Ampliar em tela cheia: Diagrama 1 · Área do pesquisador" });
+  await ampliar.scrollIntoViewIfNeeded();
+  await ampliar.click();
+
+  const janela = page.getByRole("dialog", { name: "Diagrama 1 · Área do pesquisador" });
+  await expect(janela).toBeVisible();
+  await expect(janela.getByRole("button", { name: "Voltar" })).toBeFocused();
+  // A tela cheia cobre a janela do navegador
+  const tela = page.viewportSize();
+  const caixa = await janela.boundingBox();
+  expect(Math.round(caixa?.width ?? 0)).toBe(tela?.width);
+  const imagem = janela.getByRole("img", { name: /^Diagrama: Diagrama 1/ });
+  await expect.poll(() => imagem.evaluate((elemento: HTMLImageElement) => elemento.naturalWidth)).toBeGreaterThan(0);
+  await verificarAcessibilidade(page);
+
+  // Zoom pelos botões e pelo teclado
+  const nivel = janela.getByRole("status");
+  await expect(nivel).toHaveText("100%");
+  await janela.getByRole("button", { name: "Aumentar" }).click();
+  await janela.getByRole("button", { name: "Aumentar" }).click();
+  await expect(nivel).toHaveText("150%");
+  const area = janela.getByRole("region", { name: /^Diagrama ampliado/ });
+  expect(await area.evaluate((elemento) => elemento.scrollWidth > elemento.clientWidth)).toBe(true);
+
+  // Arrastar move o diagrama, e a barra com Voltar continua parada no topo
+  const antes = await area.evaluate((elemento) => [elemento.scrollLeft, elemento.scrollTop]);
+  const centro = await area.boundingBox();
+  const x = (centro?.x ?? 0) + (centro?.width ?? 0) / 2;
+  const y = (centro?.y ?? 0) + (centro?.height ?? 0) / 2;
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  await page.mouse.move(x - 150, y - 150, { steps: 5 });
+  await page.mouse.up();
+  const depois = await area.evaluate((elemento) => [elemento.scrollLeft, elemento.scrollTop]);
+  expect(depois).not.toEqual(antes);
+  const voltar = janela.getByRole("button", { name: "Voltar" });
+  await expect(voltar).toBeInViewport();
+  expect((await voltar.boundingBox())?.y ?? 999).toBeLessThan(80);
+
+  await page.keyboard.press("-");
+  await expect(nivel).toHaveText("125%");
+  await page.keyboard.press("0");
+  await expect(nivel).toHaveText("100%");
+
+  // Voltar fecha e devolve o foco ao diagrama
+  await voltar.click();
+  await expect(janela).toBeHidden();
+  await expect(ampliar).toBeFocused();
+
+  // Pelo teclado: Enter abre, Esc fecha
+  await page.keyboard.press("Enter");
+  await expect(janela).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(janela).toBeHidden();
+  await expect(ampliar).toBeFocused();
 });
