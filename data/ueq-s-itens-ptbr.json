@@ -1,0 +1,5 @@
+{
+  "fonte": "",
+  "comoPreencher": "Preenchido pela equipe, não pelo Claude (prompts/10-extensoes.md). Fonte: UEQ-S, versão curta oficial em ueq-online.org (Schrepp, Hinderks e Thomaschewski, 2017). Uma entrada por item, na ordem em que o UEQ-S apresenta: ordem (1 a 8), numeroNoUeq (o número do mesmo par em ueq-itens-ptbr.json), termoEsquerdo e termoDireito como aparecem no UEQ-S em português, escala ('pragmatica' ou 'hedonica') e polaridade ('+' se o termo positivo está à direita, '-' se está à esquerda). Os termos têm de ser os do par correspondente do UEQ; se o UEQ-S inverte os lados, a polaridade inverte junto. Preencha fonte com o documento e a data. O teste src/ueq/__tests__/ueq-s.test.ts confere tudo isso assim que houver itens.",
+  "itens": []
+}
