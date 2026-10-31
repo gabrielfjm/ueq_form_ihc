@@ -1,3 +1,4 @@
+import chromiumServidor from "@sparticuz/chromium-min";
 import { cookies } from "next/headers";
 import { chromium } from "playwright";
 import { banco } from "@/lib/banco";
@@ -8,7 +9,29 @@ import { pesquisadorDaSessao } from "@/lib/sessao";
 // O navegador do servidor abre a página de impressão com a sessão de quem pediu. O endereço é sempre o do
 // próprio servidor, nunca o do cabeçalho Host da requisição: senão um Host forjado levaria o cookie de
 // sessão para outro domínio
-const ORIGEM_INTERNA = process.env.URL_INTERNA ?? `http://localhost:${process.env.PORT ?? 3000}`;
+// Na Vercel, o endereço público de produção (o da implantação fica atrás da proteção de deploy)
+const ORIGEM_INTERNA =
+  process.env.URL_INTERNA ??
+  (process.env.VERCEL_ENV === "production" && process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : `http://localhost:${process.env.PORT ?? 3000}`);
+
+// A função da Vercel não tem navegador instalado: baixa um Chromium próprio para servidor na primeira
+// chamada (fica em /tmp enquanto a função estiver de pé). Fora da Vercel, usa o Chromium do Playwright
+const PACOTE_CHROMIUM = "https://github.com/Sparticuz/chromium/releases/download/v153.0.0/chromium-v153.0.0-pack.x64.tar";
+
+async function abrirNavegador() {
+  if (!process.env.VERCEL) return chromium.launch();
+  return chromium.launch({
+    executablePath: await chromiumServidor.executablePath(PACOTE_CHROMIUM),
+    args: chromiumServidor.args,
+  });
+}
+
+// Baixar o Chromium e montar o painel pode passar dos 10 s padrão
+export const maxDuration = 60;
 
 // Só o que muda o painel passa adiante: versão, modo e ordem dos itens
 const PARAMETROS = ["versao", "modo", "itens"] as const;
@@ -31,10 +54,19 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   }
   const sessao = (await cookies()).get(COOKIE_SESSAO)?.value ?? "";
 
-  const navegador = await chromium.launch();
+  const navegador = await abrirNavegador();
   try {
     const contexto = await navegador.newContext();
-    await contexto.addCookies([{ name: COOKIE_SESSAO, value: sessao, url: ORIGEM_INTERNA, httpOnly: true, sameSite: "Lax" }]);
+    await contexto.addCookies([
+      {
+        name: COOKIE_SESSAO,
+        value: sessao,
+        url: ORIGEM_INTERNA,
+        httpOnly: true,
+        sameSite: "Lax",
+        secure: ORIGEM_INTERNA.startsWith("https://"),
+      },
+    ]);
     const pagina = await contexto.newPage();
     const resposta = await pagina.goto(destino.toString(), { waitUntil: "load" });
     if (!resposta?.ok()) return new Response("Não deu para montar o painel. Tente de novo.", { status: 502 });
