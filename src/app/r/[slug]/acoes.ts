@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import protocolo from "../../../../data/protocolo.json";
 import { versaoComMenosRespostas } from "@/lib/balanceamento";
 import { banco } from "@/lib/banco";
+import { cifrarJson } from "@/lib/cripto";
 import { lerDemografia } from "@/lib/demografia";
 import { itensDoQuestionario } from "@/lib/itens-ueq";
 import { ehIdioma } from "@/idiomas";
@@ -43,6 +44,11 @@ export async function consentir(slug: string): Promise<void> {
   );
   if (!versao) redirect(rota(slug));
 
+  // LGPD, art. 15 e 16: participação que ninguém terminou não fica guardada. Quem consentiu e
+  // abandonou há mais de 2 dias não tem resposta gravada; a linha sai junto com a próxima que chega
+  await banco.participacao.deleteMany({
+    where: { concluidaEm: null, criadaEm: { lt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) } },
+  });
   const participacao = await banco.participacao.create({
     data: { versaoId: versao.id, consentiuEm: new Date(), idioma: await idiomaDoParticipante() },
     select: { id: true },
@@ -96,7 +102,8 @@ export async function salvarDemografia(slug: string, dados: FormData): Promise<v
   if (participacao?.concluidaEm && dados.get("acao") === "continuar") {
     const demografia = lerDemografia(dados);
     if (Object.keys(demografia).length > 0) {
-      await banco.participacao.update({ where: { id: participacao.id }, data: { demografia } });
+      // Gravada cifrada (src/lib/cripto.ts): quem copiar o banco não lê o perfil de ninguém
+      await banco.participacao.update({ where: { id: participacao.id }, data: { demografia: cifrarJson(demografia) } });
     }
   }
   await esquecerParticipacao(slug);

@@ -2,6 +2,7 @@ import "server-only";
 import { ehIdioma, IDIOMA_PADRAO, infoIdioma } from "@/idiomas";
 import { banco } from "./banco";
 import { slugDoTitulo } from "./csv";
+import { decifrarJson } from "./cripto";
 import type { Demografia } from "./demografia";
 import { exportarBrutas, exportarPlanilhaOficial, exportarRecodificadas, exportarResultados, type ParticipacaoExportada } from "./exportacoes";
 import { itensDoQuestionario } from "./itens-ueq";
@@ -54,7 +55,7 @@ async function participacoesExportadas(estudoId: string): Promise<ParticipacaoEx
       origem: importada ? "importada" : "link",
       idioma: idioma?.codigo ?? null,
       traducaoAprovada: idioma?.traducaoAprovada ?? null,
-      demografia: (participacao.demografia ?? null) as Demografia | null,
+      demografia: decifrarJson<Demografia>(participacao.demografia),
       valores,
     };
   });

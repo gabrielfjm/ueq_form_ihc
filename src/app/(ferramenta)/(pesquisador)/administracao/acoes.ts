@@ -1,6 +1,5 @@
 "use server";
 
-import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { Prisma } from "@/generated/prisma/client";
@@ -10,9 +9,8 @@ import { CENARIOS_DEMONSTRACAO, criarCenario } from "@/lib/cenarios/cenarios";
 import { errosPorCampo, textoDoCampo, type EstadoFormulario } from "@/lib/formulario";
 import { notificar } from "@/lib/notificacoes";
 import { plural } from "@/lib/texto";
+import { gerarHash } from "@/lib/senhas";
 import { email, nome, senhaNova } from "@/lib/validacao-conta";
-
-const CUSTO_BCRYPT = 10;
 
 export type CampoNovaConta = "nome" | "email" | "senha";
 
@@ -38,7 +36,7 @@ export async function criarConta(
       data: {
         nome: validacao.data.nome,
         email: validacao.data.email,
-        senhaHash: await bcrypt.hash(validacao.data.senha, CUSTO_BCRYPT),
+        senhaHash: await gerarHash(validacao.data.senha),
       },
     });
   } catch (erro) {

@@ -1,19 +1,18 @@
 "use server";
 
-import bcrypt from "bcryptjs";
 import type { Route } from "next";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { Prisma } from "@/generated/prisma/client";
 import { banco } from "@/lib/banco";
 import { errosPorCampo, textoDoCampo, type EstadoFormulario } from "@/lib/formulario";
+import { conferirSenha, gerarHash, precisaNovoHash } from "@/lib/senhas";
 import { criarSessao } from "@/lib/sessao";
+import { bloqueado, JANELA_MINUTOS, limparFalhas, registrarFalha } from "@/lib/tentativas";
 import { destinoInterno, email, nome, senhaDigitada, senhaNova } from "@/lib/validacao-conta";
 
 export type CampoEntrar = "email" | "senha";
 export type CampoCadastro = "nome" | "email" | "senha";
-
-const CUSTO_BCRYPT = 10;
 
 const dadosEntrar = z.object({ email, senha: senhaDigitada("Informe sua senha.") });
 const dadosCadastro = z.object({ nome, email, senha: senhaNova });
@@ -26,10 +25,22 @@ export async function entrar(
   const validacao = dadosEntrar.safeParse({ email: textoDoCampo(dados, "email"), senha: textoDoCampo(dados, "senha") });
   if (!validacao.success) return { envio, erros: errosPorCampo(validacao.error) };
 
+  // Depois de 5 erros em 15 minutos, o e-mail espera: adivinhar senha fica inviável
+  if (await bloqueado(validacao.data.email)) {
+    return {
+      envio,
+      erroGeral: `Muitas tentativas com este e-mail. Por segurança, espere ${JANELA_MINUTOS} minutos e tente de novo.`,
+    };
+  }
   const pesquisador = await banco.pesquisador.findUnique({ where: { email: validacao.data.email } });
-  const senhaConfere = pesquisador ? await bcrypt.compare(validacao.data.senha, pesquisador.senhaHash) : false;
+  const senhaConfere = await conferirSenha(validacao.data.senha, pesquisador?.senhaHash);
   if (!pesquisador || !senhaConfere) {
+    await registrarFalha(validacao.data.email);
     return { envio, erroGeral: "E-mail ou senha não conferem. Confira os dois e tente de novo." };
+  }
+  await limparFalhas(validacao.data.email);
+  if (precisaNovoHash(pesquisador.senhaHash)) {
+    await banco.pesquisador.update({ where: { id: pesquisador.id }, data: { senhaHash: await gerarHash(validacao.data.senha) } });
   }
 
   await criarSessao(pesquisador.id);
@@ -62,7 +73,7 @@ export async function cadastrar(
       data: {
         nome: validacao.data.nome,
         email: validacao.data.email,
-        senhaHash: await bcrypt.hash(validacao.data.senha, CUSTO_BCRYPT),
+        senhaHash: await gerarHash(validacao.data.senha),
       },
       select: { id: true },
     });

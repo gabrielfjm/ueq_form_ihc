@@ -70,9 +70,17 @@ export function FormularioCadastro({ idTitulo }: { idTitulo: string }) {
           <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
           <span>Criar conta</span>
         </button>
-        <p className={estilos.alternativaLado}>
-          Já tem conta? <Link href="/entrar">Entrar</Link>
-        </p>
+        <div className={estilos.ladoBotao}>
+          <p className={estilos.alternativaLado}>
+            Já tem conta? <Link href="/entrar">Entrar</Link>
+          </p>
+          {/* Em outra aba: a janela de cadastro fica como está, com o que a pessoa já digitou */}
+          <p className={estilos.privacidade}>
+            <a href="/privacidade" target="_blank" rel="noopener">
+              Política de privacidade<span className="visualmente-oculto"> (abre em nova aba)</span>
+            </a>
+          </p>
+        </div>
       </div>
     </form>
   );

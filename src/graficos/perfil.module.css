@@ -1,0 +1,111 @@
+/* Perfil dos participantes (aba Respostas): barras horizontais finas em --destaque, ancoradas à esquerda,
+   ponta arredondada de 4 px; sem eixo nem grade, porque cada barra traz o número e a porcentagem */
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 20px;
+}
+
+.cartao {
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--fundo);
+}
+
+.titulo {
+  margin: 0;
+  font-size: var(--texto-lg);
+}
+
+.resumo {
+  margin: 4px 0 12px;
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.tabela th,
+.tabela td {
+  padding: 5px 0;
+  vertical-align: middle;
+}
+
+.rotulo {
+  width: 36%;
+  padding-right: 12px !important;
+  font-size: var(--texto-sm);
+  font-weight: 400;
+  text-align: left;
+  overflow-wrap: anywhere;
+}
+
+.trilho {
+  width: 46%;
+}
+
+.barra {
+  display: block;
+  min-width: 3px;
+  height: 14px;
+  border-radius: 0 4px 4px 0;
+  background: var(--destaque);
+}
+
+.valor {
+  width: 18%;
+  padding-left: 10px !important;
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.numero {
+  font-weight: 700;
+}
+
+.parcela {
+  margin-left: 6px;
+  font-size: var(--texto-xs);
+  color: var(--tinta-suave);
+}
+
+.semOpcao tr:first-child th,
+.semOpcao tr:first-child td {
+  padding-top: 10px;
+  border-top: 1px solid var(--linha);
+}
+
+.linhaCinza .rotulo {
+  color: var(--tinta-suave);
+}
+
+.linhaCinza .barra {
+  background: var(--borda-campo);
+}
+
+@media (forced-colors: active) {
+  .barra {
+    background: CanvasText;
+    forced-color-adjust: none;
+  }
+
+  .linhaCinza .barra {
+    background: GrayText;
+  }
+}
+
+@media print {
+  .barra {
+    print-color-adjust: exact;
+  }
+}

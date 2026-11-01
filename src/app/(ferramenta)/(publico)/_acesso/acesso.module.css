@@ -180,6 +180,20 @@
   margin: 0;
 }
 
+.ladoBotao {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  text-align: right;
+}
+
+.privacidade {
+  margin: 0;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
 .formularioCadastro [role="alert"] {
   gap: 2px;
   padding: 10px 14px;
@@ -268,6 +282,14 @@
 
   .linhaCampos {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ladoBotao {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 14px;
+    text-align: left;
   }
 }
 

@@ -66,3 +66,32 @@
   padding-top: 0;
   border-top: 0;
 }
+
+.situacao {
+  margin: 0;
+  max-width: var(--largura-leitura);
+}
+
+.situacao > div {
+  padding: 14px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.situacao dt {
+  font-weight: 700;
+}
+
+.situacao dd {
+  margin: 4px 0 0;
+  color: var(--tinta-suave);
+}
+
+.situacao .ativo {
+  color: var(--destaque);
+  font-weight: 700;
+}
+
+.situacao .inativo {
+  color: var(--alerta);
+  font-weight: 700;
+}

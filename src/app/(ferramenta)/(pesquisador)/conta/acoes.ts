@@ -1,19 +1,17 @@
 "use server";
 
-import bcrypt from "bcryptjs";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { banco } from "@/lib/banco";
 import { errosPorCampo, textoDoCampo, type EstadoFormulario } from "@/lib/formulario";
+import { conferirSenha, gerarHash } from "@/lib/senhas";
 import { encerrarOutrasSessoes, encerrarSessao, exigirPesquisador } from "@/lib/sessao";
 import { email, nome, senhaDigitada, senhaNova } from "@/lib/validacao-conta";
 
 export type CampoDados = "nome" | "email";
 export type CampoSenha = "senhaAtual" | "senhaNova";
 export type CampoExclusao = "confirmacao";
-
-const CUSTO_BCRYPT = 10;
 
 const dadosCadastrais = z.object({ nome, email });
 const trocaDeSenha = z.object({ senhaAtual: senhaDigitada("Informe sua senha atual."), senhaNova });
@@ -57,13 +55,13 @@ export async function trocarSenha(
     where: { id: pesquisador.id },
     select: { senhaHash: true },
   });
-  if (!(await bcrypt.compare(validacao.data.senhaAtual, senhaHash))) {
+  if (!(await conferirSenha(validacao.data.senhaAtual, senhaHash))) {
     return { envio, erros: { senhaAtual: { mensagem: "A senha atual não confere. Confira e tente de novo." } } };
   }
 
   await banco.pesquisador.update({
     where: { id: pesquisador.id },
-    data: { senhaHash: await bcrypt.hash(validacao.data.senhaNova, CUSTO_BCRYPT) },
+    data: { senhaHash: await gerarHash(validacao.data.senhaNova) },
   });
   // Quem tinha a senha antiga e entrou em outro aparelho perde o acesso (prompts/03-autenticacao.md)
   await encerrarOutrasSessoes(pesquisador.id);

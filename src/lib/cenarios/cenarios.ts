@@ -2,6 +2,7 @@ import "server-only";
 import { randomUUID } from "node:crypto";
 import type { OrigemParticipacao, StatusEstudo } from "@/generated/prisma/enums";
 import { banco } from "../banco";
+import { cifrarJson } from "../cripto";
 import { PERGUNTAS_DEMOGRAFIA, PREFIRO_NAO_RESPONDER, type Demografia } from "../demografia";
 import { gerarSlugPublico } from "../estudos";
 import { itensDoQuestionario } from "../itens-ueq";
@@ -129,6 +130,10 @@ export const CENARIO_TUTORIAL: DefinicaoCenario = {
   ],
 };
 
+function cifrarOpcional(demografia: Demografia | null) {
+  return demografia ? cifrarJson(demografia) : undefined;
+}
+
 function perfilNeutro(): PerfilVersao {
   return { atratividade: 0, perspicuidade: 0, eficiencia: 0, confiabilidade: 0, estimulacao: 0, novidade: 0 };
 }
@@ -188,7 +193,7 @@ export async function criarCenario(definicao: DefinicaoCenario, donoId: string):
           incluidaNaAnalise: indice >= (grupo.foraDaAnalise ?? 0),
           origem: grupo.origem ?? "LINK",
           idioma: importada ? null : sorteio.escolher(IDIOMAS),
-          demografia: importada ? undefined : (demografiaSorteada(sorteio) ?? undefined),
+          demografia: importada ? undefined : cifrarOpcional(demografiaSorteada(sorteio)),
           valores,
         };
       }),

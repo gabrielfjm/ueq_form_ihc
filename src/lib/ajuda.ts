@@ -185,6 +185,11 @@ export const AJUDA = {
         texto: "Ao trocar a senha, as outras sessões abertas (em outro computador, por exemplo) são encerradas.",
       },
       {
+        titulo: "Seus dados (LGPD)",
+        texto:
+          "No resumo ao lado, “Baixar meus dados” gera um arquivo com tudo o que a ferramenta guarda sobre a sua conta, e “Política de privacidade” explica o que é guardado, para quê e como é protegido.",
+      },
+      {
         titulo: "Excluir conta",
         texto:
           "Apaga a conta, os estudos de que você é dono e todas as respostas deles. Estudos de outras pessoas compartilhados com você continuam com os donos.",

@@ -122,3 +122,14 @@
   font-size: var(--texto-sm);
   color: var(--tinta-suave);
 }
+
+.linksDados {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 12px !important;
+}
+
+.linksDados a {
+  min-height: 32px;
+}

@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
-    "vercel-build": "prisma generate && prisma migrate deploy && prisma db seed && next build",
+    "vercel-build": "prisma generate && prisma migrate deploy && prisma db seed && tsx prisma/cifrar-dados.ts && next build",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "next typegen && tsc --noEmit",
@@ -17,7 +17,8 @@
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
     "suspeitas:recalcular": "tsx prisma/recalcular-suspeitas.ts",
-    "docs:diagramas": "tsx scripts/gerar-diagramas.ts"
+    "docs:diagramas": "tsx scripts/gerar-diagramas.ts",
+    "dados:cifrar": "tsx prisma/cifrar-dados.ts"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
