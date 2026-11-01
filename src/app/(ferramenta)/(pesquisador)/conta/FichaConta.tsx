@@ -1,3 +1,6 @@
+import { Download, ShieldCheck } from "lucide-react";
+import Link from "next/link";
+import formulario from "@/componentes/formulario/formulario.module.css";
 import estilos from "./conta.module.css";
 
 type Propriedades = {
@@ -36,7 +39,19 @@ export function FichaConta({ estudos, detalheEstudos, respostas, criadaEm }: Pro
         <div className={estilos.fichaUltimo}>
           <dt>Seus dados</dt>
           <dd className={estilos.detalhe}>
-            Guardamos só nome, e-mail e a senha criptografada. As respostas dos participantes são anônimas.
+            Guardamos só nome, e-mail e a senha como hash, que não dá para desfazer. As respostas dos participantes são
+            anônimas.
+          </dd>
+          {/* LGPD, art. 18: ver, levar e entender os próprios dados sem pedir a ninguém */}
+          <dd className={estilos.linksDados}>
+            <a href="/api/conta/dados" download className={formulario.linkAcao}>
+              <Download size={18} strokeWidth={1.5} aria-hidden="true" />
+              <span>Baixar meus dados</span>
+            </a>
+            <Link href="/privacidade" className={formulario.linkAcao}>
+              <ShieldCheck size={18} strokeWidth={1.5} aria-hidden="true" />
+              <span>Política de privacidade</span>
+            </Link>
           </dd>
         </div>
       </dl>

@@ -4,6 +4,10 @@ Ferramenta web para conduzir estudos de avaliação de experiência do usuário 
 
 O pesquisador cria um estudo, define uma ou mais versões do produto e compartilha um link público. O participante entra pelo link, dá o consentimento e responde os 26 itens do diferencial semântico. A ferramenta calcula média, desvio-padrão, intervalo de confiança de 95% e alfa de Cronbach por escala, compara o resultado com o benchmark oficial, aponta respostas inconsistentes e exporta os dados em CSV, inclusive no formato da planilha oficial *UEQ Data Analysis Tool*.
 
+Os pesquisadores trabalham em equipe: o dono de um estudo convida colegas como editores ou leitores, e um sino de notificações avisa sobre convites, respostas novas e mudanças feitas pelos parceiros. Quem entra pela primeira vez faz um tour guiado, e toda página tem a própria ajuda no botão (?).
+
+**Em produção:** https://ferramenta-ueq.vercel.app (Vercel + Neon, região de São Paulo). Cada merge na `main` publica uma versão nova, com as migrations aplicadas no build.
+
 Projeto da disciplina Fundamentos da Interação Humano-Computador, PPGIa · PUCPR · 2026.
 
 Equipe: Gabriel Meira, Jean Weiss e Luiza Pedralli.
@@ -26,6 +30,43 @@ A documentação da ferramenta está sendo escrita pela equipe, em [docs/documen
 
 A meta de acessibilidade é WCAG 2.2 nível AA, base da ABNT NBR 17225:2025.
 
+## Funcionalidades
+
+**Participante**
+- Link público em 37 idiomas oficiais do UEQ, com termo de consentimento e os 26 itens na ordem e polaridade oficiais.
+- Etapa opcional de dados demográficos, só quando o pesquisador liga. Ela pode ser pulada inteira, e todas as perguntas têm “Prefiro não responder”.
+
+**Pesquisador**
+- Estudos com uma ou mais versões (teste A/B), coleta aberta, encerrada e reaberta, e importação de respostas por CSV.
+- Painel com média, desvio-padrão, IC 95%, alfa de Cronbach e benchmark oficial por escala, comparação entre versões e exportação em CSV (inclusive no formato da *UEQ Data Analysis Tool*) e em PDF.
+- Respostas suspeitas pelas regras do Handbook do UEQ, com inclusão e exclusão da análise sem apagar nada.
+- Perfil dos participantes em gráficos: faixa etária, gênero, escolaridade e familiaridade com o produto, por versão.
+- **Estudos em equipe**: “Compartilhar” convida uma conta cadastrada pelo e-mail, como Editor (mexe no estudo) ou Leitor (vê e exporta). Excluir o estudo e convidar pessoas fica só com o dono.
+- **Sino de notificações**, entre Minha conta e Sair: convites (aceitar e recusar ali mesmo), respostas novas (agrupadas enquanto não lidas) e mudanças feitas pelos parceiros. Os avisos também vão por e-mail quando o envio está configurado.
+- **Tour guiado** no primeiro acesso: a pessoa clica nas próprias ações destacadas, pode pular ou fechar quando quiser, e pode rever depois pela ajuda.
+- **Ajuda (?)** no cabeçalho de toda página do pesquisador.
+- **Administração**, só para superusuários: contas, criar conta para alguém, cenários de demonstração com dados inventados, situação da proteção de dados e todos os estudos.
+
+## Segurança e LGPD
+
+O que a ferramenta faz para cumprir a Lei Geral de Proteção de Dados (Lei 13.709/2018, art. 6º, 18 e 46):
+
+- **Coletar o mínimo:** nada que identifique o participante (sem nome, e-mail, IP ou cookie de rastreamento). Os dados demográficos vêm desligados por padrão em cada estudo, e participações começadas e não enviadas são apagadas em até 2 dias.
+- **Criptografia de campo:** os dados demográficos são gravados cifrados com AES-256-GCM (`src/lib/cripto.ts`), com a chave fora do banco. O deploy cifra também os dados gravados antes (`prisma/cifrar-dados.ts`).
+- **Em trânsito e em repouso:** HTTPS com HSTS, TLS até o banco e banco cifrado em disco no provedor.
+- **Senhas e sessão:** bcrypt com custo 12 (hashes antigos sobem de custo no login), mesmo tempo de resposta com ou sem conta, 5 tentativas erradas por e-mail a cada 15 minutos, cookie de sessão `httpOnly`, `Secure` e `SameSite=Lax`, e só o hash da sessão no banco.
+- **Navegador:** Content Security Policy, `frame-ancestors 'none'` contra clickjacking, `Referrer-Policy: same-origin`, `X-Content-Type-Options` e `Permissions-Policy`.
+- **Acesso:** cada pessoa só abre os estudos dela ou os compartilhados com ela; toda leitura e alteração passa por `estudoDoPesquisador` (ver, editar, gerenciar).
+- **Direitos do titular:** [política de privacidade](https://ferramenta-ueq.vercel.app/privacidade) pública; em Minha conta, “Baixar meus dados” (JSON), correção dos dados, exclusão imediata da conta e desligar os e-mails.
+
+### Variáveis de ambiente
+
+| Variável | Para quê |
+|---|---|
+| `DATABASE_URL` | Banco PostgreSQL (na Vercel, a integração da Neon preenche) |
+| `CHAVE_CRIPTOGRAFIA` | Chave AES-256 dos dados demográficos: 32 bytes em base64, gerada com `openssl rand -base64 32`. **Guarde uma cópia em local seguro: sem ela, os dados cifrados não podem ser lidos.** Sem a variável, os dados ficam sem criptografia de campo, e a página Administração avisa |
+| `SMTP_HOST`, `SMTP_PORTA`, `SMTP_USUARIO`, `SMTP_SENHA`, `EMAIL_REMETENTE` | Envio dos convites e notificações por e-mail (Gmail: `smtp.gmail.com`, porta 465 e uma senha de app). Opcional: sem elas, os avisos ficam só no sino |
+
 ## Stack
 
 - Next.js (App Router), React e TypeScript em modo `strict`
@@ -33,6 +74,7 @@ A meta de acessibilidade é WCAG 2.2 nível AA, base da ABNT NBR 17225:2025.
 - CSS Modules e variáveis CSS, sem framework de componentes
 - Gráficos em SVG feitos à mão
 - Zod para validação
+- Nodemailer para os e-mails (SMTP) e `node:crypto` para a criptografia de campo
 - Vitest para testes de unidade, Playwright com axe-core para testes de ponta a ponta e acessibilidade
 
 ## Como rodar
@@ -64,6 +106,8 @@ O seed carrega os 26 itens do UEQ a partir de `data/ueq-itens-ptbr.json`. Enquan
 | `pnpm test` | Testes de unidade (inclui o contraste das cores do tema) |
 | `pnpm test:e2e` | Testes de ponta a ponta, com verificação WCAG 2.2 A/AA |
 | `pnpm docs:diagramas` | Gera os SVG dos diagramas da documentação, depois de mudar um diagrama Mermaid num `.md` |
+| `pnpm suspeitas:recalcular` | Recalcula a marca de suspeita de todas as participações |
+| `pnpm dados:cifrar` | Cifra os dados demográficos ainda em texto aberto (roda sozinho em cada deploy) |
 
 Antes de abrir um pull request, `pnpm lint && pnpm typecheck && pnpm test` precisa passar.
 
@@ -76,7 +120,8 @@ src/
   componentes/    componentes de interface
   graficos/       gráficos em SVG
   styles/         tokens de cor, tipografia e espaçamento
-  lib/            banco, sessão e validação
+  lib/            banco, sessão, permissões, criptografia, notificações, e-mail e validação
+  lib/cenarios/   cenários de demonstração com respostas sintéticas
 prisma/           schema e seed
 scripts/          geração dos diagramas da documentação
 data/             itens, benchmark, parâmetros do protocolo e fixtures de teste
@@ -149,7 +194,7 @@ Página inicial, para quem ainda não tem conta, e Entrar e Criar conta numa jan
 
 <img src="docs/prototipos/alta-fidelidade/r16-pagina-inicial.png" alt="Página inicial: apresentação com o item 1 do questionário como figura, Como funciona em quatro passos, tabela das seis escalas, participante, resultados e documentação" width="400"> <img src="docs/prototipos/alta-fidelidade/r17-entrar-janela.png" alt="Janela de Entrar sobre a página inicial escurecida: formulário à esquerda e painel com as escalas do UEQ à direita" width="400">
 
-<img src="docs/prototipos/alta-fidelidade/r19-criar-conta-janela.png" alt="Janela de Criar conta: nome, e-mail e senha à esquerda e os quatro passos do estudo à direita" width="400"> <img src="docs/prototipos/alta-fidelidade/r18-entrar-celular.png" alt="Entrar no celular: a janela ocupa a tela inteira, com o formulário em cima e o resumo do instrumento embaixo" width="200">
+<img src="docs/prototipos/alta-fidelidade/r19-criar-conta-janela.png" alt="Janela de Criar conta: nome e e-mail lado a lado, senha, Criar conta junto de Entrar e da política de privacidade, e os quatro passos do estudo à direita" width="400"> <img src="docs/prototipos/alta-fidelidade/r18-entrar-celular.png" alt="Entrar no celular: a janela ocupa a tela inteira, com o formulário em cima e o resumo do instrumento embaixo" width="200">
 
 Confirmações em janela, para sair e para toda exclusão:
 
@@ -160,6 +205,18 @@ Confirmações em janela, para sair e para toda exclusão:
 Enquanto a equipe escreve a documentação, cada documento aparece como em produção:
 
 <img src="docs/prototipos/alta-fidelidade/r23-documento-em-producao.png" alt="Casos de uso em produção: abas e sub-abas da documentação, fileira de marcações vazia, aviso Em produção e ficha com o que o documento vai trazer" width="400">
+
+Equipe, notificações, ajuda e LGPD:
+
+<img src="docs/prototipos/alta-fidelidade/r24-administracao.png" alt="Administração: contas, criar conta para alguém, cenários de demonstração, situação da proteção de dados e todos os estudos" width="400"> <img src="docs/prototipos/alta-fidelidade/r25-compartilhar.png" alt="Janela Compartilhar: convite por e-mail com papel Editor ou Leitor e a lista de pessoas com acesso" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r26-sino-de-notificacoes.png" alt="Sino de notificações aberto entre Minha conta e Sair: convite com Aceitar e Recusar, respostas novas e mudanças da equipe" width="400"> <img src="docs/prototipos/alta-fidelidade/r27-notificacoes.png" alt="Notificações: convites esperando resposta e o histórico de avisos" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r28-tour-boas-vindas.png" alt="Boas-vindas do primeiro acesso: Pular tutorial e Começar o tour" width="400"> <img src="docs/prototipos/alta-fidelidade/r29-tour-passo.png" alt="Passo do tour: a página escurecida em volta do estudo destacado e o cartão Passo 1 de 10" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r30-ajuda-da-pagina.png" alt="Janela de ajuda da página Respostas, aberta pelo botão (?), com Rever o tour guiado" width="400"> <img src="docs/prototipos/alta-fidelidade/r31-perfil-dos-participantes.png" alt="Perfil dos participantes: quatro gráficos de barras horizontais, um por pergunta demográfica, com filtro de versão" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r32-dados-do-participante.png" alt="Criar estudo, seção Dados do participante: caixa para coletar dados demográficos com o aviso de LGPD e a prévia com as etapas" width="400"> <img src="docs/prototipos/alta-fidelidade/r33-politica-de-privacidade.png" alt="Política de privacidade pública: quem cuida dos dados, participantes, pesquisadores, direitos e proteção" width="400">
 
 ## Protótipos de baixa fidelidade
 

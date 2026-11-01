@@ -2,8 +2,11 @@ import { Upload } from "lucide-react";
 import type { Metadata, Route } from "next";
 import Link from "next/link";
 import { Avisos } from "@/componentes/Avisos";
+import { PerfilDemografico } from "@/graficos/PerfilDemografico";
+import { demografiasNaAnalise } from "@/lib/demografias";
 import { contagemDeRespostas, estudoDoPesquisador } from "@/lib/estudos";
 import { NOME_ESCALA } from "@/lib/nomes-ueq";
+import { perfilDemografico } from "@/lib/perfil-demografico";
 import { PARAMETROS_SUSPEITA, participacoesAvaliadas } from "@/lib/participacoes";
 import { exigirPesquisador } from "@/lib/sessao";
 import { formatarDiaHora, plural } from "@/lib/texto";
@@ -28,7 +31,9 @@ const MOTIVO: Record<MotivoSuspeita, string> = { amplitude: "amplitude", respost
 export default async function PaginaRespostas({ params, searchParams }: Propriedades) {
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador((await params).id, pesquisador);
-  const { suspeitas, importadas } = await searchParams;
+  const { suspeitas, importadas, perfil } = await searchParams;
+  // Filtro de versão do perfil dos participantes, na URL como os outros filtros (Nielsen 3)
+  const versaoDoPerfil = estudo.versoes.find((versao) => versao.id === perfil);
   const soSuspeitas = suspeitas === "1";
   // Volta da importação (respostas/importar): o resultado é anunciado no topo, como nas outras ações
   const quantasImportadas = Number(importadas);
@@ -37,7 +42,20 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
       ? `${plural(quantasImportadas, "resposta importada", "respostas importadas")}. Elas aparecem na lista com a marca “importada de CSV”.`
       : null;
   const linkImportar = `/estudos/${estudo.id}/respostas/importar` as Route;
-  const [respostas, participacoes] = await Promise.all([contagemDeRespostas(estudo.id), participacoesAvaliadas(estudo.id)]);
+  const [respostas, participacoes, demografias] = await Promise.all([
+    contagemDeRespostas(estudo.id),
+    participacoesAvaliadas(estudo.id),
+    demografiasNaAnalise(estudo.id, versaoDoPerfil?.id),
+  ]);
+  // O perfil aparece quando o estudo coleta dados demográficos ou já coletou alguma vez
+  const mostrarPerfil = estudo.coletarDemografia || demografias.some((demografia) => demografia !== null);
+  const linkPerfil = (versaoId?: string) => {
+    const busca = new URLSearchParams();
+    if (soSuspeitas) busca.set("suspeitas", "1");
+    if (versaoId) busca.set("perfil", versaoId);
+    const texto = busca.toString();
+    return `/estudos/${estudo.id}/respostas${texto ? `?${texto}` : ""}#titulo-perfil` as Route;
+  };
   const fora = participacoes.filter((participacao) => !participacao.incluidaNaAnalise).length;
 
   const linhas = participacoes
@@ -110,6 +128,46 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
                   </span>
                 </p>
               </section>
+
+              {mostrarPerfil && (
+                <section aria-labelledby="titulo-perfil" className={estilos.perfil} data-tutorial="perfil">
+                  <div className={estilos.cabecalhoPerfil}>
+                    <div>
+                      <h2 id="titulo-perfil" className={estilos.titulo}>
+                        Perfil dos participantes
+                      </h2>
+                      <p className={estilos.textoPerfil}>
+                        Respostas da etapa opcional “Dados opcionais”, só das{" "}
+                        {plural(demografias.length, "participação", "participações")} na análise que vieram pelo link
+                        {versaoDoPerfil ? ` da versão “${versaoDoPerfil.nome}”` : ""}. As importadas de CSV não têm essa
+                        etapa.
+                      </p>
+                    </div>
+                    {estudo.versoes.length > 1 && (
+                      <nav aria-label="Versão do perfil" className={estilos.filtroVersao}>
+                        <Link href={linkPerfil()} aria-current={versaoDoPerfil ? undefined : "page"} scroll={false}>
+                          Todas as versões
+                        </Link>
+                        {estudo.versoes.map((versao) => (
+                          <Link
+                            key={versao.id}
+                            href={linkPerfil(versao.id)}
+                            aria-current={versaoDoPerfil?.id === versao.id ? "page" : undefined}
+                            scroll={false}
+                          >
+                            {versao.nome}
+                          </Link>
+                        ))}
+                      </nav>
+                    )}
+                  </div>
+                  {demografias.length === 0 ? (
+                    <p className={estilos.textoPerfil}>Nenhuma participação na análise para montar o perfil ainda.</p>
+                  ) : (
+                    <PerfilDemografico perguntas={perfilDemografico(demografias)} />
+                  )}
+                </section>
+              )}
 
               <div className={estilos.colunas}>
                 <section aria-labelledby="titulo-lista" className={estilos.lista}>

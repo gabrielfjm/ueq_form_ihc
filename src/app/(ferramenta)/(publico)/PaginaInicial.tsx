@@ -258,7 +258,10 @@ export function PaginaInicial({ logado, aviso }: Propriedades) {
       <footer className={estilos.rodape}>
         <div className={estilos.rodapeInterno}>
           <p>Fundamentos da IHC · PPGIa · PUCPR · 2026</p>
-          <p>Gabriel Meira, Jean Weiss e Luiza Pedralli · Código aberto sob a licença MIT</p>
+          <p>
+            Gabriel Meira, Jean Weiss e Luiza Pedralli · Código aberto sob a licença MIT ·{" "}
+            <Link href="/privacidade">Política de privacidade</Link>
+          </p>
         </div>
       </footer>
     </>

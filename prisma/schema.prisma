@@ -222,3 +222,13 @@ model Notificacao {
   @@index([pesquisadorId, lidaEm])
   @@map("notificacao")
 }
+
+// Tentativas de login que falharam, para limitar adivinhação de senha. Guarda só o hash do e-mail
+model TentativaAcesso {
+  id       String   @id @default(cuid())
+  chave    String
+  criadaEm DateTime @default(now()) @map("criada_em")
+
+  @@index([chave, criadaEm])
+  @@map("tentativa_acesso")
+}
