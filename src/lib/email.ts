@@ -4,12 +4,23 @@ import { createTransport } from "nodemailer";
 // Envio por SMTP (ex.: Gmail com senha de app). Sem as variáveis, a ferramenta não envia e-mail: o convite
 // continua aparecendo para a pessoa em Convites, e quem convidou recebe um link de e-mail pronto para
 // mandar do próprio programa de e-mail
+const host = process.env.SMTP_HOST?.trim();
+const usuario = process.env.SMTP_USUARIO?.trim();
+
+// A senha de app do Gmail é mostrada em quatro grupos ("abcd efgh ijkl mnop"), mas não tem espaço:
+// quem copia com os espaços não deve ficar sem e-mail por isso
+function senhaSmtp(): string | undefined {
+  const senha = process.env.SMTP_SENHA;
+  if (!senha) return undefined;
+  return host === "smtp.gmail.com" ? senha.replace(/\s+/g, "") : senha.trim();
+}
+
 const SMTP = {
-  host: process.env.SMTP_HOST,
+  host,
   porta: Number(process.env.SMTP_PORTA ?? 465),
-  usuario: process.env.SMTP_USUARIO,
-  senha: process.env.SMTP_SENHA,
-  remetente: process.env.EMAIL_REMETENTE ?? process.env.SMTP_USUARIO,
+  usuario,
+  senha: senhaSmtp(),
+  remetente: process.env.EMAIL_REMETENTE?.trim() || usuario,
 };
 
 export function emailConfigurado(): boolean {
