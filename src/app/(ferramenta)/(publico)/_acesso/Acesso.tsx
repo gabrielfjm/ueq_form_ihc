@@ -68,9 +68,15 @@ export function ProvedorAcesso({ children }: { children: ReactNode }) {
     <ContextoAcesso.Provider value={abrir}>
       {children}
       <Janela aberta={modo !== null} aoFechar={aoFechar} idTitulo={idTitulo} tipo="acesso">
-        <div ref={conteudo} className={estilos.janela} onClickCapture={aoClicar}>
+        <div
+          ref={conteudo}
+          className={modo === "cadastrar" ? `${estilos.janela} ${estilos.janelaCadastro}` : estilos.janela}
+          onClickCapture={aoClicar}
+        >
           <div className={estilos.principal}>
-            <Logotipo />
+            {/* Em Criar conta o logotipo vai para o painel ao lado: sem ele aqui, os 3 campos e as mensagens
+                de erro cabem na janela sem rolar */}
+            {modo !== "cadastrar" && <Logotipo />}
             {modo === "cadastrar" ? (
               <FormularioCadastro key="cadastrar" idTitulo={idTitulo} />
             ) : (
