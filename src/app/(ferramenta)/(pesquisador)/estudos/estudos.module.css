@@ -202,3 +202,33 @@
     stroke: CanvasText;
   }
 }
+
+/* Convites pendentes e estudos compartilhados com a pessoa */
+.convites {
+  margin: 0 0 32px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  padding: 14px 16px;
+  background: var(--destaque-fundo);
+  border: 1px solid var(--destaque);
+  border-radius: var(--raio);
+}
+
+.convites svg {
+  color: var(--destaque);
+}
+
+.convites a {
+  font-weight: 700;
+}
+
+.compartilhados {
+  margin-top: 56px;
+}
+
+.tituloSecao {
+  margin: 0 0 16px;
+  font-size: 1.75rem;
+}

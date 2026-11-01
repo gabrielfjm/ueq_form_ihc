@@ -49,7 +49,7 @@ export default async function PaginaConsentimento({ params }: Propriedades) {
       <header className={estilos.faixa}>
         <div className={estilos.faixaInterna}>
           <SeletorIdioma slug={slug} idioma={idioma} textos={textos.idioma} />
-          <Etapas atual={0} textos={textos.etapas} />
+          <Etapas atual={0} textos={textos.etapas} comDadosOpcionais={estudo.coletarDemografia} />
           <Marcacoes />
           <div className={estilos.nomeEstudo}>
             {/* Título e objetivo são escritos pelo pesquisador, em português */}

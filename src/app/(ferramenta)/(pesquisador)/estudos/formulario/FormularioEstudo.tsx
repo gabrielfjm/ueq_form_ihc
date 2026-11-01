@@ -19,6 +19,7 @@ export type ValoresEstudo = {
   objetivo: string;
   dataInicio: string;
   dataFim: string;
+  coletarDemografia: boolean;
   versoes: Omit<VersaoEditavel, "chave">[];
 };
 
@@ -40,6 +41,7 @@ export function FormularioEstudo(propriedades: Propriedades) {
   const proximaChave = useRef(valores.versoes.length);
   const [titulo, setTitulo] = useState(valores.titulo);
   const [objetivo, setObjetivo] = useState(valores.objetivo);
+  const [demografia, setDemografia] = useState(valores.coletarDemografia);
   const [versoes, setVersoes] = useState<VersaoEditavel[]>(() =>
     (valores.versoes.length > 0 ? valores.versoes : [{ id: "", nome: "", respostas: 0 }]).map((versao, posicao) => ({
       ...versao,
@@ -151,6 +153,38 @@ export function FormularioEstudo(propriedades: Propriedades) {
           />
         </section>
 
+        {/* LGPD (Lei 13.709/2018), art. 6º, III: só coletar o que a pesquisa precisa. Por isso nasce desligado */}
+        <section aria-labelledby="secao-demografia" className={estilos.secao}>
+          <div className={estilos.secaoTitulo}>
+            <span className={estilos.secaoNumero}>04</span>
+            <h2 id="secao-demografia" className={estilos.secaoNome}>Dados do participante</h2>
+          </div>
+          <label className={formulario.opcao}>
+            <input
+              type="checkbox"
+              name="coletarDemografia"
+              value="sim"
+              checked={demografia}
+              onChange={(evento) => setDemografia(evento.target.checked)}
+              aria-describedby="demografia-lgpd"
+            />
+            <span>Coletar dados demográficos no fim do questionário</span>
+          </label>
+          <div id="demografia-lgpd" className={estilos.lgpd}>
+            <p>
+              Ligado, o participante vê no fim a etapa opcional “Dados opcionais”, com faixa etária, gênero, escolaridade e
+              familiaridade com o produto. Ele pode responder ou pular a etapa e ir direto para o agradecimento.
+            </p>
+            <p>
+              <strong>LGPD:</strong> ligue só se o objetivo do estudo precisar desses dados (princípio da necessidade).
+              As perguntas usam faixas fechadas, todas têm “Prefiro não responder”, e nada identifica a pessoa: sem nome,
+              e-mail ou IP. Os dados ficam só com a equipe do estudo, saem nas exportações e são apagados junto com o
+              estudo.
+            </p>
+            <p>Desligado, a participação termina no envio do questionário.</p>
+          </div>
+        </section>
+
         <div className={estilos.rodape}>
           <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}>
             {modo === "criar" ? <Plus size={18} strokeWidth={1.5} aria-hidden="true" /> : <Save size={18} strokeWidth={1.5} aria-hidden="true" />}
@@ -159,7 +193,7 @@ export function FormularioEstudo(propriedades: Propriedades) {
           <Link href={cancelar}>Cancelar</Link>
         </div>
       </form>
-      <PreviaParticipante titulo={titulo} objetivo={objetivo} />
+      <PreviaParticipante titulo={titulo} objetivo={objetivo} etapas={demografia ? 3 : 2} />
     </div>
   );
 }

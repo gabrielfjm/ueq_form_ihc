@@ -1,0 +1,99 @@
+/* Janela Compartilhar: convite por e-mail e a lista de quem tem acesso */
+
+.convite {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--linha);
+}
+
+.linhaConvite {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.linhaConvite > :first-child {
+  flex: 1 1 260px;
+}
+
+.mailto {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 16px;
+  padding: 12px 16px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  font-size: var(--texto-sm);
+}
+
+.pessoas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.subtitulo {
+  margin: 0;
+  font-size: var(--texto-lg);
+}
+
+.lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 12px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.pessoa {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.email {
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+.status {
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--pragmatica);
+}
+
+.papel {
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+.controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+}
+
+.selecaoPapel {
+  width: auto;
+}
+
+.sair {
+  margin-right: auto;
+}

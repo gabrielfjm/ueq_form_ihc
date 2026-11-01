@@ -34,15 +34,38 @@ enum OrigemParticipacao {
   IMPORTADA
 }
 
+// EDITOR mexe no estudo (dados, coleta, respostas); LEITOR só vê o painel, as respostas e exporta.
+// Excluir o estudo e convidar pessoas ficam só com o dono
+enum PapelColaborador {
+  EDITOR
+  LEITOR
+}
+
+enum StatusConvite {
+  PENDENTE
+  ACEITO
+  RECUSADO
+}
+
 model Pesquisador {
   id        String   @id @default(cuid())
   nome      String
   email     String   @unique
   senhaHash String   @map("senha_hash")
   criadoEm  DateTime @default(now()) @map("criado_em")
+  // Superusuário: vê e altera todos os estudos e abre a página de administração
+  administrador Boolean @default(false)
+  // Vazio até a pessoa terminar, pular ou fechar o tour guiado do primeiro acesso
+  tutorialVistoEm DateTime? @map("tutorial_visto_em")
+  // Além do sino, cada notificação também vai por e-mail (quando o envio está configurado)
+  notificacoesPorEmail Boolean @default(true) @map("notificacoes_por_email")
 
-  estudos Estudo[]
-  sessoes Sessao[]
+  estudos          Estudo[]
+  sessoes          Sessao[]
+  colaboracoes     Colaboracao[] @relation("colaborador")
+  convitesEnviados Colaboracao[] @relation("convidou")
+  notificacoes     Notificacao[] @relation("destinatario")
+  notificacoesFeitas Notificacao[] @relation("autor")
 
   @@map("pesquisador")
 }
@@ -71,14 +94,40 @@ model Estudo {
   dataInicio      DateTime     @map("data_inicio") @db.Date
   dataFim         DateTime     @map("data_fim") @db.Date
   slugPublico     String       @unique @map("slug_publico")
+  // LGPD, princípio da necessidade: a etapa "Dados opcionais" só aparece se o pesquisador ligar. Mesmo
+  // ligada, cada pergunta é opcional para o participante, que pode pular a etapa inteira
+  coletarDemografia Boolean    @default(false) @map("coletar_demografia")
   criadoEm        DateTime     @default(now()) @map("criado_em")
   atualizadoEm    DateTime     @updatedAt @map("atualizado_em")
 
-  pesquisador Pesquisador @relation(fields: [pesquisadorId], references: [id], onDelete: Cascade)
-  versoes     Versao[]
+  pesquisador  Pesquisador   @relation(fields: [pesquisadorId], references: [id], onDelete: Cascade)
+  versoes      Versao[]
+  colaboracoes Colaboracao[]
+  notificacoes Notificacao[]
 
   @@index([pesquisadorId])
   @@map("estudo")
+}
+
+// Estudo compartilhado: o dono convida uma conta já cadastrada, que aceita ou recusa o convite.
+// Só depois de ACEITO o estudo aparece para quem foi convidado
+model Colaboracao {
+  id             String           @id @default(cuid())
+  estudoId       String           @map("estudo_id")
+  pesquisadorId  String           @map("pesquisador_id")
+  convidadoPorId String?          @map("convidado_por_id")
+  papel          PapelColaborador @default(EDITOR)
+  status         StatusConvite    @default(PENDENTE)
+  criadoEm       DateTime         @default(now()) @map("criado_em")
+  respondidoEm   DateTime?        @map("respondido_em")
+
+  estudo       Estudo       @relation(fields: [estudoId], references: [id], onDelete: Cascade)
+  pesquisador  Pesquisador  @relation("colaborador", fields: [pesquisadorId], references: [id], onDelete: Cascade)
+  convidadoPor Pesquisador? @relation("convidou", fields: [convidadoPorId], references: [id], onDelete: SetNull)
+
+  @@unique([estudoId, pesquisadorId])
+  @@index([pesquisadorId, status])
+  @@map("colaboracao")
 }
 
 model Versao {
@@ -141,4 +190,35 @@ model Resposta {
 
   @@unique([participacaoId, itemId])
   @@map("resposta")
+}
+
+// CONVITE: alguém convidou a pessoa para um estudo. RESPOSTA: chegaram respostas num estudo dela
+// (agrupadas enquanto não forem lidas). ALTERACAO: um parceiro mudou dados, coleta, respostas ou a equipe
+enum TipoNotificacao {
+  CONVITE
+  RESPOSTA
+  ALTERACAO
+}
+
+// O sino do cabeçalho: tudo o que aconteceu nos estudos da pessoa e que ela ainda não viu
+model Notificacao {
+  id            String          @id @default(cuid())
+  pesquisadorId String          @map("pesquisador_id")
+  autorId       String?         @map("autor_id")
+  estudoId      String?         @map("estudo_id")
+  colaboracaoId String?         @map("colaboracao_id")
+  tipo          TipoNotificacao
+  texto         String
+  link          String
+  // respostas que chegaram enquanto a notificação não foi lida
+  quantidade    Int             @default(1)
+  criadaEm      DateTime        @default(now()) @map("criada_em")
+  lidaEm        DateTime?       @map("lida_em")
+
+  pesquisador Pesquisador  @relation("destinatario", fields: [pesquisadorId], references: [id], onDelete: Cascade)
+  autor       Pesquisador? @relation("autor", fields: [autorId], references: [id], onDelete: SetNull)
+  estudo      Estudo?      @relation(fields: [estudoId], references: [id], onDelete: SetNull)
+
+  @@index([pesquisadorId, lidaEm])
+  @@map("notificacao")
 }

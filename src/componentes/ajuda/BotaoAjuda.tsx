@@ -1,0 +1,75 @@
+"use client";
+
+import { CircleHelp, Compass } from "lucide-react";
+import { useId, useState } from "react";
+import formulario from "@/componentes/formulario/formulario.module.css";
+import { Janela } from "@/componentes/janela/Janela";
+import janela from "@/componentes/janela/janela.module.css";
+import { iniciarTour } from "@/componentes/tutorial/eventos";
+import { AJUDA, type ChaveAjuda } from "@/lib/ajuda";
+import estilos from "./ajuda.module.css";
+
+// O (?) do cabeçalho de cada página: explica para que serve a página e o que dá para fazer nela
+// (Nielsen 10). Daqui também dá para rever o tour guiado a qualquer momento
+export function BotaoAjuda({ pagina }: { pagina: ChaveAjuda }) {
+  const [aberta, setAberta] = useState(false);
+  const idTitulo = useId();
+  const ajuda = AJUDA[pagina];
+
+  return (
+    <>
+      <button
+        type="button"
+        className={estilos.botao}
+        aria-haspopup="dialog"
+        aria-label="Ajuda desta página"
+        data-tutorial="ajuda"
+        onClick={() => setAberta(true)}
+      >
+        <CircleHelp size={22} strokeWidth={1.5} aria-hidden="true" />
+      </button>
+      <Janela aberta={aberta} aoFechar={() => setAberta(false)} idTitulo={idTitulo} tipo="conteudo">
+        <div className={janela.formulario}>
+          <div>
+            <p className={estilos.chapeu}>Ajuda desta página</p>
+            <h2 id={idTitulo} className={janela.titulo}>
+              {ajuda.titulo}
+            </h2>
+          </div>
+          <div className={janela.corpo}>
+            <p className={janela.texto}>{ajuda.resumo}</p>
+            <dl className={estilos.secoes}>
+              {ajuda.secoes.map((secao) => (
+                <div key={secao.titulo}>
+                  <dt>{secao.titulo}</dt>
+                  <dd>{secao.texto}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div className={janela.acoes}>
+            <button
+              type="button"
+              className={`${formulario.botao} ${formulario.secundario}`}
+              onClick={() => {
+                setAberta(false);
+                iniciarTour();
+              }}
+            >
+              <Compass size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
+              <span>Rever o tour guiado</span>
+            </button>
+            <button
+              type="button"
+              className={`${formulario.botao} ${formulario.primario}`}
+              data-foco-inicial=""
+              onClick={() => setAberta(false)}
+            >
+              Entendi
+            </button>
+          </div>
+        </div>
+      </Janela>
+    </>
+  );
+}

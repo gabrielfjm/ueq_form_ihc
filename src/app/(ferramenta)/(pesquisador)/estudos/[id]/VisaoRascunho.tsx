@@ -47,11 +47,13 @@ export function VisaoRascunho({ estudo, endereco, avisoExclusao }: Propriedades)
           “Este estudo ainda não está aberto”.
         </p>
         <div className={pagina.vazioAcoes}>
-          <BotaoColeta
-            estudoId={estudo.id}
-            acao="abrir"
-            className={`${formulario.botao} ${formulario.primario} ${pagina.abrir}`}
-          />
+          {estudo.permissoes.editar && (
+            <BotaoColeta
+              estudoId={estudo.id}
+              acao="abrir"
+              className={`${formulario.botao} ${formulario.primario} ${pagina.abrir}`}
+            />
+          )}
           <code className={pagina.enderecoSolto}>{endereco}</code>
         </div>
       </section>
@@ -73,23 +75,32 @@ export function VisaoRascunho({ estudo, endereco, avisoExclusao }: Propriedades)
                 <strong>{item.titulo}</strong>
                 <span className={pagina.detalhe}>{item.detalhe}</span>
               </span>
-              <Link href={editar} aria-label={`Revisar ${item.titulo.toLowerCase()}`}>
-                Revisar
-              </Link>
+              {estudo.permissoes.editar && (
+                <Link href={editar} aria-label={`Revisar ${item.titulo.toLowerCase()}`}>
+                  Revisar
+                </Link>
+              )}
             </li>
           ))}
         </ul>
       </section>
 
-      <section aria-labelledby="secao-acoes" className={estilos.secao}>
-        <div className={estilos.secaoTitulo}>
-          <span className={estilos.secaoNumero}>02</span>
-          <h2 id="secao-acoes" className={estilos.secaoNome}>
-            Ações
-          </h2>
-        </div>
-        <AcoesEstudo estudoId={estudo.id} avisoExclusao={avisoExclusao} />
-      </section>
+      {estudo.permissoes.editar && (
+        <section aria-labelledby="secao-acoes" className={estilos.secao}>
+          <div className={estilos.secaoTitulo}>
+            <span className={estilos.secaoNumero}>02</span>
+            <h2 id="secao-acoes" className={estilos.secaoNome}>
+              Ações
+            </h2>
+          </div>
+          <AcoesEstudo
+            estudoId={estudo.id}
+            avisoExclusao={avisoExclusao}
+            podeEditar={estudo.permissoes.editar}
+            podeExcluir={estudo.permissoes.gerenciar}
+          />
+        </section>
+      )}
     </>
   );
 }

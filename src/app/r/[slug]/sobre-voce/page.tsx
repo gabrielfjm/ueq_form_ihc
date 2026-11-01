@@ -22,6 +22,8 @@ export default async function PaginaSobreVoce({ params }: Propriedades) {
   const estudo = await estudoPublico(slug);
   const participacao = await participacaoAtual(estudo.id);
   if (!participacao?.concluidaEm) redirect(`/r/${slug}` as Route);
+  // Estudo sem coleta de dados demográficos não tem esta etapa
+  if (!estudo.coletarDemografia) redirect(`/r/${slug}/fim` as Route);
   const textos = textosDoIdioma(await idiomaDoParticipante());
   const { sobreVoce } = textos;
 

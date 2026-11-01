@@ -2,7 +2,7 @@ import formulario from "@/componentes/formulario/formulario.module.css";
 import estilos from "./formulario-estudo.module.css";
 
 // Mostra o começo do termo de consentimento como o participante vai ver (protótipo r4)
-export function PreviaParticipante({ titulo, objetivo }: { titulo: string; objetivo: string }) {
+export function PreviaParticipante({ titulo, objetivo, etapas }: { titulo: string; objetivo: string; etapas: number }) {
   return (
     <aside aria-labelledby="titulo-previa" className={estilos.previa}>
       <h2 id="titulo-previa" className={estilos.previaRotulo}>
@@ -10,7 +10,7 @@ export function PreviaParticipante({ titulo, objetivo }: { titulo: string; objet
       </h2>
       <div className={estilos.cartao}>
         <div className={estilos.cartaoTopo}>
-          <p className={estilos.cartaoEtapa}>Etapa 1 de 3 · Consentimento</p>
+          <p className={estilos.cartaoEtapa}>Etapa 1 de {etapas} · Consentimento</p>
           <p className={estilos.cartaoTitulo}>
             {titulo.trim() || <span className={estilos.marcador}>Título do estudo</span>}
           </p>

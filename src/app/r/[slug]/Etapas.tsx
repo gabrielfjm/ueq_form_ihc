@@ -7,13 +7,16 @@ type Propriedades = {
   // Posição da etapa atual (0 = consentimento) ou todas concluídas
   atual: 0 | 1 | 2 | "concluidas";
   textos: TextosParticipante["etapas"];
+  // a terceira etapa (dados opcionais) só existe quando o estudo coleta dados demográficos
+  comDadosOpcionais: boolean;
 };
 
 // Shneiderman 4 (diálogos com fechamento): a pessoa sabe em que etapa está e quantas faltam
-export function Etapas({ atual, textos }: Propriedades) {
+export function Etapas({ atual, textos, comDadosOpcionais }: Propriedades) {
+  const nomes = comDadosOpcionais ? textos.nomes : textos.nomes.slice(0, 2);
   return (
     <ol className={estilos.etapas} aria-label={atual === "concluidas" ? textos.rotuloConcluidas : textos.rotulo}>
-      {textos.nomes.map((etapa, posicao) => (
+      {nomes.map((etapa, posicao) => (
         <li
           key={etapa}
           aria-current={posicao === atual ? "step" : undefined}

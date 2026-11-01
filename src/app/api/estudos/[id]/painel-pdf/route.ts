@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { chromium } from "playwright";
 import { banco } from "@/lib/banco";
+import { filtroDeAcesso } from "@/lib/estudos";
 import { COOKIE_SESSAO } from "@/lib/cookie-sessao";
 import { nomeDoArquivo } from "@/lib/exportar-estudo";
 import { pesquisadorDaSessao } from "@/lib/sessao";
@@ -19,8 +20,8 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   const pesquisador = await pesquisadorDaSessao();
   if (!pesquisador) return new Response("Entre na sua conta para exportar o painel do estudo.", { status: 401 });
 
-  const estudo = await banco.estudo.findFirst({ where: { id, pesquisadorId: pesquisador.id }, select: { titulo: true } });
-  // Estudo de outro pesquisador responde igual a estudo inexistente: não revela que o id existe
+  const estudo = await banco.estudo.findFirst({ where: { id, ...filtroDeAcesso(pesquisador) }, select: { titulo: true } });
+  // Estudo sem acesso responde igual a estudo inexistente: não revela que o id existe
   if (!estudo) return new Response("Estudo não encontrado.", { status: 404 });
 
   const pedido = new URL(request.url);

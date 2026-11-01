@@ -89,7 +89,7 @@ export function VisaoComparacao({ versoes, benchmark, faixaNeutra }: Propriedade
         </section>
       )}
 
-      <section aria-labelledby="titulo-comparacao" className={estilos.secao}>
+      <section aria-labelledby="titulo-comparacao" className={estilos.secao} data-tutorial="escalas">
         <TituloSecao id="titulo-comparacao" numero={1}>Escalas por versão</TituloSecao>
         <EscalasComBenchmark
           linhas={linhas}

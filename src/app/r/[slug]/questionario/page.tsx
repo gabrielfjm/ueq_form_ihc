@@ -37,7 +37,7 @@ export default async function PaginaQuestionario({ params }: Propriedades) {
         slug={slug}
         participacaoId={participacao.id}
         tituloDocumento={`${textos.titulos.questionario} · ${estudo.titulo}`}
-        etapa={formatar(textos.etapas.etapaDeTotal, { n: 2, total: 3, nome: textos.etapas.nomes[1] })}
+        etapa={formatar(textos.etapas.etapaDeTotal, { n: 2, total: estudo.coletarDemografia ? 3 : 2, nome: textos.etapas.nomes[1] })}
         itens={itens}
         textos={textos.questionario}
         lang={idioma.lang}

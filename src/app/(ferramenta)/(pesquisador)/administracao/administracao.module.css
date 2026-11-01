@@ -1,0 +1,68 @@
+.conteudo {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 40px 24px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.regiaoStatus:empty {
+  display: none;
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 28px;
+  border-top: 1px solid var(--linha);
+}
+
+.secaoTitulo {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.secaoNumero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.secaoNome {
+  margin: 0;
+  font-size: 1.75rem;
+  line-height: 1.15;
+}
+
+.texto {
+  margin: 0;
+  max-width: var(--largura-leitura);
+  color: var(--tinta-suave);
+}
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px 24px;
+  align-items: start;
+}
+
+.alinharInicio {
+  align-self: flex-start;
+}
+
+.acesso {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 12px;
+}
+
+.primeira {
+  padding-top: 0;
+  border-top: 0;
+}

@@ -49,12 +49,14 @@ export default async function PaginaConta() {
     <>
       <FaixaCabecalho
         titulo="Minha conta"
+        ajuda="conta"
         descricao="Seus dados de acesso. Ninguém além de você vê esta página, e os participantes nunca veem seu nome nem seu e-mail."
       />
       <div className={estilos.conteudo}>
         <ConteudoConta
           nome={pesquisador.nome}
           email={pesquisador.email}
+          notificacoesPorEmail={pesquisador.notificacoesPorEmail}
           avisoExclusao={avisoDeExclusao(estudos, resumo.respostas)}
           ficha={
             <FichaConta

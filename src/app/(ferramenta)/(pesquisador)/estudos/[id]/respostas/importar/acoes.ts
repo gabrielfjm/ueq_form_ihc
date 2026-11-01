@@ -5,6 +5,8 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { banco } from "@/lib/banco";
 import { estudoDoPesquisador } from "@/lib/estudos";
+import { notificarAlteracao } from "@/lib/notificacoes";
+import { plural } from "@/lib/texto";
 import { LIMITE_BYTES, lerCsvDeRespostas, type ErroImportacao } from "@/lib/importacao";
 import { itensDoQuestionario } from "@/lib/itens-ueq";
 import { PARAMETROS_SUSPEITA } from "@/lib/participacoes";
@@ -27,7 +29,7 @@ export type ResultadoPrevia = { previa?: Previa; erro?: { campo: "versao" | "arq
 
 async function versaoDoEstudo(estudoId: string, versaoId: unknown) {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador(estudoId, pesquisador.id);
+  const estudo = await estudoDoPesquisador(estudoId, pesquisador, "editar");
   // Com uma versão só não há o que escolher; com várias, a versão tem que ser deste estudo
   const versao = estudo.versoes.length === 1 ? estudo.versoes[0] : estudo.versoes.find((v) => v.id === versaoId);
   return versao ?? null;
@@ -91,6 +93,12 @@ export async function confirmarImportacao(estudoId: string, versaoId: string, te
         select: { id: true },
       }),
     ),
+  );
+  await notificarAlteracao(
+    estudoId,
+    await exigirPesquisador(),
+    (titulo) => `importou ${plural(linhas.length, "resposta", "respostas")} de um CSV em “${titulo}”.`,
+    `/estudos/${estudoId}/respostas`,
   );
   revalidatePath(`/estudos/${estudoId}`, "layout");
   redirect(`/estudos/${estudoId}/respostas?importadas=${linhas.length}` as Route);

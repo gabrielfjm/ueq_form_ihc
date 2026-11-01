@@ -1,6 +1,6 @@
 "use client";
 
-import { BookOpen, Folder, LogOut, Plus, User, type LucideIcon } from "lucide-react";
+import { BookOpen, Folder, LogOut, Plus, ShieldCheck, User, type LucideIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,6 +9,7 @@ import { BarraFixa } from "./BarraFixa";
 import { Confirmacao } from "@/componentes/janela/Confirmacao";
 import { Logotipo } from "@/componentes/Logotipo";
 import { sair } from "./acoes";
+import { SinoNotificacoes } from "./SinoNotificacoes";
 import estilos from "./pesquisador.module.css";
 
 type ItemNavegacao = {
@@ -36,8 +37,29 @@ const ITENS: readonly ItemNavegacao[] = [
   { href: "/conta", texto: "Minha conta", Icone: User, atual: (caminho) => caminho === "/conta" },
 ];
 
-export function BarraSuperior() {
+type Propriedades = {
+  // notificações não lidas quando a página carregou; o sino atualiza sozinho depois
+  naoLidas: number;
+  administrador: boolean;
+};
+
+export function BarraSuperior({ naoLidas, administrador }: Propriedades) {
   const caminho = usePathname();
+  // Administração (só para o superusuário) entra antes de Minha conta; o sino vem logo depois dela
+  const itens: ItemNavegacao[] = [
+    ...ITENS.slice(0, 3),
+    ...(administrador
+      ? [
+          {
+            href: "/administracao" as Route,
+            texto: "Administração",
+            Icone: ShieldCheck,
+            atual: (atual: string) => atual === "/administracao",
+          },
+        ]
+      : []),
+    ...ITENS.slice(3),
+  ];
   const [confirmandoSaida, setConfirmandoSaida] = useState(false);
   return (
     <>
@@ -48,17 +70,19 @@ export function BarraSuperior() {
           </Link>
         }
       >
-        {ITENS.map(({ href, texto, Icone, atual }) => (
+        {itens.map(({ href, texto, Icone, atual }) => (
           <Link
             key={href}
             href={href}
             className={estilos.linkNavegacao}
             aria-current={atual(caminho) ? "page" : undefined}
+            data-tutorial={`navegacao-${href.slice(1).replace("/", "-")}`}
           >
             <Icone size={18} strokeWidth={1.5} aria-hidden="true" />
             <span>{texto}</span>
           </Link>
         ))}
+        <SinoNotificacoes naoLidasIniciais={naoLidas} />
         {/* Sair muda estado no servidor, por isso é botão e não link. Pede confirmação antes (protótipo r20):
             quem clica sem querer no celular, com o menu aberto, não perde a sessão */}
         <button

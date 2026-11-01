@@ -17,6 +17,7 @@ const dadosEstudo = z
     objetivo: texto("Escreva o objetivo. É o que o participante lê no termo.", 2000, "no objetivo"),
     dataInicio: z.string().regex(DIA, "Informe a data de início."),
     dataFim: z.string().regex(DIA, "Informe a data de fim."),
+    coletarDemografia: z.boolean(),
     versoes: z
       .array(z.object({ id: z.string(), nome: z.string().trim() }))
       .min(1)
@@ -52,6 +53,7 @@ export function lerFormularioEstudo(dados: FormData) {
     objetivo: textoDoCampo(dados, "objetivo"),
     dataInicio: textoDoCampo(dados, "dataInicio"),
     dataFim: textoDoCampo(dados, "dataFim"),
+    coletarDemografia: dados.get("coletarDemografia") === "sim",
     versoes: nomes.map((nome, posicao) => ({ id: ids[posicao] ?? "", nome })),
   });
 }

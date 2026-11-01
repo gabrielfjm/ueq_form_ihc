@@ -9,8 +9,9 @@ type Propriedades = {
   aoFechar: () => void;
   // id do título que dá nome à janela (aria-labelledby)
   idTitulo: string;
-  // "acesso" é a janela larga de Entrar e Criar conta; "confirmacao", a estreita de Sair e das exclusões
-  tipo: "acesso" | "confirmacao";
+  // "acesso" é a janela larga de Entrar e Criar conta; "confirmacao", a estreita de Sair e das exclusões;
+  // "conteudo", a média da ajuda (?), do Compartilhar e das boas-vindas do tour
+  tipo: "acesso" | "confirmacao" | "conteudo";
   // alertdialog nas confirmações: o leitor de tela anuncia que a janela pede uma decisão
   papel?: "dialog" | "alertdialog";
   className?: string;
@@ -58,7 +59,7 @@ export function Janela({
       role={papel === "alertdialog" ? "alertdialog" : undefined}
       aria-modal="true"
       aria-labelledby={idTitulo}
-      className={`${estilos.janela} ${tipo === "acesso" ? estilos.acesso : estilos.confirmacao} ${className ?? ""}`}
+      className={`${estilos.janela} ${estilos[tipo]} ${className ?? ""}`}
       onClose={aoFechar}
       onClick={aoClicar}
     >

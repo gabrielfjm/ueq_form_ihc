@@ -108,7 +108,7 @@ export function VisaoUmaVersao({ analise, itens, benchmark, faixaNeutra, rotuloS
         </dl>
       </section>
 
-      <section aria-labelledby="titulo-escalas" className={estilos.secao}>
+      <section aria-labelledby="titulo-escalas" className={estilos.secao} data-tutorial="escalas">
         <TituloSecao id="titulo-escalas" numero={1}>Escalas</TituloSecao>
         {analise.n < 2 && (
           <p className={estilos.aviso}>

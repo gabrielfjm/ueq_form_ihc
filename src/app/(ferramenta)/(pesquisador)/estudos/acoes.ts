@@ -10,6 +10,7 @@ import { diaDoCampo } from "@/lib/periodo";
 import { exigirPesquisador } from "@/lib/sessao";
 import { AVISOS_DE_STATUS } from "@/lib/status-estudo";
 import { lerFormularioEstudo, type CampoEstudo } from "@/lib/validacao-estudo";
+import { equipeDoEstudo, notificar, notificarAlteracao } from "@/lib/notificacoes";
 
 export async function criarEstudo(
   anterior: EstadoFormulario<CampoEstudo>,
@@ -41,7 +42,7 @@ export async function salvarEstudo(
   dados: FormData,
 ): Promise<EstadoFormulario<CampoEstudo>> {
   const pesquisador = await exigirPesquisador();
-  const atual = await estudoDoPesquisador(estudoId, pesquisador.id);
+  const atual = await estudoDoPesquisador(estudoId, pesquisador, "editar");
   const envio = anterior.envio + 1;
   const validacao = lerFormularioEstudo(dados);
   if (!validacao.success) return { envio, erros: errosPorCampo(validacao.error) };
@@ -74,13 +75,14 @@ export async function salvarEstudo(
       data: { ...estudo, dataInicio: diaDoCampo(dataInicio), dataFim: diaDoCampo(dataFim) },
     }),
   ]);
+  await notificarAlteracao(estudoId, pesquisador, (titulo) => `editou os dados de “${titulo}”.`);
   redirect(`/estudos/${estudoId}?aviso=salvo` as Route);
 }
 
 const TRANSICOES = {
-  abrir: { de: ["RASCUNHO"], para: "ABERTO", aviso: AVISOS_DE_STATUS.ABERTO },
-  encerrar: { de: ["ABERTO"], para: "ENCERRADO", aviso: AVISOS_DE_STATUS.ENCERRADO },
-  reabrir: { de: ["ENCERRADO"], para: "ABERTO", aviso: AVISOS_DE_STATUS.REABERTO },
+  abrir: { de: ["RASCUNHO"], para: "ABERTO", aviso: AVISOS_DE_STATUS.ABERTO, verbo: "abriu" },
+  encerrar: { de: ["ABERTO"], para: "ENCERRADO", aviso: AVISOS_DE_STATUS.ENCERRADO, verbo: "encerrou" },
+  reabrir: { de: ["ENCERRADO"], para: "ABERTO", aviso: AVISOS_DE_STATUS.REABERTO, verbo: "reabriu" },
 } as const;
 
 export async function alterarColeta(
@@ -88,12 +90,13 @@ export async function alterarColeta(
   acao: keyof typeof TRANSICOES,
 ): Promise<{ sucesso?: string; erro?: string }> {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador(estudoId, pesquisador.id);
+  const estudo = await estudoDoPesquisador(estudoId, pesquisador, "editar");
   const transicao = TRANSICOES[acao];
   if (!(transicao.de as readonly string[]).includes(estudo.status)) {
     return { erro: "O estado do estudo mudou em outra aba. Recarregue a página para ver o atual." };
   }
   await banco.estudo.update({ where: { id: estudoId }, data: { status: transicao.para } });
+  await notificarAlteracao(estudoId, pesquisador, (titulo) => `${transicao.verbo} a coleta de “${titulo}”.`);
   revalidatePath(`/estudos/${estudoId}`);
   return { sucesso: transicao.aviso };
 }
@@ -104,7 +107,7 @@ export async function excluirEstudo(
   dados: FormData,
 ): Promise<EstadoFormulario<"confirmacao">> {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador(estudoId, pesquisador.id);
+  const estudo = await estudoDoPesquisador(estudoId, pesquisador, "gerenciar");
   const envio = anterior.envio + 1;
   const confirmacao = textoDoCampo(dados, "confirmacao").trim().toLowerCase();
 
@@ -113,6 +116,15 @@ export async function excluirEstudo(
     return { envio, erros: { confirmacao: { mensagem: "O texto não é igual ao título do estudo. Nada foi excluído." } } };
   }
 
+  // Avisa a equipe antes de apagar: depois a notificação fica sem estudo, só com o texto
+  const equipe = await equipeDoEstudo(estudoId);
+  if (equipe) {
+    await notificar(equipe.ids, pesquisador.id, {
+      tipo: "ALTERACAO",
+      texto: `${pesquisador.nome} excluiu o estudo “${equipe.titulo}”, com as versões e as respostas.`,
+      link: "/estudos",
+    });
+  }
   // Cascata do schema: versões, participações e respostas vão junto
   await banco.estudo.delete({ where: { id: estudoId } });
   redirect("/estudos?aviso=excluido");

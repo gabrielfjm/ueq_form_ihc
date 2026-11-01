@@ -19,7 +19,7 @@ type Propriedades = {
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
+  const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   return { title: `Respostas · ${estudo.titulo} · Ferramenta UEQ` };
 }
 
@@ -27,7 +27,7 @@ const MOTIVO: Record<MotivoSuspeita, string> = { amplitude: "amplitude", respost
 
 export default async function PaginaRespostas({ params, searchParams }: Propriedades) {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
+  const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   const { suspeitas, importadas } = await searchParams;
   const soSuspeitas = suspeitas === "1";
   // Volta da importação (respostas/importar): o resultado é anunciado no topo, como nas outras ações
@@ -63,12 +63,7 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
 
   return (
     <>
-      <FaixaEstudo
-        estudoId={estudo.id}
-        titulo={estudo.titulo}
-        status={estudo.status}
-        resumo={resumoDoEstudo(estudo.status, estudo.versoes.length, respostas)}
-      />
+      <FaixaEstudo estudo={estudo} ajuda="respostas" resumo={resumoDoEstudo(estudo.status, estudo.versoes.length, respostas)} />
       <div className={estilos.conteudo}>
         <Avisos className={estilos.regiaoStatus} inicial={aviso}>
           {participacoes.length === 0 ? (
@@ -78,9 +73,11 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
                 Cada participação concluída aparece aqui, com as respostas suspeitas marcadas para você decidir se ficam na
                 análise.
               </p>
-              <p>
-                Já tem respostas coletadas fora da ferramenta? <Link href={linkImportar}>Importar respostas de um CSV</Link>
-              </p>
+              {estudo.permissoes.editar && (
+                <p>
+                  Já tem respostas coletadas fora da ferramenta? <Link href={linkImportar}>Importar respostas de um CSV</Link>
+                </p>
+              )}
             </section>
           ) : (
             <div className={estilos.secoes}>
@@ -117,6 +114,7 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
               <div className={estilos.colunas}>
                 <section aria-labelledby="titulo-lista" className={estilos.lista}>
                   <TabelaParticipacoes
+                    somenteLeitura={!estudo.permissoes.editar}
                     estudoId={estudo.id}
                     linhas={linhas}
                     total={participacoes.length}
@@ -162,10 +160,12 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
                   <p className={estilos.regraTexto}>
                     Coletadas em papel ou em outro formulário, entram por um CSV no formato da planilha oficial.
                   </p>
-                  <Link href={linkImportar} className={estilos.importar}>
-                    <Upload size={18} strokeWidth={1.5} aria-hidden="true" />
-                    <span>Importar respostas de um CSV</span>
-                  </Link>
+                  {estudo.permissoes.editar && (
+                    <Link href={linkImportar} className={estilos.importar}>
+                      <Upload size={18} strokeWidth={1.5} aria-hidden="true" />
+                      <span>Importar respostas de um CSV</span>
+                    </Link>
+                  )}
                 </aside>
               </div>
             </div>

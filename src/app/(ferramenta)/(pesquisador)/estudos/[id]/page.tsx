@@ -19,11 +19,12 @@ type Propriedades = {
 const AVISOS = {
   criado: "Estudo criado em rascunho. Confira os dados e abra a coleta quando estiver pronto.",
   salvo: "Alterações salvas.",
+  "convite-aceito": "Convite aceito. O estudo agora aparece em Seus estudos, na seção Compartilhados com você.",
 } as const;
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
+  const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   return { title: `${estudo.titulo} · Ferramenta UEQ` };
 }
 
@@ -50,7 +51,7 @@ function avisoDeExclusao(versoes: number, respostas: number, status: string) {
 
 export default async function PaginaEstudo({ params, searchParams }: Propriedades) {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
+  const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   const { aviso } = await searchParams;
   const respostas = await contagemDeRespostas(estudo.id);
   const endereco = await enderecoPublico(estudo.slugPublico);
@@ -85,9 +86,9 @@ export default async function PaginaEstudo({ params, searchParams }: Propriedade
 
   return (
     <>
-      <FaixaEstudo estudoId={estudo.id} titulo={estudo.titulo} status={estudo.status} resumo={resumo} />
+      <FaixaEstudo estudo={estudo} ajuda="estudo" resumo={resumo} />
       <div className={estilos.conteudo}>
-        <Avisos inicial={aviso === "criado" || aviso === "salvo" ? AVISOS[aviso] : null} className={estilos.regiaoStatus}>
+        <Avisos inicial={aviso === "criado" || aviso === "salvo" || aviso === "convite-aceito" ? AVISOS[aviso] : null} className={estilos.regiaoStatus}>
           <div className={estilos.colunas}>
             <div className={estilos.secoes}>
               {rascunho ? (

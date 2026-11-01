@@ -1,0 +1,170 @@
+/* Tour guiado: a página escurece em volta do destaque, sem sombra nem desfoque (docs/design.md, Proibido).
+   As quatro faixas escuras bloqueiam o resto da página; o buraco do meio fica livre nos passos de clique */
+
+.camada {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+}
+
+.sombra {
+  position: fixed;
+  background: color-mix(in srgb, var(--tinta) 62%, transparent);
+  pointer-events: auto;
+}
+
+.anel {
+  position: fixed;
+  border: 3px solid var(--destaque);
+  border-radius: var(--raio);
+  outline: 2px solid var(--fundo);
+  pointer-events: none;
+  animation: pulso 1.6s ease-in-out infinite;
+}
+
+/* Nos passos que só explicam, o destaque não recebe clique: Próximo é quem avança */
+.bloqueado {
+  pointer-events: auto;
+}
+
+@keyframes pulso {
+  50% {
+    outline-offset: 4px;
+  }
+}
+
+.cartao {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: 41;
+  width: min(380px, calc(100vw - 32px));
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px 20px;
+  background: var(--fundo);
+  border: 1px solid var(--linha-forte);
+  border-radius: var(--raio);
+  pointer-events: auto;
+}
+
+.topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.progresso {
+  margin: 0;
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.fechar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin: -8px -12px -8px 0;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: var(--raio);
+  background: var(--fundo);
+  color: var(--tinta);
+  cursor: pointer;
+}
+
+.fechar:hover {
+  border-color: var(--tinta);
+  background: var(--destaque-fundo);
+}
+
+.barraProgresso {
+  height: 4px;
+  background: var(--fundo-faixa);
+}
+
+.barraProgresso span {
+  display: block;
+  height: 100%;
+  background: var(--destaque);
+  transition: width var(--transicao);
+}
+
+.titulo {
+  margin: 4px 0 0;
+  font-size: var(--texto-lg);
+}
+
+.titulo:focus {
+  outline: none;
+}
+
+.texto {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.dica {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.acoes {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  margin-top: 6px;
+}
+
+.pular {
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--tinta);
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+.chapeu {
+  margin: 0 0 4px;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+@media (forced-colors: active) {
+  .sombra {
+    background: Canvas;
+    opacity: 0.85;
+  }
+
+  .anel {
+    border-color: Highlight;
+  }
+
+  .cartao {
+    border: 2px solid CanvasText;
+  }
+}
+
+@media print {
+  .camada {
+    display: none;
+  }
+}

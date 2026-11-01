@@ -6,15 +6,17 @@ import estilos from "./conta.module.css";
 import { ExcluirConta } from "./ExcluirConta";
 import { FormularioDados } from "./FormularioDados";
 import { FormularioSenha } from "./FormularioSenha";
+import { PreferenciaEmail } from "./PreferenciaEmail";
 
 type Propriedades = {
   nome: string;
   email: string;
+  notificacoesPorEmail: boolean;
   avisoExclusao: { destaque: string; complemento: string };
   ficha: ReactNode;
 };
 
-export function ConteudoConta({ nome, email, avisoExclusao, ficha }: Propriedades) {
+export function ConteudoConta({ nome, email, notificacoesPorEmail, avisoExclusao, ficha }: Propriedades) {
   const [status, setStatus] = useState({ mensagem: "", vez: 0 });
 
   // docs/ihc.md, 4.2: toda ação dá retorno visível e anunciado
@@ -29,6 +31,7 @@ export function ConteudoConta({ nome, email, avisoExclusao, ficha }: Propriedade
         <div className={estilos.secoes}>
           <FormularioDados nome={nome} email={email} aoSalvar={anunciar} />
           <FormularioSenha email={email} aoTrocar={anunciar} />
+          <PreferenciaEmail receber={notificacoesPorEmail} aoSalvar={anunciar} />
           <ExcluirConta aviso={avisoExclusao} />
         </div>
         {ficha}

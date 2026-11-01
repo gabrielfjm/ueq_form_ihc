@@ -13,6 +13,9 @@ export type PesquisadorLogado = {
   nome: string;
   email: string;
   criadoEm: Date;
+  administrador: boolean;
+  tutorialVistoEm: Date | null;
+  notificacoesPorEmail: boolean;
 };
 
 function idDaSessao(token: string): string {
@@ -49,7 +52,9 @@ export const pesquisadorDaSessao = cache(async (): Promise<PesquisadorLogado | n
     where: { id },
     select: {
       expiraEm: true,
-      pesquisador: { select: { id: true, nome: true, email: true, criadoEm: true } },
+      pesquisador: {
+        select: { id: true, nome: true, email: true, criadoEm: true, administrador: true, tutorialVistoEm: true, notificacoesPorEmail: true },
+      },
     },
   });
   if (!sessao || sessao.expiraEm <= new Date()) return null;

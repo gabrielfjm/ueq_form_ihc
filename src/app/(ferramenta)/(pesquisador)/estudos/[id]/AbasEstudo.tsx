@@ -21,7 +21,13 @@ export function AbasEstudo({ estudoId }: { estudoId: string }) {
         // A subpágina (Respostas › Importar) mantém a aba de origem marcada
         const atual = caminho === href || (sufixo !== "" && caminho.startsWith(`${href}/`));
         return (
-          <Link key={texto} href={href as Route} className={estilos.aba} aria-current={atual ? "page" : undefined}>
+          <Link
+            key={texto}
+            href={href as Route}
+            className={estilos.aba}
+            aria-current={atual ? "page" : undefined}
+            data-tutorial={`aba${sufixo.replace("/", "-") || "-visao-geral"}`}
+          >
             <Icone size={18} strokeWidth={1.5} aria-hidden="true" />
             <span>{texto}</span>
           </Link>

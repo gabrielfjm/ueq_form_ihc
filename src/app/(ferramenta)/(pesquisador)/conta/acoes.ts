@@ -88,3 +88,11 @@ export async function excluirConta(
   await banco.pesquisador.delete({ where: { id: pesquisador.id } });
   redirect("/?aviso=excluida");
 }
+
+export async function salvarPreferenciaEmail(receber: boolean): Promise<string> {
+  const pesquisador = await exigirPesquisador();
+  await banco.pesquisador.update({ where: { id: pesquisador.id }, data: { notificacoesPorEmail: receber } });
+  return receber
+    ? "Pronto: os avisos do sino também vão chegar no seu e-mail."
+    : "Pronto: os avisos ficam só no sino, sem e-mail.";
+}
