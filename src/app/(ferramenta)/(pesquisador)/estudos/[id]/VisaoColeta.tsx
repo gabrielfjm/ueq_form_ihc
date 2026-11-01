@@ -52,7 +52,7 @@ export function VisaoColeta({ estudo, endereco, respostas, avisoExclusao }: Prop
 
   return (
     <>
-      <section aria-labelledby="secao-link" className={`${estilos.secao} ${estilos.secaoPrimeira}`}>
+      <section aria-labelledby="secao-link" className={`${estilos.secao} ${estilos.secaoPrimeira}`} data-tutorial="link-coleta">
         <TituloSecao id="secao-link" numero={++numero}>Link para participantes</TituloSecao>
         <p className={estilos.texto}>
           {estudo.status === "ABERTO"
@@ -108,14 +108,18 @@ export function VisaoColeta({ estudo, endereco, respostas, avisoExclusao }: Prop
         </nav>
       </section>
 
-      <section aria-labelledby="secao-acoes" className={estilos.secao}>
-        <TituloSecao id="secao-acoes" numero={++numero}>Ações</TituloSecao>
-        <AcoesEstudo
-          estudoId={estudo.id}
-          avisoExclusao={avisoExclusao}
-          coleta={<BotaoColeta estudoId={estudo.id} acao={estudo.status === "ABERTO" ? "encerrar" : "reabrir"} />}
-        />
-      </section>
+      {estudo.permissoes.editar && (
+        <section aria-labelledby="secao-acoes" className={estilos.secao}>
+          <TituloSecao id="secao-acoes" numero={++numero}>Ações</TituloSecao>
+          <AcoesEstudo
+            estudoId={estudo.id}
+            avisoExclusao={avisoExclusao}
+            podeEditar={estudo.permissoes.editar}
+            podeExcluir={estudo.permissoes.gerenciar}
+            coleta={<BotaoColeta estudoId={estudo.id} acao={estudo.status === "ABERTO" ? "encerrar" : "reabrir"} />}
+          />
+        </section>
+      )}
     </>
   );
 }

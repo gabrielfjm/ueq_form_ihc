@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { banco } from "@/lib/banco";
 import { estudoDoPesquisador } from "@/lib/estudos";
+import { notificarAlteracao } from "@/lib/notificacoes";
 import { exigirPesquisador } from "@/lib/sessao";
 import { formatarDiaHora, plural } from "@/lib/texto";
 
@@ -16,7 +17,7 @@ function atualizarPaginas(estudoId: string) {
 // docs/ueq-protocolo.md, seção 7: excluir da análise só muda incluidaNaAnalise; nada é apagado
 export async function alterarInclusao(estudoId: string, participacaoId: string, incluida: boolean): Promise<Retorno> {
   const pesquisador = await exigirPesquisador();
-  await estudoDoPesquisador(estudoId, pesquisador.id);
+  await estudoDoPesquisador(estudoId, pesquisador, "editar");
 
   // O filtro pelo estudo impede alterar a participação de outro estudo trocando o id na chamada
   const participacao = await banco.participacao.findFirst({
@@ -26,6 +27,12 @@ export async function alterarInclusao(estudoId: string, participacaoId: string, 
   if (!participacao?.concluidaEm) return { erro: "Essa participação não está neste estudo. Recarregue a página." };
 
   await banco.participacao.update({ where: { id: participacaoId }, data: { incluidaNaAnalise: incluida } });
+  await notificarAlteracao(
+    estudoId,
+    pesquisador,
+    (titulo) => `${incluida ? "devolveu uma resposta à análise" : "tirou uma resposta da análise"} em “${titulo}”.`,
+    `/estudos/${estudoId}/respostas`,
+  );
   atualizarPaginas(estudoId);
   const quando = formatarDiaHora(participacao.concluidaEm);
   return {
@@ -37,13 +44,21 @@ export async function alterarInclusao(estudoId: string, participacaoId: string, 
 
 export async function tirarSuspeitasDaAnalise(estudoId: string): Promise<Retorno> {
   const pesquisador = await exigirPesquisador();
-  await estudoDoPesquisador(estudoId, pesquisador.id);
+  await estudoDoPesquisador(estudoId, pesquisador, "editar");
 
   const { count } = await banco.participacao.updateMany({
     where: { versao: { estudoId }, concluidaEm: { not: null }, suspeita: true, incluidaNaAnalise: true },
     data: { incluidaNaAnalise: false },
   });
   atualizarPaginas(estudoId);
+  if (count > 0) {
+    await notificarAlteracao(
+      estudoId,
+      pesquisador,
+      (titulo) => `tirou ${plural(count, "resposta suspeita", "respostas suspeitas")} da análise em “${titulo}”.`,
+      `/estudos/${estudoId}/respostas`,
+    );
+  }
   if (count === 0) return { sucesso: "Nenhuma participação suspeita estava na análise. Nada mudou." };
   return {
     sucesso: `${plural(count, "participação suspeita saiu", "participações suspeitas saíram")} da análise. Nada foi apagado: marque “Na análise” para incluir de novo.`,

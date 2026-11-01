@@ -72,6 +72,21 @@ test("fluxo completo do participante, com axe em todas as etapas", async ({ page
   await estudo.fechar();
 });
 
+test("sem coleta de dados demográficos, o envio leva direto ao agradecimento", async ({ page, browser }, info) => {
+  const estudo = await estudoAberto(browser, info, { demografia: false });
+  await page.goto(estudo.link);
+  await expect(page.getByRole("list", { name: "Etapas da participação" }).getByRole("listitem")).toHaveCount(2);
+  await page.getByRole("button", { name: "Concordo e quero participar" }).click();
+  await expect(page.getByText("Etapa 2 de 2 · Questionário")).toBeVisible();
+  await responder(page);
+  await page.getByRole("button", { name: "Enviar respostas" }).click();
+  await expect(page).toHaveTitle(/^Respostas registradas · /);
+  // a etapa não existe nem pelo endereço
+  await page.goto(`${estudo.link}/sobre-voce`);
+  await expect(page).not.toHaveTitle(/^Dados opcionais/);
+  await estudo.fechar();
+});
+
 test("fluxo completo só com teclado, com o foco sempre visível", async ({ page, browser }, info) => {
   test.slow();
   const estudo = await estudoAberto(browser, info);

@@ -29,7 +29,7 @@ export function ExcluirConta({ aviso }: { aviso: { destaque: string; complemento
   return (
     <section className={estilos.secao} aria-labelledby="secao-excluir">
       <div className={estilos.secaoTitulo}>
-        <span className={estilos.secaoNumero}>03</span>
+        <span className={estilos.secaoNumero}>04</span>
         <h2 id="secao-excluir" className={estilos.secaoNome}>
           Excluir conta
         </h2>

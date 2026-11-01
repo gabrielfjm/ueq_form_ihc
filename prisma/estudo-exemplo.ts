@@ -31,6 +31,7 @@ export async function criarEstudoExemplo(prisma: PrismaClient, pesquisadorId: st
       produtoAvaliado: "Checkout da loja virtual",
       objetivo: "Queremos entender como as pessoas percebem o checkout da loja.",
       status: "ABERTO",
+      coletarDemografia: true,
       dataInicio: new Date("2026-10-05T00:00:00Z"),
       dataFim: new Date("2026-11-20T00:00:00Z"),
       slugPublico: SLUG_EXEMPLO,

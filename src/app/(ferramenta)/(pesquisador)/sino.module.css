@@ -1,0 +1,212 @@
+/* Sino de notificações da barra superior e a lista que abre por baixo dele */
+
+.caixa {
+  position: relative;
+  display: inline-flex;
+}
+
+.botao {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: none;
+  color: var(--tinta);
+  font: inherit;
+  cursor: pointer;
+}
+
+.botao:hover,
+.botao[aria-expanded="true"] {
+  border-bottom-color: var(--linha);
+}
+
+/* No computador o sino fica só com o ícone; no menu do celular ganha o nome */
+.textoMenu {
+  display: none;
+}
+
+.contador {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  margin-left: -4px;
+  padding: 0 5px;
+  border-radius: 10px;
+  background: var(--alerta);
+  color: var(--fundo);
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.painel {
+  position: absolute;
+  top: calc(100% + 14px);
+  right: -12px;
+  z-index: 20;
+  width: min(400px, calc(100vw - 32px));
+  max-height: min(70vh, 560px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--fundo);
+  border: 1px solid var(--linha-forte);
+  border-radius: var(--raio);
+}
+
+.painel[hidden] {
+  display: none;
+}
+
+.cabecalho {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--fundo);
+  border-bottom: 1px solid var(--linha);
+}
+
+.titulo {
+  margin: 0;
+  font-size: var(--texto-lg);
+}
+
+.textoBotao {
+  padding: 8px 0;
+  border: 0;
+  background: none;
+  color: var(--destaque);
+  font: inherit;
+  font-size: var(--texto-sm);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  cursor: pointer;
+}
+
+.vazio {
+  margin: 0;
+  padding: 20px 16px;
+  color: var(--tinta-suave);
+  font-size: var(--texto-sm);
+}
+
+.lista {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lista li {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--linha);
+  font-size: var(--texto-sm);
+}
+
+.lista li.nova {
+  background: var(--destaque-fundo);
+  border-left: 3px solid var(--destaque);
+  padding-left: 13px;
+}
+
+.link {
+  color: var(--tinta);
+  overflow-wrap: anywhere;
+}
+
+.nova .link {
+  font-weight: 700;
+}
+
+.quando {
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-xs);
+  color: var(--tinta-suave);
+}
+
+.acoes {
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.aceitar,
+.recusar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 36px;
+  padding: 0 12px;
+  border-radius: var(--raio);
+  font: inherit;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.aceitar {
+  background: var(--tinta);
+  color: var(--fundo);
+  border: 1px solid var(--tinta);
+}
+
+.recusar {
+  background: var(--fundo);
+  color: var(--tinta);
+  border: 1px solid var(--tinta);
+}
+
+.verTodas {
+  display: block;
+  padding: 14px 16px;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 56rem) {
+  .caixa {
+    flex-direction: column;
+  }
+
+  .botao {
+    min-height: 44px;
+  }
+
+  .textoMenu {
+    display: inline;
+  }
+
+  .contador {
+    margin-left: 0;
+  }
+
+  .painel {
+    position: static;
+    width: 100%;
+    max-height: none;
+    margin-bottom: 8px;
+  }
+}
+
+@media (forced-colors: active) {
+  .contador {
+    border: 1px solid CanvasText;
+  }
+
+  .lista li.nova {
+    border-left-color: Highlight;
+  }
+}

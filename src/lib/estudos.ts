@@ -17,20 +17,59 @@ export async function gerarSlugPublico(): Promise<string> {
   throw new Error("Não foi possível gerar um link público livre depois de 10 tentativas.");
 }
 
-// Toda leitura e alteração de estudo passa por aqui: o filtro por pesquisadorId é o que
-// impede um pesquisador de ver ou mexer no estudo de outro só trocando o id na URL
-export async function estudoDoPesquisador(estudoId: string, pesquisadorId: string) {
+export type AcessoEstudo = "dono" | "editor" | "leitor" | "administrador";
+// ver: abrir o estudo, o painel, as respostas e exportar. editar: dados, coleta, respostas e importação.
+// gerenciar: excluir o estudo e convidar ou remover pessoas
+export type ExigenciaEstudo = "ver" | "editar" | "gerenciar";
+
+export const PERMISSOES: Record<AcessoEstudo, Record<ExigenciaEstudo, boolean>> = {
+  dono: { ver: true, editar: true, gerenciar: true },
+  administrador: { ver: true, editar: true, gerenciar: true },
+  editor: { ver: true, editar: true, gerenciar: false },
+  leitor: { ver: true, editar: false, gerenciar: false },
+};
+
+type QuemAcessa = { id: string; administrador: boolean };
+
+// Estudos que a pessoa vê: os dela e os compartilhados com ela (convite aceito). O administrador vê todos
+export function filtroDeAcesso(quem: QuemAcessa) {
+  if (quem.administrador) return {};
+  return {
+    OR: [
+      { pesquisadorId: quem.id },
+      { colaboracoes: { some: { pesquisadorId: quem.id, status: "ACEITO" as const } } },
+    ],
+  };
+}
+
+// Toda leitura e alteração de estudo passa por aqui: o filtro de acesso é o que impede um pesquisador
+// de ver ou mexer no estudo de outro só trocando o id na URL. Sem a permissão pedida, a resposta é a
+// mesma de um estudo que não existe (404), para não revelar que ele existe
+export async function estudoDoPesquisador(estudoId: string, quem: QuemAcessa, exigencia: ExigenciaEstudo = "ver") {
   const estudo = await banco.estudo.findFirst({
-    where: { id: estudoId, pesquisadorId },
+    where: { id: estudoId, ...filtroDeAcesso(quem) },
     include: {
       versoes: {
         orderBy: { ordem: "asc" },
         include: { _count: { select: { participacoes: { where: { concluidaEm: { not: null } } } } } },
       },
+      pesquisador: { select: { nome: true, email: true } },
+      colaboracoes: { where: { pesquisadorId: quem.id, status: "ACEITO" }, select: { papel: true } },
     },
   });
   if (!estudo) notFound();
-  return estudo;
+  const { colaboracoes, ...dados } = estudo;
+  const papel = colaboracoes[0]?.papel;
+  const acesso: AcessoEstudo =
+    estudo.pesquisadorId === quem.id
+      ? "dono"
+      : quem.administrador
+        ? "administrador"
+        : papel === "EDITOR"
+          ? "editor"
+          : "leitor";
+  if (!PERMISSOES[acesso][exigencia]) notFound();
+  return { ...dados, acesso, permissoes: PERMISSOES[acesso] };
 }
 
 export async function contagemDeRespostas(estudoId: string) {

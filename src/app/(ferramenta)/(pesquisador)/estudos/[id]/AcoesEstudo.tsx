@@ -17,11 +17,14 @@ type Propriedades = {
   avisoExclusao: { destaque: string; complemento: string };
   // botão de coleta que vem antes de Editar (Encerrar ou Reabrir); no rascunho ele fica no painel de cima
   coleta?: ReactNode;
+  // Leitor não vê ações; Editor edita e muda a coleta; excluir é só com o dono (e o administrador)
+  podeEditar: boolean;
+  podeExcluir: boolean;
 };
 
 // docs/ihc.md 4.2: excluir abre uma janela que pede o título digitado e diz quantas respostas vão junto
 // (Nielsen 5, WCAG 3.3.4). Protótipo r21
-export function AcoesEstudo({ estudoId, avisoExclusao, coleta }: Propriedades) {
+export function AcoesEstudo({ estudoId, avisoExclusao, coleta, podeEditar, podeExcluir }: Propriedades) {
   const [aberta, setAberta] = useState(false);
   const { estado, aoEnviar, limpar } = useEnvioFormulario(excluirEstudo.bind(null, estudoId));
   const campo = useRef<HTMLInputElement>(null);
@@ -38,15 +41,19 @@ export function AcoesEstudo({ estudoId, avisoExclusao, coleta }: Propriedades) {
 
   return (
     <div className={estilos.acoes}>
-      {coleta}
-      <Link href={`/estudos/${estudoId}/editar` as Route} className={formulario.linkAcao}>
-        <Pencil size={18} strokeWidth={1.5} aria-hidden="true" />
-        <span>Editar estudo</span>
-      </Link>
-      <button type="button" className={formulario.destrutivo} aria-haspopup="dialog" onClick={() => setAberta(true)}>
-        <Trash2 size={18} strokeWidth={1.5} aria-hidden="true" />
-        <span>Excluir estudo</span>
-      </button>
+      {podeEditar && coleta}
+      {podeEditar && (
+        <Link href={`/estudos/${estudoId}/editar` as Route} className={formulario.linkAcao}>
+          <Pencil size={18} strokeWidth={1.5} aria-hidden="true" />
+          <span>Editar estudo</span>
+        </Link>
+      )}
+      {podeExcluir && (
+        <button type="button" className={formulario.destrutivo} aria-haspopup="dialog" onClick={() => setAberta(true)}>
+          <Trash2 size={18} strokeWidth={1.5} aria-hidden="true" />
+          <span>Excluir estudo</span>
+        </button>
+      )}
       <Confirmacao
         aberta={aberta}
         aoFechar={fechar}

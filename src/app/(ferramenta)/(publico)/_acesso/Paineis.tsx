@@ -1,3 +1,4 @@
+import { Logotipo } from "@/componentes/Logotipo";
 import { ESCALAS_DO_UEQ, PASSOS } from "../conteudo";
 import estilos from "./acesso.module.css";
 
@@ -37,6 +38,7 @@ export function PainelInstrumento() {
 export function PainelPercurso() {
   return (
     <aside aria-label="Como funciona" className={estilos.painel}>
+      <Logotipo />
       <Marcacoes />
       <p className={estilos.painelTitulo}>Do cadastro do estudo à planilha oficial.</p>
       <ol className={estilos.lista}>

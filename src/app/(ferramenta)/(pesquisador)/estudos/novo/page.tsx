@@ -18,11 +18,13 @@ export default async function PaginaCriarEstudo() {
       <FaixaCabecalho
         migalha={<Link href="/estudos">Estudos</Link>}
         titulo="Criar estudo"
+        ajuda="novo-estudo"
         descricao="O estudo começa em rascunho. Nada vai para os participantes até você abrir a coleta."
       />
       <FormularioEstudo
         modo="criar"
         valores={{
+          coletarDemografia: false,
           titulo: "",
           produtoAvaliado: "",
           objetivo: "",

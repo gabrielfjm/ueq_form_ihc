@@ -18,7 +18,7 @@ type Propriedades = {
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
+  const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   return { title: `Resultados · ${estudo.titulo} · Ferramenta UEQ` };
 }
 
@@ -26,7 +26,7 @@ const texto = (valor: string | string[] | undefined) => (typeof valor === "strin
 
 export default async function PaginaResultados({ params, searchParams }: Propriedades) {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
+  const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   const busca = await searchParams;
   const [respostas, resultados] = await Promise.all([
     contagemDeRespostas(estudo.id),
@@ -60,12 +60,7 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
 
   return (
     <>
-      <FaixaEstudo
-        estudoId={estudo.id}
-        titulo={estudo.titulo}
-        status={estudo.status}
-        resumo={resumoDoEstudo(estudo.status, estudo.versoes.length, respostas)}
-      />
+      <FaixaEstudo estudo={estudo} ajuda="resultados" resumo={resumoDoEstudo(estudo.status, estudo.versoes.length, respostas)} />
       <div className={estilos.conteudo}>
         <ControlesResultados
           estudoId={estudo.id}

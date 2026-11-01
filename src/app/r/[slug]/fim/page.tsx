@@ -14,13 +14,13 @@ export async function generateMetadata({ params }: Propriedades): Promise<Metada
 
 // Protótipo p5: fechamento curto e sem animação (docs/design.md, Fim)
 export default async function PaginaFim({ params }: Propriedades) {
-  await estudoPublico((await params).slug);
+  const estudo = await estudoPublico((await params).slug);
   const textos = textosDoIdioma(await idiomaDoParticipante());
   return (
     <>
       <header className={estilos.faixa}>
         <div className={`${estilos.faixaInterna} ${estilos.faixaFim}`}>
-          <Etapas atual="concluidas" textos={textos.etapas} />
+          <Etapas atual="concluidas" textos={textos.etapas} comDadosOpcionais={estudo.coletarDemografia} />
           <Marcacoes cheias />
         </div>
       </header>

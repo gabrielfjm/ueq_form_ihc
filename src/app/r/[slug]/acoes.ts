@@ -17,6 +17,7 @@ import {
   marcarRespondido,
   participacaoAtual,
 } from "@/lib/participacao";
+import { notificarResposta } from "@/lib/notificacoes";
 import { avaliarSuspeita } from "@/ueq";
 
 const rota = (slug: string, etapa = "") => `/r/${slug}${etapa}` as Route;
@@ -58,7 +59,7 @@ export async function enviarRespostas(slug: string, valores: Record<number, numb
   if (estudo.status !== "ABERTO") return { erro: "encerrada" };
   const participacao = await participacaoAtual(estudo.id);
   if (!participacao) return { erro: "sem-participacao" };
-  if (participacao.concluidaEm) redirect(rota(slug, "/sobre-voce"));
+  if (participacao.concluidaEm) redirect(rota(slug, estudo.coletarDemografia ? "/sobre-voce" : "/fim"));
 
   const itens = await itensDoQuestionario();
   const valorValido = (numero: number) => {
@@ -80,6 +81,12 @@ export async function enviarRespostas(slug: string, valores: Record<number, numb
     banco.participacao.update({ where: { id: participacao.id }, data: { concluidaEm: new Date(), suspeita } }),
   ]);
   await marcarRespondido(slug);
+  await notificarResposta(estudo.id);
+  // Sem coleta de dados demográficos no estudo, a participação termina aqui, direto no agradecimento
+  if (!estudo.coletarDemografia) {
+    await esquecerParticipacao(slug);
+    redirect(rota(slug, "/fim"));
+  }
   redirect(rota(slug, "/sobre-voce"));
 }
 

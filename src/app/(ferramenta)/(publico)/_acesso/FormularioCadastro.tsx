@@ -29,7 +29,7 @@ export function FormularioCadastro({ idTitulo }: { idTitulo: string }) {
   }
 
   return (
-    <form className={estilos.formulario} noValidate onSubmit={aoEnviar}>
+    <form className={`${estilos.formulario} ${estilos.formularioCadastro}`} noValidate onSubmit={aoEnviar}>
       <div className={estilos.cabecalho}>
         <p className={estilos.area}>Área do pesquisador</p>
         <h2 id={idTitulo} className={estilos.titulo}>
@@ -37,38 +37,43 @@ export function FormularioCadastro({ idTitulo }: { idTitulo: string }) {
         </h2>
       </div>
       <ResumoErros envio={estado.envio} erros={estado.erros} campos={CAMPOS} />
-      <Campo
-        id="cadastro-nome"
-        name="nome"
-        type="text"
-        rotulo="Nome"
-        autoComplete="name"
-        erro={estado.erros?.nome}
-        data-foco-inicial=""
-      />
-      <Campo
-        id="cadastro-email"
-        name="email"
-        type="email"
-        rotulo="E-mail"
-        autoComplete="email"
-        erro={estado.erros?.email}
-      />
+      {/* Nome e e-mail lado a lado no computador: a janela inteira cabe na tela, mesmo com os erros */}
+      <div className={estilos.linhaCampos}>
+        <Campo
+          id="cadastro-nome"
+          name="nome"
+          type="text"
+          rotulo="Nome"
+          autoComplete="name"
+          erro={estado.erros?.nome}
+          data-foco-inicial=""
+        />
+        <Campo
+          id="cadastro-email"
+          name="email"
+          type="email"
+          rotulo="E-mail"
+          autoComplete="email"
+          erro={estado.erros?.email}
+        />
+      </div>
       <CampoSenha
         id="cadastro-senha"
         name="senha"
         rotulo="Senha"
-        ajuda={`Use pelo menos ${MINIMO_SENHA} caracteres. Pode colar de um gerenciador de senhas.`}
+        ajuda={`Mínimo de ${MINIMO_SENHA} caracteres. Pode colar.`}
         autoComplete="new-password"
         erro={estado.erros?.senha}
       />
-      <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}>
-        <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-        <span>Criar conta</span>
-      </button>
-      <p className={estilos.alternativa}>
-        Já tem conta? <Link href="/entrar">Entrar</Link>
-      </p>
+      <div className={estilos.rodapeFormulario}>
+        <button type="submit" className={`${formulario.botao} ${formulario.primario}`}>
+          <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
+          <span>Criar conta</span>
+        </button>
+        <p className={estilos.alternativaLado}>
+          Já tem conta? <Link href="/entrar">Entrar</Link>
+        </p>
+      </div>
     </form>
   );
 }

@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { banco } from "@/lib/banco";
 import { pesquisadorDaSessao } from "@/lib/sessao";
 import { BarraSuperior } from "../(pesquisador)/BarraSuperior";
 import { ProvedorAcesso } from "./_acesso/Acesso";
@@ -16,9 +17,10 @@ export default async function LayoutPublico({ children }: { children: ReactNode 
     </main>
   );
   if (pesquisador) {
+    const naoLidas = await banco.notificacao.count({ where: { pesquisadorId: pesquisador.id, lidaEm: null } });
     return (
       <>
-        <BarraSuperior />
+        <BarraSuperior naoLidas={naoLidas} administrador={pesquisador.administrador} />
         {principal}
       </>
     );

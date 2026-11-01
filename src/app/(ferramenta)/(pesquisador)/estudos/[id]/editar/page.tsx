@@ -13,13 +13,14 @@ export const metadata: Metadata = { title: "Editar estudo · Ferramenta UEQ" };
 export default async function PaginaEditarEstudo({ params }: Propriedades) {
   const pesquisador = await exigirPesquisador();
   const { id } = await params;
-  const estudo = await estudoDoPesquisador(id, pesquisador.id);
+  const estudo = await estudoDoPesquisador(id, pesquisador, "editar");
 
   return (
     <>
       <FaixaCabecalho
         migalha={<Link href={`/estudos/${estudo.id}` as Route}>{estudo.titulo}</Link>}
         titulo="Editar estudo"
+        ajuda="editar-estudo"
         descricao={
           estudo.status === "RASCUNHO"
             ? "O estudo continua em rascunho. Nada vai para os participantes até você abrir a coleta."
@@ -30,6 +31,7 @@ export default async function PaginaEditarEstudo({ params }: Propriedades) {
         modo="editar"
         estudoId={estudo.id}
         valores={{
+          coletarDemografia: estudo.coletarDemografia,
           titulo: estudo.titulo,
           produtoAvaliado: estudo.produtoAvaliado,
           objetivo: estudo.objetivo,

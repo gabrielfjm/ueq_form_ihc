@@ -150,6 +150,58 @@
   color: var(--tinta-suave);
 }
 
+/* Criar conta: coluna do formulário mais larga, nome e e-mail lado a lado, o botão e o "Já tem conta?" na
+   mesma linha e o resumo de erros compacto. Assim os 3 campos, com as mensagens de erro, cabem sem rolar */
+.janelaCadastro {
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+}
+
+.formularioCadastro {
+  max-width: 520px;
+}
+
+.linhaCampos {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.rodapeFormulario {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  padding-top: 4px;
+}
+
+.alternativaLado {
+  margin: 0;
+}
+
+.formularioCadastro [role="alert"] {
+  gap: 2px;
+  padding: 10px 14px;
+}
+
+.formularioCadastro [role="alert"] h2 {
+  font-size: var(--texto-md);
+}
+
+.formularioCadastro [role="alert"] li {
+  font-size: var(--texto-sm);
+}
+
+.janelaCadastro .principal {
+  justify-content: center;
+}
+
+.janelaCadastro .painel {
+  justify-content: flex-start;
+  padding-top: 40px;
+}
+
 /* Notebook e janela baixa: menos espaço entre os blocos, para Criar conta (3 campos) caber sem rolar */
 @media (max-height: 50rem) {
   .principal {
@@ -175,7 +227,14 @@
   }
 }
 
-/* Muito baixa (paisagem, zoom): o painel fica só com o título e as marcações; o formulário vem primeiro */
+/* Muito baixa (paisagem, zoom): o painel fica só com o título e as marcações; o formulário vem primeiro.
+   Em Criar conta isso já vale abaixo de 46rem, porque o formulário ficou mais baixo que o painel */
+@media (max-height: 46rem) {
+  .janelaCadastro .lista {
+    display: none;
+  }
+}
+
 @media (max-height: 40rem) {
   .lista {
     display: none;
@@ -201,6 +260,14 @@
 
   .formulario {
     max-width: none;
+  }
+
+  .janelaCadastro {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .linhaCampos {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -245,5 +312,59 @@
 
   .marcacoes .marcada {
     fill: Highlight;
+  }
+}
+
+/* Criar conta em tela baixa (notebook pequeno, celular): some a linha "Área do pesquisador" e os espaços
+   encolhem mais, para o formulário com os 3 erros ainda caber sem rolar */
+@media (max-height: 40rem) {
+  .janelaCadastro .principal {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  .janelaCadastro .area {
+    display: none;
+  }
+
+  .formularioCadastro {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 40rem) and (max-height: 45rem) {
+  .janelaCadastro .principal {
+    padding: 8px 16px;
+  }
+
+  .janelaCadastro .area {
+    display: none;
+  }
+
+  .janelaCadastro .titulo {
+    font-size: 1.5rem;
+  }
+
+  /* o título ocupa a altura do botão x, que fica no canto, para o resumo de erros não passar por baixo dele */
+  .janelaCadastro .cabecalho {
+    min-height: 44px;
+    justify-content: center;
+    padding-right: 52px;
+  }
+
+  .formularioCadastro {
+    gap: 8px;
+  }
+
+  .formularioCadastro .linhaCampos {
+    gap: 8px;
+  }
+
+  .formularioCadastro [role="alert"] {
+    padding: 8px 12px;
+  }
+
+  .rodapeFormulario {
+    padding-top: 0;
   }
 }

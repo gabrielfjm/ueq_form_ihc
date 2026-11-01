@@ -16,7 +16,7 @@ type Propriedades = {
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
+  const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   return { title: `Painel para impressão · ${estudo.titulo} · Ferramenta UEQ` };
 }
 
@@ -38,7 +38,7 @@ const dataDeGeracao = (data: Date) => DATA_GERACAO.format(data).replace(", ", " 
 // e os controles. Os gráficos são SVG, então saem em vetor
 export default async function PaginaImpressao({ params, searchParams }: Propriedades) {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
+  const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   const busca = await searchParams;
   const resultados = await analisarResultados(estudo.id, estudo.versoes);
 

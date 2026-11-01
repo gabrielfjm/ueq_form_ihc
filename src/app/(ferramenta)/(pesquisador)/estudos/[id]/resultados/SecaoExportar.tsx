@@ -37,7 +37,7 @@ type Propriedades = {
 
 export function SecaoExportar({ estudoId, titulo, numero, consulta }: Propriedades) {
   return (
-    <section aria-labelledby="titulo-exportar" className={estilos.secao}>
+    <section aria-labelledby="titulo-exportar" className={estilos.secao} data-tutorial="exportar">
       <TituloSecao id="titulo-exportar" numero={numero}>Exportar</TituloSecao>
       <ul className={estilos.exportar}>
         <li>

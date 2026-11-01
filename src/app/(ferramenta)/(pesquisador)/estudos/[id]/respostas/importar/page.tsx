@@ -9,7 +9,7 @@ type Propriedades = { params: Promise<{ id: string }> };
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
+  const estudo = await estudoDoPesquisador((await params).id, pesquisador, "editar");
   return { title: `Importar respostas · ${estudo.titulo} · Ferramenta UEQ` };
 }
 
@@ -17,17 +17,12 @@ export async function generateMetadata({ params }: Propriedades): Promise<Metada
 // oficial) entram no mesmo estudo, marcadas como importadas, e passam pela mesma análise
 export default async function PaginaImportar({ params }: Propriedades) {
   const pesquisador = await exigirPesquisador();
-  const estudo = await estudoDoPesquisador((await params).id, pesquisador.id);
+  const estudo = await estudoDoPesquisador((await params).id, pesquisador, "editar");
   const respostas = await contagemDeRespostas(estudo.id);
 
   return (
     <>
-      <FaixaEstudo
-        estudoId={estudo.id}
-        titulo={estudo.titulo}
-        status={estudo.status}
-        resumo={resumoDoEstudo(estudo.status, estudo.versoes.length, respostas)}
-      />
+      <FaixaEstudo estudo={estudo} ajuda="importar" resumo={resumoDoEstudo(estudo.status, estudo.versoes.length, respostas)} />
       <div className={estilos.conteudo}>
         <header className={estilos.cabecalho}>
           <h2 className={estilos.titulo}>Importar respostas de um CSV</h2>

@@ -56,6 +56,15 @@ export async function cadastrarComTeclado(page: Page, email: string) {
   await page.keyboard.type(SENHA);
   await page.keyboard.press("Enter");
   await expect(page).toHaveURL(/\/estudos$/);
+  await pularTutorial(page);
+}
+
+// Conta nova abre com as boas-vindas do tour guiado; os testes que não são do tour pulam direto
+export async function pularTutorial(page: Page) {
+  const boasVindas = page.getByRole("dialog", { name: "Boas-vindas à Ferramenta UEQ" });
+  await expect(boasVindas).toBeVisible();
+  await boasVindas.getByRole("button", { name: "Pular tutorial" }).click();
+  await expect(boasVindas).toBeHidden();
 }
 
 export async function entrarComTeclado(page: Page, email: string, senha = SENHA) {

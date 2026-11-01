@@ -1,0 +1,61 @@
+/* Botão (?) no cabeçalho das páginas e o conteúdo da janela de ajuda */
+
+.botao {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--borda-campo);
+  border-radius: 50%;
+  background: var(--fundo);
+  color: var(--tinta);
+  cursor: pointer;
+  transition:
+    background-color var(--transicao),
+    border-color var(--transicao);
+}
+
+.botao:hover {
+  border-color: var(--tinta);
+  background: var(--destaque-fundo);
+}
+
+.chapeu {
+  margin: 0 0 4px;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.secoes {
+  margin: 0;
+}
+
+.secoes > div {
+  padding: 14px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.secoes dt {
+  font-weight: 700;
+}
+
+.secoes dd {
+  margin: 4px 0 0;
+  color: var(--tinta-suave);
+}
+
+@media print {
+  .botao {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .botao {
+    border-color: ButtonText;
+  }
+}

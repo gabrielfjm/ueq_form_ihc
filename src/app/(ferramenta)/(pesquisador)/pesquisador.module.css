@@ -59,6 +59,7 @@
   display: none;
 }
 
+
 /* No celular e em janela estreita, os links ficam atrás do botão Menu: a barra fixa fica numa linha só */
 @media (max-width: 56rem) {
   .barraInterna {
@@ -141,6 +142,12 @@
 
 .migalha {
   font-size: var(--texto-sm);
+}
+
+.linhaTitulo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .titulo {

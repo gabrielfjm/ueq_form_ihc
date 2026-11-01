@@ -32,9 +32,11 @@ type Propriedades = {
   total: number;
   soSuspeitas: boolean;
   limiteIguais: number;
+  // Leitor vê a tabela, mas não tira nem devolve respostas da análise
+  somenteLeitura: boolean;
 };
 
-export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limiteIguais }: Propriedades) {
+export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limiteIguais, somenteLeitura }: Propriedades) {
   const anunciar = useAnunciar();
   const router = useRouter();
   const caminho = usePathname();
@@ -84,14 +86,16 @@ export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limi
             />
             Mostrar só suspeitas
           </label>
-          <button type="button" className={`${formulario.botao} ${formulario.secundario}`} onClick={tirarSuspeitas}>
-            <CircleMinus size={18} strokeWidth={1.5} aria-hidden="true" />
-            <span>Tirar suspeitas da análise</span>
-          </button>
+          {!somenteLeitura && (
+            <button type="button" className={`${formulario.botao} ${formulario.secundario}`} onClick={tirarSuspeitas}>
+              <CircleMinus size={18} strokeWidth={1.5} aria-hidden="true" />
+              <span>Tirar suspeitas da análise</span>
+            </button>
+          )}
         </div>
       </div>
       {/* Em tela estreita a tabela rola dentro da caixa; tabIndex deixa rolar pelo teclado (WCAG 2.1.1) */}
-      <div className={estilos.rolagem} tabIndex={0} role="region" aria-labelledby="titulo-lista">
+      <div className={estilos.rolagem} tabIndex={0} role="region" aria-labelledby="titulo-lista" data-tutorial="participacoes">
         <table className={estilos.tabela}>
           <caption>Da mais recente para a mais antiga</caption>
           <thead>
@@ -136,6 +140,7 @@ export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limi
                         type="checkbox"
                         className={estilos.caixa}
                         checked={linha.incluidaNaAnalise}
+                        disabled={somenteLeitura}
                         onChange={(evento) => mudarInclusao(linha, evento.target.checked)}
                         aria-label={`Participação de ${linha.quando} na análise`}
                       />
