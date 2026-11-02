@@ -27,35 +27,42 @@ export const AUTORES_DO_UEQ = [
   [m("Manuel Pérez Cota e Ramiro Gonçalves"), m("Traduziram o UEQ para o português, com Thomaschewski e Schrepp. É a versão que o participante vê aqui.")],
 ] as const;
 
-// Referências na forma da ABNT. Só artigos e documentos que a equipe consultou (docs/ueq-protocolo.md)
+// Referências na forma da ABNT, com o DOI (conferido no Crossref) ou o PDF oficial. Só artigos e documentos que
+// a equipe consultou (docs/ueq-protocolo.md)
 export const ESTUDOS_DO_UEQ = [
   {
     referencia:
       m("LAUGWITZ, B.; HELD, T.; SCHREPP, M. Construction and evaluation of a user experience questionnaire. In: HOLZINGER, A. (ed.). HCI and Usability for Education and Work: USAB 2008. Berlin: Springer, 2008. (Lecture Notes in Computer Science, v. 5298). p. 63-76."),
+    link: "https://doi.org/10.1007/978-3-540-89350-9_6",
     sobre: m("O artigo que apresenta o UEQ: como os 26 itens e as 6 escalas foram escolhidos e validados."),
   },
   {
     referencia:
       m("SCHREPP, M.; HINDERKS, A.; THOMASCHEWSKI, J. Applying the User Experience Questionnaire (UEQ) in different evaluation scenarios. In: MARCUS, A. (ed.). Design, User Experience, and Usability: DUXU 2014. Cham: Springer, 2014. (Lecture Notes in Computer Science, v. 8517). p. 383-392."),
+    link: "https://doi.org/10.1007/978-3-319-07668-3_37",
     sobre: m("Como usar o UEQ para comparar versões, acompanhar um produto ao longo do tempo e decidir onde melhorar."),
   },
   {
     referencia:
       m("SCHREPP, M.; HINDERKS, A.; THOMASCHEWSKI, J. Construction of a benchmark for the User Experience Questionnaire (UEQ). International Journal of Interactive Multimedia and Artificial Intelligence, v. 4, n. 4, p. 40-44, 2017."),
+    link: "https://doi.org/10.9781/ijimai.2017.445",
     sobre: m("A base de comparação que diz se um resultado é excelente, bom, acima ou abaixo da média, ou ruim."),
   },
   {
     referencia:
       m("SCHREPP, M.; HINDERKS, A.; THOMASCHEWSKI, J. Design and evaluation of a short version of the User Experience Questionnaire (UEQ-S). International Journal of Interactive Multimedia and Artificial Intelligence, v. 4, n. 6, p. 103-108, 2017."),
+    link: "https://doi.org/10.9781/ijimai.2017.09.001",
     sobre: m("A versão curta, com 8 itens, para quando o tempo do participante é pouco."),
   },
   {
     referencia:
       m("COTA, M. P.; THOMASCHEWSKI, J.; SCHREPP, M.; GONÇALVES, R. Efficient measurement of the user experience: a Portuguese version. Procedia Computer Science, v. 27, p. 491-498, 2014."),
+    link: "https://doi.org/10.1016/j.procs.2014.02.053",
     sobre: m("A tradução e a validação do UEQ em português, usada no link do participante."),
   },
   {
     referencia: m("SCHREPP, M. User Experience Questionnaire Handbook. Versão 11. 2023. Disponível em: https://www.ueq-online.org."),
+    link: "https://www.ueq-online.org/Material/Handbook.pdf",
     sobre: m("O manual oficial: aplicação, cálculo das escalas, interpretação e respostas suspeitas. A ferramenta segue este manual."),
   },
 ] as const;

@@ -417,11 +417,28 @@
 }
 
 /* Sub-abas: Escalas do UEQ e Dados demográficos */
+/* Sub-abas e controles do topo: perto um do outro, longe do painel (o gap de .conteudo) */
+.topo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Dados demográficos: sub-abas, texto e filtro de versão logo acima dos gráficos */
+.blocoDemografia {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.topo:empty {
+  display: none;
+}
+
 .subAbas {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 28px;
   padding: 4px;
   width: fit-content;
   max-width: 100%;
@@ -458,7 +475,6 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 12px 32px;
-  margin-bottom: 24px;
 }
 
 .textoDemografia {

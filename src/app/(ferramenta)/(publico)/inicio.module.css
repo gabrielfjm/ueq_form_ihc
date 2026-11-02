@@ -687,3 +687,8 @@
     border-top-color: CanvasText;
   }
 }
+
+/* Link de cada estudo (DOI ou PDF) */
+.linkEstudo {
+  font-weight: 700;
+}

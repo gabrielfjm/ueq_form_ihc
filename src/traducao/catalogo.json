@@ -253,6 +253,10 @@
    "cliente": false
   },
   {
+   "texto": "Abrir o PDF",
+   "cliente": false
+  },
+  {
    "texto": "Abrir os convites na ferramenta",
    "cliente": false
   },
@@ -2629,7 +2633,11 @@
    "cliente": false
   },
   {
-   "texto": "Respostas da etapa opcional “Dados opcionais”, das {quantidade} na análise que vieram pelo link{v}. As importadas de CSV não têm essa etapa.",
+   "texto": "Respostas da etapa opcional “Dados opcionais”, das {quantidade} na análise que vieram pelo link da versão “{versao}”. As importadas de CSV não têm essa etapa.",
+   "cliente": false
+  },
+  {
+   "texto": "Respostas da etapa opcional “Dados opcionais”, das {quantidade} na análise que vieram pelo link. As importadas de CSV não têm essa etapa.",
    "cliente": false
   },
   {

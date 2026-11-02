@@ -297,8 +297,13 @@ export async function PaginaInicial({ logado, aviso }: Propriedades) {
             {t("Estudos sobre o método")}
           </Titulo>
           <ol className={estilos.referencias}>
-            {ESTUDOS_DO_UEQ.map(({ referencia }) => (
-              <li key={referencia}>{t(referencia)}</li>
+            {ESTUDOS_DO_UEQ.map(({ referencia, link }) => (
+              <li key={referencia}>
+                {t(referencia)}{" "}
+                <a href={link} rel="noopener" className={estilos.linkEstudo}>
+                  {link.startsWith("https://doi.org/") ? `DOI ${link.slice("https://doi.org/".length)}` : t("Abrir o PDF")}
+                </a>
+              </li>
             ))}
           </ol>
           <p className={estilos.nota}>
