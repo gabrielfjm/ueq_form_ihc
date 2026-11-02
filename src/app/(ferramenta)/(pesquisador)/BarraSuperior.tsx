@@ -63,9 +63,10 @@ export function BarraSuperior({ naoLidas, administrador }: Propriedades) {
   const [confirmandoSaida, setConfirmandoSaida] = useState(false);
   return (
     <>
+      {/* O logotipo leva à página inicial, que também é onde o login termina */}
       <BarraFixa
         inicio={
-          <Link href="/estudos" className={estilos.inicio}>
+          <Link href="/" className={estilos.inicio}>
             <Logotipo />
           </Link>
         }

@@ -353,3 +353,86 @@
     fill: CanvasText;
   }
 }
+
+/* Índice da página, logo abaixo da apresentação: leva direto a cada seção */
+.indice {
+  border-bottom: 1px solid var(--linha);
+}
+
+.indiceInterno {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 12px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 24px;
+  font-size: var(--texto-sm);
+}
+
+.indiceInterno a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+}
+
+.indiceRotulo {
+  font-weight: 700;
+  color: var(--tinta-fraca);
+}
+
+.subtitulo {
+  margin: 8px 0 0;
+  font-size: var(--texto-lg);
+}
+
+.referencias {
+  margin: 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: var(--largura-leitura);
+}
+
+.referencias p {
+  margin: 0;
+}
+
+.referencia {
+  overflow-wrap: anywhere;
+}
+
+.creditos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 32px 48px;
+  align-items: start;
+}
+
+.creditos > div {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.creditos p {
+  margin: 0;
+}
+
+.equipe {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.equipe li {
+  display: flex;
+  flex-direction: column;
+  padding: 12px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.equipe li:last-child {
+  border-bottom: 1px solid var(--linha);
+}

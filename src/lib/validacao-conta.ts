@@ -28,7 +28,8 @@ export const senhaNova = z
 
 export const senhaDigitada = (mensagemVazia: string) => z.string().min(1, mensagemVazia);
 
-// Só aceita caminho interno ("/conta"), para o ?voltar= não virar redirecionamento para outro site
+// Só aceita caminho interno ("/conta"), para o ?voltar= não virar redirecionamento para outro site.
+// Sem destino, o login termina na página inicial, que explica o UEQ e leva aos estudos
 export function destinoInterno(valor: string): string {
-  return valor.startsWith("/") && !valor.startsWith("//") && !valor.startsWith("/\\") ? valor : "/estudos";
+  return valor.startsWith("/") && !valor.startsWith("//") && !valor.startsWith("/\\") ? valor : "/";
 }

@@ -24,7 +24,8 @@ test("cadastra, sai e entra de novo usando só o teclado", async ({ page }, info
   await expect(janelaDeAcesso(page, "Entrar")).toBeVisible();
   await expect(page.getByLabel("E-mail")).toBeFocused();
   await entrarComTeclado(page, email);
-  await expect(page).toHaveURL(/\/estudos$/);
+  // Sem destino pedido, o login termina na página inicial
+  await expect(page).toHaveURL(/:\d+\/$/);
 });
 
 test("rota protegida sem sessão vai para Entrar e volta para ela depois do login", async ({ page, context }, info) => {

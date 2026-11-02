@@ -87,5 +87,5 @@ export async function cadastrar(
   }
 
   await criarSessao(pesquisadorId);
-  redirect("/estudos");
+  redirect("/");
 }

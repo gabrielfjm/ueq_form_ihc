@@ -6,7 +6,7 @@ test("a raiz apresenta a ferramenta para quem não tem sessão e passa no axe", 
   await page.goto("/");
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByRole("heading", { level: 1, name: "Estudos de experiência do usuário com o UEQ" })).toBeVisible();
-  for (const secao of ["Como funciona", "O questionário", "Para o participante", "Resultados e dados", "Documentação"]) {
+  for (const secao of ["O que é o UEQ", "O questionário", "Como ler os resultados", "Como a ferramenta funciona", "Para o participante", "Para o pesquisador", "Estudos sobre o método", "Documentação", "Créditos"]) {
     await expect(page.getByRole("heading", { level: 2, name: secao })).toBeVisible();
   }
   await expect(page.getByRole("table", { name: "As seis escalas do UEQ" }).getByRole("row")).toHaveCount(7);
@@ -82,4 +82,27 @@ test("o navegador recebe o ícone do site", async ({ page, request }) => {
   expect(resposta.headers()["content-type"]).toContain("image/svg+xml");
   const apple = await page.locator('link[rel="apple-touch-icon"]').getAttribute("href");
   expect((await request.get(apple ?? "", { maxRedirects: 0 })).headers()["content-type"]).toContain("image/png");
+});
+
+test("a página inicial explica o UEQ, lista os estudos do método e dá os créditos", async ({ page }) => {
+  await page.goto("/");
+  const indice = page.getByRole("navigation", { name: "Nesta página" });
+  await indice.getByRole("link", { name: "Estudos sobre o método" }).click();
+  await expect(page).toHaveURL(/#inicio-estudos$/);
+  await expect(page.getByText(/LAUGWITZ, B\.; HELD, T\.; SCHREPP, M\. Construction and evaluation/)).toBeVisible();
+  const creditos = page.getByRole("region", { name: "Créditos" });
+  await expect(creditos.getByText("Bettina Laugwitz, Theo Held e Martin Schrepp")).toBeVisible();
+  await expect(creditos.getByText("Fundamentos da Interação Humano-Computador")).toBeVisible();
+  for (const nome of ["Gabriel Meira", "Jean Weiss", "Luiza Pedralli"]) {
+    await expect(creditos.getByText(nome, { exact: true })).toBeVisible();
+  }
+  await verificarAcessibilidade(page);
+});
+
+test("quem entrou volta à página inicial pelo logotipo", async ({ page }, info) => {
+  await cadastrarComTeclado(page, emailDeTeste(info));
+  await page.goto("/conta");
+  await page.getByRole("banner").getByRole("link", { name: "Ferramenta UEQ" }).click();
+  await expect(page).toHaveURL(/:\d+\/$/);
+  await expect(page.getByRole("main").getByRole("link", { name: "Ver seus estudos" })).toBeVisible();
 });

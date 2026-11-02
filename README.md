@@ -6,6 +6,8 @@ O pesquisador cria um estudo, define uma ou mais versões do produto e compartil
 
 Os pesquisadores trabalham em equipe: o dono de um estudo convida colegas como editores ou leitores, e um sino de notificações avisa sobre convites, respostas novas e mudanças feitas pelos parceiros. Quem entra pela primeira vez faz um tour guiado, e toda página tem a própria ajuda no botão (?).
 
+A página inicial explica o UEQ (escalas, como ler os resultados e o benchmark), lista os estudos que fundamentam o método e dá os créditos aos autores do UEQ e à equipe. É também a tela padrão depois do login.
+
 **Em produção:** https://ferramenta-ueq.vercel.app (Vercel + Neon, região de São Paulo). Cada merge na `main` publica uma versão nova, com as migrations aplicadas no build.
 
 Projeto da disciplina Fundamentos da Interação Humano-Computador, PPGIa · PUCPR · 2026.
@@ -192,7 +194,7 @@ Diagrama em tela cheia, com zoom, e barra fixa no celular com o menu aberto:
 
 Página inicial, para quem ainda não tem conta, e Entrar e Criar conta numa janela por cima da página:
 
-<img src="docs/prototipos/alta-fidelidade/r16-pagina-inicial.png" alt="Página inicial: apresentação com o item 1 do questionário como figura, Como funciona em quatro passos, tabela das seis escalas, participante, resultados e documentação" width="400"> <img src="docs/prototipos/alta-fidelidade/r17-entrar-janela.png" alt="Janela de Entrar sobre a página inicial escurecida: formulário à esquerda e painel com as escalas do UEQ à direita" width="400">
+<img src="docs/prototipos/alta-fidelidade/r16-pagina-inicial.png" alt="Página inicial: apresentação com o item 1 do questionário como figura, Nesta página, o que é o UEQ, as seis escalas, como ler os resultados e o benchmark, como a ferramenta funciona, estudos sobre o método e créditos" width="400"> <img src="docs/prototipos/alta-fidelidade/r17-entrar-janela.png" alt="Janela de Entrar sobre a página inicial escurecida: formulário à esquerda e painel com as escalas do UEQ à direita" width="400">
 
 <img src="docs/prototipos/alta-fidelidade/r19-criar-conta-janela.png" alt="Janela de Criar conta: nome e e-mail lado a lado, senha, Criar conta junto de Entrar e da política de privacidade, e os quatro passos do estudo à direita" width="400"> <img src="docs/prototipos/alta-fidelidade/r18-entrar-celular.png" alt="Entrar no celular: a janela ocupa a tela inteira, com o formulário em cima e o resumo do instrumento embaixo" width="200">
 
@@ -205,6 +207,10 @@ Confirmações em janela, para sair e para toda exclusão:
 Enquanto a equipe escreve a documentação, cada documento aparece como em produção:
 
 <img src="docs/prototipos/alta-fidelidade/r23-documento-em-producao.png" alt="Casos de uso em produção: abas e sub-abas da documentação, fileira de marcações vazia, aviso Em produção e ficha com o que o documento vai trazer" width="400">
+
+A página inicial com login, que é a tela padrão depois de entrar e aonde o logotipo leva:
+
+<img src="docs/prototipos/alta-fidelidade/r16b-pagina-inicial-com-login.png" alt="Página inicial com login: barra do pesquisador, Ver seus estudos e Criar estudo, e as mesmas seções sobre o UEQ, os estudos do método e os créditos" width="400">
 
 Equipe, notificações, ajuda e LGPD:
 
@@ -266,6 +272,12 @@ Minha conta:
 Documentação: visão geral e documento com sub-abas:
 
 <img src="docs/prototipos/r10-documentacao.png" alt="Documentação: abas das seções, tabela de documentos e ficha lateral" width="400"> <img src="docs/prototipos/r11-documento.png" alt="Documento: seção Modelagem, sub-abas, diagrama e ficha Sobre este documento" width="400">
+
+## Créditos
+
+O UEQ foi criado por Bettina Laugwitz, Theo Held e Martin Schrepp (Laugwitz, Held e Schrepp, 2008). O benchmark, a versão curta (UEQ-S) e o guia de aplicação são de Martin Schrepp, Andreas Hinderks e Jörg Thomaschewski (2014, 2017). A versão em português é de Manuel Pérez Cota, Jörg Thomaschewski, Martin Schrepp e Ramiro Gonçalves (2014). Todo o material oficial está em [ueq-online.org](https://www.ueq-online.org). Esta ferramenta não é oficial nem ligada aos autores do método.
+
+A ferramenta foi feita por Gabriel Meira, Jean Weiss e Luiza Pedralli como projeto da disciplina Fundamentos da Interação Humano-Computador do Programa de Pós-Graduação em Informática (PPGIa) da PUCPR, em 2026.
 
 ## Licença
 
