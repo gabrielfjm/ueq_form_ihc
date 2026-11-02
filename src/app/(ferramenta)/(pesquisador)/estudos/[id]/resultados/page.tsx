@@ -66,18 +66,21 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
     <>
       <FaixaEstudo estudo={estudo} ajuda="resultados" resumo={resumoDoEstudo(t, estudo.status, estudo.versoes.length, respostas)} />
       <div className={estilos.conteudo}>
-        {estudo.coletarDemografia && <AbasResultados estudoId={estudo.id} atual="ueq" />}
-        <ControlesResultados
-          estudoId={estudo.id}
-          versoes={resultados.porVersao.map((versao) => ({ id: versao.versaoId, nome: versao.nome, naAnalise: versao.analise.n }))}
-          naAnaliseTotal={resultados.todas.n}
-          foraDaAnalise={resultados.todas.nExcluidas}
-          comparando={comparando}
-        >
-          {comparando && (
-            <LegendaVersoes versoes={resultados.porVersao.map((versao) => ({ nome: versao.nome, n: versao.analise.n }))} />
-          )}
-        </ControlesResultados>
+        {/* Sub-abas e controles ficam juntos no topo; o espaço grande do painel vem só depois deles */}
+        <div className={estilos.topo}>
+          {estudo.coletarDemografia && <AbasResultados estudoId={estudo.id} atual="ueq" />}
+          <ControlesResultados
+            estudoId={estudo.id}
+            versoes={resultados.porVersao.map((versao) => ({ id: versao.versaoId, nome: versao.nome, naAnalise: versao.analise.n }))}
+            naAnaliseTotal={resultados.todas.n}
+            foraDaAnalise={resultados.todas.nExcluidas}
+            comparando={comparando}
+          >
+            {comparando && (
+              <LegendaVersoes versoes={resultados.porVersao.map((versao) => ({ nome: versao.nome, n: versao.analise.n }))} />
+            )}
+          </ControlesResultados>
+        </div>
 
         {resultados.todas.n === 0 ? (
           <section aria-labelledby="titulo-vazio" className={estilos.vazio}>

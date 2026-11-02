@@ -34,6 +34,10 @@ export function ControlesResultados({ estudoId, versoes, naAnaliseTotal, foraDaA
     return `${caminho}${busca ? `?${busca}` : ""}` as Route;
   }
 
+  // Com uma versão só e nada fora da análise não há o que controlar: sem caixa vazia nem linha solta
+  const vazio = versoes.length <= 1 && !children && foraDaAnalise === 0;
+  if (vazio) return null;
+
   return (
     <div className={estilos.controles}>
       {versoes.length > 1 && !comparando && (

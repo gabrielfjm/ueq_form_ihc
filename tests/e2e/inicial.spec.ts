@@ -92,6 +92,9 @@ test("a página inicial explica o UEQ, lista os estudos do método e dá os cré
   await indice.getByRole("link", { name: "Estudos sobre o método" }).click();
   await expect(page).toHaveURL(/#inicio-estudos$/);
   await expect(page.getByText(/LAUGWITZ, B\.; HELD, T\.; SCHREPP, M\. Construction and evaluation/)).toBeVisible();
+  // Cada estudo leva ao artigo pelo DOI; o manual, ao PDF oficial
+  await expect(page.getByRole("link", { name: "DOI 10.1007/978-3-540-89350-9_6" })).toHaveAttribute("href", "https://doi.org/10.1007/978-3-540-89350-9_6");
+  await expect(page.getByRole("link", { name: "Abrir o PDF" })).toHaveAttribute("href", "https://www.ueq-online.org/Material/Handbook.pdf");
   const creditos = page.getByRole("region", { name: "Créditos" });
   await expect(creditos.getByText("Bettina Laugwitz, Theo Held e Martin Schrepp")).toBeVisible();
   await expect(creditos.getByText("Fundamentos da Interação Humano-Computador")).toBeVisible();
