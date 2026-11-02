@@ -6,10 +6,12 @@ test("a raiz apresenta a ferramenta para quem não tem sessão e passa no axe", 
   await page.goto("/");
   await expect(page).toHaveURL(/\/$/);
   await expect(page.getByRole("heading", { level: 1, name: "Estudos de experiência do usuário com o UEQ" })).toBeVisible();
-  for (const secao of ["O que é o UEQ", "O questionário", "Como ler os resultados", "Como a ferramenta funciona", "Para o participante", "Para o pesquisador", "Estudos sobre o método", "Documentação", "Créditos"]) {
+  for (const secao of ["O que é o UEQ", "Como ler os resultados", "Como funciona", "Estudos sobre o método", "Créditos"]) {
     await expect(page.getByRole("heading", { level: 2, name: secao })).toBeVisible();
   }
-  await expect(page.getByRole("table", { name: "As seis escalas do UEQ" }).getByRole("row")).toHaveCount(7);
+  for (const grupo of ["Atratividade", "Qualidade pragmática", "Qualidade hedônica"]) {
+    await expect(page.getByRole("heading", { level: 3, name: grupo })).toBeVisible();
+  }
   // A barra de quem não entrou tem só a documentação e Entrar
   const principal = page.getByRole("navigation", { name: "Principal" });
   await abrirMenu(page);

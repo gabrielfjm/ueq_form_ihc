@@ -1,6 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import type { Route } from "next";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { Prisma } from "@/generated/prisma/client";
 import { exigirAdministrador } from "@/lib/administracao";
@@ -11,6 +13,8 @@ import { notificar } from "@/lib/notificacoes";
 import { plural } from "@/lib/texto";
 import { gerarHash } from "@/lib/senhas";
 import { email, nome, senhaNova } from "@/lib/validacao-conta";
+import { ehIdioma } from "@/idiomas";
+import { completarCatalogo, tradutor } from "@/traducao/servidor";
 
 export type CampoNovaConta = "nome" | "email" | "senha";
 
@@ -22,6 +26,7 @@ export async function criarConta(
   anterior: EstadoFormulario<CampoNovaConta>,
   dados: FormData,
 ): Promise<EstadoFormulario<CampoNovaConta>> {
+  const t = await tradutor();
   await exigirAdministrador();
   const envio = anterior.envio + 1;
   const validacao = dadosNovaConta.safeParse({
@@ -41,23 +46,24 @@ export async function criarConta(
     });
   } catch (erro) {
     if (erro instanceof Prisma.PrismaClientKnownRequestError && erro.code === "P2002") {
-      return { envio, erros: { email: { mensagem: "Esse e-mail já tem conta." } } };
+      return { envio, erros: { email: { mensagem: t("Esse e-mail já tem conta.") } } };
     }
     throw erro;
   }
-  revalidatePath("/administracao");
-  return { envio, sucesso: `Conta de ${validacao.data.nome} criada. Passe o e-mail e a senha para a pessoa.` };
+  revalidatePath("/administracao", "layout");
+  return { envio, sucesso: t("Conta de {nome} criada. Passe o e-mail e a senha para a pessoa.", { nome: validacao.data.nome }) };
 }
 
 export async function alternarAdministrador(pesquisadorId: string): Promise<{ sucesso?: string; erro?: string }> {
+  const t = await tradutor();
   const quem = await exigirAdministrador();
   // Sem isto o último administrador poderia se rebaixar e ninguém mais entraria aqui
-  if (pesquisadorId === quem.id) return { erro: "Você não pode tirar o seu próprio acesso de administrador." };
+  if (pesquisadorId === quem.id) return { erro: t("Você não pode tirar o seu próprio acesso de administrador.") };
   const alvo = await banco.pesquisador.findUnique({ where: { id: pesquisadorId }, select: { nome: true, administrador: true } });
-  if (!alvo) return { erro: "Essa conta não existe mais. Recarregue a página." };
+  if (!alvo) return { erro: t("Essa conta não existe mais. Recarregue a página.") };
   await banco.pesquisador.update({ where: { id: pesquisadorId }, data: { administrador: !alvo.administrador } });
-  revalidatePath("/administracao");
-  return { sucesso: alvo.administrador ? `${alvo.nome} não é mais administrador.` : `${alvo.nome} agora é administrador.` };
+  revalidatePath("/administracao", "layout");
+  return { sucesso: alvo.administrador ? t("{nome} não é mais administrador.", { nome: alvo.nome }) : t("{nome} agora é administrador.", { nome: alvo.nome }) };
 }
 
 export type CampoCenarios = "dono" | "colaboradores";
@@ -67,6 +73,7 @@ export async function criarCenarios(
   anterior: EstadoFormulario<CampoCenarios>,
   dados: FormData,
 ): Promise<EstadoFormulario<CampoCenarios>> {
+  const t = await tradutor();
   await exigirAdministrador();
   const envio = anterior.envio + 1;
   const donoId = textoDoCampo(dados, "dono");
@@ -76,7 +83,7 @@ export async function criarCenarios(
 
   const contas = await banco.pesquisador.findMany({ where: { id: { in: [donoId, ...colaboradores] } }, select: { id: true } });
   if (!contas.some((conta) => conta.id === donoId)) {
-    return { envio, erros: { dono: { mensagem: "Escolha a conta que vai ser dona dos estudos." } } };
+    return { envio, erros: { dono: { mensagem: t("Escolha a conta que vai ser dona dos estudos.") } } };
   }
   const validos = colaboradores.filter((id) => contas.some((conta) => conta.id === id));
 
@@ -101,7 +108,12 @@ export async function criarCenarios(
       for (const colaboracao of colaboracoes) {
         await notificar([colaboracao.pesquisadorId], donoId, {
           tipo: "CONVITE",
-          texto: `${colaboracao.convidadoPor?.nome ?? "A equipe"} convidou você para o estudo “${colaboracao.estudo.titulo}” como ${papel === "EDITOR" ? "editor" : "leitor"}.`,
+          texto: (t) => {
+            const valores = { nome: colaboracao.convidadoPor?.nome ?? t("A equipe"), titulo: colaboracao.estudo.titulo };
+            return papel === "EDITOR"
+              ? t("{nome} convidou você para o estudo “{titulo}” como editor.", valores)
+              : t("{nome} convidou você para o estudo “{titulo}” como leitor.", valores);
+          },
           link: "/notificacoes",
           estudoId: colaboracao.estudoId,
           colaboracaoId: colaboracao.id,
@@ -109,11 +121,21 @@ export async function criarCenarios(
       }
     }
   }
-  revalidatePath("/administracao");
+  revalidatePath("/administracao", "layout");
   return {
     envio,
-    sucesso: `${plural(estudos.length, "estudo de demonstração criado", "estudos de demonstração criados")}${
-      validos.length > 0 ? `, compartilhados com ${plural(validos.length, "conta", "contas")}` : ""
+    sucesso: `${plural(estudos.length, t("estudo de demonstração criado"), t("estudos de demonstração criados"))}${
+      validos.length > 0 ? t(", compartilhados com {quantidade}", { quantidade: plural(validos.length, "conta", "contas") }) : ""
     }.`,
   };
+}
+
+// Adianta a tradução da interface para um idioma (Administração › Idiomas); sem o botão, ela acontece na
+// primeira visita de quem usa o idioma. O que não couber no tempo da função fica para a próxima vez
+export async function traduzirInterface(idioma: string): Promise<void> {
+  await exigirAdministrador();
+  if (!ehIdioma(idioma)) redirect("/administracao/idiomas");
+  await completarCatalogo(idioma, 270_000);
+  revalidatePath("/", "layout");
+  redirect(`/administracao/idiomas?traduzido=${idioma}` as Route);
 }

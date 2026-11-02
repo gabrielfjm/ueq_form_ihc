@@ -50,7 +50,7 @@ export async function consentir(slug: string): Promise<void> {
     where: { concluidaEm: null, criadaEm: { lt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) } },
   });
   const participacao = await banco.participacao.create({
-    data: { versaoId: versao.id, consentiuEm: new Date(), idioma: await idiomaDoParticipante() },
+    data: { versaoId: versao.id, consentiuEm: new Date(), idioma: await idiomaDoParticipante(slug) },
     select: { id: true },
   });
   await guardarParticipacao(slug, participacao.id);

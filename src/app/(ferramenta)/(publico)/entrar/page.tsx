@@ -4,8 +4,12 @@ import { pesquisadorDaSessao } from "@/lib/sessao";
 import { destinoInterno } from "@/lib/validacao-conta";
 import { AbrirAcesso } from "../_acesso/Acesso";
 import { PaginaInicial } from "../PaginaInicial";
+import { tradutor } from "@/traducao/servidor";
 
-export const metadata: Metadata = { title: "Entrar · Ferramenta UEQ" };
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await tradutor();
+  return { title: t("Entrar · Ferramenta UEQ") };
+}
 
 type Propriedades = {
   searchParams: Promise<Record<string, string | string[] | undefined>>;

@@ -3,6 +3,9 @@
 import { X } from "lucide-react";
 import { useEffect, useRef, type MouseEvent, type ReactNode } from "react";
 import estilos from "./janela.module.css";
+import { useT } from "@/traducao/cliente";
+import { m } from "@/traducao/nucleo";
+
 
 type Propriedades = {
   aberta: boolean;
@@ -32,9 +35,10 @@ export function Janela({
   tipo,
   papel = "dialog",
   className,
-  rotuloFechar = "Fechar",
+  rotuloFechar = m("Fechar"),
   children,
 }: Propriedades) {
+  const t = useT();
   const janela = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
@@ -65,7 +69,7 @@ export function Janela({
     >
       <div className={estilos.caixa}>
         {rotuloFechar && (
-          <button type="button" className={estilos.fechar} aria-label={rotuloFechar} onClick={() => janela.current?.close()}>
+          <button type="button" className={estilos.fechar} aria-label={t(rotuloFechar)} onClick={() => janela.current?.close()}>
             <X size={20} strokeWidth={1.5} aria-hidden="true" />
           </button>
         )}

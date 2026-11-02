@@ -1,9 +1,11 @@
 import type { ReactNode } from "react";
 import { Tutorial } from "@/componentes/tutorial/Tutorial";
+import { IDIOMAS } from "@/idiomas";
 import { banco } from "@/lib/banco";
 import { pesquisadorDaSessao } from "@/lib/sessao";
 import { BarraSuperior } from "../(pesquisador)/BarraSuperior";
 import { ProvedorAcesso } from "./_acesso/Acesso";
+import { idiomaDaInterface } from "@/traducao/servidor";
 import { BarraPublica } from "./BarraPublica";
 
 // Páginas abertas a qualquer pessoa: a página inicial, a documentação e /entrar e /cadastrar (que são a
@@ -29,7 +31,10 @@ export default async function LayoutPublico({ children }: { children: ReactNode 
     );
   }
   return (
-    <ProvedorAcesso>
+    <ProvedorAcesso
+      idiomas={IDIOMAS.map(({ codigo, nome, lang, direcao }) => ({ codigo, nome, lang, direcao }))}
+      idiomaAtual={await idiomaDaInterface()}
+    >
       <BarraPublica />
       {principal}
     </ProvedorAcesso>

@@ -1,17 +1,27 @@
 import type { FaixaInterpretacao } from "@/ueq";
+import { m, type Traduzir } from "@/traducao/nucleo";
 import { formatarDecimal, juntarComE } from "./texto";
 
 // Textos da "Leitura rápida" (protótipos r6 e r7): descrevem as faixas que o módulo src/ueq já calculou,
 // para o pesquisador não precisar lembrar os limiares (Nielsen 6). Nenhuma conta estatística aqui
 type EscalaLida = { nome: string; media: number | null; faixaInterpretacao: FaixaInterpretacao | null };
 
-const POR_EXTENSO = ["nenhuma", "uma", "duas", "três", "quatro", "cinco", "seis"];
+const POR_EXTENSO = [m("nenhuma"), m("uma"), m("duas"), m("três"), m("quatro"), m("cinco"), m("seis")];
 
-function ficam(nomes: string[], faixa: string): string {
-  return `${juntarComE(nomes)} ${nomes.length === 1 ? "fica" : "ficam"} na faixa ${faixa}`;
+const extenso = (t: Traduzir, quantidade: number) => {
+  const palavra = POR_EXTENSO[quantidade];
+  return palavra ? t(palavra) : String(quantidade);
+};
+
+function ficam(t: Traduzir, nomes: string[], faixa: "neutra" | "negativa"): string {
+  const lista = juntarComE(nomes, t.lang);
+  if (faixa === "neutra") {
+    return nomes.length === 1 ? t("{nomes} fica na faixa neutra", { nomes: lista }) : t("{nomes} ficam na faixa neutra", { nomes: lista });
+  }
+  return nomes.length === 1 ? t("{nomes} fica na faixa negativa", { nomes: lista }) : t("{nomes} ficam na faixa negativa", { nomes: lista });
 }
 
-export function leituraDeUmaVersao(escalas: readonly EscalaLida[]): string | null {
+export function leituraDeUmaVersao(t: Traduzir, escalas: readonly EscalaLida[]): string | null {
   const comMedia = escalas.filter((escala): escala is EscalaLida & { media: number } => escala.media !== null);
   if (comMedia.length === 0) return null;
 
@@ -22,15 +32,18 @@ export function leituraDeUmaVersao(escalas: readonly EscalaLida[]): string | nul
 
   const abertura =
     positivas.length === comMedia.length
-      ? `A experiência foi avaliada como positiva nas ${POR_EXTENSO[comMedia.length]} escalas.`
+      ? t("A experiência foi avaliada como positiva nas {total} escalas.", { total: extenso(t, comMedia.length) })
       : positivas.length === 0
-        ? "Nenhuma escala ficou na faixa positiva."
-        : `A experiência foi avaliada como positiva em ${POR_EXTENSO[positivas.length]} das ${POR_EXTENSO[comMedia.length]} escalas.`;
+        ? t("Nenhuma escala ficou na faixa positiva.")
+        : t("A experiência foi avaliada como positiva em {positivas} das {total} escalas.", {
+            positivas: extenso(t, positivas.length),
+            total: extenso(t, comMedia.length),
+          });
 
   const detalhes = [
-    positivas.length > 0 ? `${maisForte.nome} é o ponto mais forte` : null,
-    neutras.length > 0 ? ficam(neutras, "neutra") : null,
-    negativas.length > 0 ? ficam(negativas, "negativa") : null,
+    positivas.length > 0 ? t("{nome} é o ponto mais forte", { nome: maisForte.nome }) : null,
+    neutras.length > 0 ? ficam(t, neutras, "neutra") : null,
+    negativas.length > 0 ? ficam(t, negativas, "negativa") : null,
   ].filter((parte) => parte !== null);
 
   if (detalhes.length === 0) return abertura;
@@ -44,7 +57,7 @@ type VersaoComparada = { nome: string; medias: readonly (number | null)[] };
 // não é um teste estatístico, que a ferramenta não faz (prompts/06-painel-resultados.md, item 7)
 const DIFERENCA_DE_DESTAQUE = 0.3;
 
-export function leituraDaComparacao(nomesEscalas: readonly string[], versoes: readonly VersaoComparada[]): string | null {
+export function leituraDaComparacao(t: Traduzir, nomesEscalas: readonly string[], versoes: readonly VersaoComparada[]): string | null {
   if (versoes.length < 2) return null;
 
   if (versoes.length === 2) {
@@ -61,15 +74,24 @@ export function leituraDaComparacao(nomesEscalas: readonly string[], versoes: re
       .sort((x, y) => Math.abs(y.diferenca) - Math.abs(x.diferenca));
     const destaques = diferencas.filter((linha) => Math.abs(linha.diferenca) >= DIFERENCA_DE_DESTAQUE).slice(0, 2);
     if (destaques.length === 0) {
-      return `As versões ficam próximas em todas as escalas: nenhuma diferença chega a ${formatarDecimal(DIFERENCA_DE_DESTAQUE)}.`;
+      return t("As versões ficam próximas em todas as escalas: nenhuma diferença chega a {limite}.", {
+        limite: formatarDecimal(DIFERENCA_DE_DESTAQUE),
+      });
     }
-    const partes = destaques.map(
-      (linha) => `${linha.nome} (${formatarDecimal(Math.abs(linha.diferenca))} a favor de ${linha.diferenca > 0 ? a.nome : b.nome})`,
+    const partes = juntarComE(
+      destaques.map((linha) =>
+        t("{escala} ({diferenca} a favor de {versao})", {
+          escala: linha.nome,
+          diferenca: formatarDecimal(Math.abs(linha.diferenca)),
+          versao: linha.diferenca > 0 ? a.nome : b.nome,
+        }),
+      ),
+      t.lang,
     );
     const restantes = diferencas.length - destaques.length;
-    return `${destaques.length === 1 ? "A maior diferença está em" : "As maiores diferenças estão em"} ${juntarComE(partes)}.${
-      restantes > 0 ? " Nas outras escalas as versões ficam próximas." : ""
-    }`;
+    const frase =
+      destaques.length === 1 ? t("A maior diferença está em {partes}.", { partes }) : t("As maiores diferenças estão em {partes}.", { partes });
+    return restantes > 0 ? `${frase} ${t("Nas outras escalas as versões ficam próximas.")}` : frase;
   }
 
   // Com três ou mais versões, diz quem tem a maior média em quantas escalas
@@ -87,6 +109,6 @@ export function leituraDaComparacao(nomesEscalas: readonly string[], versoes: re
     .map((versao, indice) => ({ nome: versao.nome, quantas: vitorias[indice] ?? 0 }))
     .filter((parte) => parte.quantas > 0)
     .sort((x, y) => y.quantas - x.quantas)
-    .map((parte) => `${parte.nome} em ${POR_EXTENSO[parte.quantas] ?? parte.quantas}`);
-  return `A maior média por escala fica com ${juntarComE(partes)}.`;
+    .map((parte) => t("{versao} em {quantas}", { versao: parte.nome, quantas: extenso(t, parte.quantas) }));
+  return t("A maior média por escala fica com {partes}.", { partes: juntarComE(partes, t.lang) });
 }

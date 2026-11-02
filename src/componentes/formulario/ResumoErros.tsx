@@ -3,6 +3,7 @@
 import { useEffect, useId, useRef } from "react";
 import type { ErroCampo } from "@/lib/formulario";
 import estilos from "./formulario.module.css";
+import { useT } from "@/traducao/cliente";
 
 type Propriedades = {
   // muda a cada envio; é o que faz o foco voltar ao resumo mesmo quando o erro se repete
@@ -22,6 +23,7 @@ function paraOResumo(mensagem: string): string {
 
 // WCAG 3.3.1 e Nielsen 9: o resumo recebe o foco e cada item leva ao campo com problema
 export function ResumoErros({ envio, erros, erroGeral, campos, tituloErroGeral }: Propriedades) {
+  const t = useT();
   const ref = useRef<HTMLDivElement>(null);
   const idTitulo = useId();
   const comErro = campos.filter((campo) => erros?.[campo.nome]);
@@ -35,26 +37,28 @@ export function ResumoErros({ envio, erros, erroGeral, campos, tituloErroGeral }
 
   const titulo =
     comErro.length > 0
-      ? `Corrija ${comErro.length} ${comErro.length === 1 ? "campo" : "campos"} para continuar`
-      : (tituloErroGeral ?? "Não deu para concluir");
+      ? comErro.length === 1
+        ? t("Corrija 1 campo para continuar")
+        : t("Corrija {n} campos para continuar", { n: comErro.length })
+      : (tituloErroGeral ?? t("Não deu para concluir"));
 
   return (
     <div ref={ref} tabIndex={-1} role="alert" aria-labelledby={idTitulo} className={estilos.resumoErros}>
       <h2 id={idTitulo} className={estilos.resumoTitulo}>
-        {titulo}
+        {t(titulo)}
       </h2>
       {comErro.length > 0 ? (
         <ul>
           {comErro.map((campo) => (
             <li key={campo.nome}>
               <a href={`#${campo.id}`}>
-                {campo.rotulo}: {paraOResumo(erros?.[campo.nome]?.mensagem ?? "")}
+                {t(campo.rotulo)}: {t(paraOResumo(t(erros?.[campo.nome]?.mensagem ?? "")))}
               </a>
             </li>
           ))}
         </ul>
       ) : (
-        <p>{erroGeral}</p>
+        <p>{erroGeral && t(erroGeral)}</p>
       )}
     </div>
   );

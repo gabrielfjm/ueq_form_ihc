@@ -3,6 +3,7 @@
 import { ArrowLeft, Maximize, ZoomIn, ZoomOut } from "lucide-react";
 import { useEffect, useLayoutEffect, useRef, useState, type KeyboardEvent, type MouseEvent, type PointerEvent } from "react";
 import estilos from "./ampliado.module.css";
+import { useT } from "@/traducao/cliente";
 
 type Ampliado = { endereco: string; legenda: string };
 type Arrasto = { x: number; y: number; esquerda: number; topo: number };
@@ -18,6 +19,7 @@ const PASSO = 25;
 // a tela cheia aberta: WCAG 2.1.4). Com zoom, dá para arrastar o diagrama com o mouse, deslizar o dedo
 // ou usar as setas na área
 export function ArtigoDocumento({ html, className }: { html: string; className?: string }) {
+  const t = useT();
   const janela = useRef<HTMLDialogElement>(null);
   const area = useRef<HTMLDivElement>(null);
   const origem = useRef<HTMLElement | null>(null);
@@ -63,7 +65,7 @@ export function ArtigoDocumento({ html, className }: { html: string; className?:
   }, []);
 
   function aoClicar(evento: MouseEvent<HTMLElement>) {
-    const gatilho = (evento.target as HTMLElement).closest<HTMLElement>("[data-ampliar]");
+    const gatilho = (evento.target as HTMLElement).closest<HTMLElement>(t("[data-ampliar]"));
     if (!gatilho) return;
     evento.preventDefault();
     origem.current = gatilho;
@@ -117,36 +119,36 @@ export function ArtigoDocumento({ html, className }: { html: string; className?:
         <div className={estilos.barra}>
           <button type="button" className={estilos.botao} onClick={() => janela.current?.close()} autoFocus>
             <ArrowLeft size={18} strokeWidth={1.5} aria-hidden="true" />
-            <span>Voltar</span>
+            <span>{t("Voltar")}</span>
           </button>
           <h2 id="titulo-ampliado" className={estilos.titulo}>
             {ampliado?.legenda}
           </h2>
-          <div role="group" aria-label="Zoom" className={estilos.zoom}>
+          <div role="group" aria-label={t("Zoom")} className={estilos.zoom}>
             <button type="button" className={estilos.botao} onClick={() => mudarZoom(zoom - PASSO)} disabled={zoom <= ZOOM_MINIMO}>
               <ZoomOut size={18} strokeWidth={1.5} aria-hidden="true" />
-              <span className={estilos.rotuloZoom}>Diminuir</span>
+              <span className={estilos.rotuloZoom}>{t("Diminuir")}</span>
             </button>
             <p role="status" className={estilos.nivel}>
               {zoom}%
             </p>
             <button type="button" className={estilos.botao} onClick={() => mudarZoom(zoom + PASSO)} disabled={zoom >= ZOOM_MAXIMO}>
               <ZoomIn size={18} strokeWidth={1.5} aria-hidden="true" />
-              <span className={estilos.rotuloZoom}>Aumentar</span>
+              <span className={estilos.rotuloZoom}>{t("Aumentar")}</span>
             </button>
             <button type="button" className={estilos.botao} onClick={() => mudarZoom(100)} disabled={zoom === 100}>
               <Maximize size={18} strokeWidth={1.5} aria-hidden="true" />
-              <span className={estilos.rotuloZoom}>Ajustar à tela</span>
+              <span className={estilos.rotuloZoom}>{t("Ajustar à tela")}</span>
             </button>
           </div>
-          <p className={estilos.dica}>Esc fecha · + e - mudam o zoom · arraste para mover</p>
+          <p className={estilos.dica}>{t("Esc fecha · + e - mudam o zoom · arraste para mover")}</p>
         </div>
         <div
           ref={area}
           className={arrastando ? `${estilos.area} ${estilos.arrastando}` : estilos.area}
           tabIndex={0}
           role="region"
-          aria-label="Diagrama ampliado. Use as setas para mover"
+          aria-label={t("Diagrama ampliado. Use as setas para mover")}
           onPointerDown={aoApertar}
           onPointerMove={aoMover}
           onPointerUp={aoSoltar}
@@ -156,7 +158,7 @@ export function ArtigoDocumento({ html, className }: { html: string; className?:
             // eslint-disable-next-line @next/next/no-img-element -- SVG do próprio servidor, sem otimização a fazer
             <img
               src={ampliado.endereco}
-              alt={`Diagrama: ${ampliado.legenda}. A descrição está no texto da seção.`}
+              alt={t("Diagrama: {legenda}. A descrição está no texto da seção.", { legenda: ampliado.legenda })}
               className={estilos.imagem}
               style={{ width: `${zoom}%` }}
               draggable={false}

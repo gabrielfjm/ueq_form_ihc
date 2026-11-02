@@ -1,5 +1,8 @@
+"use client";
+
 import { ESCALAS_DO_UEQ, PASSOS } from "../conteudo";
 import estilos from "./acesso.module.css";
+import { useT } from "@/traducao/cliente";
 
 const CENTROS_GRANDES = [24, 73, 122, 172, 221, 270, 320];
 
@@ -16,16 +19,17 @@ function Marcacoes() {
 
 // Protótipos r1 e r17: o painel ao lado de Entrar resume o instrumento
 export function PainelInstrumento() {
+  const t = useT();
   return (
-    <aside aria-label="Sobre o instrumento" className={estilos.painel}>
+    <aside aria-label={t("Sobre o instrumento")} className={estilos.painel}>
       <Marcacoes />
-      <p className={estilos.painelTitulo}>26 pares de palavras, 6 escalas e um link para os participantes.</p>
+      <p className={estilos.painelTitulo}>{t("26 pares de palavras, 6 escalas e um link para os participantes.")}</p>
       <div className={estilos.lista}>
-        <p className={estilos.listaTitulo}>Escalas do UEQ</p>
+        <p className={estilos.listaTitulo}>{t("Escalas do UEQ")}</p>
         {ESCALAS_DO_UEQ.map(({ nome, itens }) => (
           <div key={nome} className={estilos.escala}>
-            <span>{nome}</span>
-            <span className={estilos.itens}>{itens} itens</span>
+            <span>{t(nome)}</span>
+            <span className={estilos.itens}>{t("{itens} itens", { itens: itens })}</span>
           </div>
         ))}
       </div>
@@ -35,17 +39,18 @@ export function PainelInstrumento() {
 
 // Protótipos r2 e r19: ao lado de Criar conta, o caminho do estudo até a planilha
 export function PainelPercurso() {
+  const t = useT();
   return (
-    <aside aria-label="Como funciona" className={estilos.painel}>
+    <aside aria-label={t("Como funciona")} className={estilos.painel}>
       <Marcacoes />
-      <p className={estilos.painelTitulo}>Do cadastro do estudo à planilha oficial.</p>
+      <p className={estilos.painelTitulo}>{t("Do cadastro do estudo à planilha oficial.")}</p>
       <ol className={estilos.lista}>
         {PASSOS.map(([titulo, texto], posicao) => (
           <li key={titulo} className={estilos.passo}>
-            <span className={estilos.passoNumero}>{String(posicao + 1).padStart(2, "0")}</span>
+            <span className={estilos.passoNumero}>{t(String(posicao + 1).padStart(2, "0"))}</span>
             <span>
-              <strong>{titulo}</strong>
-              <span className={estilos.passoTexto}> {texto}</span>
+              <strong>{t(titulo)}</strong>
+              <span className={estilos.passoTexto}> {t(texto)}</span>
             </span>
           </li>
         ))}

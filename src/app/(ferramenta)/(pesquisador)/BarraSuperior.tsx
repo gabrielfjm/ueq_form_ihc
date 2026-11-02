@@ -11,6 +11,8 @@ import { Logotipo } from "@/componentes/Logotipo";
 import { sair } from "./acoes";
 import { SinoNotificacoes } from "./SinoNotificacoes";
 import estilos from "./pesquisador.module.css";
+import { useT } from "@/traducao/cliente";
+import { m } from "@/traducao/nucleo";
 
 type ItemNavegacao = {
   href: Route;
@@ -23,18 +25,18 @@ type ItemNavegacao = {
 const ITENS: readonly ItemNavegacao[] = [
   {
     href: "/estudos",
-    texto: "Estudos",
+    texto: m("Estudos"),
     Icone: Folder,
     atual: (caminho) => caminho.startsWith("/estudos") && caminho !== "/estudos/novo",
   },
-  { href: "/estudos/novo", texto: "Criar estudo", Icone: Plus, atual: (caminho) => caminho === "/estudos/novo" },
+  { href: "/estudos/novo", texto: m("Criar estudo"), Icone: Plus, atual: (caminho) => caminho === "/estudos/novo" },
   {
     href: "/documentacao",
-    texto: "Documentação",
+    texto: m("Documentação"),
     Icone: BookOpen,
     atual: (caminho) => caminho === "/documentacao" || caminho.startsWith("/documentacao/"),
   },
-  { href: "/conta", texto: "Minha conta", Icone: User, atual: (caminho) => caminho === "/conta" },
+  { href: "/conta", texto: m("Minha conta"), Icone: User, atual: (caminho) => caminho === "/conta" || caminho.startsWith("/conta/") },
 ];
 
 type Propriedades = {
@@ -44,6 +46,7 @@ type Propriedades = {
 };
 
 export function BarraSuperior({ naoLidas, administrador }: Propriedades) {
+  const t = useT();
   const caminho = usePathname();
   // Administração (só para o superusuário) entra antes de Minha conta; o sino vem logo depois dela
   const itens: ItemNavegacao[] = [
@@ -52,9 +55,9 @@ export function BarraSuperior({ naoLidas, administrador }: Propriedades) {
       ? [
           {
             href: "/administracao" as Route,
-            texto: "Administração",
+            texto: t("Administração"),
             Icone: ShieldCheck,
-            atual: (atual: string) => atual === "/administracao",
+            atual: (atual: string) => atual.startsWith("/administracao"),
           },
         ]
       : []),
@@ -80,7 +83,7 @@ export function BarraSuperior({ naoLidas, administrador }: Propriedades) {
             data-tutorial={`navegacao-${href.slice(1).replace("/", "-")}`}
           >
             <Icone size={18} strokeWidth={1.5} aria-hidden="true" />
-            <span>{texto}</span>
+            <span>{t(texto)}</span>
           </Link>
         ))}
         <SinoNotificacoes naoLidasIniciais={naoLidas} />
@@ -93,21 +96,20 @@ export function BarraSuperior({ naoLidas, administrador }: Propriedades) {
           onClick={() => setConfirmandoSaida(true)}
         >
           <LogOut size={18} strokeWidth={1.5} aria-hidden="true" />
-          <span>Sair</span>
+          <span>{t("Sair")}</span>
         </button>
       </BarraFixa>
       <Confirmacao
         aberta={confirmandoSaida}
         aoFechar={() => setConfirmandoSaida(false)}
-        titulo="Sair da conta?"
-        textoConfirmar="Sair"
+        titulo={t("Sair da conta?")}
+        textoConfirmar={t("Sair")}
         Icone={LogOut}
         action={sair}
         focarConfirmar
       >
         <p className={estilos.descricao}>
-          Seus estudos continuam salvos e os links seguem aceitando respostas. Para voltar, entre de novo com seu
-          e-mail e senha.
+          {t("Seus estudos continuam salvos e os links seguem aceitando respostas. Para voltar, entre de novo com seu e-mail e senha.")}
         </p>
       </Confirmacao>
     </>

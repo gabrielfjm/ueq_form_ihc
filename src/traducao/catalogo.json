@@ -1,0 +1,3976 @@
+{
+ "textos": [
+  {
+   "texto": " (você)",
+   "cliente": true
+  },
+  {
+   "texto": " Com menos de 50 respostas o alfa oscila bastante; trate como indício, não como conclusão.",
+   "cliente": false
+  },
+  {
+   "texto": "(abre em nova aba)",
+   "cliente": true
+  },
+  {
+   "texto": "({email}) convidou você em {data}.",
+   "cliente": false
+  },
+  {
+   "texto": "* Alfa abaixo de 0,7.",
+   "cliente": false
+  },
+  {
+   "texto": ", abaixo de 0,7",
+   "cliente": false
+  },
+  {
+   "texto": ", compartilhados com {quantidade}",
+   "cliente": false
+  },
+  {
+   "texto": ", {faixa} no benchmark",
+   "cliente": false
+  },
+  {
+   "texto": ". Confira as {v}: cada coluna é um item, de 1 a 7. As respostas entram marcadas como importadas, na análise e com a mesma regra de suspeita das respostas pelo link.",
+   "cliente": true
+  },
+  {
+   "texto": ". Esta ferramenta não é oficial nem ligada aos autores do método.",
+   "cliente": false
+  },
+  {
+   "texto": ". Participantes falam com o pesquisador que enviou o link do estudo, que é quem responde pela pesquisa.",
+   "cliente": false
+  },
+  {
+   "texto": "1 participação fora da análise.",
+   "cliente": true
+  },
+  {
+   "texto": "10% dos resultados da base são melhores e 75% são piores.",
+   "cliente": true
+  },
+  {
+   "texto": "18 a 24 anos",
+   "cliente": true
+  },
+  {
+   "texto": "1º de novembro de 2026",
+   "cliente": true
+  },
+  {
+   "texto": "25 a 34 anos",
+   "cliente": true
+  },
+  {
+   "texto": "25% dos resultados da base são melhores e 50% são piores.",
+   "cliente": true
+  },
+  {
+   "texto": "26 pares de palavras, 6 escalas e um link para os participantes.",
+   "cliente": true
+  },
+  {
+   "texto": "35 a 44 anos",
+   "cliente": true
+  },
+  {
+   "texto": "45 a 59 anos",
+   "cliente": true
+  },
+  {
+   "texto": "50% dos resultados da base são melhores e 25% são piores.",
+   "cliente": true
+  },
+  {
+   "texto": "60 anos ou mais",
+   "cliente": true
+  },
+  {
+   "texto": "A base de comparação que diz se um resultado é excelente, bom, acima ou abaixo da média, ou ruim.",
+   "cliente": true
+  },
+  {
+   "texto": "A coleta só começa quando você clicar em “Abrir coleta”. As datas servem de referência no painel.",
+   "cliente": true
+  },
+  {
+   "texto": "A coluna “Na análise” tira ou devolve cada resposta ao cálculo, e “Tirar suspeitas da análise” faz isso com todas as suspeitas de uma vez. O painel de Resultados recalcula na hora. Nada é apagado.",
+   "cliente": true
+  },
+  {
+   "texto": "A comparação mostra as médias lado a lado, sem teste estatístico. Para afirmar que uma versão é melhor, rode um teste adequado sobre os dados exportados.",
+   "cliente": false
+  },
+  {
+   "texto": "A data de fim prevista já passou.",
+   "cliente": false
+  },
+  {
+   "texto": "A data de fim vem antes da de início. Confira as duas.",
+   "cliente": true
+  },
+  {
+   "texto": "A data de início já chegou. Abra a coleta quando estiver pronto.",
+   "cliente": false
+  },
+  {
+   "texto": "A documentação está sendo escrita pela equipe.",
+   "cliente": false
+  },
+  {
+   "texto": "A equipe",
+   "cliente": false
+  },
+  {
+   "texto": "A equipe está escrevendo este documento. Ele aparece aqui assim que ficar pronto; a ficha ao lado diz o que ele vai trazer.",
+   "cliente": false
+  },
+  {
+   "texto": "A experiência foi avaliada como positiva em {positivas} das {total} escalas.",
+   "cliente": false
+  },
+  {
+   "texto": "A experiência foi avaliada como positiva nas {total} escalas.",
+   "cliente": false
+  },
+  {
+   "texto": "A ferramenta ainda não está configurada para enviar e-mails. Quer avisar a pessoa?",
+   "cliente": true
+  },
+  {
+   "texto": "A ferramenta marca como suspeita quem respondeu de forma inconsistente em 3 ou mais escalas, ou marcou mais de 15 itens na mesma posição (regras do Handbook do UEQ). Suspeita é só um alerta: quem decide é você.",
+   "cliente": true
+  },
+  {
+   "texto": "A ferramenta mostra quantas linhas leu e os problemas que achou antes de importar. Nada é gravado até você confirmar.",
+   "cliente": true
+  },
+  {
+   "texto": "A ferramenta é traduzida para os 37 idiomas do UEQ pela API do Claude. Cada idioma é traduzido sozinho na primeira visita de quem o usa; “Traduzir agora” adianta isso. Sem a chave ANTHROPIC_API_KEY, tudo fica em português.",
+   "cliente": true
+  },
+  {
+   "texto": "A ferramenta é um projeto acadêmico da disciplina Fundamentos da IHC do PPGIa da PUCPR, feito por Gabriel Meira, Jean Weiss e Luiza Pedralli. Para os dados das contas, a equipe é a controladora. Para as respostas de um estudo, controlador é o pesquisador responsável por ele; a ferramenta só opera os dados em nome dele.",
+   "cliente": false
+  },
+  {
+   "texto": "A impressão geral sobre o produto.",
+   "cliente": true
+  },
+  {
+   "texto": "A janela muda na hora. Dá para trocar depois, em Minha conta.",
+   "cliente": true
+  },
+  {
+   "texto": "A lista de todos os estudos que você pode abrir: os seus e os que outras pessoas compartilharam com você.",
+   "cliente": true
+  },
+  {
+   "texto": "A maior diferença está em {partes}.",
+   "cliente": false
+  },
+  {
+   "texto": "A maior média por escala fica com {partes}.",
+   "cliente": false
+  },
+  {
+   "texto": "A mesma posição foi marcada em {iguais} dos 26 itens{v}",
+   "cliente": true
+  },
+  {
+   "texto": "A pessoa precisa ter conta na ferramenta. Ela aceita o convite em Convites.",
+   "cliente": true
+  },
+  {
+   "texto": "A prévia acompanha o que você digita. O texto fixo do termo vem da própria ferramenta.",
+   "cliente": true
+  },
+  {
+   "texto": "A senha atual não confere. Confira e tente de novo.",
+   "cliente": false
+  },
+  {
+   "texto": "A senha ficou longa demais. Use no máximo 72 caracteres.",
+   "cliente": true
+  },
+  {
+   "texto": "A senha precisa ter pelo menos 8 caracteres.",
+   "cliente": true
+  },
+  {
+   "texto": "A sessão fica num cookie que o JavaScript da página não lê e que só vai por HTTPS; no banco fica apenas o hash dele. Trocar a senha encerra as outras sessões.",
+   "cliente": false
+  },
+  {
+   "texto": "A tradução da ferramenta para os 37 idiomas do UEQ, pela API do Claude.",
+   "cliente": false
+  },
+  {
+   "texto": "A tradução e a validação do UEQ em português, usada no link do participante.",
+   "cliente": true
+  },
+  {
+   "texto": "A versão \"{nome}\" já tem respostas e não pode ser removida.",
+   "cliente": false
+  },
+  {
+   "texto": "A versão curta, com 8 itens, para quando o tempo do participante é pouco.",
+   "cliente": true
+  },
+  {
+   "texto": "A versão sem nome",
+   "cliente": true
+  },
+  {
+   "texto": "Abaixo da média",
+   "cliente": true
+  },
+  {
+   "texto": "Abaixo de −0,8 a avaliação é negativa; entre −0,8 e +0,8, neutra; acima de +0,8, positiva.",
+   "cliente": false
+  },
+  {
+   "texto": "Abas",
+   "cliente": true
+  },
+  {
+   "texto": "Aberto",
+   "cliente": true
+  },
+  {
+   "texto": "Abra a coleta e compartilhe o link para começar. Enquanto o estudo estiver em rascunho, quem abrir o link verá “Este estudo ainda não está aberto”.",
+   "cliente": false
+  },
+  {
+   "texto": "Abrir coleta",
+   "cliente": true
+  },
+  {
+   "texto": "Abrir na ferramenta",
+   "cliente": false
+  },
+  {
+   "texto": "Abrir os convites na ferramenta",
+   "cliente": false
+  },
+  {
+   "texto": "Abrir, encerrar e reabrir",
+   "cliente": true
+  },
+  {
+   "texto": "Aceitar",
+   "cliente": true
+  },
+  {
+   "texto": "Aceitar ou recusar convites",
+   "cliente": true
+  },
+  {
+   "texto": "Aceito",
+   "cliente": false
+  },
+  {
+   "texto": "Acesso",
+   "cliente": true
+  },
+  {
+   "texto": "Acessível",
+   "cliente": true
+  },
+  {
+   "texto": "Acima da média",
+   "cliente": true
+  },
+  {
+   "texto": "Acima de +0,8 é avaliação positiva, abaixo de −0,8 é negativa e no meio é neutra. Com poucas respostas o intervalo fica largo: a ferramenta avisa quando ainda é cedo para concluir.",
+   "cliente": true
+  },
+  {
+   "texto": "Acompanhe a coleta",
+   "cliente": true
+  },
+  {
+   "texto": "Adicionar versão",
+   "cliente": true
+  },
+  {
+   "texto": "Administração",
+   "cliente": true
+  },
+  {
+   "texto": "Administração · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Agora as respostas",
+   "cliente": true
+  },
+  {
+   "texto": "Agradável",
+   "cliente": false
+  },
+  {
+   "texto": "Agrupado por escala",
+   "cliente": false
+  },
+  {
+   "texto": "Ainda não tem conta?",
+   "cliente": true
+  },
+  {
+   "texto": "Ajuda desta página",
+   "cliente": true
+  },
+  {
+   "texto": "Ajuda em toda página",
+   "cliente": true
+  },
+  {
+   "texto": "Ajustar à tela",
+   "cliente": true
+  },
+  {
+   "texto": "Alfa",
+   "cliente": false
+  },
+  {
+   "texto": "Algumas vezes",
+   "cliente": true
+  },
+  {
+   "texto": "Alterações salvas.",
+   "cliente": true
+  },
+  {
+   "texto": "Amostra insuficiente para intervalo de confiança.",
+   "cliente": false
+  },
+  {
+   "texto": "Amplitude acima de",
+   "cliente": false
+  },
+  {
+   "texto": "Amplitude por escala na participação de {quando}",
+   "cliente": true
+  },
+  {
+   "texto": "Antes de abrir, confira",
+   "cliente": false
+  },
+  {
+   "texto": "Ao aceitar, o estudo passa a aparecer em “Seus estudos”, na seção “Compartilhados com você”. Ao recusar, quem convidou é avisado e pode convidar de novo depois.",
+   "cliente": true
+  },
+  {
+   "texto": "Ao lado do formulário você vê como o participante vai receber o convite, antes de criar.",
+   "cliente": true
+  },
+  {
+   "texto": "Ao trocar a senha, as outras sessões abertas (em outro computador, por exemplo) são encerradas.",
+   "cliente": true
+  },
+  {
+   "texto": "Apaga a conta, os estudos de que você é dono e todas as respostas deles. Estudos de outras pessoas compartilhados com você continuam com os donos.",
+   "cliente": true
+  },
+  {
+   "texto": "Apaga a conta, os seus estudos e as respostas deles. Não dá para desfazer.",
+   "cliente": false
+  },
+  {
+   "texto": "Apagar:",
+   "cliente": false
+  },
+  {
+   "texto": "Aparece no termo de consentimento. Escreva para o participante, em linguagem simples.",
+   "cliente": true
+  },
+  {
+   "texto": "Aparece para o participante no topo do questionário.",
+   "cliente": true
+  },
+  {
+   "texto": "Aparece só para você, no topo do painel.",
+   "cliente": true
+  },
+  {
+   "texto": "Aqui ficam os seus estudos e os que a equipe compartilhou com você. Separamos um estudo com respostas para o tour. Clique no título dele para abrir.",
+   "cliente": true
+  },
+  {
+   "texto": "Aqui você baixa os dados em CSV, no formato da planilha oficial do UEQ, e o painel em PDF.",
+   "cliente": true
+  },
+  {
+   "texto": "Arquivo",
+   "cliente": false
+  },
+  {
+   "texto": "Arquivo CSV",
+   "cliente": true
+  },
+  {
+   "texto": "As datas de início e fim são só referência para a equipe: quem decide se o link aceita respostas é o botão de abrir e encerrar a coleta.",
+   "cliente": true
+  },
+  {
+   "texto": "As maiores diferenças estão em {partes}.",
+   "cliente": false
+  },
+  {
+   "texto": "As mudanças valem para quem abrir o link depois de salvar. Versões que já têm respostas não podem ser removidas.",
+   "cliente": false
+  },
+  {
+   "texto": "As médias das 6 escalas aparecem assim que chegar a primeira resposta.",
+   "cliente": false
+  },
+  {
+   "texto": "As médias, os intervalos de confiança, o alfa e o benchmark das 6 escalas aparecem aqui assim que chegar a primeira resposta.",
+   "cliente": false
+  },
+  {
+   "texto": "As respostas entram na versão",
+   "cliente": true
+  },
+  {
+   "texto": "As seis escalas do UEQ",
+   "cliente": true
+  },
+  {
+   "texto": "As versões ficam próximas em todas as escalas: nenhuma diferença chega a {limite}.",
+   "cliente": false
+  },
+  {
+   "texto": "Ativa. Os dados novos já entram cifrados e os antigos são cifrados a cada deploy.",
+   "cliente": false
+  },
+  {
+   "texto": "Atratividade",
+   "cliente": true
+  },
+  {
+   "texto": "Aumentar",
+   "cliente": true
+  },
+  {
+   "texto": "Avisar por e-mail",
+   "cliente": true
+  },
+  {
+   "texto": "Ações",
+   "cliente": false
+  },
+  {
+   "texto": "Baixar",
+   "cliente": false
+  },
+  {
+   "texto": "Baixar meus dados",
+   "cliente": false
+  },
+  {
+   "texto": "Base legal:",
+   "cliente": false
+  },
+  {
+   "texto": "Benchmark",
+   "cliente": false
+  },
+  {
+   "texto": "Bettina Laugwitz, Theo Held e Martin Schrepp",
+   "cliente": true
+  },
+  {
+   "texto": "Boas-vindas à Ferramenta UEQ",
+   "cliente": true
+  },
+  {
+   "texto": "Bom",
+   "cliente": true
+  },
+  {
+   "texto": "COTA, M. P.; THOMASCHEWSKI, J.; SCHREPP, M.; GONÇALVES, R. Efficient measurement of the user experience: a Portuguese version. Procedia Computer Science, v. 27, p. 491-498, 2014.",
+   "cliente": true
+  },
+  {
+   "texto": "CSV no formato da UEQ Data Analysis Tool, para conferir os cálculos.",
+   "cliente": true
+  },
+  {
+   "texto": "Cada aviso também vai para o seu e-mail. Se preferir só o sino, desligue em Minha conta, na seção Notificações.",
+   "cliente": true
+  },
+  {
+   "texto": "Cada barra é a média de uma escala, de −3 a +3, com o intervalo de confiança de 95%. O fundo em faixas mostra o benchmark do UEQ: onde o produto cai em relação a centenas de outros produtos avaliados.",
+   "cliente": true
+  },
+  {
+   "texto": "Cada barra é a média de uma escala, de −3 a +3, com o intervalo de confiança. As faixas ao fundo comparam o produto com o benchmark do UEQ.",
+   "cliente": true
+  },
+  {
+   "texto": "Cada documento aparece aqui assim que fica pronto. Enquanto isso, a ficha ao lado de cada um diz o que ele vai trazer.",
+   "cliente": false
+  },
+  {
+   "texto": "Cada escala vai de −3 a +3",
+   "cliente": false
+  },
+  {
+   "texto": "Cada linha é um estudo, do atualizado mais recentemente ao mais antigo. Status diz se a coleta está em rascunho, aberta ou encerrada; a régua mostra onde hoje cai no período da coleta; Respostas conta só quem terminou o questionário.",
+   "cliente": true
+  },
+  {
+   "texto": "Cada participante responde sobre uma versão, e a ferramenta distribui as pessoas para equilibrar as respostas. Com uma versão só, o painel não mostra comparação.",
+   "cliente": true
+  },
+  {
+   "texto": "Cada participação concluída aparece aqui, com as respostas suspeitas marcadas para você decidir se ficam na análise.",
+   "cliente": false
+  },
+  {
+   "texto": "Cada participação concluída, com as marcadas como suspeitas e as que estão fora da análise.",
+   "cliente": true
+  },
+  {
+   "texto": "Cada pessoa que entra pelo link vai para a versão com menos respostas, para manter o equilíbrio.",
+   "cliente": false
+  },
+  {
+   "texto": "Cada pessoa só vê os estudos que são dela ou que foram compartilhados com ela. Nem os administradores da ferramenta veem os estudos ou as respostas de outras pessoas.",
+   "cliente": false
+  },
+  {
+   "texto": "Cada ponto é a média das respostas no par, do termo da esquerda (-3) ao da direita (+3). A ordem e os lados são os do questionário.",
+   "cliente": false
+  },
+  {
+   "texto": "Cancelar",
+   "cliente": true
+  },
+  {
+   "texto": "Cancelar convite",
+   "cliente": true
+  },
+  {
+   "texto": "Carregando…",
+   "cliente": true
+  },
+  {
+   "texto": "Casos de uso, diagrama de classes e verificação do cálculo",
+   "cliente": true
+  },
+  {
+   "texto": "Cenários de demonstração",
+   "cliente": true
+  },
+  {
+   "texto": "Cenários de demonstração · Administração · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Chegou ao limite de {MAXIMO_VERSOES} versões por estudo.",
+   "cliente": true
+  },
+  {
+   "texto": "Clique na aba Respostas para ver cada participação.",
+   "cliente": true
+  },
+  {
+   "texto": "Clique na aba Resultados para abrir o painel do estudo.",
+   "cliente": true
+  },
+  {
+   "texto": "Clique no destaque para continuar",
+   "cliente": true
+  },
+  {
+   "texto": "Coleta aberta. O link já aceita respostas.",
+   "cliente": true
+  },
+  {
+   "texto": "Coleta encerrada.",
+   "cliente": false
+  },
+  {
+   "texto": "Coleta encerrada. O link não aceita mais respostas. Dá para reabrir quando quiser.",
+   "cliente": true
+  },
+  {
+   "texto": "Coleta por versão",
+   "cliente": false
+  },
+  {
+   "texto": "Coleta reaberta. O link voltou a aceitar respostas.",
+   "cliente": true
+  },
+  {
+   "texto": "Coletadas em papel ou em outro formulário, entram por um CSV no formato da planilha oficial.",
+   "cliente": false
+  },
+  {
+   "texto": "Coletar dados demográficos no fim do questionário",
+   "cliente": true
+  },
+  {
+   "texto": "Com 20 a 30 pessoas, o resultado costuma ficar estável.",
+   "cliente": false
+  },
+  {
+   "texto": "Com a coleta encerrada, quem abrir o link verá “A coleta deste estudo foi encerrada”.",
+   "cliente": false
+  },
+  {
+   "texto": "Com frequência",
+   "cliente": true
+  },
+  {
+   "texto": "Com menos de 2 respostas na análise não há desvio-padrão nem IC95, e o gráfico mostra só a média. Espere mais respostas antes de interpretar.",
+   "cliente": false
+  },
+  {
+   "texto": "Começa em {dias}.",
+   "cliente": false
+  },
+  {
+   "texto": "Começar o tour",
+   "cliente": true
+  },
+  {
+   "texto": "Como editor, você pode editar o estudo, abrir e encerrar a coleta e revisar as respostas.",
+   "cliente": false
+  },
+  {
+   "texto": "Como funciona",
+   "cliente": true
+  },
+  {
+   "texto": "Como leitor, você pode ver o painel de resultados e as respostas, e exportar os dados.",
+   "cliente": false
+  },
+  {
+   "texto": "Como ler os resultados",
+   "cliente": true
+  },
+  {
+   "texto": "Como os dados são protegidos (LGPD, art. 46)",
+   "cliente": false
+  },
+  {
+   "texto": "Como uma resposta vira suspeita",
+   "cliente": false
+  },
+  {
+   "texto": "Como usar o UEQ para comparar versões, acompanhar um produto ao longo do tempo e decidir onde melhorar.",
+   "cliente": true
+  },
+  {
+   "texto": "Comparar versões",
+   "cliente": true
+  },
+  {
+   "texto": "Comparação com 21.175 pessoas de 468 estudos (planilha oficial, versão 15).",
+   "cliente": false
+  },
+  {
+   "texto": "Comparação entre as versões",
+   "cliente": false
+  },
+  {
+   "texto": "Compartilhados com você",
+   "cliente": true
+  },
+  {
+   "texto": "Compartilhar",
+   "cliente": true
+  },
+  {
+   "texto": "Compartilhar com",
+   "cliente": true
+  },
+  {
+   "texto": "Compartilhar “{titulo}”",
+   "cliente": true
+  },
+  {
+   "texto": "Concluída em",
+   "cliente": true
+  },
+  {
+   "texto": "Concluído",
+   "cliente": true
+  },
+  {
+   "texto": "Concordo e quero participar",
+   "cliente": true
+  },
+  {
+   "texto": "Conferência antes de gravar",
+   "cliente": true
+  },
+  {
+   "texto": "Confiabilidade",
+   "cliente": true
+  },
+  {
+   "texto": "Construíram o benchmark, a versão curta (UEQ-S) e o guia de uso em diferentes cenários de avaliação.",
+   "cliente": true
+  },
+  {
+   "texto": "Conta criada em",
+   "cliente": false
+  },
+  {
+   "texto": "Conta de {nome} criada. Passe o e-mail e a senha para a pessoa.",
+   "cliente": false
+  },
+  {
+   "texto": "Conta excluída. Os estudos e as respostas foram apagados.",
+   "cliente": true
+  },
+  {
+   "texto": "Contas",
+   "cliente": true
+  },
+  {
+   "texto": "Contas e Criar conta para alguém",
+   "cliente": true
+  },
+  {
+   "texto": "Contas · Administração · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Contas, estudos de demonstração e a proteção de dados da ferramenta.",
+   "cliente": false
+  },
+  {
+   "texto": "Convidar",
+   "cliente": true
+  },
+  {
+   "texto": "Convidar pessoa",
+   "cliente": true
+  },
+  {
+   "texto": "Convite aceito. O estudo agora aparece em Seus estudos, na seção Compartilhados com você.",
+   "cliente": true
+  },
+  {
+   "texto": "Convite de {data} para o estudo de {nome}.",
+   "cliente": false
+  },
+  {
+   "texto": "Convite enviado para {nome}, na ferramenta e por e-mail.",
+   "cliente": false
+  },
+  {
+   "texto": "Convite enviado para {nome}. Ele já aparece no sino de notificações da pessoa, na ferramenta.",
+   "cliente": false
+  },
+  {
+   "texto": "Convite para {nome} cancelado.",
+   "cliente": false
+  },
+  {
+   "texto": "Convite pendente",
+   "cliente": true
+  },
+  {
+   "texto": "Convite recusado. Quem convidou pode chamar você de novo depois.",
+   "cliente": true
+  },
+  {
+   "texto": "Convites",
+   "cliente": true
+  },
+  {
+   "texto": "Convites esperando resposta",
+   "cliente": false
+  },
+  {
+   "texto": "Convites já respondidos",
+   "cliente": false
+  },
+  {
+   "texto": "Convites para estudos, respostas novas (agrupadas: dez respostas numa manhã viram um aviso só) e mudanças feitas por outras pessoas da equipe, como editar o estudo, abrir ou encerrar a coleta, importar respostas ou tirar respostas da análise. O que você mesmo faz não gera aviso.",
+   "cliente": true
+  },
+  {
+   "texto": "Convites pendentes",
+   "cliente": false
+  },
+  {
+   "texto": "Convites, respostas novas e mudanças que a equipe faz nos seus estudos aparecem aqui, e também no seu e-mail.",
+   "cliente": true
+  },
+  {
+   "texto": "Convites, respostas que chegaram e o que a equipe mudou nos estudos que você acompanha.",
+   "cliente": false
+  },
+  {
+   "texto": "Copiar link",
+   "cliente": true
+  },
+  {
+   "texto": "Corrigir:",
+   "cliente": false
+  },
+  {
+   "texto": "Corrija 1 campo para continuar",
+   "cliente": true
+  },
+  {
+   "texto": "Corrija {n} campos para continuar",
+   "cliente": true
+  },
+  {
+   "texto": "Cria três estudos com dados inventados (A/B com coleta aberta, encerrado com respostas importadas e um rascunho), com o dono e as pessoas que você escolher.",
+   "cliente": true
+  },
+  {
+   "texto": "Cria três estudos com dados inventados: uma comparação A/B com a coleta aberta e respostas suspeitas, um estudo encerrado com respostas importadas e um rascunho com 3 versões.",
+   "cliente": false
+  },
+  {
+   "texto": "Criada em",
+   "cliente": true
+  },
+  {
+   "texto": "Criado em",
+   "cliente": false
+  },
+  {
+   "texto": "Criando os estudos…",
+   "cliente": true
+  },
+  {
+   "texto": "Criar conta",
+   "cliente": true
+  },
+  {
+   "texto": "Criar conta para alguém",
+   "cliente": true
+  },
+  {
+   "texto": "Criar conta para alguém · Administração · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Criar conta · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Criar estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Criar estudo · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Criar os estudos de demonstração",
+   "cliente": true
+  },
+  {
+   "texto": "Criar os três estudos",
+   "cliente": true
+  },
+  {
+   "texto": "Criar um estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Criaram o UEQ em 2005 e publicaram a construção e a validação do questionário em 2008.",
+   "cliente": true
+  },
+  {
+   "texto": "Crie o estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Crie o estudo, mande um link e veja as seis escalas do UEQ calculadas e comparadas com o benchmark oficial.",
+   "cliente": false
+  },
+  {
+   "texto": "Crie o primeiro para gerar o link de coleta: título, objetivo, período e versões.",
+   "cliente": false
+  },
+  {
+   "texto": "Crie outra conta para poder compartilhar.",
+   "cliente": true
+  },
+  {
+   "texto": "Criptografia dos dados demográficos (AES-256-GCM)",
+   "cliente": false
+  },
+  {
+   "texto": "Criptografia, envio de e-mails e as proteções que estão sempre ativas.",
+   "cliente": false
+  },
+  {
+   "texto": "Créditos",
+   "cliente": true
+  },
+  {
+   "texto": "Código aberto (MIT) em",
+   "cliente": false
+  },
+  {
+   "texto": "Código aberto · licença MIT",
+   "cliente": false
+  },
+  {
+   "texto": "DP",
+   "cliente": false
+  },
+  {
+   "texto": "Da conta mais antiga para a mais nova",
+   "cliente": true
+  },
+  {
+   "texto": "Da mais recente para a mais antiga",
+   "cliente": true
+  },
+  {
+   "texto": "Dados cadastrais",
+   "cliente": true
+  },
+  {
+   "texto": "Dados cadastrais · Minha conta · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Dados demográficos",
+   "cliente": true
+  },
+  {
+   "texto": "Dados demográficos · {titulo} · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Dados do estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Dados do participante",
+   "cliente": true
+  },
+  {
+   "texto": "Dados do participante (LGPD)",
+   "cliente": true
+  },
+  {
+   "texto": "Dados protegidos",
+   "cliente": true
+  },
+  {
+   "texto": "Dados salvos.",
+   "cliente": false
+  },
+  {
+   "texto": "Dados salvos. O novo e-mail já vale para o próximo login.",
+   "cliente": false
+  },
+  {
+   "texto": "Data de fim",
+   "cliente": true
+  },
+  {
+   "texto": "Data de início",
+   "cliente": true
+  },
+  {
+   "texto": "De 3 a 5 minutos · voluntária e anônima",
+   "cliente": true
+  },
+  {
+   "texto": "De {intervalo}.",
+   "cliente": false
+  },
+  {
+   "texto": "De {nome} · você é {v}",
+   "cliente": false
+  },
+  {
+   "texto": "Depois de enviar:",
+   "cliente": false
+  },
+  {
+   "texto": "Depois de trocar, as outras sessões abertas com a senha antiga são encerradas.",
+   "cliente": true
+  },
+  {
+   "texto": "Desagradável",
+   "cliente": false
+  },
+  {
+   "texto": "Descartar alterações",
+   "cliente": true
+  },
+  {
+   "texto": "Desenvolvimento, protótipos, arquitetura, protocolo do UEQ e casos de teste",
+   "cliente": true
+  },
+  {
+   "texto": "Desistir:",
+   "cliente": false
+  },
+  {
+   "texto": "Desligada. Configure CHAVE_CRIPTOGRAFIA na Vercel (openssl rand -base64 32) e faça um novo deploy.",
+   "cliente": false
+  },
+  {
+   "texto": "Desligado por padrão. Ligue só se o estudo precisar de faixa etária, gênero, escolaridade e familiaridade com o produto. Ligado, o participante vê no fim uma etapa opcional e pode responder ou pular direto para o agradecimento; nada identifica a pessoa.",
+   "cliente": true
+  },
+  {
+   "texto": "Desligado, a participação termina no envio do questionário.",
+   "cliente": true
+  },
+  {
+   "texto": "Desligado. Os avisos ficam só no sino. Configure SMTP_HOST, SMTP_USUARIO e SMTP_SENHA na Vercel.",
+   "cliente": false
+  },
+  {
+   "texto": "Detalhes",
+   "cliente": true
+  },
+  {
+   "texto": "Diagrama ampliado. Use as setas para mover",
+   "cliente": true
+  },
+  {
+   "texto": "Diagrama: {legenda}. A descrição está no texto da seção.",
+   "cliente": true
+  },
+  {
+   "texto": "Diferença",
+   "cliente": false
+  },
+  {
+   "texto": "Diferença =",
+   "cliente": false
+  },
+  {
+   "texto": "Diga qual produto será avaliado.",
+   "cliente": true
+  },
+  {
+   "texto": "Digite o e-mail da sua conta para confirmar.",
+   "cliente": false
+  },
+  {
+   "texto": "Digite o título do estudo para confirmar",
+   "cliente": true
+  },
+  {
+   "texto": "Digite o título do estudo para confirmar.",
+   "cliente": false
+  },
+  {
+   "texto": "Digite seu e-mail para confirmar",
+   "cliente": true
+  },
+  {
+   "texto": "Diminuir",
+   "cliente": true
+  },
+  {
+   "texto": "Do arquivo {arquivo}, na versão",
+   "cliente": true
+  },
+  {
+   "texto": "Do atualizado mais recentemente ao mais antigo",
+   "cliente": false
+  },
+  {
+   "texto": "Do cadastro do estudo à planilha oficial.",
+   "cliente": true
+  },
+  {
+   "texto": "Documentação",
+   "cliente": true
+  },
+  {
+   "texto": "Documentação · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Documento",
+   "cliente": false
+  },
+  {
+   "texto": "Documentos de {titulo}",
+   "cliente": false
+  },
+  {
+   "texto": "Dono",
+   "cliente": true
+  },
+  {
+   "texto": "Dono dos estudos",
+   "cliente": true
+  },
+  {
+   "texto": "Dê um nome à versão ou remova.",
+   "cliente": true
+  },
+  {
+   "texto": "Dê um título ao estudo.",
+   "cliente": true
+  },
+  {
+   "texto": "Dúvidas e pedidos",
+   "cliente": false
+  },
+  {
+   "texto": "E-mail",
+   "cliente": true
+  },
+  {
+   "texto": "E-mail de quem vai participar",
+   "cliente": true
+  },
+  {
+   "texto": "E-mail ou senha não conferem. Confira os dois e tente de novo.",
+   "cliente": false
+  },
+  {
+   "texto": "Editar estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Editar estudo · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Editor",
+   "cliente": true
+  },
+  {
+   "texto": "Editor pode editar o estudo, abrir e encerrar a coleta, importar respostas e tirar respostas da análise. Leitor vê o painel e as respostas e exporta, sem mudar nada. Excluir o estudo e convidar pessoas é só com o dono.",
+   "cliente": true
+  },
+  {
+   "texto": "Editor: edita o estudo e as respostas",
+   "cliente": true
+  },
+  {
+   "texto": "Editor: pode editar o estudo, mudar a coleta e revisar as respostas",
+   "cliente": true
+  },
+  {
+   "texto": "Eficiência",
+   "cliente": true
+  },
+  {
+   "texto": "Em Compartilhar você convida outras pessoas pelo e-mail da conta delas, como Editor ou Leitor, no estilo do Google Docs. O convite chega no sino e por e-mail.",
+   "cliente": true
+  },
+  {
+   "texto": "Em cada escala, a ferramenta compara os itens da mesma pessoa. Muita diferença entre eles, ou a mesma posição marcada em quase tudo, sugere resposta sem atenção.",
+   "cliente": false
+  },
+  {
+   "texto": "Em equipe",
+   "cliente": true
+  },
+  {
+   "texto": "Em estudos com mais de uma versão, o modo de comparação põe as médias das versões lado a lado, escala por escala, com a diferença entre elas. Olhe os intervalos de confiança antes de concluir que uma versão é melhor.",
+   "cliente": true
+  },
+  {
+   "texto": "Em pouco mais de um minuto, o tour mostra o caminho de um estudo: o link da coleta, o trabalho em equipe, o painel de resultados, as respostas suspeitas, as notificações e a ajuda de cada página.",
+   "cliente": true
+  },
+  {
+   "texto": "Em produção",
+   "cliente": false
+  },
+  {
+   "texto": "Em rascunho, o link mostra que o questionário está em preparação. Abrir a coleta começa a aceitar respostas; encerrar para de aceitar, e dá para reabrir depois sem perder nada.",
+   "cliente": true
+  },
+  {
+   "texto": "Encerrado",
+   "cliente": true
+  },
+  {
+   "texto": "Encerrar coleta",
+   "cliente": true
+  },
+  {
+   "texto": "Ensino fundamental",
+   "cliente": true
+  },
+  {
+   "texto": "Ensino médio",
+   "cliente": true
+  },
+  {
+   "texto": "Ensino superior",
+   "cliente": true
+  },
+  {
+   "texto": "Entendi",
+   "cliente": true
+  },
+  {
+   "texto": "Entrar",
+   "cliente": true
+  },
+  {
+   "texto": "Entrar · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Entre os 10% melhores resultados da base.",
+   "cliente": true
+  },
+  {
+   "texto": "Entre os 25% piores resultados da base.",
+   "cliente": true
+  },
+  {
+   "texto": "Entre por aqui.",
+   "cliente": true
+  },
+  {
+   "texto": "Envie o link",
+   "cliente": true
+  },
+  {
+   "texto": "Envie por e-mail ou mensagem. Quem abrir verá o termo de consentimento antes do questionário.",
+   "cliente": false
+  },
+  {
+   "texto": "Envio de e-mails (convites e notificações)",
+   "cliente": false
+  },
+  {
+   "texto": "Esc fecha · + e - mudam o zoom · arraste para mover",
+   "cliente": true
+  },
+  {
+   "texto": "Escala",
+   "cliente": false
+  },
+  {
+   "texto": "Escala inconsistente",
+   "cliente": false
+  },
+  {
+   "texto": "Escalas",
+   "cliente": false
+  },
+  {
+   "texto": "Escalas do UEQ",
+   "cliente": true
+  },
+  {
+   "texto": "Escalas e benchmark",
+   "cliente": true
+  },
+  {
+   "texto": "Escalas por versão",
+   "cliente": false
+  },
+  {
+   "texto": "Escolaridade",
+   "cliente": true
+  },
+  {
+   "texto": "Escolha a conta que vai ser dona dos estudos.",
+   "cliente": false
+  },
+  {
+   "texto": "Escolha a versão",
+   "cliente": true
+  },
+  {
+   "texto": "Escolha a versão que essas respostas avaliaram.",
+   "cliente": false
+  },
+  {
+   "texto": "Escolha o idioma",
+   "cliente": false
+  },
+  {
+   "texto": "Escolha um arquivo CSV com as respostas.",
+   "cliente": false
+  },
+  {
+   "texto": "Escolher outro arquivo",
+   "cliente": true
+  },
+  {
+   "texto": "Escreva o e-mail no formato nome@exemplo.com.",
+   "cliente": true
+  },
+  {
+   "texto": "Escreva o objetivo. É o que o participante lê no termo.",
+   "cliente": true
+  },
+  {
+   "texto": "Essa conta não existe mais. Recarregue a página.",
+   "cliente": false
+  },
+  {
+   "texto": "Essa participação não está neste estudo. Recarregue a página.",
+   "cliente": false
+  },
+  {
+   "texto": "Essa pessoa não está mais no estudo. Feche a janela e abra de novo.",
+   "cliente": false
+  },
+  {
+   "texto": "Essa versão não está neste estudo. Recarregue a página.",
+   "cliente": false
+  },
+  {
+   "texto": "Esse convite não está mais disponível: foi cancelado ou já foi respondido.",
+   "cliente": true
+  },
+  {
+   "texto": "Esse e-mail já tem conta.",
+   "cliente": true
+  },
+  {
+   "texto": "Esse e-mail já é de outra conta.",
+   "cliente": false
+  },
+  {
+   "texto": "Esse e-mail é do dono do estudo, que já tem acesso total.",
+   "cliente": false
+  },
+  {
+   "texto": "Esse não é o e-mail da sua conta. Nada foi excluído.",
+   "cliente": false
+  },
+  {
+   "texto": "Esta comparação em A4, com os gráficos em vetor.",
+   "cliente": false
+  },
+  {
+   "texto": "Esta ferramenta",
+   "cliente": false
+  },
+  {
+   "texto": "Este painel, com a versão escolhida, em A4 e com os gráficos em vetor. Para anexar ao relatório ou imprimir.",
+   "cliente": false
+  },
+  {
+   "texto": "Este é o endereço que você manda para os participantes. Ele abre o termo de consentimento e o questionário, em 37 idiomas, enquanto a coleta estiver aberta.",
+   "cliente": true
+  },
+  {
+   "texto": "Estimulação",
+   "cliente": true
+  },
+  {
+   "texto": "Estudo",
+   "cliente": false
+  },
+  {
+   "texto": "Estudo completo",
+   "cliente": false
+  },
+  {
+   "texto": "Estudo criado em rascunho. Confira os dados e abra a coleta quando estiver pronto.",
+   "cliente": true
+  },
+  {
+   "texto": "Estudo de {nome} · {v}",
+   "cliente": false
+  },
+  {
+   "texto": "Estudo excluído.",
+   "cliente": true
+  },
+  {
+   "texto": "Estudos",
+   "cliente": true
+  },
+  {
+   "texto": "Estudos compartilhados com editores e leitores.",
+   "cliente": true
+  },
+  {
+   "texto": "Estudos de avaliação de experiência do usuário com o User Experience Questionnaire",
+   "cliente": false
+  },
+  {
+   "texto": "Estudos de experiência do usuário com o UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Estudos de outras pessoas da equipe em que você foi convidado",
+   "cliente": false
+  },
+  {
+   "texto": "Estudos sobre o método",
+   "cliente": true
+  },
+  {
+   "texto": "Estudos · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Etapa 1 de {etapas} · Consentimento",
+   "cliente": true
+  },
+  {
+   "texto": "Excelente",
+   "cliente": true
+  },
+  {
+   "texto": "Excluir apaga o estudo e {versoes}.",
+   "cliente": false
+  },
+  {
+   "texto": "Excluir apaga o estudo, {versoes} e {respostas}.",
+   "cliente": false
+  },
+  {
+   "texto": "Excluir apaga sua conta e {estudos}.",
+   "cliente": false
+  },
+  {
+   "texto": "Excluir apaga sua conta, {estudos} e {respostas}.",
+   "cliente": false
+  },
+  {
+   "texto": "Excluir apaga sua conta.",
+   "cliente": false
+  },
+  {
+   "texto": "Excluir conta",
+   "cliente": true
+  },
+  {
+   "texto": "Excluir conta definitivamente",
+   "cliente": true
+  },
+  {
+   "texto": "Excluir da análise",
+   "cliente": false
+  },
+  {
+   "texto": "Excluir definitivamente",
+   "cliente": true
+  },
+  {
+   "texto": "Excluir este estudo?",
+   "cliente": true
+  },
+  {
+   "texto": "Excluir estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Excluir minha conta",
+   "cliente": true
+  },
+  {
+   "texto": "Excluir sua conta?",
+   "cliente": true
+  },
+  {
+   "texto": "Exemplo de resultado: média de cada escala, de −3 a +3",
+   "cliente": false
+  },
+  {
+   "texto": "Exportar",
+   "cliente": true
+  },
+  {
+   "texto": "Exporte os dados",
+   "cliente": true
+  },
+  {
+   "texto": "Faixa etária",
+   "cliente": true
+  },
+  {
+   "texto": "Falta configurar algo",
+   "cliente": false
+  },
+  {
+   "texto": "Fazer a tarefa com facilidade.",
+   "cliente": true
+  },
+  {
+   "texto": "Fazer por mim",
+   "cliente": true
+  },
+  {
+   "texto": "Fechar",
+   "cliente": true
+  },
+  {
+   "texto": "Fechar o tutorial",
+   "cliente": true
+  },
+  {
+   "texto": "Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Ferramenta UEQ · Estudos de experiência do usuário",
+   "cliente": false
+  },
+  {
+   "texto": "Ferramenta UEQ · Painel de resultados",
+   "cliente": false
+  },
+  {
+   "texto": "Ficha do estudo",
+   "cliente": false
+  },
+  {
+   "texto": "Ficou com dúvida? Toda página tem este botão (?) que explica o que dá para fazer nela. Clique nele para terminar o tour.",
+   "cliente": true
+  },
+  {
+   "texto": "Fonte dos limiares",
+   "cliente": false
+  },
+  {
+   "texto": "Formato da planilha oficial (CSV)",
+   "cliente": true
+  },
+  {
+   "texto": "Formato do arquivo",
+   "cliente": true
+  },
+  {
+   "texto": "Fundamentos da IHC · PPGIa · PUCPR · 2026",
+   "cliente": false
+  },
+  {
+   "texto": "Fundamentos da Interação Humano-Computador",
+   "cliente": false
+  },
+  {
+   "texto": "Gabriel Meira",
+   "cliente": true
+  },
+  {
+   "texto": "Gerado em",
+   "cliente": false
+  },
+  {
+   "texto": "Gostar de usar.",
+   "cliente": true
+  },
+  {
+   "texto": "Gráficos dos dados demográficos",
+   "cliente": false
+  },
+  {
+   "texto": "Guardamos só nome, e-mail e a senha como hash, que não dá para desfazer. As respostas dos participantes são anônimas.",
+   "cliente": false
+  },
+  {
+   "texto": "Gênero",
+   "cliente": true
+  },
+  {
+   "texto": "HTTPS com HSTS, política de conteúdo (CSP), senhas em bcrypt custo 12, limite de tentativas de login, cookie de sessão httpOnly e Secure, limpeza das participações abandonadas em 2 dias e nenhum acesso do administrador aos estudos de outras pessoas.",
+   "cliente": false
+  },
+  {
+   "texto": "Handbook UEQ e data/protocolo.json",
+   "cliente": false
+  },
+  {
+   "texto": "Hoje é o dia {dia} de {total}.",
+   "cliente": false
+  },
+  {
+   "texto": "Homem",
+   "cliente": true
+  },
+  {
+   "texto": "IC de {inferior} a {superior}",
+   "cliente": false
+  },
+  {
+   "texto": "IC95",
+   "cliente": false
+  },
+  {
+   "texto": "Idioma",
+   "cliente": true
+  },
+  {
+   "texto": "Idioma da ferramenta",
+   "cliente": true
+  },
+  {
+   "texto": "Idioma da ferramenta e o padrão dos estudos que você cria.",
+   "cliente": false
+  },
+  {
+   "texto": "Idioma da ferramenta trocado.",
+   "cliente": false
+  },
+  {
+   "texto": "Idioma do questionário",
+   "cliente": true
+  },
+  {
+   "texto": "Idioma · Minha conta · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Idiomas",
+   "cliente": true
+  },
+  {
+   "texto": "Iguais",
+   "cliente": true
+  },
+  {
+   "texto": "Importando…",
+   "cliente": true
+  },
+  {
+   "texto": "Importar respostas",
+   "cliente": true
+  },
+  {
+   "texto": "Importar respostas de um CSV",
+   "cliente": false
+  },
+  {
+   "texto": "Importar respostas · {titulo} · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Inconsistentes",
+   "cliente": true
+  },
+  {
+   "texto": "Informe a data de fim.",
+   "cliente": true
+  },
+  {
+   "texto": "Informe a data de início.",
+   "cliente": true
+  },
+  {
+   "texto": "Informe seu e-mail.",
+   "cliente": true
+  },
+  {
+   "texto": "Informe seu nome.",
+   "cliente": true
+  },
+  {
+   "texto": "Informe sua senha atual.",
+   "cliente": true
+  },
+  {
+   "texto": "Informe sua senha.",
+   "cliente": true
+  },
+  {
+   "texto": "Informe uma senha.",
+   "cliente": true
+  },
+  {
+   "texto": "Instrumento",
+   "cliente": false
+  },
+  {
+   "texto": "Ir para lá",
+   "cliente": true
+  },
+  {
+   "texto": "Item",
+   "cliente": true
+  },
+  {
+   "texto": "Item do questionário: sete círculos entre Desagradável e Agradável, com o quinto marcado",
+   "cliente": false
+  },
+  {
+   "texto": "Item {numero}, de {termoEsquerdo} a {termoDireito}: média {decimal}",
+   "cliente": false
+  },
+  {
+   "texto": "Jean Weiss",
+   "cliente": true
+  },
+  {
+   "texto": "Já aceitos: os estudos aparecem direto",
+   "cliente": true
+  },
+  {
+   "texto": "Já existe outra versão com esse nome. Use nomes diferentes.",
+   "cliente": true
+  },
+  {
+   "texto": "Já tem conta?",
+   "cliente": true
+  },
+  {
+   "texto": "Já tem respostas coletadas fora da ferramenta?",
+   "cliente": false
+  },
+  {
+   "texto": "Já tem {respostas} {v} e não pode ser removida.",
+   "cliente": true
+  },
+  {
+   "texto": "Já tenho conta",
+   "cliente": false
+  },
+  {
+   "texto": "LAUGWITZ, B.; HELD, T.; SCHREPP, M. Construction and evaluation of a user experience questionnaire. In: HOLZINGER, A. (ed.). HCI and Usability for Education and Work: USAB 2008. Berlin: Springer, 2008. (Lecture Notes in Computer Science, v. 5298). p. 63-76.",
+   "cliente": true
+  },
+  {
+   "texto": "LGPD:",
+   "cliente": true
+  },
+  {
+   "texto": "Legenda das versões",
+   "cliente": false
+  },
+  {
+   "texto": "Leitor",
+   "cliente": true
+  },
+  {
+   "texto": "Leitor: pode ver o painel e as respostas e exportar",
+   "cliente": true
+  },
+  {
+   "texto": "Leitor: só vê e exporta",
+   "cliente": true
+  },
+  {
+   "texto": "Leitura",
+   "cliente": false
+  },
+  {
+   "texto": "Leitura rápida",
+   "cliente": true
+  },
+  {
+   "texto": "Leve os dados para o relatório",
+   "cliente": true
+  },
+  {
+   "texto": "Ligado, cada aviso do sino também chega no seu e-mail. Desligado, os avisos ficam só no sino.",
+   "cliente": true
+  },
+  {
+   "texto": "Ligado, o participante vê no fim a etapa opcional “Dados opcionais”, com faixa etária, gênero, escolaridade e familiaridade com o produto. Ele pode responder ou pular a etapa e ir direto para o agradecimento.",
+   "cliente": true
+  },
+  {
+   "texto": "Linha",
+   "cliente": true
+  },
+  {
+   "texto": "Link copiado.",
+   "cliente": true
+  },
+  {
+   "texto": "Link da coleta",
+   "cliente": true
+  },
+  {
+   "texto": "Link para participantes",
+   "cliente": false
+  },
+  {
+   "texto": "Luiza Pedralli",
+   "cliente": true
+  },
+  {
+   "texto": "Mais publicações em",
+   "cliente": false
+  },
+  {
+   "texto": "Manuel Pérez Cota e Ramiro Gonçalves",
+   "cliente": true
+  },
+  {
+   "texto": "Marcar todas como lidas",
+   "cliente": true
+  },
+  {
+   "texto": "Martin Schrepp, Andreas Hinderks e Jörg Thomaschewski",
+   "cliente": true
+  },
+  {
+   "texto": "Mede se os itens de uma escala andaram juntos neste grupo de participantes. Abaixo de 0,7 é sinal de que a escala pode ter sido entendida de jeitos diferentes. Com menos de 50 respostas o alfa oscila bastante, então trate um valor baixo como indício, não como conclusão.",
+   "cliente": true
+  },
+  {
+   "texto": "Menu",
+   "cliente": true
+  },
+  {
+   "texto": "Mesmo formato, com valores de -3 a +3 e a polaridade já corrigida.",
+   "cliente": true
+  },
+  {
+   "texto": "Minha conta",
+   "cliente": true
+  },
+  {
+   "texto": "Minha conta · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Modo de visualização",
+   "cliente": true
+  },
+  {
+   "texto": "Mostra se a criptografia e o envio de e-mails estão configurados em produção. O administrador não vê os estudos nem as respostas de ninguém: só a quantidade de estudos de cada conta.",
+   "cliente": true
+  },
+  {
+   "texto": "Mostrando {length} de {total}.",
+   "cliente": true
+  },
+  {
+   "texto": "Mostrar",
+   "cliente": true
+  },
+  {
+   "texto": "Mostrar senha",
+   "cliente": true
+  },
+  {
+   "texto": "Mostrar só suspeitas",
+   "cliente": true
+  },
+  {
+   "texto": "Mostrar todas",
+   "cliente": true
+  },
+  {
+   "texto": "Mude os dados, o período ou as versões do estudo.",
+   "cliente": true
+  },
+  {
+   "texto": "Muitas tentativas com este e-mail. Por segurança, espere {JANELA_MINUTOS} minutos e tente de novo.",
+   "cliente": false
+  },
+  {
+   "texto": "Mulher",
+   "cliente": true
+  },
+  {
+   "texto": "Média",
+   "cliente": false
+  },
+  {
+   "texto": "Média e IC95 de cada escala, por versão",
+   "cliente": false
+  },
+  {
+   "texto": "Médias das seis escalas do UEQ com intervalo de confiança de 95% e faixas do benchmark.",
+   "cliente": false
+  },
+  {
+   "texto": "Médias por escala nas duas versões.",
+   "cliente": false
+  },
+  {
+   "texto": "Médias por escala nas {n} versões.",
+   "cliente": false
+  },
+  {
+   "texto": "Médias por item",
+   "cliente": false
+  },
+  {
+   "texto": "Médias por versão",
+   "cliente": false
+  },
+  {
+   "texto": "Médias, intervalo de confiança, alfa e benchmark das 6 escalas, com {quantidade}.",
+   "cliente": false
+  },
+  {
+   "texto": "Médias, intervalos de confiança, alfa e benchmark por escala, e as respostas suspeitas.",
+   "cliente": true
+  },
+  {
+   "texto": "Mínimo de {MINIMO_SENHA} caracteres. Pode colar.",
+   "cliente": true
+  },
+  {
+   "texto": "Na análise",
+   "cliente": true
+  },
+  {
+   "texto": "Nada foi importado. Corrija estas linhas no arquivo e envie de novo; as outras estão certas.",
+   "cliente": true
+  },
+  {
+   "texto": "Nada identifica o participante; dados sensíveis cifrados (LGPD).",
+   "cliente": true
+  },
+  {
+   "texto": "Nada muda até você salvar. Para desistir, volte para o estudo sem salvar.",
+   "cliente": true
+  },
+  {
+   "texto": "Nada novo. Convites, respostas e mudanças da equipe nos seus estudos aparecem aqui.",
+   "cliente": true
+  },
+  {
+   "texto": "Nada por aqui ainda. Quando alguém convidar você, quando chegarem respostas nos seus estudos ou quando um parceiro mudar algo, o aviso aparece aqui, no sino do topo e no seu e-mail. Para ser convidado, a pessoa usa o e-mail da sua conta:",
+   "cliente": false
+  },
+  {
+   "texto": "Nas outras escalas as versões ficam próximas.",
+   "cliente": false
+  },
+  {
+   "texto": "Negativa",
+   "cliente": false
+  },
+  {
+   "texto": "Nenhuma escala ficou na faixa positiva.",
+   "cliente": false
+  },
+  {
+   "texto": "Nenhuma nova",
+   "cliente": false
+  },
+  {
+   "texto": "Nenhuma participação na análise para mostrar os dados demográficos ainda.",
+   "cliente": false
+  },
+  {
+   "texto": "Nenhuma participação suspeita estava na análise. Nada mudou.",
+   "cliente": false
+  },
+  {
+   "texto": "Nenhuma resposta ainda.",
+   "cliente": false
+  },
+  {
+   "texto": "Nenhuma resposta na análise ainda.",
+   "cliente": false
+  },
+  {
+   "texto": "Nesta página",
+   "cliente": false
+  },
+  {
+   "texto": "Neutra",
+   "cliente": false
+  },
+  {
+   "texto": "Ninguém além do dono tem acesso a este estudo ainda.",
+   "cliente": true
+  },
+  {
+   "texto": "No fim da página você baixa os dados em CSV (no formato da planilha oficial do UEQ) e o painel em PDF, para o relatório.",
+   "cliente": true
+  },
+  {
+   "texto": "No resumo ao lado, “Baixar meus dados” gera um arquivo com tudo o que a ferramenta guarda sobre a sua conta, e “Política de privacidade” explica o que é guardado, para quê e como é protegido.",
+   "cliente": true
+  },
+  {
+   "texto": "Nome",
+   "cliente": true
+  },
+  {
+   "texto": "Nome dos arquivos: {v}. Os arquivos trazem todas as versões do estudo.",
+   "cliente": false
+  },
+  {
+   "texto": "Nome e e-mail",
+   "cliente": true
+  },
+  {
+   "texto": "Nome e e-mail que você usa para entrar.",
+   "cliente": false
+  },
+  {
+   "texto": "Notificações",
+   "cliente": true
+  },
+  {
+   "texto": "Notificações por e-mail",
+   "cliente": true
+  },
+  {
+   "texto": "Notificações · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Notificações: {naoLidas} {v}",
+   "cliente": true
+  },
+  {
+   "texto": "Nova",
+   "cliente": false
+  },
+  {
+   "texto": "Nova resposta em “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "Nova senha",
+   "cliente": true
+  },
+  {
+   "texto": "Nova:",
+   "cliente": true
+  },
+  {
+   "texto": "Novidade",
+   "cliente": true
+  },
+  {
+   "texto": "Nunca tinha usado",
+   "cliente": true
+  },
+  {
+   "texto": "Não apaga nada. A resposta continua na exportação de respostas brutas, com a coluna de inclusão.",
+   "cliente": false
+  },
+  {
+   "texto": "Não deu para concluir",
+   "cliente": true
+  },
+  {
+   "texto": "Não deu para copiar automaticamente. Selecione o link acima e copie.",
+   "cliente": true
+  },
+  {
+   "texto": "Não deu para salvar",
+   "cliente": true
+  },
+  {
+   "texto": "Não dá para desfazer.",
+   "cliente": false
+  },
+  {
+   "texto": "Não dá para desfazer. Se quiser só parar a coleta, use “Encerrar coleta”, que pode ser reaberta.",
+   "cliente": false
+  },
+  {
+   "texto": "Não foi possível entrar",
+   "cliente": true
+  },
+  {
+   "texto": "Não guardamos nada que identifique você:",
+   "cliente": false
+  },
+  {
+   "texto": "Não há conta com esse e-mail na ferramenta. Peça para a pessoa criar uma conta e convide de novo com o mesmo e-mail.",
+   "cliente": false
+  },
+  {
+   "texto": "Não respondeu",
+   "cliente": true
+  },
+  {
+   "texto": "O arquivo não tem nenhuma linha de respostas.",
+   "cliente": false
+  },
+  {
+   "texto": "O arquivo tem erros. Corrija e envie de novo.",
+   "cliente": false
+  },
+  {
+   "texto": "O arquivo tem mais de {v} KB. Divida em arquivos menores.",
+   "cliente": false
+  },
+  {
+   "texto": "O artigo que apresenta o UEQ: como os 26 itens e as 6 escalas foram escolhidos e validados.",
+   "cliente": true
+  },
+  {
+   "texto": "O banco de dados fica cifrado em disco no provedor (Neon, região de São Paulo).",
+   "cliente": false
+  },
+  {
+   "texto": "O benchmark",
+   "cliente": false
+  },
+  {
+   "texto": "O botão “Compartilhar” convida outra pessoa com conta na ferramenta para trabalhar no estudo, como Editor ou Leitor. Ela recebe o convite no sino de notificações e por e-mail.",
+   "cliente": true
+  },
+  {
+   "texto": "O e-mail é o que você usa para entrar e como a equipe convida você para um estudo.",
+   "cliente": false
+  },
+  {
+   "texto": "O e-mail é o que você usa para entrar e também como as outras pessoas da equipe convidam você para um estudo.",
+   "cliente": true
+  },
+  {
+   "texto": "O estado do estudo mudou em outra aba. Recarregue a página para ver o atual.",
+   "cliente": false
+  },
+  {
+   "texto": "O estudo começa em rascunho. Nada vai para os participantes até você abrir a coleta.",
+   "cliente": false
+  },
+  {
+   "texto": "O estudo continua em rascunho. Nada vai para os participantes até você abrir a coleta.",
+   "cliente": false
+  },
+  {
+   "texto": "O formulário que define o que vai ser avaliado e quem vai responder o quê.",
+   "cliente": true
+  },
+  {
+   "texto": "O idioma da ferramenta e o idioma padrão dos estudos que você cria. Quem responde pode trocar o idioma do questionário a qualquer momento.",
+   "cliente": false
+  },
+  {
+   "texto": "O idioma da ferramenta inteira, dos avisos e dos e-mails que você recebe. Também é o idioma em que seus estudos novos nascem; cada estudo pode ter outro, no formulário.",
+   "cliente": true
+  },
+  {
+   "texto": "O intervalo de confiança de 95% é a faixa em que a média provavelmente ficaria se o estudo fosse repetido com outras pessoas do mesmo público. Quanto menos respostas, mais largo o traço. Se os traços de duas versões não se sobrepõem, a diferença tende a ser real; se se sobrepõem, não dá para concluir sem um teste estatístico.",
+   "cliente": true
+  },
+  {
+   "texto": "O link abre neste idioma e o participante pode trocar a qualquer momento. Título, produto e objetivo são traduzidos automaticamente para o idioma que ele escolher.",
+   "cliente": true
+  },
+  {
+   "texto": "O link abre no idioma escolhido, e o participante pode trocar para qualquer um dos 37 idiomas do UEQ. Os 26 pares de palavras usam a tradução oficial; título, produto e objetivo são traduzidos automaticamente.",
+   "cliente": true
+  },
+  {
+   "texto": "O link da coleta",
+   "cliente": true
+  },
+  {
+   "texto": "O manual oficial: aplicação, cálculo das escalas, interpretação e respostas suspeitas. A ferramenta segue este manual.",
+   "cliente": true
+  },
+  {
+   "texto": "O método UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "O objetivo aparece aqui.",
+   "cliente": true
+  },
+  {
+   "texto": "O painel do UEQ: médias das seis escalas, comparação com o benchmark, itens e exportações.",
+   "cliente": true
+  },
+  {
+   "texto": "O painel do superusuário. Cada cartão abre a página da ação.",
+   "cliente": true
+  },
+  {
+   "texto": "O participante marca, a ferramenta calcula",
+   "cliente": false
+  },
+  {
+   "texto": "O participante responde no idioma dele, com as traduções oficiais.",
+   "cliente": true
+  },
+  {
+   "texto": "O que a Ferramenta UEQ guarda, para quê, por quanto tempo e como você controla os seus dados. Atualizada em {ATUALIZADA_EM}.",
+   "cliente": false
+  },
+  {
+   "texto": "O que avisa",
+   "cliente": true
+  },
+  {
+   "texto": "O que dá para mudar",
+   "cliente": true
+  },
+  {
+   "texto": "O que está configurado em produção e o que está sempre ativo.",
+   "cliente": false
+  },
+  {
+   "texto": "O que fica gravado:",
+   "cliente": false
+  },
+  {
+   "texto": "O que tem na tabela",
+   "cliente": true
+  },
+  {
+   "texto": "O que é",
+   "cliente": false
+  },
+  {
+   "texto": "O que é Perspicuidade?",
+   "cliente": true
+  },
+  {
+   "texto": "O que é o IC95?",
+   "cliente": true
+  },
+  {
+   "texto": "O que é o UEQ",
+   "cliente": true
+  },
+  {
+   "texto": "O que é o alfa de Cronbach?",
+   "cliente": true
+  },
+  {
+   "texto": "O que é o benchmark?",
+   "cliente": true
+  },
+  {
+   "texto": "O resumo do estudo, o link da coleta e as ações que mudam o estado dele.",
+   "cliente": true
+  },
+  {
+   "texto": "O sino avisa sobre convites, respostas novas e mudanças da equipe.",
+   "cliente": false
+  },
+  {
+   "texto": "O sino de notificações",
+   "cliente": true
+  },
+  {
+   "texto": "O sino na barra do topo, entre Minha conta e Sair, mostra quantas novidades você ainda não viu: convites (que você aceita ou recusa ali mesmo), respostas que chegaram e mudanças que outras pessoas fizeram nos seus estudos.",
+   "cliente": true
+  },
+  {
+   "texto": "O texto não é igual ao título do estudo. Nada foi excluído.",
+   "cliente": false
+  },
+  {
+   "texto": "O tour continua em outra página",
+   "cliente": true
+  },
+  {
+   "texto": "Objetivo",
+   "cliente": true
+  },
+  {
+   "texto": "Olá!",
+   "cliente": false
+  },
+  {
+   "texto": "Opção",
+   "cliente": false
+  },
+  {
+   "texto": "Opções da conta",
+   "cliente": false
+  },
+  {
+   "texto": "Opções de administração",
+   "cliente": false
+  },
+  {
+   "texto": "Ordem dos itens",
+   "cliente": false
+  },
+  {
+   "texto": "Ordem oficial",
+   "cliente": false
+  },
+  {
+   "texto": "Os dados demográficos dos participantes são gravados cifrados com AES-256-GCM, com a chave guardada fora do banco: quem tivesse uma cópia do banco não conseguiria lê-los.",
+   "cliente": false
+  },
+  {
+   "texto": "Os itens de {escalas} não andaram juntos neste grupo: a escala pode ter sido entendida de jeitos diferentes. Confira os itens {itens} em “Médias por item” antes de tirar conclusões sobre essa escala.",
+   "cliente": false
+  },
+  {
+   "texto": "Os itens de {escalas} não andaram juntos neste grupo: as escalas podem ter sido entendidas de jeitos diferentes. Confira os itens {itens} em “Médias por item” antes de tirar conclusões sobre essas escalas.",
+   "cliente": false
+  },
+  {
+   "texto": "Os links públicos param de funcionar. Não dá para desfazer.",
+   "cliente": false
+  },
+  {
+   "texto": "Os participantes respondem sem conta, pelo celular ou computador.",
+   "cliente": true
+  },
+  {
+   "texto": "Outro",
+   "cliente": true
+  },
+  {
+   "texto": "Painel em PDF",
+   "cliente": false
+  },
+  {
+   "texto": "Painel para impressão · {titulo} · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Panorama das {quantidade}",
+   "cliente": false
+  },
+  {
+   "texto": "Papel",
+   "cliente": true
+  },
+  {
+   "texto": "Papel de quem recebe",
+   "cliente": true
+  },
+  {
+   "texto": "Papel de {nome}",
+   "cliente": true
+  },
+  {
+   "texto": "Papéis",
+   "cliente": true
+  },
+  {
+   "texto": "Para aceitar ou recusar, entre na ferramenta e abra Convites: {link}",
+   "cliente": false
+  },
+  {
+   "texto": "Para comparar duas ou mais versões do produto (teste A/B), adicione uma versão para cada. O link é um só: a ferramenta distribui cada participante para a versão com menos respostas, para os grupos ficarem equilibrados.",
+   "cliente": true
+  },
+  {
+   "texto": "Para mostrar a ferramenta e o questionário em outros idiomas, os textos da interface e o título, o produto e o objetivo de cada estudo vão para a API do Claude (Anthropic), que devolve a tradução. Nenhuma resposta, nome, e-mail ou dado demográfico vai junto.",
+   "cliente": false
+  },
+  {
+   "texto": "Para que serve",
+   "cliente": false
+  },
+  {
+   "texto": "Para quem vai testar ou avaliar a ferramenta.",
+   "cliente": false
+  },
+  {
+   "texto": "Para quem vai testar ou avaliar a ferramenta. Passe o e-mail e a senha para a pessoa.",
+   "cliente": false
+  },
+  {
+   "texto": "Para quê:",
+   "cliente": false
+  },
+  {
+   "texto": "Para trazer respostas coletadas fora da ferramenta, em papel ou em outro formulário. O formato é o da aba Data da planilha oficial, o mesmo da exportação “Formato da planilha oficial”.",
+   "cliente": false
+  },
+  {
+   "texto": "Partes dos resultados",
+   "cliente": false
+  },
+  {
+   "texto": "Participação de {quando} na análise",
+   "cliente": true
+  },
+  {
+   "texto": "Participação de {quando} saiu da análise. Nada foi apagado: marque “Na análise” para incluir de novo.",
+   "cliente": false
+  },
+  {
+   "texto": "Participação de {quando} voltou para a análise.",
+   "cliente": false
+  },
+  {
+   "texto": "Participação suspeita",
+   "cliente": false
+  },
+  {
+   "texto": "Participações",
+   "cliente": true
+  },
+  {
+   "texto": "Passo {v} de {length}",
+   "cliente": true
+  },
+  {
+   "texto": "Pelo menos 8 caracteres. A pessoa pode trocar depois, em Minha conta.",
+   "cliente": true
+  },
+  {
+   "texto": "Pendentes: a pessoa aceita pelo sino",
+   "cliente": true
+  },
+  {
+   "texto": "Perspicuidade",
+   "cliente": true
+  },
+  {
+   "texto": "Período",
+   "cliente": true
+  },
+  {
+   "texto": "Período da coleta",
+   "cliente": true
+  },
+  {
+   "texto": "Pesquisadores fazem tudo direto em",
+   "cliente": false
+  },
+  {
+   "texto": "Pessoa",
+   "cliente": true
+  },
+  {
+   "texto": "Pessoas",
+   "cliente": false
+  },
+  {
+   "texto": "Pessoas com acesso",
+   "cliente": true
+  },
+  {
+   "texto": "Política de privacidade",
+   "cliente": true
+  },
+  {
+   "texto": "Política de privacidade · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Por e-mail",
+   "cliente": true
+  },
+  {
+   "texto": "Por quanto tempo:",
+   "cliente": false
+  },
+  {
+   "texto": "Por que a faixa neutra vai de -0,8 a +0,8?",
+   "cliente": true
+  },
+  {
+   "texto": "Positiva",
+   "cliente": false
+  },
+  {
+   "texto": "Prefiro não responder",
+   "cliente": true
+  },
+  {
+   "texto": "Preparando…",
+   "cliente": true
+  },
+  {
+   "texto": "Primeiras linhas do arquivo",
+   "cliente": true
+  },
+  {
+   "texto": "Primeiro acesso",
+   "cliente": true
+  },
+  {
+   "texto": "Principal",
+   "cliente": true
+  },
+  {
+   "texto": "Problema",
+   "cliente": true
+  },
+  {
+   "texto": "Produto avaliado",
+   "cliente": true
+  },
+  {
+   "texto": "Projeto da disciplina",
+   "cliente": false
+  },
+  {
+   "texto": "Pronto: os avisos do sino também vão chegar no seu e-mail.",
+   "cliente": false
+  },
+  {
+   "texto": "Pronto: os avisos ficam só no sino, sem e-mail.",
+   "cliente": false
+  },
+  {
+   "texto": "Proporção entre as {responderam} pessoas que escolheram uma opção.",
+   "cliente": false
+  },
+  {
+   "texto": "Proteção de dados",
+   "cliente": true
+  },
+  {
+   "texto": "Proteção de dados · Administração · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Proteção de dados · LGPD",
+   "cliente": false
+  },
+  {
+   "texto": "Prévia",
+   "cliente": true
+  },
+  {
+   "texto": "Prévia para o participante",
+   "cliente": true
+  },
+  {
+   "texto": "Próximo",
+   "cliente": true
+  },
+  {
+   "texto": "Próximos passos",
+   "cliente": false
+  },
+  {
+   "texto": "Pular para o conteúdo",
+   "cliente": false
+  },
+  {
+   "texto": "Pular tutorial",
+   "cliente": true
+  },
+  {
+   "texto": "Pós-graduação",
+   "cliente": true
+  },
+  {
+   "texto": "Qualidade hedônica",
+   "cliente": true
+  },
+  {
+   "texto": "Qualidade pragmática",
+   "cliente": true
+  },
+  {
+   "texto": "Quando alguém da equipe convida você e você aceita, o estudo aparece na seção “Compartilhados com você”, com o nome de quem é o dono e o seu papel: Editor pode mexer no estudo; Leitor só vê e exporta.",
+   "cliente": true
+  },
+  {
+   "texto": "Quando o estudo coleta dados demográficos, a sub-aba “Dados demográficos” mostra cada pergunta no gráfico que combina com ela: faixa etária em colunas, gênero e escolaridade em barras e familiaridade numa barra dividida. “Ver os números” abre a tabela de cada gráfico.",
+   "cliente": true
+  },
+  {
+   "texto": "Quem cuida dos dados",
+   "cliente": false
+  },
+  {
+   "texto": "Quem deve ler",
+   "cliente": false
+  },
+  {
+   "texto": "Quem respondeu de forma contraditória ou marcou quase tudo igual aparece como suspeito. Você decide, na coluna “Na análise”, se a resposta entra no cálculo. Nada é apagado.",
+   "cliente": true
+  },
+  {
+   "texto": "Quem tem conta na ferramenta e quem é administrador.",
+   "cliente": false
+  },
+  {
+   "texto": "Rascunho",
+   "cliente": true
+  },
+  {
+   "texto": "Reabrir coleta",
+   "cliente": true
+  },
+  {
+   "texto": "Receber os avisos também por e-mail",
+   "cliente": true
+  },
+  {
+   "texto": "Recusado",
+   "cliente": false
+  },
+  {
+   "texto": "Recusar",
+   "cliente": true
+  },
+  {
+   "texto": "Remover a versão {v}?",
+   "cliente": true
+  },
+  {
+   "texto": "Remover versão",
+   "cliente": true
+  },
+  {
+   "texto": "Remover versão {v}",
+   "cliente": true
+  },
+  {
+   "texto": "Requisitos, rastreabilidade, personas e histórias de usuário",
+   "cliente": true
+  },
+  {
+   "texto": "Respostas",
+   "cliente": true
+  },
+  {
+   "texto": "Respostas brutas (CSV)",
+   "cliente": true
+  },
+  {
+   "texto": "Respostas coletadas",
+   "cliente": false
+  },
+  {
+   "texto": "Respostas concluídas por versão",
+   "cliente": false
+  },
+  {
+   "texto": "Respostas da etapa opcional “Dados opcionais”, das {quantidade} na análise que vieram pelo link{v}. As importadas de CSV não têm essa etapa.",
+   "cliente": false
+  },
+  {
+   "texto": "Respostas de fora da ferramenta",
+   "cliente": false
+  },
+  {
+   "texto": "Respostas recodificadas (CSV)",
+   "cliente": true
+  },
+  {
+   "texto": "Respostas suspeitas",
+   "cliente": true
+  },
+  {
+   "texto": "Respostas · {titulo} · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Resultados",
+   "cliente": true
+  },
+  {
+   "texto": "Resultados mostra o painel com as seis escalas e o benchmark; Respostas lista cada participação e as suspeitas.",
+   "cliente": true
+  },
+  {
+   "texto": "Resultados por escala",
+   "cliente": false
+  },
+  {
+   "texto": "Resultados por escala (CSV)",
+   "cliente": true
+  },
+  {
+   "texto": "Resultados · {titulo} · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Resumo da conta",
+   "cliente": false
+  },
+  {
+   "texto": "Rever o tour guiado",
+   "cliente": true
+  },
+  {
+   "texto": "Revisar",
+   "cliente": false
+  },
+  {
+   "texto": "Revisar respostas suspeitas",
+   "cliente": false
+  },
+  {
+   "texto": "Revisar {v}",
+   "cliente": false
+  },
+  {
+   "texto": "Revogar o envio de e-mails:",
+   "cliente": false
+  },
+  {
+   "texto": "Ruim",
+   "cliente": true
+  },
+  {
+   "texto": "SCHREPP, M. User Experience Questionnaire Handbook. Versão 11. 2023. Disponível em: https://www.ueq-online.org.",
+   "cliente": true
+  },
+  {
+   "texto": "SCHREPP, M.; HINDERKS, A.; THOMASCHEWSKI, J. Applying the User Experience Questionnaire (UEQ) in different evaluation scenarios. In: MARCUS, A. (ed.). Design, User Experience, and Usability: DUXU 2014. Cham: Springer, 2014. (Lecture Notes in Computer Science, v. 8517). p. 383-392.",
+   "cliente": true
+  },
+  {
+   "texto": "SCHREPP, M.; HINDERKS, A.; THOMASCHEWSKI, J. Construction of a benchmark for the User Experience Questionnaire (UEQ). International Journal of Interactive Multimedia and Artificial Intelligence, v. 4, n. 4, p. 40-44, 2017.",
+   "cliente": true
+  },
+  {
+   "texto": "SCHREPP, M.; HINDERKS, A.; THOMASCHEWSKI, J. Design and evaluation of a short version of the User Experience Questionnaire (UEQ-S). International Journal of Interactive Multimedia and Artificial Intelligence, v. 4, n. 6, p. 103-108, 2017.",
+   "cliente": true
+  },
+  {
+   "texto": "Sair",
+   "cliente": true
+  },
+  {
+   "texto": "Sair da conta?",
+   "cliente": true
+  },
+  {
+   "texto": "Sair deste estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Salvar alterações",
+   "cliente": true
+  },
+  {
+   "texto": "Salvar idioma",
+   "cliente": false
+  },
+  {
+   "texto": "Salvar ou descartar",
+   "cliente": true
+  },
+  {
+   "texto": "Se a pessoa se sente no controle.",
+   "cliente": true
+  },
+  {
+   "texto": "Se dá para fazer as tarefas sem esforço desnecessário.",
+   "cliente": true
+  },
+  {
+   "texto": "Se o produto é criativo e inovador.",
+   "cliente": true
+  },
+  {
+   "texto": "Se você aplicou o questionário fora da ferramenta (papel, outro formulário), importe um CSV no formato da planilha oficial. As importadas aparecem marcadas na tabela.",
+   "cliente": true
+  },
+  {
+   "texto": "Se você respondeu um questionário",
+   "cliente": false
+  },
+  {
+   "texto": "Se você tem conta de pesquisador",
+   "cliente": false
+  },
+  {
+   "texto": "Se é fácil de entender e de aprender a usar.",
+   "cliente": true
+  },
+  {
+   "texto": "Se é interessante e motivador usar.",
+   "cliente": true
+  },
+  {
+   "texto": "Seleção",
+   "cliente": false
+  },
+  {
+   "texto": "Sempre ativos",
+   "cliente": false
+  },
+  {
+   "texto": "Senha",
+   "cliente": true
+  },
+  {
+   "texto": "Senha atual",
+   "cliente": true
+  },
+  {
+   "texto": "Senha trocada. As outras sessões abertas foram encerradas.",
+   "cliente": false
+  },
+  {
+   "texto": "Senha · Minha conta · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "Senhas são guardadas só como hash bcrypt (custo 12). Depois de {MAXIMO_TENTATIVAS} senhas erradas para o mesmo e-mail, o login espera {JANELA_MINUTOS} minutos.",
+   "cliente": false
+  },
+  {
+   "texto": "Seus dados",
+   "cliente": false
+  },
+  {
+   "texto": "Seus dados (LGPD)",
+   "cliente": true
+  },
+  {
+   "texto": "Seus dados de acesso e a exclusão da conta.",
+   "cliente": true
+  },
+  {
+   "texto": "Seus dados de acesso e preferências. Os participantes nunca veem seu nome nem seu e-mail.",
+   "cliente": false
+  },
+  {
+   "texto": "Seus direitos (LGPD, art. 18)",
+   "cliente": false
+  },
+  {
+   "texto": "Seus estudos",
+   "cliente": true
+  },
+  {
+   "texto": "Seus estudos continuam salvos e os links seguem aceitando respostas. Para voltar, entre de novo com seu e-mail e senha.",
+   "cliente": true
+  },
+  {
+   "texto": "Seção",
+   "cliente": false
+  },
+  {
+   "texto": "Seções da documentação",
+   "cliente": false
+  },
+  {
+   "texto": "Seções do estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Sino de notificações",
+   "cliente": true
+  },
+  {
+   "texto": "Situação",
+   "cliente": true
+  },
+  {
+   "texto": "Situação dos documentos",
+   "cliente": false
+  },
+  {
+   "texto": "Sobre este documento",
+   "cliente": false
+  },
+  {
+   "texto": "Sobre o estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Sobre o instrumento",
+   "cliente": true
+  },
+  {
+   "texto": "Status",
+   "cliente": false
+  },
+  {
+   "texto": "Sugerido a partir do produto avaliado. Pode trocar.",
+   "cliente": true
+  },
+  {
+   "texto": "Suspeita",
+   "cliente": true
+  },
+  {
+   "texto": "Só os 26 valores por linha, das participações na análise. Cole na aba de dados da UEQ Data Analysis Tool para conferir os cálculos.",
+   "cliente": true
+  },
+  {
+   "texto": "Teclado, leitor de tela e zoom de 400% (WCAG 2.2 AA).",
+   "cliente": true
+  },
+  {
+   "texto": "Texto gerado a partir das médias e das faixas de interpretação. Os números estão no gráfico e na tabela logo abaixo.",
+   "cliente": false
+  },
+  {
+   "texto": "Tirar administrador",
+   "cliente": true
+  },
+  {
+   "texto": "Tirar ou devolver à análise",
+   "cliente": true
+  },
+  {
+   "texto": "Tirar suspeitas da análise",
+   "cliente": true
+  },
+  {
+   "texto": "Toda a conexão usa HTTPS (TLS), inclusive entre a ferramenta e o banco de dados.",
+   "cliente": false
+  },
+  {
+   "texto": "Todas as linhas do arquivo entram nesta versão.",
+   "cliente": true
+  },
+  {
+   "texto": "Todas as notificações",
+   "cliente": false
+  },
+  {
+   "texto": "Todas as respostas coletadas estão fora da análise. Inclua de volta pela aba Respostas para ver os resultados.",
+   "cliente": false
+  },
+  {
+   "texto": "Todas as versões",
+   "cliente": false
+  },
+  {
+   "texto": "Todas as versões ({naAnaliseTotal} na análise)",
+   "cliente": true
+  },
+  {
+   "texto": "Tornar administrador",
+   "cliente": true
+  },
+  {
+   "texto": "Trabalhe em equipe",
+   "cliente": true
+  },
+  {
+   "texto": "Traduziram o UEQ para o português, com Thomaschewski e Schrepp. É a versão que o participante vê aqui.",
+   "cliente": true
+  },
+  {
+   "texto": "Tradução automática desligada",
+   "cliente": false
+  },
+  {
+   "texto": "Tradução automática ligada",
+   "cliente": false
+  },
+  {
+   "texto": "Traga para o estudo respostas coletadas fora da ferramenta.",
+   "cliente": true
+  },
+  {
+   "texto": "Trocar senha",
+   "cliente": true
+  },
+  {
+   "texto": "Troque a senha; as outras sessões abertas são encerradas.",
+   "cliente": false
+  },
+  {
+   "texto": "Três estudos com dados inventados, para mostrar a ferramenta funcionando.",
+   "cliente": false
+  },
+  {
+   "texto": "Tudo configurado",
+   "cliente": false
+  },
+  {
+   "texto": "Tudo o que aconteceu nos estudos que você acompanha, do mais recente ao mais antigo.",
+   "cliente": true
+  },
+  {
+   "texto": "Tudo pode ser mudado a qualquer momento, inclusive ligar ou desligar a coleta de dados demográficos (vale para as próximas respostas). Só não dá para remover uma versão que já tem respostas, para não perder dados.",
+   "cliente": true
+  },
+  {
+   "texto": "Título do estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Título e produto aparecem para você; o objetivo também aparece para o participante, na tela de consentimento. Escreva em linguagem simples.",
+   "cliente": true
+  },
+  {
+   "texto": "Título, objetivo, período e as versões do produto que serão comparadas.",
+   "cliente": true
+  },
+  {
+   "texto": "UEQ completo · 26 itens · {length} idiomas",
+   "cliente": false
+  },
+  {
+   "texto": "UEQ © Laugwitz, Held e Schrepp ·",
+   "cliente": false
+  },
+  {
+   "texto": "Um CSV com 26 colunas (uma por item, na ordem oficial) e uma linha por participante, com valores de 1 a 7, como na aba Data da planilha do UEQ.",
+   "cliente": true
+  },
+  {
+   "texto": "Um questionário padronizado e gratuito: em poucos minutos, quem usou um produto marca 26 pares de palavras opostas, e o resultado vira seis notas comparáveis entre produtos e versões.",
+   "cliente": false
+  },
+  {
+   "texto": "Uma comparação com a base oficial do UEQ, com 21.175 pessoas de 468 estudos de produtos variados. A faixa diz em que parte dessa base a média caiu: Excelente fica entre os 10% melhores; Bom tem 10% de resultados melhores e 75% piores; Acima da média, 25% melhores e 50% piores; Abaixo da média, 50% melhores e 25% piores; Ruim fica entre os 25% piores.",
+   "cliente": true
+  },
+  {
+   "texto": "Uma das versões não é deste estudo. Recarregue a página e tente de novo.",
+   "cliente": false
+  },
+  {
+   "texto": "Uma escala só, com 6 itens.",
+   "cliente": true
+  },
+  {
+   "texto": "Uma linha por participação, valores de 1 a 7, com colunas de inclusão na análise e suspeita. Para arquivar ou analisar em outro programa.",
+   "cliente": true
+  },
+  {
+   "texto": "Uma pessoa por linha, com os 26 valores de 1 a 7 na ordem oficial e sem cabeçalho. Separados por ponto e vírgula, vírgula ou tabulação. Até 5000 linhas.",
+   "cliente": true
+  },
+  {
+   "texto": "Uma versão",
+   "cliente": true
+  },
+  {
+   "texto": "Use no máximo 120 caracteres no nome.",
+   "cliente": true
+  },
+  {
+   "texto": "Use no máximo 120 caracteres no produto.",
+   "cliente": true
+  },
+  {
+   "texto": "Use no máximo 160 caracteres no título.",
+   "cliente": true
+  },
+  {
+   "texto": "Use no máximo 2000 caracteres no objetivo.",
+   "cliente": true
+  },
+  {
+   "texto": "Use no máximo 80 caracteres no nome da versão.",
+   "cliente": true
+  },
+  {
+   "texto": "Use pelo menos {MINIMO_SENHA} caracteres. Pode colar de um gerenciador de senhas.",
+   "cliente": true
+  },
+  {
+   "texto": "Use “Criar estudo” para começar: título, produto avaliado, objetivo, período e as versões que vão ser comparadas. O estudo nasce em rascunho e só recebe respostas depois de você abrir a coleta.",
+   "cliente": true
+  },
+  {
+   "texto": "User Experience Questionnaire",
+   "cliente": false
+  },
+  {
+   "texto": "Vamos ver os resultados",
+   "cliente": true
+  },
+  {
+   "texto": "Veja quem tem conta, torne alguém administrador e crie a conta de quem vai testar ou avaliar a ferramenta. No primeiro acesso a pessoa faz o tour e pode trocar a senha em Minha conta.",
+   "cliente": true
+  },
+  {
+   "texto": "Ver convites",
+   "cliente": false
+  },
+  {
+   "texto": "Ver e levar seus dados:",
+   "cliente": false
+  },
+  {
+   "texto": "Ver escalas",
+   "cliente": true
+  },
+  {
+   "texto": "Ver no GitHub",
+   "cliente": false
+  },
+  {
+   "texto": "Ver os números",
+   "cliente": false
+  },
+  {
+   "texto": "Ver prévia",
+   "cliente": true
+  },
+  {
+   "texto": "Ver respostas",
+   "cliente": true
+  },
+  {
+   "texto": "Ver resultados",
+   "cliente": false
+  },
+  {
+   "texto": "Ver seus estudos",
+   "cliente": false
+  },
+  {
+   "texto": "Ver todas as notificações",
+   "cliente": true
+  },
+  {
+   "texto": "Versão",
+   "cliente": true
+  },
+  {
+   "texto": "Versão {nome}",
+   "cliente": false
+  },
+  {
+   "texto": "Versão {v}",
+   "cliente": true
+  },
+  {
+   "texto": "Versões",
+   "cliente": true
+  },
+  {
+   "texto": "Visão geral",
+   "cliente": true
+  },
+  {
+   "texto": "Visão geral do estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Você ainda não tem estudos.",
+   "cliente": false
+  },
+  {
+   "texto": "Você já usava este produto?",
+   "cliente": true
+  },
+  {
+   "texto": "Você mesmo clica nas ações que o tour destacar. Dá para pular ou fechar quando quiser, e rever depois pelo botão (?) de qualquer página.",
+   "cliente": true
+  },
+  {
+   "texto": "Você não pode tirar o seu próprio acesso de administrador.",
+   "cliente": false
+  },
+  {
+   "texto": "Você recebe estes avisos porque participa deste estudo. Para parar de receber por e-mail, desligue em Minha conta.",
+   "cliente": false
+  },
+  {
+   "texto": "Você saiu da sua conta.",
+   "cliente": true
+  },
+  {
+   "texto": "Você saiu do caminho do tour. Volte para onde ele parou ou pule o tutorial.",
+   "cliente": true
+  },
+  {
+   "texto": "Você saiu do estudo. Ele continua com o dono e com o resto da equipe.",
+   "cliente": true
+  },
+  {
+   "texto": "Você tem {quantidade} para trabalhar em estudos da equipe.",
+   "cliente": false
+  },
+  {
+   "texto": "Voltar",
+   "cliente": true
+  },
+  {
+   "texto": "Voltar para Respostas",
+   "cliente": true
+  },
+  {
+   "texto": "Voltar para os resultados",
+   "cliente": false
+  },
+  {
+   "texto": "Zoom",
+   "cliente": true
+  },
+  {
+   "texto": "[data-ampliar]",
+   "cliente": true
+  },
+  {
+   "texto": "a coleta ainda não foi aberta",
+   "cliente": false
+  },
+  {
+   "texto": "a resposta",
+   "cliente": false
+  },
+  {
+   "texto": "a resposta coletada",
+   "cliente": false
+  },
+  {
+   "texto": "a versão",
+   "cliente": false
+  },
+  {
+   "texto": "aberto",
+   "cliente": false
+  },
+  {
+   "texto": "abertos",
+   "cliente": false
+  },
+  {
+   "texto": "abriu a coleta de “{titulo}”.",
+   "cliente": true
+  },
+  {
+   "texto": "aceitando respostas",
+   "cliente": true
+  },
+  {
+   "texto": "administrador",
+   "cliente": false
+  },
+  {
+   "texto": "administradores",
+   "cliente": false
+  },
+  {
+   "texto": "agora",
+   "cliente": true
+  },
+  {
+   "texto": "ainda não fez o tour do primeiro acesso",
+   "cliente": true
+  },
+  {
+   "texto": "amplitude",
+   "cliente": true
+  },
+  {
+   "texto": "as 26 respostas do questionário, a versão do produto que você avaliou, o idioma, a data e, só se o pesquisador ligou essa etapa e você quis responder, a faixa etária, o gênero, a escolaridade e se você já usava o produto. Todas essas perguntas têm “Prefiro não responder” e podem ser puladas.",
+   "cliente": false
+  },
+  {
+   "texto": "as {n} respostas",
+   "cliente": false
+  },
+  {
+   "texto": "as {n} respostas coletadas",
+   "cliente": false
+  },
+  {
+   "texto": "as {n} versões",
+   "cliente": false
+  },
+  {
+   "texto": "até enviar, é só fechar a página ou usar “Sair sem enviar”: nada do que você marcou é gravado. Participações começadas e não enviadas são apagadas em até 2 dias.",
+   "cliente": false
+  },
+  {
+   "texto": "cinco",
+   "cliente": true
+  },
+  {
+   "texto": "começa em {dia}",
+   "cliente": false
+  },
+  {
+   "texto": "como nada liga as respostas a você, não temos como encontrá-las para mostrar ou apagar. Fale com o pesquisador que enviou o link.",
+   "cliente": false
+  },
+  {
+   "texto": "conta",
+   "cliente": false
+  },
+  {
+   "texto": "contas",
+   "cliente": false
+  },
+  {
+   "texto": "convite pendente",
+   "cliente": false
+  },
+  {
+   "texto": "convites pendentes",
+   "cliente": false
+  },
+  {
+   "texto": "círculo cheio",
+   "cliente": true
+  },
+  {
+   "texto": "círculo vazado",
+   "cliente": true
+  },
+  {
+   "texto": "desligue “Receber os avisos também por e-mail” em Minha conta.",
+   "cliente": false
+  },
+  {
+   "texto": "devolveu uma resposta à análise em “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "dia",
+   "cliente": false
+  },
+  {
+   "texto": "dias",
+   "cliente": false
+  },
+  {
+   "texto": "diferença {decimal}",
+   "cliente": false
+  },
+  {
+   "texto": "do PPGIa da PUCPR, 2026.",
+   "cliente": false
+  },
+  {
+   "texto": "dos 26 itens",
+   "cliente": false
+  },
+  {
+   "texto": "duas",
+   "cliente": true
+  },
+  {
+   "texto": "editou os dados de “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "em Minha conta, “Baixar meus dados” gera um arquivo com tudo o que a ferramenta guarda sobre a sua conta.",
+   "cliente": false
+  },
+  {
+   "texto": "em {data}",
+   "cliente": false
+  },
+  {
+   "texto": "encerrado",
+   "cliente": false
+  },
+  {
+   "texto": "encerrados",
+   "cliente": false
+  },
+  {
+   "texto": "encerrou a coleta de “{titulo}”.",
+   "cliente": true
+  },
+  {
+   "texto": "enquanto a conta existir. Ao excluir a conta, apagamos na hora a conta, os estudos de que você é dono e todas as respostas deles.",
+   "cliente": false
+  },
+  {
+   "texto": "entrar na ferramenta, organizar os estudos e trabalhar em equipe. Seu nome e e-mail aparecem só para as pessoas com quem você compartilha um estudo; os participantes nunca os veem.",
+   "cliente": false
+  },
+  {
+   "texto": "escalas",
+   "cliente": false
+  },
+  {
+   "texto": "estimulação e novidade",
+   "cliente": false
+  },
+  {
+   "texto": "estudo",
+   "cliente": false
+  },
+  {
+   "texto": "estudo de demonstração criado",
+   "cliente": false
+  },
+  {
+   "texto": "estudos",
+   "cliente": false
+  },
+  {
+   "texto": "estudos de demonstração criados",
+   "cliente": false
+  },
+  {
+   "texto": "fora da análise",
+   "cliente": false
+  },
+  {
+   "texto": "github.com/gabrielfjm/ueq_form_ihc",
+   "cliente": false
+  },
+  {
+   "texto": "há {n} dias",
+   "cliente": true
+  },
+  {
+   "texto": "há {n} h",
+   "cliente": true
+  },
+  {
+   "texto": "há {n} min",
+   "cliente": true
+  },
+  {
+   "texto": "idiomas",
+   "cliente": false
+  },
+  {
+   "texto": "importada de CSV",
+   "cliente": true
+  },
+  {
+   "texto": "importou {quantidade} de um CSV em “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "itens",
+   "cliente": false
+  },
+  {
+   "texto": "ligue só se o objetivo do estudo precisar desses dados (princípio da necessidade). As perguntas usam faixas fechadas, todas têm “Prefiro não responder”, e nada identifica a pessoa: sem nome, e-mail ou IP. Os dados ficam só com a equipe do estudo, saem nas exportações e são apagados junto com o estudo.",
+   "cliente": true
+  },
+  {
+   "texto": "linha",
+   "cliente": true
+  },
+  {
+   "texto": "linhas",
+   "cliente": true
+  },
+  {
+   "texto": "losango cheio",
+   "cliente": true
+  },
+  {
+   "texto": "losango vazado",
+   "cliente": true
+  },
+  {
+   "texto": "menos",
+   "cliente": false
+  },
+  {
+   "texto": "n",
+   "cliente": false
+  },
+  {
+   "texto": "n na análise",
+   "cliente": false
+  },
+  {
+   "texto": "n, média, DP, IC95, alfa e faixas de cada escala e versão, só com as participações na análise. Para as tabelas do relatório.",
+   "cliente": true
+  },
+  {
+   "texto": "na análise",
+   "cliente": false
+  },
+  {
+   "texto": "negativa",
+   "cliente": true
+  },
+  {
+   "texto": "nem nome, nem e-mail, nem endereço IP, nem localização. A ferramenta não usa cookies de rastreamento ou de publicidade.",
+   "cliente": false
+  },
+  {
+   "texto": "nenhum estudo criado ainda",
+   "cliente": false
+  },
+  {
+   "texto": "nenhuma",
+   "cliente": true
+  },
+  {
+   "texto": "nenhuma ainda",
+   "cliente": false
+  },
+  {
+   "texto": "neutra",
+   "cliente": true
+  },
+  {
+   "texto": "neutro",
+   "cliente": false
+  },
+  {
+   "texto": "nome e e-mail se mudam em Minha conta.",
+   "cliente": false
+  },
+  {
+   "texto": "nome, e-mail, a senha (só como hash, nunca a senha), os estudos, os convites e as notificações. A sessão usa um único cookie necessário para manter você conectado.",
+   "cliente": false
+  },
+  {
+   "texto": "nova",
+   "cliente": false
+  },
+  {
+   "texto": "nova resposta",
+   "cliente": false
+  },
+  {
+   "texto": "novas",
+   "cliente": false
+  },
+  {
+   "texto": "novas respostas",
+   "cliente": false
+  },
+  {
+   "texto": "não responderam",
+   "cliente": false
+  },
+  {
+   "texto": "não respondeu",
+   "cliente": false
+  },
+  {
+   "texto": "o estudo",
+   "cliente": false
+  },
+  {
+   "texto": "o link ainda não aceita respostas",
+   "cliente": true
+  },
+  {
+   "texto": "o link não aceita mais respostas",
+   "cliente": true
+  },
+  {
+   "texto": "o seu consentimento, dado na primeira tela (art. 7º, I), para pesquisa acadêmica (art. 7º, IV).",
+   "cliente": false
+  },
+  {
+   "texto": "ontem",
+   "cliente": true
+  },
+  {
+   "texto": "os {n} estudos",
+   "cliente": false
+  },
+  {
+   "texto": "ou mais escalas inconsistentes, ou a mesma posição em mais de",
+   "cliente": false
+  },
+  {
+   "texto": "participação",
+   "cliente": false
+  },
+  {
+   "texto": "participação respondeu",
+   "cliente": false
+  },
+  {
+   "texto": "participações",
+   "cliente": false
+  },
+  {
+   "texto": "participações responderam",
+   "cliente": false
+  },
+  {
+   "texto": "perspicuidade, eficiência e confiabilidade",
+   "cliente": false
+  },
+  {
+   "texto": "pessoa escolheu uma opção",
+   "cliente": false
+  },
+  {
+   "texto": "pessoa preferiu",
+   "cliente": false
+  },
+  {
+   "texto": "pessoas escolheram uma opção",
+   "cliente": false
+  },
+  {
+   "texto": "pessoas preferiram",
+   "cliente": false
+  },
+  {
+   "texto": "pontos por item",
+   "cliente": false
+  },
+  {
+   "texto": "positiva",
+   "cliente": true
+  },
+  {
+   "texto": "previsto de {datas}",
+   "cliente": false
+  },
+  {
+   "texto": "quadrado cheio",
+   "cliente": true
+  },
+  {
+   "texto": "quadrado vazado",
+   "cliente": true
+  },
+  {
+   "texto": "quatro",
+   "cliente": true
+  },
+  {
+   "texto": "reabriu a coleta de “{titulo}”.",
+   "cliente": true
+  },
+  {
+   "texto": "resposta",
+   "cliente": true
+  },
+  {
+   "texto": "resposta importada",
+   "cliente": false
+  },
+  {
+   "texto": "resposta pronta",
+   "cliente": true
+  },
+  {
+   "texto": "resposta suspeita",
+   "cliente": false
+  },
+  {
+   "texto": "respostas",
+   "cliente": true
+  },
+  {
+   "texto": "respostas iguais",
+   "cliente": true
+  },
+  {
+   "texto": "respostas importadas",
+   "cliente": false
+  },
+  {
+   "texto": "respostas prontas",
+   "cliente": true
+  },
+  {
+   "texto": "respostas suspeitas",
+   "cliente": false
+  },
+  {
+   "texto": "sai da lista. Ela ainda não tem respostas; a mudança só vale quando você salvar o estudo.",
+   "cliente": true
+  },
+  {
+   "texto": "seis",
+   "cliente": true
+  },
+  {
+   "texto": "sem intervalo de confiança",
+   "cliente": false
+  },
+  {
+   "texto": "sem leitura",
+   "cliente": false
+  },
+  {
+   "texto": "sem média",
+   "cliente": false
+  },
+  {
+   "texto": "somando todos os estudos",
+   "cliente": false
+  },
+  {
+   "texto": "suspeita",
+   "cliente": false
+  },
+  {
+   "texto": "suspeitas",
+   "cliente": false
+  },
+  {
+   "texto": "tirou uma resposta da análise em “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "tirou {quantidade} da análise em “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "todas na análise",
+   "cliente": false
+  },
+  {
+   "texto": "tradução não aprovada",
+   "cliente": true
+  },
+  {
+   "texto": "três",
+   "cliente": true
+  },
+  {
+   "texto": "ueq-online.org",
+   "cliente": false
+  },
+  {
+   "texto": "ueq:iniciar-tour",
+   "cliente": true
+  },
+  {
+   "texto": "uma",
+   "cliente": true
+  },
+  {
+   "texto": "versão",
+   "cliente": false
+  },
+  {
+   "texto": "versões",
+   "cliente": false
+  },
+  {
+   "texto": "você é editor",
+   "cliente": true
+  },
+  {
+   "texto": "você é leitor: pode ver e exportar, sem alterar",
+   "cliente": true
+  },
+  {
+   "texto": "{datas} · concluída",
+   "cliente": false
+  },
+  {
+   "texto": "{datas} · dia {dia} de {total}",
+   "cliente": false
+  },
+  {
+   "texto": "{datas} · passou do fim",
+   "cliente": false
+  },
+  {
+   "texto": "{data} · atualizado em {data2}",
+   "cliente": false
+  },
+  {
+   "texto": "{escala} ({diferenca} a favor de {versao})",
+   "cliente": false
+  },
+  {
+   "texto": "{foraDaAnalise} participações fora da análise.",
+   "cliente": true
+  },
+  {
+   "texto": "{itens} itens",
+   "cliente": true
+  },
+  {
+   "texto": "{naAnalise} na análise · {fora} fora da análise",
+   "cliente": false
+  },
+  {
+   "texto": "{nomesVersoes}. Depois da primeira resposta, versões com respostas não podem ser removidas.",
+   "cliente": false
+  },
+  {
+   "texto": "{nomes} fica na faixa negativa",
+   "cliente": false
+  },
+  {
+   "texto": "{nomes} fica na faixa neutra",
+   "cliente": false
+  },
+  {
+   "texto": "{nomes} ficam na faixa negativa",
+   "cliente": false
+  },
+  {
+   "texto": "{nomes} ficam na faixa neutra",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} ({email}) convidou você para trabalhar no estudo “{titulo}” na Ferramenta UEQ, como editor.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} ({email}) convidou você para trabalhar no estudo “{titulo}” na Ferramenta UEQ, como leitor.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} aceitou o convite para o estudo “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} agora é administrador.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} agora é editor.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} agora é leitor.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} convidou você para o estudo “{titulo}”",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} convidou você para o estudo “{titulo}” como editor.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} convidou você para o estudo “{titulo}” como leitor.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} excluiu o estudo “{titulo}”, com as versões e as respostas.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} já tem acesso a este estudo.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} mudou seu papel em “{titulo}” para editor.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} mudou seu papel em “{titulo}” para leitor.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} não tem mais acesso ao estudo.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} não é mais administrador.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} recusou o convite para o estudo “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} removeu seu acesso ao estudo “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} saiu do estudo “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} · n = {n}",
+   "cliente": false
+  },
+  {
+   "texto": "{nome} é o ponto mais forte",
+   "cliente": false
+  },
+  {
+   "texto": "{nome}: média {media}, {ic}, {leitura}{benchmark}.",
+   "cliente": false
+  },
+  {
+   "texto": "{n} na análise",
+   "cliente": false
+  },
+  {
+   "texto": "{quantidade} com problema em {arquivo}",
+   "cliente": true
+  },
+  {
+   "texto": "{quantidade} da análise. Nada foi apagado: marque “Na análise” para incluir de novo.",
+   "cliente": false
+  },
+  {
+   "texto": "{quantidade} de forma contraditória. Decida se ficam na análise.",
+   "cliente": false
+  },
+  {
+   "texto": "{quantidade} de {total}",
+   "cliente": false
+  },
+  {
+   "texto": "{quantidade} não responder · {quantidade2}",
+   "cliente": false
+  },
+  {
+   "texto": "{quantidade} para importar",
+   "cliente": true
+  },
+  {
+   "texto": "{quantidade} · {abertos} com coleta aberta · {quantidade2} no total",
+   "cliente": false
+  },
+  {
+   "texto": "{quantidade}. Elas aparecem na lista com a marca “importada de CSV”.",
+   "cliente": false
+  },
+  {
+   "texto": "{quantidade}: {v} na análise e {fora} fora da análise.",
+   "cliente": false
+  },
+  {
+   "texto": "{rascunhos} em rascunho",
+   "cliente": false
+  },
+  {
+   "texto": "{respostas} em “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "{rotuloSelecao}, {quantidade} na análise",
+   "cliente": false
+  },
+  {
+   "texto": "{rotulo}: em produção.",
+   "cliente": false
+  },
+  {
+   "texto": "{titulo} · Documentação · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "{titulo} · Ferramenta UEQ",
+   "cliente": false
+  },
+  {
+   "texto": "{titulo}: pessoas por opção",
+   "cliente": false
+  },
+  {
+   "texto": "{versao} em {quantas}",
+   "cliente": false
+  },
+  {
+   "texto": "{v} escalas da participação de {quando}",
+   "cliente": true
+  },
+  {
+   "texto": "{v}tracejado: faixa neutra de -0,8 a +0,8",
+   "cliente": false
+  },
+  {
+   "texto": "Área do pesquisador",
+   "cliente": true
+  },
+  {
+   "texto": "É a leitura padrão do handbook do UEQ: médias entre -0,8 e +0,8 indicam avaliação neutra, acima de +0,8 positiva e abaixo de -0,8 negativa. Médias acima de +2 ou abaixo de -2 são raras, porque as pessoas tendem a evitar os extremos da escala.",
+   "cliente": true
+  },
+  {
+   "texto": "É o endereço que você manda para os participantes. Ele funciona nos 37 idiomas oficiais do UEQ e só aceita respostas enquanto a coleta está aberta.",
+   "cliente": true
+  },
+  {
+   "texto": "É o nome oficial da escala que mede se o produto é fácil de entender e de aprender a usar. As outras: Atratividade é a impressão geral; Eficiência, se dá para fazer as tarefas sem esforço desnecessário; Confiabilidade, se a pessoa se sente no controle; Estimulação, se é interessante e motivador usar; Novidade, se o produto é criativo e inovador.",
+   "cliente": true
+  },
+  {
+   "texto": "É o que o participante lê no termo de consentimento.",
+   "cliente": false
+  },
+  {
+   "texto": "É o que você usa para entrar.",
+   "cliente": true
+  },
+  {
+   "texto": "Última resposta",
+   "cliente": false
+  },
+  {
+   "texto": "“Excluir conta”, em Minha conta, apaga tudo, sem período de espera.",
+   "cliente": false
+  },
+  {
+   "texto": "“{name}” não é um CSV. Salve a planilha como CSV e envie de novo.",
+   "cliente": false
+  }
+ ]
+}

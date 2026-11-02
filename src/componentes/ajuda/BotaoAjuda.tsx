@@ -8,10 +8,12 @@ import janela from "@/componentes/janela/janela.module.css";
 import { iniciarTour } from "@/componentes/tutorial/eventos";
 import { AJUDA, type ChaveAjuda } from "@/lib/ajuda";
 import estilos from "./ajuda.module.css";
+import { useT } from "@/traducao/cliente";
 
 // O (?) do cabeçalho de cada página: explica para que serve a página e o que dá para fazer nela
 // (Nielsen 10). Daqui também dá para rever o tour guiado a qualquer momento
 export function BotaoAjuda({ pagina }: { pagina: ChaveAjuda }) {
+  const t = useT();
   const [aberta, setAberta] = useState(false);
   const idTitulo = useId();
   const ajuda = AJUDA[pagina];
@@ -22,7 +24,7 @@ export function BotaoAjuda({ pagina }: { pagina: ChaveAjuda }) {
         type="button"
         className={estilos.botao}
         aria-haspopup="dialog"
-        aria-label="Ajuda desta página"
+        aria-label={t("Ajuda desta página")}
         data-tutorial="ajuda"
         onClick={() => setAberta(true)}
       >
@@ -31,18 +33,18 @@ export function BotaoAjuda({ pagina }: { pagina: ChaveAjuda }) {
       <Janela aberta={aberta} aoFechar={() => setAberta(false)} idTitulo={idTitulo} tipo="conteudo">
         <div className={janela.formulario}>
           <div>
-            <p className={estilos.chapeu}>Ajuda desta página</p>
+            <p className={estilos.chapeu}>{t("Ajuda desta página")}</p>
             <h2 id={idTitulo} className={janela.titulo}>
-              {ajuda.titulo}
+              {t(ajuda.titulo)}
             </h2>
           </div>
           <div className={janela.corpo}>
-            <p className={janela.texto}>{ajuda.resumo}</p>
+            <p className={janela.texto}>{t(ajuda.resumo)}</p>
             <dl className={estilos.secoes}>
               {ajuda.secoes.map((secao) => (
                 <div key={secao.titulo}>
-                  <dt>{secao.titulo}</dt>
-                  <dd>{secao.texto}</dd>
+                  <dt>{t(secao.titulo)}</dt>
+                  <dd>{t(secao.texto)}</dd>
                 </div>
               ))}
             </dl>
@@ -57,7 +59,7 @@ export function BotaoAjuda({ pagina }: { pagina: ChaveAjuda }) {
               }}
             >
               <Compass size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-              <span>Rever o tour guiado</span>
+              <span>{t("Rever o tour guiado")}</span>
             </button>
             <button
               type="button"
@@ -65,7 +67,7 @@ export function BotaoAjuda({ pagina }: { pagina: ChaveAjuda }) {
               data-foco-inicial=""
               onClick={() => setAberta(false)}
             >
-              Entendi
+              {t("Entendi")}
             </button>
           </div>
         </div>

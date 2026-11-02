@@ -8,6 +8,9 @@ import { AcoesEstudo } from "./AcoesEstudo";
 import { BotaoColeta } from "./BotaoColeta";
 import estilos from "./estudo.module.css";
 import pagina from "./pagina-estudo.module.css";
+import { tradutor } from "@/traducao/servidor";
+import { m } from "@/traducao/nucleo";
+
 
 type Propriedades = {
   estudo: Awaited<ReturnType<typeof estudoDoPesquisador>>;
@@ -18,16 +21,17 @@ type Propriedades = {
 const CENTROS = [24, 73, 122, 172, 221, 270, 320];
 
 // Protótipo r4b: antes de abrir a coleta, a página abre com o estado vazio e o que conferir
-export function VisaoRascunho({ estudo, endereco, avisoExclusao }: Propriedades) {
+export async function VisaoRascunho({ estudo, endereco, avisoExclusao }: Propriedades) {
+  const t = await tradutor();
   const editar = `/estudos/${estudo.id}/editar` as Route;
   const nomesVersoes = juntarComE(estudo.versoes.map((versao) => versao.nome));
   const conferir = [
-    { titulo: "Objetivo", detalhe: "É o que o participante lê no termo de consentimento." },
+    { titulo: m("Objetivo"), detalhe: t("É o que o participante lê no termo de consentimento.") },
     {
-      titulo: plural(estudo.versoes.length, "versão", "versões"),
-      detalhe: `${nomesVersoes}. Depois da primeira resposta, versões com respostas não podem ser removidas.`,
+      titulo: plural(estudo.versoes.length, t("versão"), t("versões")),
+      detalhe: t("{nomesVersoes}. Depois da primeira resposta, versões com respostas não podem ser removidas.", { nomesVersoes: nomesVersoes }),
     },
-    { titulo: "Período", detalhe: `De ${intervalo(estudo.dataInicio, estudo.dataFim)}.` },
+    { titulo: t("Período"), detalhe: t("De {intervalo}.", { intervalo: intervalo(estudo.dataInicio, estudo.dataFim) }) },
   ];
 
   return (
@@ -40,11 +44,10 @@ export function VisaoRascunho({ estudo, endereco, avisoExclusao }: Propriedades)
           ))}
         </svg>
         <h2 id="titulo-vazio" className={pagina.vazioTitulo}>
-          Nenhuma resposta ainda.
+          {t("Nenhuma resposta ainda.")}
         </h2>
         <p className={pagina.vazioTexto}>
-          Abra a coleta e compartilhe o link para começar. Enquanto o estudo estiver em rascunho, quem abrir o link verá
-          “Este estudo ainda não está aberto”.
+          {t("Abra a coleta e compartilhe o link para começar. Enquanto o estudo estiver em rascunho, quem abrir o link verá “Este estudo ainda não está aberto”.")}
         </p>
         <div className={pagina.vazioAcoes}>
           {estudo.permissoes.editar && (
@@ -54,7 +57,7 @@ export function VisaoRascunho({ estudo, endereco, avisoExclusao }: Propriedades)
               className={`${formulario.botao} ${formulario.primario} ${pagina.abrir}`}
             />
           )}
-          <code className={pagina.enderecoSolto}>{endereco}</code>
+          <code className={pagina.enderecoSolto}>{t(endereco)}</code>
         </div>
       </section>
 
@@ -62,7 +65,7 @@ export function VisaoRascunho({ estudo, endereco, avisoExclusao }: Propriedades)
         <div className={estilos.secaoTitulo}>
           <span className={estilos.secaoNumero}>01</span>
           <h2 id="secao-conferir" className={estilos.secaoNome}>
-            Antes de abrir, confira
+            {t("Antes de abrir, confira")}
           </h2>
         </div>
         <ul className={pagina.conferir}>
@@ -72,12 +75,12 @@ export function VisaoRascunho({ estudo, endereco, avisoExclusao }: Propriedades)
                 {"abc"[posicao]}
               </span>
               <span>
-                <strong>{item.titulo}</strong>
-                <span className={pagina.detalhe}>{item.detalhe}</span>
+                <strong>{t(item.titulo)}</strong>
+                <span className={pagina.detalhe}>{t(item.detalhe)}</span>
               </span>
               {estudo.permissoes.editar && (
-                <Link href={editar} aria-label={`Revisar ${item.titulo.toLowerCase()}`}>
-                  Revisar
+                <Link href={editar} aria-label={t("Revisar {v}", { v: item.titulo.toLowerCase() })}>
+                  {t("Revisar")}
                 </Link>
               )}
             </li>
@@ -90,7 +93,7 @@ export function VisaoRascunho({ estudo, endereco, avisoExclusao }: Propriedades)
           <div className={estilos.secaoTitulo}>
             <span className={estilos.secaoNumero}>02</span>
             <h2 id="secao-acoes" className={estilos.secaoNome}>
-              Ações
+              {t("Ações")}
             </h2>
           </div>
           <AcoesEstudo

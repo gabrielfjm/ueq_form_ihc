@@ -16,6 +16,7 @@ export type PesquisadorLogado = {
   administrador: boolean;
   tutorialVistoEm: Date | null;
   notificacoesPorEmail: boolean;
+  idioma: string;
 };
 
 function idDaSessao(token: string): string {
@@ -53,7 +54,7 @@ export const pesquisadorDaSessao = cache(async (): Promise<PesquisadorLogado | n
     select: {
       expiraEm: true,
       pesquisador: {
-        select: { id: true, nome: true, email: true, criadoEm: true, administrador: true, tutorialVistoEm: true, notificacoesPorEmail: true },
+        select: { id: true, nome: true, email: true, criadoEm: true, administrador: true, tutorialVistoEm: true, notificacoesPorEmail: true, idioma: true },
       },
     },
   });

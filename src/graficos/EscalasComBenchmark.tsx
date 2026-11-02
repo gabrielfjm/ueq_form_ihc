@@ -2,18 +2,20 @@ import { Fragment, type ReactNode } from "react";
 import type { Construto } from "@/lib/nomes-ueq";
 import type { Intervalo, LimitesBenchmark } from "@/ueq";
 import estilos from "./graficos.module.css";
+import { tradutor } from "@/traducao/servidor";
+import { m } from "@/traducao/nucleo";
 
 // docs/ihc.md §4.3: na comparação cada versão tem uma forma, não só uma cor (WCAG 1.4.1).
 // Até 6 versões por estudo: círculo, quadrado e losango, cheios e vazados
 export type FormaMarcador = { figura: "circulo" | "quadrado" | "losango"; vazado: boolean };
 
 export const FORMAS: readonly (FormaMarcador & { nome: string })[] = [
-  { figura: "circulo", vazado: false, nome: "círculo cheio" },
-  { figura: "circulo", vazado: true, nome: "círculo vazado" },
-  { figura: "quadrado", vazado: false, nome: "quadrado cheio" },
-  { figura: "quadrado", vazado: true, nome: "quadrado vazado" },
-  { figura: "losango", vazado: false, nome: "losango cheio" },
-  { figura: "losango", vazado: true, nome: "losango vazado" },
+  { figura: "circulo", vazado: false, nome: m("círculo cheio") },
+  { figura: "circulo", vazado: true, nome: m("círculo vazado") },
+  { figura: "quadrado", vazado: false, nome: m("quadrado cheio") },
+  { figura: "quadrado", vazado: true, nome: m("quadrado vazado") },
+  { figura: "losango", vazado: false, nome: m("losango cheio") },
+  { figura: "losango", vazado: true, nome: m("losango vazado") },
 ];
 
 export const FORMA_UNICA: FormaMarcador = { figura: "circulo", vazado: false };
@@ -50,7 +52,8 @@ export function posicao(valor: number): number {
 
 const MARCAS = [-3, -2, -1, 0, 1, 2, 3];
 
-function Faixa({ de, ate, classe, rotulo }: { de: number; ate: number; classe: string | undefined; rotulo: string }) {
+async function Faixa({ de, ate, classe, rotulo }: { de: number; ate: number; classe: string | undefined; rotulo: string }) {
+  const t = await tradutor();
   const x = posicao(de);
   const largura = posicao(ate) - x;
   if (largura <= 0) return null;
@@ -59,7 +62,7 @@ function Faixa({ de, ate, classe, rotulo }: { de: number; ate: number; classe: s
     <svg x={`${x}%`} y="0" width={`${largura}%`} height="48">
       <rect width="100%" height="100%" className={classe} />
       <text x="5" y="15" className={estilos.rotuloFaixa}>
-        {rotulo}
+        {t(rotulo)}
       </text>
     </svg>
   );
@@ -99,13 +102,14 @@ export function FiguraMarcador({ x, y, forma }: { x: string | number; y: number;
 
 // docs/design.md, Painel do estudo: uma linha por escala com as 5 faixas do benchmark atrás,
 // a faixa neutra tracejada, o ponto da média e o traço do IC95. SVG feito à mão, sem biblioteca
-export function EscalasComBenchmark({ linhas, descricao, nomesGrupos, legenda }: Propriedades) {
+export async function EscalasComBenchmark({ linhas, descricao, nomesGrupos, legenda }: Propriedades) {
+  const t = await tradutor();
   return (
-    <figure role="img" aria-label={descricao} className={estilos.figura}>
+    <figure role="img" aria-label={t(descricao)} className={estilos.figura}>
       <div aria-hidden="true" className={estilos.grade}>
         <div className={estilos.eixo}>
           <span className={estilos.neutro} style={{ left: "50%" }}>
-            neutro
+            {t("neutro")}
           </span>
           {MARCAS.map((marca, indice) => (
             <span
@@ -128,8 +132,8 @@ export function EscalasComBenchmark({ linhas, descricao, nomesGrupos, legenda }:
           const { limites } = linha;
           return (
             <Fragment key={linha.chave}>
-              {novoGrupo && <span className={estilos.grupo}>{nomesGrupos[linha.construto]}</span>}
-              <span className={estilos.nome}>{linha.nome}</span>
+              {novoGrupo && <span className={estilos.grupo}>{t(nomesGrupos[linha.construto])}</span>}
+              <span className={estilos.nome}>{t(linha.nome)}</span>
               <svg className={`${estilos.trilho} ${estilos[linha.construto]}`} height="48" width="100%">
                 <Faixa de={-3} ate={limites.abaixoDaMedia} classe={estilos.faixaRuim} rotulo="ruim" />
                 <Faixa de={limites.abaixoDaMedia} ate={limites.acimaDaMedia} classe={estilos.faixaAbaixo} rotulo="abaixo" />

@@ -12,14 +12,19 @@ import { FaixaCabecalho } from "../FaixaCabecalho";
 import estilos from "./estudos.module.css";
 import { ReguaPeriodo } from "./ReguaPeriodo";
 import { StatusEstudo } from "./StatusEstudo";
+import { tradutor } from "@/traducao/servidor";
+import { m } from "@/traducao/nucleo";
 
-export const metadata: Metadata = { title: "Estudos · Ferramenta UEQ" };
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await tradutor();
+  return { title: t("Estudos · Ferramenta UEQ") };
+}
 
 const CENTROS = [24, 73, 122, 172, 221, 270, 320];
 
 const AVISOS = {
-  excluido: "Estudo excluído.",
-  "saiu-do-estudo": "Você saiu do estudo. Ele continua com o dono e com o resto da equipe.",
+  excluido: m("Estudo excluído."),
+  "saiu-do-estudo": m("Você saiu do estudo. Ele continua com o dono e com o resto da equipe."),
 } as const;
 
 type Propriedades = { searchParams: Promise<Record<string, string | string[] | undefined>> };
@@ -56,19 +61,20 @@ async function estudosComRespostas(onde: Prisma.EstudoWhereInput, pesquisadorId:
 
 type EstudoDaLista = Awaited<ReturnType<typeof estudosComRespostas>>[number];
 
-function TabelaEstudos({ estudos, hoje, legenda, compartilhados = false }: { estudos: EstudoDaLista[]; hoje: Date; legenda: string; compartilhados?: boolean }) {
+async function TabelaEstudos({ estudos, hoje, legenda, compartilhados = false }: { estudos: EstudoDaLista[]; hoje: Date; legenda: string; compartilhados?: boolean }) {
+  const t = await tradutor();
   return (
     <div className={estilos.rolagemTabela}>
       <table className={estilos.tabela}>
-        <caption>{legenda}</caption>
+        <caption>{t(legenda)}</caption>
         <thead>
           <tr>
-            <th scope="col">Estudo</th>
-            <th scope="col">Status</th>
-            <th scope="col">Período da coleta</th>
-            <th scope="col" className={estilos.direita}>Versões</th>
-            <th scope="col" className={estilos.direita}>Respostas</th>
-            <th scope="col" className={estilos.direita}>Última resposta</th>
+            <th scope="col">{t("Estudo")}</th>
+            <th scope="col">{t("Status")}</th>
+            <th scope="col">{t("Período da coleta")}</th>
+            <th scope="col" className={estilos.direita}>{t("Versões")}</th>
+            <th scope="col" className={estilos.direita}>{t("Respostas")}</th>
+            <th scope="col" className={estilos.direita}>{t("Última resposta")}</th>
           </tr>
         </thead>
         <tbody>
@@ -76,12 +82,12 @@ function TabelaEstudos({ estudos, hoje, legenda, compartilhados = false }: { est
             <tr key={estudo.id}>
               <th scope="row">
                 <Link href={`/estudos/${estudo.id}` as Route} className={estilos.tituloEstudo} data-estudo={estudo.id}>
-                  {estudo.titulo}
+                  {t(estudo.titulo)}
                 </Link>
-                <span className={estilos.produto}>{estudo.produtoAvaliado}</span>
+                <span className={estilos.produto}>{t(estudo.produtoAvaliado)}</span>
                 {compartilhados && (
                   <span className={estilos.produto}>
-                    De {estudo.pesquisador.nome} · você é {estudo.papel === "LEITOR" ? "leitor" : "editor"}
+                    {t("De {nome} · você é {v}", { nome: estudo.pesquisador.nome, v: estudo.papel === "LEITOR" ? "leitor" : "editor" })}
                   </span>
                 )}
               </th>
@@ -104,16 +110,18 @@ function TabelaEstudos({ estudos, hoje, legenda, compartilhados = false }: { est
   );
 }
 
-function BotaoCriar({ className = "" }: { className?: string }) {
+async function BotaoCriar({ className = "" }: { className?: string }) {
+  const t = await tradutor();
   return (
     <Link href="/estudos/novo" className={`${formulario.botao} ${formulario.primario} ${className}`}>
       <Plus size={18} strokeWidth={1.5} aria-hidden="true" />
-      <span>Criar estudo</span>
+      <span>{t("Criar estudo")}</span>
     </Link>
   );
 }
 
 export default async function PaginaEstudos({ searchParams }: Propriedades) {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const { aviso } = await searchParams;
   const [estudos, compartilhados, convites] = await Promise.all([
@@ -128,11 +136,11 @@ export default async function PaginaEstudos({ searchParams }: Propriedades) {
   return (
     <>
       <FaixaCabecalho
-        titulo="Seus estudos"
+        titulo={t("Seus estudos")}
         ajuda="estudos"
         resumo={
           estudos.length > 0
-            ? `${plural(estudos.length, "estudo", "estudos")} · ${abertos} com coleta aberta · ${plural(respostas, "resposta", "respostas")} no total`
+            ? t("{quantidade} · {abertos} com coleta aberta · {quantidade2} no total", { quantidade: plural(estudos.length, t("estudo"), t("estudos")), abertos: abertos, quantidade2: plural(respostas, t("resposta"), t("respostas")) })
             : undefined
         }
         acao={<BotaoCriar />}
@@ -143,19 +151,19 @@ export default async function PaginaEstudos({ searchParams }: Propriedades) {
             <p className={estilos.convites}>
               <Mail size={18} strokeWidth={1.5} aria-hidden="true" />
               <span>
-                Você tem {plural(convites, "convite pendente", "convites pendentes")} para trabalhar em estudos da equipe.
+                {t("Você tem {quantidade} para trabalhar em estudos da equipe.", { quantidade: plural(convites, t("convite pendente"), t("convites pendentes")) })}
               </span>
-              <Link href="/notificacoes">Ver convites</Link>
+              <Link href="/notificacoes">{t("Ver convites")}</Link>
             </p>
           )}
           {estudos.length === 0 ? (
             <section aria-labelledby="sem-estudos" className={estilos.vazio}>
               <div className={estilos.vazioTextos}>
                 <h2 id="sem-estudos" className={estilos.vazioTitulo}>
-                  Você ainda não tem estudos.
+                  {t("Você ainda não tem estudos.")}
                 </h2>
                 <p className={estilos.vazioTexto}>
-                  Crie o primeiro para gerar o link de coleta: título, objetivo, período e versões.
+                  {t("Crie o primeiro para gerar o link de coleta: título, objetivo, período e versões.")}
                 </p>
                 <BotaoCriar className={estilos.vazioAcao} />
               </div>
@@ -167,17 +175,17 @@ export default async function PaginaEstudos({ searchParams }: Propriedades) {
               </svg>
             </section>
           ) : (
-            <TabelaEstudos estudos={estudos} hoje={hoje} legenda="Do atualizado mais recentemente ao mais antigo" />
+            <TabelaEstudos estudos={estudos} hoje={hoje} legenda={t("Do atualizado mais recentemente ao mais antigo")} />
           )}
           {compartilhados.length > 0 && (
             <section aria-labelledby="compartilhados" className={estilos.compartilhados}>
               <h2 id="compartilhados" className={estilos.tituloSecao}>
-                Compartilhados com você
+                {t("Compartilhados com você")}
               </h2>
               <TabelaEstudos
                 estudos={compartilhados}
                 hoje={hoje}
-                legenda="Estudos de outras pessoas da equipe em que você foi convidado"
+                legenda={t("Estudos de outras pessoas da equipe em que você foi convidado")}
                 compartilhados
               />
             </section>

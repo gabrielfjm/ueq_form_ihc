@@ -61,7 +61,7 @@ test("Baixar meus dados entrega um JSON com a conta e sem a senha", async ({ pag
   expect(texto).not.toContain("senhaHash");
 });
 
-test("o perfil dos participantes aparece na aba Respostas com o que foi respondido", async ({ page, browser }, info) => {
+test("os dados demográficos aparecem em Resultados, numa sub-aba própria", async ({ page, browser }, info) => {
   test.slow();
   const estudo = await estudoAberto(browser, info);
   await page.goto(estudo.link);
@@ -73,12 +73,12 @@ test("o perfil dos participantes aparece na aba Respostas com o que foi respondi
   await expect(page).toHaveTitle(/^Respostas registradas · /);
 
   const pesquisador = estudo.pesquisador;
-  await pesquisador.getByRole("navigation", { name: "Seções do estudo" }).getByRole("link", { name: "Respostas" }).click();
-  const perfil = pesquisador.getByRole("region", { name: "Perfil dos participantes" });
-  await expect(perfil).toBeVisible();
-  const idade = perfil.getByRole("table", { name: /Faixa etária/ });
+  await pesquisador.getByRole("navigation", { name: "Seções do estudo" }).getByRole("link", { name: "Resultados" }).click();
+  await pesquisador.getByRole("navigation", { name: "Partes dos resultados" }).getByRole("link", { name: "Dados demográficos" }).click();
+  const idade = pesquisador.getByRole("region", { name: "Faixa etária" });
+  await expect(idade.getByRole("img")).toHaveAttribute("aria-label", /25 a 34 anos, 1 \(100%\)/);
+  await idade.getByText("Ver os números").click();
   await expect(idade.getByRole("row", { name: /25 a 34 anos/ })).toContainText("100%");
-  await expect(perfil.getByRole("table", { name: /Gênero/ }).getByRole("row", { name: /Não respondeu/ })).toContainText("1");
   await verificarAcessibilidade(pesquisador);
   await estudo.fechar();
 });

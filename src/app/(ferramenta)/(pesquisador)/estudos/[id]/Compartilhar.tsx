@@ -17,12 +17,15 @@ import {
   type ResultadoConvite,
 } from "./acoes-compartilhar";
 import estilos from "./compartilhar.module.css";
+import { useT } from "@/traducao/cliente";
+import { m } from "@/traducao/nucleo";
 
-const STATUS = { PENDENTE: "Convite pendente", RECUSADO: "Recusou o convite", ACEITO: null } as const;
+const STATUS = { PENDENTE: m("Convite pendente"), RECUSADO: "Recusou o convite", ACEITO: null } as const;
 
 // Compartilhar como no Google Docs: convidar pelo e-mail de uma conta já cadastrada, escolher o papel e
 // ver quem tem acesso. O convite chega na ferramenta (Convites) e, com SMTP configurado, por e-mail
 export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: string }) {
+  const t = useT();
   const [aberta, setAberta] = useState(false);
   const [acessos, setAcessos] = useState<AcessosDoEstudo | null>(null);
   const [convite, setConvite] = useState<ResultadoConvite>({ envio: 0 });
@@ -76,23 +79,23 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
         onClick={() => setAberta(true)}
       >
         <Users size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-        <span>Compartilhar</span>
+        <span>{t("Compartilhar")}</span>
       </button>
       <Janela aberta={aberta} aoFechar={fechar} idTitulo={idTitulo} tipo="conteudo">
         <div className={janela.formulario}>
           <h2 id={idTitulo} className={janela.titulo}>
-            Compartilhar “{titulo}”
+            {t("Compartilhar “{titulo}”", { titulo: titulo })}
           </h2>
           <MensagemStatus mensagem={aviso.mensagem} vez={aviso.vez} />
 
           {acessos?.podeGerenciar && (
-            <form className={estilos.convite} noValidate onSubmit={aoConvidar} aria-label="Convidar pessoa">
+            <form className={estilos.convite} noValidate onSubmit={aoConvidar} aria-label={t("Convidar pessoa")}>
               <Campo
                 id="convite-email"
                 name="email"
                 type="email"
-                rotulo="E-mail de quem vai participar"
-                ajuda="A pessoa precisa ter conta na ferramenta. Ela aceita o convite em Convites."
+                rotulo={t("E-mail de quem vai participar")}
+                ajuda={t("A pessoa precisa ter conta na ferramenta. Ela aceita o convite em Convites.")}
                 autoComplete="off"
                 erro={convite.erros?.email}
                 data-foco-inicial=""
@@ -100,24 +103,24 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
               <div className={estilos.linhaConvite}>
                 <div className={formulario.grupo}>
                   <label htmlFor="convite-papel" className={formulario.rotulo}>
-                    Papel
+                    {t("Papel")}
                   </label>
                   <select id="convite-papel" name="papel" className={formulario.campo} defaultValue="EDITOR">
-                    <option value="EDITOR">Editor: edita o estudo e as respostas</option>
-                    <option value="LEITOR">Leitor: só vê e exporta</option>
+                    <option value="EDITOR">{t("Editor: edita o estudo e as respostas")}</option>
+                    <option value="LEITOR">{t("Leitor: só vê e exporta")}</option>
                   </select>
                 </div>
                 <button type="submit" className={`${formulario.botao} ${formulario.primario}`} disabled={ocupado}>
                   <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-                  <span>Convidar</span>
+                  <span>{t("Convidar")}</span>
                 </button>
               </div>
               {convite.mailto && (
                 <p className={estilos.mailto}>
-                  <span>A ferramenta ainda não está configurada para enviar e-mails. Quer avisar a pessoa?</span>
+                  <span>{t("A ferramenta ainda não está configurada para enviar e-mails. Quer avisar a pessoa?")}</span>
                   <a href={convite.mailto} className={formulario.linkAcao}>
                     <Mail size={18} strokeWidth={1.5} aria-hidden="true" />
-                    <span>Avisar por e-mail</span>
+                    <span>{t("Avisar por e-mail")}</span>
                   </a>
                 </p>
               )}
@@ -126,43 +129,43 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
 
           <section aria-labelledby={`${idTitulo}-pessoas`} className={estilos.pessoas}>
             <h3 id={`${idTitulo}-pessoas`} className={estilos.subtitulo}>
-              Pessoas com acesso
+              {t("Pessoas com acesso")}
             </h3>
             {!acessos ? (
-              <p className={janela.texto}>Carregando…</p>
+              <p className={janela.texto}>{t("Carregando…")}</p>
             ) : (
               <ul className={estilos.lista}>
                 <li>
                   <span className={estilos.pessoa}>
                     <strong>
-                      {acessos.dono.nome}
-                      {acessos.dono.voce && " (você)"}
+                      {t(acessos.dono.nome)}
+                      {acessos.dono.voce && t(" (você)")}
                     </strong>
-                    <span className={estilos.email}>{acessos.dono.email}</span>
+                    <span className={estilos.email}>{t(acessos.dono.email)}</span>
                   </span>
-                  <span className={estilos.papel}>Dono</span>
+                  <span className={estilos.papel}>{t("Dono")}</span>
                 </li>
                 {acessos.pessoas.map((pessoa) => (
                   <li key={pessoa.id}>
                     <span className={estilos.pessoa}>
                       <strong>
-                        {pessoa.nome}
-                        {pessoa.voce && " (você)"}
+                        {t(pessoa.nome)}
+                        {pessoa.voce && t(" (você)")}
                       </strong>
-                      <span className={estilos.email}>{pessoa.email}</span>
+                      <span className={estilos.email}>{t(pessoa.email)}</span>
                       {STATUS[pessoa.status] && <span className={estilos.status}>{STATUS[pessoa.status]}</span>}
                     </span>
                     {acessos.podeGerenciar ? (
                       <span className={estilos.controles}>
                         <select
-                          aria-label={`Papel de ${pessoa.nome}`}
+                          aria-label={t("Papel de {nome}", { nome: pessoa.nome })}
                           className={`${formulario.campo} ${estilos.selecaoPapel}`}
                           value={pessoa.papel}
                           disabled={ocupado}
                           onChange={(evento) => executar(() => mudarPapel(pessoa.id, evento.target.value))}
                         >
-                          <option value="EDITOR">Editor</option>
-                          <option value="LEITOR">Leitor</option>
+                          <option value="EDITOR">{t("Editor")}</option>
+                          <option value="LEITOR">{t("Leitor")}</option>
                         </select>
                         <button
                           type="button"
@@ -171,7 +174,7 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
                           onClick={() => executar(() => removerAcesso(pessoa.id))}
                         >
                           <UserMinus size={18} strokeWidth={1.5} aria-hidden="true" />
-                          <span>{pessoa.status === "ACEITO" ? `Remover ${pessoa.nome}` : "Cancelar convite"}</span>
+                          <span>{pessoa.status === "ACEITO" ? `Remover ${pessoa.nome}` : t("Cancelar convite")}</span>
                         </button>
                       </span>
                     ) : (
@@ -182,7 +185,7 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
               </ul>
             )}
             {acessos && acessos.pessoas.length === 0 && (
-              <p className={janela.texto}>Ninguém além do dono tem acesso a este estudo ainda.</p>
+              <p className={janela.texto}>{t("Ninguém além do dono tem acesso a este estudo ainda.")}</p>
             )}
           </section>
 
@@ -191,13 +194,13 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
               <form action={sairDoEstudo.bind(null, estudoId)} className={estilos.sair}>
                 <button type="submit" className={formulario.destrutivo}>
                   <LogOut size={18} strokeWidth={1.5} aria-hidden="true" />
-                  <span>Sair deste estudo</span>
+                  <span>{t("Sair deste estudo")}</span>
                 </button>
               </form>
             )}
             <button type="button" className={`${formulario.botao} ${formulario.primario}`} onClick={fechar}>
               <Check size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-              <span>Concluído</span>
+              <span>{t("Concluído")}</span>
             </button>
           </div>
         </div>

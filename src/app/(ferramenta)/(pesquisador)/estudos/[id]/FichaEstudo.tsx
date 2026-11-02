@@ -4,6 +4,7 @@ import { formatarDia, situacaoDoPeriodo } from "@/lib/periodo";
 import { formatarData } from "@/lib/texto";
 import { textoDoPeriodo } from "../ReguaPeriodo";
 import estilos from "./pagina-estudo.module.css";
+import { tradutor } from "@/traducao/servidor";
 
 type Propriedades = {
   status: StatusEstudo;
@@ -33,50 +34,51 @@ function ReguaFicha({ status, inicio, fim, hoje }: Pick<Propriedades, "status" |
 }
 
 // Ficha lateral dos protótipos r4b e r5
-export function FichaEstudo(propriedades: Propriedades) {
+export async function FichaEstudo(propriedades: Propriedades) {
+  const t = await tradutor();
   const { status, respostas, detalheRespostas, inicio, fim, hoje, produto, objetivo, criadoEm, atualizadoEm } = propriedades;
   return (
     <aside aria-labelledby="titulo-ficha" className={estilos.ficha}>
       <h2 id="titulo-ficha" className={estilos.fichaTitulo}>
-        Ficha do estudo
+        {t("Ficha do estudo")}
       </h2>
       <dl className={estilos.fichaLista}>
         <div>
-          <dt>Respostas</dt>
+          <dt>{t("Respostas")}</dt>
           <dd>
             <span className={estilos.numeroGrande}>{respostas}</span>
-            <span className={estilos.detalhe}>{detalheRespostas}</span>
+            <span className={estilos.detalhe}>{t(detalheRespostas)}</span>
           </dd>
         </div>
         <div>
-          <dt>Período da coleta</dt>
+          <dt>{t("Período da coleta")}</dt>
           <dd>
             <ReguaFicha status={status} inicio={inicio} fim={fim} hoje={hoje} />
             <span className={estilos.datasRegua}>
-              <span>{formatarDia(inicio)}</span>
-              <span>{formatarDia(fim)}</span>
+              <span>{t(formatarDia(inicio))}</span>
+              <span>{t(formatarDia(fim))}</span>
             </span>
-            <span className={estilos.situacaoRegua}>{textoDoPeriodo({ status, inicio, fim, hoje }, false)}</span>
+            <span className={estilos.situacaoRegua}>{t(textoDoPeriodo(t, { status, inicio, fim, hoje }, false))}</span>
           </dd>
         </div>
         <div>
-          <dt>Produto avaliado</dt>
-          <dd>{produto}</dd>
+          <dt>{t("Produto avaliado")}</dt>
+          <dd>{t(produto)}</dd>
         </div>
         {objetivo && (
           <div>
-            <dt>Objetivo</dt>
-            <dd className={estilos.detalhe}>{objetivo}</dd>
+            <dt>{t("Objetivo")}</dt>
+            <dd className={estilos.detalhe}>{t(objetivo)}</dd>
           </div>
         )}
         <div>
-          <dt>Instrumento</dt>
-          <dd>UEQ completo · 26 itens · {IDIOMAS.length} idiomas</dd>
+          <dt>{t("Instrumento")}</dt>
+          <dd>{t("UEQ completo · 26 itens · {length} idiomas", { length: IDIOMAS.length })}</dd>
         </div>
         <div>
-          <dt>Criado em</dt>
+          <dt>{t("Criado em")}</dt>
           <dd className={estilos.numeroPequeno}>
-            {formatarData(criadoEm)} · atualizado em {formatarData(atualizadoEm)}
+            {t("{data} · atualizado em {data2}", { data: formatarData(criadoEm), data2: formatarData(atualizadoEm) })}
           </dd>
         </div>
       </dl>

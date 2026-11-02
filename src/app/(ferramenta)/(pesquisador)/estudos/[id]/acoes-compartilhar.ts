@@ -12,6 +12,7 @@ import { textoDoCampo, type EstadoFormulario } from "@/lib/formulario";
 import { notificar } from "@/lib/notificacoes";
 import { exigirPesquisador } from "@/lib/sessao";
 import { email as validarEmail } from "@/lib/validacao-conta";
+import { tradutor } from "@/traducao/servidor";
 
 export type PessoaComAcesso = {
   id: string;
@@ -62,6 +63,7 @@ export type ResultadoConvite = EstadoFormulario<"email"> & {
 const papelValido = (valor: string): PapelColaborador => (valor === "LEITOR" ? "LEITOR" : "EDITOR");
 
 export async function convidar(estudoId: string, anterior: ResultadoConvite, dados: FormData): Promise<ResultadoConvite> {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador(estudoId, pesquisador, "gerenciar");
   const envio = anterior.envio + 1;
@@ -79,20 +81,20 @@ export async function convidar(estudoId: string, anterior: ResultadoConvite, dad
       erros: {
         email: {
           mensagem:
-            "Não há conta com esse e-mail na ferramenta. Peça para a pessoa criar uma conta e convide de novo com o mesmo e-mail.",
+            t("Não há conta com esse e-mail na ferramenta. Peça para a pessoa criar uma conta e convide de novo com o mesmo e-mail."),
         },
       },
     };
   }
   if (convidado.id === estudo.pesquisadorId) {
-    return { envio, erros: { email: { mensagem: "Esse e-mail é do dono do estudo, que já tem acesso total." } } };
+    return { envio, erros: { email: { mensagem: t("Esse e-mail é do dono do estudo, que já tem acesso total.") } } };
   }
 
   const existente = await banco.colaboracao.findUnique({
     where: { estudoId_pesquisadorId: { estudoId, pesquisadorId: convidado.id } },
   });
   if (existente?.status === "ACEITO") {
-    return { envio, erros: { email: { mensagem: `${convidado.nome} já tem acesso a este estudo.` } } };
+    return { envio, erros: { email: { mensagem: t("{nome} já tem acesso a este estudo.", { nome: convidado.nome }) } } };
   }
   // Convite recusado ou ainda pendente: vale o novo, com o papel escolhido agora
   const colaboracao = await banco.colaboracao.upsert({
@@ -111,20 +113,24 @@ export async function convidar(estudoId: string, anterior: ResultadoConvite, dad
   await banco.notificacao.deleteMany({ where: { colaboracaoId: colaboracao.id, tipo: "CONVITE" } });
   await notificar([convidado.id], pesquisador.id, {
     tipo: "CONVITE",
-    texto: `${pesquisador.nome} convidou você para o estudo “${estudo.titulo}” como ${papel === "EDITOR" ? "editor" : "leitor"}.`,
+    texto: (t) =>
+      papel === "EDITOR"
+        ? t("{nome} convidou você para o estudo “{titulo}” como editor.", { nome: pesquisador.nome, titulo: estudo.titulo })
+        : t("{nome} convidou você para o estudo “{titulo}” como leitor.", { nome: pesquisador.nome, titulo: estudo.titulo }),
     link: "/notificacoes",
     estudoId,
     colaboracaoId: colaboracao.id,
-    email: (_destinatario, origem) => emailDeConvite({ ...dadosEmail, link: `${origem}/notificacoes` }),
+    email: (_destinatario, origem, t) => emailDeConvite(t, { ...dadosEmail, link: `${origem}/notificacoes` }),
   });
   const enviado = emailConfigurado();
-  const email = emailDeConvite({ ...dadosEmail, link: `${await origemDoSite()}/notificacoes` });
+  // Sem envio configurado, o pesquisador manda pelo próprio e-mail: no idioma de quem convida
+  const email = emailDeConvite(t, { ...dadosEmail, link: `${await origemDoSite()}/notificacoes` });
   revalidatePath(`/estudos/${estudoId}`, "layout");
   return {
     envio,
     sucesso: enviado
-      ? `Convite enviado para ${convidado.nome}, na ferramenta e por e-mail.`
-      : `Convite enviado para ${convidado.nome}. Ele já aparece no sino de notificações da pessoa, na ferramenta.`,
+      ? t("Convite enviado para {nome}, na ferramenta e por e-mail.", { nome: convidado.nome })
+      : t("Convite enviado para {nome}. Ele já aparece no sino de notificações da pessoa, na ferramenta.", { nome: convidado.nome }),
     mailto: enviado ? undefined : linkMailto(email),
   };
 }
@@ -141,32 +147,42 @@ async function colaboracaoParaGerenciar(colaboracaoId: string) {
 }
 
 export async function mudarPapel(colaboracaoId: string, papel: string): Promise<{ sucesso?: string; erro?: string }> {
+  const t = await tradutor();
   const colaboracao = await colaboracaoParaGerenciar(colaboracaoId);
-  if (!colaboracao) return { erro: "Essa pessoa não está mais no estudo. Feche a janela e abra de novo." };
+  if (!colaboracao) return { erro: t("Essa pessoa não está mais no estudo. Feche a janela e abra de novo.") };
   const novo = papelValido(papel);
   await banco.colaboracao.update({ where: { id: colaboracaoId }, data: { papel: novo } });
   if (colaboracao.status === "ACEITO") {
     await notificar([colaboracao.pesquisadorId], colaboracao.quem.id, {
       tipo: "ALTERACAO",
-      texto: `${colaboracao.quem.nome} mudou seu papel em “${colaboracao.tituloEstudo}” para ${novo === "EDITOR" ? "editor" : "leitor"}.`,
+      texto: (t) =>
+        novo === "EDITOR"
+          ? t("{nome} mudou seu papel em “{titulo}” para editor.", { nome: colaboracao.quem.nome, titulo: colaboracao.tituloEstudo })
+          : t("{nome} mudou seu papel em “{titulo}” para leitor.", { nome: colaboracao.quem.nome, titulo: colaboracao.tituloEstudo }),
       link: `/estudos/${colaboracao.estudoId}`,
       estudoId: colaboracao.estudoId,
     });
   }
   revalidatePath(`/estudos/${colaboracao.estudoId}`, "layout");
-  return { sucesso: `${colaboracao.pesquisador.nome} agora é ${novo === "EDITOR" ? "editor" : "leitor"}.` };
+  return {
+    sucesso:
+      novo === "EDITOR"
+        ? t("{nome} agora é editor.", { nome: colaboracao.pesquisador.nome })
+        : t("{nome} agora é leitor.", { nome: colaboracao.pesquisador.nome }),
+  };
 }
 
 export async function removerAcesso(colaboracaoId: string): Promise<{ sucesso?: string; erro?: string }> {
+  const t = await tradutor();
   const colaboracao = await colaboracaoParaGerenciar(colaboracaoId);
-  if (!colaboracao) return { erro: "Essa pessoa não está mais no estudo. Feche a janela e abra de novo." };
+  if (!colaboracao) return { erro: t("Essa pessoa não está mais no estudo. Feche a janela e abra de novo.") };
   await banco.colaboracao.delete({ where: { id: colaboracaoId } });
   // Convite cancelado some do sino de quem foi convidado: não sobra botão de aceitar sem convite
   await banco.notificacao.deleteMany({ where: { colaboracaoId, tipo: "CONVITE" } });
   if (colaboracao.status === "ACEITO") {
     await notificar([colaboracao.pesquisadorId], colaboracao.quem.id, {
       tipo: "ALTERACAO",
-      texto: `${colaboracao.quem.nome} removeu seu acesso ao estudo “${colaboracao.tituloEstudo}”.`,
+      texto: (t) => t("{nome} removeu seu acesso ao estudo “{titulo}”.", { nome: colaboracao.quem.nome, titulo: colaboracao.tituloEstudo }),
       link: "/estudos",
     });
   }
@@ -174,8 +190,8 @@ export async function removerAcesso(colaboracaoId: string): Promise<{ sucesso?: 
   return {
     sucesso:
       colaboracao.status === "ACEITO"
-        ? `${colaboracao.pesquisador.nome} não tem mais acesso ao estudo.`
-        : `Convite para ${colaboracao.pesquisador.nome} cancelado.`,
+        ? t("{nome} não tem mais acesso ao estudo.", { nome: colaboracao.pesquisador.nome })
+        : t("Convite para {nome} cancelado.", { nome: colaboracao.pesquisador.nome }),
   };
 }
 
@@ -187,7 +203,7 @@ export async function sairDoEstudo(estudoId: string): Promise<void> {
   if (estudo && count > 0) {
     await notificar([estudo.pesquisadorId], pesquisador.id, {
       tipo: "ALTERACAO",
-      texto: `${pesquisador.nome} saiu do estudo “${estudo.titulo}”.`,
+      texto: (t) => t("{nome} saiu do estudo “{titulo}”.", { nome: pesquisador.nome, titulo: estudo.titulo }),
       link: `/estudos/${estudoId}`,
       estudoId,
     });

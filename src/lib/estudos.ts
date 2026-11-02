@@ -17,23 +17,22 @@ export async function gerarSlugPublico(): Promise<string> {
   throw new Error("Não foi possível gerar um link público livre depois de 10 tentativas.");
 }
 
-export type AcessoEstudo = "dono" | "editor" | "leitor" | "administrador";
+export type AcessoEstudo = "dono" | "editor" | "leitor";
 // ver: abrir o estudo, o painel, as respostas e exportar. editar: dados, coleta, respostas e importação.
 // gerenciar: excluir o estudo e convidar ou remover pessoas
 export type ExigenciaEstudo = "ver" | "editar" | "gerenciar";
 
 export const PERMISSOES: Record<AcessoEstudo, Record<ExigenciaEstudo, boolean>> = {
   dono: { ver: true, editar: true, gerenciar: true },
-  administrador: { ver: true, editar: true, gerenciar: true },
   editor: { ver: true, editar: true, gerenciar: false },
   leitor: { ver: true, editar: false, gerenciar: false },
 };
 
-type QuemAcessa = { id: string; administrador: boolean };
+type QuemAcessa = { id: string };
 
-// Estudos que a pessoa vê: os dela e os compartilhados com ela (convite aceito). O administrador vê todos
+// Estudos que a pessoa vê: os dela e os compartilhados com ela (convite aceito). Nem o administrador
+// vê estudos de outras pessoas: as respostas são dados de pesquisa de quem conduz o estudo (LGPD)
 export function filtroDeAcesso(quem: QuemAcessa) {
-  if (quem.administrador) return {};
   return {
     OR: [
       { pesquisadorId: quem.id },
@@ -60,14 +59,7 @@ export async function estudoDoPesquisador(estudoId: string, quem: QuemAcessa, ex
   if (!estudo) notFound();
   const { colaboracoes, ...dados } = estudo;
   const papel = colaboracoes[0]?.papel;
-  const acesso: AcessoEstudo =
-    estudo.pesquisadorId === quem.id
-      ? "dono"
-      : quem.administrador
-        ? "administrador"
-        : papel === "EDITOR"
-          ? "editor"
-          : "leitor";
+  const acesso: AcessoEstudo = estudo.pesquisadorId === quem.id ? "dono" : papel === "EDITOR" ? "editor" : "leitor";
   if (!PERMISSOES[acesso][exigencia]) notFound();
   return { ...dados, acesso, permissoes: PERMISSOES[acesso] };
 }

@@ -8,16 +8,37 @@ import formulario from "@/componentes/formulario/formulario.module.css";
 import { ResumoErros } from "@/componentes/formulario/ResumoErros";
 import { estadoInicial } from "@/lib/formulario";
 import { MINIMO_SENHA } from "@/lib/validacao-conta";
-import { cadastrar, type CampoCadastro } from "./acoes";
+import { useRouter } from "next/navigation";
+import { useT } from "@/traducao/cliente";
+import { m, type OpcaoIdioma } from "@/traducao/nucleo";
+import { cadastrar, trocarIdiomaDaInterface, type CampoCadastro } from "./acoes";
 import estilos from "./acesso.module.css";
 
 const CAMPOS = [
-  { nome: "nome", rotulo: "Nome", id: "cadastro-nome" },
-  { nome: "email", rotulo: "E-mail", id: "cadastro-email" },
-  { nome: "senha", rotulo: "Senha", id: "cadastro-senha" },
+  { nome: "nome", rotulo: m("Nome"), id: "cadastro-nome" },
+  { nome: "email", rotulo: m("E-mail"), id: "cadastro-email" },
+  { nome: "senha", rotulo: m("Senha"), id: "cadastro-senha" },
 ] as const;
 
-export function FormularioCadastro({ idTitulo }: { idTitulo: string }) {
+export function FormularioCadastro({
+  idTitulo,
+  idiomas,
+  idiomaAtual,
+}: {
+  idTitulo: string;
+  idiomas: OpcaoIdioma[];
+  idiomaAtual: string;
+}) {
+  const t = useT();
+  const router = useRouter();
+
+  // Escolher o idioma já troca a janela e a página para ele; o que foi digitado continua nos campos
+  function aoTrocarIdioma(idioma: string) {
+    startTransition(async () => {
+      await trocarIdiomaDaInterface(idioma);
+      router.refresh();
+    });
+  }
   const [estado, enviar, enviando] = useActionState(cadastrar, estadoInicial<CampoCadastro>());
 
   // Mesmo motivo do FormularioEntrar: sem o reset automático, os campos certos continuam preenchidos
@@ -31,9 +52,9 @@ export function FormularioCadastro({ idTitulo }: { idTitulo: string }) {
   return (
     <form className={`${estilos.formulario} ${estilos.formularioCadastro}`} noValidate onSubmit={aoEnviar}>
       <div className={estilos.cabecalho}>
-        <p className={estilos.area}>Área do pesquisador</p>
+        <p className={estilos.area}>{t("Área do pesquisador")}</p>
         <h2 id={idTitulo} className={estilos.titulo}>
-          Criar conta
+          {t("Criar conta")}
         </h2>
       </div>
       <ResumoErros envio={estado.envio} erros={estado.erros} campos={CAMPOS} />
@@ -43,7 +64,7 @@ export function FormularioCadastro({ idTitulo }: { idTitulo: string }) {
           id="cadastro-nome"
           name="nome"
           type="text"
-          rotulo="Nome"
+          rotulo={t("Nome")}
           autoComplete="name"
           erro={estado.erros?.nome}
           data-foco-inicial=""
@@ -52,7 +73,7 @@ export function FormularioCadastro({ idTitulo }: { idTitulo: string }) {
           id="cadastro-email"
           name="email"
           type="email"
-          rotulo="E-mail"
+          rotulo={t("E-mail")}
           autoComplete="email"
           erro={estado.erros?.email}
         />
@@ -60,22 +81,44 @@ export function FormularioCadastro({ idTitulo }: { idTitulo: string }) {
       <CampoSenha
         id="cadastro-senha"
         name="senha"
-        rotulo="Senha"
-        ajuda={`Mínimo de ${MINIMO_SENHA} caracteres. Pode colar.`}
+        rotulo={t("Senha")}
+        ajuda={t("Mínimo de {MINIMO_SENHA} caracteres. Pode colar.", { MINIMO_SENHA: MINIMO_SENHA })}
         autoComplete="new-password"
         erro={estado.erros?.senha}
       />
+      <div className={formulario.grupo}>
+        <label htmlFor="cadastro-idioma" className={formulario.rotulo}>
+          {t("Idioma da ferramenta")}
+        </label>
+        <p id="cadastro-idioma-ajuda" className={formulario.ajuda}>
+          {t("A janela muda na hora. Dá para trocar depois, em Minha conta.")}
+        </p>
+        <select
+          id="cadastro-idioma"
+          name="idioma"
+          className={formulario.campo}
+          defaultValue={idiomaAtual}
+          aria-describedby="cadastro-idioma-ajuda"
+          onChange={(evento) => aoTrocarIdioma(evento.currentTarget.value)}
+        >
+          {idiomas.map((idioma) => (
+            <option key={idioma.codigo} value={idioma.codigo} lang={idioma.lang}>
+              {idioma.nome}
+            </option>
+          ))}
+        </select>
+      </div>
       <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}>
           <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-          <span>Criar conta</span>
+          <span>{t("Criar conta")}</span>
       </button>
       <p className={`${estilos.alternativa} ${estilos.alternativaCadastro}`}>
         <span>
-          Já tem conta? <Link href="/entrar">Entrar</Link>
+          {t("Já tem conta?")}{" "}<Link href="/entrar">{t("Entrar")}</Link>
         </span>
         {/* Em outra aba: a janela de cadastro fica como está, com o que a pessoa já digitou */}
         <a href="/privacidade" target="_blank" rel="noopener" className={estilos.privacidade}>
-          Política de privacidade<span className="visualmente-oculto"> (abre em nova aba)</span>
+          {t("Política de privacidade")}<span className="visualmente-oculto">{" "}{t("(abre em nova aba)")}</span>
         </a>
       </p>
     </form>

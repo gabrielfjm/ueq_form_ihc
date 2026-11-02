@@ -25,10 +25,17 @@
   text-decoration: none;
 }
 
+/* Logotipo e links sempre na mesma linha: abaixo da largura em que não cabem, os links vão para o Menu */
+.barraInterna {
+  flex-wrap: nowrap;
+}
+
 .navegacao {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 28px;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 8px 22px;
+  font-size: var(--texto-sm);
 }
 
 .linkNavegacao {
@@ -61,8 +68,9 @@
 
 
 /* No celular e em janela estreita, os links ficam atrás do botão Menu: a barra fixa fica numa linha só */
-@media (max-width: 56rem) {
+@media (max-width: 68rem) {
   .barraInterna {
+    flex-wrap: wrap;
     padding: 8px 16px;
     gap: 8px 16px;
   }

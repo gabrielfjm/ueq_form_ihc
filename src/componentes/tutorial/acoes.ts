@@ -12,8 +12,7 @@ const MINIMO_RESPOSTAS = 5;
 export async function prepararTour(): Promise<string> {
   const pesquisador = await exigirPesquisador();
   const estudos = await banco.estudo.findMany({
-    // Mesmo o administrador faz o tour só nos estudos dele ou compartilhados com ele, nunca nos de outros
-    where: { ...filtroDeAcesso({ id: pesquisador.id, administrador: false }), status: { not: "RASCUNHO" } },
+    where: { ...filtroDeAcesso(pesquisador), status: { not: "RASCUNHO" } },
     select: {
       id: true,
       versoes: { select: { _count: { select: { participacoes: { where: { concluidaEm: { not: null } } } } } } },

@@ -8,6 +8,7 @@ import estilos from "../resultados.module.css";
 import { LegendaVersoes, VisaoComparacao } from "../VisaoComparacao";
 import { VisaoUmaVersao } from "../VisaoUmaVersao";
 import impressao from "./impressao.module.css";
+import { tradutor } from "@/traducao/servidor";
 
 type Propriedades = {
   params: Promise<{ id: string }>;
@@ -15,9 +16,10 @@ type Propriedades = {
 };
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador((await params).id, pesquisador);
-  return { title: `Painel para impressão · ${estudo.titulo} · Ferramenta UEQ` };
+  return { title: t("Painel para impressão · {titulo} · Ferramenta UEQ", { titulo: estudo.titulo }) };
 }
 
 const texto = (valor: string | string[] | undefined) => (typeof valor === "string" ? valor : undefined);
@@ -31,12 +33,16 @@ const DATA_GERACAO = new Intl.DateTimeFormat("pt-BR", {
   minute: "2-digit",
   timeZone: "America/Sao_Paulo",
 });
-const dataDeGeracao = (data: Date) => DATA_GERACAO.format(data).replace(", ", " às ");
+const dataDeGeracao = (data: Date, lang: string) =>
+  lang === "pt-BR"
+    ? DATA_GERACAO.format(data).replace(", ", " às ")
+    : new Intl.DateTimeFormat(lang, { dateStyle: "short", timeStyle: "short", timeZone: "America/Sao_Paulo" }).format(data);
 
 // prompts/10-extensoes.md: a versão impressa do painel, que /api/estudos/[id]/painel-pdf transforma em PDF.
 // Os mesmos componentes da tela, com a mesma versão e o mesmo modo da URL; o CSS de impressão tira a navegação
 // e os controles. Os gráficos são SVG, então saem em vetor
 export default async function PaginaImpressao({ params, searchParams }: Propriedades) {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   const busca = await searchParams;
@@ -48,12 +54,12 @@ export default async function PaginaImpressao({ params, searchParams }: Propried
   const analise = versaoEscolhida?.analise ?? resultados.todas;
   const ordemPorEscala = texto(busca.itens) === "escala";
   const selecao = comparando
-    ? "Comparação entre as versões"
+    ? t("Comparação entre as versões")
     : versaoEscolhida
-      ? `Versão ${versaoEscolhida.nome}`
+      ? t("Versão {nome}", { nome: versaoEscolhida.nome })
       : variasVersoes
-        ? "Todas as versões"
-        : "Estudo completo";
+        ? t("Todas as versões")
+        : t("Estudo completo");
   const n = comparando ? resultados.todas.n : analise.n;
   // Na impressão não há o que alternar; o endereço só precisa existir para o componente
   const enderecoOrdem = (): Route => `/estudos/${estudo.id}/resultados` as Route;
@@ -61,27 +67,27 @@ export default async function PaginaImpressao({ params, searchParams }: Propried
   return (
     <div className={`${estilos.conteudo} ${impressao.pagina}`}>
       <p className={impressao.voltar}>
-        <Link href={`/estudos/${estudo.id}/resultados` as Route}>Voltar para os resultados</Link>
+        <Link href={`/estudos/${estudo.id}/resultados` as Route}>{t("Voltar para os resultados")}</Link>
       </p>
       <header className={impressao.cabecalho}>
-        <p className={impressao.ferramenta}>Ferramenta UEQ · Painel de resultados</p>
-        <h1 className={impressao.titulo}>{estudo.titulo}</h1>
+        <p className={impressao.ferramenta}>{t("Ferramenta UEQ · Painel de resultados")}</p>
+        <h1 className={impressao.titulo}>{t(estudo.titulo)}</h1>
         <dl className={impressao.dados}>
           <div>
-            <dt>Produto avaliado</dt>
-            <dd>{estudo.produtoAvaliado}</dd>
+            <dt>{t("Produto avaliado")}</dt>
+            <dd>{t(estudo.produtoAvaliado)}</dd>
           </div>
           <div>
-            <dt>Seleção</dt>
-            <dd>{selecao}</dd>
+            <dt>{t("Seleção")}</dt>
+            <dd>{t(selecao)}</dd>
           </div>
           <div>
-            <dt>n na análise</dt>
-            <dd className={estilos.numero}>{plural(n, "participação", "participações")}</dd>
+            <dt>{t("n na análise")}</dt>
+            <dd className={estilos.numero}>{t(plural(n, t("participação"), t("participações")))}</dd>
           </div>
           <div>
-            <dt>Gerado em</dt>
-            <dd className={estilos.numero}>{dataDeGeracao(new Date())}</dd>
+            <dt>{t("Gerado em")}</dt>
+            <dd className={estilos.numero}>{dataDeGeracao(new Date(), t.lang)}</dd>
           </div>
         </dl>
         {comparando && (
@@ -90,7 +96,7 @@ export default async function PaginaImpressao({ params, searchParams }: Propried
       </header>
 
       {resultados.todas.n === 0 ? (
-        <p>Nenhuma resposta na análise ainda.</p>
+        <p>{t("Nenhuma resposta na análise ainda.")}</p>
       ) : comparando ? (
         <VisaoComparacao versoes={resultados.porVersao} benchmark={resultados.benchmark} faixaNeutra={resultados.faixaNeutra} />
       ) : (

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import formulario from "@/componentes/formulario/formulario.module.css";
 import { infoIdioma, textosDoIdioma } from "@/idiomas";
-import { estudoPublico, idiomaDoParticipante, jaRespondeu, participacaoAtual } from "@/lib/participacao";
+import { estudoPublico, textosDoEstudo, idiomaDoParticipante, jaRespondeu, participacaoAtual } from "@/lib/participacao";
 import { consentir } from "./acoes";
 import { Etapas, Marcacoes } from "./Etapas";
 import estilos from "./participante.module.css";
@@ -12,11 +12,13 @@ import { SeletorIdioma } from "./SeletorIdioma";
 type Propriedades = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
-  const estudo = await estudoPublico((await params).slug);
-  const { titulos } = textosDoIdioma(await idiomaDoParticipante());
-  if (estudo.status !== "ABERTO") return { title: `${titulos.indisponivel} · ${estudo.titulo}` };
-  if (await jaRespondeu()) return { title: `${titulos.jaRespondeu} · ${estudo.titulo}` };
-  return { title: `${titulos.consentimento} · ${estudo.titulo}` };
+  const { slug } = await params;
+  const estudo = await estudoPublico(slug);
+  const doEstudo = await textosDoEstudo(slug);
+  const { titulos } = textosDoIdioma(await idiomaDoParticipante(slug));
+  if (estudo.status !== "ABERTO") return { title: `${titulos.indisponivel} · ${doEstudo.titulo}` };
+  if (await jaRespondeu()) return { title: `${titulos.jaRespondeu} · ${doEstudo.titulo}` };
+  return { title: `${titulos.consentimento} · ${doEstudo.titulo}` };
 }
 
 function Aviso({ etapa, titulo, texto }: { etapa: string; titulo: string; texto: string }) {
@@ -32,14 +34,15 @@ function Aviso({ etapa, titulo, texto }: { etapa: string; titulo: string; texto:
 export default async function PaginaConsentimento({ params }: Propriedades) {
   const { slug } = await params;
   const estudo = await estudoPublico(slug);
-  const idioma = infoIdioma(await idiomaDoParticipante());
+  const doEstudo = await textosDoEstudo(slug);
+  const idioma = infoIdioma(await idiomaDoParticipante(slug));
   const textos = textosDoIdioma(idioma.codigo);
 
   // Protótipo p6: link de estudo em rascunho ou com a coleta encerrada
   if (estudo.status === "RASCUNHO") return <Aviso {...textos.fechado.rascunho} />;
   if (estudo.status === "ENCERRADO") return <Aviso {...textos.fechado.encerrado} />;
   // Cookie de "já respondeu": evita um segundo envio sem querer pelo mesmo navegador (prompts/05, item 11)
-  if (await jaRespondeu()) return <Aviso etapa={estudo.titulo} {...textos.jaRespondeu} />;
+  if (await jaRespondeu()) return <Aviso etapa={doEstudo.titulo} {...textos.jaRespondeu} />;
   const atual = await participacaoAtual(estudo.id);
   if (atual && !atual.concluidaEm) redirect(`/r/${slug}/questionario` as Route);
 
@@ -53,8 +56,8 @@ export default async function PaginaConsentimento({ params }: Propriedades) {
           <Marcacoes />
           <div className={estilos.nomeEstudo}>
             {/* Título e objetivo são escritos pelo pesquisador, em português */}
-            <h1 className={estilos.tituloGrande} lang="pt-BR">
-              {estudo.titulo}
+            <h1 className={estilos.tituloGrande} lang={doEstudo.lang}>
+              {doEstudo.titulo}
             </h1>
             <p className={estilos.subtitulo}>{consentimento.subtitulo}</p>
           </div>
@@ -66,7 +69,7 @@ export default async function PaginaConsentimento({ params }: Propriedades) {
             {consentimento.termoTitulo}
           </h2>
           <p className={estilos.texto}>
-            <span lang="pt-BR">{estudo.objetivo}</span> {consentimento.termoTexto}
+            <span lang={doEstudo.lang}>{doEstudo.objetivo}</span> {consentimento.termoTexto}
           </p>
           <dl className={estilos.condicoes}>
             {consentimento.condicoes.map(([condicao, explicacao], posicao) => (

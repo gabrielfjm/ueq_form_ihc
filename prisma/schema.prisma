@@ -59,6 +59,8 @@ model Pesquisador {
   tutorialVistoEm DateTime? @map("tutorial_visto_em")
   // Além do sino, cada notificação também vai por e-mail (quando o envio está configurado)
   notificacoesPorEmail Boolean @default(true) @map("notificacoes_por_email")
+  // Idioma da interface da ferramenta para esta pessoa e o padrão dos estudos que ela cria (data/ueq-idiomas.json)
+  idioma String @default("pt")
 
   estudos          Estudo[]
   sessoes          Sessao[]
@@ -97,6 +99,9 @@ model Estudo {
   // LGPD, princípio da necessidade: a etapa "Dados opcionais" só aparece se o pesquisador ligar. Mesmo
   // ligada, cada pergunta é opcional para o participante, que pode pular a etapa inteira
   coletarDemografia Boolean    @default(false) @map("coletar_demografia")
+  // Idioma em que o estudo foi escrito e em que o link abre; o participante pode trocar, e título, produto
+  // e objetivo são traduzidos para o idioma dele
+  idioma          String       @default("pt")
   criadoEm        DateTime     @default(now()) @map("criado_em")
   atualizadoEm    DateTime     @updatedAt @map("atualizado_em")
 
@@ -231,4 +236,17 @@ model TentativaAcesso {
 
   @@index([chave, criadaEm])
   @@map("tentativa_acesso")
+}
+
+// Textos já traduzidos pela API (interface da ferramenta e textos dos estudos), para não traduzir de novo.
+// hashOrigem é o SHA-256 do texto original em português ou no idioma do estudo
+model Traducao {
+  id         String   @id @default(cuid())
+  idioma     String
+  hashOrigem String   @map("hash_origem")
+  texto      String
+  criadaEm   DateTime @default(now()) @map("criada_em")
+
+  @@unique([idioma, hashOrigem])
+  @@map("traducao")
 }

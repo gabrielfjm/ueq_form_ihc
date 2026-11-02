@@ -11,6 +11,9 @@ test("Minha conta salva os dados, anuncia o resultado e passa no axe", async ({ 
   await expect(page.getByRole("link", { name: "Minha conta" })).toHaveAttribute("aria-current", "page");
   await verificarAcessibilidade(page);
 
+  // O painel leva à página de cada opção
+  await page.getByRole("link", { name: "Dados cadastrais" }).click();
+  await expect(page).toHaveURL(/\/conta\/dados$/);
   await page.getByLabel("Nome").fill("Nome trocado");
   await page.getByRole("button", { name: "Salvar alterações" }).click();
   await expect(page.getByRole("status")).toHaveText("Dados salvos.");
@@ -31,7 +34,7 @@ test("trocar a senha encerra a sessão aberta em outro navegador", async ({ page
   await entrarComTeclado(outraPagina, email);
   await expect(outraPagina).toHaveURL(/:\d+\/$/);
 
-  await page.goto("/conta");
+  await page.goto("/conta/senha");
   await page.getByLabel("Senha atual").fill("senha-errada");
   await page.getByLabel("Nova senha").fill("outra-senha-boa");
   await page.getByRole("button", { name: "Trocar senha" }).click();

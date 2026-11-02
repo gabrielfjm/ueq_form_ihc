@@ -176,7 +176,7 @@
   text-align: center;
 }
 
-@media (max-width: 56rem) {
+@media (max-width: 68rem) {
   .caixa {
     flex-direction: column;
   }

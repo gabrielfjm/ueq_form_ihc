@@ -2,30 +2,19 @@
 
 import { useState, useTransition } from "react";
 import formulario from "@/componentes/formulario/formulario.module.css";
+import { MensagemStatus } from "@/componentes/formulario/MensagemStatus";
 import { salvarPreferenciaEmail } from "./acoes";
-import estilos from "./conta.module.css";
-
-type Propriedades = {
-  receber: boolean;
-  aoSalvar: (mensagem: string) => void;
-};
+import { useT } from "@/traducao/cliente";
 
 // Salva ao marcar ou desmarcar: é uma escolha só, sem outro campo para conferir antes
-export function PreferenciaEmail({ receber, aoSalvar }: Propriedades) {
+export function PreferenciaEmail({ receber }: { receber: boolean }) {
+  const t = useT();
   const [marcado, setMarcado] = useState(receber);
+  const [status, setStatus] = useState({ mensagem: "", vez: 0 });
   const [, iniciar] = useTransition();
 
   return (
-    <section className={estilos.secao} aria-labelledby="secao-notificacoes">
-      <div className={estilos.secaoTitulo}>
-        <span className={estilos.secaoNumero}>03</span>
-        <h2 id="secao-notificacoes" className={estilos.secaoNome}>
-          Notificações
-        </h2>
-      </div>
-      <p className={estilos.texto}>
-        O sino no topo avisa sobre convites, respostas novas e mudanças que a equipe faz nos seus estudos.
-      </p>
+    <div>
       <label className={formulario.opcao}>
         <input
           type="checkbox"
@@ -33,11 +22,15 @@ export function PreferenciaEmail({ receber, aoSalvar }: Propriedades) {
           onChange={(evento) => {
             const valor = evento.target.checked;
             setMarcado(valor);
-            iniciar(async () => aoSalvar(await salvarPreferenciaEmail(valor)));
+            iniciar(async () => {
+              const mensagem = await salvarPreferenciaEmail(valor);
+              setStatus((atual) => ({ mensagem, vez: atual.vez + 1 }));
+            });
           }}
         />
-        <span>Receber os avisos também por e-mail</span>
+        <span>{t("Receber os avisos também por e-mail")}</span>
       </label>
-    </section>
+      <MensagemStatus mensagem={status.mensagem} vez={status.vez} />
+    </div>
   );
 }

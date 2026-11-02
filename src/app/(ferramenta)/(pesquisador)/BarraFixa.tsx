@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
 import estilos from "./pesquisador.module.css";
+import { useT } from "@/traducao/cliente";
 
 type Propriedades = {
   // o logotipo com o link de início
@@ -17,6 +18,7 @@ type Propriedades = {
 // --altura-barra, que o scroll-padding-top do globals.css usa para o foco e as âncoras nunca ficarem
 // embaixo da barra (WCAG 2.4.11)
 export function BarraFixa({ inicio, children }: Propriedades) {
+  const t = useT();
   const barra = useRef<HTMLElement>(null);
   const botao = useRef<HTMLButtonElement>(null);
   const caminho = usePathname();
@@ -63,9 +65,9 @@ export function BarraFixa({ inicio, children }: Propriedades) {
           onClick={() => setAberto(!aberto)}
         >
           {aberto ? <X size={18} strokeWidth={1.5} aria-hidden="true" /> : <Menu size={18} strokeWidth={1.5} aria-hidden="true" />}
-          <span>Menu</span>
+          <span>{t("Menu")}</span>
         </button>
-        <nav id="navegacao-principal" aria-label="Principal" className={estilos.navegacao} data-aberto={aberto ? "" : undefined}>
+        <nav id="navegacao-principal" aria-label={t("Principal")} className={estilos.navegacao} data-aberto={aberto ? "" : undefined}>
           {children}
         </nav>
       </div>

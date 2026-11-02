@@ -7,6 +7,7 @@ import { Confirmacao } from "@/componentes/janela/Confirmacao";
 import type { ErroCampo } from "@/lib/formulario";
 import { MAXIMO_VERSOES } from "@/lib/validacao-estudo";
 import estilos from "./formulario-estudo.module.css";
+import { useT } from "@/traducao/cliente";
 
 export type VersaoEditavel = {
   // chave local da linha; id vazio = versão nova, ainda não gravada
@@ -30,6 +31,7 @@ export function idDoCampoVersao(chave: string): string {
 }
 
 export function ListaVersoes({ versoes, sugerida, erros, aoMudarNome, aoAdicionar, aoRemover }: Propriedades) {
+  const t = useT();
   const botaoAdicionar = useRef<HTMLButtonElement>(null);
   // Para onde o foco vai depois que a lista renderizar: o campo novo ou o botão de adicionar
   const focarDepois = useRef<string | "adicionar" | null>(null);
@@ -50,20 +52,20 @@ export function ListaVersoes({ versoes, sugerida, erros, aoMudarNome, aoAdiciona
         const erro = erros?.[`versao-${posicao + 1}`];
         const ajuda =
           versao.respostas > 0
-            ? `Já tem ${versao.respostas} ${versao.respostas === 1 ? "resposta" : "respostas"} e não pode ser removida.`
+            ? t("Já tem {respostas} {v} e não pode ser removida.", { respostas: versao.respostas, v: versao.respostas === 1 ? "resposta" : "respostas" })
             : posicao === 0 && sugerida
-              ? "Sugerido a partir do produto avaliado. Pode trocar."
+              ? t("Sugerido a partir do produto avaliado. Pode trocar.")
               : null;
         const descricao = [ajuda ? `${id}-ajuda` : null, erro ? `${id}-erro` : null].filter(Boolean).join(" ");
         return (
           <div key={versao.chave} className={formulario.grupo}>
             <input type="hidden" name="versaoId" value={versao.id} />
             <label htmlFor={id} className={formulario.rotulo}>
-              Versão {posicao + 1}
+              {t("Versão {v}", { v: posicao + 1 })}
             </label>
             {ajuda && (
               <p id={`${id}-ajuda`} className={formulario.ajuda}>
-                {ajuda}
+                {t(ajuda)}
               </p>
             )}
             <div className={estilos.linhaVersao}>
@@ -86,13 +88,13 @@ export function ListaVersoes({ versoes, sugerida, erros, aoMudarNome, aoAdiciona
                   onClick={() => setRemovendo({ chave: versao.chave, posicao: posicao + 1, nome: versao.nome.trim() })}
                 >
                   <X size={18} strokeWidth={1.5} aria-hidden="true" />
-                  <span>Remover versão {posicao + 1}</span>
+                  <span>{t("Remover versão {v}", { v: posicao + 1 })}</span>
                 </button>
               )}
             </div>
             {erro && (
               <p id={`${id}-erro`} className={formulario.erro}>
-                {erro.mensagem}
+                {t(erro.mensagem)}
               </p>
             )}
           </div>
@@ -108,16 +110,16 @@ export function ListaVersoes({ versoes, sugerida, erros, aoMudarNome, aoAdiciona
           }}
         >
           <Plus size={18} strokeWidth={1.5} aria-hidden="true" />
-          <span>Adicionar versão</span>
+          <span>{t("Adicionar versão")}</span>
         </button>
       ) : (
-        <p className={formulario.ajuda}>Chegou ao limite de {MAXIMO_VERSOES} versões por estudo.</p>
+        <p className={formulario.ajuda}>{t("Chegou ao limite de {MAXIMO_VERSOES} versões por estudo.", { MAXIMO_VERSOES: MAXIMO_VERSOES })}</p>
       )}
       <Confirmacao
         aberta={removendo !== null}
         aoFechar={() => setRemovendo(null)}
-        titulo={`Remover a versão ${removendo?.posicao ?? ""}?`}
-        textoConfirmar="Remover versão"
+        titulo={t("Remover a versão {v}?", { v: removendo?.posicao ?? "" })}
+        textoConfirmar={t("Remover versão")}
         Icone={X}
         perigo
         focarConfirmar
@@ -129,8 +131,7 @@ export function ListaVersoes({ versoes, sugerida, erros, aoMudarNome, aoAdiciona
         }}
       >
         <p>
-          {removendo?.nome ? <strong>{removendo.nome}</strong> : "A versão sem nome"} sai da lista. Ela ainda não tem
-          respostas; a mudança só vale quando você salvar o estudo.
+          {removendo?.nome ? <strong>{t(removendo.nome)}</strong> : t("A versão sem nome")}{" "}{t("sai da lista. Ela ainda não tem respostas; a mudança só vale quando você salvar o estudo.")}
         </p>
       </Confirmacao>
     </>

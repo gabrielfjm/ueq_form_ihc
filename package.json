@@ -18,7 +18,8 @@
     "db:seed": "prisma db seed",
     "suspeitas:recalcular": "tsx prisma/recalcular-suspeitas.ts",
     "docs:diagramas": "tsx scripts/gerar-diagramas.ts",
-    "dados:cifrar": "tsx prisma/cifrar-dados.ts"
+    "dados:cifrar": "tsx prisma/cifrar-dados.ts",
+    "i18n:catalogo": "tsx scripts/catalogo-traducao.ts"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -30,6 +31,7 @@
     ]
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
     "@prisma/adapter-pg": "7.10.1",
     "@prisma/client": "7.10.1",
     "bcryptjs": "3.0.3",
