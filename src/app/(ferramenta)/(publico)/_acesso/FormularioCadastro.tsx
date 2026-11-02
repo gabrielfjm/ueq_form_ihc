@@ -65,23 +65,19 @@ export function FormularioCadastro({ idTitulo }: { idTitulo: string }) {
         autoComplete="new-password"
         erro={estado.erros?.senha}
       />
-      <div className={estilos.rodapeFormulario}>
-        <button type="submit" className={`${formulario.botao} ${formulario.primario}`}>
+      <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}>
           <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
           <span>Criar conta</span>
-        </button>
-        <div className={estilos.ladoBotao}>
-          <p className={estilos.alternativaLado}>
-            Já tem conta? <Link href="/entrar">Entrar</Link>
-          </p>
-          {/* Em outra aba: a janela de cadastro fica como está, com o que a pessoa já digitou */}
-          <p className={estilos.privacidade}>
-            <a href="/privacidade" target="_blank" rel="noopener">
-              Política de privacidade<span className="visualmente-oculto"> (abre em nova aba)</span>
-            </a>
-          </p>
-        </div>
-      </div>
+      </button>
+      <p className={`${estilos.alternativa} ${estilos.alternativaCadastro}`}>
+        <span>
+          Já tem conta? <Link href="/entrar">Entrar</Link>
+        </span>
+        {/* Em outra aba: a janela de cadastro fica como está, com o que a pessoa já digitou */}
+        <a href="/privacidade" target="_blank" rel="noopener" className={estilos.privacidade}>
+          Política de privacidade<span className="visualmente-oculto"> (abre em nova aba)</span>
+        </a>
+      </p>
     </form>
   );
 }

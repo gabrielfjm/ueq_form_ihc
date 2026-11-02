@@ -61,6 +61,14 @@
   width: 60rem;
 }
 
+/* Entrar e Criar conta com a mesma altura: trocar de uma para a outra não faz a janela pular.
+   Com mensagens de erro, a janela cresce até a altura da tela em vez de rolar */
+@media (min-width: 40.0625rem) {
+  .acesso {
+    min-height: min(40rem, calc(100dvh - 32px));
+  }
+}
+
 .confirmacao {
   width: 33rem;
 }
