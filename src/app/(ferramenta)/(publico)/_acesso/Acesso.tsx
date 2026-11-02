@@ -74,9 +74,11 @@ export function ProvedorAcesso({ children }: { children: ReactNode }) {
           onClickCapture={aoClicar}
         >
           <div className={estilos.principal}>
-            {/* Em Criar conta o logotipo vai para o painel ao lado: sem ele aqui, os 3 campos e as mensagens
-                de erro cabem na janela sem rolar */}
-            {modo !== "cadastrar" && <Logotipo />}
+            {/* Entrar e Criar conta têm a mesma estrutura: logotipo, formulário e painel ao lado. Em tela
+                baixa o logotipo sai das duas, para Criar conta com os erros caber sem rolar */}
+            <span className={estilos.marca}>
+              <Logotipo />
+            </span>
             {modo === "cadastrar" ? (
               <FormularioCadastro key="cadastrar" idTitulo={idTitulo} />
             ) : (

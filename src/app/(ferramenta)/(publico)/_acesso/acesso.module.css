@@ -13,6 +13,7 @@
   min-width: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 32px;
   padding: 36px 44px 40px;
 }
@@ -150,14 +151,11 @@
   color: var(--tinta-suave);
 }
 
-/* Criar conta: coluna do formulário mais larga, nome e e-mail lado a lado, o botão e o "Já tem conta?" na
-   mesma linha e o resumo de erros compacto. Assim os 3 campos, com as mensagens de erro, cabem sem rolar */
-.janelaCadastro {
-  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-}
-
-.formularioCadastro {
-  max-width: 520px;
+/* Criar conta tem a mesma estrutura e as mesmas medidas de Entrar: logotipo, formulário de 400 px e o
+   painel ao lado. Para os 3 campos caberem sem rolar, mesmo com os erros, nome e e-mail ficam lado a lado
+   e o resumo de erros é compacto */
+.marca {
+  display: block;
 }
 
 .linhaCampos {
@@ -167,31 +165,15 @@
   align-items: start;
 }
 
-.rodapeFormulario {
+.alternativaCadastro {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: space-between;
-  gap: 12px 20px;
-  padding-top: 4px;
-}
-
-.alternativaLado {
-  margin: 0;
-}
-
-.ladoBotao {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-  text-align: right;
+  gap: 4px 16px;
 }
 
 .privacidade {
-  margin: 0;
   font-size: var(--texto-sm);
-  color: var(--tinta-suave);
 }
 
 .formularioCadastro [role="alert"] {
@@ -205,15 +187,6 @@
 
 .formularioCadastro [role="alert"] li {
   font-size: var(--texto-sm);
-}
-
-.janelaCadastro .principal {
-  justify-content: center;
-}
-
-.janelaCadastro .painel {
-  justify-content: flex-start;
-  padding-top: 40px;
 }
 
 /* Notebook e janela baixa: menos espaço entre os blocos, para Criar conta (3 campos) caber sem rolar */
@@ -276,20 +249,8 @@
     max-width: none;
   }
 
-  .janelaCadastro {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .linhaCampos {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .ladoBotao {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: baseline;
-    gap: 2px 14px;
-    text-align: left;
   }
 }
 
@@ -337,19 +298,25 @@
   }
 }
 
-/* Criar conta em tela baixa (notebook pequeno, celular): some a linha "Área do pesquisador" e os espaços
-   encolhem mais, para o formulário com os 3 erros ainda caber sem rolar */
-@media (max-height: 40rem) {
-  .janelaCadastro .principal {
+/* Tela baixa (notebook pequeno, celular deitado): nas duas janelas saem o logotipo e a linha "Área do
+   pesquisador", e os espaços encolhem, para o formulário com os erros ainda caber sem rolar */
+@media (max-height: 45rem) {
+  .marca {
+    display: none;
+  }
+}
+
+@media (max-height: 45rem) {
+  .principal {
     padding-top: 20px;
     padding-bottom: 20px;
   }
 
-  .janelaCadastro .area {
+  .area {
     display: none;
   }
 
-  .formularioCadastro {
+  .formulario {
     gap: 10px;
   }
 }
@@ -384,9 +351,5 @@
 
   .formularioCadastro [role="alert"] {
     padding: 8px 12px;
-  }
-
-  .rodapeFormulario {
-    padding-top: 0;
   }
 }
