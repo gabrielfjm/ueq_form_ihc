@@ -55,8 +55,10 @@ export async function cadastrarComTeclado(page: Page, email: string) {
   await tabAte(page, page.getByLabel("Senha", { exact: true }));
   await page.keyboard.type(SENHA);
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/\/estudos$/);
+  // O cadastro termina na página inicial, com as boas-vindas do tour; os testes seguem da lista de estudos
+  await expect(page).toHaveURL(/:\d+\/$/);
   await pularTutorial(page);
+  await page.goto("/estudos");
 }
 
 // Conta nova abre com as boas-vindas do tour guiado; os testes que não são do tour pulam direto

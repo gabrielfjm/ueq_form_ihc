@@ -29,7 +29,7 @@ test("trocar a senha encerra a sessão aberta em outro navegador", async ({ page
   const outraPagina = await outroNavegador.newPage();
   await outraPagina.goto("/entrar");
   await entrarComTeclado(outraPagina, email);
-  await expect(outraPagina).toHaveURL(/\/estudos$/);
+  await expect(outraPagina).toHaveURL(/:\d+\/$/);
 
   await page.goto("/conta");
   await page.getByLabel("Senha atual").fill("senha-errada");
@@ -45,7 +45,7 @@ test("trocar a senha encerra a sessão aberta em outro navegador", async ({ page
   await outraPagina.goto("/conta");
   await expect(outraPagina).toHaveURL(/\/entrar/);
   await entrarComTeclado(outraPagina, email, "outra-senha-boa");
-  await expect(outraPagina).toHaveURL(/\/estudos$/);
+  await expect(outraPagina).toHaveURL(/:\d+\/$/);
   await outroNavegador.close();
 });
 

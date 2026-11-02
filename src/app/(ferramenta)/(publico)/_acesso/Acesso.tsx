@@ -31,7 +31,7 @@ const ContextoAcesso = createContext<Abrir>(() => {});
 // aberta, e é para lá que a checagem de sessão manda quem chega numa rota protegida
 export function ProvedorAcesso({ children }: { children: ReactNode }) {
   const [modo, setModo] = useState<ModoAcesso | null>(null);
-  const [voltar, setVoltar] = useState("/estudos");
+  const [voltar, setVoltar] = useState("/");
   const caminho = usePathname();
   const router = useRouter();
   const idTitulo = useId();
@@ -43,7 +43,7 @@ export function ProvedorAcesso({ children }: { children: ReactNode }) {
   }, [modo]);
 
   // Estável entre renderizações: AbrirAcesso depende dele e não pode reabrir a janela a cada render
-  const abrir = useCallback<Abrir>((novo, destino = "/estudos") => {
+  const abrir = useCallback<Abrir>((novo, destino = "/") => {
     setVoltar(destino);
     setModo(novo);
   }, []);

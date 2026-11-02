@@ -8,7 +8,7 @@ export const metadata: Metadata = { title: "Criar conta · Ferramenta UEQ" };
 
 // A página inicial com a janela de Criar conta já aberta
 export default async function PaginaCadastrar() {
-  if (await pesquisadorDaSessao()) redirect("/estudos");
+  if (await pesquisadorDaSessao()) redirect("/");
 
   return (
     <>

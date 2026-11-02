@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Tutorial } from "@/componentes/tutorial/Tutorial";
 import { banco } from "@/lib/banco";
 import { pesquisadorDaSessao } from "@/lib/sessao";
 import { BarraSuperior } from "../(pesquisador)/BarraSuperior";
@@ -22,6 +23,8 @@ export default async function LayoutPublico({ children }: { children: ReactNode 
       <>
         <BarraSuperior naoLidas={naoLidas} administrador={pesquisador.administrador} />
         {principal}
+        {/* A página inicial é onde o login termina: as boas-vindas do tour aparecem já aqui */}
+        <Tutorial primeiroAcesso={!pesquisador.tutorialVistoEm} pesquisadorId={pesquisador.id} />
       </>
     );
   }
