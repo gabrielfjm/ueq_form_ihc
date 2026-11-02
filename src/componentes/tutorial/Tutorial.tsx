@@ -11,6 +11,7 @@ import { marcarTutorialVisto, prepararTour } from "./acoes";
 import { EVENTO_INICIAR_TOUR } from "./eventos";
 import { PASSOS } from "./passos";
 import estilos from "./tutorial.module.css";
+import { useT } from "@/traducao/cliente";
 
 // O passo atual fica no navegador: o tour atravessa várias páginas e continua depois de um recarregamento
 const CHAVE = "ueq-tour";
@@ -46,6 +47,7 @@ const iguais = (a: Retangulo | null, b: Retangulo | null) =>
 // e pede que a pessoa clique na ação para seguir. Pode ser pulado ou fechado a qualquer momento (botão,
 // x ou Esc) e não volta sozinho depois disso; dá para rever pela ajuda (?) de qualquer página
 export function Tutorial({ primeiroAcesso, pesquisadorId }: { primeiroAcesso: boolean; pesquisadorId: string }) {
+  const t = useT();
   const chaveVisto = `${CHAVE_VISTO}:${pesquisadorId}`;
   const caminho = usePathname();
   const router = useRouter();
@@ -229,28 +231,26 @@ export function Tutorial({ primeiroAcesso, pesquisadorId }: { primeiroAcesso: bo
         }}
         idTitulo={idBoasVindas}
         tipo="conteudo"
-        rotuloFechar="Fechar o tutorial"
+        rotuloFechar={t("Fechar o tutorial")}
       >
         <div className={janela.formulario}>
           <div>
-            <p className={estilos.chapeu}>Primeiro acesso</p>
+            <p className={estilos.chapeu}>{t("Primeiro acesso")}</p>
             <h2 id={idBoasVindas} className={janela.titulo}>
-              Boas-vindas à Ferramenta UEQ
+              {t("Boas-vindas à Ferramenta UEQ")}
             </h2>
           </div>
           <div className={janela.corpo}>
             <p>
-              Em pouco mais de um minuto, o tour mostra o caminho de um estudo: o link da coleta, o trabalho em equipe, o
-              painel de resultados, as respostas suspeitas, as notificações e a ajuda de cada página.
+              {t("Em pouco mais de um minuto, o tour mostra o caminho de um estudo: o link da coleta, o trabalho em equipe, o painel de resultados, as respostas suspeitas, as notificações e a ajuda de cada página.")}
             </p>
             <p className={janela.texto}>
-              Você mesmo clica nas ações que o tour destacar. Dá para pular ou fechar quando quiser, e rever depois pelo
-              botão (?) de qualquer página.
+              {t("Você mesmo clica nas ações que o tour destacar. Dá para pular ou fechar quando quiser, e rever depois pelo botão (?) de qualquer página.")}
             </p>
           </div>
           <div className={janela.acoes}>
             <button type="button" className={`${formulario.botao} ${formulario.secundario}`} onClick={encerrar}>
-              Pular tutorial
+              {t("Pular tutorial")}
             </button>
             <button
               type="button"
@@ -260,7 +260,7 @@ export function Tutorial({ primeiroAcesso, pesquisadorId }: { primeiroAcesso: bo
               onClick={comecar}
             >
               <Compass size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-              <span>{preparando ? "Preparando…" : "Começar o tour"}</span>
+              <span>{preparando ? t("Preparando…") : t("Começar o tour")}</span>
             </button>
           </div>
         </div>
@@ -302,9 +302,9 @@ export function Tutorial({ primeiroAcesso, pesquisadorId }: { primeiroAcesso: bo
           >
             <div className={estilos.topo}>
               <p className={estilos.progresso}>
-                Passo {estado.passo + 1} de {PASSOS.length}
+                {t("Passo {v} de {length}", { v: estado.passo + 1, length: PASSOS.length })}
               </p>
-              <button type="button" className={estilos.fechar} aria-label="Fechar o tutorial" onClick={encerrar}>
+              <button type="button" className={estilos.fechar} aria-label={t("Fechar o tutorial")} onClick={encerrar}>
                 <X size={18} strokeWidth={1.5} aria-hidden="true" />
               </button>
             </div>
@@ -312,22 +312,22 @@ export function Tutorial({ primeiroAcesso, pesquisadorId }: { primeiroAcesso: bo
               <span style={{ width: `${((estado.passo + 1) / PASSOS.length) * 100}%` }} />
             </div>
             <h2 ref={titulo} id={idTitulo} className={estilos.titulo} tabIndex={-1}>
-              {naPagina ? passo.titulo : "O tour continua em outra página"}
+              {naPagina ? passo.titulo : t("O tour continua em outra página")}
             </h2>
             <p className={estilos.texto}>
               {naPagina
                 ? passo.texto
-                : "Você saiu do caminho do tour. Volte para onde ele parou ou pule o tutorial."}
+                : t("Você saiu do caminho do tour. Volte para onde ele parou ou pule o tutorial.")}
             </p>
             {naPagina && passo.modo === "clique" && retangulo && (
               <p className={estilos.dica}>
                 <MousePointerClick size={18} strokeWidth={1.5} aria-hidden="true" />
-                <span>Clique no destaque para continuar</span>
+                <span>{t("Clique no destaque para continuar")}</span>
               </p>
             )}
             <div className={estilos.acoes}>
               <button type="button" className={estilos.pular} onClick={encerrar}>
-                Pular tutorial
+                {t("Pular tutorial")}
               </button>
               {!naPagina ? (
                 <button
@@ -335,7 +335,7 @@ export function Tutorial({ primeiroAcesso, pesquisadorId }: { primeiroAcesso: bo
                   className={`${formulario.botao} ${formulario.primario}`}
                   onClick={() => pagina && router.push(pagina as Route)}
                 >
-                  Ir para lá
+                  {t("Ir para lá")}
                 </button>
               ) : passo.modo === "proximo" || !retangulo ? (
                 <button
@@ -343,11 +343,11 @@ export function Tutorial({ primeiroAcesso, pesquisadorId }: { primeiroAcesso: bo
                   className={`${formulario.botao} ${formulario.primario}`}
                   onClick={passo.modo === "proximo" ? avancar : fazerPorMim}
                 >
-                  {estado.passo + 1 === PASSOS.length ? "Concluir" : "Próximo"}
+                  {estado.passo + 1 === PASSOS.length ? "Concluir" : t("Próximo")}
                 </button>
               ) : (
                 <button type="button" className={`${formulario.botao} ${formulario.secundario}`} onClick={fazerPorMim}>
-                  Fazer por mim
+                  {t("Fazer por mim")}
                 </button>
               )}
             </div>

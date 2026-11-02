@@ -34,8 +34,7 @@ export function formatarDecimal(valor: number | null | undefined): string {
   return valor === null || valor === undefined ? "—" : FORMATO_DECIMAL.format(valor);
 }
 
-// "a, b e c"
-export function juntarComE(partes: readonly string[]): string {
-  if (partes.length <= 1) return partes.join("");
-  return `${partes.slice(0, -1).join(", ")} e ${partes.at(-1)}`;
+// "a, b e c" (ou "a, b and c": a conjunção segue o idioma da interface)
+export function juntarComE(partes: readonly string[], lang = "pt-BR"): string {
+  return new Intl.ListFormat(lang, { style: "long", type: "conjunction" }).format(partes);
 }

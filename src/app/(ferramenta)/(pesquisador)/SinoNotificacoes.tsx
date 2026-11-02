@@ -14,22 +14,25 @@ import {
   type NotificacaoDoSino,
 } from "./notificacoes/acoes";
 import estilos from "./sino.module.css";
+import { useT } from "@/traducao/cliente";
+import type { Traduzir } from "@/traducao/nucleo";
 
 const MINUTO = 60 * 1000;
 
-function haQuanto(iso: string): string {
+function haQuanto(t: Traduzir, iso: string): string {
   const minutos = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / MINUTO));
-  if (minutos < 1) return "agora";
-  if (minutos < 60) return `há ${minutos} min`;
+  if (minutos < 1) return t("agora");
+  if (minutos < 60) return t("há {n} min", { n: minutos });
   const horas = Math.round(minutos / 60);
-  if (horas < 24) return `há ${horas} h`;
+  if (horas < 24) return t("há {n} h", { n: horas });
   const dias = Math.round(horas / 24);
-  return dias === 1 ? "ontem" : `há ${dias} dias`;
+  return dias === 1 ? t("ontem") : t("há {n} dias", { n: dias });
 }
 
 // O sino fica na barra, entre Minha conta e Sair. O número se atualiza a cada navegação e a cada minuto;
 // a lista abre por baixo, sem cobrir a página inteira (não é modal), e fecha com Esc ou clicando fora
 export function SinoNotificacoes({ naoLidasIniciais }: { naoLidasIniciais: number }) {
+  const t = useT();
   const caminho = usePathname();
   const [naoLidas, setNaoLidas] = useState(naoLidasIniciais);
   const [aberto, setAberto] = useState(false);
@@ -86,7 +89,7 @@ export function SinoNotificacoes({ naoLidasIniciais }: { naoLidasIniciais: numbe
     void marcarLida(item.id);
   }
 
-  const rotulo = naoLidas > 0 ? `Notificações: ${naoLidas} ${naoLidas === 1 ? "nova" : "novas"}` : "Notificações";
+  const rotulo = naoLidas > 0 ? t("Notificações: {naoLidas} {v}", { naoLidas: naoLidas, v: naoLidas === 1 ? "nova" : "novas" }) : t("Notificações");
 
   return (
     <span ref={caixa} className={estilos.caixa} onKeyDown={aoTeclar}>
@@ -96,14 +99,14 @@ export function SinoNotificacoes({ naoLidasIniciais }: { naoLidasIniciais: numbe
         className={estilos.botao}
         aria-expanded={aberto}
         aria-controls="lista-notificacoes"
-        aria-label={rotulo}
-        title="Notificações"
+        aria-label={t(rotulo)}
+        title={t("Notificações")}
         data-tutorial="notificacoes"
         onClick={() => setAberto(!aberto)}
       >
         <Bell size={18} strokeWidth={1.5} aria-hidden="true" />
         <span className={estilos.textoMenu} aria-hidden="true">
-          Notificações
+          {t("Notificações")}
         </span>
         {naoLidas > 0 && (
           <span className={estilos.contador} aria-hidden="true">
@@ -111,42 +114,42 @@ export function SinoNotificacoes({ naoLidasIniciais }: { naoLidasIniciais: numbe
           </span>
         )}
       </button>
-      <div id="lista-notificacoes" className={estilos.painel} hidden={!aberto} role="region" aria-label="Notificações">
+      <div id="lista-notificacoes" className={estilos.painel} hidden={!aberto} role="region" aria-label={t("Notificações")}>
         <div className={estilos.cabecalho}>
-          <h2 className={estilos.titulo}>Notificações</h2>
+          <h2 className={estilos.titulo}>{t("Notificações")}</h2>
           {lista?.some((item) => !item.lida) && (
             <button type="button" className={estilos.textoBotao} onClick={todasLidas}>
-              Marcar todas como lidas
+              {t("Marcar todas como lidas")}
             </button>
           )}
         </div>
         {!lista ? (
-          <p className={estilos.vazio}>Carregando…</p>
+          <p className={estilos.vazio}>{t("Carregando…")}</p>
         ) : lista.length === 0 ? (
           <p className={estilos.vazio}>
-            Nada novo. Convites, respostas e mudanças da equipe nos seus estudos aparecem aqui.
+            {t("Nada novo. Convites, respostas e mudanças da equipe nos seus estudos aparecem aqui.")}
           </p>
         ) : (
           <ul className={estilos.lista}>
             {lista.map((item) => (
               <li key={item.id} className={item.lida ? undefined : estilos.nova}>
-                {!item.lida && <span className="visualmente-oculto">Nova: </span>}
+                {!item.lida && <span className="visualmente-oculto">{t("Nova:")}{" "}</span>}
                 <Link href={item.link as Route} className={estilos.link} onClick={() => abrirItem(item)}>
-                  {item.texto}
+                  {t(item.texto)}
                 </Link>
-                <span className={estilos.quando}>{haQuanto(item.criadaEm)}</span>
+                <span className={estilos.quando}>{t(haQuanto(t, item.criadaEm))}</span>
                 {item.convitePendente && (
                   <span className={estilos.acoes}>
                     <form action={responderConvite.bind(null, item.convitePendente, true)}>
                       <button type="submit" className={estilos.aceitar}>
                         <Check size={16} strokeWidth={2} aria-hidden="true" />
-                        <span>Aceitar</span>
+                        <span>{t("Aceitar")}</span>
                       </button>
                     </form>
                     <form action={responderConvite.bind(null, item.convitePendente, false)}>
                       <button type="submit" className={estilos.recusar}>
                         <X size={16} strokeWidth={2} aria-hidden="true" />
-                        <span>Recusar</span>
+                        <span>{t("Recusar")}</span>
                       </button>
                     </form>
                   </span>
@@ -156,7 +159,7 @@ export function SinoNotificacoes({ naoLidasIniciais }: { naoLidasIniciais: numbe
           </ul>
         )}
         <Link href="/notificacoes" className={estilos.verTodas}>
-          Ver todas as notificações
+          {t("Ver todas as notificações")}
         </Link>
       </div>
     </span>

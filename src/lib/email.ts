@@ -1,5 +1,6 @@
 import "server-only";
 import { createTransport } from "nodemailer";
+import type { Traduzir } from "@/traducao/nucleo";
 
 // Envio por SMTP (ex.: Gmail com senha de app). Sem as variáveis, a ferramenta não envia e-mail: o convite
 // continua aparecendo para a pessoa em Convites, e quem convidou recebe um link de e-mail pronto para
@@ -66,29 +67,42 @@ type DadosConvite = {
   link: string;
 };
 
-const NOME_PAPEL = { EDITOR: "editor", LEITOR: "leitor" } as const;
-
-export function emailDeConvite({ quemConvidou, para, estudo, papel, link }: DadosConvite): Email {
-  const assunto = `${quemConvidou.nome} convidou você para o estudo “${estudo}”`;
+// No idioma da conta de quem recebe (ou de quem convida, no mailto: que sai do e-mail dele)
+export function emailDeConvite(t: Traduzir, { quemConvidou, para, estudo, papel, link }: DadosConvite): Email {
+  const assunto = t("{nome} convidou você para o estudo “{titulo}”", { nome: quemConvidou.nome, titulo: estudo });
+  const convite = (nome: string, titulo: string) =>
+    papel === "EDITOR"
+      ? t("{nome} ({email}) convidou você para trabalhar no estudo “{titulo}” na Ferramenta UEQ, como editor.", {
+          nome,
+          email: quemConvidou.email,
+          titulo,
+        })
+      : t("{nome} ({email}) convidou você para trabalhar no estudo “{titulo}” na Ferramenta UEQ, como leitor.", {
+          nome,
+          email: quemConvidou.email,
+          titulo,
+        });
   const papelTexto =
     papel === "EDITOR"
-      ? "Como editor, você pode editar o estudo, abrir e encerrar a coleta e revisar as respostas."
-      : "Como leitor, você pode ver o painel de resultados e as respostas, e exportar os dados.";
+      ? t("Como editor, você pode editar o estudo, abrir e encerrar a coleta e revisar as respostas.")
+      : t("Como leitor, você pode ver o painel de resultados e as respostas, e exportar os dados.");
+  const ola = t("Olá!");
+  const assinatura = t("Ferramenta UEQ");
   const texto = [
-    "Olá!",
+    ola,
     "",
-    `${quemConvidou.nome} (${quemConvidou.email}) convidou você para trabalhar no estudo “${estudo}” na Ferramenta UEQ, como ${NOME_PAPEL[papel]}.`,
+    convite(quemConvidou.nome, estudo),
     papelTexto,
     "",
-    `Para aceitar ou recusar, entre na ferramenta e abra Convites: ${link}`,
+    t("Para aceitar ou recusar, entre na ferramenta e abra Convites: {link}", { link }),
     "",
-    "Ferramenta UEQ",
+    assinatura,
   ].join("\n");
-  const html = `<p>Olá!</p>
-<p><strong>${escapar(quemConvidou.nome)}</strong> (${escapar(quemConvidou.email)}) convidou você para trabalhar no estudo <strong>“${escapar(estudo)}”</strong> na Ferramenta UEQ, como ${NOME_PAPEL[papel]}.</p>
+  const html = `<p>${escapar(ola)}</p>
+<p>${escapar(convite(quemConvidou.nome, estudo))}</p>
 <p>${escapar(papelTexto)}</p>
-<p><a href="${escapar(link)}">Abrir os convites na ferramenta</a></p>
-<p style="color:#46525E">Ferramenta UEQ</p>`;
+<p><a href="${escapar(link)}">${escapar(t("Abrir os convites na ferramenta"))}</a></p>
+<p style="color:#46525E">${escapar(assinatura)}</p>`;
   return { para, assunto, texto, html, responderPara: quemConvidou.email };
 }
 

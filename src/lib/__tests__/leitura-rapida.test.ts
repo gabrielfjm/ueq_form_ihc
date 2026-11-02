@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
+import { criarTradutor } from "@/traducao/nucleo";
 import { leituraDaComparacao, leituraDeUmaVersao } from "../leitura-rapida";
+
 import { formatarDecimal } from "../texto";
+
+const t = criarTradutor("pt", {});
 
 const escala = (nome: string, media: number | null, faixa: "positiva" | "neutra" | "negativa" | null) => ({
   nome,
@@ -11,7 +15,7 @@ const escala = (nome: string, media: number | null, faixa: "positiva" | "neutra"
 describe("leituraDeUmaVersao", () => {
   it("reproduz a frase do protótipo r6", () => {
     expect(
-      leituraDeUmaVersao([
+      leituraDeUmaVersao(t, [
         escala("Atratividade", 1.42, "positiva"),
         escala("Perspicuidade", 1.68, "positiva"),
         escala("Eficiência", 1.21, "positiva"),
@@ -26,7 +30,7 @@ describe("leituraDeUmaVersao", () => {
 
   it("junta várias escalas da mesma faixa e cita as negativas", () => {
     expect(
-      leituraDeUmaVersao([
+      leituraDeUmaVersao(t, [
         escala("Atratividade", 0.2, "neutra"),
         escala("Eficiência", 0.5, "neutra"),
         escala("Novidade", -1.2, "negativa"),
@@ -35,7 +39,7 @@ describe("leituraDeUmaVersao", () => {
   });
 
   it("devolve null sem nenhuma média", () => {
-    expect(leituraDeUmaVersao([escala("Atratividade", null, null)])).toBeNull();
+    expect(leituraDeUmaVersao(t, [escala("Atratividade", null, null)])).toBeNull();
   });
 });
 
@@ -44,7 +48,7 @@ describe("leituraDaComparacao", () => {
 
   it("aponta as duas maiores diferenças e a quem favorecem", () => {
     expect(
-      leituraDaComparacao(escalas, [
+      leituraDaComparacao(t, escalas, [
         { nome: "Checkout atual", medias: [1.55, 1.8, 1.05, 0.98, 0.92, 0.21] },
         { nome: "Checkout em uma página", medias: [1.26, 1.54, 1.4, 0.94, 1.21, 0.81] },
       ]),
@@ -54,14 +58,14 @@ describe("leituraDaComparacao", () => {
   });
 
   it("diz quando as versões ficam próximas em tudo", () => {
-    expect(leituraDaComparacao(["Atratividade"], [{ nome: "A", medias: [1] }, { nome: "B", medias: [1.1] }])).toBe(
+    expect(leituraDaComparacao(t, ["Atratividade"], [{ nome: "A", medias: [1] }, { nome: "B", medias: [1.1] }])).toBe(
       "As versões ficam próximas em todas as escalas: nenhuma diferença chega a 0,30.",
     );
   });
 
   it("com três versões conta em quantas escalas cada uma tem a maior média", () => {
     expect(
-      leituraDaComparacao(["Atratividade", "Novidade", "Eficiência"], [
+      leituraDaComparacao(t, ["Atratividade", "Novidade", "Eficiência"], [
         { nome: "A", medias: [1, 2, 0] },
         { nome: "B", medias: [2, 1, 3] },
         { nome: "C", medias: [0, 0, 0] },

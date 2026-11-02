@@ -5,6 +5,7 @@ import { useId, type FormEvent, type ReactNode } from "react";
 import formulario from "@/componentes/formulario/formulario.module.css";
 import { Janela } from "./Janela";
 import estilos from "./janela.module.css";
+import { useT } from "@/traducao/cliente";
 
 type Propriedades = {
   aberta: boolean;
@@ -41,16 +42,17 @@ export function Confirmacao({
   aoConfirmar,
   focarConfirmar = false,
 }: Propriedades) {
+  const t = useT();
   const idTitulo = useId();
   const conteudo = (
     <>
       <h2 id={idTitulo} className={estilos.titulo}>
-        {titulo}
+        {t(titulo)}
       </h2>
       <div className={estilos.corpo}>{children}</div>
       <div className={estilos.acoes}>
         <button type="button" className={`${formulario.botao} ${formulario.secundario}`} onClick={aoFechar}>
-          Cancelar
+          {t("Cancelar")}
         </button>
         <button
           type={aoConfirmar ? "button" : "submit"}
@@ -59,7 +61,7 @@ export function Confirmacao({
           onClick={aoConfirmar}
         >
           <Icone size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-          <span>{textoConfirmar}</span>
+          <span>{t(textoConfirmar)}</span>
         </button>
       </div>
     </>

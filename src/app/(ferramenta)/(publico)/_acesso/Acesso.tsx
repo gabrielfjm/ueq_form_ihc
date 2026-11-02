@@ -15,6 +15,7 @@ import {
 } from "react";
 import { Janela } from "@/componentes/janela/Janela";
 import { Logotipo } from "@/componentes/Logotipo";
+import type { OpcaoIdioma } from "@/traducao/nucleo";
 import { FormularioCadastro } from "./FormularioCadastro";
 import { FormularioEntrar } from "./FormularioEntrar";
 import { PainelInstrumento, PainelPercurso } from "./Paineis";
@@ -29,7 +30,15 @@ const ContextoAcesso = createContext<Abrir>(() => {});
 // Entrar e Criar conta abrem numa janela por cima da página em que a pessoa está (protótipos r17 a r19),
 // sem perder o lugar. /entrar e /cadastrar continuam existindo: mostram a página inicial com a janela
 // aberta, e é para lá que a checagem de sessão manda quem chega numa rota protegida
-export function ProvedorAcesso({ children }: { children: ReactNode }) {
+export function ProvedorAcesso({
+  children,
+  idiomas,
+  idiomaAtual,
+}: {
+  children: ReactNode;
+  idiomas: OpcaoIdioma[];
+  idiomaAtual: string;
+}) {
   const [modo, setModo] = useState<ModoAcesso | null>(null);
   const [voltar, setVoltar] = useState("/");
   const caminho = usePathname();
@@ -80,7 +89,7 @@ export function ProvedorAcesso({ children }: { children: ReactNode }) {
               <Logotipo />
             </span>
             {modo === "cadastrar" ? (
-              <FormularioCadastro key="cadastrar" idTitulo={idTitulo} />
+              <FormularioCadastro key="cadastrar" idTitulo={idTitulo} idiomas={idiomas} idiomaAtual={idiomaAtual} />
             ) : (
               <FormularioEntrar key="entrar" idTitulo={idTitulo} voltar={voltar} />
             )}

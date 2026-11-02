@@ -4,12 +4,14 @@ import { Avisos } from "@/componentes/Avisos";
 import { contagemDeRespostas, estudoDoPesquisador } from "@/lib/estudos";
 import { hojeEmBrasilia } from "@/lib/periodo";
 import { exigirPesquisador } from "@/lib/sessao";
-import { juntarComE } from "@/lib/texto";
 import estilos from "./estudo.module.css";
 import { FaixaEstudo, resumoDoEstudo } from "./FaixaEstudo";
 import { FichaEstudo } from "./FichaEstudo";
 import { VisaoColeta } from "./VisaoColeta";
 import { VisaoRascunho } from "./VisaoRascunho";
+import { tradutor } from "@/traducao/servidor";
+import type { Traduzir } from "@/traducao/nucleo";
+import { m } from "@/traducao/nucleo";
 
 type Propriedades = {
   params: Promise<{ id: string }>;
@@ -17,15 +19,16 @@ type Propriedades = {
 };
 
 const AVISOS = {
-  criado: "Estudo criado em rascunho. Confira os dados e abra a coleta quando estiver pronto.",
-  salvo: "Alterações salvas.",
-  "convite-aceito": "Convite aceito. O estudo agora aparece em Seus estudos, na seção Compartilhados com você.",
+  criado: m("Estudo criado em rascunho. Confira os dados e abra a coleta quando estiver pronto."),
+  salvo: m("Alterações salvas."),
+  "convite-aceito": m("Convite aceito. O estudo agora aparece em Seus estudos, na seção Compartilhados com você."),
 } as const;
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador((await params).id, pesquisador);
-  return { title: `${estudo.titulo} · Ferramenta UEQ` };
+  return { title: t("{titulo} · Ferramenta UEQ", { titulo: estudo.titulo }) };
 }
 
 // O link vai para fora da ferramenta (e-mail, mensagem), então precisa do endereço completo
@@ -37,19 +40,23 @@ async function enderecoPublico(slug: string): Promise<string> {
 }
 
 // "Excluir apaga o estudo, as 2 versões e as 34 respostas." (protótipo r5)
-function avisoDeExclusao(versoes: number, respostas: number, status: string) {
-  const partes = ["o estudo", versoes === 1 ? "a versão" : `as ${versoes} versões`];
-  if (respostas > 0) partes.push(respostas === 1 ? "a resposta" : `as ${respostas} respostas`);
+function avisoDeExclusao(t: Traduzir, versoes: number, respostas: number, status: string) {
+  const dasVersoes = versoes === 1 ? t("a versão") : t("as {n} versões", { n: versoes });
+  const dasRespostas = respostas === 1 ? t("a resposta") : t("as {n} respostas", { n: respostas });
   return {
-    destaque: `Excluir apaga ${juntarComE(partes)}.`,
+    destaque:
+      respostas > 0
+        ? t("Excluir apaga o estudo, {versoes} e {respostas}.", { versoes: dasVersoes, respostas: dasRespostas })
+        : t("Excluir apaga o estudo e {versoes}.", { versoes: dasVersoes }),
     complemento:
       status === "ABERTO"
-        ? "Não dá para desfazer. Se quiser só parar a coleta, use “Encerrar coleta”, que pode ser reaberta."
-        : "Não dá para desfazer.",
+        ? t("Não dá para desfazer. Se quiser só parar a coleta, use “Encerrar coleta”, que pode ser reaberta.")
+        : t("Não dá para desfazer."),
   };
 }
 
 export default async function PaginaEstudo({ params, searchParams }: Propriedades) {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   const { aviso } = await searchParams;
@@ -58,7 +65,7 @@ export default async function PaginaEstudo({ params, searchParams }: Propriedade
   const rascunho = estudo.status === "RASCUNHO";
   const fora = respostas.total - respostas.naAnalise;
 
-  const resumo = resumoDoEstudo(estudo.status, estudo.versoes.length, respostas);
+  const resumo = resumoDoEstudo(t, estudo.status, estudo.versoes.length, respostas);
 
   const ficha = (
     <FichaEstudo
@@ -66,12 +73,12 @@ export default async function PaginaEstudo({ params, searchParams }: Propriedade
       respostas={respostas.total}
       detalheRespostas={
         rascunho
-          ? "a coleta ainda não foi aberta"
+          ? t("a coleta ainda não foi aberta")
           : respostas.total === 0
-            ? "nenhuma ainda"
+            ? t("nenhuma ainda")
             : fora > 0
-              ? `${respostas.naAnalise} na análise · ${fora} fora da análise`
-              : "todas na análise"
+              ? t("{naAnalise} na análise · {fora} fora da análise", { naAnalise: respostas.naAnalise, fora: fora })
+              : t("todas na análise")
       }
       inicio={estudo.dataInicio}
       fim={estudo.dataFim}
@@ -82,7 +89,7 @@ export default async function PaginaEstudo({ params, searchParams }: Propriedade
       atualizadoEm={estudo.atualizadoEm}
     />
   );
-  const exclusao = avisoDeExclusao(estudo.versoes.length, respostas.total, estudo.status);
+  const exclusao = avisoDeExclusao(t, estudo.versoes.length, respostas.total, estudo.status);
 
   return (
     <>

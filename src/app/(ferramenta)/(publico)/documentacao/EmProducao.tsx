@@ -2,13 +2,15 @@ import type { Route } from "next";
 import Link from "next/link";
 import { SECOES, VISAO_GERAL, documentoPronto, enderecoDoDocumento, type Documento } from "@/lib/documentacao/catalogo";
 import estilos from "./documentacao.module.css";
+import { tradutor } from "@/traducao/servidor";
 
 const CENTROS = [10, 37, 64, 91, 118, 145, 172];
 
 // Protótipo r23: o lugar do documento enquanto a equipe escreve. Estado vazio com a fileira de marcações,
 // sem nenhuma marcada (docs/design.md, Estados vazios), uma frase direta e, na visão geral, a situação de
 // cada documento, para a pessoa saber o que já dá para ler (Nielsen 1)
-export function EmProducao({ documento, visaoGeral }: { documento: Documento; visaoGeral: boolean }) {
+export async function EmProducao({ documento, visaoGeral }: { documento: Documento; visaoGeral: boolean }) {
+  const t = await tradutor();
   const documentos = SECOES.flatMap((secao) =>
     secao.documentos.filter((item) => item !== VISAO_GERAL).map((item) => ({ secao: secao.titulo, item })),
   );
@@ -22,35 +24,35 @@ export function EmProducao({ documento, visaoGeral }: { documento: Documento; vi
       </svg>
       <p className={estilos.situacao}>
         <span className={estilos.pontoProducao} aria-hidden="true" />
-        Em produção
+        {t("Em produção")}
       </p>
       <h2 id="titulo-em-producao" className={estilos.emProducaoTitulo}>
-        {visaoGeral ? "A documentação está sendo escrita pela equipe." : `${documento.rotulo}: em produção.`}
+        {visaoGeral ? t("A documentação está sendo escrita pela equipe.") : t("{rotulo}: em produção.", { rotulo: documento.rotulo })}
       </h2>
       <p className={estilos.emProducaoTexto}>
         {visaoGeral
-          ? "Cada documento aparece aqui assim que fica pronto. Enquanto isso, a ficha ao lado de cada um diz o que ele vai trazer."
-          : "A equipe está escrevendo este documento. Ele aparece aqui assim que ficar pronto; a ficha ao lado diz o que ele vai trazer."}
+          ? t("Cada documento aparece aqui assim que fica pronto. Enquanto isso, a ficha ao lado de cada um diz o que ele vai trazer.")
+          : t("A equipe está escrevendo este documento. Ele aparece aqui assim que ficar pronto; a ficha ao lado diz o que ele vai trazer.")}
       </p>
       {visaoGeral && (
         <div className={estilos.rolagemSituacao} role="region" aria-labelledby="titulo-situacao" tabIndex={0}>
           <table className={estilos.tabelaSituacao}>
-            <caption id="titulo-situacao">Situação dos documentos</caption>
+            <caption id="titulo-situacao">{t("Situação dos documentos")}</caption>
             <thead>
               <tr>
-                <th scope="col">Documento</th>
-                <th scope="col">Seção</th>
-                <th scope="col">Situação</th>
+                <th scope="col">{t("Documento")}</th>
+                <th scope="col">{t("Seção")}</th>
+                <th scope="col">{t("Situação")}</th>
               </tr>
             </thead>
             <tbody>
               {documentos.map(({ secao, item }) => (
                 <tr key={item.slug}>
                   <th scope="row">
-                    <Link href={enderecoDoDocumento(item) as Route}>{item.rotulo}</Link>
+                    <Link href={enderecoDoDocumento(item) as Route}>{t(item.rotulo)}</Link>
                   </th>
-                  <td>{secao}</td>
-                  <td>{documentoPronto(item) ? "Publicado" : "Em produção"}</td>
+                  <td>{t(secao)}</td>
+                  <td>{documentoPronto(item) ? "Publicado" : t("Em produção")}</td>
                 </tr>
               ))}
             </tbody>

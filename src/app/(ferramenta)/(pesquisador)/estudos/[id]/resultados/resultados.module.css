@@ -415,3 +415,82 @@
   gap: 4px 16px;
   color: var(--tinta-suave);
 }
+
+/* Sub-abas: Escalas do UEQ e Dados demográficos */
+.subAbas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+  padding: 4px;
+  width: fit-content;
+  max-width: 100%;
+  background: var(--fundo-faixa);
+  border-radius: var(--raio);
+}
+
+.subAba {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--raio);
+  color: var(--tinta-suave);
+  text-decoration: none;
+}
+
+.subAba:hover {
+  color: var(--tinta);
+  background: var(--fundo);
+}
+
+.subAba[aria-current="page"] {
+  background: var(--fundo);
+  color: var(--tinta);
+  font-weight: 700;
+  box-shadow: inset 0 -3px 0 var(--destaque);
+}
+
+.cabecalhoDemografia {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 32px;
+  margin-bottom: 24px;
+}
+
+.textoDemografia {
+  margin: 0;
+  max-width: var(--largura-leitura);
+  color: var(--tinta-suave);
+}
+
+.filtroVersao {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.filtroVersao a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--borda-campo);
+  border-radius: var(--raio);
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.filtroVersao a:hover {
+  background: var(--destaque-fundo);
+}
+
+.filtroVersao a[aria-current="page"] {
+  border-color: var(--tinta);
+  background: var(--tinta);
+  color: var(--fundo);
+  font-weight: 700;
+}

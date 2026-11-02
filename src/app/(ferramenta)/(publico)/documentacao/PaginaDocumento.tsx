@@ -8,6 +8,7 @@ import { ArtigoDocumento } from "./ArtigoDocumento";
 import { EmProducao } from "./EmProducao";
 import { FichaDocumento } from "./FichaDocumento";
 import texto from "./texto.module.css";
+import { tradutor } from "@/traducao/servidor";
 
 const ICONES: Record<string, LucideIcon> = {
   "visao-geral": LayoutDashboard,
@@ -24,7 +25,8 @@ const endereco = (documento: Documento) => enderecoDoDocumento(documento) as Rou
 // Protótipo r10 a r12: abas das seções na faixa (como as do estudo) e sub-abas dos documentos logo abaixo,
 // as duas com aria-current, para a pessoa sempre saber onde está (Nielsen 1, WCAG 2.4.8)
 // renderizado é null quando o documento ainda está em produção (catalogo.ts, PRONTOS)
-export function PaginaDocumento({ documento, renderizado }: { documento: Documento; renderizado: DocumentoRenderizado | null }) {
+export async function PaginaDocumento({ documento, renderizado }: { documento: Documento; renderizado: DocumentoRenderizado | null }) {
+  const t = await tradutor();
   const atual = secaoDoDocumento(documento);
   const visaoGeral = documento === VISAO_GERAL;
   return (
@@ -32,15 +34,15 @@ export function PaginaDocumento({ documento, renderizado }: { documento: Documen
       <div className={estilos.faixa}>
         <div className={estilos.faixaInterna}>
           {visaoGeral ? (
-            <p className={estilos.area}>Código aberto · licença MIT</p>
+            <p className={estilos.area}>{t("Código aberto · licença MIT")}</p>
           ) : (
             <p className={estilos.migalha}>
-              <Link href="/documentacao">Documentação</Link> <span aria-hidden="true">›</span> {atual.titulo}
+              <Link href="/documentacao">{t("Documentação")}</Link> <span aria-hidden="true">›</span> {t(atual.titulo)}
             </p>
           )}
-          <h1 className={estilos.titulo}>{visaoGeral ? "Documentação" : (renderizado?.titulo ?? documento.rotulo)}</h1>
-          <p className={estilos.descricao}>{documento.descricao}</p>
-          <nav aria-label="Seções da documentação" className={estilos.abas}>
+          <h1 className={estilos.titulo}>{visaoGeral ? t("Documentação") : (renderizado?.titulo ?? documento.rotulo)}</h1>
+          <p className={estilos.descricao}>{t(documento.descricao)}</p>
+          <nav aria-label={t("Seções da documentação")} className={estilos.abas}>
             {SECOES.map((secao) => {
               const Icone = ICONES[secao.slug] ?? FileText;
               const primeiro = secao.documentos[0];
@@ -53,7 +55,7 @@ export function PaginaDocumento({ documento, renderizado }: { documento: Documen
                   aria-current={secao === atual ? "page" : undefined}
                 >
                   <Icone size={18} strokeWidth={1.5} aria-hidden="true" />
-                  <span>{secao.titulo}</span>
+                  <span>{t(secao.titulo)}</span>
                 </Link>
               );
             })}
@@ -62,7 +64,7 @@ export function PaginaDocumento({ documento, renderizado }: { documento: Documen
       </div>
       {atual.documentos.length > 1 && (
         <div className={estilos.faixaSubabas}>
-          <nav aria-label={`Documentos de ${atual.titulo}`} className={estilos.subabas}>
+          <nav aria-label={t("Documentos de {titulo}", { titulo: atual.titulo })} className={estilos.subabas}>
             {atual.documentos.map((item) => (
               <Link
                 key={item.slug}
@@ -70,7 +72,7 @@ export function PaginaDocumento({ documento, renderizado }: { documento: Documen
                 className={estilos.subaba}
                 aria-current={item === documento ? "page" : undefined}
               >
-                {item.rotulo}
+                {t(item.rotulo)}
               </Link>
             ))}
           </nav>

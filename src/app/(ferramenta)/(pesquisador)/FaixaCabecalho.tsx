@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import { BotaoAjuda } from "@/componentes/ajuda/BotaoAjuda";
 import type { ChaveAjuda } from "@/lib/ajuda";
 import estilos from "./pesquisador.module.css";
+import { tradutor } from "@/traducao/servidor";
 
 type Propriedades = {
   titulo: string;
@@ -16,18 +17,19 @@ type Propriedades = {
 };
 
 // docs/design.md, Layout: faixa em --fundo-faixa no topo das páginas, com título e resumo
-export function FaixaCabecalho({ titulo, descricao, resumo, migalha, acao, ajuda }: Propriedades) {
+export async function FaixaCabecalho({ titulo, descricao, resumo, migalha, acao, ajuda }: Propriedades) {
+  const t = await tradutor();
   return (
     <div className={estilos.faixa}>
       <div className={migalha ? `${estilos.faixaInterna} ${estilos.faixaCompacta}` : estilos.faixaInterna}>
         <div className={estilos.faixaTextos}>
-          {migalha ? <div className={estilos.migalha}>{migalha}</div> : <p className={estilos.area}>Área do pesquisador</p>}
+          {migalha ? <div className={estilos.migalha}>{migalha}</div> : <p className={estilos.area}>{t("Área do pesquisador")}</p>}
           <div className={estilos.linhaTitulo}>
-            <h1 className={estilos.titulo}>{titulo}</h1>
+            <h1 className={estilos.titulo}>{t(titulo)}</h1>
             <BotaoAjuda pagina={ajuda} />
           </div>
-          {descricao && <p className={estilos.descricao}>{descricao}</p>}
-          {resumo && <p className={estilos.resumo}>{resumo}</p>}
+          {descricao && <p className={estilos.descricao}>{t(descricao)}</p>}
+          {resumo && <p className={estilos.resumo}>{t(resumo)}</p>}
         </div>
         {acao}
       </div>

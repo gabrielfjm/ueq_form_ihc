@@ -11,6 +11,7 @@ import { Confirmacao } from "@/componentes/janela/Confirmacao";
 import janela from "@/componentes/janela/janela.module.css";
 import { excluirEstudo } from "../acoes";
 import estilos from "./pagina-estudo.module.css";
+import { useT } from "@/traducao/cliente";
 
 type Propriedades = {
   estudoId: string;
@@ -25,6 +26,7 @@ type Propriedades = {
 // docs/ihc.md 4.2: excluir abre uma janela que pede o título digitado e diz quantas respostas vão junto
 // (Nielsen 5, WCAG 3.3.4). Protótipo r21
 export function AcoesEstudo({ estudoId, avisoExclusao, coleta, podeEditar, podeExcluir }: Propriedades) {
+  const t = useT();
   const [aberta, setAberta] = useState(false);
   const { estado, aoEnviar, limpar } = useEnvioFormulario(excluirEstudo.bind(null, estudoId));
   const campo = useRef<HTMLInputElement>(null);
@@ -45,32 +47,32 @@ export function AcoesEstudo({ estudoId, avisoExclusao, coleta, podeEditar, podeE
       {podeEditar && (
         <Link href={`/estudos/${estudoId}/editar` as Route} className={formulario.linkAcao}>
           <Pencil size={18} strokeWidth={1.5} aria-hidden="true" />
-          <span>Editar estudo</span>
+          <span>{t("Editar estudo")}</span>
         </Link>
       )}
       {podeExcluir && (
         <button type="button" className={formulario.destrutivo} aria-haspopup="dialog" onClick={() => setAberta(true)}>
           <Trash2 size={18} strokeWidth={1.5} aria-hidden="true" />
-          <span>Excluir estudo</span>
+          <span>{t("Excluir estudo")}</span>
         </button>
       )}
       <Confirmacao
         aberta={aberta}
         aoFechar={fechar}
-        titulo="Excluir este estudo?"
-        textoConfirmar="Excluir definitivamente"
+        titulo={t("Excluir este estudo?")}
+        textoConfirmar={t("Excluir definitivamente")}
         Icone={Trash2}
         perigo
         onSubmit={aoEnviar}
       >
         <p className={janela.aviso}>
-          <strong>{avisoExclusao.destaque}</strong> {avisoExclusao.complemento}
+          <strong>{t(avisoExclusao.destaque)}</strong> {t(avisoExclusao.complemento)}
         </p>
         <Campo
           ref={campo}
           id="confirmar-titulo"
           name="confirmacao"
-          rotulo="Digite o título do estudo para confirmar"
+          rotulo={t("Digite o título do estudo para confirmar")}
           autoComplete="off"
           erro={estado.erros?.confirmacao}
           data-foco-inicial=""

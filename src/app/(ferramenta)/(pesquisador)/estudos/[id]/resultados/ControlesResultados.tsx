@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import estilos from "./resultados.module.css";
+import { useT } from "@/traducao/cliente";
 
 type Propriedades = {
   estudoId: string;
@@ -18,6 +19,7 @@ type Propriedades = {
 
 // docs/ihc.md §4.3 (Nielsen 3): versão e modo ficam na URL, então voltar, recarregar e compartilhar funcionam
 export function ControlesResultados({ estudoId, versoes, naAnaliseTotal, foraDaAnalise, comparando, children }: Propriedades) {
+  const t = useT();
   const router = useRouter();
   const caminho = usePathname();
   const parametros = useSearchParams();
@@ -36,37 +38,37 @@ export function ControlesResultados({ estudoId, versoes, naAnaliseTotal, foraDaA
     <div className={estilos.controles}>
       {versoes.length > 1 && !comparando && (
         <div className={estilos.seletor}>
-          <label htmlFor="versao">Versão</label>
+          <label htmlFor="versao">{t("Versão")}</label>
           {/* Trocar a versão só atualiza os números desta página; o foco continua no seletor (WCAG 3.2.2) */}
           <select
             id="versao"
             value={parametros.get("versao") ?? ""}
             onChange={(evento) => router.replace(endereco({ versao: evento.target.value || null }), { scroll: false })}
           >
-            <option value="">Todas as versões ({naAnaliseTotal} na análise)</option>
+            <option value="">{t("Todas as versões ({naAnaliseTotal} na análise)", { naAnaliseTotal: naAnaliseTotal })}</option>
             {versoes.map((versao) => (
               <option key={versao.id} value={versao.id}>
-                {versao.nome} ({versao.naAnalise})
+                {t(versao.nome)} ({versao.naAnalise})
               </option>
             ))}
           </select>
         </div>
       )}
       {versoes.length > 1 && (
-        <nav aria-label="Modo de visualização" className={estilos.alternar}>
+        <nav aria-label={t("Modo de visualização")} className={estilos.alternar}>
           <Link href={endereco({ modo: null })} aria-current={comparando ? undefined : "page"} scroll={false}>
-            Uma versão
+            {t("Uma versão")}
           </Link>
           <Link href={endereco({ modo: "comparar", versao: null })} aria-current={comparando ? "page" : undefined} scroll={false}>
-            Comparar versões
+            {t("Comparar versões")}
           </Link>
         </nav>
       )}
       {children}
       {foraDaAnalise > 0 && (
         <p className={estilos.fora}>
-          {foraDaAnalise === 1 ? "1 participação fora da análise." : `${foraDaAnalise} participações fora da análise.`}{" "}
-          <Link href={`/estudos/${estudoId}/respostas` as Route}>Ver respostas</Link>
+          {foraDaAnalise === 1 ? t("1 participação fora da análise.") : t("{foraDaAnalise} participações fora da análise.", { foraDaAnalise: foraDaAnalise })}{" "}
+          <Link href={`/estudos/${estudoId}/respostas` as Route}>{t("Ver respostas")}</Link>
         </p>
       )}
     </div>

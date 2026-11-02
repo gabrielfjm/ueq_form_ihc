@@ -1,0 +1,232 @@
+/* Dados demográficos (Resultados › Dados demográficos): um gráfico por pergunta, cada um na forma que a
+   informação pede. Um só tom (--destaque); sem eixo nem grade, porque cada marca traz o próprio número */
+
+.grade {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  gap: 20px;
+}
+
+.cartao {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+}
+
+.titulo {
+  margin: 0;
+  font-size: var(--texto-lg);
+}
+
+.resumo,
+.rodape,
+.notaSegmentada {
+  margin: 0;
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+.parcela {
+  margin-left: 6px;
+  font-size: var(--texto-xs);
+  font-weight: 400;
+  color: var(--tinta-suave);
+}
+
+/* Colunas (faixa etária) */
+.colunas {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  align-items: end;
+  height: 220px;
+}
+
+.coluna {
+  height: 100%;
+  min-width: 0;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 6px;
+  text-align: center;
+}
+
+.valorColuna {
+  font-family: var(--fonte-numero);
+  font-weight: 700;
+}
+
+.trilhoColuna {
+  display: flex;
+  align-items: flex-end;
+  border-bottom: 1px solid var(--linha-forte);
+}
+
+.barraColuna {
+  display: block;
+  width: 100%;
+  min-height: 2px;
+  border-radius: 4px 4px 0 0;
+  background: var(--destaque);
+}
+
+.rotuloColuna {
+  font-size: var(--texto-xs);
+  line-height: 1.25;
+  color: var(--tinta-suave);
+  overflow-wrap: anywhere;
+}
+
+/* Barras horizontais (gênero, escolaridade) */
+.barras {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.linhaBarra {
+  display: grid;
+  grid-template-columns: minmax(0, 36%) minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.rotuloBarra {
+  font-size: var(--texto-sm);
+  overflow-wrap: anywhere;
+}
+
+.trilhoBarra {
+  display: block;
+}
+
+.barra {
+  display: block;
+  min-width: 3px;
+  height: 16px;
+  border-radius: 0 4px 4px 0;
+  background: var(--destaque);
+}
+
+.valorBarra {
+  font-family: var(--fonte-numero);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Barra segmentada (familiaridade com o produto) */
+.segmentada {
+  display: flex;
+  gap: 2px;
+  height: 40px;
+}
+
+.segmento {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 4px;
+}
+
+.segmento:first-child {
+  border-radius: 4px 0 0 4px;
+}
+
+.segmento:last-child {
+  border-radius: 0 4px 4px 0;
+}
+
+.textoSegmento,
+.textoSegmentoEscuro {
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: #fff;
+}
+
+.textoSegmentoEscuro {
+  color: var(--tinta);
+}
+
+.legenda {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  font-size: var(--texto-sm);
+}
+
+.legenda li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.amostra {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+}
+
+/* Tabela com os números */
+.numeros summary {
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--destaque);
+  font-size: var(--texto-sm);
+  cursor: pointer;
+}
+
+.tabela {
+  width: 100%;
+  margin-top: 8px;
+  border-collapse: collapse;
+  font-size: var(--texto-sm);
+}
+
+.tabela th,
+.tabela td {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--linha);
+  text-align: left;
+  font-weight: 400;
+}
+
+.tabela thead th {
+  font-weight: 700;
+}
+
+.direita {
+  text-align: right !important;
+}
+
+@media (forced-colors: active) {
+  .barra,
+  .barraColuna,
+  .segmento {
+    background: CanvasText !important;
+    forced-color-adjust: none;
+    outline: 1px solid Canvas;
+  }
+}
+
+@media print {
+  .barra,
+  .barraColuna,
+  .segmento {
+    print-color-adjust: exact;
+  }
+
+  .numeros {
+    display: none;
+  }
+}

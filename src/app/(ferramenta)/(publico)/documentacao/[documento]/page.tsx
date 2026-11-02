@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { documentoPeloSlug, documentoPronto, type Documento } from "@/lib/documentacao/catalogo";
 import { lerDocumento } from "@/lib/documentacao/ler";
 import { PaginaDocumento } from "../PaginaDocumento";
+import { tradutor } from "@/traducao/servidor";
 
 type Propriedades = { params: Promise<{ documento: string }> };
 
@@ -19,9 +20,10 @@ async function renderizar(documento: Documento) {
 }
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
+  const t = await tradutor();
   const documento = await documentoDaRota(params);
   const titulo = (await renderizar(documento))?.titulo ?? documento.rotulo;
-  return { title: `${titulo} · Documentação · Ferramenta UEQ` };
+  return { title: t("{titulo} · Documentação · Ferramenta UEQ", { titulo: titulo }) };
 }
 
 export default async function PaginaDocumentoDaRota({ params }: Propriedades) {

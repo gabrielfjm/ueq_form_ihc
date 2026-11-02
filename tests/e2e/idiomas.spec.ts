@@ -12,10 +12,10 @@ async function responderTudo(page: Page) {
   }
 }
 
-test("em espanhol pelo navegador: o link inteiro sai no idioma e o pesquisador vê o idioma", async ({ browser }, info) => {
+test("estudo em espanhol: o link abre no idioma do estudo, mesmo com o navegador em português", async ({ browser }, info) => {
   test.slow();
-  const estudo = await estudoAberto(browser, info);
-  const contexto = await browser.newContext({ locale: "es-ES" });
+  const estudo = await estudoAberto(browser, info, { idioma: "es" });
+  const contexto = await browser.newContext({ locale: "pt-BR" });
   const page = await contexto.newPage();
 
   await page.goto(estudo.link);

@@ -10,17 +10,21 @@ import { conferirSenha, gerarHash, precisaNovoHash } from "@/lib/senhas";
 import { criarSessao } from "@/lib/sessao";
 import { bloqueado, JANELA_MINUTOS, limparFalhas, registrarFalha } from "@/lib/tentativas";
 import { destinoInterno, email, nome, senhaDigitada, senhaNova } from "@/lib/validacao-conta";
+import { ehIdioma, IDIOMA_PADRAO } from "@/idiomas";
+import { lembrarIdioma, tradutor } from "@/traducao/servidor";
+import { m } from "@/traducao/nucleo";
 
 export type CampoEntrar = "email" | "senha";
 export type CampoCadastro = "nome" | "email" | "senha";
 
-const dadosEntrar = z.object({ email, senha: senhaDigitada("Informe sua senha.") });
+const dadosEntrar = z.object({ email, senha: senhaDigitada(m("Informe sua senha.")) });
 const dadosCadastro = z.object({ nome, email, senha: senhaNova });
 
 export async function entrar(
   anterior: EstadoFormulario<CampoEntrar>,
   dados: FormData,
 ): Promise<EstadoFormulario<CampoEntrar>> {
+  const t = await tradutor();
   const envio = anterior.envio + 1;
   const validacao = dadosEntrar.safeParse({ email: textoDoCampo(dados, "email"), senha: textoDoCampo(dados, "senha") });
   if (!validacao.success) return { envio, erros: errosPorCampo(validacao.error) };
@@ -29,14 +33,14 @@ export async function entrar(
   if (await bloqueado(validacao.data.email)) {
     return {
       envio,
-      erroGeral: `Muitas tentativas com este e-mail. Por segurança, espere ${JANELA_MINUTOS} minutos e tente de novo.`,
+      erroGeral: t("Muitas tentativas com este e-mail. Por segurança, espere {JANELA_MINUTOS} minutos e tente de novo.", { JANELA_MINUTOS: JANELA_MINUTOS }),
     };
   }
   const pesquisador = await banco.pesquisador.findUnique({ where: { email: validacao.data.email } });
   const senhaConfere = await conferirSenha(validacao.data.senha, pesquisador?.senhaHash);
   if (!pesquisador || !senhaConfere) {
     await registrarFalha(validacao.data.email);
-    return { envio, erroGeral: "E-mail ou senha não conferem. Confira os dois e tente de novo." };
+    return { envio, erroGeral: t("E-mail ou senha não conferem. Confira os dois e tente de novo.") };
   }
   await limparFalhas(validacao.data.email);
   if (precisaNovoHash(pesquisador.senhaHash)) {
@@ -44,12 +48,18 @@ export async function entrar(
   }
 
   await criarSessao(pesquisador.id);
+  await lembrarIdioma(pesquisador.idioma);
   redirect(destinoInterno(textoDoCampo(dados, "voltar")) as Route);
 }
 
+// O seletor de idioma de Criar conta já troca a página, antes de a conta existir
+export async function trocarIdiomaDaInterface(idioma: string) {
+  if (ehIdioma(idioma)) await lembrarIdioma(idioma);
+}
+
 const EMAIL_JA_TEM_CONTA = {
-  mensagem: "Esse e-mail já tem conta.",
-  link: { href: "/entrar", texto: "Entre por aqui." },
+  mensagem: m("Esse e-mail já tem conta."),
+  link: { href: "/entrar", texto: m("Entre por aqui.") },
 } as const;
 
 export async function cadastrar(
@@ -63,6 +73,8 @@ export async function cadastrar(
     senha: textoDoCampo(dados, "senha"),
   });
   if (!validacao.success) return { envio, erros: errosPorCampo(validacao.error) };
+  const escolhido = textoDoCampo(dados, "idioma");
+  const idioma = ehIdioma(escolhido) ? escolhido : IDIOMA_PADRAO;
 
   const existente = await banco.pesquisador.findUnique({ where: { email: validacao.data.email }, select: { id: true } });
   if (existente) return { envio, erros: { email: EMAIL_JA_TEM_CONTA } };
@@ -74,6 +86,7 @@ export async function cadastrar(
         nome: validacao.data.nome,
         email: validacao.data.email,
         senhaHash: await gerarHash(validacao.data.senha),
+        idioma,
       },
       select: { id: true },
     });
@@ -87,5 +100,6 @@ export async function cadastrar(
   }
 
   await criarSessao(pesquisadorId);
+  await lembrarIdioma(idioma);
   redirect("/");
 }

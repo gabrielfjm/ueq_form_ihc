@@ -5,11 +5,13 @@ import { contagemDeRespostas, estudoDoPesquisador } from "@/lib/estudos";
 import { analisarResultados } from "@/lib/resultados";
 import { exigirPesquisador } from "@/lib/sessao";
 import { FaixaEstudo, resumoDoEstudo } from "../FaixaEstudo";
+import { AbasResultados } from "./AbasResultados";
 import { ControlesResultados } from "./ControlesResultados";
 import estilos from "./resultados.module.css";
 import { SecaoExportar } from "./SecaoExportar";
 import { LegendaVersoes, VisaoComparacao } from "./VisaoComparacao";
 import { VisaoUmaVersao } from "./VisaoUmaVersao";
+import { tradutor } from "@/traducao/servidor";
 
 type Propriedades = {
   params: Promise<{ id: string }>;
@@ -17,14 +19,16 @@ type Propriedades = {
 };
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador((await params).id, pesquisador);
-  return { title: `Resultados · ${estudo.titulo} · Ferramenta UEQ` };
+  return { title: t("Resultados · {titulo} · Ferramenta UEQ", { titulo: estudo.titulo }) };
 }
 
 const texto = (valor: string | string[] | undefined) => (typeof valor === "string" ? valor : undefined);
 
 export default async function PaginaResultados({ params, searchParams }: Propriedades) {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   const busca = await searchParams;
@@ -60,8 +64,9 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
 
   return (
     <>
-      <FaixaEstudo estudo={estudo} ajuda="resultados" resumo={resumoDoEstudo(estudo.status, estudo.versoes.length, respostas)} />
+      <FaixaEstudo estudo={estudo} ajuda="resultados" resumo={resumoDoEstudo(t, estudo.status, estudo.versoes.length, respostas)} />
       <div className={estilos.conteudo}>
+        {estudo.coletarDemografia && <AbasResultados estudoId={estudo.id} atual="ueq" />}
         <ControlesResultados
           estudoId={estudo.id}
           versoes={resultados.porVersao.map((versao) => ({ id: versao.versaoId, nome: versao.nome, naAnalise: versao.analise.n }))}
@@ -76,11 +81,11 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
 
         {resultados.todas.n === 0 ? (
           <section aria-labelledby="titulo-vazio" className={estilos.vazio}>
-            <h2 id="titulo-vazio">Nenhuma resposta na análise ainda.</h2>
+            <h2 id="titulo-vazio">{t("Nenhuma resposta na análise ainda.")}</h2>
             <p>
               {respostas.total > 0
-                ? "Todas as respostas coletadas estão fora da análise. Inclua de volta pela aba Respostas para ver os resultados."
-                : "As médias, os intervalos de confiança, o alfa e o benchmark das 6 escalas aparecem aqui assim que chegar a primeira resposta."}
+                ? t("Todas as respostas coletadas estão fora da análise. Inclua de volta pela aba Respostas para ver os resultados.")
+                : t("As médias, os intervalos de confiança, o alfa e o benchmark das 6 escalas aparecem aqui assim que chegar a primeira resposta.")}
             </p>
           </section>
         ) : comparando ? (
@@ -93,9 +98,9 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
                 className={estilos.linkExportar}
               >
                 <Download size={18} strokeWidth={1.5} aria-hidden="true" />
-                <span>Painel em PDF</span>
+                <span>{t("Painel em PDF")}</span>
               </a>
-              <span>Esta comparação em A4, com os gráficos em vetor.</span>
+              <span>{t("Esta comparação em A4, com os gráficos em vetor.")}</span>
             </p>
           </>
         ) : (
@@ -104,7 +109,7 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
             itens={resultados.itens}
             benchmark={resultados.benchmark}
             faixaNeutra={resultados.faixaNeutra}
-            rotuloSelecao={versaoEscolhida ? `Versão ${versaoEscolhida.nome}` : variasVersoes ? "Todas as versões" : "Estudo completo"}
+            rotuloSelecao={versaoEscolhida ? t("Versão {nome}", { nome: versaoEscolhida.nome }) : variasVersoes ? t("Todas as versões") : t("Estudo completo")}
             ordemPorEscala={ordemPorEscala}
             enderecoOrdem={enderecoOrdem}
           />

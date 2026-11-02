@@ -12,6 +12,7 @@ import { itensDoQuestionario } from "@/lib/itens-ueq";
 import { PARAMETROS_SUSPEITA } from "@/lib/participacoes";
 import { exigirPesquisador } from "@/lib/sessao";
 import { avaliarSuspeita } from "@/ueq";
+import { tradutor } from "@/traducao/servidor";
 
 export type Previa = {
   versaoId: string;
@@ -37,21 +38,22 @@ async function versaoDoEstudo(estudoId: string, versaoId: unknown) {
 
 // Passo 1: lê o arquivo e devolve a prévia das 5 primeiras linhas e os erros, sem gravar nada
 export async function previsualizarImportacao(estudoId: string, dados: FormData): Promise<ResultadoPrevia> {
+  const t = await tradutor();
   const versao = await versaoDoEstudo(estudoId, dados.get("versao"));
-  if (!versao) return { erro: { campo: "versao", mensagem: "Escolha a versão que essas respostas avaliaram." } };
+  if (!versao) return { erro: { campo: "versao", mensagem: t("Escolha a versão que essas respostas avaliaram.") } };
 
   const arquivo = dados.get("arquivo");
-  if (!(arquivo instanceof File) || arquivo.size === 0) return { erro: { campo: "arquivo", mensagem: "Escolha um arquivo CSV com as respostas." } };
+  if (!(arquivo instanceof File) || arquivo.size === 0) return { erro: { campo: "arquivo", mensagem: t("Escolha um arquivo CSV com as respostas.") } };
   if (!/\.(csv|txt)$/i.test(arquivo.name)) {
-    return { erro: { campo: "arquivo", mensagem: `“${arquivo.name}” não é um CSV. Salve a planilha como CSV e envie de novo.` } };
+    return { erro: { campo: "arquivo", mensagem: t("“{name}” não é um CSV. Salve a planilha como CSV e envie de novo.", { name: arquivo.name }) } };
   }
   if (arquivo.size > LIMITE_BYTES) {
-    return { erro: { campo: "arquivo", mensagem: `O arquivo tem mais de ${LIMITE_BYTES / 1000} KB. Divida em arquivos menores.` } };
+    return { erro: { campo: "arquivo", mensagem: t("O arquivo tem mais de {v} KB. Divida em arquivos menores.", { v: LIMITE_BYTES / 1000 }) } };
   }
 
   const texto = await arquivo.text();
   const { linhas, erros } = lerCsvDeRespostas(texto);
-  if (linhas.length === 0 && erros.length === 0) return { erro: { campo: "arquivo", mensagem: "O arquivo não tem nenhuma linha de respostas." } };
+  if (linhas.length === 0 && erros.length === 0) return { erro: { campo: "arquivo", mensagem: t("O arquivo não tem nenhuma linha de respostas.") } };
   return {
     previa: {
       versaoId: versao.id,
@@ -67,10 +69,11 @@ export async function previsualizarImportacao(estudoId: string, dados: FormData)
 
 // Passo 2: grava. Só com o arquivo inteiro válido: importar parte esconderia linhas da análise sem a pessoa ver
 export async function confirmarImportacao(estudoId: string, versaoId: string, texto: string): Promise<{ erro?: string }> {
+  const t = await tradutor();
   const versao = await versaoDoEstudo(estudoId, versaoId);
-  if (!versao) return { erro: "Essa versão não está neste estudo. Recarregue a página." };
+  if (!versao) return { erro: t("Essa versão não está neste estudo. Recarregue a página.") };
   const { linhas, erros } = lerCsvDeRespostas(texto);
-  if (erros.length > 0 || linhas.length === 0) return { erro: "O arquivo tem erros. Corrija e envie de novo." };
+  if (erros.length > 0 || linhas.length === 0) return { erro: t("O arquivo tem erros. Corrija e envie de novo.") };
 
   const itens = await itensDoQuestionario();
   const agora = new Date();
@@ -97,7 +100,8 @@ export async function confirmarImportacao(estudoId: string, versaoId: string, te
   await notificarAlteracao(
     estudoId,
     await exigirPesquisador(),
-    (titulo) => `importou ${plural(linhas.length, "resposta", "respostas")} de um CSV em “${titulo}”.`,
+    (titulo, t) =>
+      t("importou {quantidade} de um CSV em “{titulo}”.", { quantidade: plural(linhas.length, t("resposta"), t("respostas")), titulo }),
     `/estudos/${estudoId}/respostas`,
   );
   revalidatePath(`/estudos/${estudoId}`, "layout");

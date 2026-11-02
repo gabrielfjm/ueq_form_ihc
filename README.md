@@ -35,19 +35,21 @@ A meta de acessibilidade é WCAG 2.2 nível AA, base da ABNT NBR 17225:2025.
 ## Funcionalidades
 
 **Participante**
-- Link público em 37 idiomas oficiais do UEQ, com termo de consentimento e os 26 itens na ordem e polaridade oficiais.
+- Link público em 37 idiomas oficiais do UEQ, com termo de consentimento e os 26 itens na ordem e polaridade oficiais. O link abre no idioma do estudo, o participante troca quando quiser, e o título, o produto e o objetivo escritos pelo pesquisador são traduzidos para o idioma dele.
 - Etapa opcional de dados demográficos, só quando o pesquisador liga. Ela pode ser pulada inteira, e todas as perguntas têm “Prefiro não responder”.
 
 **Pesquisador**
 - Estudos com uma ou mais versões (teste A/B), coleta aberta, encerrada e reaberta, e importação de respostas por CSV.
 - Painel com média, desvio-padrão, IC 95%, alfa de Cronbach e benchmark oficial por escala, comparação entre versões e exportação em CSV (inclusive no formato da *UEQ Data Analysis Tool*) e em PDF.
 - Respostas suspeitas pelas regras do Handbook do UEQ, com inclusão e exclusão da análise sem apagar nada.
-- Perfil dos participantes em gráficos: faixa etária, gênero, escolaridade e familiaridade com o produto, por versão.
+- Em Resultados, duas abas: as escalas do UEQ e, quando o estudo coleta, os **dados demográficos**, cada pergunta no gráfico que combina com ela (colunas para a faixa etária, barras para gênero e escolaridade, barra 100% para a familiaridade), com a tabela dos números e filtro por versão.
 - **Estudos em equipe**: “Compartilhar” convida uma conta cadastrada pelo e-mail, como Editor (mexe no estudo) ou Leitor (vê e exporta). Excluir o estudo e convidar pessoas fica só com o dono.
 - **Sino de notificações**, entre Minha conta e Sair: convites (aceitar e recusar ali mesmo), respostas novas (agrupadas enquanto não lidas) e mudanças feitas pelos parceiros. Os avisos também vão por e-mail quando o envio está configurado.
 - **Tour guiado** no primeiro acesso: a pessoa clica nas próprias ações destacadas, pode pular ou fechar quando quiser, e pode rever depois pela ajuda.
 - **Ajuda (?)** no cabeçalho de toda página do pesquisador.
-- **Administração**, só para superusuários: contas, criar conta para alguém, cenários de demonstração com dados inventados, situação da proteção de dados e todos os estudos.
+- **Ferramenta nos 37 idiomas do UEQ**: o idioma é escolhido ao criar a conta e trocado em Minha conta › Idioma. A interface é escrita em português e traduzida pela API do Claude, com cada tradução guardada no banco; os 26 pares de palavras usam sempre a tradução oficial. Avisos do sino e e-mails saem no idioma de quem recebe. Os estudos novos nascem no idioma da conta.
+- **Minha conta** e **Administração** são painéis: cada cartão abre a página da opção (dados, senha, idioma) ou age ali mesmo (notificações por e-mail, excluir a conta).
+- **Administração**, só para superusuários: contas, criar conta para alguém, cenários de demonstração com dados inventados, a situação da proteção de dados e a tradução de cada idioma. O administrador não vê os estudos nem as respostas de ninguém.
 
 ## Segurança e LGPD
 
@@ -58,7 +60,7 @@ O que a ferramenta faz para cumprir a Lei Geral de Proteção de Dados (Lei 13.7
 - **Em trânsito e em repouso:** HTTPS com HSTS, TLS até o banco e banco cifrado em disco no provedor.
 - **Senhas e sessão:** bcrypt com custo 12 (hashes antigos sobem de custo no login), mesmo tempo de resposta com ou sem conta, 5 tentativas erradas por e-mail a cada 15 minutos, cookie de sessão `httpOnly`, `Secure` e `SameSite=Lax`, e só o hash da sessão no banco.
 - **Navegador:** Content Security Policy, `frame-ancestors 'none'` contra clickjacking, `Referrer-Policy: same-origin`, `X-Content-Type-Options` e `Permissions-Policy`.
-- **Acesso:** cada pessoa só abre os estudos dela ou os compartilhados com ela; toda leitura e alteração passa por `estudoDoPesquisador` (ver, editar, gerenciar).
+- **Acesso:** cada pessoa só abre os estudos dela ou os compartilhados com ela, e nem o administrador vê os estudos dos outros; toda leitura e alteração passa por `estudoDoPesquisador` (ver, editar, gerenciar).
 - **Direitos do titular:** [política de privacidade](https://ferramenta-ueq.vercel.app/privacidade) pública; em Minha conta, “Baixar meus dados” (JSON), correção dos dados, exclusão imediata da conta e desligar os e-mails.
 
 ### Variáveis de ambiente
@@ -68,6 +70,7 @@ O que a ferramenta faz para cumprir a Lei Geral de Proteção de Dados (Lei 13.7
 | `DATABASE_URL` | Banco PostgreSQL (na Vercel, a integração da Neon preenche) |
 | `CHAVE_CRIPTOGRAFIA` | Chave AES-256 dos dados demográficos: 32 bytes em base64, gerada com `openssl rand -base64 32`. **Guarde uma cópia em local seguro: sem ela, os dados cifrados não podem ser lidos.** Sem a variável, os dados ficam sem criptografia de campo, e a página Administração avisa |
 | `SMTP_HOST`, `SMTP_PORTA`, `SMTP_USUARIO`, `SMTP_SENHA`, `EMAIL_REMETENTE` | Envio dos convites e notificações por e-mail (Gmail: `smtp.gmail.com`, porta 465 e uma senha de app). Opcional: sem elas, os avisos ficam só no sino |
+| `ANTHROPIC_API_KEY` | Chave da API do Claude (console.anthropic.com), para traduzir a interface e os textos dos estudos para os 37 idiomas do UEQ. Opcional: sem ela, a ferramenta aparece em português e o participante vê título e objetivo no idioma em que o estudo foi escrito |
 
 ## Stack
 
@@ -110,6 +113,7 @@ O seed carrega os 26 itens do UEQ a partir de `data/ueq-itens-ptbr.json`. Enquan
 | `pnpm docs:diagramas` | Gera os SVG dos diagramas da documentação, depois de mudar um diagrama Mermaid num `.md` |
 | `pnpm suspeitas:recalcular` | Recalcula a marca de suspeita de todas as participações |
 | `pnpm dados:cifrar` | Cifra os dados demográficos ainda em texto aberto (roda sozinho em cada deploy) |
+| `pnpm i18n:catalogo` | Refaz `src/traducao/catalogo.json`, a lista de textos da interface (`t("…")` e `m("…")`) que a API traduz. Um teste falha se ela estiver desatualizada |
 
 Antes de abrir um pull request, `pnpm lint && pnpm typecheck && pnpm test` precisa passar.
 
@@ -124,6 +128,8 @@ src/
   styles/         tokens de cor, tipografia e espaçamento
   lib/            banco, sessão, permissões, criptografia, notificações, e-mail e validação
   lib/cenarios/   cenários de demonstração com respostas sintéticas
+  idiomas/        textos do participante e dados dos 37 idiomas oficiais do UEQ
+  traducao/       tradução da interface do pesquisador (catálogo, tradutor e API do Claude)
 prisma/           schema e seed
 scripts/          geração dos diagramas da documentação
 data/             itens, benchmark, parâmetros do protocolo e fixtures de teste
@@ -180,7 +186,7 @@ Comparação entre versões, respostas suspeitas e minha conta:
 
 <img src="docs/prototipos/alta-fidelidade/r7-comparar-versoes.png" alt="Comparar versões: marcador cheio e vazado por escala, leitura rápida das diferenças e tabela" width="400"> <img src="docs/prototipos/alta-fidelidade/r8-respostas-e-suspeitas.png" alt="Respostas: faixa com as 34 participações, tabela com suspeitas e regra de suspeita ao lado" width="400">
 
-<img src="docs/prototipos/alta-fidelidade/r9-minha-conta.png" alt="Minha conta: dados cadastrais, troca de senha, exclusão da conta e resumo da conta" width="400">
+<img src="docs/prototipos/alta-fidelidade/r9-minha-conta.png" alt="Minha conta como painel: cartões de Dados cadastrais, Senha, Idioma, Notificações e Excluir conta, com o resumo da conta ao lado" width="400"> <img src="docs/prototipos/alta-fidelidade/r35-idioma-da-conta.png" alt="Minha conta, Idioma: os idiomas do UEQ pelo próprio nome e pelo nome em português, com Salvar idioma" width="400">
 
 Documentação dentro da ferramenta: visão geral, documento com diagrama e documento com downloads:
 
@@ -196,7 +202,7 @@ Página inicial, para quem ainda não tem conta, e Entrar e Criar conta numa jan
 
 <img src="docs/prototipos/alta-fidelidade/r16-pagina-inicial.png" alt="Página inicial: apresentação com o item 1 do questionário como figura, Nesta página, o que é o UEQ, as seis escalas, como ler os resultados e o benchmark, como a ferramenta funciona, estudos sobre o método e créditos" width="400"> <img src="docs/prototipos/alta-fidelidade/r17-entrar-janela.png" alt="Janela de Entrar sobre a página inicial escurecida: formulário à esquerda e painel com as escalas do UEQ à direita" width="400">
 
-<img src="docs/prototipos/alta-fidelidade/r19-criar-conta-janela.png" alt="Janela de Criar conta: nome e e-mail lado a lado, senha, Criar conta junto de Entrar e da política de privacidade, e os quatro passos do estudo à direita" width="400"> <img src="docs/prototipos/alta-fidelidade/r18-entrar-celular.png" alt="Entrar no celular: a janela ocupa a tela inteira, com o formulário em cima e o resumo do instrumento embaixo" width="200">
+<img src="docs/prototipos/alta-fidelidade/r19-criar-conta-janela.png" alt="Janela de Criar conta: nome e e-mail lado a lado, senha, idioma da ferramenta, Criar conta junto de Entrar e da política de privacidade, e os quatro passos do estudo à direita" width="400"> <img src="docs/prototipos/alta-fidelidade/r18-entrar-celular.png" alt="Entrar no celular: a janela ocupa a tela inteira, com o formulário em cima e o resumo do instrumento embaixo" width="200">
 
 Confirmações em janela, para sair e para toda exclusão:
 
@@ -214,13 +220,13 @@ A página inicial com login, que é a tela padrão depois de entrar e aonde o lo
 
 Equipe, notificações, ajuda e LGPD:
 
-<img src="docs/prototipos/alta-fidelidade/r24-administracao.png" alt="Administração: contas, criar conta para alguém, cenários de demonstração, situação da proteção de dados e todos os estudos" width="400"> <img src="docs/prototipos/alta-fidelidade/r25-compartilhar.png" alt="Janela Compartilhar: convite por e-mail com papel Editor ou Leitor e a lista de pessoas com acesso" width="400">
+<img src="docs/prototipos/alta-fidelidade/r24-administracao.png" alt="Administração: painel com Contas, Criar conta para alguém, Cenários de demonstração, Proteção de dados e Idiomas" width="400"> <img src="docs/prototipos/alta-fidelidade/r24b-contas.png" alt="Administração, Contas: tabela com cada pessoa, a data da conta, o papel e Tornar administrador" width="400"> <img src="docs/prototipos/alta-fidelidade/r24c-criar-conta-para-alguem.png" alt="Administração, Criar conta para alguém: nome, e-mail, senha e administrador numa coluna" width="400"> <img src="docs/prototipos/alta-fidelidade/r34-idiomas.png" alt="Administração, Idiomas: situação da tradução automática pela API do Claude e quanto de cada idioma já está traduzido, com Traduzir agora" width="400"> <img src="docs/prototipos/alta-fidelidade/r25-compartilhar.png" alt="Janela Compartilhar: convite por e-mail com papel Editor ou Leitor e a lista de pessoas com acesso" width="400">
 
 <img src="docs/prototipos/alta-fidelidade/r26-sino-de-notificacoes.png" alt="Sino de notificações aberto entre Minha conta e Sair: convite com Aceitar e Recusar, respostas novas e mudanças da equipe" width="400"> <img src="docs/prototipos/alta-fidelidade/r27-notificacoes.png" alt="Notificações: convites esperando resposta e o histórico de avisos" width="400">
 
 <img src="docs/prototipos/alta-fidelidade/r28-tour-boas-vindas.png" alt="Boas-vindas do primeiro acesso: Pular tutorial e Começar o tour" width="400"> <img src="docs/prototipos/alta-fidelidade/r29-tour-passo.png" alt="Passo do tour: a página escurecida em volta do estudo destacado e o cartão Passo 1 de 10" width="400">
 
-<img src="docs/prototipos/alta-fidelidade/r30-ajuda-da-pagina.png" alt="Janela de ajuda da página Respostas, aberta pelo botão (?), com Rever o tour guiado" width="400"> <img src="docs/prototipos/alta-fidelidade/r31-perfil-dos-participantes.png" alt="Perfil dos participantes: quatro gráficos de barras horizontais, um por pergunta demográfica, com filtro de versão" width="400">
+<img src="docs/prototipos/alta-fidelidade/r30-ajuda-da-pagina.png" alt="Janela de ajuda da página Respostas, aberta pelo botão (?), com Rever o tour guiado" width="400"> <img src="docs/prototipos/alta-fidelidade/r31-dados-demograficos.png" alt="Resultados, sub-aba Dados demográficos: colunas para a faixa etária, barras para gênero e escolaridade e barra 100% para a familiaridade, com filtro de versão" width="400">
 
 <img src="docs/prototipos/alta-fidelidade/r32-dados-do-participante.png" alt="Criar estudo, seção Dados do participante: caixa para coletar dados demográficos com o aviso de LGPD e a prévia com as etapas" width="400"> <img src="docs/prototipos/alta-fidelidade/r33-politica-de-privacidade.png" alt="Política de privacidade pública: quem cuida dos dados, participantes, pesquisadores, direitos e proteção" width="400">
 

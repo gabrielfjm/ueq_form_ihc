@@ -8,10 +8,11 @@ import { useEnvioFormulario } from "@/componentes/formulario/useEnvioFormulario"
 import { Confirmacao } from "@/componentes/janela/Confirmacao";
 import janela from "@/componentes/janela/janela.module.css";
 import { excluirConta } from "./acoes";
-import estilos from "./conta.module.css";
+import { useT } from "@/traducao/cliente";
 
 // docs/ihc.md, 4.2: confirmação numa janela, digitando o dado e dizendo o que vai junto (Nielsen 5, WCAG 3.3.4)
 export function ExcluirConta({ aviso }: { aviso: { destaque: string; complemento: string } }) {
+  const t = useT();
   const [aberta, setAberta] = useState(false);
   const { estado, aoEnviar, limpar } = useEnvioFormulario(excluirConta);
   const campo = useRef<HTMLInputElement>(null);
@@ -27,48 +28,39 @@ export function ExcluirConta({ aviso }: { aviso: { destaque: string; complemento
   }
 
   return (
-    <section className={estilos.secao} aria-labelledby="secao-excluir">
-      <div className={estilos.secaoTitulo}>
-        <span className={estilos.secaoNumero}>04</span>
-        <h2 id="secao-excluir" className={estilos.secaoNome}>
-          Excluir conta
-        </h2>
-      </div>
-      <p className={estilos.texto}>
-        Apaga sua conta e tudo o que está nela. Se quiser guardar os dados, exporte as respostas de cada estudo antes.
-      </p>
+    <>
       <button
         type="button"
-        className={`${formulario.destrutivo} ${estilos.alinharInicio}`}
+        className={`${formulario.destrutivo}`}
         aria-haspopup="dialog"
         onClick={() => setAberta(true)}
       >
         <Trash2 size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-        <span>Excluir minha conta</span>
+        <span>{t("Excluir minha conta")}</span>
       </button>
       <Confirmacao
         aberta={aberta}
         aoFechar={fechar}
-        titulo="Excluir sua conta?"
-        textoConfirmar="Excluir conta definitivamente"
+        titulo={t("Excluir sua conta?")}
+        textoConfirmar={t("Excluir conta definitivamente")}
         Icone={Trash2}
         perigo
         onSubmit={aoEnviar}
       >
         <p className={janela.aviso}>
-          <strong>{aviso.destaque}</strong> {aviso.complemento}
+          <strong>{t(aviso.destaque)}</strong> {t(aviso.complemento)}
         </p>
         <Campo
           ref={campo}
           id="confirmar-email"
           name="confirmacao"
           type="email"
-          rotulo="Digite seu e-mail para confirmar"
+          rotulo={t("Digite seu e-mail para confirmar")}
           autoComplete="off"
           erro={estado.erros?.confirmacao}
           data-foco-inicial=""
         />
       </Confirmacao>
-    </section>
+    </>
   );
 }

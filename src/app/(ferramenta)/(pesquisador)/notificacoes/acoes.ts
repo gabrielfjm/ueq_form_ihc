@@ -87,7 +87,10 @@ export async function responderConvite(colaboracaoId: string, aceitar: boolean):
   await banco.notificacao.updateMany({ where: { colaboracaoId, pesquisadorId: pesquisador.id, lidaEm: null }, data: { lidaEm: new Date() } });
   await notificar([colaboracao.convidadoPorId ?? colaboracao.estudo.pesquisadorId], pesquisador.id, {
     tipo: "ALTERACAO",
-    texto: `${pesquisador.nome} ${aceitar ? "aceitou" : "recusou"} o convite para o estudo “${colaboracao.estudo.titulo}”.`,
+    texto: (t) =>
+      aceitar
+        ? t("{nome} aceitou o convite para o estudo “{titulo}”.", { nome: pesquisador.nome, titulo: colaboracao.estudo.titulo })
+        : t("{nome} recusou o convite para o estudo “{titulo}”.", { nome: pesquisador.nome, titulo: colaboracao.estudo.titulo }),
     link: `/estudos/${colaboracao.estudoId}`,
     estudoId: colaboracao.estudoId,
   });

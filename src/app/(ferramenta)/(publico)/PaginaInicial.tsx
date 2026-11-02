@@ -1,193 +1,197 @@
-import { BookOpen, Folder, LogIn, Plus, UserPlus } from "lucide-react";
+import {
+  ChartColumn,
+  Download,
+  Folder,
+  Languages,
+  Accessibility,
+  LogIn,
+  Plus,
+  Send,
+  ShieldCheck,
+  SquarePen,
+  UserPlus,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import Link from "next/link";
 import formulario from "@/componentes/formulario/formulario.module.css";
 import { MensagemStatus } from "@/componentes/formulario/MensagemStatus";
-import { MAXIMO_VERSOES } from "@/lib/validacao-estudo";
-import { BotaoAcesso } from "./_acesso/Acesso";
 import { REPOSITORIO } from "@/lib/documentacao/catalogo";
+import { BotaoAcesso } from "./_acesso/Acesso";
 import { AUTORES_DO_UEQ, ESCALAS_DO_UEQ, ESTUDOS_DO_UEQ, FAIXAS_DO_BENCHMARK, PASSOS } from "./conteudo";
 import estilos from "./inicio.module.css";
+import { tradutor } from "@/traducao/servidor";
+import { m } from "@/traducao/nucleo";
 
 const CENTROS = [20, 62, 104, 146, 188, 230, 272];
 
-const PARTICIPANTE = [
-  [
-    "Sem conta e sem instalar nada",
-    "O link abre no celular ou no computador: primeiro o termo de consentimento, depois os 26 itens e, no fim, dados opcionais sobre a pessoa.",
-  ],
-  [
-    "Nos 37 idiomas oficiais do UEQ",
-    "O participante escolhe o idioma. Itens e instruções vêm do pacote oficial de traduções, sem nenhuma alteração.",
-  ],
-  [
-    "Acessível do começo ao fim",
-    "Funciona só com teclado, com leitor de tela e com zoom de 400%. A meta é a WCAG 2.2 nível AA, base da ABNT NBR 17225:2025.",
-  ],
+// Prévia ilustrativa do painel: médias de exemplo, uma por escala, na cor do grupo
+const PREVIA = [
+  { nome: m("Atratividade"), media: 1.6, grupo: "atratividade" },
+  { nome: m("Perspicuidade"), media: 1.9, grupo: "pragmatica" },
+  { nome: m("Eficiência"), media: 1.4, grupo: "pragmatica" },
+  { nome: m("Confiabilidade"), media: 1.2, grupo: "pragmatica" },
+  { nome: m("Estimulação"), media: 1.1, grupo: "hedonica" },
+  { nome: m("Novidade"), media: 0.6, grupo: "hedonica" },
 ] as const;
 
-const RESULTADOS = [
-  [
-    "Painel por escala",
-    "Média, desvio-padrão, intervalo de confiança de 95% e alfa de Cronbach, com a interpretação escrita ao lado de cada número.",
-  ],
-  ["Benchmark oficial", "Cada média comparada com a base do UEQ, de Excelente a Ruim, com o nome da faixa em texto."],
-  [
-    "Comparação entre versões",
-    `Até ${MAXIMO_VERSOES} versões do mesmo produto no mesmo gráfico, cada uma com um marcador de forma diferente.`,
-  ],
-  [
-    "Respostas suspeitas",
-    "Respostas inconsistentes ficam marcadas e podem sair da análise. Nada é apagado: dá para trazer de volta.",
-  ],
-  [
-    "Exportar e importar",
-    "CSV no formato da UEQ Data Analysis Tool, painel em PDF e importação, em CSV, de respostas coletadas fora da ferramenta.",
-  ],
+const GRUPOS = [
+  { nome: m("Atratividade"), classe: "atratividade", texto: m("Uma escala só, com 6 itens.") },
+  { nome: m("Qualidade pragmática"), classe: "pragmatica", texto: m("Fazer a tarefa com facilidade.") },
+  { nome: m("Qualidade hedônica"), classe: "hedonica", texto: m("Gostar de usar.") },
 ] as const;
+
+const ICONES_PASSOS: LucideIcon[] = [SquarePen, Send, ChartColumn, Download];
+
+const DESTAQUES: readonly [LucideIcon, string, string][] = [
+  [Languages, "37 idiomas", m("O participante responde no idioma dele, com as traduções oficiais.")],
+  [Accessibility, m("Acessível"), m("Teclado, leitor de tela e zoom de 400% (WCAG 2.2 AA).")],
+  [Users, m("Em equipe"), m("Estudos compartilhados com editores e leitores.")],
+  [ShieldCheck, m("Dados protegidos"), m("Nada identifica o participante; dados sensíveis cifrados (LGPD).")],
+];
 
 const EQUIPE = [
-  ["Gabriel Meira", "Desenvolvimento, protótipos, arquitetura, protocolo do UEQ e casos de teste"],
-  ["Jean Weiss", "Casos de uso, diagrama de classes e verificação do cálculo"],
-  ["Luiza Pedralli", "Requisitos, rastreabilidade, personas e histórias de usuário"],
+  [m("Gabriel Meira"), m("Desenvolvimento, protótipos, arquitetura, protocolo do UEQ e casos de teste")],
+  [m("Jean Weiss"), m("Casos de uso, diagrama de classes e verificação do cálculo")],
+  [m("Luiza Pedralli"), m("Requisitos, rastreabilidade, personas e histórias de usuário")],
 ] as const;
 
 const SECOES = [
-  ["inicio-ueq", "O que é o UEQ"],
-  ["inicio-questionario", "O questionário"],
-  ["inicio-leitura", "Como ler os resultados"],
-  ["inicio-como-funciona", "Como a ferramenta funciona"],
-  ["inicio-estudos", "Estudos sobre o método"],
-  ["inicio-creditos", "Créditos"],
+  ["inicio-ueq", m("O que é o UEQ")],
+  ["inicio-leitura", m("Como ler os resultados")],
+  ["inicio-como-funciona", m("Como funciona")],
+  ["inicio-estudos", m("Estudos sobre o método")],
+  ["inicio-creditos", m("Créditos")],
 ] as const;
-
-function Titulo({ id, numero, children }: { id: string; numero: number; children: string }) {
-  return (
-    <div className={estilos.secaoTitulo}>
-      <span className={estilos.secaoNumero}>{String(numero).padStart(2, "0")}</span>
-      <h2 id={id} className={estilos.secaoNome}>
-        {children}
-      </h2>
-    </div>
-  );
-}
-
-function Lista({ itens }: { itens: readonly (readonly [string, string])[] }) {
-  return (
-    <dl className={estilos.lista}>
-      {itens.map(([termo, descricao]) => (
-        <div key={termo} className={estilos.itemLista}>
-          <dt>{termo}</dt>
-          <dd className={estilos.textoSuave}>{descricao}</dd>
-        </div>
-      ))}
-    </dl>
-  );
-}
 
 // Retorno de ações que terminam aqui, depois que a sessão já acabou
 const AVISOS = {
-  saiu: "Você saiu da sua conta.",
-  excluida: "Conta excluída. Os estudos e as respostas foram apagados.",
+  saiu: m("Você saiu da sua conta."),
+  excluida: m("Conta excluída. Os estudos e as respostas foram apagados."),
 } as const;
 
 export function avisoDaPaginaInicial(valor: string | string[] | undefined): string | null {
   return valor === "saiu" || valor === "excluida" ? AVISOS[valor] : null;
 }
 
+async function Titulo({ id, numero, children }: { id: string; numero: number; children: string }) {
+  const t = await tradutor();
+  return (
+    <div className={estilos.secaoTitulo}>
+      <span className={estilos.secaoNumero}>{t(String(numero).padStart(2, "0"))}</span>
+      <h2 id={id} className={estilos.secaoNome}>
+        {t(children)}
+      </h2>
+    </div>
+  );
+}
+
+// Posição de uma média de −3 a +3 numa régua de 0 a 100%
+const posicao = (valor: number) => ((valor + 3) / 6) * 100;
+
 type Propriedades = {
   logado: boolean;
   aviso?: string | null;
 };
 
-// Protótipo r16: a página inicial explica o que é a ferramenta para quem ainda não tem conta.
-// Cara de instrumento, não de SaaS (docs/design.md): texto à esquerda, o próprio item do questionário
-// como figura, seções numeradas e uma tabela, sem cards nem hero centralizado
-export function PaginaInicial({ logado, aviso }: Propriedades) {
+// Página inicial: o que é o UEQ, como ler, como a ferramenta funciona, os estudos do método e os créditos.
+// Pouco texto e mais figura, mas toda figura tem o equivalente em texto (leitor de tela) e nada depende
+// de cor sozinha. A animação do item respeita "reduzir movimento" (globals.css)
+export async function PaginaInicial({ logado, aviso }: Propriedades) {
+  const t = await tradutor();
   return (
     <>
       <div className={estilos.faixa}>
         <div className={estilos.faixaInterna}>
           <div className={estilos.apresentacao}>
             <MensagemStatus mensagem={aviso} className={estilos.regiaoStatus} />
-            <p className={estilos.area}>Fundamentos da IHC · PPGIa · PUCPR · 2026</p>
-            <h1 className={estilos.titulo}>Estudos de experiência do usuário com o UEQ</h1>
+            <p className={estilos.area}>{t("User Experience Questionnaire")}</p>
+            <h1 className={estilos.titulo}>{t("Estudos de experiência do usuário com o UEQ")}</h1>
             <p className={estilos.descricao}>
-              Cadastre o estudo, envie um link aos participantes e acompanhe as seis escalas do User Experience
-              Questionnaire: média, intervalo de confiança, alfa de Cronbach e benchmark oficial. Os dados saem no
-              formato da planilha oficial, para conferir cada cálculo.
+              {t("Crie o estudo, mande um link e veja as seis escalas do UEQ calculadas e comparadas com o benchmark oficial.")}
             </p>
             <div className={estilos.acoes}>
               {logado ? (
                 <>
                   <Link href="/estudos" className={`${formulario.botao} ${formulario.primario}`}>
                     <Folder size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-                    <span>Ver seus estudos</span>
+                    <span>{t("Ver seus estudos")}</span>
                   </Link>
                   <Link href="/estudos/novo" className={`${formulario.botao} ${formulario.secundario}`}>
                     <Plus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-                    <span>Criar estudo</span>
+                    <span>{t("Criar estudo")}</span>
                   </Link>
                 </>
               ) : (
                 <>
                   <BotaoAcesso modo="cadastrar" className={`${formulario.botao} ${formulario.primario}`}>
                     <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-                    <span>Criar conta</span>
+                    <span>{t("Criar conta")}</span>
                   </BotaoAcesso>
                   <BotaoAcesso modo="entrar" className={`${formulario.botao} ${formulario.secundario}`}>
                     <LogIn size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-                    <span>Já tenho conta</span>
+                    <span>{t("Já tenho conta")}</span>
                   </BotaoAcesso>
                 </>
               )}
             </div>
+            <dl className={estilos.numeros}>
+              {[
+                ["26", t("itens")],
+                ["6", t("escalas")],
+                ["7", t("pontos por item")],
+                ["37", t("idiomas")],
+              ].map(([valor, rotulo]) => (
+                <div key={rotulo}>
+                  <dt>{rotulo}</dt>
+                  <dd>{valor}</dd>
+                </div>
+              ))}
+            </dl>
           </div>
 
           <figure className={estilos.figura}>
-            <figcaption className={estilos.legenda}>Item 1 de 26, como o participante vê</figcaption>
+            <figcaption className={estilos.legenda}>{t("O participante marca, a ferramenta calcula")}</figcaption>
             <div className={estilos.item}>
-              <span className={estilos.termoEsquerdo}>Desagradável</span>
+              <span className={estilos.termoEsquerdo}>{t("Desagradável")}</span>
               <svg
                 viewBox="0 0 292 40"
                 className={estilos.circulos}
                 role="img"
-                aria-label="Sete círculos entre Desagradável e Agradável, com o quinto marcado"
+                aria-label={t("Item do questionário: sete círculos entre Desagradável e Agradável, com o quinto marcado")}
               >
                 <line x1="20" y1="20" x2="272" y2="20" />
-                {CENTROS.map((cx, posicao) => (
-                  <circle key={cx} cx={cx} cy="20" r="15" className={posicao === 4 ? estilos.marcada : estilos.vazia} />
+                {CENTROS.map((cx, indice) => (
+                  <circle key={cx} cx={cx} cy="20" r="15" className={indice === 4 ? estilos.marcada : estilos.vazia} />
                 ))}
               </svg>
-              <span className={estilos.termoDireito}>Agradável</span>
+              <span className={estilos.termoDireito}>{t("Agradável")}</span>
             </div>
-            <dl className={estilos.numeros}>
-              <div>
-                <dt>itens</dt>
-                <dd>26</dd>
-              </div>
-              <div>
-                <dt>escalas</dt>
-                <dd>6</dd>
-              </div>
-              <div>
-                <dt>pontos por item</dt>
-                <dd>7</dd>
-              </div>
-              <div>
-                <dt>idiomas</dt>
-                <dd>37</dd>
-              </div>
-            </dl>
+            <ul className={estilos.previa} aria-label={t("Exemplo de resultado: média de cada escala, de −3 a +3")}>
+              {PREVIA.map(({ nome, media, grupo }) => (
+                <li key={nome}>
+                  <span className={estilos.previaNome}>{t(nome)}</span>
+                  <span className={estilos.previaTrilho} aria-hidden="true">
+                    <span className={estilos.previaZero} />
+                    <span
+                      className={`${estilos.previaBarra} ${estilos[grupo]}`}
+                      style={{ left: "50%", width: `${posicao(media) - 50}%` }}
+                    />
+                  </span>
+                  <span className={estilos.previaValor}>{t(media.toLocaleString("pt-BR", { minimumFractionDigits: 1 }))}</span>
+                </li>
+              ))}
+            </ul>
           </figure>
         </div>
       </div>
 
-      <nav aria-label="Nesta página" className={estilos.indice}>
+      <nav aria-label={t("Nesta página")} className={estilos.indice}>
         <div className={estilos.indiceInterno}>
-          <span className={estilos.indiceRotulo}>Nesta página</span>
+          <span className={estilos.indiceRotulo}>{t("Nesta página")}</span>
           {SECOES.map(([id, nome]) => (
             <a key={id} href={`#${id}`}>
-              {nome}
+              {t(nome)}
             </a>
           ))}
         </div>
@@ -196,229 +200,148 @@ export function PaginaInicial({ logado, aviso }: Propriedades) {
       <div className={estilos.conteudo}>
         <section className={estilos.secao} aria-labelledby="inicio-ueq">
           <Titulo id="inicio-ueq" numero={1}>
-            O que é o UEQ
+            {t("O que é o UEQ")}
           </Titulo>
           <p className={estilos.paragrafo}>
-            O <strong>User Experience Questionnaire (UEQ)</strong> é um questionário padronizado para medir como as
-            pessoas percebem a experiência de usar um produto: um site, um aplicativo, um sistema, um totem. Em poucos
-            minutos, quem usou o produto marca sua impressão em 26 pares de palavras opostas, e o resultado vira seis
-            notas comparáveis entre estudos e entre versões do mesmo produto.
+            {t("Um questionário padronizado e gratuito: em poucos minutos, quem usou um produto marca 26 pares de palavras opostas, e o resultado vira seis notas comparáveis entre produtos e versões.")}
           </p>
-          <p className={estilos.paragrafo}>
-            Ele mede dois lados da experiência. A <strong>qualidade pragmática</strong> é a parte orientada à tarefa: se
-            o produto é fácil de entender, rápido e previsível. A <strong>qualidade hedônica</strong> é o que não depende
-            da tarefa: se usar é interessante e se o produto parece novo. A <strong>atratividade</strong> resume a
-            impressão geral.
-          </p>
-          <p className={estilos.paragrafo}>
-            O UEQ é gratuito. O questionário, as traduções, o manual e a planilha de análise estão no site oficial,{" "}
-            <a href="https://www.ueq-online.org" rel="noopener">
-              ueq-online.org
-            </a>
-            . Esta ferramenta automatiza a aplicação e o cálculo seguindo esse material; ela não é oficial nem ligada aos
-            autores do método.
-          </p>
-        </section>
-
-        <section className={estilos.secao} aria-labelledby="inicio-questionario">
-          <Titulo id="inicio-questionario" numero={2}>
-            O questionário
-          </Titulo>
-          <p className={estilos.paragrafo}>
-            Cada um dos 26 itens é um par de palavras opostas numa escala de 7 pontos (diferencial semântico), como na
-            figura acima. A ordem dos itens e o lado de cada palavra são fixos; metade dos itens começa pela palavra
-            positiva, para a pessoa ler cada par em vez de marcar tudo do mesmo lado. A ferramenta usa a ordem, a
-            polaridade e as traduções oficiais, e calcula as escalas do jeito que o manual do UEQ descreve.
-          </p>
-          <div className={estilos.rolagemTabela} role="region" aria-labelledby="inicio-tabela-escalas" tabIndex={0}>
-            <table className={estilos.tabela}>
-              <caption id="inicio-tabela-escalas" className="visualmente-oculto">
-                As seis escalas do UEQ
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">Escala</th>
-                  <th scope="col">Grupo</th>
-                  <th scope="col" className={estilos.colunaNumero}>
-                    Itens
-                  </th>
-                  <th scope="col">O que mede</th>
-                </tr>
-              </thead>
-              <tbody>
-                {ESCALAS_DO_UEQ.map(({ nome, grupo, itens, mede }) => (
-                  <tr key={nome}>
-                    <th scope="row">{nome}</th>
-                    <td>{grupo}</td>
-                    <td className={estilos.colunaNumero}>{itens}</td>
-                    <td>{mede}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className={estilos.grupos}>
+            {GRUPOS.map(({ nome, classe, texto }) => (
+              <section key={nome} className={`${estilos.grupo} ${estilos[classe]}`} aria-labelledby={`grupo-${classe}`}>
+                <h3 id={`grupo-${classe}`} className={estilos.grupoNome}>
+                  {t(nome)}
+                </h3>
+                <p className={estilos.grupoTexto}>{t(texto)}</p>
+                <ul className={estilos.escalas}>
+                  {ESCALAS_DO_UEQ.filter((escala) => escala.grupo === nome).map((escala) => (
+                    <li key={escala.nome}>
+                      <strong>{t(escala.nome)}</strong>
+                      <span>{t(escala.mede)}</span>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
           </div>
         </section>
 
         <section className={estilos.secao} aria-labelledby="inicio-leitura">
-          <Titulo id="inicio-leitura" numero={3}>
-            Como ler os resultados
+          <Titulo id="inicio-leitura" numero={2}>
+            {t("Como ler os resultados")}
           </Titulo>
-          <dl className={estilos.lista}>
-            <div className={estilos.itemLista}>
-              <dt>De −3 a +3</dt>
-              <dd className={estilos.textoSuave}>
-                Cada escala é a média das respostas, transformadas para ir de −3 (a pior impressão) a +3 (a melhor).
-                Médias acima de +2 ou abaixo de −2 são raras, porque as pessoas tendem a evitar os extremos.
-              </dd>
-            </div>
-            <div className={estilos.itemLista}>
-              <dt>Positiva, neutra ou negativa</dt>
-              <dd className={estilos.textoSuave}>
-                Acima de +0,8 a avaliação é positiva; abaixo de −0,8, negativa; entre os dois, neutra.
-              </dd>
-            </div>
-            <div className={estilos.itemLista}>
-              <dt>Quantas pessoas</dt>
-              <dd className={estilos.textoSuave}>
-                Com 20 a 30 pessoas o resultado costuma ficar estável. O intervalo de confiança mostra quanto a média ainda
-                pode mudar: quanto mais estreito, mais seguro.
-              </dd>
-            </div>
-            <div className={estilos.itemLista}>
-              <dt>Respostas suspeitas</dt>
-              <dd className={estilos.textoSuave}>
-                Quem responde ao acaso costuma se contradizer dentro da mesma escala. O manual sugere tirar da análise quem
-                faz isso em 3 ou mais escalas ou marca mais de 15 itens na mesma posição.
-              </dd>
-            </div>
-          </dl>
-          <h3 className={estilos.subtitulo}>O benchmark</h3>
-          <p className={estilos.paragrafo}>
-            Para saber se uma média é boa, o UEQ a compara com uma base de 21.175 pessoas de 468 estudos com produtos
-            de todo tipo (planilha oficial, versão 15). Cada escala cai numa das cinco faixas:
-          </p>
-          <div className={estilos.rolagemTabela} role="region" aria-labelledby="inicio-tabela-benchmark" tabIndex={0}>
-            <table className={estilos.tabela}>
-              <caption id="inicio-tabela-benchmark" className="visualmente-oculto">
-                As cinco faixas do benchmark do UEQ
-              </caption>
-              <thead>
-                <tr>
-                  <th scope="col">Faixa</th>
-                  <th scope="col">O que quer dizer</th>
-                </tr>
-              </thead>
-              <tbody>
-                {FAIXAS_DO_BENCHMARK.map(([faixa, significado]) => (
-                  <tr key={faixa}>
-                    <th scope="row">{faixa}</th>
-                    <td>{significado}</td>
-                  </tr>
+          <div className={estilos.leitura}>
+            <figure className={estilos.regua}>
+              <figcaption className={estilos.subtitulo}>{t("Cada escala vai de −3 a +3")}</figcaption>
+              <div className={estilos.reguaFaixas}>
+                <span className={estilos.negativa}>{t("Negativa")}</span>
+                <span className={estilos.neutra}>{t("Neutra")}</span>
+                <span className={estilos.positiva}>{t("Positiva")}</span>
+              </div>
+              <div className={estilos.reguaMarcas} aria-hidden="true">
+                <span>−3</span>
+                <span>−0,8</span>
+                <span>+0,8</span>
+                <span>+3</span>
+              </div>
+              <p className="visualmente-oculto">
+                {t("Abaixo de −0,8 a avaliação é negativa; entre −0,8 e +0,8, neutra; acima de +0,8, positiva.")}
+              </p>
+              <p className={estilos.nota}>{t("Com 20 a 30 pessoas, o resultado costuma ficar estável.")}</p>
+            </figure>
+            <div>
+              <h3 className={estilos.subtitulo}>{t("O benchmark")}</h3>
+              <p className={estilos.nota}>{t("Comparação com 21.175 pessoas de 468 estudos (planilha oficial, versão 15).")}</p>
+              <ol className={estilos.escada}>
+                {FAIXAS_DO_BENCHMARK.map(([faixa, significado], indice) => (
+                  <li key={faixa} className={estilos[`degrau${indice}`]}>
+                    <strong>{t(faixa)}</strong>
+                    <span>{t(significado)}</span>
+                  </li>
                 ))}
-              </tbody>
-            </table>
+              </ol>
+            </div>
           </div>
         </section>
 
         <section className={estilos.secao} aria-labelledby="inicio-como-funciona">
-          <Titulo id="inicio-como-funciona" numero={4}>
-            Como a ferramenta funciona
+          <Titulo id="inicio-como-funciona" numero={3}>
+            {t("Como funciona")}
           </Titulo>
           <ol className={estilos.passos}>
-            {PASSOS.map(([titulo, texto], posicao) => (
-              <li key={titulo} className={estilos.passo}>
-                <span className={estilos.passoNumero}>{String(posicao + 1).padStart(2, "0")}</span>
-                <strong className={estilos.passoTitulo}>{titulo}</strong>
-                <span className={estilos.textoSuave}>{texto}</span>
+            {PASSOS.map(([titulo, texto], indice) => {
+              const Icone = ICONES_PASSOS[indice] ?? SquarePen;
+              return (
+                <li key={titulo} className={estilos.passo}>
+                  <span className={estilos.passoIcone} aria-hidden="true">
+                    <Icone size={24} strokeWidth={1.5} />
+                  </span>
+                  <strong className={estilos.passoTitulo}>{t(titulo)}</strong>
+                  <span className={estilos.textoSuave}>{t(texto)}</span>
+                </li>
+              );
+            })}
+          </ol>
+          <ul className={estilos.destaques}>
+            {DESTAQUES.map(([Icone, titulo, texto]) => (
+              <li key={titulo}>
+                <Icone size={22} strokeWidth={1.5} aria-hidden="true" className={estilos.destaqueIcone} />
+                <strong>{t(titulo)}</strong>
+                <span className={estilos.textoSuave}>{t(texto)}</span>
               </li>
             ))}
-          </ol>
-        </section>
-
-        <section className={estilos.secao} aria-labelledby="inicio-participante">
-          <Titulo id="inicio-participante" numero={5}>
-            Para o participante
-          </Titulo>
-          <Lista itens={PARTICIPANTE} />
-        </section>
-
-        <section className={estilos.secao} aria-labelledby="inicio-resultados">
-          <Titulo id="inicio-resultados" numero={6}>
-            Para o pesquisador
-          </Titulo>
-          <Lista itens={RESULTADOS} />
+          </ul>
         </section>
 
         <section className={estilos.secao} aria-labelledby="inicio-estudos">
-          <Titulo id="inicio-estudos" numero={7}>
-            Estudos sobre o método
+          <Titulo id="inicio-estudos" numero={4}>
+            {t("Estudos sobre o método")}
           </Titulo>
-          <p className={estilos.paragrafo}>
-            Os trabalhos em que o UEQ foi construído e validado, e os que a ferramenta segue no cálculo, no benchmark e
-            na tradução. A lista completa de publicações está em{" "}
-            <a href="https://www.ueq-online.org" rel="noopener">
-              ueq-online.org
-            </a>
-            .
-          </p>
           <ol className={estilos.referencias}>
-            {ESTUDOS_DO_UEQ.map(({ referencia, sobre }) => (
-              <li key={referencia}>
-                <p className={estilos.referencia}>{referencia}</p>
-                <p className={estilos.textoSuave}>{sobre}</p>
-              </li>
+            {ESTUDOS_DO_UEQ.map(({ referencia }) => (
+              <li key={referencia}>{t(referencia)}</li>
             ))}
           </ol>
-        </section>
-
-        <section className={estilos.secao} aria-labelledby="inicio-documentacao">
-          <Titulo id="inicio-documentacao" numero={8}>
-            Documentação
-          </Titulo>
-          <p className={estilos.paragrafo}>
-            Requisitos, personas, histórias de usuário, casos de uso, diagramas UML, arquitetura no modelo C4 e casos de
-            teste, abertos a qualquer pessoa, sem precisar de conta. A equipe está escrevendo os documentos: cada um
-            aparece na aba assim que fica pronto.
+          <p className={estilos.nota}>
+            {t("Mais publicações em")}{" "}
+            <a href="https://www.ueq-online.org" rel="noopener">
+              {t("ueq-online.org")}
+            </a>
+            {t(". Esta ferramenta não é oficial nem ligada aos autores do método.")}
           </p>
-          <Link href="/documentacao" className={`${formulario.linkAcao} ${estilos.linkDocumentacao}`}>
-            <BookOpen size={18} strokeWidth={1.5} aria-hidden="true" />
-            <span>Abrir a documentação</span>
-          </Link>
         </section>
 
         <section className={estilos.secao} aria-labelledby="inicio-creditos">
-          <Titulo id="inicio-creditos" numero={9}>
-            Créditos
+          <Titulo id="inicio-creditos" numero={5}>
+            {t("Créditos")}
           </Titulo>
           <div className={estilos.creditos}>
             <div>
-              <h3 className={estilos.subtitulo}>O método UEQ</h3>
-              <p className={estilos.textoSuave}>
-                Todo o mérito do instrumento é dos autores do UEQ. Os itens, as traduções, a instrução ao participante e os
-                limites do benchmark são deles, distribuídos em ueq-online.org, e aparecem aqui sem alteração.
-              </p>
-              <Lista itens={AUTORES_DO_UEQ} />
+              <h3 className={estilos.subtitulo}>{t("O método UEQ")}</h3>
+              <ul className={estilos.pessoas}>
+                {AUTORES_DO_UEQ.map(([nome, papel]) => (
+                  <li key={nome}>
+                    <strong>{t(nome)}</strong>
+                    <span className={estilos.textoSuave}>{t(papel)}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
             <div>
-              <h3 className={estilos.subtitulo}>Esta ferramenta</h3>
+              <h3 className={estilos.subtitulo}>{t("Esta ferramenta")}</h3>
               <p className={estilos.textoSuave}>
-                Feita como projeto da disciplina <strong>Fundamentos da Interação Humano-Computador</strong> do Programa de
-                Pós-Graduação em Informática (PPGIa) da Pontifícia Universidade Católica do Paraná (PUCPR), em 2026.
+                {t("Projeto da disciplina")}{" "}<strong>{t("Fundamentos da Interação Humano-Computador")}</strong>{" "}{t("do PPGIa da PUCPR, 2026.")}
               </p>
-              <ul className={estilos.equipe}>
+              <ul className={estilos.pessoas}>
                 {EQUIPE.map(([nome, papel]) => (
                   <li key={nome}>
-                    <strong>{nome}</strong>
-                    <span className={estilos.textoSuave}>{papel}</span>
+                    <strong>{t(nome)}</strong>
+                    <span className={estilos.textoSuave}>{t(papel)}</span>
                   </li>
                 ))}
               </ul>
               <p className={estilos.textoSuave}>
-                Código aberto sob a licença MIT, em{" "}
-                <a href={REPOSITORIO} rel="noopener">
-                  github.com/gabrielfjm/ueq_form_ihc
-                </a>
-                . A licença não cobre o material oficial do UEQ.
+                {t("Código aberto (MIT) em")}{" "}<a href={REPOSITORIO} rel="noopener">{t("github.com/gabrielfjm/ueq_form_ihc")}</a> ·{" "}
+                <Link href="/documentacao">{t("Documentação")}</Link>
               </p>
             </div>
           </div>
@@ -427,10 +350,9 @@ export function PaginaInicial({ logado, aviso }: Propriedades) {
 
       <footer className={estilos.rodape}>
         <div className={estilos.rodapeInterno}>
-          <p>Fundamentos da IHC · PPGIa · PUCPR · 2026</p>
+          <p>{t("Fundamentos da IHC · PPGIa · PUCPR · 2026")}</p>
           <p>
-            Gabriel Meira, Jean Weiss e Luiza Pedralli · UEQ © Laugwitz, Held e Schrepp ·{" "}
-            <Link href="/privacidade">Política de privacidade</Link>
+            {t("UEQ © Laugwitz, Held e Schrepp ·")}{" "}<Link href="/privacidade">{t("Política de privacidade")}</Link>
           </p>
         </div>
       </footer>

@@ -11,7 +11,7 @@ const protocolo = JSON.parse(readFileSync("data/protocolo.json", "utf8")) as { i
 
 export const TITULO_ESTUDO = "Avaliação do checkout da loja virtual";
 
-export async function criarEstudo(page: Page, titulo = TITULO_ESTUDO, { demografia = true } = {}) {
+export async function criarEstudo(page: Page, titulo = TITULO_ESTUDO, { demografia = true, idioma = "" } = {}) {
   await page.goto("/estudos/novo");
   await page.getByLabel("Título do estudo").fill(titulo);
   await page.getByLabel("Produto avaliado").fill("Checkout da loja virtual");
@@ -20,6 +20,7 @@ export async function criarEstudo(page: Page, titulo = TITULO_ESTUDO, { demograf
   await page.getByLabel("Versão 2").fill("Checkout em uma página");
   // Os fluxos do participante passam pela etapa "Dados opcionais", que nasce desligada
   if (demografia) await page.getByLabel("Coletar dados demográficos no fim do questionário").check();
+  if (idioma) await page.getByLabel("Idioma do questionário").selectOption(idioma);
   await page.getByRole("main").getByRole("button", { name: "Criar estudo" }).click();
   await expect(page.getByRole("status")).toHaveText(
     "Estudo criado em rascunho. Confira os dados e abra a coleta quando estiver pronto.",
@@ -28,11 +29,11 @@ export async function criarEstudo(page: Page, titulo = TITULO_ESTUDO, { demograf
 
 // Um pesquisador em outro contexto do navegador cria e abre um estudo; devolve o link público
 // e a página do pesquisador, para os testes do participante conferirem o resultado do outro lado
-export async function estudoAberto(browser: Browser, info: TestInfo, { demografia = true } = {}) {
+export async function estudoAberto(browser: Browser, info: TestInfo, { demografia = true, idioma = "" } = {}) {
   const contexto = await browser.newContext();
   const pesquisador = await contexto.newPage();
   await cadastrarComTeclado(pesquisador, emailDeTeste(info));
-  await criarEstudo(pesquisador, TITULO_ESTUDO, { demografia });
+  await criarEstudo(pesquisador, TITULO_ESTUDO, { demografia, idioma });
   await pesquisador.getByRole("button", { name: "Abrir coleta" }).click();
   await expect(pesquisador.getByText("Aberto · aceitando respostas")).toBeVisible();
   const link = (await pesquisador.locator("code").textContent()) ?? "";

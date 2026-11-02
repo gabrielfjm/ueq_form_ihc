@@ -6,6 +6,7 @@ import { estudoDoPesquisador } from "@/lib/estudos";
 import { notificarAlteracao } from "@/lib/notificacoes";
 import { exigirPesquisador } from "@/lib/sessao";
 import { formatarDiaHora, plural } from "@/lib/texto";
+import { tradutor } from "@/traducao/servidor";
 
 type Retorno = { sucesso?: string; erro?: string };
 
@@ -16,6 +17,7 @@ function atualizarPaginas(estudoId: string) {
 
 // docs/ueq-protocolo.md, seção 7: excluir da análise só muda incluidaNaAnalise; nada é apagado
 export async function alterarInclusao(estudoId: string, participacaoId: string, incluida: boolean): Promise<Retorno> {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   await estudoDoPesquisador(estudoId, pesquisador, "editar");
 
@@ -24,25 +26,29 @@ export async function alterarInclusao(estudoId: string, participacaoId: string, 
     where: { id: participacaoId, versao: { estudoId }, concluidaEm: { not: null } },
     select: { concluidaEm: true },
   });
-  if (!participacao?.concluidaEm) return { erro: "Essa participação não está neste estudo. Recarregue a página." };
+  if (!participacao?.concluidaEm) return { erro: t("Essa participação não está neste estudo. Recarregue a página.") };
 
   await banco.participacao.update({ where: { id: participacaoId }, data: { incluidaNaAnalise: incluida } });
   await notificarAlteracao(
     estudoId,
     pesquisador,
-    (titulo) => `${incluida ? "devolveu uma resposta à análise" : "tirou uma resposta da análise"} em “${titulo}”.`,
+    (titulo, t) =>
+      incluida
+        ? t("devolveu uma resposta à análise em “{titulo}”.", { titulo })
+        : t("tirou uma resposta da análise em “{titulo}”.", { titulo }),
     `/estudos/${estudoId}/respostas`,
   );
   atualizarPaginas(estudoId);
   const quando = formatarDiaHora(participacao.concluidaEm);
   return {
     sucesso: incluida
-      ? `Participação de ${quando} voltou para a análise.`
-      : `Participação de ${quando} saiu da análise. Nada foi apagado: marque “Na análise” para incluir de novo.`,
+      ? t("Participação de {quando} voltou para a análise.", { quando: quando })
+      : t("Participação de {quando} saiu da análise. Nada foi apagado: marque “Na análise” para incluir de novo.", { quando: quando }),
   };
 }
 
 export async function tirarSuspeitasDaAnalise(estudoId: string): Promise<Retorno> {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   await estudoDoPesquisador(estudoId, pesquisador, "editar");
 
@@ -55,12 +61,16 @@ export async function tirarSuspeitasDaAnalise(estudoId: string): Promise<Retorno
     await notificarAlteracao(
       estudoId,
       pesquisador,
-      (titulo) => `tirou ${plural(count, "resposta suspeita", "respostas suspeitas")} da análise em “${titulo}”.`,
+      (titulo, t) =>
+        t("tirou {quantidade} da análise em “{titulo}”.", {
+          quantidade: plural(count, t("resposta suspeita"), t("respostas suspeitas")),
+          titulo,
+        }),
       `/estudos/${estudoId}/respostas`,
     );
   }
-  if (count === 0) return { sucesso: "Nenhuma participação suspeita estava na análise. Nada mudou." };
+  if (count === 0) return { sucesso: t("Nenhuma participação suspeita estava na análise. Nada mudou.") };
   return {
-    sucesso: `${plural(count, "participação suspeita saiu", "participações suspeitas saíram")} da análise. Nada foi apagado: marque “Na análise” para incluir de novo.`,
+    sucesso: t("{quantidade} da análise. Nada foi apagado: marque “Na análise” para incluir de novo.", { quantidade: plural(count, "participação suspeita saiu", "participações suspeitas saíram") }),
   };
 }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, type InputHTMLAttributes, type Ref, type TextareaHTMLAttributes } from "react";
 import type { ErroCampo } from "@/lib/formulario";
 import estilos from "./formulario.module.css";
+import { useT } from "@/traducao/cliente";
 
 type PropriedadesCampo = Omit<InputHTMLAttributes<HTMLInputElement>, "id" | "className"> & {
   id: string;
@@ -19,14 +20,16 @@ type PropriedadesCampoSenha = Omit<PropriedadesCampo, "type"> & {
   textoMostrar?: string;
 };
 
+// As mensagens vêm do servidor já traduzidas ou marcadas com m(); t() de um texto já traduzido não muda nada
 function MensagemErro({ id, erro }: { id: string; erro: ErroCampo }) {
+  const t = useT();
   return (
     <p id={id} className={estilos.erro}>
-      {erro.mensagem}
+      {t(erro.mensagem)}
       {erro.link && (
         <>
           {" "}
-          <Link href={erro.link.href}>{erro.link.texto}</Link>
+          <Link href={erro.link.href}>{t(erro.link.texto)}</Link>
         </>
       )}
     </p>
@@ -39,14 +42,15 @@ function descricoes(id: string, ajuda?: string, erro?: ErroCampo): string | unde
 }
 
 export function Campo({ id, rotulo, ajuda, erro, ...entrada }: PropriedadesCampo) {
+  const t = useT();
   return (
     <div className={estilos.grupo}>
       <label htmlFor={id} className={estilos.rotulo}>
-        {rotulo}
+        {t(rotulo)}
       </label>
       {ajuda && (
         <p id={`${id}-ajuda`} className={estilos.ajuda}>
-          {ajuda}
+          {t(ajuda)}
         </p>
       )}
       <input
@@ -69,14 +73,15 @@ type PropriedadesAreaTexto = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "
 };
 
 export function AreaTexto({ id, rotulo, ajuda, erro, ...entrada }: PropriedadesAreaTexto) {
+  const t = useT();
   return (
     <div className={estilos.grupo}>
       <label htmlFor={id} className={estilos.rotulo}>
-        {rotulo}
+        {t(rotulo)}
       </label>
       {ajuda && (
         <p id={`${id}-ajuda`} className={estilos.ajuda}>
-          {ajuda}
+          {t(ajuda)}
         </p>
       )}
       <textarea
@@ -92,16 +97,18 @@ export function AreaTexto({ id, rotulo, ajuda, erro, ...entrada }: PropriedadesA
 }
 
 // WCAG 3.3.8: colar e gerenciador de senhas funcionam; o botão mostra o que foi digitado
-export function CampoSenha({ id, rotulo, ajuda, erro, textoMostrar = "Mostrar senha", ...entrada }: PropriedadesCampoSenha) {
+export function CampoSenha({ id, rotulo, ajuda, erro, textoMostrar, ...entrada }: PropriedadesCampoSenha) {
+  const t = useT();
+  const mostrar = textoMostrar ?? t("Mostrar senha");
   const [visivel, setVisivel] = useState(false);
   return (
     <div className={estilos.grupo}>
       <label htmlFor={id} className={estilos.rotulo}>
-        {rotulo}
+        {t(rotulo)}
       </label>
       {ajuda && (
         <p id={`${id}-ajuda`} className={estilos.ajuda}>
-          {ajuda}
+          {t(ajuda)}
         </p>
       )}
       <div className={estilos.linhaSenha}>
@@ -123,7 +130,7 @@ export function CampoSenha({ id, rotulo, ajuda, erro, textoMostrar = "Mostrar se
           onClick={() => setVisivel((atual) => !atual)}
         >
           <Eye size={18} strokeWidth={1.5} aria-hidden="true" className={estilos.icone} />
-          <span>{textoMostrar}</span>
+          <span>{t(mostrar)}</span>
         </button>
       </div>
       {erro && <MensagemErro id={`${id}-erro`} erro={erro} />}

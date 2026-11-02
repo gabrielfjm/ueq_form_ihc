@@ -3,16 +3,17 @@ import { redirect } from "next/navigation";
 import { formatar } from "@/idiomas/formatar";
 import { textosDoIdioma } from "@/idiomas";
 import { PERGUNTAS_DEMOGRAFIA, PREFIRO_NAO_RESPONDER } from "@/lib/demografia";
-import { estudoPublico, idiomaDoParticipante, participacaoAtual } from "@/lib/participacao";
+import { estudoPublico, textosDoEstudo, idiomaDoParticipante, participacaoAtual } from "@/lib/participacao";
 import { salvarDemografia } from "../acoes";
 import estilos from "./sobre-voce.module.css";
 
 type Propriedades = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
-  const estudo = await estudoPublico((await params).slug);
-  const { titulos } = textosDoIdioma(await idiomaDoParticipante());
-  return { title: `${titulos.dadosOpcionais} · ${estudo.titulo}` };
+  const { slug } = await params;
+  const doEstudo = await textosDoEstudo(slug);
+  const { titulos } = textosDoIdioma(await idiomaDoParticipante(slug));
+  return { title: `${titulos.dadosOpcionais} · ${doEstudo.titulo}` };
 }
 
 // Protótipo p4. Nada vem marcado e "Pular esta etapa" tem o mesmo peso de "Continuar":
@@ -24,7 +25,7 @@ export default async function PaginaSobreVoce({ params }: Propriedades) {
   if (!participacao?.concluidaEm) redirect(`/r/${slug}` as Route);
   // Estudo sem coleta de dados demográficos não tem esta etapa
   if (!estudo.coletarDemografia) redirect(`/r/${slug}/fim` as Route);
-  const textos = textosDoIdioma(await idiomaDoParticipante());
+  const textos = textosDoIdioma(await idiomaDoParticipante(slug));
   const { sobreVoce } = textos;
 
   return (

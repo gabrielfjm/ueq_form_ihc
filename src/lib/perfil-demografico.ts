@@ -1,3 +1,4 @@
+import { m } from "@/traducao/nucleo";
 import { PERGUNTAS_DEMOGRAFIA, PREFIRO_NAO_RESPONDER, type Demografia } from "./demografia";
 
 // Perfil dos participantes para a aba Respostas: quantas pessoas marcaram cada opção de cada pergunta.
@@ -44,7 +45,7 @@ export function perfilDemografico(demografias: readonly (Demografia | null)[]): 
       ordenada,
       opcoes,
       prefiroNao: barra(PREFIRO_NAO_RESPONDER, prefiroNao, total),
-      semResposta: barra("Não respondeu", total - responderam - prefiroNao, total),
+      semResposta: barra(m("Não respondeu"), total - responderam - prefiroNao, total),
       responderam,
       total,
     };

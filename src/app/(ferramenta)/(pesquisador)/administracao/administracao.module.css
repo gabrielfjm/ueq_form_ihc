@@ -95,3 +95,42 @@
   color: var(--alerta);
   font-weight: 700;
 }
+
+/* Formulários das subpáginas (Criar conta, Cenários): uma coluna, na largura de leitura */
+.formularioPagina {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Administração › Idiomas */
+.avisoIdioma {
+  margin: 24px 0 0;
+  font-weight: 700;
+  color: var(--positivo, var(--tinta));
+}
+
+.tabelaIdiomas {
+  width: 100%;
+  max-width: 760px;
+  margin-top: 32px;
+  border-collapse: collapse;
+}
+
+.tabelaIdiomas th,
+.tabelaIdiomas td {
+  padding: 8px 12px 8px 0;
+  border-bottom: 1px solid var(--linha);
+  text-align: left;
+  vertical-align: middle;
+}
+
+.tabelaIdiomas tbody th {
+  font-weight: 400;
+}
+
+.tabelaIdiomas td:nth-child(2),
+.tabelaIdiomas td:nth-child(3) {
+  font-family: var(--fonte-numero);
+}

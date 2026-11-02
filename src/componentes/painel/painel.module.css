@@ -1,0 +1,113 @@
+.grade {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 20px;
+}
+
+.cartao {
+  position: relative;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+  padding: 22px 20px;
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  background: var(--fundo);
+  transition:
+    border-color var(--transicao),
+    background-color var(--transicao);
+}
+
+.cartaoLink:hover {
+  border-color: var(--tinta);
+  background: var(--fundo-painel);
+}
+
+/* O foco do link aparece no cartão inteiro, que é a área clicável */
+.cartaoLink:focus-within {
+  outline: 2px solid var(--destaque);
+  outline-offset: 2px;
+}
+
+.icone {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--destaque-fundo);
+  color: var(--destaque);
+}
+
+.textos {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.titulo {
+  margin: 0;
+  font-size: var(--texto-lg);
+}
+
+.link {
+  color: var(--tinta);
+  text-decoration: none;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.descricao {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.situacao {
+  margin: 4px 0 0;
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.alerta {
+  color: var(--alerta);
+}
+
+.conteudo {
+  position: relative;
+  z-index: 1;
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 20px;
+}
+
+.seta {
+  align-self: center;
+  color: var(--tinta-suave);
+}
+
+@media (forced-colors: active) {
+  .cartao {
+    border-color: CanvasText;
+  }
+
+  .cartaoLink:focus-within {
+    outline-color: Highlight;
+  }
+}

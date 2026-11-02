@@ -29,17 +29,17 @@ test("a barra fica fixa no topo ao rolar, com e sem conta", async ({ page }, inf
 });
 
 test("o foco e as âncoras nunca ficam embaixo da barra fixa", async ({ page }) => {
-  await page.goto(`${PAGINA_LONGA}#inicio-resultados`);
+  await page.goto(`${PAGINA_LONGA}#inicio-leitura`);
   await barraNoTopo(page);
   const fundo = await fundoDaBarra(page);
   await expect
-    .poll(() => page.locator("#inicio-resultados").evaluate((ancora) => ancora.getBoundingClientRect().top))
+    .poll(() => page.locator("#inicio-leitura").evaluate((ancora) => ancora.getBoundingClientRect().top))
     .toBeGreaterThanOrEqual(fundo);
 
   // Subindo com Shift+Tab, o navegador traz cada elemento pela borda de cima, onde está a barra:
   // o elemento com foco tem de parar abaixo dela (WCAG 2.4.11)
   await page.goto(PAGINA_LONGA);
-  await page.getByRole("link", { name: "Abrir a documentação" }).focus();
+  await page.getByRole("link", { name: "Política de privacidade" }).focus();
   for (let i = 0; i < 40; i++) {
     await page.keyboard.press("Shift+Tab");
     const posicao = await page.evaluate(() => {

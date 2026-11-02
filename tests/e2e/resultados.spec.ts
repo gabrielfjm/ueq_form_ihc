@@ -45,6 +45,9 @@ test("mostra os números do módulo UEQ e guarda versão e modo na URL", async (
   await expect(pagina).toHaveURL(/modo=comparar/);
   await expect(pagina.getByRole("list", { name: "Legenda das versões" })).toContainText("círculo vazado · n = 15");
   await expect(pagina.getByRole("heading", { name: "Médias por versão" })).toBeVisible();
+  // A troca de modo mantém a rolagem; lá embaixo, as abas do estudo ficam atrás da barra fixa e o axe
+  // as conta como alvos encobertos. A checagem vale para a página do topo
+  await pagina.evaluate(() => window.scrollTo(0, 0));
   await verificarAcessibilidade(pagina);
 
   await pagina.goBack();

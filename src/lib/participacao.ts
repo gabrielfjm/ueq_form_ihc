@@ -1,8 +1,9 @@
 import "server-only";
-import { cookies, headers } from "next/headers";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import { cache } from "react";
-import { ehIdioma, negociarIdioma, type CodigoIdioma } from "@/idiomas";
+import { ehIdioma, IDIOMA_PADRAO, infoIdioma, type CodigoIdioma } from "@/idiomas";
+import { traduzirTextosLivres } from "@/traducao/servidor";
 import { banco } from "./banco";
 
 // Os cookies valem só dentro do link do estudo (/r/<slug>) e não guardam nada sobre a pessoa:
@@ -31,6 +32,7 @@ export const estudoPublico = cache(async (slug: string) => {
       objetivo: true,
       status: true,
       coletarDemografia: true,
+      idioma: true,
       versoes: {
         select: {
           id: true,
@@ -56,11 +58,29 @@ export async function marcarRespondido(slug: string) {
   (await cookies()).set(COOKIE_RESPONDIDO, "1", { ...opcoes(slug), maxAge: TRINTA_DIAS_S });
 }
 
-// O idioma escolhido no seletor; antes de escolher, o primeiro dos 37 que o navegador pede (Accept-Language)
-export const idiomaDoParticipante = cache(async (): Promise<CodigoIdioma> => {
+// O idioma escolhido no seletor; antes de escolher, o idioma em que o estudo foi escrito (o pesquisador
+// define ao criar). Quem responde troca a qualquer momento pelo seletor do topo
+export const idiomaDoParticipante = cache(async (slug: string): Promise<CodigoIdioma> => {
   const escolhido = (await cookies()).get(COOKIE_IDIOMA)?.value;
   if (ehIdioma(escolhido)) return escolhido;
-  return negociarIdioma((await headers()).get("accept-language"));
+  const { idioma } = await estudoPublico(slug);
+  return ehIdioma(idioma) ? idioma : IDIOMA_PADRAO;
+});
+
+// Título, produto e objetivo no idioma de quem responde, traduzidos pela API do Claude e guardados.
+// Sem tradução (API desligada ou fora do ar), ficam no idioma do estudo, marcados com o lang dele
+export const textosDoEstudo = cache(async (slug: string) => {
+  const estudo = await estudoPublico(slug);
+  const idioma = await idiomaDoParticipante(slug);
+  const origem = ehIdioma(estudo.idioma) ? estudo.idioma : IDIOMA_PADRAO;
+  const originais = [estudo.titulo, estudo.produtoAvaliado, estudo.objetivo];
+  const [titulo = estudo.titulo, produtoAvaliado = estudo.produtoAvaliado, objetivo = estudo.objetivo] = await traduzirTextosLivres(
+    originais,
+    origem,
+    idioma,
+  );
+  const traduzido = idioma !== origem && [titulo, produtoAvaliado, objetivo].some((texto, indice) => texto !== originais[indice]);
+  return { titulo, produtoAvaliado, objetivo, lang: infoIdioma(traduzido ? idioma : origem).lang };
 });
 
 export async function guardarIdioma(slug: string, codigo: CodigoIdioma) {

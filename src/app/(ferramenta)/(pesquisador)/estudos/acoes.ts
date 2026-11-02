@@ -9,8 +9,11 @@ import { errosPorCampo, textoDoCampo, type EstadoFormulario } from "@/lib/formul
 import { diaDoCampo } from "@/lib/periodo";
 import { exigirPesquisador } from "@/lib/sessao";
 import { AVISOS_DE_STATUS } from "@/lib/status-estudo";
+import { ehIdioma } from "@/idiomas";
 import { lerFormularioEstudo, type CampoEstudo } from "@/lib/validacao-estudo";
 import { equipeDoEstudo, notificar, notificarAlteracao } from "@/lib/notificacoes";
+import { m } from "@/traducao/nucleo";
+import { tradutor } from "@/traducao/servidor";
 
 export async function criarEstudo(
   anterior: EstadoFormulario<CampoEstudo>,
@@ -21,10 +24,11 @@ export async function criarEstudo(
   const validacao = lerFormularioEstudo(dados);
   if (!validacao.success) return { envio, erros: errosPorCampo(validacao.error) };
 
-  const { versoes, dataInicio, dataFim, ...estudo } = validacao.data;
+  const { versoes, dataInicio, dataFim, idioma, ...estudo } = validacao.data;
   const criado = await banco.estudo.create({
     data: {
       ...estudo,
+      idioma: ehIdioma(idioma) ? idioma : pesquisador.idioma,
       pesquisadorId: pesquisador.id,
       dataInicio: diaDoCampo(dataInicio),
       dataFim: diaDoCampo(dataFim),
@@ -41,24 +45,25 @@ export async function salvarEstudo(
   anterior: EstadoFormulario<CampoEstudo>,
   dados: FormData,
 ): Promise<EstadoFormulario<CampoEstudo>> {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const atual = await estudoDoPesquisador(estudoId, pesquisador, "editar");
   const envio = anterior.envio + 1;
   const validacao = lerFormularioEstudo(dados);
   if (!validacao.success) return { envio, erros: errosPorCampo(validacao.error) };
 
-  const { versoes, dataInicio, dataFim, ...estudo } = validacao.data;
+  const { versoes, dataInicio, dataFim, idioma, ...estudo } = validacao.data;
   const mantidas = new Set(versoes.map((versao) => versao.id).filter(Boolean));
   const removidas = atual.versoes.filter((versao) => !mantidas.has(versao.id));
 
   // prompts/04-estudos.md: versão que já tem respostas não pode sair (o formulário já esconde o botão)
   const comRespostas = removidas.find((versao) => versao._count.participacoes > 0);
   if (comRespostas) {
-    return { envio, erroGeral: `A versão "${comRespostas.nome}" já tem respostas e não pode ser removida.` };
+    return { envio, erroGeral: t("A versão \"{nome}\" já tem respostas e não pode ser removida.", { nome: comRespostas.nome }) };
   }
   const idsDoEstudo = new Set(atual.versoes.map((versao) => versao.id));
   if ([...mantidas].some((id) => !idsDoEstudo.has(id))) {
-    return { envio, erroGeral: "Uma das versões não é deste estudo. Recarregue a página e tente de novo." };
+    return { envio, erroGeral: t("Uma das versões não é deste estudo. Recarregue a página e tente de novo.") };
   }
 
   await banco.$transaction([
@@ -72,33 +77,39 @@ export async function salvarEstudo(
     ),
     banco.estudo.update({
       where: { id: estudoId },
-      data: { ...estudo, dataInicio: diaDoCampo(dataInicio), dataFim: diaDoCampo(dataFim) },
+      data: {
+        ...estudo,
+        idioma: ehIdioma(idioma) ? idioma : atual.idioma,
+        dataInicio: diaDoCampo(dataInicio),
+        dataFim: diaDoCampo(dataFim),
+      },
     }),
   ]);
-  await notificarAlteracao(estudoId, pesquisador, (titulo) => `editou os dados de “${titulo}”.`);
+  await notificarAlteracao(estudoId, pesquisador, (titulo, t) => t("editou os dados de “{titulo}”.", { titulo }));
   redirect(`/estudos/${estudoId}?aviso=salvo` as Route);
 }
 
 const TRANSICOES = {
-  abrir: { de: ["RASCUNHO"], para: "ABERTO", aviso: AVISOS_DE_STATUS.ABERTO, verbo: "abriu" },
-  encerrar: { de: ["ABERTO"], para: "ENCERRADO", aviso: AVISOS_DE_STATUS.ENCERRADO, verbo: "encerrou" },
-  reabrir: { de: ["ENCERRADO"], para: "ABERTO", aviso: AVISOS_DE_STATUS.REABERTO, verbo: "reabriu" },
+  abrir: { de: ["RASCUNHO"], para: "ABERTO", aviso: AVISOS_DE_STATUS.ABERTO, feito: m("abriu a coleta de “{titulo}”.") },
+  encerrar: { de: ["ABERTO"], para: "ENCERRADO", aviso: AVISOS_DE_STATUS.ENCERRADO, feito: m("encerrou a coleta de “{titulo}”.") },
+  reabrir: { de: ["ENCERRADO"], para: "ABERTO", aviso: AVISOS_DE_STATUS.REABERTO, feito: m("reabriu a coleta de “{titulo}”.") },
 } as const;
 
 export async function alterarColeta(
   estudoId: string,
   acao: keyof typeof TRANSICOES,
 ): Promise<{ sucesso?: string; erro?: string }> {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador(estudoId, pesquisador, "editar");
   const transicao = TRANSICOES[acao];
   if (!(transicao.de as readonly string[]).includes(estudo.status)) {
-    return { erro: "O estado do estudo mudou em outra aba. Recarregue a página para ver o atual." };
+    return { erro: t("O estado do estudo mudou em outra aba. Recarregue a página para ver o atual.") };
   }
   await banco.estudo.update({ where: { id: estudoId }, data: { status: transicao.para } });
-  await notificarAlteracao(estudoId, pesquisador, (titulo) => `${transicao.verbo} a coleta de “${titulo}”.`);
+  await notificarAlteracao(estudoId, pesquisador, (titulo, t) => t(transicao.feito, { titulo }));
   revalidatePath(`/estudos/${estudoId}`);
-  return { sucesso: transicao.aviso };
+  return { sucesso: t(transicao.aviso) };
 }
 
 export async function excluirEstudo(
@@ -106,14 +117,15 @@ export async function excluirEstudo(
   anterior: EstadoFormulario<"confirmacao">,
   dados: FormData,
 ): Promise<EstadoFormulario<"confirmacao">> {
+  const t = await tradutor();
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador(estudoId, pesquisador, "gerenciar");
   const envio = anterior.envio + 1;
   const confirmacao = textoDoCampo(dados, "confirmacao").trim().toLowerCase();
 
-  if (!confirmacao) return { envio, erros: { confirmacao: { mensagem: "Digite o título do estudo para confirmar." } } };
+  if (!confirmacao) return { envio, erros: { confirmacao: { mensagem: t("Digite o título do estudo para confirmar.") } } };
   if (confirmacao !== estudo.titulo.trim().toLowerCase()) {
-    return { envio, erros: { confirmacao: { mensagem: "O texto não é igual ao título do estudo. Nada foi excluído." } } };
+    return { envio, erros: { confirmacao: { mensagem: t("O texto não é igual ao título do estudo. Nada foi excluído.") } } };
   }
 
   // Avisa a equipe antes de apagar: depois a notificação fica sem estudo, só com o texto
@@ -121,7 +133,7 @@ export async function excluirEstudo(
   if (equipe) {
     await notificar(equipe.ids, pesquisador.id, {
       tipo: "ALTERACAO",
-      texto: `${pesquisador.nome} excluiu o estudo “${equipe.titulo}”, com as versões e as respostas.`,
+      texto: (t) => t("{nome} excluiu o estudo “{titulo}”, com as versões e as respostas.", { nome: pesquisador.nome, titulo: equipe.titulo }),
       link: "/estudos",
     });
   }

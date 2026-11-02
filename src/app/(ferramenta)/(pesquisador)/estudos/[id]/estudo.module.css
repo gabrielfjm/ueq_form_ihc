@@ -55,11 +55,6 @@
   font-weight: 700;
 }
 
-.administrador {
-  background: var(--alerta-fundo);
-  color: var(--alerta);
-}
-
 .linhaStatus {
   margin: 0;
   display: flex;

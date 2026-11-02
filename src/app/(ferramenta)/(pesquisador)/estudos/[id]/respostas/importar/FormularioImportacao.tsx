@@ -9,12 +9,14 @@ import { ResumoErros } from "@/componentes/formulario/ResumoErros";
 import { plural } from "@/lib/texto";
 import { confirmarImportacao, previsualizarImportacao, type Previa, type ResultadoPrevia } from "./acoes";
 import estilos from "./importar.module.css";
+import { useT } from "@/traducao/cliente";
+import { m } from "@/traducao/nucleo";
 
 type Propriedades = { estudoId: string; versoes: { id: string; nome: string }[] };
 
 const CAMPOS = [
-  { nome: "versao", rotulo: "Versão", id: "importar-versao" },
-  { nome: "arquivo", rotulo: "Arquivo CSV", id: "importar-arquivo" },
+  { nome: "versao", rotulo: m("Versão"), id: "importar-versao" },
+  { nome: "arquivo", rotulo: m("Arquivo CSV"), id: "importar-arquivo" },
 ] as const;
 
 const COLUNAS = Array.from({ length: 26 }, (_, posicao) => posicao + 1);
@@ -22,6 +24,7 @@ const COLUNAS = Array.from({ length: 26 }, (_, posicao) => posicao + 1);
 // Dois passos, como pede uma ação que grava muitas linhas de uma vez: ver antes, confirmar depois
 // (Nielsen 5, prevenção de erros; Shneiderman 4, diálogo com fechamento)
 export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
+  const t = useT();
   const [previa, setPrevia] = useState<Previa | null>(null);
   const [erro, setErro] = useState<ResultadoPrevia["erro"]>();
   const [erroGravar, setErroGravar] = useState("");
@@ -70,10 +73,10 @@ export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
         {versoes.length > 1 ? (
           <div className={formulario.grupo}>
             <label htmlFor="importar-versao" className={formulario.rotulo}>
-              Versão
+              {t("Versão")}
             </label>
             <p id="importar-versao-ajuda" className={formulario.ajuda}>
-              Todas as linhas do arquivo entram nesta versão.
+              {t("Todas as linhas do arquivo entram nesta versão.")}
             </p>
             <select
               id="importar-versao"
@@ -84,31 +87,30 @@ export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
               aria-invalid={erro?.campo === "versao" || undefined}
             >
               <option value="" disabled>
-                Escolha a versão
+                {t("Escolha a versão")}
               </option>
               {versoes.map((versao) => (
                 <option key={versao.id} value={versao.id}>
-                  {versao.nome}
+                  {t(versao.nome)}
                 </option>
               ))}
             </select>
           </div>
         ) : (
           <p className={estilos.versaoUnica}>
-            As respostas entram na versão <strong>{versoes[0]?.nome}</strong>.
+            {t("As respostas entram na versão")}{" "}<strong>{versoes[0]?.nome}</strong>.
           </p>
         )}
         <div className={formulario.grupo}>
           <label htmlFor="importar-arquivo" className={formulario.rotulo}>
-            Arquivo CSV
+            {t("Arquivo CSV")}
           </label>
           <p id="importar-arquivo-ajuda" className={formulario.ajuda}>
-            Uma pessoa por linha, com os 26 valores de 1 a 7 na ordem oficial e sem cabeçalho. Separados por ponto e
-            vírgula, vírgula ou tabulação. Até 5000 linhas.
+            {t("Uma pessoa por linha, com os 26 valores de 1 a 7 na ordem oficial e sem cabeçalho. Separados por ponto e vírgula, vírgula ou tabulação. Até 5000 linhas.")}
           </p>
           {erro?.campo === "arquivo" && (
             <p id="importar-arquivo-erro" className={formulario.erro}>
-              {erro.mensagem}
+              {t(erro.mensagem)}
             </p>
           )}
           <input
@@ -124,10 +126,10 @@ export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
         <div className={estilos.botoes}>
           <button type="submit" className={`${formulario.botao} ${formulario.primario}`} disabled={ocupado}>
             <Upload size={18} strokeWidth={1.5} aria-hidden="true" />
-            <span>{ocupado ? "Lendo o arquivo…" : "Ver prévia"}</span>
+            <span>{ocupado ? "Lendo o arquivo…" : t("Ver prévia")}</span>
           </button>
           <Link href={`/estudos/${estudoId}/respostas` as Route} className={formulario.linkAcao}>
-            Voltar para Respostas
+            {t("Voltar para Respostas")}
           </Link>
         </div>
       </form>
@@ -139,19 +141,19 @@ export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
     <section aria-labelledby="titulo-previa" className={estilos.previa}>
       <h3 id="titulo-previa" ref={tituloPrevia} tabIndex={-1} className={estilos.tituloPrevia}>
         {comErros
-          ? `${plural(previa.erros.length, "linha", "linhas")} com problema em ${previa.arquivo}`
-          : `${plural(previa.total, "resposta pronta", "respostas prontas")} para importar`}
+          ? t("{quantidade} com problema em {arquivo}", { quantidade: plural(previa.erros.length, t("linha"), t("linhas")), arquivo: previa.arquivo })
+          : t("{quantidade} para importar", { quantidade: plural(previa.total, t("resposta pronta"), t("respostas prontas")) })}
       </h3>
 
       {comErros ? (
         <>
-          <p>Nada foi importado. Corrija estas linhas no arquivo e envie de novo; as outras estão certas.</p>
+          <p>{t("Nada foi importado. Corrija estas linhas no arquivo e envie de novo; as outras estão certas.")}</p>
           <div className={estilos.rolagem} tabIndex={0} role="region" aria-labelledby="titulo-previa">
             <table className={estilos.tabela}>
               <thead>
                 <tr>
-                  <th scope="col">Linha</th>
-                  <th scope="col">Problema</th>
+                  <th scope="col">{t("Linha")}</th>
+                  <th scope="col">{t("Problema")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -160,7 +162,7 @@ export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
                     <th scope="row" className={estilos.numero}>
                       {problema.linha}
                     </th>
-                    <td>{problema.mensagem}</td>
+                    <td>{t(problema.mensagem)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -170,20 +172,17 @@ export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
       ) : (
         <>
           <p>
-            Do arquivo {previa.arquivo}, na versão <strong>{previa.versaoNome}</strong>. Confira as{" "}
-            {previa.primeiras.length === 1 ? "primeira linha" : `${previa.primeiras.length} primeiras linhas`}: cada
-            coluna é um item, de 1 a 7. As respostas entram marcadas como importadas, na análise e com a mesma regra de
-            suspeita das respostas pelo link.
+            {t("Do arquivo {arquivo}, na versão", { arquivo: previa.arquivo })}{" "}<strong>{t(previa.versaoNome)}</strong>{t(". Confira as {v}: cada coluna é um item, de 1 a 7. As respostas entram marcadas como importadas, na análise e com a mesma regra de suspeita das respostas pelo link.", { v: previa.primeiras.length === 1 ? "primeira linha" : `${previa.primeiras.length} primeiras linhas` })}
           </p>
           <div className={estilos.rolagem} tabIndex={0} role="region" aria-labelledby="legenda-previa">
             <table className={`${estilos.tabela} ${estilos.tabelaValores}`}>
-              <caption id="legenda-previa">Primeiras linhas do arquivo</caption>
+              <caption id="legenda-previa">{t("Primeiras linhas do arquivo")}</caption>
               <thead>
                 <tr>
-                  <th scope="col">Linha</th>
+                  <th scope="col">{t("Linha")}</th>
                   {COLUNAS.map((numero) => (
                     <th key={numero} scope="col" className={estilos.numero}>
-                      <span className="visualmente-oculto">Item </span>
+                      <span className="visualmente-oculto">{t("Item")}{" "}</span>
                       {numero}
                     </th>
                   ))}
@@ -207,7 +206,7 @@ export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
           </div>
           {erroGravar && (
             <p role="alert" className={formulario.erro}>
-              {erroGravar}
+              {t(erroGravar)}
             </p>
           )}
         </>
@@ -216,11 +215,11 @@ export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
       <div className={estilos.botoes}>
         {!comErros && (
           <button type="button" className={`${formulario.botao} ${formulario.primario}`} onClick={aoConfirmar} disabled={ocupado}>
-            {ocupado ? "Importando…" : `Importar ${plural(previa.total, "resposta", "respostas")}`}
+            {ocupado ? t("Importando…") : `Importar ${plural(previa.total, t("resposta"), t("respostas"))}`}
           </button>
         )}
         <button type="button" className={`${formulario.botao} ${formulario.secundario}`} onClick={escolherOutro}>
-          Escolher outro arquivo
+          {t("Escolher outro arquivo")}
         </button>
       </div>
     </section>
