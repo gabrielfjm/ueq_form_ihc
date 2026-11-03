@@ -152,15 +152,15 @@ Como as telas vão ficar em produção, em [docs/prototipos/alta-fidelidade/](do
 ### Participante
 
 <p>
-<img src="docs/prototipos/alta-fidelidade/p1-consentimento.png" alt="Consentimento: etapas no topo, fileira de sete marcações, termo com tempo, participação, anonimato e uso dos dados, botão Concordo e quero participar" width="200">
-<img src="docs/prototipos/alta-fidelidade/p2-questionario-celular.png" alt="Questionário no celular: cada item com os dois termos acima de sete círculos, rodapé com 8 de 26 respondidos e Sair sem enviar" width="200">
-<img src="docs/prototipos/alta-fidelidade/p3-questionario-item-faltando.png" alt="Envio com item faltando: resumo Faltam 2 itens em vermelho com links, item 7 com borda e texto Este item não foi respondido" width="200">
-<img src="docs/prototipos/alta-fidelidade/p4-dados-opcionais.png" alt="Dados opcionais: faixa etária, gênero, escolaridade e familiaridade, todas com Prefiro não responder, botões Continuar e Pular esta etapa" width="200">
-<img src="docs/prototipos/alta-fidelidade/p5-fim.png" alt="Fim: etapas concluídas, sete marcações preenchidas e Respostas registradas" width="200">
-<img src="docs/prototipos/alta-fidelidade/p6-link-fechado.png" alt="Link fechado: estudo em rascunho ou coleta encerrada" width="200">
+<img src="docs/prototipos/alta-fidelidade/p1-consentimento.png" alt="Consentimento: faixa com o seletor de idioma, as etapas, a fileira de sete marcações e o título, termo com tempo, participação, anonimato e uso dos dados, botão Concordo e quero participar" width="200">
+<img src="docs/prototipos/alta-fidelidade/p2-questionario-celular.png" alt="Questionário no celular: faixa com idioma e etapa, instrução oficial num quadro, cada item numerado com os dois termos acima de sete círculos e uma barra azul nos respondidos, rodapé com 8 de 26 respondidos e Sair sem enviar" width="200">
+<img src="docs/prototipos/alta-fidelidade/p3-questionario-item-faltando.png" alt="Envio com itens faltando: resumo em vermelho com o número de cada item e um link para ele" width="200">
+<img src="docs/prototipos/alta-fidelidade/p4-dados-opcionais.png" alt="Dados opcionais: faixa com a etapa, perguntas com cada opção numa linha clicável e a escolhida em destaque, todas com Prefiro não responder, botões Continuar e Pular esta etapa" width="200">
+<img src="docs/prototipos/alta-fidelidade/p5-fim.png" alt="Fim: etapas concluídas, sete marcações preenchidas e o agradecimento num quadro" width="200">
+<img src="docs/prototipos/alta-fidelidade/p6-link-fechado.png" alt="Link fechado: aviso num quadro de que a coleta do estudo foi encerrada" width="200">
 </p>
 
-<img src="docs/prototipos/alta-fidelidade/p7-questionario-desktop.png" alt="Questionário no desktop com os 26 itens e rodapé fixo com o progresso e o link Sair sem enviar" width="800">
+<img src="docs/prototipos/alta-fidelidade/p7-questionario-desktop.png" alt="Questionário no computador: faixa com idioma e etapa, instrução num quadro, itens numerados com o termo à esquerda, sete círculos e o termo à direita, barra azul nos respondidos e rodapé fixo com o progresso" width="800">
 
 "Sair sem enviar" confirma numa janela, com o foco em Continuar respondendo:
 

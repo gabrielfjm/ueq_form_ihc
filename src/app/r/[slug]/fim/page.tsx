@@ -27,9 +27,11 @@ export default async function PaginaFim({ params }: Propriedades) {
         </div>
       </header>
       <main id="conteudo" tabIndex={-1} className={estilos.corpo}>
-        <h1 className={estilos.fimTitulo}>{textos.fim.titulo}</h1>
-        <p className={estilos.fimTexto}>{textos.fim.texto}</p>
-        <p className={estilos.fimNota}>{textos.fim.nota}</p>
+        <div className={estilos.fimCaixa}>
+          <h1 className={estilos.fimTitulo}>{textos.fim.titulo}</h1>
+          <p className={estilos.fimTexto}>{textos.fim.texto}</p>
+          <p className={estilos.fimNota}>{textos.fim.nota}</p>
+        </div>
       </main>
     </>
   );

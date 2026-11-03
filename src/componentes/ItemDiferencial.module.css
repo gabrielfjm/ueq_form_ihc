@@ -1,16 +1,24 @@
 /* docs/ihc.md §3 e §4.1, protótipos p2, p3 e p7 */
 
+/* A barra da esquerda (respondido ou faltando) é uma sombra interna de 3px: aparece sem empurrar o conteúdo */
 .item {
   margin: 0;
   min-width: 0;
-  padding: 16px 0 12px;
+  padding: 14px 8px 10px 14px;
   border: 0;
   border-bottom: 1px solid var(--linha);
+  transition:
+    background-color var(--transicao),
+    box-shadow var(--transicao);
+}
+
+.respondido {
+  box-shadow: inset 3px 0 0 var(--destaque);
 }
 
 .faltando {
-  padding-left: 10px;
-  border-left: 3px solid var(--alerta);
+  box-shadow: inset 3px 0 0 var(--alerta);
+  background: var(--alerta-fundo);
 }
 
 .legenda {
@@ -28,19 +36,30 @@
   color: var(--alerta);
 }
 
-/* Celular: os dois termos numa linha acima dos círculos, um em cada ponta */
+/* Celular: o número e os dois termos numa linha acima dos círculos, um termo em cada ponta */
 .linha {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr) minmax(0, 1fr);
   grid-template-areas:
-    "esquerdo direito"
-    "circulos circulos";
-  row-gap: 4px;
+    "numero esquerdo direito"
+    "circulos circulos circulos";
+  align-items: baseline;
+  row-gap: 6px;
+}
+
+.numero {
+  grid-area: numero;
+  min-width: 1.75rem;
+  font-family: var(--fonte-numero);
+  font-size: var(--texto-xs);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--tinta-fraca);
 }
 
 .termoEsquerdo,
 .termoDireito {
-  padding: 0 6px;
+  padding: 0 4px;
   overflow-wrap: anywhere;
 }
 
@@ -74,16 +93,19 @@
   cursor: pointer;
 }
 
+/* Marcado vira um anel com o miolo cheio, como os botões de opção dos dados opcionais */
 .circulo {
   appearance: none;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   margin: 0;
   border: 1.5px solid var(--tinta);
   border-radius: 50%;
-  background: transparent;
+  background: var(--fundo);
   cursor: pointer;
-  transition: background-color var(--transicao);
+  transition:
+    background-color var(--transicao),
+    box-shadow var(--transicao);
 }
 
 .circulo:hover {
@@ -92,6 +114,7 @@
 
 .circulo:checked {
   background: var(--tinta);
+  box-shadow: inset 0 0 0 4px var(--fundo);
 }
 
 .circulo:focus-visible {
@@ -99,19 +122,24 @@
   outline-offset: 3px;
 }
 
-/* Desktop: termo à esquerda alinhado à direita, círculos no centro, termo à direita (docs/design.md) */
+/* Desktop: número, termo à esquerda alinhado à direita, círculos no centro, termo à direita (docs/design.md).
+   A linha inteira clareia com o mouse em cima, para o olho não se perder entre o termo e os círculos */
 @media (min-width: 640px) {
   .item {
-    padding: 8px 0;
+    padding: 6px 12px 6px 16px;
   }
 
-  .faltando {
-    padding-left: 10px;
+  .item:hover {
+    background: var(--fundo-painel);
+  }
+
+  .faltando:hover {
+    background: var(--alerta-fundo);
   }
 
   .linha {
-    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
-    grid-template-areas: "esquerdo circulos direito";
+    grid-template-columns: 2rem minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-areas: "numero esquerdo circulos direito";
     align-items: center;
     column-gap: 16px;
   }
@@ -141,13 +169,18 @@
   .circulo:checked {
     background: Highlight;
     border-color: Highlight;
+    box-shadow: inset 0 0 0 4px Canvas;
   }
 
   .circulo:focus-visible {
     outline-color: Highlight;
   }
 
+  .respondido {
+    border-left: 3px solid Highlight;
+  }
+
   .faltando {
-    border-left-color: Mark;
+    border-left: 3px solid Mark;
   }
 }

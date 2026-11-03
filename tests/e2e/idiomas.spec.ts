@@ -101,14 +101,15 @@ test("em árabe pelo seletor: página da direita para a esquerda, escala na orde
   expect(um).toBeLessThan(sete);
   expect(esquerda).toBeLessThan(sete);
   expect(um).toBeLessThan(direita);
-  // E o termo da esquerda começa colado à esquerda, não no meio da linha (alinhamento físico, não "start")
+  // E o termo da esquerda começa colado à esquerda, logo depois do número do item, não no meio da linha
+  // (alinhamento físico, não "start")
   // Mede o texto, não o span: o span ocupa a célula inteira da grade, qualquer que seja o alinhamento
   const inicioEsquerda = await item.getByText("مزعج", { exact: true }).evaluate((elemento) => {
     const trecho = document.createRange();
     trecho.selectNodeContents(elemento);
     return trecho.getBoundingClientRect().x;
   });
-  expect(inicioEsquerda).toBeLessThanOrEqual((await item.locator('input[value="1"]').boundingBox())!.x);
+  expect(inicioEsquerda).toBeLessThan((await item.locator('input[value="2"]').boundingBox())!.x);
   await verificarAcessibilidade(page);
 
   await responderTudo(page);
@@ -120,4 +121,22 @@ test("em árabe pelo seletor: página da direita para a esquerda, escala na orde
   await pesquisador.getByRole("navigation", { name: "Seções do estudo" }).getByRole("link", { name: "Respostas" }).click();
   await expect(pesquisador.getByRole("row").filter({ hasText: "Árabe" })).toContainText("tradução não aprovada");
   await estudo.fechar();
+});
+
+test("o idioma também troca no meio do questionário, sem perder o que já foi marcado", async ({ page, browser }, info) => {
+  const estudo = await estudoAberto(browser, info);
+  await page.goto(estudo.link);
+  await page.getByRole("button", { name: "Concordo e quero participar" }).click();
+  await expect(page).toHaveURL(/\/questionario$/);
+  await page.getByRole("group", { name: "Item 1 de 26: Desagradável ou Agradável" }).getByRole("radio").nth(5).check();
+
+  await page.getByLabel("Idioma").selectOption("en");
+  await page.getByRole("button", { name: "Aplicar" }).click();
+  // Volta para o questionário (não para o consentimento), já em inglês e com o item 1 marcado
+  await expect(page).toHaveURL(/\/questionario$/);
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  const item = page.getByRole("group", { name: "Item 1 of 26: annoying or enjoyable" });
+  await expect(item.getByRole("radio").nth(5)).toBeChecked();
+  await expect(page.getByText("1 of 26 answered")).toBeVisible();
+  await verificarAcessibilidade(page);
 });
