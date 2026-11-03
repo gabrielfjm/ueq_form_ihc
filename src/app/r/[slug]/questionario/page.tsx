@@ -4,6 +4,8 @@ import { formatar } from "@/idiomas/formatar";
 import { infoIdioma, instrucaoDoIdioma, termosDoIdioma, textosDoIdioma } from "@/idiomas";
 import { itensDoQuestionario } from "@/lib/itens-ueq";
 import { estudoPublico, textosDoEstudo, idiomaDoParticipante, participacaoAtual } from "@/lib/participacao";
+import participante from "../participante.module.css";
+import { SeletorIdioma } from "../SeletorIdioma";
 import { FormularioQuestionario } from "./FormularioQuestionario";
 import estilos from "./questionario.module.css";
 
@@ -35,28 +37,40 @@ export default async function PaginaQuestionario({ params }: Propriedades) {
 
   return (
     <div className={estilos.pagina}>
+      {/* A mesma faixa do consentimento: a pessoa sente que continua no mesmo lugar. O idioma pode ser trocado
+          aqui também, e as marcações já feitas voltam do rascunho */}
+      <header className={participante.faixa}>
+        <div className={`${participante.faixaInterna} ${participante.faixaLarga}`}>
+          <SeletorIdioma slug={slug} idioma={idioma} textos={textos.idioma} voltar="questionario" />
+          <div className={participante.nomeEstudo}>
+            <p className={participante.etapaFaixa}>
+              {formatar(textos.etapas.etapaDeTotal, { n: 2, total: estudo.coletarDemografia ? 3 : 2, nome: textos.etapas.nomes[1] })}
+            </p>
+            <h1 className={participante.tituloGrande} lang={doEstudo.lang}>
+              {doEstudo.produtoAvaliado}
+            </h1>
+          </div>
+        </div>
+      </header>
       <FormularioQuestionario
         slug={slug}
         participacaoId={participacao.id}
         tituloDocumento={`${textos.titulos.questionario} · ${doEstudo.titulo}`}
-        etapa={formatar(textos.etapas.etapaDeTotal, { n: 2, total: estudo.coletarDemografia ? 3 : 2, nome: textos.etapas.nomes[1] })}
         itens={itens}
         textos={textos.questionario}
         lang={idioma.lang}
         direcao={idioma.direcao}
       >
-        {/* docs/ihc.md §3.4: instrução oficial do UEQ, do pacote de idiomas (data/ueq-instrucoes.json) */}
-        <header className={estilos.cabecalho}>
-          <h1 className={estilos.titulo} lang={doEstudo.lang}>
-            {doEstudo.produtoAvaliado}
-          </h1>
-          <div className={estilos.instrucao}>
-            <p className={estilos.instrucaoTitulo}>{instrucao.titulo}</p>
-            {instrucao.paragrafos.map((paragrafo) => (
-              <p key={paragrafo}>{paragrafo}</p>
-            ))}
-          </div>
-        </header>
+        {/* docs/ihc.md §3.4: instrução oficial do UEQ, do pacote de idiomas (data/ueq-instrucoes.json), num quadro
+            à parte para não virar um bloco de texto solto antes dos itens */}
+        <section aria-labelledby="titulo-instrucao" className={estilos.instrucao}>
+          <h2 id="titulo-instrucao" className={estilos.instrucaoTitulo}>
+            {instrucao.titulo}
+          </h2>
+          {instrucao.paragrafos.map((paragrafo) => (
+            <p key={paragrafo}>{paragrafo}</p>
+          ))}
+        </section>
       </FormularioQuestionario>
     </div>
   );

@@ -36,10 +36,13 @@ export function ItemDiferencial({
   direcao,
 }: Propriedades) {
   const idErro = `item-${numero}-erro`;
+  // Respondido ganha só uma barra fina à esquerda, igual em qualquer posição marcada: mostra o caminho já
+  // feito sem dizer nada sobre a resposta. Faltando (depois do envio) usa a mesma barra em --alerta
+  const estado = faltando ? estilos.faltando : valor !== undefined ? estilos.respondido : "";
   return (
     <fieldset
       id={`item-${numero}`}
-      className={faltando ? `${estilos.item} ${estilos.faltando}` : estilos.item}
+      className={`${estilos.item} ${estado}`}
       aria-describedby={faltando ? idErro : undefined}
     >
       <legend className={estilos.legenda}>
@@ -53,6 +56,10 @@ export function ItemDiferencial({
       {/* A linha fica sempre da esquerda para a direita, de 1 a 7, como nos PDFs oficiais em árabe, hebraico
           e persa: o termo da esquerda continua à esquerda. Só o texto de cada termo segue a direção do idioma */}
       <div className={estilos.linha} dir="ltr">
+        {/* O número já está na legenda; à vista, ajuda a achar o item que o resumo de erros aponta */}
+        <span aria-hidden="true" className={estilos.numero}>
+          {numero}
+        </span>
         {/* Os termos já estão na legenda; aqui ficam só para quem vê, sem repetir no leitor de tela */}
         <span aria-hidden="true" dir={direcao} className={estilos.termoEsquerdo}>
           {termoEsquerdo}

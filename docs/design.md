@@ -132,7 +132,12 @@ A tela mais importante. É onde a equipe mostra que entende de IHC.
 - Progresso: texto "14 de 26" fixo no rodapé + a fileira de 7 marcações como ícone. Sem barra de progresso colorida
 - Ao enviar com item faltando: resumo de erros no topo com link para cada item ("Faltam 2 itens: 7 e 19"), foco vai para o resumo, e cada item faltando ganha borda esquerda `--alerta` + o texto "Este item não foi respondido"
 - `scroll-padding-bottom` igual à altura do rodapé fixo, para o foco nunca ficar escondido
-- Fim: página simples agradecendo. Nada de confete
+- Fim: página simples agradecendo, num quadro com fundo `--fundo-painel` e barra de 3px `--destaque` à esquerda. Nada de confete. Os avisos de uma tela só (link fechado, já respondeu, saiu) usam o mesmo quadro
+- Todas as etapas abrem com a mesma faixa `--fundo-faixa` do consentimento: etapa ("Etapa 2 de 3 · Questionário") e título. No consentimento e no questionário a faixa tem o seletor de idioma; trocar no questionário volta para ele, com as marcações guardadas no rascunho
+- Instrução oficial do UEQ num quadro (`--fundo-painel`, borda de 1px `--linha`) acima dos itens, com o texto inteiro e na ordem do pacote de idiomas
+- Cada item mostra o número em `--tinta-fraca` à esquerda, para achar o item que o resumo de erros aponta; o número também está na legenda. Item respondido ganha uma barra de 3px `--destaque` à esquerda, igual em qualquer posição marcada; item faltando, a mesma barra em `--alerta` com fundo `--alerta-fundo`. No computador a linha clareia (`--fundo-painel`) com o mouse em cima, para o olho não se perder entre termo e círculos
+- Círculos de 30px; marcado é anel com o miolo em `--tinta`, como os botões de opção dos dados opcionais
+- Dados opcionais: cada opção é uma linha inteira clicável, com borda `--borda-campo`; a escolhida fica com borda `--tinta` e fundo `--destaque-fundo`. Continuar e Pular esta etapa continuam com o mesmo peso
 
 ### Painel do estudo
 Abre com uma **linha de resumo em texto**, não com cards: "34 respostas · 3 suspeitas · 31 na análise · coleta aberta desde 04/11".

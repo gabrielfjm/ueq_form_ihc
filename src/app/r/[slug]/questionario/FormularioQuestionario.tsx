@@ -17,7 +17,6 @@ type Propriedades = {
   slug: string;
   participacaoId: string;
   tituloDocumento: string;
-  etapa: string;
   itens: Item[];
   textos: TextosParticipante["questionario"];
   lang: string;
@@ -29,7 +28,6 @@ export function FormularioQuestionario({
   slug,
   participacaoId,
   tituloDocumento,
-  etapa,
   itens,
   textos,
   lang,
@@ -106,7 +104,6 @@ export function FormularioQuestionario({
   return (
     <>
       <main id="conteudo" tabIndex={-1} className={estilos.principal}>
-        <p className={estilos.etapa}>{etapa}</p>
         {recuperadas && <MensagemStatus mensagem={textos.recuperadas} />}
         {(faltando.length > 0 || erroEnvio) && (
           <div ref={resumo} tabIndex={-1} role="alert" aria-labelledby="resumo-erros" className={estilos.resumo}>

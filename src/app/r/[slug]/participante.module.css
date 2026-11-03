@@ -1,12 +1,24 @@
 /* Telas do participante (p1 a p7): sem ícones e sem nada além do necessário (docs/ihc.md §3) */
 
+/* Avisos de uma tela só (link fechado, já respondeu, saiu): o mesmo quadro do agradecimento do fim */
 .pagina {
+  box-sizing: border-box;
   max-width: 40rem;
-  margin: 0 auto;
-  padding: 48px 16px 40px;
+  margin: 48px auto 40px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--linha);
+  border-left: 3px solid var(--destaque);
+  border-radius: var(--raio);
+}
+
+@media (max-width: 42rem) {
+  .pagina {
+    margin: 24px 16px 32px;
+  }
 }
 
 .etapa {
@@ -41,9 +53,28 @@
   gap: 20px;
 }
 
+/* O questionário usa a largura dele (960 px), com a mesma faixa */
+.faixaLarga {
+  max-width: 960px;
+}
+
+@media (min-width: 640px) {
+  .faixaLarga {
+    padding-inline: 24px;
+  }
+}
+
 .faixaFim {
-  padding-bottom: 40px;
-  gap: 40px;
+  padding-bottom: 32px;
+  gap: 24px;
+}
+
+/* "Etapa 2 de 3 · Questionário" logo acima do título, nas etapas que não mostram a régua de etapas */
+.etapaFaixa {
+  margin: 0;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-fraca);
 }
 
 /* Seletor de idioma: fora do protótipo, então o mínimo possível e com as peças do formulário (campo e botão) */
@@ -100,9 +131,10 @@
   color: var(--tinta);
 }
 
+/* A fileira de marcações é o motivo da ferramenta: discreta, do tamanho de uma assinatura */
 .marcacoes {
   width: 100%;
-  max-width: 400px;
+  max-width: 220px;
 }
 
 .marcacoes line {
@@ -218,9 +250,21 @@
   padding: 10px 4px;
 }
 
+/* Fim: o agradecimento num quadro, perto do topo, sem deixar a tela vazia nem fazer festa */
+.fimCaixa {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 24px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--linha);
+  border-left: 3px solid var(--destaque);
+  border-radius: var(--raio);
+}
+
 .fimTitulo {
   margin: 0;
-  font-size: 2.25rem;
+  font-size: 2rem;
   line-height: 1.15;
 }
 
@@ -231,7 +275,7 @@
 
 .fimNota {
   margin: 0;
-  padding-top: 16px;
+  padding-top: 14px;
   border-top: 1px solid var(--linha);
   color: var(--tinta-suave);
 }

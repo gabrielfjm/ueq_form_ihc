@@ -17,40 +17,27 @@
   gap: 20px;
 }
 
-.etapa {
-  margin: 0;
-  font-size: var(--texto-sm);
-  font-weight: 700;
-  color: var(--tinta-fraca);
-}
-
-.cabecalho {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.titulo {
-  margin: 0;
-  font-size: 1.875rem;
-  line-height: 1.2;
-  overflow-wrap: anywhere;
-}
-
+/* Instrução oficial num quadro calmo, separado dos itens; o texto continua inteiro e na ordem do pacote */
 .instrucao {
-  max-width: 72ch;
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 18px 20px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
   color: var(--tinta-suave);
 }
 
 .instrucao p {
   margin: 0;
+  max-width: 72ch;
 }
 
 .instrucaoTitulo {
-  font-weight: 700;
+  margin: 0 0 2px;
+  font-size: 1.1875rem;
+  line-height: 1.3;
   color: var(--tinta);
 }
 
@@ -173,12 +160,12 @@
 
 @media (min-width: 640px) {
   .principal {
-    padding: 48px 24px 64px;
-    gap: 24px;
+    padding: 40px 24px 64px;
+    gap: 28px;
   }
 
-  .titulo {
-    font-size: 2.25rem;
+  .instrucao {
+    padding: 22px 28px;
   }
 
   .rodapeInterno {

@@ -24,11 +24,12 @@ import { avaliarSuspeita } from "@/ueq";
 const rota = (slug: string, etapa = "") => `/r/${slug}${etapa}` as Route;
 
 // Seletor de idioma do consentimento: só muda com o botão "Aplicar", nunca ao escolher (WCAG 3.2.2)
+// Também no questionário: quem troca o idioma no meio volta para lá, com as marcações guardadas no rascunho
 export async function escolherIdioma(slug: string, dados: FormData): Promise<void> {
   await estudoPublico(slug);
   const codigo = dados.get("idioma");
   if (ehIdioma(codigo)) await guardarIdioma(slug, codigo);
-  redirect(rota(slug));
+  redirect(rota(slug, dados.get("voltar") === "questionario" ? "/questionario" : ""));
 }
 
 // Só aqui nasce a Participacao: antes de concordar, nada sobre a pessoa é gravado (docs/ihc.md §3.7)

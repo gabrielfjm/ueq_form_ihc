@@ -3,13 +3,20 @@ import { IDIOMAS, type InfoIdioma, type TextosParticipante } from "@/idiomas";
 import { escolherIdioma } from "./acoes";
 import estilos from "./participante.module.css";
 
-type Propriedades = { slug: string; idioma: InfoIdioma; textos: TextosParticipante["idioma"] };
+type Propriedades = {
+  slug: string;
+  idioma: InfoIdioma;
+  textos: TextosParticipante["idioma"];
+  // no questionário, aplicar volta para ele em vez do consentimento
+  voltar?: "questionario";
+};
 
 // Cada idioma aparece pelo próprio nome (endônimo) e com lang, para o leitor de tela pronunciar certo.
 // Mudar a seleção não envia nada: só o botão aplica (WCAG 3.2.2, sem mudança de contexto ao escolher)
-export function SeletorIdioma({ slug, idioma, textos }: Propriedades) {
+export function SeletorIdioma({ slug, idioma, textos, voltar }: Propriedades) {
   return (
     <form action={escolherIdioma.bind(null, slug)} className={estilos.idioma}>
+      {voltar && <input type="hidden" name="voltar" value={voltar} />}
       <label htmlFor="idioma" className={estilos.idiomaRotulo}>
         {textos.rotulo}
       </label>
