@@ -2345,6 +2345,10 @@
    "cliente": true
   },
   {
+   "texto": "Para aceitar ou recusar, entre na ferramenta e abra Convites.",
+   "cliente": false
+  },
+  {
    "texto": "Para aceitar ou recusar, entre na ferramenta e abra Convites: {link}",
    "cliente": false
   },
@@ -2753,6 +2757,10 @@
    "cliente": true
   },
   {
+   "texto": "Se o botão não funcionar, copie e cole este endereço no navegador:",
+   "cliente": false
+  },
+  {
    "texto": "Se o produto é criativo e inovador.",
    "cliente": true
   },
@@ -3134,6 +3142,10 @@
   },
   {
    "texto": "Você ainda não tem estudos.",
+   "cliente": false
+  },
+  {
+   "texto": "Você foi convidado para um estudo",
    "cliente": false
   },
   {
