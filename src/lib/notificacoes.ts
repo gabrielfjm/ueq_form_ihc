@@ -4,6 +4,7 @@ import type { TipoNotificacao } from "@/generated/prisma/enums";
 import { banco } from "./banco";
 import { enviarEmail, type Email } from "./email";
 import { origemDoSite } from "./endereco";
+import { htmlDoEmail, textoDoEmail } from "./modelo-email";
 import type { Traduzir } from "@/traducao/nucleo";
 import { tradutorDoIdioma } from "@/traducao/servidor";
 import { plural } from "./texto";
@@ -35,16 +36,23 @@ async function destinatarios(ids: readonly string[]): Promise<{ pessoa: Destinat
   return Promise.all(pessoas.map(async (pessoa) => ({ pessoa, t: await tradutorDoIdioma(pessoa.idioma) })));
 }
 
-const escapar = (texto: string) => texto.replace(/[&<>"']/g, (caractere) => `&#${caractere.charCodeAt(0)};`);
-
+// O aviso do sino como e-mail, no modelo da ferramenta (src/lib/modelo-email.ts)
 function emailPadrao(t: Traduzir, para: string, texto: string, endereco: string): Email {
-  const rodape = t("Você recebe estes avisos porque participa deste estudo. Para parar de receber por e-mail, desligue em Minha conta.");
-  const abrir = t("Abrir na ferramenta");
+  const conteudo = {
+    lang: t.lang,
+    previa: texto,
+    titulo: texto,
+    paragrafos: [],
+    botao: { texto: t("Abrir na ferramenta"), href: endereco },
+    linkReserva: t("Se o botão não funcionar, copie e cole este endereço no navegador:"),
+    rodape: [t("Você recebe estes avisos porque participa deste estudo. Para parar de receber por e-mail, desligue em Minha conta.")],
+    assinatura: t("Ferramenta UEQ"),
+  };
   return {
     para,
     assunto: texto.length > 110 ? `${texto.slice(0, 107)}…` : texto,
-    texto: `${texto}\n\n${abrir}: ${endereco}\n\n${rodape}\n\n${t("Ferramenta UEQ")}`,
-    html: `<p>${escapar(texto)}</p><p><a href="${escapar(endereco)}">${escapar(abrir)}</a></p><p style="color:#46525E;font-size:13px">${escapar(rodape)}</p>`,
+    texto: textoDoEmail(conteudo),
+    html: htmlDoEmail(conteudo),
   };
 }
 

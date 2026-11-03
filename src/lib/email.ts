@@ -1,6 +1,7 @@
 import "server-only";
 import { createTransport } from "nodemailer";
 import type { Traduzir } from "@/traducao/nucleo";
+import { htmlDoEmail } from "./modelo-email";
 
 // Envio por SMTP (ex.: Gmail com senha de app). Sem as variáveis, a ferramenta não envia e-mail: o convite
 // continua aparecendo para a pessoa em Convites, e quem convidou recebe um link de e-mail pronto para
@@ -56,9 +57,6 @@ export async function enviarEmail(email: Email): Promise<boolean> {
   }
 }
 
-const escapar = (texto: string) =>
-  texto.replace(/[&<>"']/g, (caractere) => `&#${caractere.charCodeAt(0)};`);
-
 type DadosConvite = {
   quemConvidou: { nome: string; email: string };
   para: string;
@@ -98,11 +96,17 @@ export function emailDeConvite(t: Traduzir, { quemConvidou, para, estudo, papel,
     "",
     assinatura,
   ].join("\n");
-  const html = `<p>${escapar(ola)}</p>
-<p>${escapar(convite(quemConvidou.nome, estudo))}</p>
-<p>${escapar(papelTexto)}</p>
-<p><a href="${escapar(link)}">${escapar(t("Abrir os convites na ferramenta"))}</a></p>
-<p style="color:#46525E">${escapar(assinatura)}</p>`;
+  const html = htmlDoEmail({
+    lang: t.lang,
+    previa: convite(quemConvidou.nome, estudo),
+    titulo: t("Você foi convidado para um estudo"),
+    paragrafos: [ola, convite(quemConvidou.nome, estudo), papelTexto],
+    destaque: estudo,
+    botao: { texto: t("Abrir os convites na ferramenta"), href: link },
+    linkReserva: t("Se o botão não funcionar, copie e cole este endereço no navegador:"),
+    rodape: [t("Para aceitar ou recusar, entre na ferramenta e abra Convites.")],
+    assinatura,
+  });
   return { para, assunto, texto, html, responderPara: quemConvidou.email };
 }
 
