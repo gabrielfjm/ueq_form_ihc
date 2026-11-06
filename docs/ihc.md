@@ -84,7 +84,8 @@ Formato: requisito → princípio (fonte).
 | Excluir estudo: confirmação digitando o título, mostrando quantas respostas serão perdidas. Encerrar coleta é reversível (Reabrir) | Prevenção de erros (Nielsen 5, WCAG 3.3.4), reversão fácil (Shneiderman 6) |
 | Sair e toda exclusão confirmam numa janela (`<dialog>` nativo) que diz o que vai acontecer, com Cancelar ao lado. Foco preso dentro, Esc fecha sem fazer nada e o foco volta para quem abriu | Prevenção de erros (Nielsen 5), controle do usuário (Nielsen 3), 2.1.2, 2.4.3, 3.3.4 |
 | Entrar e Criar conta abrem numa janela sobre a página atual, sem perder o lugar, e cabem na tela sem rolar | Controle do usuário (Nielsen 3), carga de memória (Shneiderman 8), 1.4.10 |
-| Toda ação dá retorno visível e anunciado: "Coleta aberta. O link já aceita respostas." em região `role="status"` | Feedback (Norman, Shneiderman 3), 4.1.3 |
+| Toda ação dá retorno visível e anunciado: "Coleta aberta. O link já aceita respostas." em região `role="status"`, que acompanha a rolagem e fica até a pessoa fechar | Feedback (Norman, Shneiderman 3), 4.1.3, 2.2.1 |
+| Enquanto a ação roda, o botão diz o que está acontecendo e bloqueia novos cliques, para nada ser enviado duas vezes | Visibilidade do status (Nielsen 1), prevenção de erros (Nielsen 5), 4.1.3 |
 | Status do estudo escrito, sempre no mesmo lugar, com a consequência ("Aberto · aceitando respostas") | Visibilidade do status (Nielsen 1) |
 | Termos do UEQ com nome oficial e uma explicação curta acessível por `<details>` ("O que é Perspicuidade?") | Correspondência com o mundo real (Nielsen 2), ajuda e documentação (Nielsen 10), revelação progressiva |
 | Mesmo padrão de botão, tabela e mensagem em todas as telas | Consistência (Nielsen 4, Shneiderman 1) |

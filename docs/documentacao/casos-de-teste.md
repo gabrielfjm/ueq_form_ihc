@@ -1,6 +1,6 @@
 # Casos e cenários de teste
 
-Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **177 casos de teste**: 87 de ponta a ponta, 65 de unidade e 25 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
+Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **180 casos de teste**: 90 de ponta a ponta, 65 de unidade e 25 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
 
 A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). A ligação de cada cenário e de cada caso com os requisitos entra quando a lista de requisitos estiver pronta.
 
@@ -8,14 +8,12 @@ A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). A ligação de 
 
 | Nível | Ferramenta | Casos | Execuções | Passaram | Pulados | Falharam |
 |---|---|---|---|---|---|---|
-| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 87 | 174 | 170 | 3 | 1 |
+| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 90 | 180 | 177 | 3 | 0 |
 | Unidade | Vitest 5 | 65 | 290 | 282 | 8 | 0 |
 | Manual | Pessoas da equipe | 25 | — | — | — | — |
 
 - **Ponta a ponta:** cada caso roda duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7). As execuções puladas são de propósito: [CT-E49](casos-de-teste.md#ct-e49) só roda quando os documentos que ele usa forem publicados, e [CT-E67](casos-de-teste.md#ct-e67) roda só no desktop.
 - **Unidade:** alguns casos são parametrizados (um por idioma, um por par de cores), por isso há mais execuções que casos. As 8 puladas esperam dados que só a equipe pode copiar das fontes oficiais ([CT-U29](#ct-u29) e [CT-U53](#ct-u53)).
-- **Rodadas:** os arquivos `documentacao.spec.ts` e `barra.spec.ts` foram repetidos depois da divisão da documentação em páginas; os outros resultados são da rodada completa anterior, no mesmo dia.
-- **Falha da rodada:** [CT-E63](casos-de-teste.md#ct-e63), no celular, estourou os 60 s com a suíte inteira em paralelo. Repetido sozinho, passou 4 de 4, em cerca de 12 s cada. É instabilidade sob carga, não regressão, mas conta como falha na tabela.
 - **Manual:** a checklist de [docs/checklist-manual.md](../checklist-manual.md) e as conferências que dependem de pessoas ainda estão por fazer.
 - **Ambiente:** servidor de desenvolvimento e PostgreSQL local. A execução não exercita a produção na Vercel, a API do Claude nem o envio de e-mail.
 
@@ -59,9 +57,9 @@ pnpm exec playwright show-report   # relatório com as capturas de daltonismo do
 
 | ID | Cenário | Objetivo | Requisitos | Casos de teste | Situação |
 |---|---|---|---|---|---|
-| <a id="cn01"></a>CN01 | **Acesso e autenticação** | Cadastrar, entrar, sair e proteger a área do pesquisador, só com teclado e sem violações de acessibilidade | a definir | [CT-E01](casos-de-teste.md#ct-e01), [CT-E02](casos-de-teste.md#ct-e02), [CT-E03](casos-de-teste.md#ct-e03), [CT-E04](casos-de-teste.md#ct-e04), [CT-E06](casos-de-teste.md#ct-e06), [CT-E07](casos-de-teste.md#ct-e07), [CT-E08](casos-de-teste.md#ct-e08) | Passou |
+| <a id="cn01"></a>CN01 | **Acesso e autenticação** | Cadastrar, entrar, sair e proteger a área do pesquisador, só com teclado e sem violações de acessibilidade | a definir | [CT-E01](casos-de-teste.md#ct-e01), [CT-E02](casos-de-teste.md#ct-e02), [CT-E03](casos-de-teste.md#ct-e03), [CT-E04](casos-de-teste.md#ct-e04), [CT-E06](casos-de-teste.md#ct-e06), [CT-E07](casos-de-teste.md#ct-e07), [CT-E08](casos-de-teste.md#ct-e08), [CT-E90](casos-de-teste.md#ct-e90) | Passou |
 | <a id="cn02"></a>CN02 | **Minha conta** | Editar dados, trocar a senha derrubando outras sessões e excluir a conta com confirmação | a definir | [CT-E09](casos-de-teste.md#ct-e09), [CT-E10](casos-de-teste.md#ct-e10), [CT-E11](casos-de-teste.md#ct-e11) | Passou |
-| <a id="cn03"></a>CN03 | **Gestão de estudos** | Criar, listar, editar, abrir, encerrar, reabrir, copiar o link e excluir estudos | a definir | [CT-E12](casos-de-teste.md#ct-e12), [CT-E13](casos-de-teste.md#ct-e13), [CT-E14](casos-de-teste.md#ct-e14), [CT-E15](casos-de-teste.md#ct-e15), [CT-E16](casos-de-teste.md#ct-e16), [CT-E17](casos-de-teste.md#ct-e17), [CT-E18](casos-de-teste.md#ct-e18), [CT-E19](casos-de-teste.md#ct-e19) | Passou |
+| <a id="cn03"></a>CN03 | **Gestão de estudos** | Criar, listar, editar, abrir, encerrar, reabrir, copiar o link e excluir estudos | a definir | [CT-E12](casos-de-teste.md#ct-e12), [CT-E13](casos-de-teste.md#ct-e13), [CT-E14](casos-de-teste.md#ct-e14), [CT-E15](casos-de-teste.md#ct-e15), [CT-E16](casos-de-teste.md#ct-e16), [CT-E17](casos-de-teste.md#ct-e17), [CT-E18](casos-de-teste.md#ct-e18), [CT-E19](casos-de-teste.md#ct-e19), [CT-E88](casos-de-teste.md#ct-e88), [CT-E89](casos-de-teste.md#ct-e89) | Passou |
 | <a id="cn04"></a>CN04 | **Isolamento e proteção de dados** | Garantir que um pesquisador não veja nem exporte o estudo de outro e que o participante nunca precise de sessão | a definir | [CT-E05](casos-de-teste.md#ct-e05), [CT-E20](casos-de-teste.md#ct-e20), [CT-E38](casos-de-teste.md#ct-e38), [CT-E41](casos-de-teste.md#ct-e41) | Passou |
 | <a id="cn05"></a>CN05 | **Participação no estudo** | Percorrer o link do participante do consentimento ao fim, inclusive recusar, desistir, recarregar e tentar responder de novo | a definir | [CT-U30](casos-de-teste.md#ct-u30), [CT-E21](casos-de-teste.md#ct-e21), [CT-E23](casos-de-teste.md#ct-e23), [CT-E26](casos-de-teste.md#ct-e26), [CT-E27](casos-de-teste.md#ct-e27), [CT-E28](casos-de-teste.md#ct-e28), [CT-E52](casos-de-teste.md#ct-e52), [CT-E71](casos-de-teste.md#ct-e71), [CT-E82](casos-de-teste.md#ct-e82), [CT-E83](casos-de-teste.md#ct-e83) | Passou |
 | <a id="cn06"></a>CN06 | **Acessibilidade do questionário** | Responder só com teclado e leitor de tela, em 320 px, com foco sempre visível e o instrumento intacto | a definir | [CT-E22](casos-de-teste.md#ct-e22), [CT-E24](casos-de-teste.md#ct-e24), [CT-E25](casos-de-teste.md#ct-e25) | Passou |
@@ -1326,7 +1324,7 @@ Resultado esperado: A visão geral mostra "A documentação está sendo escrita 
 | Teste | `tests/e2e/equipe.spec.ts` › "convite por e-mail chega no sino, o leitor só vê e o dono é avisado" |
 | Pré-condições | Duas contas, cada uma no seu navegador; o dono tem um estudo. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou no desktop; no celular, estourou o tempo na rodada completa e passou 4 de 4 ao repetir sozinho |
+| Resultado em 06/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1808,6 +1806,68 @@ Passos:
 1. Abrir /documentacao/checklist-manual.
 
 Resultado esperado: As seções aparecem na mesma página, sem o índice "Neste documento", e a ficha lista as âncoras.
+
+### CT-E88
+
+**Enquanto a ação roda, o botão mostra que está processando e nada é enviado duas vezes.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN03 · Gestão de estudos](#cn03) |
+| Teste | `tests/e2e/estudos.spec.ts` › "enquanto cria o estudo o botão mostra que está processando, ignora novos cliques e no fim confirma" |
+| Pré-condições | Pesquisador logado; o teste atrasa os envios em 1,2 s. |
+| Requisitos | a definir |
+| Resultado em 06/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Preencher Criar estudo e clicar em Criar estudo.
+2. Clicar de novo no botão ocupado, duas vezes, e apertar Enter.
+3. Esperar a página do estudo e rodar o axe.
+4. Abrir a lista de estudos.
+
+Resultado esperado: O botão diz "Criando o estudo…", com aria-busy e aria-disabled. A página do estudo mostra "Estudo criado com sucesso." e a lista tem um estudo só com aquele título. Zero violações.
+
+### CT-E89
+
+**A confirmação acompanha a rolagem, pode ser fechada e não volta ao recarregar.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN03 · Gestão de estudos](#cn03) |
+| Teste | `tests/e2e/estudos.spec.ts` › "a confirmação pode ser fechada e continua à vista depois de rolar a página" |
+| Pré-condições | Pesquisador logado; janela de 800 × 400 px. |
+| Requisitos | a definir |
+| Resultado em 06/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Criar um estudo.
+2. Rolar até o fim da página.
+3. Clicar em Fechar na confirmação.
+4. Recarregar.
+
+Resultado esperado: A confirmação continua à vista depois de rolar e some ao fechar. O aviso sai do endereço, e recarregar não confirma de novo.
+
+### CT-E90
+
+**Criar a conta, sair e entrar confirmam na tela.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN01 · Acesso e autenticação](#cn01) |
+| Teste | `tests/e2e/autenticacao.spec.ts` › "criar a conta e entrar confirmam na tela" |
+| Pré-condições | E-mail de teste novo. |
+| Requisitos | a definir |
+| Resultado em 06/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Criar a conta e pular o tour.
+2. Sair e confirmar.
+3. Entrar de novo.
+
+Resultado esperado: "Conta criada com sucesso.", "Você saiu da sua conta." e "Você entrou na sua conta." aparecem em role=status, e o endereço fica limpo.
 
 ## Casos de unidade
 

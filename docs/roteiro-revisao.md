@@ -45,7 +45,7 @@ Para cada tela, faça a tarefa e compare com o protótipo em `docs/prototipos/al
 | 3a | Política de privacidade | link nas janelas de acesso, no rodapé da página inicial, em Minha conta e na ajuda | r33 | Abra por dois caminhos diferentes e use "Voltar". Diga o que acontece com as suas respostas |
 | 3b | Tour guiado | primeiro acesso de uma conta nova | r28, r29 | Siga parte do tour, depois pule |
 | 3c | Lista de estudos | menu "Estudos" | r3 | Encontre o Estudo de exemplo |
-| 4 | Criar estudo | "Criar estudo" | r4 | Crie um estudo com 2 versões |
+| 4 | Criar estudo | "Criar estudo" | r4, r39 durante o envio, r40 na confirmação | Crie um estudo com 2 versões e clique duas vezes em Criar estudo |
 | 5 | Estudo em rascunho | depois de criar | r4b | Abra a coleta e copie o link |
 | 6 | Página do estudo | título do estudo na lista | r5 | Encerre e reabra a coleta |
 | 7 | Consentimento | o link do estudo | p1 | Leia o termo e troque o idioma |

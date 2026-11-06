@@ -18,6 +18,7 @@ O objetivo é código que pareça escrito por uma equipe que conhece o domínio,
 - Componente faz uma coisa. Lógica de dados fica em Server Component ou rota, não em `useEffect` com `fetch`
 - Preferir Server Components e Server Actions do Next. Client Component só onde há interação (questionário, janelas, tour, filtros do painel)
 - Todo acesso a estudo passa por `estudoDoPesquisador` ou `filtroDeAcesso`. Nunca buscar estudo só pelo id
+- Botão que chama o servidor é `BotaoEnvio`, com `textoEnviando`. Toda ação concluída confirma na tela: `MensagemStatus`, `useAnunciar` ou `?aviso=` na página de destino
 - Sem camadas de abstração "para o futuro" (repository genérico, factory, service de uma função só)
 - Sem `try/catch` envolvendo tudo. Tratar erro onde dá para fazer algo útil com ele
 - Sem `any`. Sem `as unknown as`. Tipos do Prisma e do Zod reaproveitados, não redeclarados
