@@ -1,0 +1,30 @@
+sequenceDiagram
+    autonumber
+    actor Pesq as Pesquisador
+    participant Nav as Navegador
+    participant Rota as Rota de API painel-pdf
+    participant Sessao as lib/sessao
+    participant Chrome as Chromium (Playwright)
+    participant Imp as Página impressao
+    participant BD as PostgreSQL
+
+    Pesq->>Nav: Exportar painel em PDF
+    Nav->>Rota: GET /api/estudos/abc/painel-pdf?versao=v2
+    Rota->>Sessao: pesquisadorDaSessao()
+    alt sem sessão
+        Rota-->>Nav: 401 "Entre na sua conta…"
+    else com sessão
+        Rota->>BD: estudo com esse id e filtroDeAcesso(pessoa)
+        alt estudo não encontrado ou sem acesso
+            Rota-->>Nav: 404 "Estudo não encontrado."
+        else a pessoa tem acesso
+            Rota->>Chrome: launch() e cookie de sessão para a origem interna
+            Chrome->>Imp: GET /estudos/abc/resultados/impressao?versao=v2
+            Note over Imp,BD: mesma consulta e mesmo cálculo do diagrama 3
+            Imp-->>Chrome: HTML com CSS de impressão (A4, 18 mm)
+            Chrome->>Chrome: espera as fontes, emula mídia print
+            Chrome-->>Rota: PDF com gráficos em vetor
+            Rota->>Chrome: close()
+            Rota-->>Nav: application/pdf, attachment, ueq_<titulo>_painel_<data>.pdf
+        end
+    end

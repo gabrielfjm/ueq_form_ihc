@@ -1,0 +1,113 @@
+erDiagram
+    pesquisador ||--o{ sessao : "abre"
+    pesquisador ||--o{ estudo : "é dono de"
+    pesquisador ||--o{ colaboracao : "é convidado em"
+    pesquisador |o--o{ colaboracao : "convidou"
+    pesquisador ||--o{ notificacao : "recebe"
+    pesquisador |o--o{ notificacao : "causou"
+    estudo ||--o{ colaboracao : "é compartilhado em"
+    estudo ||--|{ versao : "tem"
+    estudo |o--o{ notificacao : "origina"
+    versao ||--o{ participacao : "recebe"
+    participacao ||--o{ resposta : "tem"
+    item ||--o{ resposta : "é respondido em"
+
+    pesquisador {
+        text id PK
+        text nome
+        text email UK
+        text senha_hash
+        timestamp criado_em
+        boolean administrador
+        timestamp tutorial_visto_em "pode ser nulo"
+        boolean notificacoes_por_email
+        text idioma
+    }
+    sessao {
+        text id PK "SHA-256 do token"
+        text pesquisador_id FK
+        timestamp criada_em
+        timestamp expira_em
+    }
+    estudo {
+        text id PK
+        text pesquisador_id FK
+        text titulo
+        text produto_avaliado
+        text objetivo
+        StatusEstudo status
+        date data_inicio
+        date data_fim
+        text slug_publico UK
+        boolean coletar_demografia
+        text idioma
+        timestamp criado_em
+        timestamp atualizado_em
+    }
+    colaboracao {
+        text id PK
+        text estudo_id FK
+        text pesquisador_id FK
+        text convidado_por_id FK "pode ser nulo"
+        PapelColaborador papel
+        StatusConvite status
+        timestamp criado_em
+        timestamp respondido_em "pode ser nulo"
+    }
+    versao {
+        text id PK
+        text estudo_id FK
+        text nome
+        integer ordem
+    }
+    item {
+        integer id PK
+        integer numero UK
+        text termo_esquerdo
+        text termo_direito
+        Escala escala
+        Polaridade polaridade
+    }
+    participacao {
+        text id PK
+        text versao_id FK
+        timestamp consentiu_em
+        timestamp criada_em
+        timestamp concluida_em "pode ser nulo"
+        jsonb demografia "pode ser nulo, cifrada"
+        boolean suspeita
+        boolean incluida_na_analise
+        text idioma "pode ser nulo"
+        OrigemParticipacao origem
+    }
+    resposta {
+        text id PK
+        text participacao_id FK
+        integer item_id FK
+        integer valor "CHECK de 1 a 7"
+    }
+    notificacao {
+        text id PK
+        text pesquisador_id FK
+        text autor_id FK "pode ser nulo"
+        text estudo_id FK "pode ser nulo"
+        text colaboracao_id "pode ser nulo, sem FK"
+        TipoNotificacao tipo
+        text texto
+        text link
+        integer quantidade
+        timestamp criada_em
+        timestamp lida_em "pode ser nulo"
+    }
+    tentativa_acesso {
+        text id PK
+        text chave "SHA-256 do e-mail"
+        timestamp criada_em
+    }
+    traducao {
+        text id PK
+        text idioma
+        text hash_origem
+        text texto
+        timestamp criada_em
+    }

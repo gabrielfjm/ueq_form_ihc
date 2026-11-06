@@ -1,0 +1,42 @@
+sequenceDiagram
+    autonumber
+    actor Pesq as Pesquisador
+    participant Nav as Navegador
+    participant Proxy as proxy
+    participant Acao as Ação entrar
+    participant Tent as lib/tentativas
+    participant Sessao as lib/sessao
+    participant BD as PostgreSQL
+
+    Pesq->>Nav: abre /estudos/abc/resultados
+    Nav->>Proxy: GET /estudos/abc/resultados (sem cookie)
+    Proxy-->>Nav: redireciona para /entrar?voltar=/estudos/abc/resultados
+    Pesq->>Nav: digita e-mail e senha e clica em Entrar
+    Nav->>Acao: entrar(FormData)
+    Acao->>Acao: valida os campos com Zod
+    Acao->>Tent: bloqueado(email)
+    Tent->>BD: conta falhas de SHA-256(email) nos últimos 15 minutos
+    alt 5 falhas ou mais
+        Acao-->>Nav: erro "Muitas tentativas com este e-mail…"
+        Nav-->>Pesq: resumo de erros com o foco
+    else pode tentar
+        Acao->>BD: busca o pesquisador pelo e-mail
+        BD-->>Acao: pesquisador com senhaHash
+        Acao->>Acao: bcrypt.compare(senha, senhaHash)
+        alt e-mail ou senha não conferem
+            Acao->>Tent: registrarFalha(email)
+            Acao-->>Nav: erro "E-mail ou senha não conferem…"
+            Nav-->>Pesq: resumo de erros com o foco
+        else conferem
+            Acao->>Tent: limparFalhas(email)
+            Acao->>Sessao: criarSessao(pesquisadorId)
+            Sessao->>Sessao: gera token aleatório de 32 bytes
+            Sessao->>BD: apaga sessões vencidas e cria Sessao com id = SHA-256(token)
+            Sessao-->>Nav: cookie "sessao" httpOnly, sameSite lax, 7 dias
+            Acao-->>Nav: redireciona para destinoInterno(voltar)
+            Nav->>Proxy: GET /estudos/abc/resultados (com cookie)
+            Proxy-->>Nav: segue
+            Note over Nav,BD: a página chama exigirPesquisador, que procura a sessão pelo hash do token e confere a validade
+            Nav-->>Pesq: painel de resultados
+        end
+    end

@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync
 import { createRequire } from "node:module";
 import { join } from "node:path";
 import { chromium } from "playwright";
-import { DOCUMENTOS } from "../src/lib/documentacao/catalogo";
+import { DOCUMENTOS, PASTA_FONTES, caminhoDaFonte } from "../src/lib/documentacao/catalogo";
 import { NOME_DIAGRAMA, PASTA_DIAGRAMAS, blocosMermaid, nomeDoDiagrama } from "../src/lib/documentacao/diagramas";
 
 // pnpm docs:diagramas: gera um SVG por diagrama Mermaid dos documentos do catálogo e apaga os que
@@ -11,9 +11,14 @@ const require = createRequire(import.meta.url);
 const mermaid = readFileSync(require.resolve("mermaid/dist/mermaid.min.js"), "utf8");
 
 // Documento em produção pode ainda não ter arquivo: entra quando a equipe escrever
+mkdirSync(PASTA_FONTES, { recursive: true });
 const diagramas = new Map<string, string>();
 for (const documento of DOCUMENTOS.filter(({ arquivo }) => existsSync(arquivo))) {
-  for (const codigo of blocosMermaid(readFileSync(documento.arquivo, "utf8"))) diagramas.set(nomeDoDiagrama(codigo), codigo);
+  blocosMermaid(readFileSync(documento.arquivo, "utf8")).forEach((codigo, posicao) => {
+    diagramas.set(nomeDoDiagrama(codigo), codigo);
+    // Todo diagrama publica o arquivo-fonte para baixar. A pasta guarda também fontes de outras ferramentas, então nada é apagado
+    writeFileSync(caminhoDaFonte(documento, posicao), `${codigo.replace(/\r\n/g, "\n").trim()}\n`);
+  });
 }
 
 mkdirSync(PASTA_DIAGRAMAS, { recursive: true });

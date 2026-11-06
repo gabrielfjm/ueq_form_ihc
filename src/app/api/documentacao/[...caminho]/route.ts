@@ -6,6 +6,7 @@ import { NOME_DIAGRAMA, PASTA_DIAGRAMAS, blocosMermaid, nomeDoDiagrama } from "@
 const TIPOS: Record<string, string> = {
   csv: "text/csv; charset=utf-8",
   xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+  mmd: "text/plain; charset=utf-8",
 };
 
 // Diagramas dos documentos já publicados; os dos documentos em produção não saem

@@ -1,0 +1,23 @@
+sequenceDiagram
+    autonumber
+    actor Pesq as Pesquisador
+    participant Nav as Navegador
+    participant Acao as Ação alterarInclusao
+    participant Sessao as lib/sessao
+    participant Estudos as lib/estudos
+    participant BD as PostgreSQL
+
+    Pesq->>Nav: desmarca "Na análise" numa linha de Respostas
+    Nav->>Acao: alterarInclusao(estudoId, participacaoId, false)
+    Acao->>Sessao: exigirPesquisador()
+    Acao->>Estudos: estudoDoPesquisador(estudoId, pessoa, "editar")
+    Acao->>BD: participação com esse id, deste estudo e concluída
+    alt não encontrada
+        Acao-->>Nav: erro "Essa participação não está neste estudo…"
+    else encontrada
+        Acao->>BD: incluidaNaAnalise = false
+        Acao->>BD: avisa o resto da equipe no sino (notificarAlteracao)
+        Acao->>Acao: revalidatePath do estudo (painel, respostas, exportações)
+        Acao-->>Nav: "Participação de … saiu da análise. Nada foi apagado…"
+        Nav-->>Pesq: aviso em role="status"
+    end

@@ -1,6 +1,6 @@
 # Fundamentos de IHC aplicados à ferramenta
 
-Este arquivo transforma a literatura de IHC em requisitos verificáveis. Toda decisão de interface tem que ser rastreável até um princípio daqui. Quando o Claude Code implementar uma tela, ele confere a seção "Requisitos por tela" e a "Checklist WCAG" antes de dar a tarefa como pronta.
+Este arquivo transforma a literatura de IHC em requisitos verificáveis. Toda decisão de interface tem que ser rastreável até um princípio daqui. Quem implementa uma tela confere a seção "Requisitos por tela" e a "Checklist WCAG" antes de dar a tarefa como pronta. A ligação de cada decisão com o código e com os testes está em [decisões de interface](rastreabilidade-ihc.md).
 
 Meta de conformidade: **WCAG 2.2 nível AA** (W3C, 2023), que é também a base da **ABNT NBR 17225:2025** (acessibilidade em conteúdo e aplicações web). A Lei Brasileira de Inclusão (Lei 13.146/2015, art. 63) torna acessibilidade de sites obrigatória no Brasil.
 
@@ -10,7 +10,7 @@ Meta de conformidade: **WCAG 2.2 nível AA** (W3C, 2023), que é também a base 
 |---|---|
 | ISO 9241-11:2018 | Definição de usabilidade: eficácia, eficiência e satisfação para usuários específicos, com objetivos específicos, em um contexto de uso específico. Por isso a seção 2 define usuários e contextos antes de qualquer tela |
 | ISO 9241-110:2020 | 7 princípios de interação: adequação à tarefa, autodescrição, conformidade com as expectativas, facilidade de aprendizado, controlabilidade, robustez ao erro de uso, engajamento |
-| Nielsen (1994), 10 heurísticas | Checklist de avaliação heurística usada no comando /revisar-ihc |
+| Nielsen (1994), 10 heurísticas | Checklist da avaliação heurística feita pela equipe |
 | Shneiderman et al., 8 regras de ouro | Consistência, usabilidade universal, feedback informativo, diálogos com fechamento, prevenção de erros, reversão fácil, controle do usuário, redução da carga de memória |
 | Norman (2013) | Affordances e significantes, mapeamento natural, feedback, restrições, modelo conceitual |
 | Lei de Fitts | Alvos importantes grandes e perto de onde o olhar e o cursor já estão |
@@ -29,7 +29,7 @@ Meta de conformidade: **WCAG 2.2 nível AA** (W3C, 2023), que é também a base 
 - Medida de sucesso: taxa de conclusão alta, nenhum item esquecido, tempo próximo ao previsto pelo handbook
 
 **Pesquisador**
-- Aluno de pós ou pesquisador, conhece UX mas não necessariamente estatística a fundo
+- Aluno de pós ou pesquisador, conhece UX mas não necessariamente estatística a fundo. Pode trabalhar em equipe e ler a ferramenta em qualquer um dos 37 idiomas
 - Usa desktop, em sessões curtas e repetidas (abre o painel várias vezes durante a coleta)
 - Objetivo: montar o estudo sem erro, acompanhar a coleta, entender o resultado e exportar para o relatório
 - Medida de sucesso: cria um estudo completo sem ajuda, interpreta corretamente o painel, confere os números com a planilha oficial
@@ -45,7 +45,7 @@ Aqui IHC encontra metodologia de pesquisa. Qualquer viés de interface contamina
 5. **Layout idêntico para os 26 itens.** Mudança de layout entre itens muda a resposta
 6. **O participante nunca vê resultados** nem a média de outros participantes
 7. **Desistir é fácil e explícito** (ética em pesquisa com humanos). Link "Sair sem enviar" sempre disponível, com confirmação numa janela, e nada é gravado em Resposta antes do envio
-8. **Anonimato real.** Não coletar IP, nome ou e-mail. Demografia só em faixas e sempre com "Prefiro não responder"
+8. **Anonimato real.** Não coletar IP, nome ou e-mail. Demografia só em faixas, sempre com "Prefiro não responder", e a etapa inteira só existe se o pesquisador ligar a coleta no estudo
 
 ## 4. Requisitos por tela, com o princípio que justifica
 
@@ -67,8 +67,9 @@ Formato: requisito → princípio (fonte).
 | Respostas salvas no sessionStorage enquanto responde | Robustez ao erro de uso (ISO 9241-110), Shneiderman 6 |
 | Sem tempo limite | Tempo ajustável (2.2.1) |
 | Em 320 px de largura e com zoom de 400% nada corta nem exige rolagem horizontal. No celular os termos vão para cima dos círculos | Refluxo (1.4.10), redimensionar texto (1.4.4) |
-| Página com `lang="pt-BR"`, `<title>` por etapa ("Consentimento · Estudo X", "Questionário · Estudo X") | Idioma (3.1.1), página com título (2.4.2) |
+| Página com o `lang` e o `dir` do idioma escolhido, `<title>` por etapa ("Consentimento · Estudo X", "Questionário · Estudo X") | Idioma (3.1.1), página com título (2.4.2) |
 | Uma única ação principal por página (Concordo / Enviar respostas) | Lei de Hick, design minimalista (Nielsen 8) |
+| O termo de consentimento tem link para a política de privacidade, numa página dentro do link do participante, sem caminho para o resto da ferramenta. O questionário em si não tem esse link, para não acrescentar nada ao instrumento | Transparência (LGPD, art. 9º), ética em pesquisa, §3 |
 | Etapas claras: Consentimento → Questionário → Dados opcionais → Fim, com indicação textual da etapa atual | Diálogos com fechamento (Shneiderman 4) |
 
 ### 4.2 Telas do pesquisador
@@ -89,6 +90,14 @@ Formato: requisito → princípio (fonte).
 | Mesmo padrão de botão, tabela e mensagem em todas as telas | Consistência (Nielsen 4, Shneiderman 1) |
 | Nenhuma informação depende de hover. Se houver tooltip, ele abre também no foco, pode ser fechado com Esc e não some ao mover o mouse para cima dele | Conteúdo em hover ou foco (1.4.13), reconhecer em vez de lembrar (Nielsen 6) |
 
+| Ajuda (?) em toda página do pesquisador: para que serve a página e o que dá para fazer nela | Ajuda e documentação (Nielsen 10), autodescrição (ISO 9241-110) |
+| Tour no primeiro acesso, feito nas telas reais, que pode ser pulado, fechado e revisto | Facilidade de aprendizado (ISO 9241-110), controle do usuário (Nielsen 3), Nielsen 10 |
+| Sino com as não lidas em número e texto, agrupando respostas enquanto o aviso não é lido. O aviso também pode ir por e-mail, e isso se desliga em Minha conta | Visibilidade do status (Nielsen 1), carga de memória (Shneiderman 8), controle do usuário (Shneiderman 7) |
+| Compartilhar diz o que cada papel pode fazer (Editor, Leitor) antes do convite. Quem não pode fazer uma ação não vê o botão dela | Prevenção de erros (Nielsen 5), design minimalista (Nielsen 8) |
+| Administração e Minha conta como painéis: cada opção diz a situação atual e leva a uma página própria | Reconhecer em vez de lembrar (Nielsen 6), Lei de Hick, revelação progressiva |
+| Política de privacidade a um clique: nas janelas de acesso, na página inicial, em Minha conta e na ajuda. O "Voltar" diz para onde vai e a política abre em outra aba quando há formulário preenchido | Controle do usuário (Nielsen 3), Shneiderman 7, transparência (LGPD, art. 9º) |
+| Interface no idioma da conta, escolhido ao criar a conta e trocado em Minha conta. `lang` e `dir` acompanham o idioma em que a tela de fato sai | Usabilidade universal (Shneiderman 2), 3.1.1 |
+
 ### 4.3 Painel de resultados e gráficos
 
 | Requisito | Princípio |
@@ -102,12 +111,15 @@ Formato: requisito → princípio (fonte).
 | Alerta de alfa baixo e de amostra pequena explicam o que significa e o que fazer | Nielsen 9 e 10 |
 | Filtros e modo de comparação refletidos na URL (dá para voltar, recarregar e compartilhar) | Controle e liberdade (Nielsen 3) |
 | Excluir respostas da análise é desfazível e o painel mostra quantas estão fora | Shneiderman 6, Nielsen 1 |
+| Dados demográficos em sub-aba própria de Resultados, cada pergunta com o gráfico que combina com ela, e a tabela de números em "Ver os números" | Gestalt, 1.1.1, revelação progressiva |
 
 ### 4.4 Exportação
 - Cada link de exportação diz o formato, o conteúdo e para que serve. Download não abre em nova aba sem avisar
 - Nome de arquivo legível e datado
 
 ## 5. Checklist WCAG 2.2 AA (critérios mais relevantes aqui)
+
+A checklist fica desmarcada até a revisão final, em que cada critério é marcado com a evidência (teste, captura ou trecho de código). O axe-core já cobre parte dela em todas as telas, mas não substitui essa conferência.
 
 Perceptível
 - [ ] 1.1.1 Gráficos e ícones com alternativa em texto
@@ -135,7 +147,7 @@ Operável
 - [ ] 2.5.8 Alvos ≥ 24×24 px (nosso padrão é 44 px no questionário)
 
 Compreensível
-- [ ] 3.1.1 `lang="pt-BR"`
+- [ ] 3.1.1 `lang` do idioma em que a tela está
 - [ ] 3.2.1 / 3.2.2 Foco e entrada não mudam contexto sozinhos
 - [ ] 3.2.3 / 3.2.4 Navegação e componentes consistentes
 - [ ] 3.3.1 / 3.3.3 Erro identificado em texto, com sugestão
@@ -158,9 +170,9 @@ Extra (além do AA, baratos e coerentes com IHC)
 
 Ferramentas automáticas pegam só uma parte dos problemas de acessibilidade. Por isso:
 
-1. **Automático (Claude Code):** axe-core no Playwright, Lighthouse, teste de contraste dos tokens, teste e2e só de teclado
+1. **Automático:** axe-core no Playwright em todas as telas e estados de erro, teste de contraste dos tokens, testes e2e só de teclado, em 320 px, com daltonismo simulado e com alto contraste
 2. **Manual (equipe):** `docs/checklist-manual.md`, com leitor de tela, zoom, celular real e simulação de daltonismo
-3. **Avaliação heurística (equipe):** os três avaliam separados com as 10 heurísticas de Nielsen, depois consolidam com severidade de 0 a 4. O comando /revisar-ihc faz uma primeira passada, mas não substitui os avaliadores humanos
+3. **Avaliação heurística (equipe):** os três avaliam separados com as 10 heurísticas de Nielsen, depois consolidam com severidade de 0 a 4
 4. **Teste com usuários:** 5 participantes externos ao trio respondem um estudo real na ferramenta (tarefa do participante) e 2 a 3 colegas fazem o papel de pesquisador (criar estudo, interpretar o painel, exportar). Pensamento em voz alta, taxa de sucesso, tempo e erros. Ao final, os pesquisadores avaliam a própria ferramenta **com o UEQ, aplicado pela ferramenta**. Isso fecha o ciclo e vira o melhor slide da apresentação
 
 ## 7. Referências
@@ -168,6 +180,7 @@ Ferramentas automáticas pegam só uma parte dos problemas de acessibilidade. Po
 - ABNT. NBR 17225:2025. Acessibilidade em conteúdo e aplicações web: requisitos. 2025.
 - BRASIL. Lei nº 13.146, de 6 de julho de 2015 (Lei Brasileira de Inclusão). Art. 63.
 - BRASIL. eMAG: Modelo de Acessibilidade em Governo Eletrônico, versão 3.1.
+- BRASIL. Lei nº 13.709, de 14 de agosto de 2018 (Lei Geral de Proteção de Dados Pessoais).
 - ISO 9241-11:2018. Ergonomics of human-system interaction: Usability: Definitions and concepts.
 - ISO 9241-110:2020. Ergonomics of human-system interaction: Interaction principles.
 - NIELSEN, J. Enhancing the explanatory power of usability heuristics. CHI 1994.
