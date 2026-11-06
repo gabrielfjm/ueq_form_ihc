@@ -37,6 +37,8 @@ const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Há dois layouts raiz (a ferramenta em pt-BR e o link do participante no idioma escolhido)
   experimental: { globalNotFound: true },
+  // O painel em PDF roda um navegador no servidor: os pacotes dele ficam fora do bundle da função
+  serverExternalPackages: ["@sparticuz/chromium-min", "playwright", "playwright-core"],
   // A aba Documentação e os downloads dela leem docs/ em tempo de execução
   outputFileTracingIncludes: {
     "/documentacao{,/**}": ["./docs/**/*"],
