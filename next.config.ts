@@ -43,6 +43,11 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/documentacao{,/**}": ["./docs/**/*"],
     "/api/documentacao/**": ["./docs/**/*"],
+    // O rastreio automático deixa de fora arquivos que o Playwright carrega em tempo de execução, como browsers.json
+    "/api/estudos/*/painel-pdf": [
+      "./node_modules/.pnpm/playwright-core@*/node_modules/playwright-core/**/*",
+      "./node_modules/.pnpm/@sparticuz+chromium-min@*/node_modules/**/*",
+    ],
   },
   async headers() {
     return [{ source: "/:path*", headers: CABECALHOS_DE_SEGURANCA }];
