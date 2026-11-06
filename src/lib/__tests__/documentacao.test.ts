@@ -4,6 +4,8 @@ import { describe, expect, it } from "vitest";
 import { DOCUMENTOS, DOWNLOADS, REPOSITORIO, SECOES, caminhoDaFonte, documentoPeloSlug, documentoPronto } from "../documentacao/catalogo";
 import { NOME_DIAGRAMA, PASTA_DIAGRAMAS, blocosMermaid, nomeDoDiagrama } from "../documentacao/diagramas";
 import { destinoDoLink, renderizarMarkdown, slugDoTitulo } from "../documentacao/markdown";
+import { dividirDocumento } from "../documentacao/estrutura";
+import { estruturaDe, lerPagina, rotaDaAncora } from "../documentacao/paginas";
 
 const ler = (arquivo: string) => readFileSync(arquivo, "utf8");
 
@@ -129,5 +131,105 @@ describe("renderizarMarkdown", () => {
     expect(html).toContain("<summary>Ver o código do diagrama</summary>");
     expect(html).toMatch(/<button type="button" class="ampliar" data-ampliar="\/api\/documentacao\/diagramas\/[0-9a-f]{12}\.svg"/);
     expect(html).not.toContain('class="language-mermaid"');
+  });
+});
+
+describe("dividirDocumento", () => {
+  const corpo = "texto ".repeat(40);
+  const markdown = [
+    "# Título",
+    "",
+    "Abertura do documento.",
+    "",
+    "## Primeira seção",
+    "",
+    `**Resumo** da primeira. ${corpo}`,
+    "",
+    "```mermaid",
+    "flowchart LR",
+    "```",
+    "",
+    "```",
+    "## isto é código, não seção",
+    "```",
+    "",
+    "## Seção é longa",
+    "",
+    "Introdução.",
+    "",
+    "### Um",
+    "",
+    "Primeiro.",
+    "",
+    '| <a id="ct-1"></a>CT-1 | x |',
+    "|---|---|",
+    "",
+    "### Dois",
+    "",
+    "### Três",
+  ].join("\n");
+  const estrutura = dividirDocumento(markdown, 0);
+
+  it("separa a abertura das seções e não confunde código com título", () => {
+    expect(estrutura.titulo).toBe("Título");
+    expect(estrutura.abertura).toBe("Abertura do documento.");
+    expect(estrutura.secoes.map((secao) => secao.titulo)).toEqual(["Primeira seção", "Seção é longa"]);
+    expect(estrutura.secoes[0]?.markdown).toContain("## isto é código");
+    expect(estrutura.secoes[0]?.diagramas).toBe(1);
+  });
+
+  it("usa endereço sem acento e divide só a seção com 3 subseções ou mais", () => {
+    expect(estrutura.secoes[1]?.slug).toBe("secao-e-longa");
+    expect(estrutura.secoes[0]?.partes).toEqual([]);
+    expect(estrutura.secoes[1]?.partes.map((parte) => parte.slug)).toEqual(["um", "dois", "tres"]);
+    expect(estrutura.secoes[1]?.markdown).toBe("Introdução.");
+  });
+
+  it("acha a página de cada âncora, inclusive a de uma linha de tabela", () => {
+    expect(estrutura.ancoras.get("primeira-seção")).toEqual({ secao: "primeira-secao", ehTitulo: true });
+    expect(estrutura.ancoras.get("três")).toEqual({ secao: "secao-e-longa", parte: "tres", ehTitulo: true });
+    expect(estrutura.ancoras.get("ct-1")).toEqual({ secao: "secao-e-longa", parte: "um", ehTitulo: false });
+  });
+
+  it("resume pelo primeiro parágrafo, sem marcação e com limite", () => {
+    expect(estrutura.secoes[0]?.resumo.startsWith("Resumo da primeira.")).toBe(true);
+    expect(estrutura.secoes[0]?.resumo.length).toBeLessThanOrEqual(171);
+  });
+
+  it("documento curto ou com uma seção só é lido inteiro", () => {
+    expect(dividirDocumento(markdown).inteiro).toBe(true);
+    expect(dividirDocumento("# T\n\n## Só uma\n\ntexto", 0).inteiro).toBe(true);
+    expect(estrutura.inteiro).toBe(false);
+  });
+});
+
+describe("rota das âncoras em documentos divididos", () => {
+  const documento = (slug: string) => documentoPeloSlug(slug)!;
+
+  it("leva à página da âncora, com fragmento só no meio da página", () => {
+    expect(rotaDaAncora(documento("casos-de-teste"), "ct-e01")).toBe("/documentacao/casos-de-teste/casos-de-ponta-a-ponta/ct-e01");
+    expect(rotaDaAncora(documento("casos-de-teste"), "cn01")).toBe("/documentacao/casos-de-teste/cenarios#cn01");
+    expect(rotaDaAncora(documento("requisitos"), "rf19")).toBe("/documentacao/requisitos#rf19");
+  });
+
+  it("a página de uma seção reescreve o link e mantém só o fragmento dentro dela", () => {
+    const casos = documento("casos-de-teste");
+    const lida = lerPagina(casos, "cenarios");
+    expect(lida?.html).toContain('href="/documentacao/casos-de-teste/casos-de-ponta-a-ponta/ct-e01"');
+    expect(lida?.anterior?.endereco).toBe("/documentacao/casos-de-teste/estrategia");
+    expect(lerPagina(casos, "nao-existe")).toBeNull();
+    expect(lerPagina(casos, "cenarios", "nao-existe")).toBeNull();
+  });
+
+  it("toda página de todo documento publicado tem título, e os títulos internos não pulam nível", () => {
+    for (const doc of DOCUMENTOS.filter(documentoPronto)) {
+      const estruturaDoc = estruturaDe(doc);
+      for (const secao of estruturaDoc?.inteiro ? [] : (estruturaDoc?.secoes ?? [])) {
+        const lida = lerPagina(doc, secao.slug);
+        expect(lida?.pagina.titulo, doc.arquivo).toBeTruthy();
+        expect(lida?.html ?? "", `${doc.arquivo} ${secao.slug}`).not.toMatch(/<h1/);
+        for (const parte of secao.partes) expect(lerPagina(doc, secao.slug, parte.slug)?.pagina.titulo).toBe(parte.titulo);
+      }
+    }
   });
 });

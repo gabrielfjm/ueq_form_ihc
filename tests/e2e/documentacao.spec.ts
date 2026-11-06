@@ -105,7 +105,14 @@ test("os links entre documentos levam à âncora dentro da ferramenta e a planil
 
 test("em 320 px a documentação não rola na horizontal", async ({ page }) => {
   await page.setViewportSize({ width: 320, height: 640 });
-  for (const endereco of ["/documentacao", "/documentacao/requisitos", "/documentacao/arquitetura"]) {
+  for (const endereco of [
+    "/documentacao",
+    "/documentacao/requisitos",
+    "/documentacao/arquitetura",
+    "/documentacao/arquitetura/nivel-1--contexto",
+    "/documentacao/casos-de-teste/cenarios",
+    "/documentacao/casos-de-teste/casos-de-ponta-a-ponta",
+  ]) {
     await page.goto(endereco);
     const rola = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
     expect(rola, endereco).toBe(false);
@@ -125,9 +132,86 @@ test("endereço fora do catálogo dá 404 e os arquivos só saem da lista", asyn
   expect(estudos.status()).toBe(307);
 });
 
+test("documento longo abre como índice, e cada seção em página própria com o diagrama à vista", async ({ page }) => {
+  await page.goto("/documentacao/diagramas-de-sequencia");
+  await expect(page.getByRole("heading", { level: 1, name: "Diagramas de sequência" })).toBeVisible();
+  const indice = page.getByRole("region", { name: "Neste documento" });
+  await expect(indice.getByRole("listitem")).toHaveCount(8);
+  await expect(page.getByRole("img", { name: /^Diagrama: / })).toHaveCount(0);
+  await verificarAcessibilidade(page);
+
+  await indice.getByRole("link", { name: "7. Convidar alguém para o estudo" }).click();
+  await expect(page).toHaveURL(/\/documentacao\/diagramas-de-sequencia\/7-convidar-alguem-para-o-estudo$/);
+  await expect(page).toHaveTitle(/^7\. Convidar alguém para o estudo · Diagramas de sequência · Documentação · /);
+  await expect(page.getByRole("heading", { level: 1, name: "7. Convidar alguém para o estudo" })).toBeVisible();
+  await expect(page.getByText("7 de 8")).toBeVisible();
+  // O diagrama é o destaque: carrega de verdade e aparece sem rolar
+  const diagrama = page.getByRole("img", { name: /^Diagrama: 7\. Convidar/ });
+  await expect.poll(() => diagrama.evaluate((imagem: HTMLImageElement) => imagem.naturalWidth)).toBeGreaterThan(0);
+  await expect(diagrama).toBeInViewport();
+  await verificarAcessibilidade(page);
+
+  const vizinhas = page.getByRole("navigation", { name: "Páginas vizinhas" });
+  await vizinhas.getByRole("link", { name: /Próxima/ }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "8. Traduzir a interface sob demanda" })).toBeVisible();
+  await expect(vizinhas.getByRole("link", { name: /Próxima/ })).toHaveCount(0);
+  await vizinhas.getByRole("link", { name: /Anterior/ }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "7. Convidar alguém para o estudo" })).toBeVisible();
+});
+
+test("Voltar leva à página de onde a pessoa veio e, sem histórico, à página de cima", async ({ page }) => {
+  // De um link dentro de outra página: volta para ela, não para o índice do documento
+  await page.goto("/documentacao/diagramas-de-sequencia/5-exportar-o-painel-em-pdf");
+  await page.getByRole("link", { name: "arquitetura" }).first().click();
+  await expect(page).toHaveURL(/\/documentacao\/arquitetura\/implantacao$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Implantação" })).toBeVisible();
+  // Antes de a página ficar interativa, o Voltar é só um link: leva à página de cima, sem usar o histórico
+  await page.waitForLoadState("networkidle");
+  await page.getByRole("link", { name: "Voltar", exact: true }).click();
+  await expect(page).toHaveURL(/\/5-exportar-o-painel-em-pdf$/);
+
+  // Aberta direto, numa aba nova: vai para a abertura do documento
+  const novaAba = await page.context().newPage();
+  await novaAba.goto("/documentacao/modelo-logico/diagrama");
+  await novaAba.waitForLoadState("networkidle");
+  await novaAba.getByRole("link", { name: "Voltar", exact: true }).click();
+  await expect(novaAba).toHaveURL(/\/documentacao\/modelo-logico$/);
+  await novaAba.close();
+});
+
+test("seção com muitas subseções vira índice, e o link de uma tabela leva à página da linha", async ({ page }) => {
+  await page.goto("/documentacao/casos-de-teste/casos-de-ponta-a-ponta");
+  await expect(page.getByRole("heading", { level: 1, name: "Casos de ponta a ponta" })).toBeVisible();
+  const lista = page.getByRole("region", { name: "Nesta seção" });
+  await lista.getByRole("link", { name: "CT-E02", exact: true }).click();
+  await expect(page).toHaveURL(/\/casos-de-ponta-a-ponta\/ct-e02$/);
+  await expect(page.getByRole("heading", { level: 1, name: "CT-E02" })).toBeVisible();
+  await verificarAcessibilidade(page);
+
+  await page.goto("/documentacao/casos-de-teste/cenarios");
+  await page.getByRole("link", { name: "CT-E01", exact: true }).first().click();
+  await expect(page).toHaveURL(/\/casos-de-ponta-a-ponta\/ct-e01$/);
+
+  // Endereço antigo, só com o fragmento, acha a página nova
+  await page.goto("/documentacao/casos-de-teste#ct-e03");
+  await expect(page).toHaveURL(/\/casos-de-ponta-a-ponta\/ct-e03$/);
+  await page.goto("/documentacao/casos-de-teste#ct-u01");
+  await expect(page).toHaveURL(/\/casos-de-unidade\/cn08--calculo-ueq#ct-u01$/);
+  await expect(page.locator("#ct-u01")).toBeInViewport();
+
+  expect((await page.goto("/documentacao/casos-de-teste/nao-existe"))?.status()).toBe(404);
+  expect((await page.goto("/documentacao/requisitos/nao-publicado"))?.status()).toBe(404);
+});
+
+test("documento curto continua inteiro, com o índice da página na ficha", async ({ page }) => {
+  await page.goto("/documentacao/checklist-manual");
+  await expect(page.getByRole("heading", { level: 2, name: "Teclado" })).toBeVisible();
+  await expect(page.getByRole("region", { name: "Neste documento" })).toHaveCount(0);
+  await expect(page.getByRole("complementary", { name: "Sobre este documento" }).getByRole("link", { name: "Teclado" })).toBeVisible();
+});
+
 test("clicar no diagrama abre em tela cheia, com zoom, arrasto, Voltar e Esc", async ({ page }) => {
-  test.skip(!publicado("casos-de-uso"), "Casos de uso ainda em produção");
-  await page.goto("/documentacao/casos-de-uso");
+  await page.goto("/documentacao/modelo-logico/diagrama");
   const ampliar = page.getByRole("button", { name: /^Ampliar em tela cheia: / }).first();
   const titulo = ((await ampliar.getAttribute("aria-label")) ?? "").replace("Ampliar em tela cheia: ", "");
   await ampliar.scrollIntoViewIfNeeded();

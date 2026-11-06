@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { documentoPeloSlug, documentoPronto, type Documento } from "@/lib/documentacao/catalogo";
-import { lerDocumento } from "@/lib/documentacao/ler";
+import { documentoPeloSlug } from "@/lib/documentacao/catalogo";
+import { aberturaDoDocumento } from "@/lib/documentacao/paginas";
 import { PaginaDocumento } from "../PaginaDocumento";
 import { tradutor } from "@/traducao/servidor";
 
@@ -14,19 +14,15 @@ async function documentoDaRota(params: Propriedades["params"]) {
   return documento;
 }
 
-// Documento em produção não é lido: a página mostra só o aviso, com o nome do catálogo
-async function renderizar(documento: Documento) {
-  return documentoPronto(documento) ? lerDocumento(documento) : null;
-}
-
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
   const t = await tradutor();
   const documento = await documentoDaRota(params);
-  const titulo = (await renderizar(documento))?.titulo ?? documento.rotulo;
+  // Documento em produção não é lido: a página mostra só o aviso, com o nome do catálogo
+  const titulo = aberturaDoDocumento(documento)?.renderizado.titulo || documento.rotulo;
   return { title: t("{titulo} · Documentação · Ferramenta UEQ", { titulo: titulo }) };
 }
 
 export default async function PaginaDocumentoDaRota({ params }: Propriedades) {
   const documento = await documentoDaRota(params);
-  return <PaginaDocumento documento={documento} renderizado={await renderizar(documento)} />;
+  return <PaginaDocumento documento={documento} abertura={aberturaDoDocumento(documento)} />;
 }

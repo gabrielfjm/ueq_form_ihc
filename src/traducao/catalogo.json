@@ -357,6 +357,10 @@
    "cliente": true
   },
   {
+   "texto": "Anterior",
+   "cliente": false
+  },
+  {
    "texto": "Antes de abrir, confira",
    "cliente": false
   },
@@ -1853,6 +1857,10 @@
    "cliente": true
   },
   {
+   "texto": "Ler a introdução",
+   "cliente": false
+  },
+  {
    "texto": "Leve os dados para o relatório",
    "cliente": true
   },
@@ -2066,6 +2074,14 @@
   },
   {
    "texto": "Nesta página",
+   "cliente": false
+  },
+  {
+   "texto": "Nesta seção",
+   "cliente": false
+  },
+  {
+   "texto": "Neste documento",
    "cliente": false
   },
   {
@@ -2637,6 +2653,10 @@
    "cliente": true
   },
   {
+   "texto": "Próxima",
+   "cliente": false
+  },
+  {
    "texto": "Próximo",
    "cliente": true
   },
@@ -2651,6 +2671,10 @@
   {
    "texto": "Pular tutorial",
    "cliente": true
+  },
+  {
+   "texto": "Páginas vizinhas",
+   "cliente": false
   },
   {
    "texto": "Pós-graduação",
@@ -3449,6 +3473,14 @@
    "cliente": false
   },
   {
+   "texto": "diagrama",
+   "cliente": false
+  },
+  {
+   "texto": "diagramas",
+   "cliente": false
+  },
+  {
    "texto": "dias",
    "cliente": false
   },
@@ -3542,6 +3574,10 @@
   },
   {
    "texto": "importou {quantidade} de um CSV em “{titulo}”.",
+   "cliente": false
+  },
+  {
+   "texto": "item",
    "cliente": false
   },
   {
@@ -3978,6 +4014,10 @@
   },
   {
    "texto": "{n} na análise",
+   "cliente": false
+  },
+  {
+   "texto": "{posicao} de {total}",
    "cliente": false
   },
   {
