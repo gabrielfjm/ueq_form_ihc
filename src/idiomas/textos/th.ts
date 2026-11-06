@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const th: TextosParticipante = {
   pularConteudo: "ข้ามไปยังเนื้อหา",
+  aguarde: "โปรดรอสักครู่…",
   idioma: {
     rotulo: "ภาษา",
     aplicar: "ใช้",

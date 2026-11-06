@@ -68,11 +68,13 @@ const SECOES = [
 // Retorno de ações que terminam aqui, depois que a sessão já acabou
 const AVISOS = {
   saiu: m("Você saiu da sua conta."),
+  entrou: m("Você entrou na sua conta."),
+  "conta-criada": m("Conta criada com sucesso."),
   excluida: m("Conta excluída. Os estudos e as respostas foram apagados."),
 } as const;
 
 export function avisoDaPaginaInicial(valor: string | string[] | undefined): string | null {
-  return valor === "saiu" || valor === "excluida" ? AVISOS[valor] : null;
+  return valor === "saiu" || valor === "excluida" || valor === "entrou" || valor === "conta-criada" ? AVISOS[valor] : null;
 }
 
 async function Titulo({ id, numero, children }: { id: string; numero: number; children: string }) {

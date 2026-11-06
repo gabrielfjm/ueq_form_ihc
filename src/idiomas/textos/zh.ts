@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const zh: TextosParticipante = {
   pularConteudo: "跳到主要内容",
+  aguarde: "请稍候…",
   idioma: {
     rotulo: "语言",
     aplicar: "应用",

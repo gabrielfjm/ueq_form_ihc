@@ -168,18 +168,66 @@
   padding-left: 20px;
 }
 
+/* A confirmação acompanha a rolagem: fica à vista mesmo quando a ação foi lá embaixo numa página longa */
+.regiaoStatus {
+  position: sticky;
+  top: calc(var(--altura-barra, 64px) + 8px);
+  z-index: 5;
+}
+
 .status {
   margin: 0;
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 16px;
+  padding: 8px 8px 8px 16px;
   background: var(--destaque-fundo);
+  border: 1px solid var(--destaque);
   border-radius: var(--raio);
 }
 
 .status svg {
+  flex: none;
   color: var(--destaque);
+}
+
+.statusErro {
+  background: var(--alerta-fundo);
+  border-color: var(--alerta);
+}
+
+.statusErro svg {
+  color: var(--alerta);
+}
+
+.statusTexto {
+  flex: 1;
+  min-width: 0;
+}
+
+.statusFechar {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--tinta);
+  cursor: pointer;
+}
+
+.girando {
+  flex: none;
+  animation: girar 900ms linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 @media (forced-colors: active) {

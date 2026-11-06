@@ -82,7 +82,7 @@ test("excluir a conta exige digitar o e-mail e apaga o acesso", async ({ page },
 
   await page.getByLabel("Digite seu e-mail para confirmar").fill(email);
   await page.getByRole("button", { name: "Excluir conta definitivamente" }).click();
-  await expect(page).toHaveURL(/\/\?aviso=excluida$/);
+  await expect(page).toHaveURL(/:\d+\/$/);
   await expect(page.getByRole("status")).toHaveText("Conta excluída. Os estudos e as respostas foram apagados.");
 
   await page.goto("/entrar");

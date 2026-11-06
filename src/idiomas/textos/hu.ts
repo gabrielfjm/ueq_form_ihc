@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const hu: TextosParticipante = {
   pularConteudo: "Ugrás a tartalomra",
+  aguarde: "Kérjük, várjon…",
   idioma: {
     rotulo: "Nyelv",
     aplicar: "Alkalmaz",

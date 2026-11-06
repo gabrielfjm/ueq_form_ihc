@@ -6,6 +6,7 @@ import formulario from "@/componentes/formulario/formulario.module.css";
 import { Janela } from "./Janela";
 import estilos from "./janela.module.css";
 import { useT } from "@/traducao/cliente";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 type Propriedades = {
   aberta: boolean;
@@ -25,6 +26,9 @@ type Propriedades = {
   aoConfirmar?: () => void;
   // sem campo para digitar, o foco começa no botão de confirmar, e Enter confirma
   focarConfirmar?: boolean;
+  // Ação em andamento. Com action, o próprio formulário sabe, e só o texto é opcional
+  enviando?: boolean;
+  textoEnviando?: string;
 };
 
 // Confirmação de toda ação que encerra algo ou apaga dados: diz o que vai acontecer, com Cancelar
@@ -41,6 +45,8 @@ export function Confirmacao({
   onSubmit,
   aoConfirmar,
   focarConfirmar = false,
+  enviando,
+  textoEnviando,
 }: Propriedades) {
   const t = useT();
   const idTitulo = useId();
@@ -54,15 +60,17 @@ export function Confirmacao({
         <button type="button" className={`${formulario.botao} ${formulario.secundario}`} onClick={aoFechar}>
           {t("Cancelar")}
         </button>
-        <button
+        <BotaoEnvio
           type={aoConfirmar ? "button" : "submit"}
+          enviando={enviando}
+          textoEnviando={textoEnviando ?? t("Aguarde…")}
+          icone={<Icone size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
           className={`${formulario.botao} ${perigo ? formulario.perigo : formulario.primario}`}
           data-foco-inicial={focarConfirmar ? "" : undefined}
           onClick={aoConfirmar}
         >
-          <Icone size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-          <span>{t(textoConfirmar)}</span>
-        </button>
+          {t(textoConfirmar)}
+        </BotaoEnvio>
       </div>
     </>
   );

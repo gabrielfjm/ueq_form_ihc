@@ -49,7 +49,9 @@ export async function entrar(
 
   await criarSessao(pesquisador.id);
   await lembrarIdioma(pesquisador.idioma);
-  redirect(destinoInterno(textoDoCampo(dados, "voltar")) as Route);
+  const destino = destinoInterno(textoDoCampo(dados, "voltar"));
+  // Na página inicial, a confirmação de que entrou; quem voltou à página que pediu já vê que deu certo
+  redirect((destino === "/" ? "/?aviso=entrou" : destino) as Route);
 }
 
 // O seletor de idioma de Criar conta já troca a página, antes de a conta existir
@@ -101,5 +103,5 @@ export async function cadastrar(
 
   await criarSessao(pesquisadorId);
   await lembrarIdioma(idioma);
-  redirect("/");
+  redirect("/?aviso=conta-criada");
 }

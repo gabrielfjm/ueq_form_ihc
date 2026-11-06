@@ -14,6 +14,7 @@ import { idDoCampoVersao, ListaVersoes, type VersaoEditavel } from "./ListaVerso
 import { PreviaParticipante } from "./PreviaParticipante";
 import { useT } from "@/traducao/cliente";
 import { m, type OpcaoIdioma } from "@/traducao/nucleo";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 export type ValoresEstudo = {
   titulo: string;
@@ -40,7 +41,7 @@ export function FormularioEstudo(propriedades: Propriedades) {
   const t = useT();
   const { valores, modo } = propriedades;
   const acao = propriedades.modo === "criar" ? criarEstudo : salvarEstudo.bind(null, propriedades.estudoId);
-  const { estado, aoEnviar } = useEnvioFormulario(acao);
+  const { estado, enviando, aoEnviar } = useEnvioFormulario(acao);
 
   const proximaChave = useRef(valores.versoes.length);
   const [titulo, setTitulo] = useState(valores.titulo);
@@ -206,10 +207,14 @@ export function FormularioEstudo(propriedades: Propriedades) {
         </section>
 
         <div className={estilos.rodape}>
-          <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}>
-            {modo === "criar" ? <Plus size={18} strokeWidth={1.5} aria-hidden="true" /> : <Save size={18} strokeWidth={1.5} aria-hidden="true" />}
-            <span>{modo === "criar" ? t("Criar estudo") : t("Salvar alterações")}</span>
-          </button>
+          <BotaoEnvio
+            enviando={enviando}
+            textoEnviando={modo === "criar" ? t("Criando o estudo…") : t("Salvando…")}
+            icone={modo === "criar" ? <Plus size={18} strokeWidth={1.5} aria-hidden="true" /> : <Save size={18} strokeWidth={1.5} aria-hidden="true" />}
+            className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}
+          >
+            {modo === "criar" ? t("Criar estudo") : t("Salvar alterações")}
+          </BotaoEnvio>
           <Link href={cancelar}>{t("Cancelar")}</Link>
         </div>
       </form>

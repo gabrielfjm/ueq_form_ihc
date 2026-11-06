@@ -28,7 +28,7 @@ type Propriedades = {
 export function AcoesEstudo({ estudoId, avisoExclusao, coleta, podeEditar, podeExcluir }: Propriedades) {
   const t = useT();
   const [aberta, setAberta] = useState(false);
-  const { estado, aoEnviar, limpar } = useEnvioFormulario(excluirEstudo.bind(null, estudoId));
+  const { estado, enviando, aoEnviar, limpar } = useEnvioFormulario(excluirEstudo.bind(null, estudoId));
   const campo = useRef<HTMLInputElement>(null);
 
   // Com o título errado, o foco volta para o campo, junto da mensagem de erro
@@ -64,6 +64,8 @@ export function AcoesEstudo({ estudoId, avisoExclusao, coleta, podeEditar, podeE
         Icone={Trash2}
         perigo
         onSubmit={aoEnviar}
+        enviando={enviando}
+        textoEnviando={t("Excluindo…")}
       >
         <p className={janela.aviso}>
           <strong>{t(avisoExclusao.destaque)}</strong> {t(avisoExclusao.complemento)}

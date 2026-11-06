@@ -241,6 +241,10 @@
    "cliente": false
   },
   {
+   "texto": "Abrindo a coleta…",
+   "cliente": true
+  },
+  {
    "texto": "Abrir coleta",
    "cliente": true
   },
@@ -317,6 +321,10 @@
    "cliente": false
   },
   {
+   "texto": "Aguarde…",
+   "cliente": true
+  },
+  {
    "texto": "Ainda não tem conta?",
    "cliente": true
   },
@@ -341,7 +349,7 @@
    "cliente": true
   },
   {
-   "texto": "Alterações salvas.",
+   "texto": "Alterações salvas com sucesso.",
    "cliente": true
   },
   {
@@ -753,6 +761,10 @@
    "cliente": true
   },
   {
+   "texto": "Conta criada com sucesso.",
+   "cliente": true
+  },
+  {
    "texto": "Conta criada em",
    "cliente": false
   },
@@ -783,6 +795,10 @@
   {
    "texto": "Controlador é o pesquisador responsável por ele; a ferramenta só opera os dados em nome dele.",
    "cliente": false
+  },
+  {
+   "texto": "Convidando…",
+   "cliente": true
   },
   {
    "texto": "Convidar",
@@ -879,6 +895,14 @@
   {
    "texto": "Criado em",
    "cliente": false
+  },
+  {
+   "texto": "Criando a conta…",
+   "cliente": true
+  },
+  {
+   "texto": "Criando o estudo…",
+   "cliente": true
   },
   {
    "texto": "Criando os estudos…",
@@ -1253,6 +1277,10 @@
    "cliente": true
   },
   {
+   "texto": "Encerrando a coleta…",
+   "cliente": true
+  },
+  {
    "texto": "Encerrar coleta",
    "cliente": true
   },
@@ -1274,6 +1302,10 @@
   },
   {
    "texto": "Entendi",
+   "cliente": true
+  },
+  {
+   "texto": "Entrando…",
    "cliente": true
   },
   {
@@ -1441,7 +1473,7 @@
    "cliente": false
   },
   {
-   "texto": "Estudo criado em rascunho. Confira os dados e abra a coleta quando estiver pronto.",
+   "texto": "Estudo criado com sucesso. Ele está em rascunho: confira os dados e abra a coleta quando estiver pronto.",
    "cliente": true
   },
   {
@@ -1486,6 +1518,10 @@
   },
   {
    "texto": "Excelente",
+   "cliente": true
+  },
+  {
+   "texto": "Excluindo…",
    "cliente": true
   },
   {
@@ -2733,6 +2769,10 @@
    "cliente": false
   },
   {
+   "texto": "Reabrindo a coleta…",
+   "cliente": true
+  },
+  {
    "texto": "Reabrir coleta",
    "cliente": true
   },
@@ -2869,6 +2909,10 @@
    "cliente": true
   },
   {
+   "texto": "Saindo do estudo…",
+   "cliente": true
+  },
+  {
    "texto": "Sair",
    "cliente": true
   },
@@ -2878,6 +2922,10 @@
   },
   {
    "texto": "Sair deste estudo",
+   "cliente": true
+  },
+  {
+   "texto": "Salvando…",
    "cliente": true
   },
   {
@@ -3113,6 +3161,10 @@
    "cliente": true
   },
   {
+   "texto": "Trocando a senha…",
+   "cliente": true
+  },
+  {
    "texto": "Trocar senha",
    "cliente": true
   },
@@ -3299,6 +3351,10 @@
   {
    "texto": "Você ainda não tem estudos.",
    "cliente": false
+  },
+  {
+   "texto": "Você entrou na sua conta.",
+   "cliente": true
   },
   {
    "texto": "Você foi convidado para um estudo",

@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const pl: TextosParticipante = {
   pularConteudo: "Przejdź do treści",
+  aguarde: "Proszę czekać…",
   idioma: {
     rotulo: "Język",
     aplicar: "Zastosuj",

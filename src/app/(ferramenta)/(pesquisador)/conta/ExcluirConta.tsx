@@ -14,7 +14,7 @@ import { useT } from "@/traducao/cliente";
 export function ExcluirConta({ aviso }: { aviso: { destaque: string; complemento: string } }) {
   const t = useT();
   const [aberta, setAberta] = useState(false);
-  const { estado, aoEnviar, limpar } = useEnvioFormulario(excluirConta);
+  const { estado, enviando, aoEnviar, limpar } = useEnvioFormulario(excluirConta);
   const campo = useRef<HTMLInputElement>(null);
 
   // Com o e-mail errado, o foco volta para o campo, junto da mensagem de erro
@@ -46,6 +46,8 @@ export function ExcluirConta({ aviso }: { aviso: { destaque: string; complemento
         Icone={Trash2}
         perigo
         onSubmit={aoEnviar}
+        enviando={enviando}
+        textoEnviando={t("Excluindo…")}
       >
         <p className={janela.aviso}>
           <strong>{t(aviso.destaque)}</strong> {t(aviso.complemento)}

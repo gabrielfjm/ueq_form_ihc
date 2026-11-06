@@ -19,8 +19,8 @@ type Propriedades = {
 };
 
 const AVISOS = {
-  criado: m("Estudo criado em rascunho. Confira os dados e abra a coleta quando estiver pronto."),
-  salvo: m("Alterações salvas."),
+  criado: m("Estudo criado com sucesso. Ele está em rascunho: confira os dados e abra a coleta quando estiver pronto."),
+  salvo: m("Alterações salvas com sucesso."),
   "convite-aceito": m("Convite aceito. O estudo agora aparece em Seus estudos, na seção Compartilhados com você."),
 } as const;
 

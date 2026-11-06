@@ -12,6 +12,7 @@ import estilos from "./acesso.module.css";
 import { LinkPrivacidade } from "./LinkPrivacidade";
 import { useT } from "@/traducao/cliente";
 import { m } from "@/traducao/nucleo";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 
 const CAMPOS = [
@@ -58,10 +59,14 @@ export function FormularioEntrar({ idTitulo, voltar }: { idTitulo: string; volta
         data-foco-inicial=""
       />
       <CampoSenha id="entrar-senha" name="senha" rotulo={t("Senha")} autoComplete="current-password" erro={estado.erros?.senha} />
-      <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}>
-        <LogIn size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-        <span>{t("Entrar")}</span>
-      </button>
+      <BotaoEnvio
+        enviando={enviando}
+        textoEnviando={t("Entrando…")}
+        icone={<LogIn size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
+        className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}
+      >
+        {t("Entrar")}
+      </BotaoEnvio>
       {/* A janela troca para Criar conta sem fechar (JanelaAcesso); aberto em outra aba, o link abre a janela lá */}
       <p className={`${estilos.alternativa} ${estilos.alternativaCadastro}`}>
         <span>

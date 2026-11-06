@@ -14,6 +14,7 @@ import { m, type OpcaoIdioma } from "@/traducao/nucleo";
 import { cadastrar, trocarIdiomaDaInterface, type CampoCadastro } from "./acoes";
 import estilos from "./acesso.module.css";
 import { LinkPrivacidade } from "./LinkPrivacidade";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 const CAMPOS = [
   { nome: "nome", rotulo: m("Nome"), id: "cadastro-nome" },
@@ -109,10 +110,14 @@ export function FormularioCadastro({
           ))}
         </select>
       </div>
-      <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}>
-          <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-          <span>{t("Criar conta")}</span>
-      </button>
+      <BotaoEnvio
+        enviando={enviando}
+        textoEnviando={t("Criando a conta…")}
+        icone={<UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
+        className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}
+      >
+        {t("Criar conta")}
+      </BotaoEnvio>
       <p className={`${estilos.alternativa} ${estilos.alternativaCadastro}`}>
         <span>
           {t("Já tem conta?")}{" "}<Link href="/entrar">{t("Entrar")}</Link>

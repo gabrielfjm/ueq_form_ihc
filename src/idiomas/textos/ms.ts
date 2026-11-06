@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const ms: TextosParticipante = {
   pularConteudo: "Langkau ke kandungan",
+  aguarde: "Sila tunggu…",
   idioma: {
     rotulo: "Bahasa",
     aplicar: "Guna",

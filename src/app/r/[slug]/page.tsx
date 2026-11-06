@@ -8,6 +8,7 @@ import { consentir } from "./acoes";
 import { Etapas, Marcacoes } from "./Etapas";
 import estilos from "./participante.module.css";
 import { SeletorIdioma } from "./SeletorIdioma";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 type Propriedades = { params: Promise<{ slug: string }> };
 
@@ -51,7 +52,7 @@ export default async function PaginaConsentimento({ params }: Propriedades) {
     <>
       <header className={estilos.faixa}>
         <div className={estilos.faixaInterna}>
-          <SeletorIdioma slug={slug} idioma={idioma} textos={textos.idioma} />
+          <SeletorIdioma slug={slug} idioma={idioma} textos={textos.idioma} aguarde={textos.aguarde} />
           <Etapas atual={0} textos={textos.etapas} comDadosOpcionais={estudo.coletarDemografia} />
           <Marcacoes />
           <div className={estilos.nomeEstudo}>
@@ -90,9 +91,9 @@ export default async function PaginaConsentimento({ params }: Propriedades) {
         </section>
         {/* Uma ação principal só (Hick, Nielsen 8); recusar é um link igualmente visível (§3.7) */}
         <form action={consentir.bind(null, slug)} className={estilos.decisao}>
-          <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.concordo}`}>
+          <BotaoEnvio semIndicador textoEnviando={textos.aguarde} className={`${formulario.botao} ${formulario.primario} ${estilos.concordo}`}>
             {consentimento.concordo}
-          </button>
+          </BotaoEnvio>
           <Link href={`/r/${slug}/saiu` as Route} className={estilos.naoQuero}>
             {consentimento.naoQuero}
           </Link>

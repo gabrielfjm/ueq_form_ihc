@@ -10,6 +10,7 @@ import { coberturaDoCatalogo, tradutor } from "@/traducao/servidor";
 import { FaixaCabecalho } from "../../FaixaCabecalho";
 import { traduzirInterface } from "../acoes";
 import estilos from "../administracao.module.css";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 // A tradução de um idioma inteiro roda dentro da ação do botão; dá tempo para os lotes da API
 export const maxDuration = 300;
@@ -89,11 +90,14 @@ export default async function PaginaIdiomas({ searchParams }: { searchParams: Pr
                   <td>
                     {ligada && parcela < 1 && (
                       <form action={traduzirInterface.bind(null, idioma.codigo)}>
-                        <button type="submit" className={`${formulario.botao} ${formulario.secundario}`}>
-                          <Languages size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-                          <span>{t("Traduzir agora")}</span>
+                        <BotaoEnvio
+                          textoEnviando={t("Traduzindo…")}
+                          icone={<Languages size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
+                          className={`${formulario.botao} ${formulario.secundario}`}
+                        >
+                          {t("Traduzir agora")}
                           <span className="visualmente-oculto"> {idioma.nome}</span>
-                        </button>
+                        </BotaoEnvio>
                       </form>
                     )}
                   </td>

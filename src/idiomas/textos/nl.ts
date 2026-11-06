@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const nl: TextosParticipante = {
   pularConteudo: "Naar de inhoud",
+  aguarde: "Even geduld…",
   idioma: {
     rotulo: "Taal",
     aplicar: "Toepassen",

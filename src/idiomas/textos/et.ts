@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const et: TextosParticipante = {
   pularConteudo: "Mine sisu juurde",
+  aguarde: "Palun oodake…",
   idioma: {
     rotulo: "Keel",
     aplicar: "Rakenda",

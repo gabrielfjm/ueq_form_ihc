@@ -10,6 +10,7 @@ import { salvarIdioma } from "../acoes";
 import conta from "../conta.module.css";
 import { nomeDoIdiomaEm } from "@/traducao/nucleo";
 import { tradutor } from "@/traducao/servidor";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await tradutor();
@@ -55,10 +56,13 @@ export default async function PaginaIdioma() {
               ))}
             </div>
           </fieldset>
-          <button type="submit" className={`${formulario.botao} ${formulario.primario} ${conta.alinharInicio}`}>
-            <Check size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-            <span>{t("Salvar idioma")}</span>
-          </button>
+          <BotaoEnvio
+            textoEnviando={t("Salvando…")}
+            icone={<Check size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
+            className={`${formulario.botao} ${formulario.primario} ${conta.alinharInicio}`}
+          >
+            {t("Salvar idioma")}
+          </BotaoEnvio>
         </form>
       </div>
     </>

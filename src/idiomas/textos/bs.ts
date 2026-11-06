@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const bs: TextosParticipante = {
   pularConteudo: "Preskoči na sadržaj",
+  aguarde: "Sačekajte…",
   idioma: {
     rotulo: "Jezik",
     aplicar: "Primijeni",

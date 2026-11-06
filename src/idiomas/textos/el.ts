@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const el: TextosParticipante = {
   pularConteudo: "Μετάβαση στο περιεχόμενο",
+  aguarde: "Περιμένετε…",
   idioma: {
     rotulo: "Γλώσσα",
     aplicar: "Εφαρμογή",

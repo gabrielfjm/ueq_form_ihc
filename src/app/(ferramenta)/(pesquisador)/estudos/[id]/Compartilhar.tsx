@@ -19,6 +19,7 @@ import {
 import estilos from "./compartilhar.module.css";
 import { useT } from "@/traducao/cliente";
 import { m } from "@/traducao/nucleo";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 const STATUS = { PENDENTE: m("Convite pendente"), RECUSADO: "Recusou o convite", ACEITO: null } as const;
 
@@ -29,11 +30,11 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
   const [aberta, setAberta] = useState(false);
   const [acessos, setAcessos] = useState<AcessosDoEstudo | null>(null);
   const [convite, setConvite] = useState<ResultadoConvite>({ envio: 0 });
-  const [aviso, setAviso] = useState({ mensagem: "", vez: 0 });
+  const [aviso, setAviso] = useState({ mensagem: "", erro: false, vez: 0 });
   const [ocupado, iniciar] = useTransition();
   const idTitulo = useId();
 
-  const anunciar = (mensagem: string) => setAviso((atual) => ({ mensagem, vez: atual.vez + 1 }));
+  const anunciar = (mensagem: string, erro = false) => setAviso((atual) => ({ mensagem, erro, vez: atual.vez + 1 }));
   const recarregar = useCallback(() => listarAcessos(estudoId).then(setAcessos), [estudoId]);
 
   useEffect(() => {
@@ -58,7 +59,7 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
   function executar(acao: () => Promise<{ sucesso?: string; erro?: string }>) {
     iniciar(async () => {
       const resultado = await acao();
-      anunciar(resultado.sucesso ?? resultado.erro ?? "");
+      anunciar(resultado.erro ?? resultado.sucesso ?? "", Boolean(resultado.erro));
       await recarregar();
     });
   }
@@ -66,7 +67,7 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
   function fechar() {
     setAberta(false);
     setConvite((atual) => ({ envio: atual.envio }));
-    setAviso({ mensagem: "", vez: 0 });
+    setAviso({ mensagem: "", erro: false, vez: 0 });
   }
 
   return (
@@ -86,7 +87,7 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
           <h2 id={idTitulo} className={janela.titulo}>
             {t("Compartilhar “{titulo}”", { titulo: titulo })}
           </h2>
-          <MensagemStatus mensagem={aviso.mensagem} vez={aviso.vez} />
+          <MensagemStatus mensagem={aviso.mensagem} erro={aviso.erro} vez={aviso.vez} />
 
           {acessos?.podeGerenciar && (
             <form className={estilos.convite} noValidate onSubmit={aoConvidar} aria-label={t("Convidar pessoa")}>
@@ -110,10 +111,14 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
                     <option value="LEITOR">{t("Leitor: só vê e exporta")}</option>
                   </select>
                 </div>
-                <button type="submit" className={`${formulario.botao} ${formulario.primario}`} disabled={ocupado}>
-                  <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-                  <span>{t("Convidar")}</span>
-                </button>
+                <BotaoEnvio
+                  enviando={ocupado}
+                  textoEnviando={t("Convidando…")}
+                  icone={<UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
+                  className={`${formulario.botao} ${formulario.primario}`}
+                >
+                  {t("Convidar")}
+                </BotaoEnvio>
               </div>
               {convite.mailto && (
                 <p className={estilos.mailto}>
@@ -192,10 +197,13 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
           <div className={janela.acoes}>
             {acessos?.pessoas.some((pessoa) => pessoa.voce && pessoa.status === "ACEITO") && (
               <form action={sairDoEstudo.bind(null, estudoId)} className={estilos.sair}>
-                <button type="submit" className={formulario.destrutivo}>
-                  <LogOut size={18} strokeWidth={1.5} aria-hidden="true" />
-                  <span>{t("Sair deste estudo")}</span>
-                </button>
+                <BotaoEnvio
+                  textoEnviando={t("Saindo do estudo…")}
+                  icone={<LogOut size={18} strokeWidth={1.5} aria-hidden="true" />}
+                  className={formulario.destrutivo}
+                >
+                  {t("Sair deste estudo")}
+                </BotaoEnvio>
               </form>
             )}
             <button type="button" className={`${formulario.botao} ${formulario.primario}`} onClick={fechar}>

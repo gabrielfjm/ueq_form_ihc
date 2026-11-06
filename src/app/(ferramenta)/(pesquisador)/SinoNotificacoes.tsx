@@ -16,6 +16,7 @@ import {
 import estilos from "./sino.module.css";
 import { useT } from "@/traducao/cliente";
 import type { Traduzir } from "@/traducao/nucleo";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 const MINUTO = 60 * 1000;
 
@@ -141,16 +142,22 @@ export function SinoNotificacoes({ naoLidasIniciais }: { naoLidasIniciais: numbe
                 {item.convitePendente && (
                   <span className={estilos.acoes}>
                     <form action={responderConvite.bind(null, item.convitePendente, true)}>
-                      <button type="submit" className={estilos.aceitar}>
-                        <Check size={16} strokeWidth={2} aria-hidden="true" />
-                        <span>{t("Aceitar")}</span>
-                      </button>
+                      <BotaoEnvio
+                        textoEnviando={t("Aguarde…")}
+                        icone={<Check size={16} strokeWidth={2} aria-hidden="true" />}
+                        className={estilos.aceitar}
+                      >
+                        {t("Aceitar")}
+                      </BotaoEnvio>
                     </form>
                     <form action={responderConvite.bind(null, item.convitePendente, false)}>
-                      <button type="submit" className={estilos.recusar}>
-                        <X size={16} strokeWidth={2} aria-hidden="true" />
-                        <span>{t("Recusar")}</span>
-                      </button>
+                      <BotaoEnvio
+                        textoEnviando={t("Aguarde…")}
+                        icone={<X size={16} strokeWidth={2} aria-hidden="true" />}
+                        className={estilos.recusar}
+                      >
+                        {t("Recusar")}
+                      </BotaoEnvio>
                     </form>
                   </span>
                 )}

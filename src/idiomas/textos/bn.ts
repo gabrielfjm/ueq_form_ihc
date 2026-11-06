@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const bn: TextosParticipante = {
   pularConteudo: "মূল বিষয়বস্তুতে যান",
+  aguarde: "অপেক্ষা করুন…",
   idioma: {
     rotulo: "ভাষা",
     aplicar: "প্রয়োগ করুন",
