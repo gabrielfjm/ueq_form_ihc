@@ -86,14 +86,17 @@ Escala (rem): 0.8125 · 0.9375 · 1.0625 · 1.25 · 1.625 · 2.25. Corpo em 1.06
 
 - Conteúdo alinhado à esquerda, largura máxima de leitura ~72ch, painéis de dados até 1120px
 - Grid de 8px. Espaço vertical generoso entre seções (48 a 64px), apertado dentro de tabelas
-- Navegação do pesquisador: barra superior fina com nome da ferramenta à esquerda e 5 links com ícone e texto: Estudos, Criar estudo, Documentação, Minha conta, Sair. Sem sidebar. Quem não entrou (página inicial e documentação) vê a mesma barra só com Documentação e Entrar (`log-in`); Criar conta (`user-plus`) fica na página inicial e dentro da janela de Entrar. O link do participante não tem barra nenhuma
+- Navegação do pesquisador: barra superior fina com nome da ferramenta à esquerda e links com ícone e texto: Estudos, Criar estudo, Documentação, Administração (só para quem é administrador), Minha conta, o sino de notificações e Sair. Sem sidebar. Quem não entrou (página inicial e documentação) vê a mesma barra só com Documentação e Entrar (`log-in`); Criar conta (`user-plus`) fica na página inicial e dentro da janela de Entrar. O link do participante não tem barra nenhuma
 - A barra fica fixa no topo durante toda a rolagem, no computador e no celular. Até 56rem de largura os links ficam atrás de um botão Menu (`menu`, e `x` quando aberto, sempre com o texto "Menu"), para a barra fixa ocupar uma linha só; o menu abre os links em coluna logo abaixo e fecha com Esc ou ao trocar de página. Em 320 px a fileira de marcações do logotipo sai da barra para o nome e o Menu caberem
 - Tabelas são cidadãs de primeira classe: cabeçalho em negrito, linhas separadas por régua de 1px, números alinhados à direita
 - Botão primário: fundo `--tinta`, texto `--fundo`, raio 2px, altura 40px. Secundário: borda 1px `--tinta`, fundo transparente. Ação destrutiva: texto `--alerta` sublinhado, que abre uma janela de confirmação (ver "Janelas")
 - Foco visível sempre: `outline: 2px solid var(--destaque); outline-offset: 2px`
 - Faixa de cabeçalho em `--fundo-faixa` no topo das páginas do estudo, com título, status, resumo e abas
 - Telas largas do pesquisador usam duas colunas (conteúdo + ficha lateral) em vez de uma coluna estreita com a direita vazia
-- Página inicial (`/`): apresenta a ferramenta para quem não tem conta. Texto alinhado à esquerda com o item 1 do questionário como figura, seções numeradas (Como funciona, O questionário, Para o participante, Resultados e dados, Documentação) e a tabela das escalas. Sem hero centralizado nem cards
+- Página inicial (`/`): apresenta a ferramenta e é a tela depois do login. Texto alinhado à esquerda com o item do questionário e uma prévia do resultado como figura, índice "Nesta página" e seções numeradas: O que é o UEQ, Como ler os resultados, Como funciona, Estudos sobre o método e Créditos. Sem hero centralizado
+- Painéis de opções (Administração e Minha conta, protótipos r24 e r9): uma grade em que cada opção leva a uma página própria ou abre uma janela, com título, descrição e situação em uma linha, em vez de empilhar tudo numa tela só. O cartão inteiro responde ao clique, mas continua sendo uma lista com títulos para o leitor de tela
+- Política de privacidade (`/privacidade`, protótipo r33): faixa com "Voltar" no topo e o quadro "Em resumo" ao lado; abaixo, seções numeradas em linhas de rótulo e explicação com régua entre elas, como as condições do consentimento, e a ficha lateral fixa "Nesta página". O "Voltar" diz para onde vai e aparece também no fim da página. Quando a política abriu em outra aba, a partir das janelas de Entrar e Criar conta, ele vira "Fechar esta aba e voltar", para não perder o que a pessoa digitou
+- Política no link do participante (`/r/<slug>/privacidade`, protótipo p9): o mesmo conteúdo, aberto por um link no fim do termo de consentimento, sem barra, sem ícones e sem link para o resto da ferramenta. O "Voltar" leva ao termo. Enquanto o texto não tem tradução para o idioma da pessoa, um quadro avisa, no idioma dela, que a política aparece em português
 
 ## Janelas
 
@@ -105,6 +108,17 @@ Escala (rem): 0.8125 · 0.9375 · 1.0625 · 1.25 · 1.625 · 2.25. Corpo em 1.06
 - "Sair sem enviar", no questionário do participante, também confirma numa janela (protótipo p8): a pergunta é o título, "Continuar respondendo" é o botão primário e começa com o foco, e Esc também continua. Sem ícone e sem o `x`, como todas as telas do participante; os textos vêm do idioma escolhido
 - Documento em produção (protótipo r23): enquanto o arquivo não entra na lista `PRONTOS` de `src/lib/documentacao/catalogo.ts`, a aba Documentação mostra as mesmas abas e sub-abas, a fileira de marcações vazia, "Em produção" com o ponto vazado do rascunho e a ficha com o que o documento vai trazer, sem arquivo, downloads nem índice. A visão geral lista a situação de cada documento
 - Ícone do site (`src/app/icon.svg` e `apple-icon.tsx`): três marcações do diferencial semântico, a última preenchida, em branco sobre `--destaque`
+- Ajuda da página (protótipo r30): botão redondo (?) no cabeçalho de cada página do pesquisador, com `aria-label`, que abre a janela média. Ela diz para que serve a página e o que dá para fazer nela, leva à Política de privacidade e oferece rever o tour
+- Compartilhar (protótipo r25): janela média com quem tem acesso e o convite por e-mail, escolhendo Editor ou Leitor
+
+## Sino e tour
+
+- Sino (protótipo r26): fica entre Minha conta e Sair. As não lidas aparecem num contador `--alerta` com o número em texto. Abre os avisos mais recentes e leva à página Notificações (r27), onde os convites têm Aceitar e Recusar ali mesmo
+- Tour guiado (protótipos r28 e r29): começa com uma janela de boas-vindas no primeiro acesso. Cada passo destaca um elemento real da tela e um cartão ao lado explica. Em parte dos passos, a pessoa faz a própria ação para seguir. Dá para pular ou fechar a qualquer momento, e rever pela ajuda
+
+## E-mails
+
+Convite e avisos saem com a mesma identidade: fundo branco, faixa `--fundo-faixa`, tinta escura, a fileira de 7 marcações e azul-petróleo só no que é clicável. São feitos em tabelas com estilo inline, sem imagens, e levam a versão em texto puro. Saem no idioma de quem recebe (`src/lib/modelo-email.ts`).
 
 ## Ícones
 
@@ -114,7 +128,7 @@ Lucide (`lucide-react`), contorno de 1,5 px, 18 px, na cor do texto ao lado.
 - Ícone sozinho só em fechar e menu, com `aria-label`. Exceção: no celular, os botões de zoom do diagrama em tela cheia (`zoom-out`, `zoom-in`, `maximize`) mostram só o ícone para Voltar e o zoom caberem numa linha; o texto (Diminuir, Aumentar, Ajustar à tela) continua como nome acessível e aparece no computador
 - Ação destrutiva usa o ícone na cor `--alerta`, junto com o texto
 - **Nenhum ícone nas telas do participante dentro do questionário** (ihc.md, seção 3: qualquer elemento a mais pode influenciar a resposta)
-- Mapa usado nas telas: Estudos `folder`, Criar estudo `plus`, Minha conta `user`, Salvar alterações `save`, Trocar senha `lock`, Sair `log-out`, Entrar `log-in`, Criar conta `user-plus`, Visão geral `layout-dashboard`, Resultados `bar-chart-3`, Respostas `list`, Copiar link `copy`, Abrir coleta `play`, Encerrar coleta `square`, Reabrir `rotate-ccw`, Editar `pencil`, Excluir `trash-2`, Exportar `download`, Mostrar senha `eye`, Adicionar versão `plus`, Remover `x`, Tirar da análise `minus-circle`, mensagem de status `check-circle`, Documentação `book-open`, Ver no GitHub e Abrir em tamanho real `external-link`, Baixar `download`. Abas da documentação: Visão geral `layout-dashboard`, Requisitos `list-checks`, Usuários `users`, Modelagem `shapes`, Arquitetura `layers`, Testes `flask-conical`, Especificação `file-text`
+- Mapa usado nas telas: Estudos `folder`, Criar estudo `plus`, Minha conta `user`, Salvar alterações `save`, Trocar senha `lock`, Sair `log-out`, Entrar `log-in`, Criar conta `user-plus`, Visão geral `layout-dashboard`, Resultados `bar-chart-3`, Respostas `list`, Copiar link `copy`, Abrir coleta `play`, Encerrar coleta `square`, Reabrir `rotate-ccw`, Editar `pencil`, Excluir `trash-2`, Exportar `download`, Mostrar senha `eye`, Adicionar versão `plus`, Remover `x`, Tirar da análise `minus-circle`, mensagem de status `check-circle`, Documentação `book-open`, Ver no GitHub e Abrir em tamanho real `external-link`, Baixar `download`, Voltar `arrow-left`, Administração e Política de privacidade `shield-check`, Notificações `bell`, Ajuda `circle-help`, Rever o tour `compass`, Idioma `languages`. Abas da documentação: Visão geral `layout-dashboard`, Requisitos `list-checks`, Usuários `users`, Modelagem `shapes`, Arquitetura `layers`, Testes `flask-conical`, Especificação `file-text`
 - Movimento: só transição de 120ms em cor/borda. Respeitar `prefers-reduced-motion`
 
 ## Telas-chave
@@ -123,7 +137,7 @@ Lucide (`lucide-react`), contorno de 1,5 px, 18 px, na cor do texto ao lado.
 A tela mais importante. É onde a equipe mostra que entende de IHC.
 
 - Cabeçalho mínimo: nome do produto avaliado e uma frase de instrução no estilo do UEQ oficial
-- Termo de consentimento antes, em página própria, com texto completo e botão "Concordo e quero participar". Sem checkbox escondido
+- Termo de consentimento antes, em página própria, com texto completo, link para a política de privacidade e botão "Concordo e quero participar". Sem checkbox escondido
 - Itens em linhas, uma por item, com régua fina entre elas. Termo da esquerda alinhado à direita, 7 círculos no centro, termo da direita alinhado à esquerda. Nada de números visíveis
 - Círculos com área de toque de 44×44px, contorno 1.5px `--tinta`, preenchido em `--tinta` quando marcado
 - Teclado: comportamento nativo de rádio (Tab entre itens, setas dentro do item). Sem atalho de tecla única, que conflita com leitor de tela (WCAG 2.1.4). Cada item é um `<fieldset>` com `<legend>`, detalhes em `docs/ihc.md` seção 4.1
@@ -158,6 +172,10 @@ Comparação entre versões: mesmo gráfico de escalas, com um marcador por vers
 
 ### Estados vazios
 Sem ilustração. Uma frase direta e a ação. Ex.: "Nenhuma resposta ainda. Compartilhe o link do estudo para começar a coleta." + link copiável num campo com fundo `--fundo-painel` e botão "Copiar link".
+
+## Exceções em aberto
+
+A página inicial foge de duas regras da seção "Proibido": a faixa do topo tem um gradiente radial suave, e figuras e cartões têm raio de 6 a 8 px (`inicio.module.css`). O contador do sino tem raio de 10 px, que é o formato do número. A equipe ainda precisa decidir se a regra muda ou se a página volta à regra.
 
 ## Tom de voz
 

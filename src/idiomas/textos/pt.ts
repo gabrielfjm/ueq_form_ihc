@@ -35,6 +35,11 @@ export const pt: TextosParticipante = {
     ],
     concordo: "Concordo e quero participar",
     naoQuero: "Não quero participar",
+    privacidade: "Política de privacidade",
+  },
+  politica: {
+    voltar: "Voltar",
+    semTraducao: "Esta política ainda não foi traduzida para o seu idioma e aparece em português.",
   },
   fechado: {
     rascunho: {

@@ -34,6 +34,11 @@ export const mr: TextosParticipante = {
     ],
     concordo: "मी सहमत आहे आणि सहभागी होऊ इच्छितो/इच्छिते",
     naoQuero: "मला सहभागी व्हायचे नाही",
+    privacidade: "गोपनीयता धोरण",
+  },
+  politica: {
+    voltar: "मागे जा",
+    semTraducao: "हे धोरण अद्याप तुमच्या भाषेत अनुवादित झालेले नाही, म्हणून ते पोर्तुगीजमध्ये दिसत आहे.",
   },
   fechado: {
     rascunho: {

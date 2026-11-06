@@ -34,6 +34,11 @@ export const ja: TextosParticipante = {
     ],
     concordo: "同意して参加する",
     naoQuero: "参加しない",
+    privacidade: "プライバシーポリシー",
+  },
+  politica: {
+    voltar: "戻る",
+    semTraducao: "このポリシーはまだお使いの言語に翻訳されていないため、ポルトガル語で表示しています。",
   },
   fechado: {
     rascunho: {

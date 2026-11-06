@@ -34,6 +34,11 @@ export const el: TextosParticipante = {
     ],
     concordo: "Συμφωνώ και θέλω να συμμετάσχω",
     naoQuero: "Δεν θέλω να συμμετάσχω",
+    privacidade: "Πολιτική απορρήτου",
+  },
+  politica: {
+    voltar: "Επιστροφή",
+    semTraducao: "Αυτή η πολιτική δεν έχει μεταφραστεί ακόμη στη γλώσσα σας και εμφανίζεται στα πορτογαλικά.",
   },
   fechado: {
     rascunho: {

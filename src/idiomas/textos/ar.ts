@@ -34,6 +34,11 @@ export const ar: TextosParticipante = {
     ],
     concordo: "أوافق وأرغب في المشاركة",
     naoQuero: "لا أرغب في المشاركة",
+    privacidade: "سياسة الخصوصية",
+  },
+  politica: {
+    voltar: "رجوع",
+    semTraducao: "لم تُترجم هذه السياسة إلى لغتك بعد، لذا تظهر باللغة البرتغالية.",
   },
   fechado: {
     rascunho: {

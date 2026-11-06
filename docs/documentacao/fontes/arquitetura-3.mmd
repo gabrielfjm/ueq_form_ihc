@@ -1,0 +1,84 @@
+flowchart TB
+    navegador["<b>Interface no navegador</b><br/>[Container]"]
+    pdf["<b>Gerador de PDF</b><br/>[Container]"]
+    banco[("<b>PostgreSQL</b><br/>[Container]")]
+    dados[/"<b>data/*.json</b><br/>[Container]"/]
+    docsMd[/"<b>docs/*.md</b><br/>[arquivos do repositório]"/]
+    claude["<b>API do Claude</b><br/>[Sistema externo]"]
+    smtp["<b>Servidor de e-mail</b><br/>[Sistema externo]"]
+
+    subgraph app["Aplicação web · Next.js"]
+        direction TB
+        proxy["<b>Proxy de sessão</b><br/>[src/proxy.ts]<br/>Manda para Entrar quem não tem cookie,<br/>guardando a página pedida"]
+
+        subgraph rotas["Rotas"]
+            direction LR
+            publico["<b>Páginas públicas</b><br/>[app/(ferramenta)/(publico)]<br/>Página inicial, janelas de Entrar e Criar conta,<br/>Documentação e Política de privacidade"]
+            areaPesq["<b>Área do pesquisador</b><br/>[app/(ferramenta)/(pesquisador)]<br/>Estudos, Resultados, Respostas, Importar,<br/>Notificações, Minha conta e Administração"]
+            areaPart["<b>Link do participante</b><br/>[app/r/[slug]]<br/>Layout raiz próprio com lang e dir;<br/>consentimento, política, questionário,<br/>dados opcionais, fim"]
+            api["<b>Rotas de download</b><br/>[app/api]<br/>exportar/[tipo], painel-pdf,<br/>conta/dados e documentacao"]
+        end
+
+        subgraph servicos["Serviços · src/lib"]
+            direction LR
+            sessao["<b>Sessão e conta</b><br/>sessao.ts, senhas.ts, tentativas.ts,<br/>validacao-conta.ts, administracao.ts"]
+            estudos["<b>Estudos</b><br/>estudos.ts, validacao-estudo.ts,<br/>status-estudo.ts, periodo.ts<br/>acesso (dono, editor, leitor), slug"]
+            participacao["<b>Participação</b><br/>participacao.ts, balanceamento.ts,<br/>demografia.ts, cripto.ts, itens-ueq.ts"]
+            resultados["<b>Resultados</b><br/>resultados.ts, participacoes.ts,<br/>leitura-rapida.ts, perfil-demografico.ts"]
+            arquivos["<b>Arquivos</b><br/>exportacoes.ts, exportar-estudo.ts,<br/>csv.ts, importacao.ts"]
+            avisos["<b>Avisos</b><br/>notificacoes.ts, email.ts,<br/>modelo-email.ts"]
+            banco_lib["<b>Acesso ao banco</b><br/>banco.ts + Prisma Client<br/>gerado em src/generated/prisma"]
+        end
+
+        ueq["<b>Módulo de cálculo</b><br/>[src/ueq · funções puras]<br/>recodificação, estatística, escalas,<br/>alfa, benchmark, inconsistência"]
+        idiomas["<b>Idiomas do participante</b><br/>[src/idiomas]<br/>37 idiomas, negociação pelo navegador,<br/>textos tipados, plural e listas"]
+        traducao["<b>Tradução da interface</b><br/>[src/traducao]<br/>t() e m(), catálogo de textos,<br/>cache no banco e API do Claude"]
+        ui["<b>Componentes e gráficos</b><br/>[src/componentes, src/graficos]<br/>ItemDiferencial, formulários, janelas, tour,<br/>EscalasComBenchmark, MediasPorItem, Demografia"]
+        docsLib["<b>Leitor de documentos</b><br/>[src/lib/documentacao]<br/>catálogo, Markdown com marked,<br/>links e âncoras como no GitHub"]
+    end
+
+    navegador --> proxy
+    proxy --> areaPesq
+    proxy --> api
+    navegador --> publico
+    navegador --> areaPart
+
+    publico --> sessao
+    publico --> traducao
+    publico --> docsLib
+    areaPesq --> sessao
+    areaPesq --> estudos
+    areaPesq --> resultados
+    areaPesq --> arquivos
+    areaPesq --> avisos
+    areaPesq --> traducao
+    areaPesq --> ui
+    areaPart --> participacao
+    areaPart --> idiomas
+    areaPart --> traducao
+    areaPart --> avisos
+    areaPart --> ui
+    areaPart --> ueq
+    api --> sessao
+    api --> arquivos
+    api --> docsLib
+    api -- "abre a impressão" --> pdf
+    docsLib -. ".md e SVG dos diagramas" .-> docsMd
+
+    resultados --> ueq
+    arquivos --> ueq
+    arquivos --> resultados
+    sessao --> banco_lib
+    estudos --> banco_lib
+    participacao --> banco_lib
+    resultados --> banco_lib
+    arquivos --> banco_lib
+    avisos --> banco_lib
+    traducao --> banco_lib
+    banco_lib -- "SQL" --> banco
+    traducao -- "traduz em lotes" --> claude
+    avisos -- "envia" --> smtp
+
+    resultados -. "protocolo e benchmark" .-> dados
+    idiomas -. "termos e instruções" .-> dados
+    areaPart -. "protocolo" .-> dados

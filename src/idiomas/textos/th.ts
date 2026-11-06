@@ -34,6 +34,11 @@ export const th: TextosParticipante = {
     ],
     concordo: "ฉันยินยอมและต้องการเข้าร่วม",
     naoQuero: "ฉันไม่ต้องการเข้าร่วม",
+    privacidade: "นโยบายความเป็นส่วนตัว",
+  },
+  politica: {
+    voltar: "ย้อนกลับ",
+    semTraducao: "นโยบายนี้ยังไม่ได้แปลเป็นภาษาของคุณ จึงแสดงเป็นภาษาโปรตุเกส",
   },
   fechado: {
     rascunho: {

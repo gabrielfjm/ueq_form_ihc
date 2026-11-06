@@ -44,6 +44,8 @@ A tabela serve para três coisas:
 | Decisão | Princípio | Onde está | Evidência |
 |---|---|---|---|
 | Consentimento com uma ação principal. Recusar é um link igualmente visível | Hick, Nielsen 8, §3.7 | `src/app/r/[slug]/page.tsx` | e2e questionario: "não quero participar sai sem gravar…" |
+| O termo tem link para a política, numa página sem barra e sem caminho para a ferramenta, que volta ao termo | LGPD art. 9º, Nielsen 3 | `src/app/r/[slug]/page.tsx`, `src/app/r/[slug]/privacidade/page.tsx` | e2e questionario: "a política de privacidade abre pelo termo, dentro do link do participante, e volta para ele" |
+| Sem tradução, a política avisa no idioma da pessoa que aparece em português, e o texto sai marcado com o `lang` do português | Nielsen 1, WCAG 3.1.2 | `src/app/r/[slug]/privacidade/page.tsx` | e2e questionario: "sem tradução automática, a política avisa no idioma da pessoa e sai marcada como português" |
 | Nada sobre a pessoa é gravado antes de "Concordo" | §3.7 (ética em pesquisa) | `src/app/r/[slug]/acoes.ts` (`consentir`) | e2e questionario |
 | Etapas numeradas (1 Consentimento · 2 Questionário · 3 Dados opcionais) | Shneiderman 4, Nielsen 1 | `src/app/r/[slug]/Etapas.tsx` | e2e questionario (aria-current na etapa) |
 | Cada item é um fieldset com legenda. Cada círculo diz a posição e o polo ("2 de 7, mais perto de Agradável") | WCAG 1.3.1, 4.1.2, 2.5.3 | `ItemDiferencial.tsx` | e2e questionario: "cada item é um grupo…"; manual: leitor de tela |
@@ -61,11 +63,12 @@ A tabela serve para três coisas:
 
 | Decisão | Princípio | Onde está | Evidência |
 |---|---|---|---|
-| O idioma vem do navegador, entre os 37 do pacote oficial, e o `<html lang>` e o `dir` acompanham | WCAG 3.1.1 | `src/app/r/[slug]/layout.tsx`, `src/idiomas/index.ts` (`negociarIdioma`) | e2e idiomas: "em espanhol pelo navegador…"; unit `src/idiomas/__tests__` |
+| O link abre no idioma do estudo, entre os 37 do pacote oficial, mesmo com o navegador em outro idioma, e o `<html lang>` e o `dir` acompanham | WCAG 3.1.1 | `src/app/r/[slug]/layout.tsx`, `src/lib/participacao.ts` (`idiomaDoParticipante`) | e2e idiomas: "estudo em espanhol: o link abre no idioma do estudo, mesmo com o navegador em português" |
 | No seletor de idioma, escolher não muda nada: só o botão "Aplicar" | WCAG 3.2.2 | `src/app/r/[slug]/SeletorIdioma.tsx` | e2e idiomas (árabe) |
 | Cada idioma aparece no seletor com o próprio nome e com `lang` | WCAG 3.1.2 | `SeletorIdioma.tsx` | manual: leitor de tela |
 | Nos 9 idiomas de tradução não aprovada, aviso no consentimento e marca para o pesquisador | Nielsen 1, transparência metodológica | `SeletorIdioma.tsx`, `respostas/TabelaParticipacoes.tsx`, exportações | e2e idiomas (árabe) |
 | Todos os textos de tela têm tradução, com os mesmos marcadores da versão em português | Shneiderman 2 (usabilidade universal) | `src/idiomas/textos/*.ts`, com o tipo `TextosParticipante` | unit `src/idiomas/__tests__/idiomas.test.ts` |
+| O questionário usa só as traduções oficiais; o título, o produto e o objetivo do estudo saem traduzidos, e sem tradução ficam no original, marcados com o `lang` dele | Validade do instrumento (§3), WCAG 3.1.2 | `src/lib/participacao.ts` (`textosDoEstudo`), `src/traducao/servidor.ts` | manual: revisão por falante nativo (`docs/idiomas.md`) |
 
 ## Pesquisador: conta e estudos
 
@@ -77,12 +80,37 @@ A tabela serve para três coisas:
 | O produto avaliado vira sugestão de nome da primeira versão | WCAG 3.3.7 | `estudos/formulario/FormularioEstudo.tsx` | e2e estudos: "o produto sugere o nome da primeira versão…" |
 | Excluir estudo ou conta abre uma janela que pede o título ou o e-mail digitado e diz o que vai junto | Nielsen 5, WCAG 3.3.4 | `estudos/[id]/AcoesEstudo.tsx`, `conta/ExcluirConta.tsx`, `src/componentes/janela/Confirmacao.tsx` | e2e estudos: "excluir pede o título e apaga o estudo"; e2e conta: "excluir a conta exige digitar o e-mail e apaga o acesso" |
 | Sair e Remover versão também confirmam numa janela, com o foco já no botão da ação | Nielsen 3 e 5, Shneiderman 6 | `(pesquisador)/BarraSuperior.tsx`, `estudos/formulario/ListaVersoes.tsx` | e2e autenticacao: "cadastra, sai e entra de novo usando só o teclado"; e2e estudos: "o produto sugere o nome da primeira versão…" |
-| A página inicial explica a ferramenta para quem não tem conta: o que faz, o questionário, o participante, os resultados e a documentação | Nielsen 2 e 10 | `(publico)/PaginaInicial.tsx` | e2e inicial: "a raiz apresenta a ferramenta para quem não tem sessão e passa no axe" |
+| A página inicial explica o UEQ e a ferramenta: o que é o método, como ler os resultados, como funciona, os estudos e os créditos. É também a tela depois do login | Nielsen 2 e 10 | `(publico)/PaginaInicial.tsx` | e2e inicial: "a raiz apresenta a ferramenta para quem não tem sessão e passa no axe" |
 | Entrar e Criar conta abrem numa janela sobre a página atual, trocam um pelo outro sem fechar e cabem na tela sem rolar | Nielsen 3, Shneiderman 8, WCAG 1.4.10 | `(publico)/_acesso/Acesso.tsx`, `acesso.module.css` | e2e inicial: "Entrar abre a janela por cima da página, sem rolar, e Esc fecha devolvendo o foco" |
 | Encerrar a coleta é reversível ("Reabrir"), por isso não pede confirmação | Shneiderman 6 | `estudos/[id]/BotaoColeta.tsx` | e2e estudos: "abre, encerra e reabre a coleta…" |
 | Status escrito com a consequência ("Aberto · aceitando respostas"), sempre no mesmo lugar | Nielsen 1 | `src/lib/status-estudo.ts`, `estudos/[id]/FaixaEstudo.tsx` | e2e estudos |
 | Toda ação confirma o resultado numa região `role="status"` | Norman (feedback), Shneiderman 3, WCAG 4.1.3 | `src/componentes/Avisos.tsx`, `formulario/MensagemStatus.tsx` | e2e estudos: "Copiar link anuncia o resultado…"; e2e conta |
 | Outro pesquisador não vê o estudo pelo endereço: a resposta é igual à de um estudo inexistente | privacidade dos dados da pesquisa | `src/lib/estudos.ts` (`estudoDoPesquisador`) | e2e estudos: "outro pesquisador não vê o estudo pelo endereço"; e2e exportacao |
+
+## Pesquisador: equipe, avisos e ajuda
+
+| Decisão | Princípio | Onde está | Evidência |
+|---|---|---|---|
+| O dono convida por e-mail como Editor ou Leitor; o estudo só aparece depois de aceitar, e o leitor só vê e exporta | Nielsen 5, controle do usuário, privacidade dos dados da pesquisa | `estudos/[id]/Compartilhar.tsx`, `acoes-compartilhar.ts`, `src/lib/estudos.ts` (`PERMISSOES`) | e2e equipe: "convite por e-mail chega no sino, o leitor só vê e o dono é avisado" |
+| Sino com o número de não lidas, que funciona também pelo teclado, e convites com Aceitar e Recusar ali mesmo | Nielsen 1, Shneiderman 7, WCAG 2.1.1 | `(pesquisador)/sino.module.css`, `notificacoes/page.tsx`, `src/lib/notificacoes.ts` | e2e equipe: "o sino também funciona pelo teclado" |
+| Respostas novas viram um aviso só enquanto ele não é lido: 30 respostas numa manhã não são 30 avisos | Nielsen 8, carga de memória (Shneiderman 8) | `src/lib/notificacoes.ts` (`notificarResposta`) | manual |
+| Quem fez a ação não é avisado da própria ação, e o e-mail pode ser desligado em Minha conta | Nielsen 8, Shneiderman 7 | `src/lib/notificacoes.ts` (`notificar`) | e2e equipe: "convite por e-mail chega no sino…" |
+| Tour só no primeiro acesso, nas telas reais, avançando pela ação da pessoa, e que pode ser pulado e revisto | ISO 9241-110 (facilidade de aprendizado), Nielsen 3 e 10 | `src/componentes/tutorial/` | e2e equipe: "o tour abre só no primeiro acesso, avança pelo clique na ação e pode ser pulado" |
+| O (?) em toda página do pesquisador diz para que ela serve e o que dá para fazer nela | Nielsen 10 | `src/componentes/ajuda/BotaoAjuda.tsx`, `src/lib/ajuda.ts` | e2e equipe: "toda página do pesquisador tem o (?) com a ajuda dela" |
+| Administração e Minha conta são painéis: cada opção diz a situação atual e abre uma página própria | Nielsen 6, Hick, revelação progressiva | `src/componentes/painel/PainelOpcoes.tsx` | e2e conta; manual |
+| A interface sai no idioma da conta, e o idioma se troca em Minha conta. Enquanto a maior parte não foi traduzida, o `lang` da página fica em português, para o leitor de tela pronunciar certo | Shneiderman 2, WCAG 3.1.1 | `src/traducao/servidor.ts` (`idiomaExibido`), `conta/idioma/` | e2e idioma-interface: "o idioma escolhido ao criar a conta vale para a ferramenta e pode ser trocado em Minha conta" |
+
+## Proteção de dados
+
+| Decisão | Princípio | Onde está | Evidência |
+|---|---|---|---|
+| A política é pública e escrita sem juridiquês, em linhas de rótulo e explicação, com um resumo e um índice | LGPD art. 9º, Nielsen 2, WCAG 2.4.5 | `(publico)/privacidade/page.tsx` | e2e privacidade: "a política de privacidade é pública e acessível"; "a política leva cada seção pelo índice e não rola na horizontal em 320 px" |
+| O "Voltar" da política diz para onde vai, funciona sem histórico e devolve a pessoa ao ponto de onde saiu | Nielsen 3, Shneiderman 7 | `privacidade/Voltar.tsx`, `privacidade/origem.ts` | e2e privacidade: "da página inicial, a política volta ao rodapé de onde a pessoa saiu"; "de Minha conta e da ajuda, a política volta para a mesma tela" |
+| Das janelas de Entrar e Criar conta, a política abre em outra aba, avisa disso no nome do link, e voltar fecha a aba, sem perder o que foi digitado | Nielsen 3, WCAG 3.2.5 | `_acesso/LinkPrivacidade.tsx`, `privacidade/Voltar.tsx` | e2e privacidade: "das janelas de acesso, a política abre em outra aba, sem perder o que foi digitado, e voltar tenta fechar a aba"; manual: checklist, leitor de tela |
+| O destino do "Voltar" só aceita caminho interno | Segurança (redirecionamento aberto) | `src/lib/validacao-conta.ts` (`destinoInterno`) | e2e privacidade: "a política não aceita voltar para outro site" |
+| A coleta demográfica vem desligada em cada estudo, e a caixa explica o porquê | LGPD art. 6º (necessidade), §3.8 | `estudos/formulario/`, `Estudo.coletarDemografia` | manual: `docs/roteiro-revisao.md` |
+| "Baixar meus dados" entrega um arquivo com tudo, sem pedir a ninguém | LGPD art. 18, Shneiderman 7 | `src/app/api/conta/dados/route.ts`, `conta/FichaConta.tsx` | e2e privacidade: "Baixar meus dados entrega um JSON com a conta e sem a senha" |
+| Depois de 5 senhas erradas, a mensagem diz quanto esperar | Nielsen 9, LGPD art. 46 | `src/lib/tentativas.ts` | e2e privacidade: "depois de 5 senhas erradas o e-mail espera" |
 
 ## Pesquisador: painel de resultados
 
@@ -97,6 +125,7 @@ A tabela serve para três coisas:
 | Versão, modo e ordem dos itens ficam na URL: voltar, recarregar e compartilhar funcionam | Nielsen 3 | `resultados/ControlesResultados.tsx` | e2e resultados: "…guarda versão e modo na URL" |
 | Trocar a versão não tira o foco do seletor | WCAG 3.2.2 | `ControlesResultados.tsx` | manual: teclado |
 | Em tela estreita a tabela rola dentro de uma região focável, e a página não rola | WCAG 1.4.10 e 2.1.1 | `VisaoUmaVersao.tsx`, `VisaoComparacao.tsx` | e2e resultados: "em 320 px o painel não rola na horizontal, nos dois modos" |
+| Dados demográficos em sub-aba própria, cada pergunta no gráfico que combina com ela, com "Ver os números" | Gestalt, WCAG 1.1.1, revelação progressiva | `src/graficos/Demografia.tsx`, `resultados/demograficos/` | e2e privacidade: "os dados demográficos aparecem em Resultados, numa sub-aba própria" |
 | Painel em PDF com a mesma seleção da tela, cabeçalho com título, n e data de geração, gráficos em vetor, A4 com margens de 18 mm | Nielsen 4, §4.4 | `resultados/impressao/`, `src/app/api/estudos/[id]/painel-pdf/route.ts` | e2e painel-pdf |
 
 ## Pesquisador: respostas, exportação e importação
@@ -124,8 +153,8 @@ A tabela serve para três coisas:
 | Link "Pular para o conteúdo" como primeiro Tab | WCAG 2.4.1 | `src/app/(ferramenta)/layout.tsx`, `src/app/r/[slug]/layout.tsx` | e2e inicial: "o primeiro Tab leva ao link de pular para o conteúdo" |
 | Título de página único e descritivo ("Questionário · <estudo>") | WCAG 2.4.2 | `generateMetadata` de cada página | e2e (toHaveTitle em vários testes) |
 | Cores em tokens, com contraste conferido por teste | WCAG 1.4.3 e 1.4.11 | `src/styles/tokens.css` | unit `src/styles/__tests__/contraste.test.ts` |
-| Mesmo padrão de botão, campo, tabela e mensagem em todas as telas | Nielsen 4, Shneiderman 1 | `src/componentes/formulario/`, `src/styles/` | revisão visual (prompt 09) |
-| Telas iguais ao protótipo de alta fidelidade | consistência com o projeto avaliado | `docs/prototipos/alta-fidelidade/` | revisão visual (prompt 09) |
+| Mesmo padrão de botão, campo, tabela e mensagem em todas as telas | Nielsen 4, Shneiderman 1 | `src/componentes/formulario/`, `src/styles/` | manual: `docs/roteiro-revisao.md` |
+| Telas iguais ao protótipo de alta fidelidade | consistência com o projeto avaliado | `docs/prototipos/alta-fidelidade/` | manual: `docs/roteiro-revisao.md` |
 
 ## O que nenhum teste automático cobre
 
@@ -134,7 +163,8 @@ Estes pontos ficam para a revisão manual (`docs/checklist-manual.md` e `docs/ro
 - uso real com leitor de tela (NVDA, VoiceOver, TalkBack) do começo ao fim;
 - zoom de 200% e 400% num celular real, e o polegar nos círculos;
 - espaçamento de texto aumentado (WCAG 1.4.12) e `prefers-reduced-motion`;
-- a qualidade das traduções das telas do participante (`docs/idiomas.md`);
+- a qualidade das traduções das telas do participante e da interface traduzida pela API (`docs/idiomas.md`);
+- o tour guiado e o sino com leitor de tela;
 - a compreensão do painel por quem não conhece o UEQ.
 
 As telas sem protótipo também ficam para essa revisão: o seletor de idioma, Importar respostas e o painel em PDF.

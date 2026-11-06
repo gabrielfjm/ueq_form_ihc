@@ -1,7 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { posix } from "node:path";
 import { describe, expect, it } from "vitest";
-import { DOCUMENTOS, DOWNLOADS, REPOSITORIO, SECOES, documentoPeloSlug, documentoPronto } from "../documentacao/catalogo";
+import { DOCUMENTOS, DOWNLOADS, REPOSITORIO, SECOES, caminhoDaFonte, documentoPeloSlug, documentoPronto } from "../documentacao/catalogo";
 import { NOME_DIAGRAMA, PASTA_DIAGRAMAS, blocosMermaid, nomeDoDiagrama } from "../documentacao/diagramas";
 import { destinoDoLink, renderizarMarkdown, slugDoTitulo } from "../documentacao/markdown";
 
@@ -40,6 +40,16 @@ describe("diagramas", () => {
 
   it("cada diagrama dos documentos tem o SVG gerado (senão: pnpm docs:diagramas)", () => {
     for (const nome of usados) expect(existsSync(posix.join(PASTA_DIAGRAMAS, nome)), `${nome}: rode pnpm docs:diagramas`).toBe(true);
+  });
+
+  it("cada diagrama tem o arquivo-fonte igual ao do documento (senão: pnpm docs:diagramas)", () => {
+    for (const documento of EXISTENTES) {
+      blocosMermaid(ler(documento.arquivo)).forEach((codigo, posicao) => {
+        const fonte = caminhoDaFonte(documento, posicao);
+        expect(existsSync(fonte), `${fonte}: rode pnpm docs:diagramas`).toBe(true);
+        expect(ler(fonte).trim(), `${fonte}: rode pnpm docs:diagramas`).toBe(codigo.replace(/\r\n/g, "\n").trim());
+      });
+    }
   });
 
   it("não sobra SVG de diagrama que nenhum documento usa", () => {

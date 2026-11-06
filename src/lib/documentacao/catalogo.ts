@@ -21,13 +21,41 @@ export type Secao = { slug: string; titulo: string; documentos: readonly Documen
 // arquivo não entra nesta lista, a aba mostra "Em produção" no lugar dele, sem o texto, os diagramas e os
 // downloads, e o arquivo nem precisa existir ainda. Para publicar um documento pronto, acrescente aqui o
 // caminho do arquivo (o mesmo de `arquivo`)
-const PRONTOS: ReadonlySet<string> = new Set<string>([]);
+const PRONTOS: ReadonlySet<string> = new Set<string>([
+  "docs/documentacao/arquitetura.md",
+  "docs/documentacao/diagramas-de-sequencia.md",
+  "docs/documentacao/modelo-logico.md",
+  "docs/documentacao/casos-de-teste.md",
+  "docs/roteiro-revisao.md",
+  "docs/checklist-manual.md",
+  "docs/ueq-protocolo.md",
+  "docs/ihc.md",
+  "docs/rastreabilidade-ihc.md",
+  "docs/idiomas.md",
+  "docs/design.md",
+  "docs/codigo.md",
+]);
 
 export function documentoPronto(documento: Documento): boolean {
   return PRONTOS.has(documento.arquivo);
 }
 
 const PLANILHA: Download = { arquivo: "docs/documentacao/planilha-requisitos.xlsx", rotulo: "Planilha de requisitos (XLSX)" };
+
+// Regra de todo diagrama: o arquivo-fonte fica para baixar (gerado pelo pnpm docs:diagramas).
+// docs/documentacao/fontes/arquitetura-1.mmd é o 1º diagrama do documento
+export const PASTA_FONTES = "docs/documentacao/fontes";
+
+export function caminhoDaFonte({ slug }: { slug: string }, posicao: number): string {
+  return `${PASTA_FONTES}/${slug || "visao-geral"}-${posicao + 1}.mmd`;
+}
+
+function fontesMermaid(slug: string, quantidade: number): readonly Download[] {
+  return Array.from({ length: quantidade }, (_, posicao) => ({
+    arquivo: caminhoDaFonte({ slug }, posicao),
+    rotulo: `${slug}-${posicao + 1}.mmd`,
+  }));
+}
 
 export const VISAO_GERAL: Documento = {
   slug: "",
@@ -124,6 +152,7 @@ export const SECOES: readonly Secao[] = [
         oQueE: "O modelo lógico do PostgreSQL da ferramenta: tabelas, tipos, chaves primárias e estrangeiras e cardinalidades.",
         paraQueServe: "Entender como os dados ficam guardados e o que apagar um estudo ou uma conta leva junto.",
         quemDeveLer: "Quem mexe no banco, nas migrações ou nas exportações.",
+        downloads: fontesMermaid("modelo-logico", 1),
       },
       {
         slug: "diagramas-de-sequencia",
@@ -133,6 +162,7 @@ export const SECOES: readonly Secao[] = [
         oQueE: "Os fluxos mais importantes passo a passo, do clique até o banco, como entrar, responder e exportar.",
         paraQueServe: "Seguir uma requisição do clique até o banco e de volta, inclusive os desvios de erro.",
         quemDeveLer: "Quem vai depurar ou mudar um desses fluxos.",
+        downloads: fontesMermaid("diagramas-de-sequencia", 8),
       },
     ],
   },
@@ -148,6 +178,7 @@ export const SECOES: readonly Secao[] = [
         oQueE: "A arquitetura em três níveis de zoom (C4), as regras de dependência e as decisões tomadas, com o porquê.",
         paraQueServe: "Saber onde cada coisa mora antes de mexer e o que é preciso para publicar num servidor.",
         quemDeveLer: "Quem vai contribuir com código ou instalar a ferramenta.",
+        downloads: fontesMermaid("arquitetura", 4),
       },
     ],
   },

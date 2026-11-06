@@ -34,6 +34,11 @@ export const it: TextosParticipante = {
     ],
     concordo: "Accetto e voglio partecipare",
     naoQuero: "Non voglio partecipare",
+    privacidade: "Informativa sulla privacy",
+  },
+  politica: {
+    voltar: "Indietro",
+    semTraducao: "Questa informativa non è ancora tradotta nella tua lingua e appare in portoghese.",
   },
   fechado: {
     rascunho: {

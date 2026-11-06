@@ -41,10 +41,6 @@
    "cliente": false
   },
   {
-   "texto": ". Participantes falam com o pesquisador que enviou o link do estudo, que é quem responde pela pesquisa.",
-   "cliente": false
-  },
-  {
    "texto": "1 participação fora da análise.",
    "cliente": true
   },
@@ -129,11 +125,19 @@
    "cliente": false
   },
   {
+   "texto": "A equipe é a controladora.",
+   "cliente": false
+  },
+  {
    "texto": "A experiência foi avaliada como positiva em {positivas} das {total} escalas.",
    "cliente": false
   },
   {
    "texto": "A experiência foi avaliada como positiva nas {total} escalas.",
+   "cliente": false
+  },
+  {
+   "texto": "A ferramenta",
    "cliente": false
   },
   {
@@ -151,10 +155,6 @@
   {
    "texto": "A ferramenta é traduzida para os 37 idiomas do UEQ pela API do Claude. Cada idioma é traduzido sozinho na primeira visita de quem o usa; “Traduzir agora” adianta isso. Sem a chave ANTHROPIC_API_KEY, tudo fica em português.",
    "cliente": true
-  },
-  {
-   "texto": "A ferramenta é um projeto acadêmico da disciplina Fundamentos da IHC do PPGIa da PUCPR, feito por Gabriel Meira, Jean Weiss e Luiza Pedralli. Para os dados das contas, a equipe é a controladora. Para as respostas de um estudo, controlador é o pesquisador responsável por ele; a ferramenta só opera os dados em nome dele.",
-   "cliente": false
   },
   {
    "texto": "A impressão geral sobre o produto.",
@@ -199,10 +199,6 @@
   {
    "texto": "A senha precisa ter pelo menos 8 caracteres.",
    "cliente": true
-  },
-  {
-   "texto": "A sessão fica num cookie que o JavaScript da página não lê e que só vai por HTTPS; no banco fica apenas o hash dele. Trocar a senha encerra as outras sessões.",
-   "cliente": false
   },
   {
    "texto": "A tradução da ferramenta para os 37 idiomas do UEQ, pela API do Claude.",
@@ -385,7 +381,7 @@
    "cliente": false
   },
   {
-   "texto": "Apagar:",
+   "texto": "Apagar",
    "cliente": false
   },
   {
@@ -415,6 +411,10 @@
   {
    "texto": "Arquivo CSV",
    "cliente": true
+  },
+  {
+   "texto": "As 26 respostas do questionário, a versão do produto que você avaliou, o idioma, a data e, só se o pesquisador ligou essa etapa e você quis responder, a faixa etária, o gênero, a escolaridade e se você já usava o produto. Todas essas perguntas têm “Prefiro não responder” e podem ser puladas.",
+   "cliente": false
   },
   {
    "texto": "As datas de início e fim são só referência para a equipe: quem decide se o link aceita respostas é o botão de abrir e encerrar a coleta.",
@@ -457,6 +457,14 @@
    "cliente": true
   },
   {
+   "texto": "Atualizada em {ATUALIZADA_EM}.",
+   "cliente": false
+  },
+  {
+   "texto": "Até enviar, é só fechar a página ou usar “Sair sem enviar”: nada do que você marcou é gravado. Participações começadas e não enviadas são apagadas em até 2 dias.",
+   "cliente": false
+  },
+  {
    "texto": "Aumentar",
    "cliente": true
   },
@@ -469,6 +477,10 @@
    "cliente": false
   },
   {
+   "texto": "Baixa ou apaga os próprios dados quando quiser.",
+   "cliente": false
+  },
+  {
    "texto": "Baixar",
    "cliente": false
   },
@@ -477,7 +489,11 @@
    "cliente": false
   },
   {
-   "texto": "Base legal:",
+   "texto": "Banco de dados",
+   "cliente": false
+  },
+  {
+   "texto": "Base legal",
    "cliente": false
   },
   {
@@ -661,6 +677,10 @@
    "cliente": true
   },
   {
+   "texto": "Como nada liga as respostas a você, não temos como encontrá-las para mostrar ou apagar. Fale com o pesquisador que enviou o link.",
+   "cliente": false
+  },
+  {
    "texto": "Como os dados são protegidos (LGPD, art. 46)",
    "cliente": false
   },
@@ -713,6 +733,10 @@
    "cliente": true
   },
   {
+   "texto": "Conexão",
+   "cliente": false
+  },
+  {
    "texto": "Conferência antes de gravar",
    "cliente": true
   },
@@ -750,6 +774,10 @@
   },
   {
    "texto": "Contas, estudos de demonstração e a proteção de dados da ferramenta.",
+   "cliente": false
+  },
+  {
+   "texto": "Controlador é o pesquisador responsável por ele; a ferramenta só opera os dados em nome dele.",
    "cliente": false
   },
   {
@@ -821,7 +849,7 @@
    "cliente": true
   },
   {
-   "texto": "Corrigir:",
+   "texto": "Corrigir",
    "cliente": false
   },
   {
@@ -949,6 +977,10 @@
    "cliente": false
   },
   {
+   "texto": "Dados das contas",
+   "cliente": false
+  },
+  {
    "texto": "Dados demográficos",
    "cliente": true
   },
@@ -1001,7 +1033,7 @@
    "cliente": false
   },
   {
-   "texto": "Depois de enviar:",
+   "texto": "Depois de enviar",
    "cliente": false
   },
   {
@@ -1021,7 +1053,7 @@
    "cliente": true
   },
   {
-   "texto": "Desistir:",
+   "texto": "Desistir",
    "cliente": false
   },
   {
@@ -1038,6 +1070,10 @@
   },
   {
    "texto": "Desligado. Os avisos ficam só no sino. Configure SMTP_HOST, SMTP_USUARIO e SMTP_SENHA na Vercel.",
+   "cliente": false
+  },
+  {
+   "texto": "Desligue “Receber os avisos também por e-mail” em Minha conta.",
    "cliente": false
   },
   {
@@ -1177,6 +1213,10 @@
    "cliente": true
   },
   {
+   "texto": "Em Minha conta, “Baixar meus dados” gera um arquivo com tudo o que a ferramenta guarda sobre a sua conta.",
+   "cliente": false
+  },
+  {
    "texto": "Em cada escala, a ferramenta compara os itens da mesma pessoa. Muita diferença entre eles, ou a mesma posição marcada em quase tudo, sugere resposta sem atenção.",
    "cliente": false
   },
@@ -1201,12 +1241,20 @@
    "cliente": true
   },
   {
+   "texto": "Em resumo",
+   "cliente": false
+  },
+  {
    "texto": "Encerrado",
    "cliente": true
   },
   {
    "texto": "Encerrar coleta",
    "cliente": true
+  },
+  {
+   "texto": "Enquanto a conta existir. Ao excluir a conta, apagamos na hora a conta, os estudos de que você é dono e todas as respostas deles.",
+   "cliente": false
   },
   {
    "texto": "Ensino fundamental",
@@ -1227,6 +1275,10 @@
   {
    "texto": "Entrar",
    "cliente": true
+  },
+  {
+   "texto": "Entrar na ferramenta, organizar os estudos e trabalhar em equipe. Seu nome e e-mail aparecem só para as pessoas com quem você compartilha um estudo; os participantes nunca os veem.",
+   "cliente": false
   },
   {
    "texto": "Entrar · Ferramenta UEQ",
@@ -1501,7 +1553,15 @@
    "cliente": true
   },
   {
+   "texto": "Falam com o pesquisador que enviou o link do estudo, que é quem responde pela pesquisa.",
+   "cliente": false
+  },
+  {
    "texto": "Falta configurar algo",
+   "cliente": false
+  },
+  {
+   "texto": "Fazem tudo direto em",
    "cliente": false
   },
   {
@@ -1514,6 +1574,10 @@
   },
   {
    "texto": "Fechar",
+   "cliente": true
+  },
+  {
+   "texto": "Fechar esta aba e voltar",
    "cliente": true
   },
   {
@@ -1530,6 +1594,18 @@
   },
   {
    "texto": "Ferramenta UEQ · Painel de resultados",
+   "cliente": false
+  },
+  {
+   "texto": "Fica anônimo: nada liga as respostas à pessoa.",
+   "cliente": false
+  },
+  {
+   "texto": "Fica cifrado em disco no provedor (Neon, região de São Paulo).",
+   "cliente": false
+  },
+  {
+   "texto": "Fica num cookie que o JavaScript da página não lê e que só vai por HTTPS; no banco fica apenas o hash dele. Trocar a senha encerra as outras sessões.",
    "cliente": false
   },
   {
@@ -1573,7 +1649,15 @@
    "cliente": true
   },
   {
+   "texto": "Gravados cifrados com AES-256-GCM, com a chave guardada fora do banco: quem tivesse uma cópia do banco não conseguiria lê-los.",
+   "cliente": false
+  },
+  {
    "texto": "Gráficos dos dados demográficos",
+   "cliente": false
+  },
+  {
+   "texto": "Guardadas só como hash bcrypt (custo 12). Depois de {MAXIMO_TENTATIVAS} senhas erradas para o mesmo e-mail, o login espera {JANELA_MINUTOS} minutos.",
    "cliente": false
   },
   {
@@ -1941,11 +2025,19 @@
    "cliente": false
   },
   {
+   "texto": "Nada que identifique você: nem nome, nem e-mail, nem endereço IP, nem localização. A ferramenta não usa cookies de rastreamento ou de publicidade.",
+   "cliente": false
+  },
+  {
    "texto": "Nas outras escalas as versões ficam próximas.",
    "cliente": false
   },
   {
    "texto": "Negativa",
+   "cliente": false
+  },
+  {
+   "texto": "Nenhum: sem cookies de rastreamento ou de publicidade.",
    "cliente": false
   },
   {
@@ -2006,6 +2098,14 @@
   },
   {
    "texto": "Nome e e-mail que você usa para entrar.",
+   "cliente": false
+  },
+  {
+   "texto": "Nome e e-mail se mudam em Minha conta.",
+   "cliente": false
+  },
+  {
+   "texto": "Nome, e-mail, a senha (só como hash, nunca a senha), os estudos, os convites e as notificações. A sessão usa um único cookie necessário para manter você conectado.",
    "cliente": false
   },
   {
@@ -2077,10 +2177,6 @@
    "cliente": true
   },
   {
-   "texto": "Não guardamos nada que identifique você:",
-   "cliente": false
-  },
-  {
    "texto": "Não há conta com esse e-mail na ferramenta. Peça para a pessoa criar uma conta e convide de novo com o mesmo e-mail.",
    "cliente": false
   },
@@ -2103,10 +2199,6 @@
   {
    "texto": "O artigo que apresenta o UEQ: como os 26 itens e as 6 escalas foram escolhidos e validados.",
    "cliente": true
-  },
-  {
-   "texto": "O banco de dados fica cifrado em disco no provedor (Neon, região de São Paulo).",
-   "cliente": false
   },
   {
    "texto": "O benchmark",
@@ -2193,7 +2285,7 @@
    "cliente": true
   },
   {
-   "texto": "O que a Ferramenta UEQ guarda, para quê, por quanto tempo e como você controla os seus dados. Atualizada em {ATUALIZADA_EM}.",
+   "texto": "O que a Ferramenta UEQ guarda, para quê, por quanto tempo e como você controla os seus dados.",
    "cliente": false
   },
   {
@@ -2209,7 +2301,11 @@
    "cliente": false
   },
   {
-   "texto": "O que fica gravado:",
+   "texto": "O que fica gravado",
+   "cliente": false
+  },
+  {
+   "texto": "O que não guardamos",
    "cliente": false
   },
   {
@@ -2243,6 +2339,10 @@
   {
    "texto": "O resumo do estudo, o link da coleta e as ações que mudam o estado dele.",
    "cliente": true
+  },
+  {
+   "texto": "O seu consentimento, dado na primeira tela (art. 7º, I), para pesquisa acadêmica (art. 7º, IV).",
+   "cliente": false
   },
   {
    "texto": "O sino avisa sobre convites, respostas novas e mudanças da equipe.",
@@ -2290,10 +2390,6 @@
   },
   {
    "texto": "Ordem oficial",
-   "cliente": false
-  },
-  {
-   "texto": "Os dados demográficos dos participantes são gravados cifrados com AES-256-GCM, com a chave guardada fora do banco: quem tivesse uma cópia do banco não conseguiria lê-los.",
    "cliente": false
   },
   {
@@ -2373,7 +2469,7 @@
    "cliente": false
   },
   {
-   "texto": "Para quê:",
+   "texto": "Para quê",
    "cliente": false
   },
   {
@@ -2381,7 +2477,15 @@
    "cliente": false
   },
   {
+   "texto": "Parar os e-mails",
+   "cliente": false
+  },
+  {
    "texto": "Partes dos resultados",
+   "cliente": false
+  },
+  {
+   "texto": "Participantes",
    "cliente": false
   },
   {
@@ -2429,7 +2533,7 @@
    "cliente": true
   },
   {
-   "texto": "Pesquisadores fazem tudo direto em",
+   "texto": "Pesquisadores",
    "cliente": false
   },
   {
@@ -2457,7 +2561,7 @@
    "cliente": true
   },
   {
-   "texto": "Por quanto tempo:",
+   "texto": "Por quanto tempo",
    "cliente": false
   },
   {
@@ -2577,16 +2681,32 @@
    "cliente": false
   },
   {
+   "texto": "Quem responde",
+   "cliente": false
+  },
+  {
    "texto": "Quem respondeu de forma contraditória ou marcou quase tudo igual aparece como suspeito. Você decide, na coluna “Na análise”, se a resposta entra no cálculo. Nada é apagado.",
    "cliente": true
+  },
+  {
+   "texto": "Quem tem conta",
+   "cliente": false
   },
   {
    "texto": "Quem tem conta na ferramenta e quem é administrador.",
    "cliente": false
   },
   {
+   "texto": "Quem vê o quê",
+   "cliente": false
+  },
+  {
    "texto": "Rascunho",
    "cliente": true
+  },
+  {
+   "texto": "Rastreamento",
+   "cliente": false
   },
   {
    "texto": "Reabrir coleta",
@@ -2649,6 +2769,10 @@
    "cliente": false
   },
   {
+   "texto": "Respostas de um estudo",
+   "cliente": false
+  },
+  {
    "texto": "Respostas recodificadas (CSV)",
    "cliente": true
   },
@@ -2698,10 +2822,6 @@
   },
   {
    "texto": "Revisar {v}",
-   "cliente": false
-  },
-  {
-   "texto": "Revogar o envio de e-mails:",
    "cliente": false
   },
   {
@@ -2809,7 +2929,11 @@
    "cliente": false
   },
   {
-   "texto": "Senhas são guardadas só como hash bcrypt (custo 12). Depois de {MAXIMO_TENTATIVAS} senhas erradas para o mesmo e-mail, o login espera {JANELA_MINUTOS} minutos.",
+   "texto": "Senhas",
+   "cliente": false
+  },
+  {
+   "texto": "Sessão",
    "cliente": false
   },
   {
@@ -2957,6 +3081,10 @@
    "cliente": false
   },
   {
+   "texto": "Traduções",
+   "cliente": false
+  },
+  {
    "texto": "Traga para o estudo respostas coletadas fora da ferramenta.",
    "cliente": true
   },
@@ -3007,6 +3135,10 @@
   {
    "texto": "Um CSV com 26 colunas (uma por item, na ordem oficial) e uma linha por participante, com valores de 1 a 7, como na aba Data da planilha do UEQ.",
    "cliente": true
+  },
+  {
+   "texto": "Um projeto acadêmico da disciplina Fundamentos da IHC do PPGIa da PUCPR, feito por Gabriel Meira, Jean Weiss e Luiza Pedralli.",
+   "cliente": false
   },
   {
    "texto": "Um questionário padronizado e gratuito: em poucos minutos, quem usou um produto marca 26 pares de palavras opostas, e o resultado vira seis notas comparáveis entre produtos e versões.",
@@ -3081,7 +3213,7 @@
    "cliente": false
   },
   {
-   "texto": "Ver e levar seus dados:",
+   "texto": "Ver e levar seus dados",
    "cliente": false
   },
   {
@@ -3185,7 +3317,19 @@
    "cliente": true
   },
   {
+   "texto": "Voltar para Minha conta",
+   "cliente": true
+  },
+  {
    "texto": "Voltar para Respostas",
+   "cliente": true
+  },
+  {
+   "texto": "Voltar para a página anterior",
+   "cliente": true
+  },
+  {
+   "texto": "Voltar para a página inicial",
    "cliente": true
   },
   {
@@ -3253,10 +3397,6 @@
    "cliente": true
   },
   {
-   "texto": "as 26 respostas do questionário, a versão do produto que você avaliou, o idioma, a data e, só se o pesquisador ligou essa etapa e você quis responder, a faixa etária, o gênero, a escolaridade e se você já usava o produto. Todas essas perguntas têm “Prefiro não responder” e podem ser puladas.",
-   "cliente": false
-  },
-  {
    "texto": "as {n} respostas",
    "cliente": false
   },
@@ -3269,19 +3409,11 @@
    "cliente": false
   },
   {
-   "texto": "até enviar, é só fechar a página ou usar “Sair sem enviar”: nada do que você marcou é gravado. Participações começadas e não enviadas são apagadas em até 2 dias.",
-   "cliente": false
-  },
-  {
    "texto": "cinco",
    "cliente": true
   },
   {
    "texto": "começa em {dia}",
-   "cliente": false
-  },
-  {
-   "texto": "como nada liga as respostas a você, não temos como encontrá-las para mostrar ou apagar. Fale com o pesquisador que enviou o link.",
    "cliente": false
   },
   {
@@ -3307,10 +3439,6 @@
   {
    "texto": "círculo vazado",
    "cliente": true
-  },
-  {
-   "texto": "desligue “Receber os avisos também por e-mail” em Minha conta.",
-   "cliente": false
   },
   {
    "texto": "devolveu uma resposta à análise em “{titulo}”.",
@@ -3345,10 +3473,6 @@
    "cliente": false
   },
   {
-   "texto": "em Minha conta, “Baixar meus dados” gera um arquivo com tudo o que a ferramenta guarda sobre a sua conta.",
-   "cliente": false
-  },
-  {
    "texto": "em {data}",
    "cliente": false
   },
@@ -3363,14 +3487,6 @@
   {
    "texto": "encerrou a coleta de “{titulo}”.",
    "cliente": true
-  },
-  {
-   "texto": "enquanto a conta existir. Ao excluir a conta, apagamos na hora a conta, os estudos de que você é dono e todas as respostas deles.",
-   "cliente": false
-  },
-  {
-   "texto": "entrar na ferramenta, organizar os estudos e trabalhar em equipe. Seu nome e e-mail aparecem só para as pessoas com quem você compartilha um estudo; os participantes nunca os veem.",
-   "cliente": false
   },
   {
    "texto": "escalas",
@@ -3477,10 +3593,6 @@
    "cliente": true
   },
   {
-   "texto": "nem nome, nem e-mail, nem endereço IP, nem localização. A ferramenta não usa cookies de rastreamento ou de publicidade.",
-   "cliente": false
-  },
-  {
    "texto": "nenhum estudo criado ainda",
    "cliente": false
   },
@@ -3498,14 +3610,6 @@
   },
   {
    "texto": "neutro",
-   "cliente": false
-  },
-  {
-   "texto": "nome e e-mail se mudam em Minha conta.",
-   "cliente": false
-  },
-  {
-   "texto": "nome, e-mail, a senha (só como hash, nunca a senha), os estudos, os convites e as notificações. A sessão usa um único cookie necessário para manter você conectado.",
    "cliente": false
   },
   {
@@ -3543,10 +3647,6 @@
   {
    "texto": "o link não aceita mais respostas",
    "cliente": true
-  },
-  {
-   "texto": "o seu consentimento, dado na primeira tela (art. 7º, I), para pesquisa acadêmica (art. 7º, IV).",
-   "cliente": false
   },
   {
    "texto": "ontem",

@@ -1,0 +1,35 @@
+flowchart LR
+    navegador["Navegador<br/>[pesquisador ou participante]"]
+
+    subgraph vercel["Vercel · projeto ferramenta-ueq"]
+        direction TB
+        funcoes["<b>Next.js 16</b><br/>[funções Node.js]<br/>ferramenta-ueq.vercel.app"]
+        build["<b>vercel-build</b><br/>generate, migrate deploy, seed,<br/>cifrar-dados e next build"]
+    end
+
+    subgraph neon["Neon · aws-sa-east-1 (São Paulo)"]
+        pgprod[("<b>PostgreSQL</b><br/>DATABASE_URL e<br/>DATABASE_URL_UNPOOLED")]
+    end
+
+    github["<b>GitHub</b><br/>branch main"]
+    claudeapi["<b>API do Claude</b>"]
+    smtpserv["<b>Servidor SMTP</b>"]
+
+    subgraph maquina["Máquina do desenvolvedor"]
+        direction TB
+        node["<b>Node.js 24 + pnpm 10</b><br/>pnpm dev · next dev na porta 3000"]
+        chromium["<b>Chromium do Playwright</b><br/>PDF e testes e2e"]
+        subgraph docker["Docker"]
+            pg[("<b>postgres:16</b><br/>porta 5432")]
+        end
+    end
+
+    navegador -- "HTTPS" --> funcoes
+    github -- "cada merge publica" --> build
+    build -- "migrations e seed" --> pgprod
+    build --> funcoes
+    funcoes -- "SQL com TLS" --> pgprod
+    funcoes -. "se configurado" .-> claudeapi
+    funcoes -. "se configurado" .-> smtpserv
+    node -- "DATABASE_URL" --> pg
+    node --> chromium

@@ -34,6 +34,11 @@ export const cs: TextosParticipante = {
     ],
     concordo: "Souhlasím a chci se zúčastnit",
     naoQuero: "Nechci se zúčastnit",
+    privacidade: "Zásady ochrany osobních údajů",
+  },
+  politica: {
+    voltar: "Zpět",
+    semTraducao: "Tyto zásady zatím nejsou přeloženy do vašeho jazyka, proto se zobrazují v portugalštině.",
   },
   fechado: {
     rascunho: {

@@ -1,0 +1,32 @@
+flowchart TB
+    pesquisador["<b>Pesquisador</b><br/>[Pessoa]<br/>Cria estudos, acompanha a coleta,<br/>interpreta e exporta os resultados.<br/>Pode trabalhar em equipe"]
+    participante["<b>Participante</b><br/>[Pessoa]<br/>Responde o questionário pelo link,<br/>sem conta e de forma anônima"]
+    administrador["<b>Administrador</b><br/>[Pessoa]<br/>Um pesquisador que cria contas,<br/>acompanha idiomas e proteção de dados"]
+    mantenedor["<b>Mantenedor</b><br/>[Pessoa]<br/>Instala, carrega os itens oficiais<br/>e ajusta os parâmetros"]
+
+    ferramenta["<b>Ferramenta UEQ</b><br/>[Sistema de software]<br/>Conduz estudos com o User Experience<br/>Questionnaire, do cadastro à exportação"]
+
+    claude["<b>API do Claude</b><br/>[Sistema externo · Anthropic]<br/>Traduz a interface e os textos dos estudos"]
+    smtp["<b>Servidor de e-mail</b><br/>[Sistema externo · SMTP]<br/>Entrega convites e avisos"]
+    planilha["<b>UEQ Data Analysis Tool</b><br/>[Sistema externo · planilha Excel V15]<br/>Ferramenta oficial de análise do UEQ"]
+    ueqonline["<b>ueq-online.org</b><br/>[Sistema externo]<br/>Handbook, pacote de idiomas<br/>e benchmark oficiais"]
+    canais["<b>Canais de mensagem</b><br/>[Sistema externo]<br/>WhatsApp, e-mail"]
+
+    pesquisador -- "usa pelo navegador<br/>[HTTPS]" --> ferramenta
+    participante -- "responde pelo link /r/slug<br/>[HTTPS]" --> ferramenta
+    administrador -- "usa pelo navegador<br/>[HTTPS]" --> ferramenta
+    mantenedor -- "roda migrations, seed<br/>e recálculo [CLI]" --> ferramenta
+    ferramenta -- "pede traduções, sem respostas<br/>nem dados pessoais [HTTPS]" --> claude
+    ferramenta -- "envia convites e avisos<br/>[SMTP]" --> smtp
+    smtp -- "entrega o aviso" --> pesquisador
+    pesquisador -- "envia o link do estudo" --> canais
+    canais -- "entrega o link" --> participante
+    pesquisador -- "cola o CSV exportado<br/>para conferir os números" --> planilha
+    mantenedor -- "copia itens, instruções,<br/>limiares e benchmark para data/" --> ueqonline
+
+    classDef pessoa fill:#0F1720,stroke:#0F1720,color:#FFFFFF
+    classDef sistema fill:#0B6A78,stroke:#0F1720,color:#FFFFFF
+    classDef externo fill:#F3F5F7,stroke:#7A8691,color:#0F1720
+    class pesquisador,participante,administrador,mantenedor pessoa
+    class ferramenta sistema
+    class claude,smtp,planilha,ueqonline,canais externo

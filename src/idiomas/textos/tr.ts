@@ -34,6 +34,11 @@ export const tr: TextosParticipante = {
     ],
     concordo: "Kabul ediyorum ve katılmak istiyorum",
     naoQuero: "Katılmak istemiyorum",
+    privacidade: "Gizlilik politikası",
+  },
+  politica: {
+    voltar: "Geri dön",
+    semTraducao: "Bu politika henüz dilinize çevrilmedi, bu nedenle Portekizce gösteriliyor.",
   },
   fechado: {
     rascunho: {

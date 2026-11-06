@@ -1,0 +1,35 @@
+sequenceDiagram
+    autonumber
+    actor Dono
+    participant Nav as Navegador
+    participant Acao as Ações do estudo e do sino
+    participant Estudos as lib/estudos
+    participant Avisos as lib/notificacoes
+    participant BD as PostgreSQL
+    participant Smtp as Servidor de e-mail
+    actor Conv as Convidado
+
+    Dono->>Nav: Compartilhar, informa o e-mail e o papel
+    Nav->>Acao: convidar(estudoId, FormData)
+    Acao->>Estudos: estudoDoPesquisador(estudoId, pessoa, "gerenciar")
+    Acao->>BD: procura a conta pelo e-mail
+    alt não há conta, é o dono ou já tem acesso
+        Acao-->>Nav: erro no campo, dizendo o que fazer
+    else pode convidar
+        Acao->>BD: cria ou renova Colaboracao como PENDENTE
+        Acao->>BD: apaga o convite antigo do sino, se houver
+        Acao->>Avisos: notificar(convidado, tipo CONVITE)
+        Avisos->>BD: cria Notificacao no idioma do convidado
+        alt envio de e-mail configurado
+            Acao-->>Nav: "Convite enviado para …, na ferramenta e por e-mail."
+            Avisos->>Smtp: depois da resposta, envia o e-mail do convite
+            Smtp-->>Conv: e-mail com o link
+        else sem envio configurado
+            Acao-->>Nav: aviso e link de e-mail pronto para quem convidou
+        end
+    end
+
+    Conv->>Nav: abre o sino e aceita ou recusa
+    Nav->>Acao: responde ao convite
+    Acao->>BD: Colaboracao ACEITO ou RECUSADO, com respondidoEm
+    Note over Conv,BD: só com ACEITO o estudo entra no filtroDeAcesso da pessoa

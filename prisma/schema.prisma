@@ -53,7 +53,7 @@ model Pesquisador {
   email     String   @unique
   senhaHash String   @map("senha_hash")
   criadoEm  DateTime @default(now()) @map("criado_em")
-  // Superusuário: vê e altera todos os estudos e abre a página de administração
+  // Abre a página de administração (contas, idiomas, proteção de dados, cenários). Não vê estudos de outras pessoas
   administrador Boolean @default(false)
   // Vazio até a pessoa terminar, pular ou fechar o tour guiado do primeiro acesso
   tutorialVistoEm DateTime? @map("tutorial_visto_em")

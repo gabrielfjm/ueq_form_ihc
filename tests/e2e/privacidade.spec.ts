@@ -21,6 +21,77 @@ test("a política de privacidade é pública e acessível", async ({ page }) => 
   await verificarAcessibilidade(page);
 });
 
+test("a política leva cada seção pelo índice e não rola na horizontal em 320 px", async ({ page }) => {
+  await page.goto("/privacidade");
+  const indice = page.getByRole("navigation", { name: "Nesta página" });
+  await indice.getByRole("link", { name: "Dúvidas e pedidos" }).click();
+  await expect(page).toHaveURL(/#contato$/);
+  await expect(page.getByRole("heading", { name: "Dúvidas e pedidos" })).toBeInViewport();
+
+  await page.setViewportSize({ width: 320, height: 700 });
+  const larguras = await page.evaluate(() => [document.documentElement.scrollWidth, window.innerWidth]);
+  expect(larguras[0]).toBeLessThanOrEqual(larguras[1] ?? 0);
+  await verificarAcessibilidade(page);
+});
+
+test("da página inicial, a política volta ao rodapé de onde a pessoa saiu", async ({ page }) => {
+  await page.goto("/");
+  await page.locator("#rodape").getByRole("link", { name: "Política de privacidade" }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Política de privacidade" })).toBeVisible();
+  await page.getByRole("link", { name: "Voltar para a página inicial" }).first().click();
+  await expect(page).toHaveURL(/\/#rodape$/);
+  await expect(page.locator("#rodape")).toBeInViewport();
+});
+
+test("de Minha conta e da ajuda, a política volta para a mesma tela", async ({ page }, info) => {
+  await cadastrarComTeclado(page, emailDeTeste(info));
+  await page.goto("/conta");
+  await page.getByRole("link", { name: "Política de privacidade" }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Política de privacidade" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Baixar meus dados" })).toBeVisible();
+  await page.getByRole("link", { name: "Voltar para Minha conta" }).first().click();
+  await expect(page).toHaveURL(/\/conta$/);
+
+  await page.goto("/estudos");
+  await page.getByRole("button", { name: "Ajuda desta página" }).click();
+  await page.getByRole("dialog").getByRole("link", { name: "Política de privacidade" }).click();
+  await expect(page.getByRole("heading", { level: 1, name: "Política de privacidade" })).toBeVisible();
+  await page.getByRole("link", { name: "Voltar para a página anterior" }).first().click();
+  await expect(page).toHaveURL(/\/estudos$/);
+});
+
+test("das janelas de acesso, a política abre em outra aba, sem perder o que foi digitado, e voltar tenta fechar a aba", async ({ page, context }) => {
+  await page.goto("/entrar");
+  await expect(page.getByRole("dialog").getByRole("link", { name: /Política de privacidade/ })).toBeVisible();
+
+  await page.goto("/cadastrar");
+  await page.getByLabel("Nome").fill("Quem está lendo a política");
+  const [aba] = await Promise.all([
+    context.waitForEvent("page"),
+    page.getByRole("dialog").getByRole("link", { name: /Política de privacidade/ }).click(),
+  ]);
+  await expect(aba.getByRole("heading", { level: 1, name: "Política de privacidade" })).toBeVisible();
+  await expect(page.getByLabel("Nome")).toHaveValue("Quem está lendo a política");
+
+  // window.close() de verdade trava o encerramento do Playwright no Chromium headless, então ele é trocado por
+  // um registro. Assim o teste confere também o plano B: se o navegador recusar fechar, o link segue para o início
+  // Antes de a página ficar interativa, o link é só um link: leva direto ao início, sem tentar fechar
+  await aba.waitForLoadState("networkidle");
+  await aba.evaluate(() => {
+    window.close = () => sessionStorage.setItem("pediu-para-fechar", "sim");
+  });
+  await aba.getByRole("link", { name: "Fechar esta aba e voltar" }).first().click();
+  await expect(aba).toHaveURL(/:\d+\/$/);
+  expect(await aba.evaluate(() => sessionStorage.getItem("pediu-para-fechar"))).toBe("sim");
+});
+
+test("a política não aceita voltar para outro site", async ({ page }) => {
+  for (const de of ["https://exemplo.com", "//exemplo.com", "/\\exemplo.com", "/\t/exemplo.com"]) {
+    await page.goto(`/privacidade?de=${encodeURIComponent(de)}`);
+    await expect(page.getByRole("link", { name: "Voltar para a página inicial" }).first()).toHaveAttribute("href", "/");
+  }
+});
+
 test("depois de 5 senhas erradas o e-mail espera", async ({ page }, info) => {
   const email = `bloqueio-${emailDeTeste(info)}`;
   await page.goto("/entrar");

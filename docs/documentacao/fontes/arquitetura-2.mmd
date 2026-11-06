@@ -1,0 +1,39 @@
+flowchart TB
+    pesquisador["<b>Pesquisador</b><br/>[Pessoa]"]
+    participante["<b>Participante</b><br/>[Pessoa]"]
+    mantenedor["<b>Mantenedor</b><br/>[Pessoa]"]
+    claude["<b>API do Claude</b><br/>[Sistema externo]"]
+    smtp["<b>Servidor de e-mail</b><br/>[Sistema externo]"]
+
+    subgraph fronteira["Ferramenta UEQ"]
+        direction TB
+        navegador["<b>Interface no navegador</b><br/>[Container · React 19, CSS Modules]<br/>HTML renderizado no servidor e Client Components<br/>só onde há interação: questionário, janelas,<br/>tour, filtros e formulários"]
+        app["<b>Aplicação web</b><br/>[Container · Next.js 16 App Router, Node.js 24]<br/>Server Components, Server Actions,<br/>Route Handlers e proxy de sessão.<br/>Contém o módulo de cálculo src/ueq"]
+        pdf["<b>Gerador de PDF</b><br/>[Container · Chromium sem tela via Playwright]<br/>Aberto sob demanda pela aplicação<br/>para imprimir o painel em A4"]
+        banco[("<b>Banco de dados</b><br/>[Container · PostgreSQL 16]<br/>Contas, sessões, estudos, versões, itens,<br/>participações, respostas, notificações<br/>e traduções")]
+        dados[/"<b>Dados oficiais</b><br/>[Container · arquivos JSON em data/]<br/>Itens, instruções e textos dos 37 idiomas,<br/>protocolo e benchmark, com a fonte"/]
+        scripts["<b>Scripts de manutenção</b><br/>[Container · Prisma CLI e tsx]<br/>migrate, seed dos itens, recálculo de<br/>suspeitas, cifragem, catálogo e diagramas"]
+    end
+
+    pesquisador -- "usa [HTTPS]" --> navegador
+    participante -- "usa [HTTPS]" --> navegador
+    mantenedor -- "roda [pnpm]" --> scripts
+
+    navegador -- "pede páginas e chama Server Actions<br/>[HTTPS, RSC]; baixa CSV, JSON e PDF [HTTPS GET]" --> app
+    app -- "lê e grava<br/>[SQL via Prisma Client e adapter pg]" --> banco
+    app -- "importa na compilação<br/>[import JSON]" --> dados
+    app -- "abre a página de impressão<br/>com a sessão de quem pediu [HTTP interno]" --> pdf
+    pdf -- "GET /estudos/id/resultados/impressao<br/>[HTTP, origem interna]" --> app
+    app -- "traduz em lotes<br/>[HTTPS, SDK da Anthropic]" --> claude
+    app -- "envia depois de responder<br/>[SMTP, Nodemailer]" --> smtp
+    scripts -- "aplica migrations, grava itens,<br/>atualiza suspeitas, cifra demografia [SQL]" --> banco
+    scripts -- "lê e valida com Zod" --> dados
+
+    classDef pessoa fill:#0F1720,stroke:#0F1720,color:#FFFFFF
+    classDef container fill:#0B6A78,stroke:#0F1720,color:#FFFFFF
+    classDef armazenamento fill:#E6F2F4,stroke:#0B6A78,color:#0F1720
+    classDef externo fill:#F3F5F7,stroke:#7A8691,color:#0F1720
+    class pesquisador,participante,mantenedor pessoa
+    class navegador,app,pdf,scripts container
+    class banco,dados armazenamento
+    class claude,smtp externo

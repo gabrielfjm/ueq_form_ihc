@@ -13,6 +13,7 @@ import { useT } from "@/traducao/cliente";
 import { m, type OpcaoIdioma } from "@/traducao/nucleo";
 import { cadastrar, trocarIdiomaDaInterface, type CampoCadastro } from "./acoes";
 import estilos from "./acesso.module.css";
+import { LinkPrivacidade } from "./LinkPrivacidade";
 
 const CAMPOS = [
   { nome: "nome", rotulo: m("Nome"), id: "cadastro-nome" },
@@ -116,10 +117,7 @@ export function FormularioCadastro({
         <span>
           {t("Já tem conta?")}{" "}<Link href="/entrar">{t("Entrar")}</Link>
         </span>
-        {/* Em outra aba: a janela de cadastro fica como está, com o que a pessoa já digitou */}
-        <a href="/privacidade" target="_blank" rel="noopener" className={estilos.privacidade}>
-          {t("Política de privacidade")}<span className="visualmente-oculto">{" "}{t("(abre em nova aba)")}</span>
-        </a>
+        <LinkPrivacidade />
       </p>
     </form>
   );

@@ -34,6 +34,11 @@ export const zh: TextosParticipante = {
     ],
     concordo: "我同意并愿意参与",
     naoQuero: "我不想参与",
+    privacidade: "隐私政策",
+  },
+  politica: {
+    voltar: "返回",
+    semTraducao: "本政策尚未翻译成您的语言，因此以葡萄牙语显示。",
   },
   fechado: {
     rascunho: {

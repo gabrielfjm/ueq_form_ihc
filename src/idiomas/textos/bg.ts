@@ -34,6 +34,11 @@ export const bg: TextosParticipante = {
     ],
     concordo: "Съгласен/съгласна съм и искам да участвам",
     naoQuero: "Не искам да участвам",
+    privacidade: "Политика за поверителност",
+  },
+  politica: {
+    voltar: "Назад",
+    semTraducao: "Тази политика все още не е преведена на вашия език и се показва на португалски.",
   },
   fechado: {
     rascunho: {

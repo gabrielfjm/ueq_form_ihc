@@ -34,6 +34,11 @@ export const bn: TextosParticipante = {
     ],
     concordo: "আমি সম্মত এবং অংশ নিতে চাই",
     naoQuero: "আমি অংশ নিতে চাই না",
+    privacidade: "গোপনীয়তা নীতি",
+  },
+  politica: {
+    voltar: "ফিরে যান",
+    semTraducao: "এই নীতি এখনও আপনার ভাষায় অনূদিত হয়নি, তাই পর্তুগিজ ভাষায় দেখানো হচ্ছে।",
   },
   fechado: {
     rascunho: {

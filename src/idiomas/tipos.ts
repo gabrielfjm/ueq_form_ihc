@@ -41,6 +41,13 @@ export type TextosParticipante = {
     condicoes: [[string, string], [string, string], [string, string], [string, string]];
     concordo: string;
     naoQuero: string;
+    // O link para a política de privacidade, no fim do termo
+    privacidade: string;
+  };
+  politica: {
+    voltar: string;
+    // O texto da política vem da tradução automática; sem ela, aparece em português e a tela avisa
+    semTraducao: string;
   };
   fechado: { rascunho: Aviso; encerrado: Aviso };
   jaRespondeu: { titulo: string; texto: string };

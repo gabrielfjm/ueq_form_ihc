@@ -1,0 +1,61 @@
+sequenceDiagram
+    autonumber
+    actor Part as Participante
+    participant Nav as Navegador
+    participant Pag as Páginas /r/[slug]
+    participant Acao as Ações /r/[slug]
+    participant Lib as lib/participacao e lib/balanceamento
+    participant Ueq as ueq
+    participant BD as PostgreSQL
+
+    Part->>Nav: abre /r/<slug>
+    Nav->>Pag: GET
+    Pag->>Lib: estudoPublico(slug) e idiomaDoParticipante() (a escolha no cookie ou o idioma do estudo)
+    Lib->>BD: estudo pelo slug, com versões e respostas concluídas por versão
+    alt estudo em rascunho, encerrado ou link já respondido
+        Pag-->>Nav: aviso da situação, sem consentimento
+    else estudo aberto
+        Pag-->>Nav: termo de consentimento no idioma negociado
+    end
+
+    Part->>Nav: Concordo e quero participar
+    Nav->>Acao: consentir(slug)
+    Acao->>Lib: versaoComMenosRespostas(versões)
+    Lib-->>Acao: versão com menos respostas concluídas
+    Acao->>BD: apaga participações abandonadas há mais de 2 dias
+    Acao->>BD: cria Participacao (versão, consentiuEm, idioma)
+    Acao-->>Nav: cookie ueq_participacao no caminho /r/<slug> e redireciona ao questionário
+
+    Nav->>Pag: GET /r/<slug>/questionario
+    Pag->>BD: 26 itens (ordem e polaridade oficiais)
+    Pag-->>Nav: instrução oficial e 26 itens, nenhum marcado
+    loop a cada marcação
+        Part->>Nav: marca uma posição
+        Nav->>Nav: atualiza o progresso e guarda o rascunho no sessionStorage
+    end
+
+    Part->>Nav: Enviar respostas
+    Nav->>Nav: confere no navegador se os 26 estão marcados
+    Nav->>Acao: enviarRespostas(slug, valores)
+    Acao->>Acao: confere os 26 valores de 1 a 7 de novo no servidor
+    alt falta algum item
+        Acao-->>Nav: { faltando: [7, 19] }
+        Nav-->>Part: resumo "Faltam 2 itens" com o foco e links para os itens
+    else completo
+        Acao->>Ueq: avaliarSuspeita(valores, itens, protocolo)
+        Ueq-->>Acao: { suspeita, motivos, amplitudes }
+        Acao->>BD: transação: cria 26 Respostas e marca concluidaEm e suspeita
+        Acao->>BD: avisa dono e equipe no sino (notificarResposta)
+        Acao-->>Nav: cookie ueq_respondido (30 dias)
+    end
+
+    opt o estudo coleta dados demográficos
+        Acao-->>Nav: redireciona a /sobre-voce
+        Part->>Nav: responde os dados opcionais ou pula a etapa
+        Nav->>Acao: salvarDemografia(slug, FormData)
+        opt clicou em Continuar e respondeu algo
+            Acao->>BD: grava demografia cifrada (só opções da lista)
+        end
+    end
+    Acao-->>Nav: apaga o cookie ueq_participacao e redireciona a /fim
+    Nav-->>Part: Respostas registradas

@@ -9,9 +9,13 @@ A ferramenta aplica o User Experience Questionnaire (UEQ) e analisa as respostas
 - **Pesquisador:** cria um estudo com uma ou mais versões de um produto, compartilha um link e acompanha o painel de resultados.
 - **Participante:** abre o link, sem conta, e responde os 26 pares de palavras em 3 a 5 minutos, em um dos 37 idiomas do UEQ.
 
+Pesquisadores também trabalham em equipe, recebem avisos num sino e podem usar a ferramenta em qualquer um dos 37 idiomas.
+
 ## Como abrir
 
-Num computador com Docker, Node e pnpm, na pasta do repositório:
+**Em produção:** https://ferramenta-ueq.vercel.app. Crie a sua conta em "Criar conta". Sem o estudo de exemplo, crie um estudo seu ou use os cenários de demonstração de Administração, se a sua conta for administradora.
+
+**Na própria máquina:** num computador com Docker, Node e pnpm, na pasta do repositório:
 
 ```
 docker compose up -d
@@ -24,9 +28,10 @@ pnpm dev
 
 Depois, abra http://localhost:3000.
 
-- **Conta de pesquisador pronta:** `pesquisador@exemplo.com`, senha `senha-de-teste`. Ela já tem o "Estudo de exemplo", com 31 respostas em 2 versões.
+- **Conta de pesquisador pronta:** `pesquisador@exemplo.com`, senha `senha-de-teste`. Ela já tem o "Estudo de exemplo", com 35 respostas em 2 versões, 4 delas suspeitas.
 - **Link do participante desse estudo:** http://localhost:3000/r/exemplo. Cada navegador responde uma vez. Para responder de novo, use uma janela anônima.
-- **Para ver outro idioma:** troque no seletor "Idioma" do consentimento, ou mude o idioma preferido do navegador.
+- **Para ver outro idioma no questionário:** troque no seletor "Idioma" do consentimento.
+- **Para ver a ferramenta em outro idioma:** Minha conta › Idioma. Sem `ANTHROPIC_API_KEY`, a interface continua em português.
 
 ## As telas, na ordem de uso
 
@@ -34,28 +39,39 @@ Para cada tela, faça a tarefa e compare com o protótipo em `docs/prototipos/al
 
 | # | Tela | Como chegar | Protótipo | Tarefa |
 |---|---|---|---|---|
-| 1 | Entrar | http://localhost:3000 | r1 | Entre com a conta pronta, primeiro errando a senha |
-| 2 | Criar conta | link "Criar conta" em Entrar | r2 | Crie uma conta deixando um campo vazio, depois corrija |
-| 3 | Lista de estudos | menu "Estudos" | r3 | Encontre o Estudo de exemplo |
+| 1 | Página inicial | http://localhost:3000 | r16, r16b com login | Explique, só lendo, o que é o UEQ e o que a ferramenta faz |
+| 2 | Entrar | botão "Entrar" na barra, abre uma janela | r17, r18 no celular | Entre com a conta pronta, primeiro errando a senha |
+| 3 | Criar conta | "Criar conta" na janela de Entrar | r19, r2 com erro | Crie uma conta deixando um campo vazio, depois corrija |
+| 3a | Política de privacidade | link nas janelas de acesso, no rodapé da página inicial, em Minha conta e na ajuda | r33 | Abra por dois caminhos diferentes e use "Voltar". Diga o que acontece com as suas respostas |
+| 3b | Tour guiado | primeiro acesso de uma conta nova | r28, r29 | Siga parte do tour, depois pule |
+| 3c | Lista de estudos | menu "Estudos" | r3 | Encontre o Estudo de exemplo |
 | 4 | Criar estudo | "Criar estudo" | r4 | Crie um estudo com 2 versões |
 | 5 | Estudo em rascunho | depois de criar | r4b | Abra a coleta e copie o link |
 | 6 | Página do estudo | título do estudo na lista | r5 | Encerre e reabra a coleta |
 | 7 | Consentimento | o link do estudo | p1 | Leia o termo e troque o idioma |
-| 8 | Questionário | "Concordo e quero participar" | p7 (desktop), p2 (celular) | Responda tudo, deixando 2 itens em branco na primeira tentativa |
+| 7a | Política, no link do participante | "Política de privacidade", no fim do termo | p9 | Diga o que acontece com as suas respostas e volte ao termo |
+| 8 | Questionário | "Concordo e quero participar" | p7 (desktop), p2 (celular), p8 (sair sem enviar) | Responda tudo, deixando 2 itens em branco na primeira tentativa |
 | 9 | Item faltando | enviar incompleto | p3 | Use o resumo para chegar aos itens que faltam |
-| 10 | Dados opcionais | depois de enviar | p4 | Responda uma pergunta e pule as outras |
+| 10 | Dados opcionais | depois de enviar, só se o estudo coleta | p4 | Responda uma pergunta e pule as outras |
 | 11 | Fim | "Continuar" | p5 | — |
 | 12 | Link fechado | o link de um estudo encerrado ou em rascunho | p6 | — |
 | 13 | Resultados, uma versão | aba "Resultados" | r6 | Diga, só olhando, qual escala foi melhor e se ficou acima do benchmark |
 | 14 | Resultados, comparação | "Comparar versões" | r7 | Diga qual versão foi melhor em Estimulação |
 | 15 | Respostas e suspeitas | aba "Respostas" | r8 | Mostre só as suspeitas, tire uma da análise e coloque de volta |
-| 16 | Minha conta | menu "Minha conta" | r9 | Mude o nome |
+| 15a | Dados demográficos | sub-aba em "Resultados", num estudo com a coleta ligada | r31, r32 para ligar a coleta | Diga qual foi a faixa etária mais comum |
+| 15b | Compartilhar | "Compartilhar" na página do estudo | r25 | Convide outra conta como Leitor e, nessa conta, aceite |
+| 15c | Sino e notificações | sino na barra, depois "Ver todas as notificações" | r26, r27 | Encontre o convite e o aviso de respostas novas |
+| 15d | Ajuda da página | botão (?) no cabeçalho de cada página | r30 | Abra em duas páginas e diga se a explicação ajuda |
+| 16 | Minha conta | menu "Minha conta" | r9, r35 para o idioma | Mude o nome e baixe os seus dados |
+| 16a | Administração | menu "Administração", só para conta administradora | r24, r24b, r24c, r34 | Crie uma conta e veja a cobertura dos idiomas |
+| 16b | Documentação | menu "Documentação", com e sem login | r10 a r15, r23 | Abra um documento, amplie um diagrama e volte |
+| 16c | Sair e exclusões | "Sair"; excluir estudo; excluir conta | r20, r21, r22 | Cancele e confirme, usando também o Esc |
 | 17 | Exportar | fim da aba "Resultados" | r6, seção 04 | Baixe o CSV da planilha oficial e o painel em PDF |
 | 18 | Importar respostas | aba "Respostas", "Importar respostas de um CSV" | sem protótipo | Importe `data/fixtures/basico/respostas.csv` numa versão |
 | 19 | Painel em PDF | "Painel em PDF" | sem protótipo | Abra o PDF e confira se dá para usar no relatório |
 | 20 | Seletor de idioma | topo do consentimento | sem protótipo | Escolha árabe ou japonês e responda o questionário |
 
-As telas 18 a 20 foram criadas depois do protótipo. Avalie se seguem o mesmo padrão das outras: botões, campos, tabelas, mensagens e tom de voz.
+As telas 18 a 20 não têm protótipo. Avalie se seguem o mesmo padrão das outras: botões, campos, tabelas, mensagens e tom de voz.
 
 ## O que avaliar
 
@@ -107,5 +123,7 @@ O que sobra para vocês é o que só uma pessoa avalia:
 
 - **Painel (telas 13 e 14):** alguém que não conhece o UEQ consegue tirar a conclusão certa?
 - **Questionário no celular (telas 8 e 9):** responda em pé, com uma mão.
-- **Idiomas (tela 20):** se alguém da equipe fala outro idioma além do português, revise os textos dele. As traduções das telas foram feitas pela equipe (`docs/idiomas.md`).
+- **Idiomas (tela 20):** se alguém da equipe fala outro idioma além do português, revise os textos dele. As traduções das telas do participante foram feitas pela equipe, e as da ferramenta, pela API do Claude (`docs/idiomas.md`).
+- **Tour guiado (tela 3b):** alguém que nunca viu a ferramenta consegue seguir?
+- **Política de privacidade (tela 3a):** um participante entende o que acontece com as respostas dele?
 - **Telas sem protótipo (18 a 20):** são as menos vistas até agora.

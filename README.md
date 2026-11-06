@@ -22,7 +22,7 @@ A documentação da ferramenta está sendo escrita pela equipe, em [docs/documen
 
 | Arquivo | Conteúdo |
 |---|---|
-| [docs/documentacao/](docs/documentacao/) | Arquitetura C4, diagramas de sequência e casos de teste; requisitos, rastreabilidade, personas, histórias, casos de uso, diagrama de classes, modelo lógico e verificação do cálculo em produção |
+| [docs/documentacao/](docs/documentacao/) | Arquitetura C4, diagramas de sequência, modelo lógico e casos de teste, com os arquivos-fonte dos diagramas em `fontes/`; requisitos, rastreabilidade, personas, histórias, casos de uso, diagrama de classes e verificação do cálculo em produção |
 | [docs/ueq-protocolo.md](docs/ueq-protocolo.md) | Itens, escalas, polaridade e todas as fórmulas do cálculo |
 | [docs/ihc.md](docs/ihc.md) | Requisitos de usabilidade e acessibilidade, cada um ligado ao princípio da literatura que o justifica |
 | [docs/design.md](docs/design.md) | Identidade visual |
@@ -37,6 +37,7 @@ A meta de acessibilidade é WCAG 2.2 nível AA, base da ABNT NBR 17225:2025.
 **Participante**
 - Link público em 37 idiomas oficiais do UEQ, com termo de consentimento e os 26 itens na ordem e polaridade oficiais. O link abre no idioma do estudo, o participante troca quando quiser, e o título, o produto e o objetivo escritos pelo pesquisador são traduzidos para o idioma dele.
 - Etapa opcional de dados demográficos, só quando o pesquisador liga. Ela pode ser pulada inteira, e todas as perguntas têm “Prefiro não responder”.
+- Política de privacidade a partir do termo de consentimento, numa página dentro do próprio link, sem caminho para o resto da ferramenta.
 
 **Pesquisador**
 - Estudos com uma ou mais versões (teste A/B), coleta aberta, encerrada e reaberta, e importação de respostas por CSV.
@@ -157,6 +158,7 @@ Como as telas vão ficar em produção, em [docs/prototipos/alta-fidelidade/](do
 <img src="docs/prototipos/alta-fidelidade/p3-questionario-item-faltando.png" alt="Envio com itens faltando: resumo em vermelho com o número de cada item e um link para ele" width="200">
 <img src="docs/prototipos/alta-fidelidade/p4-dados-opcionais.png" alt="Dados opcionais: faixa com a etapa, perguntas com cada opção numa linha clicável e a escolhida em destaque, todas com Prefiro não responder, botões Continuar e Pular esta etapa" width="200">
 <img src="docs/prototipos/alta-fidelidade/p5-fim.png" alt="Fim: etapas concluídas, sete marcações preenchidas e o agradecimento num quadro" width="200">
+<img src="docs/prototipos/alta-fidelidade/p9-politica-de-privacidade.png" alt="Política de privacidade no link do participante, no celular: Voltar, resumo, índice e as seções em linhas, sem barra e sem ícones" width="180">
 <img src="docs/prototipos/alta-fidelidade/p6-link-fechado.png" alt="Link fechado: aviso num quadro de que a coleta do estudo foi encerrada" width="200">
 </p>
 
@@ -200,7 +202,7 @@ Diagrama em tela cheia, com zoom, e barra fixa no celular com o menu aberto:
 
 Página inicial, para quem ainda não tem conta, e Entrar e Criar conta numa janela por cima da página:
 
-<img src="docs/prototipos/alta-fidelidade/r16-pagina-inicial.png" alt="Página inicial: apresentação com o item 1 do questionário como figura, Nesta página, o que é o UEQ, as seis escalas, como ler os resultados e o benchmark, como a ferramenta funciona, estudos sobre o método e créditos" width="400"> <img src="docs/prototipos/alta-fidelidade/r17-entrar-janela.png" alt="Janela de Entrar sobre a página inicial escurecida: formulário à esquerda e painel com as escalas do UEQ à direita" width="400">
+<img src="docs/prototipos/alta-fidelidade/r16-pagina-inicial.png" alt="Página inicial: apresentação com o item 1 do questionário como figura, Nesta página, o que é o UEQ, as seis escalas, como ler os resultados e o benchmark, como a ferramenta funciona, estudos sobre o método e créditos" width="400"> <img src="docs/prototipos/alta-fidelidade/r17-entrar-janela.png" alt="Janela de Entrar sobre a página inicial escurecida: formulário à esquerda, com Criar conta e a política de privacidade, e painel com as escalas do UEQ à direita" width="400">
 
 <img src="docs/prototipos/alta-fidelidade/r19-criar-conta-janela.png" alt="Janela de Criar conta: nome e e-mail lado a lado, senha, idioma da ferramenta, Criar conta junto de Entrar e da política de privacidade, e os quatro passos do estudo à direita" width="400"> <img src="docs/prototipos/alta-fidelidade/r18-entrar-celular.png" alt="Entrar no celular: a janela ocupa a tela inteira, com o formulário em cima e o resumo do instrumento embaixo" width="200">
 
@@ -226,9 +228,9 @@ Equipe, notificações, ajuda e LGPD:
 
 <img src="docs/prototipos/alta-fidelidade/r28-tour-boas-vindas.png" alt="Boas-vindas do primeiro acesso: Pular tutorial e Começar o tour" width="400"> <img src="docs/prototipos/alta-fidelidade/r29-tour-passo.png" alt="Passo do tour: a página escurecida em volta do estudo destacado e o cartão Passo 1 de 10" width="400">
 
-<img src="docs/prototipos/alta-fidelidade/r30-ajuda-da-pagina.png" alt="Janela de ajuda da página Respostas, aberta pelo botão (?), com Rever o tour guiado" width="400"> <img src="docs/prototipos/alta-fidelidade/r31-dados-demograficos.png" alt="Resultados, sub-aba Dados demográficos: colunas para a faixa etária, barras para gênero e escolaridade e barra 100% para a familiaridade, com filtro de versão" width="400">
+<img src="docs/prototipos/alta-fidelidade/r30-ajuda-da-pagina.png" alt="Janela de ajuda da página Respostas, aberta pelo botão (?), com a política de privacidade e Rever o tour guiado" width="400"> <img src="docs/prototipos/alta-fidelidade/r31-dados-demograficos.png" alt="Resultados, sub-aba Dados demográficos: colunas para a faixa etária, barras para gênero e escolaridade e barra 100% para a familiaridade, com filtro de versão" width="400">
 
-<img src="docs/prototipos/alta-fidelidade/r32-dados-do-participante.png" alt="Criar estudo, seção Dados do participante: caixa para coletar dados demográficos com o aviso de LGPD e a prévia com as etapas" width="400"> <img src="docs/prototipos/alta-fidelidade/r33-politica-de-privacidade.png" alt="Política de privacidade pública: quem cuida dos dados, participantes, pesquisadores, direitos e proteção" width="400">
+<img src="docs/prototipos/alta-fidelidade/r32-dados-do-participante.png" alt="Criar estudo, seção Dados do participante: caixa para coletar dados demográficos com o aviso de LGPD e a prévia com as etapas" width="400"> <img src="docs/prototipos/alta-fidelidade/r33-politica-de-privacidade.png" alt="Política de privacidade pública: Voltar e o quadro Em resumo na faixa, seções numeradas em linhas com régua (quem cuida dos dados, participantes, pesquisadores, direitos, proteção e dúvidas) e o índice Nesta página ao lado" width="400">
 
 ## Protótipos de baixa fidelidade
 

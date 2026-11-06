@@ -1,0 +1,29 @@
+sequenceDiagram
+    autonumber
+    actor Pesq as Pesquisador
+    participant Nav as Navegador
+    participant Acao as Ações importar
+    participant Imp as lib/importacao
+    participant Ueq as ueq
+    participant BD as PostgreSQL
+
+    Pesq->>Nav: escolhe a versão e o arquivo e clica em "Ver prévia"
+    Nav->>Acao: previsualizarImportacao(estudoId, FormData)
+    Acao->>Acao: confere sessão, permissão de editar, versão, extensão e tamanho (até 500 KB)
+    Acao->>Imp: lerCsvDeRespostas(texto)
+    Imp-->>Acao: linhas válidas e erros por linha
+    Acao-->>Nav: prévia das 5 primeiras linhas, total e erros
+    alt alguma linha com erro
+        Nav-->>Pesq: problema de cada linha, sem botão de confirmar
+    else arquivo inteiro válido
+        Pesq->>Nav: confirma
+        Nav->>Acao: confirmarImportacao(estudoId, versaoId, texto)
+        Acao->>Imp: lerCsvDeRespostas(texto) de novo
+        loop para cada linha
+            Acao->>Ueq: avaliarSuspeita(valores, itens, protocolo)
+        end
+        Acao->>BD: transação: uma Participacao IMPORTADA, concluída e sem idioma, com 26 Respostas, por linha
+        Acao->>BD: avisa o resto da equipe no sino (notificarAlteracao)
+        Acao-->>Nav: redireciona a Respostas com "N importadas"
+        Nav-->>Pesq: as linhas aparecem marcadas "importada de CSV"
+    end

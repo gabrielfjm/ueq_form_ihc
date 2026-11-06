@@ -1,11 +1,14 @@
-# Idiomas do questionário
+# Idiomas
 
-O link do participante funciona nos 37 idiomas do pacote oficial do UEQ. A ferramenta do pesquisador continua em português.
+A Ferramenta UEQ funciona nos 37 idiomas do pacote oficial do UEQ, com dois caminhos separados:
+
+- **O link do participante** usa os termos e as instruções oficiais e textos de tela revisáveis, em arquivos. Como é instrumento de medida, nada do questionário passa por tradução automática.
+- **A ferramenta do pesquisador** é escrita em português e traduzida sob demanda pela API do Claude ([seção própria](#a-ferramenta-do-pesquisador)). Os textos escritos pelo pesquisador num estudo (título, produto e objetivo) usam a mesma API.
 
 ## Como o idioma é escolhido
 
-- Ao abrir o link, vale o primeiro dos 37 idiomas que o navegador pede (`Accept-Language`). Se nenhum dos 37 aparece, vale o português.
-- No consentimento há um seletor "Idioma" com o nome de cada idioma escrito nele mesmo. Escolher no seletor não muda nada sozinho: só o botão "Aplicar" muda (WCAG 3.2.2).
+- Ao criar o estudo, o pesquisador escolhe o idioma dele (`Estudo.idioma`, com o idioma da conta como padrão). O link abre nesse idioma, mesmo com o navegador em outro.
+- No consentimento e no questionário há um seletor "Idioma" com o nome de cada idioma escrito nele mesmo. Escolher no seletor não muda nada sozinho: só o botão "Aplicar" muda (WCAG 3.2.2). Trocar no questionário volta para ele, com as marcações guardadas.
 - A escolha fica num cookie (`ueq_idioma`, só em `/r/<slug>`) e vale para todas as etapas. Ao consentir, o código do idioma é gravado em `Participacao.idioma`.
 - O `<html lang>` e o `dir` seguem o idioma (WCAG 3.1.1). Por isso o link do participante tem um layout raiz próprio (`src/app/r/[slug]/layout.tsx`), separado do da ferramenta (`src/app/(ferramenta)/layout.tsx`).
 - Em árabe, hebraico e persa o texto vai da direita para a esquerda. A linha de círculos continua da esquerda para a direita, de 1 a 7, com o termo da esquerda à esquerda, como nos PDFs oficiais desses idiomas.
@@ -17,6 +20,8 @@ O link do participante funciona nos 37 idiomas do pacote oficial do UEQ. A ferra
 | 26 pares de termos | `data/ueq-idiomas.json` | PDF oficial de cada idioma, conferido contra a imagem da página |
 | Instrução antes dos itens | `data/ueq-instrucoes.json` | PDF oficial de cada idioma, sem o exemplo com círculo marcado (como em português) |
 | Textos das telas (consentimento, botões, nomes acessíveis, erros, dados opcionais, fim) | `src/idiomas/textos/*.ts` | Tradução da equipe |
+| Política de privacidade, vista pelo link do participante | Tabela `traducao` do banco | API do Claude, com os mesmos textos da ferramenta. Sem tradução, aparece em português, com um aviso no idioma da pessoa |
+| Título, produto e objetivo do estudo | Tabela `traducao` do banco | API do Claude, a partir do idioma do estudo. A página espera até 8 segundos; o que não chegar a tempo sai no original, marcado com o `lang` dele, e fica para a próxima visita |
 
 O PDF é a referência porque é o questionário que o participante veria. A aba `Items` da UEQ Data Analysis Tool V15 traz outra versão em vários idiomas:
 
@@ -60,12 +65,28 @@ Nove PDFs avisam "This translation is not yet finally approved": árabe, bengali
 
 Antes de usar um idioma num estudo real, alguém fluente deve conferir:
 
-1. os textos de tela em `src/idiomas/textos/<código>.ts`, que são todos tradução da equipe;
+1. os textos de tela em `src/idiomas/textos/<código>.ts`, que são todos tradução da equipe (a API do Claude traduz só a ferramenta do pesquisador e os textos do estudo);
 2. as correções da tabela acima, quando o idioma tem alguma;
 3. as instruções marcadas "Transcrito da imagem… Conferir com falante nativo" em `data/ueq-instrucoes.json`: árabe, híndi, marati, bengali, tâmil e canarês. Em bengali, os espaços entre as palavras foram postos pela equipe, porque o PDF não os tem.
 
 As respostas de dados opcionais são gravadas sempre com a categoria em português (por exemplo, "25 a 34 anos"), em qualquer idioma. A análise e as exportações não mudam.
 
+## A ferramenta do pesquisador
+
+O idioma é escolhido ao criar a conta e trocado em Minha conta › Idioma. Antes de entrar, vale o último escolhido no navegador (cookie `idioma_interface`). Avisos do sino e e-mails saem no idioma de quem recebe.
+
+Como funciona:
+
+1. Todo texto de tela é escrito em português dentro de `t("…")` ou `m("…")`. O comando `pnpm i18n:catalogo` extrai esses textos para `src/traducao/catalogo.json`.
+2. Ao abrir uma tela em outro idioma, o servidor lê as traduções da tabela `traducao`. O que falta sai em português, e os lotes de 60 textos rodam depois da resposta, com até 6 ao mesmo tempo, pelo modelo definido em `src/traducao/claude.ts`.
+3. Cada tradução é guardada por idioma e pelo hash do texto, então nunca é pedida duas vezes. Mudar um texto em português gera uma tradução nova.
+4. Administração › Idiomas mostra a cobertura de cada idioma e tem o botão "Traduzir agora".
+
+Sem `ANTHROPIC_API_KEY` no ambiente, nada é traduzido e a ferramenta aparece em português. Enquanto mais da metade do catálogo de um idioma não estiver traduzida, o `<html lang>` e a direção ficam em português, para o leitor de tela pronunciar certo.
+
+Vão para a API só os textos da interface e os textos do estudo. Nenhuma resposta, nome, e-mail ou dado demográfico vai junto, como diz a política de privacidade.
+
 ## Fora do escopo
 
-O painel de resultados não separa por idioma. Para comparar idiomas, use a coluna `idioma` das exportações.
+- O painel de resultados não separa por idioma. Para comparar idiomas, use a coluna `idioma` das exportações.
+- Os documentos da aba Documentação ficam em português.

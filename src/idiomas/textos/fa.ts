@@ -34,6 +34,11 @@ export const fa: TextosParticipante = {
     ],
     concordo: "موافقم و می‌خواهم شرکت کنم",
     naoQuero: "نمی‌خواهم شرکت کنم",
+    privacidade: "سیاست حریم خصوصی",
+  },
+  politica: {
+    voltar: "بازگشت",
+    semTraducao: "این سیاست هنوز به زبان شما ترجمه نشده است و به زبان پرتغالی نمایش داده می‌شود.",
   },
   fechado: {
     rascunho: {

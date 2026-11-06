@@ -34,6 +34,11 @@ export const bs: TextosParticipante = {
     ],
     concordo: "Saglasan/saglasna sam i želim učestvovati",
     naoQuero: "Ne želim učestvovati",
+    privacidade: "Politika privatnosti",
+  },
+  politica: {
+    voltar: "Nazad",
+    semTraducao: "Ova politika još nije prevedena na vaš jezik i prikazana je na portugalskom.",
   },
   fechado: {
     rascunho: {

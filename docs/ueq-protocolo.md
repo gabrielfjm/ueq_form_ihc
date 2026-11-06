@@ -1,6 +1,6 @@
 # Protocolo UEQ · especificação de cálculo
 
-Fonte: Schrepp, M. *User Experience Questionnaire Handbook* e planilha oficial *UEQ Data Analysis Tool* (ueq-online.org). Versões conferidas em 23/10/2026: Handbook versão 11 (12/09/2023) e `UEQ_Data_Analysis_Tool_V15.xlsx` (22/10/2026). Quando o handbook e a planilha divergem, vale a planilha, porque é contra ela que os testes comparam. Todo valor marcado com **[CONFIRMAR]** precisa ser conferido pela equipe no handbook ou na planilha antes de ser implementado. Quando confirmar, troque a marca por `[OK · handbook p. X]` ou `[OK · planilha, aba Y]`.
+Fonte: Schrepp, M. *User Experience Questionnaire Handbook* e planilha oficial *UEQ Data Analysis Tool* (ueq-online.org). Versões conferidas em 23/10/2026: Handbook versão 11 (12/09/2023) e `UEQ_Data_Analysis_Tool_V15.xlsx` (22/10/2026). Quando o handbook e a planilha divergem, vale a planilha, porque é contra ela que os testes comparam. Todo valor marcado com **[CONFIRMAR]** precisa ser conferido pela equipe no handbook ou na planilha antes de ser implementado. Quando confirmar, troque a marca por `[OK · handbook p. X]` ou `[OK · planilha, aba Y]`. Em 06/11/2026 não há nenhum valor pendente de confirmação neste documento: o que falta é a comparação da [seção 10](#10-validação-contra-a-planilha-oficial).
 
 ## 1. Itens, escalas e polaridade
 
@@ -56,7 +56,7 @@ Agrupamento:
 
 Média dos valores recodificados dos itens daquela escala, para aquele participante.
 
-`[OK · planilha, aba DT]`: célula vazia é ignorada. O escore da escala é a média só dos itens respondidos (`AVERAGE`), e fica vazio se nenhum item da escala foi respondido. Nossa ferramenta exige os 26 itens (validação no formulário), então não deve existir valor ausente vindo da coleta. Se houver importação por CSV no futuro, decidir a regra aqui.
+`[OK · planilha, aba DT]`: célula vazia é ignorada. O escore da escala é a média só dos itens respondidos (`AVERAGE`), e fica vazio se nenhum item da escala foi respondido. Nossa ferramenta exige os 26 itens (validação no formulário), então não existe valor ausente vindo da coleta. A importação por CSV segue a mesma regra: cada linha precisa dos 26 valores de 1 a 7, e o arquivo com qualquer linha inválida é recusado inteiro (`src/lib/importacao.ts`).
 
 ## 4. Estatísticas por escala (entre participantes incluídos na análise)
 
@@ -121,7 +121,7 @@ Leitura, com maior estrito como na fórmula da planilha: `media > excelente` →
 
 ## 9. Exportações
 
-1. **Respostas brutas** (CSV): uma linha por participação. Colunas: id da participação, versão, data, incluída (sim/não), suspeita (sim/não), demográficos, `item01` a `item26` com valores 1 a 7.
+1. **Respostas brutas** (CSV): uma linha por participação. Colunas: id da participação, versão, data, incluída (sim/não), suspeita (sim/não), origem, idioma, tradução aprovada, demográficos, `item01` a `item26` com valores 1 a 7.
 2. **Respostas recodificadas** (CSV): mesmo formato, valores -3 a 3.
 3. **Resultados por escala** (CSV): versão, escala, n, média, dp, ic95 inferior, ic95 superior, alfa, faixa de interpretação, faixa do benchmark.
 4. **Compatível com a planilha oficial**: só os 26 valores 1 a 7 por linha, na ordem oficial, sem cabeçalho e sem colunas extras, só das participações na análise. Mesmo formato das fixtures: separador `;`, quebra de linha CRLF e **sem BOM**. `[OK · planilha V15, aba Data]`: os dados começam em `Data!A4`, uma coluna por item de A a Z. O Excel em pt-BR abre o arquivo `;` já separado em colunas; daí é copiar as linhas e colar em `Data!A4` (passo a passo em `data/fixtures/LEIA-ME.md`). Um teste confere que a exportação da fixture `basico` sai idêntica ao `respostas.csv` original.
@@ -136,3 +136,5 @@ Em `data/fixtures/` ficam pelo menos três conjuntos:
 - `extremos`: todos 1, todos 7, n = 1, n = 2
 
 Cada conjunto tem `respostas.csv` (formato da planilha) e `esperado.json` com os números copiados da planilha oficial depois de colar as respostas lá. Os testes do módulo `src/ueq/` comparam com tolerância de `1e-6`.
+
+**Situação em 06/11/2026:** os `respostas.csv` existem, mas nenhum `esperado.json` foi preenchido, e por isso os 6 testes dessa comparação ficam pulados. O passo a passo está em `data/fixtures/LEIA-ME.md`.

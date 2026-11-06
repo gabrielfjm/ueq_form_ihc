@@ -1,0 +1,27 @@
+sequenceDiagram
+    autonumber
+    actor Pesq as Pesquisador
+    participant Nav as Navegador
+    participant Pag as Página
+    participant Trad as traducao/servidor
+    participant BD as PostgreSQL
+    participant Claude as API do Claude
+
+    Pesq->>Nav: abre uma tela com a conta em espanhol
+    Nav->>Pag: GET
+    Pag->>Trad: tradutor()
+    Trad->>BD: traduções do catálogo em espanhol
+    BD-->>Trad: as que já existem
+    alt faltam traduções e há ANTHROPIC_API_KEY
+        Trad-->>Pag: t() com o que existe, e o resto em português
+        Pag-->>Nav: HTML
+        loop depois da resposta, em lotes de 60, até 6 ao mesmo tempo
+            Trad->>Claude: traduzirLote(textos, pt, es)
+            Claude-->>Trad: traduções com os marcadores preservados
+            Trad->>BD: guarda em Traducao, por idioma e hash do texto
+        end
+    else catálogo completo ou sem chave da API
+        Trad-->>Pag: t() com o dicionário disponível
+        Pag-->>Nav: HTML
+    end
+    Note over Pag,Nav: se a maior parte ainda está em português, o html lang fica pt-BR, para o leitor de tela pronunciar certo

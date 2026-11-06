@@ -1,0 +1,36 @@
+sequenceDiagram
+    autonumber
+    actor Pesq as Pesquisador
+    participant Nav as Navegador
+    participant Pag as Página resultados
+    participant Sessao as lib/sessao
+    participant Estudos as lib/estudos
+    participant Res as lib/resultados
+    participant Ueq as ueq
+    participant BD as PostgreSQL
+
+    Pesq->>Nav: abre /estudos/abc/resultados?versao=v2
+    Nav->>Pag: GET com searchParams
+    Pag->>Sessao: exigirPesquisador()
+    Sessao->>BD: sessão pelo hash do token, ainda válida
+    BD-->>Sessao: pesquisador
+    Pag->>Estudos: estudoDoPesquisador(id, pessoa, "ver")
+    Estudos->>BD: estudo com esse id, se a pessoa é dona ou aceitou o convite
+    alt estudo não existe ou a pessoa não tem acesso
+        Estudos-->>Nav: 404, igual nos dois casos
+    else a pessoa tem acesso
+        Pag->>Res: analisarResultados(estudoId, versões)
+        Res->>BD: itens e participações concluídas, com respostas
+        Res->>Res: monta 26 valores por participação e separa por versão
+        Res->>Ueq: analisarEstudo(todas, itens, protocolo e benchmark)
+        loop para cada versão
+            Res->>Ueq: analisarEstudo(da versão, itens, config)
+        end
+        Ueq-->>Res: AnaliseEstudo (escalas, grupos, itens, participantes)
+        Res-->>Pag: análise de todas e por versão
+        Pag->>Pag: leitura rápida, gráfico SVG com title e desc, tabelas
+        Pag-->>Nav: HTML do painel
+        Nav-->>Pesq: painel da versão v2
+    end
+    Pesq->>Nav: escolhe "Comparar versões"
+    Nav->>Pag: GET ?modo=comparar (a URL guarda a visão)

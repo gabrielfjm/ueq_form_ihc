@@ -34,6 +34,11 @@ export const hu: TextosParticipante = {
     ],
     concordo: "Elfogadom, és részt szeretnék venni",
     naoQuero: "Nem szeretnék részt venni",
+    privacidade: "Adatvédelmi szabályzat",
+  },
+  politica: {
+    voltar: "Vissza",
+    semTraducao: "Ezt a szabályzatot még nem fordították le az Ön nyelvére, ezért portugálul jelenik meg.",
   },
   fechado: {
     rascunho: {
