@@ -34,6 +34,11 @@ export const sk: TextosParticipante = {
     ],
     concordo: "Súhlasím a chcem sa zúčastniť",
     naoQuero: "Nechcem sa zúčastniť",
+    privacidade: "Zásady ochrany osobných údajov",
+  },
+  politica: {
+    voltar: "Späť",
+    semTraducao: "Tieto zásady ešte nie sú preložené do vášho jazyka, preto sa zobrazujú v portugalčine.",
   },
   fechado: {
     rascunho: {

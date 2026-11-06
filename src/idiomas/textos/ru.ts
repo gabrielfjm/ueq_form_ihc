@@ -34,6 +34,11 @@ export const ru: TextosParticipante = {
     ],
     concordo: "Я согласен(на) и хочу участвовать",
     naoQuero: "Я не хочу участвовать",
+    privacidade: "Политика конфиденциальности",
+  },
+  politica: {
+    voltar: "Назад",
+    semTraducao: "Эта политика ещё не переведена на ваш язык и показана на португальском.",
   },
   fechado: {
     rascunho: {

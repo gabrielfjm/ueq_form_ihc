@@ -223,7 +223,7 @@ test("sair sem enviar confirma numa janela e não grava nada", async ({ page, br
   await estudo.fechar();
 });
 
-// Quem responde só vê o formulário e o seletor de idioma: nenhum link sai do próprio estudo
+// Quem responde só vê o formulário, o seletor de idioma e a política: nenhum link sai do próprio estudo
 async function soLinksDoFormulario(page: Page) {
   await expect(page.getByRole("navigation", { name: "Principal" })).toHaveCount(0);
   const destinos = await page.locator("a[href]").evaluateAll((links) => links.map((link) => link.getAttribute("href") ?? ""));
@@ -246,6 +246,32 @@ test("o link do participante só mostra o formulário e o seletor de idioma, sem
   await page.getByRole("button", { name: "Pular esta etapa" }).click();
   await expect(page).toHaveURL(/\/fim$/);
   await soLinksDoFormulario(page);
+  await estudo.fechar();
+});
+
+test("a política de privacidade abre pelo termo, dentro do link do participante, e volta para ele", async ({ page, browser }, info) => {
+  const estudo = await estudoAberto(browser, info);
+  await page.goto(estudo.link);
+  await page.getByRole("link", { name: "Política de privacidade" }).click();
+  await expect(page).toHaveURL(/\/privacidade$/);
+  await expect(page.getByRole("heading", { level: 1, name: "Política de privacidade" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Se você respondeu um questionário" })).toBeVisible();
+  // Nem a barra da ferramenta nem o link de Minha conta: nada sai do estudo
+  await soLinksDoFormulario(page);
+  await verificarAcessibilidade(page);
+  await page.getByRole("link", { name: "Voltar" }).first().click();
+  await expect(page.getByRole("button", { name: "Concordo e quero participar" })).toBeVisible();
+  await estudo.fechar();
+});
+
+test("sem tradução automática, a política avisa no idioma da pessoa e sai marcada como português", async ({ page, browser }, info) => {
+  const estudo = await estudoAberto(browser, info, { idioma: "en" });
+  await page.goto(estudo.link);
+  await page.getByRole("link", { name: "Privacy policy" }).click();
+  await expect(page.getByText("This policy has not been translated into your language yet")).toBeVisible();
+  await expect(page.locator("main")).toHaveAttribute("lang", "pt-BR");
+  await expect(page.getByRole("link", { name: "Back" }).first()).toBeVisible();
+  await verificarAcessibilidade(page);
   await estudo.fechar();
 });
 

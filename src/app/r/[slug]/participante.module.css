@@ -188,6 +188,11 @@
   gap: 14px;
 }
 
+.linkPrivacidade {
+  margin: 0;
+  font-size: var(--texto-sm);
+}
+
 .termoTitulo {
   margin: 0;
   font-size: 1.5rem;

@@ -34,6 +34,11 @@ export const fr: TextosParticipante = {
     ],
     concordo: "J’accepte et je veux participer",
     naoQuero: "Je ne veux pas participer",
+    privacidade: "Politique de confidentialité",
+  },
+  politica: {
+    voltar: "Retour",
+    semTraducao: "Cette politique n’est pas encore traduite dans votre langue et s’affiche en portugais.",
   },
   fechado: {
     rascunho: {

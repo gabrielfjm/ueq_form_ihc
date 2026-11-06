@@ -34,6 +34,11 @@ export const hr: TextosParticipante = {
     ],
     concordo: "Pristajem i želim sudjelovati",
     naoQuero: "Ne želim sudjelovati",
+    privacidade: "Politika privatnosti",
+  },
+  politica: {
+    voltar: "Natrag",
+    semTraducao: "Ova politika još nije prevedena na vaš jezik i prikazana je na portugalskom.",
   },
   fechado: {
     rascunho: {

@@ -34,6 +34,11 @@ export const ms: TextosParticipante = {
     ],
     concordo: "Saya setuju dan mahu menyertai",
     naoQuero: "Saya tidak mahu menyertai",
+    privacidade: "Dasar privasi",
+  },
+  politica: {
+    voltar: "Kembali",
+    semTraducao: "Dasar ini belum diterjemahkan ke dalam bahasa anda, jadi ia dipaparkan dalam bahasa Portugis.",
   },
   fechado: {
     rascunho: {

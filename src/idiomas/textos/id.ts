@@ -34,6 +34,11 @@ export const id: TextosParticipante = {
     ],
     concordo: "Saya setuju dan ingin berpartisipasi",
     naoQuero: "Saya tidak ingin berpartisipasi",
+    privacidade: "Kebijakan privasi",
+  },
+  politica: {
+    voltar: "Kembali",
+    semTraducao: "Kebijakan ini belum diterjemahkan ke bahasa Anda, sehingga ditampilkan dalam bahasa Portugis.",
   },
   fechado: {
     rascunho: {

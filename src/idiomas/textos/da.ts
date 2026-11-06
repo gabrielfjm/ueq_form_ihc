@@ -34,6 +34,11 @@ export const da: TextosParticipante = {
     ],
     concordo: "Jeg accepterer og vil gerne deltage",
     naoQuero: "Jeg vil ikke deltage",
+    privacidade: "Privatlivspolitik",
+  },
+  politica: {
+    voltar: "Tilbage",
+    semTraducao: "Denne politik er endnu ikke oversat til dit sprog og vises på portugisisk.",
   },
   fechado: {
     rascunho: {

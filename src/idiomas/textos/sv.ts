@@ -34,6 +34,11 @@ export const sv: TextosParticipante = {
     ],
     concordo: "Jag godkänner och vill delta",
     naoQuero: "Jag vill inte delta",
+    privacidade: "Integritetspolicy",
+  },
+  politica: {
+    voltar: "Tillbaka",
+    semTraducao: "Den här policyn är ännu inte översatt till ditt språk och visas på portugisiska.",
   },
   fechado: {
     rascunho: {

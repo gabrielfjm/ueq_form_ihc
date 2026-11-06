@@ -34,6 +34,11 @@ export const kn: TextosParticipante = {
     ],
     concordo: "ನಾನು ಸಮ್ಮತಿಸುತ್ತೇನೆ ಮತ್ತು ಭಾಗವಹಿಸಲು ಬಯಸುತ್ತೇನೆ",
     naoQuero: "ನಾನು ಭಾಗವಹಿಸಲು ಬಯಸುವುದಿಲ್ಲ",
+    privacidade: "ಗೌಪ್ಯತಾ ನೀತಿ",
+  },
+  politica: {
+    voltar: "ಹಿಂದಕ್ಕೆ",
+    semTraducao: "ಈ ನೀತಿಯನ್ನು ಇನ್ನೂ ನಿಮ್ಮ ಭಾಷೆಗೆ ಅನುವಾದಿಸಿಲ್ಲ, ಆದ್ದರಿಂದ ಪೋರ್ಚುಗೀಸ್‌ನಲ್ಲಿ ತೋರಿಸಲಾಗಿದೆ.",
   },
   fechado: {
     rascunho: {

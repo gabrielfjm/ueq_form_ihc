@@ -34,6 +34,11 @@ export const he: TextosParticipante = {
     ],
     concordo: "אני מסכים/ה ורוצה להשתתף",
     naoQuero: "איני רוצה להשתתף",
+    privacidade: "מדיניות פרטיות",
+  },
+  politica: {
+    voltar: "חזרה",
+    semTraducao: "מדיניות זו עדיין לא תורגמה לשפה שלך ולכן היא מוצגת בפורטוגזית.",
   },
   fechado: {
     rascunho: {

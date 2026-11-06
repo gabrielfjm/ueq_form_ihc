@@ -34,6 +34,11 @@ export const nb: TextosParticipante = {
     ],
     concordo: "Jeg samtykker og vil delta",
     naoQuero: "Jeg vil ikke delta",
+    privacidade: "Personvernerklæring",
+  },
+  politica: {
+    voltar: "Tilbake",
+    semTraducao: "Denne erklæringen er ennå ikke oversatt til ditt språk og vises på portugisisk.",
   },
   fechado: {
     rascunho: {

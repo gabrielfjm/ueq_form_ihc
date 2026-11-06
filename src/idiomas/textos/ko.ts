@@ -34,6 +34,11 @@ export const ko: TextosParticipante = {
     ],
     concordo: "동의하며 참여하겠습니다",
     naoQuero: "참여하지 않겠습니다",
+    privacidade: "개인정보 처리방침",
+  },
+  politica: {
+    voltar: "돌아가기",
+    semTraducao: "이 방침은 아직 사용자의 언어로 번역되지 않아 포르투갈어로 표시됩니다.",
   },
   fechado: {
     rascunho: {

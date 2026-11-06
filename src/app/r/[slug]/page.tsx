@@ -82,6 +82,11 @@ export default async function PaginaConsentimento({ params }: Propriedades) {
               </div>
             ))}
           </dl>
+          {/* LGPD, art. 9º: quem vai consentir precisa poder ler o que acontece com os dados. A página fica
+              dentro do link do participante: nenhum caminho leva ao resto da ferramenta */}
+          <p className={estilos.linkPrivacidade}>
+            <Link href={`/r/${slug}/privacidade` as Route}>{consentimento.privacidade}</Link>
+          </p>
         </section>
         {/* Uma ação principal só (Hick, Nielsen 8); recusar é um link igualmente visível (§3.7) */}
         <form action={consentir.bind(null, slug)} className={estilos.decisao}>

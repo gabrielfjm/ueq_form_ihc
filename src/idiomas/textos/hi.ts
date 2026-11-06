@@ -34,6 +34,11 @@ export const hi: TextosParticipante = {
     ],
     concordo: "मैं सहमत हूँ और भाग लेना चाहता/चाहती हूँ",
     naoQuero: "मैं भाग नहीं लेना चाहता/चाहती",
+    privacidade: "निजता नीति",
+  },
+  politica: {
+    voltar: "वापस जाएँ",
+    semTraducao: "यह नीति अभी आपकी भाषा में अनूदित नहीं हुई है, इसलिए पुर्तगाली में दिखाई दे रही है।",
   },
   fechado: {
     rascunho: {

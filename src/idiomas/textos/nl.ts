@@ -34,6 +34,11 @@ export const nl: TextosParticipante = {
     ],
     concordo: "Ik ga akkoord en wil deelnemen",
     naoQuero: "Ik wil niet deelnemen",
+    privacidade: "Privacybeleid",
+  },
+  politica: {
+    voltar: "Terug",
+    semTraducao: "Dit beleid is nog niet in uw taal vertaald en wordt in het Portugees getoond.",
   },
   fechado: {
     rascunho: {

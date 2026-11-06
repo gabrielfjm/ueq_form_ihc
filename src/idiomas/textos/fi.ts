@@ -34,6 +34,11 @@ export const fi: TextosParticipante = {
     ],
     concordo: "Hyväksyn ja haluan osallistua",
     naoQuero: "En halua osallistua",
+    privacidade: "Tietosuojakäytäntö",
+  },
+  politica: {
+    voltar: "Takaisin",
+    semTraducao: "Tätä käytäntöä ei ole vielä käännetty kielellesi, joten se näytetään portugaliksi.",
   },
   fechado: {
     rascunho: {

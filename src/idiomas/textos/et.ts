@@ -34,6 +34,11 @@ export const et: TextosParticipante = {
     ],
     concordo: "Nõustun ja soovin osaleda",
     naoQuero: "Ma ei soovi osaleda",
+    privacidade: "Privaatsuspoliitika",
+  },
+  politica: {
+    voltar: "Tagasi",
+    semTraducao: "Seda poliitikat ei ole veel teie keelde tõlgitud, seetõttu kuvatakse see portugali keeles.",
   },
   fechado: {
     rascunho: {
