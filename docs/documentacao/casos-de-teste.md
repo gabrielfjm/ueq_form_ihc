@@ -1913,5 +1913,5 @@ Feitos por pessoas da equipe. Os de CN17 vêm de [docs/checklist-manual.md](../c
 - **Casos manuais.** Os 25 estão por fazer, inclusive o teste com usuários previsto em [docs/ihc.md §6](../ihc.md#6-como-verificar-automação-não-basta).
 - **Administração.** As páginas de Administração (contas, idiomas, proteção de dados e cenários) ainda não têm caso de ponta a ponta. Só a geração de respostas dos cenários tem teste ([CT-U61](#ct-u61)).
 - **Serviços externos.** A chamada à API do Claude e o envio de e-mail não são exercitados nos testes: [CT-E67](#ct-e67) grava a tradução direto no banco, e [CT-U59](#ct-u59) confere só o conteúdo do e-mail.
-- **Painel em PDF em produção.** Os casos [CT-E39](#ct-e39) e [CT-E40](#ct-e40) rodam no ambiente local. A pendência em produção está na [arquitetura](arquitetura.md#implantação).
+- **Painel em PDF em produção.** Os casos [CT-E39](#ct-e39) e [CT-E40](#ct-e40) rodam no ambiente local, com o Chromium do Playwright. O pacote usado na Vercel só é exercitado em produção.
 - **Requisitos sem caso de teste automatizado:** a lista entra quando os requisitos estiverem definidos.

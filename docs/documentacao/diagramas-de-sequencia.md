@@ -226,7 +226,7 @@ sequenceDiagram
 
 ## 5. Exportar o painel em PDF
 
-O servidor abre a página de impressão num Chromium sem tela, com a sessão de quem pediu, e devolve o PDF. Em produção, depende da pendência descrita na [arquitetura](arquitetura.md#implantação).
+O servidor abre a página de impressão num Chromium sem tela, com a sessão de quem pediu, e devolve o PDF. Na Vercel, esse Chromium é baixado na primeira chamada, como explica a [arquitetura](arquitetura.md#implantação).
 
 ```mermaid
 sequenceDiagram

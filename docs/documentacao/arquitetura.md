@@ -116,7 +116,7 @@ flowchart TB
 |---|---|---|---|
 | Interface no navegador | React 19.3, CSS Modules, variáveis CSS, SVG feito à mão | Mostrar as telas e tratar a interação. Sem biblioteca de componentes nem de gráficos | `src/app/**/*.tsx` com `"use client"`, `src/componentes/`, `src/graficos/`, `src/styles/` |
 | Aplicação web | Next.js 16.4, Node.js 24, Zod 4, bcryptjs, Nodemailer, SDK da Anthropic | Renderizar as páginas, validar e gravar dados, proteger a área do pesquisador, gerar exportações, traduzir e avisar | `src/app/`, `src/lib/`, `src/ueq/`, `src/idiomas/`, `src/traducao/`, `src/proxy.ts` |
-| Gerador de PDF | Playwright 1.64 (Chromium) | Imprimir o painel em PDF com gráficos em vetor | `src/app/api/estudos/[id]/painel-pdf/route.ts` |
+| Gerador de PDF | Playwright 1.64 com o Chromium dele no desenvolvimento e `@sparticuz/chromium-min` 153 na Vercel | Imprimir o painel em PDF com gráficos em vetor | `src/app/api/estudos/[id]/painel-pdf/route.ts` |
 | Banco de dados | PostgreSQL 16 (Docker no desenvolvimento, Neon em produção) | Persistir o modelo de domínio, com cascata e `CHECK`. Detalhes no [modelo lógico](modelo-logico.md) | `prisma/schema.prisma`, `prisma/migrations/`, `docker-compose.yml` |
 | Dados oficiais | JSON versionado | Fonte única dos itens, instruções, protocolo e benchmark, cada um com o campo `fonte` | `data/` |
 | Documentação | Markdown e SVG versionados | Os documentos que a aba Documentação mostra, os diagramas já desenhados e o arquivo-fonte de cada um | `docs/`, `docs/documentacao/diagramas/`, `docs/documentacao/fontes/` |
@@ -252,7 +252,7 @@ O `matcher` de [`src/proxy.ts`](../../src/proxy.ts) exclui o que nunca exige ses
 | Tradução sob demanda, guardada no banco | Traduzir cada texto uma vez só, sem custo em leituras seguintes e sem manter 37 arquivos à mão | A primeira visita a um idioma pode sair em português enquanto os lotes rodam em segundo plano |
 | E-mail enviado depois da resposta (`after`) | Quem clicou não espera o servidor de e-mail, e uma falha de envio não desfaz a ação | O sino é o registro que sempre existe; o e-mail é um extra |
 | Gráficos em SVG feitos à mão | Controle total de `title`, `desc`, contraste, formas por versão e reorganização em tela estreita | Sem biblioteca de gráficos para atualizar |
-| PDF gerado por Chromium no servidor | O PDF sai igual ao painel, com gráficos em vetor e as mesmas fontes | O servidor precisa de um navegador disponível (ver [Implantação](#implantação)) |
+| PDF gerado por Chromium no servidor | O PDF sai igual ao painel, com gráficos em vetor e as mesmas fontes | Na Vercel, o navegador é baixado na primeira chamada (ver [Implantação](#implantação)) |
 | Documentação lida dos mesmos `.md` do repositório, com os diagramas desenhados antes, em SVG (`pnpm docs:diagramas`) | Um arquivo só para o GitHub e para a ferramenta; a ferramenta não carrega a biblioteca Mermaid e cada diagrama vira imagem com texto alternativo | Mudar um diagrama exige gerar o SVG e a fonte de novo; um teste de unidade avisa |
 | Dados oficiais em JSON versionado | Cada número tem fonte rastreável e muda por pull request, não no código | Mudar um limiar exige `pnpm suspeitas:recalcular` para atualizar as participações já gravadas |
 | Cookies do participante restritos a `/r/<slug>` | Anonimato: só o id aleatório da participação, a marca de já respondido e o idioma | A proteção contra envio duplicado vale por navegador, não por pessoa |
@@ -314,7 +314,7 @@ flowchart LR
 | `PESQUISADOR_TESTE_EMAIL` e `PESQUISADOR_TESTE_SENHA` | Só no desenvolvimento | Conta criada pelo seed. Não devem existir em produção |
 | `TRADUCAO_PSEUDO` | Só para conferência | Com `1`, marca os textos do catálogo com ⟦ ⟧ para achar o que não passa por `t()` |
 
-**Pendência conhecida: painel em PDF em produção.** A rota usa `chromium.launch()` do Playwright, que precisa de um Chromium instalado no servidor, e o build da Vercel não instala nenhum. A adaptação para a Vercel foi feita no commit `d9b4344`, da branch `chore/faxina-e-deploy`, mas não chegou à `main`. Até ela entrar, espera-se que o PDF funcione só localmente. Esse comportamento não foi testado em produção. As exportações em CSV não dependem de navegador.
+**Painel em PDF em produção.** A função da Vercel não tem navegador instalado. Na primeira chamada, a rota baixa um Chromium próprio para servidor (`@sparticuz/chromium-min` 153), que fica em `/tmp` enquanto a função estiver de pé, e abre a página de impressão pelo endereço público de produção. Por isso a primeira geração depois de um tempo parado demora mais, e o limite da função é de 60 s. No desenvolvimento, vale o Chromium do Playwright. As exportações em CSV não dependem de navegador.
 
 ## Estrutura de pastas
 
