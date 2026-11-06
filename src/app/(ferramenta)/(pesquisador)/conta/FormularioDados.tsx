@@ -11,6 +11,7 @@ import { salvarDados } from "./acoes";
 import estilos from "./conta.module.css";
 import { useT } from "@/traducao/cliente";
 import { m } from "@/traducao/nucleo";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 
 const CAMPOS = [
@@ -26,7 +27,7 @@ type Propriedades = {
 export function FormularioDados({ nome, email }: Propriedades) {
   const t = useT();
   const [status, setStatus] = useState({ mensagem: "", vez: 0 });
-  const { estado, aoEnviar, limpar } = useEnvioFormulario(salvarDados, (mensagem) =>
+  const { estado, enviando, aoEnviar, limpar } = useEnvioFormulario(salvarDados, (mensagem) =>
     setStatus((atual) => ({ mensagem, vez: atual.vez + 1 })),
   );
 
@@ -55,10 +56,14 @@ export function FormularioDados({ nome, email }: Propriedades) {
         erro={estado.erros?.email}
       />
       <div className={estilos.botoes}>
-        <button type="submit" className={`${formulario.botao} ${formulario.primario}`}>
-          <Save size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-          <span>{t("Salvar alterações")}</span>
-        </button>
+        <BotaoEnvio
+          enviando={enviando}
+          textoEnviando={t("Salvando…")}
+          icone={<Save size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
+          className={`${formulario.botao} ${formulario.primario}`}
+        >
+          {t("Salvar alterações")}
+        </BotaoEnvio>
         <button type="reset" className={`${formulario.botao} ${formulario.secundario}`}>
           <span>{t("Descartar alterações")}</span>
         </button>

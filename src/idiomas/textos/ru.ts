@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const ru: TextosParticipante = {
   pularConteudo: "Перейти к содержанию",
+  aguarde: "Подождите…",
   idioma: {
     rotulo: "Язык",
     aplicar: "Применить",

@@ -22,12 +22,12 @@ export type ContaAdmin = {
 // Só nome, e-mail e a quantidade de estudos de cada conta: o administrador não vê os estudos de ninguém
 export function ContasAdmin({ idAtual, contas }: { idAtual: string; contas: ContaAdmin[] }) {
   const t = useT();
-  const [status, setStatus] = useState({ mensagem: "", vez: 0 });
+  const [status, setStatus] = useState({ mensagem: "", erro: false, vez: 0 });
   const [ocupado, iniciar] = useTransition();
 
   return (
     <>
-      <MensagemStatus mensagem={status.mensagem} vez={status.vez} className={estilos.regiaoStatus} />
+      <MensagemStatus mensagem={status.mensagem} erro={status.erro} vez={status.vez} className={estilos.regiaoStatus} />
       <div className={tabela.rolagemTabela}>
         <table className={tabela.tabela}>
           <caption>{t("Da conta mais antiga para a mais nova")}</caption>
@@ -62,7 +62,7 @@ export function ContasAdmin({ idAtual, contas }: { idAtual: string; contas: Cont
                         onClick={() =>
                           iniciar(async () => {
                             const resultado = await alternarAdministrador(conta.id);
-                            setStatus((atual) => ({ mensagem: resultado.sucesso ?? resultado.erro ?? "", vez: atual.vez + 1 }));
+                            setStatus((atual) => ({ mensagem: resultado.erro ?? resultado.sucesso ?? "", erro: Boolean(resultado.erro), vez: atual.vez + 1 }));
                           })
                         }
                       >

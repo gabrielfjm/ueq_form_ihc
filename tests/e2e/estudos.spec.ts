@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Page } from "@playwright/test";
 import { verificarAcessibilidade } from "./acessibilidade";
 import { cadastrarComTeclado, emailDeTeste } from "./contas";
 import { TITULO_ESTUDO, criarEstudo } from "./preparacao";
@@ -95,7 +95,7 @@ test("editar salva as mudanças e avisa", async ({ page }) => {
   await expect(page.getByRole("heading", { level: 1, name: "Editar estudo" })).toBeVisible();
   await page.getByLabel("Título do estudo").fill("Checkout, segunda rodada");
   await page.getByRole("button", { name: "Salvar alterações" }).click();
-  await expect(page.getByRole("status")).toHaveText("Alterações salvas.");
+  await expect(page.getByRole("status")).toHaveText("Alterações salvas com sucesso.");
   await expect(page.getByRole("heading", { level: 1, name: "Checkout, segunda rodada" })).toBeVisible();
 });
 
@@ -112,7 +112,7 @@ test("excluir pede o título e apaga o estudo", async ({ page }) => {
 
   await page.getByLabel("Digite o título do estudo para confirmar").fill(TITULO);
   await page.getByRole("button", { name: "Excluir definitivamente" }).click();
-  await expect(page).toHaveURL(/\/estudos\?aviso=excluido$/);
+  await expect(page).toHaveURL(/\/estudos$/);
   await expect(page.getByRole("status")).toHaveText("Estudo excluído.");
   await expect(page.getByRole("heading", { name: "Você ainda não tem estudos." })).toBeVisible();
 });
@@ -127,4 +127,59 @@ test("outro pesquisador não vê o estudo pelo endereço", async ({ page, browse
   const resposta = await outraPagina.goto(endereco);
   expect(resposta?.status()).toBe(404);
   await outro.close();
+});
+
+// O servidor demora de propósito: é o que dá tempo de ver o botão ocupado e de tentar clicar de novo
+async function atrasarEnvios(page: Page) {
+  await page.route("**/*", async (rota) => {
+    if (rota.request().method() === "POST") await new Promise((resolve) => setTimeout(resolve, 1200));
+    await rota.continue();
+  });
+}
+
+test("enquanto cria o estudo o botão mostra que está processando, ignora novos cliques e no fim confirma", async ({ page }, info) => {
+  await page.goto("/estudos/novo");
+  const titulo = `Sem duplicar ${info.project.name} ${Date.now()}`;
+  await page.getByLabel("Título do estudo").fill(titulo);
+  await page.getByLabel("Produto avaliado").fill("Produto");
+  await page.getByLabel("Objetivo").fill("Objetivo do estudo");
+  await atrasarEnvios(page);
+
+  const criar = page.getByRole("main").getByRole("button", { name: "Criar estudo" });
+  await criar.click();
+  const ocupado = page.getByRole("button", { name: "Criando o estudo…" });
+  await expect(ocupado).toHaveAttribute("aria-busy", "true");
+  await expect(ocupado).toHaveAttribute("aria-disabled", "true");
+  // Tentativas de clicar de novo e o Enter num campo não enviam outra vez
+  await ocupado.click({ force: true });
+  await ocupado.click({ force: true });
+  await page.keyboard.press("Enter");
+
+  await expect(page).toHaveURL(/\/estudos\/[^/?]+$/, { timeout: 30_000 });
+  const confirmacao = page.getByRole("status").filter({ hasText: "Estudo criado com sucesso." });
+  await expect(confirmacao).toBeVisible();
+  await verificarAcessibilidade(page);
+
+  // Só um estudo foi criado
+  await page.goto("/estudos");
+  await expect(page.getByRole("link", { name: titulo })).toHaveCount(1);
+});
+
+test("a confirmação pode ser fechada e continua à vista depois de rolar a página", async ({ page }) => {
+  await page.goto("/estudos/novo");
+  await page.getByLabel("Título do estudo").fill("Confirmação à vista");
+  await page.getByLabel("Produto avaliado").fill("Produto");
+  await page.getByLabel("Objetivo").fill("Objetivo do estudo");
+  await page.getByRole("main").getByRole("button", { name: "Criar estudo" }).click();
+  const confirmacao = page.getByRole("status").getByText("Estudo criado com sucesso.");
+  await expect(confirmacao).toBeVisible();
+  await page.setViewportSize({ width: 800, height: 400 });
+  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+  await expect(confirmacao).toBeInViewport();
+  await page.getByRole("status").getByRole("button", { name: "Fechar" }).click();
+  await expect(confirmacao).toHaveCount(0);
+  // O aviso sai do endereço: recarregar não confirma de novo
+  await page.reload();
+  await expect(confirmacao).toHaveCount(0);
 });

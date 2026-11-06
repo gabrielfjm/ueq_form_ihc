@@ -41,7 +41,7 @@ export default async function PaginaQuestionario({ params }: Propriedades) {
           aqui também, e as marcações já feitas voltam do rascunho */}
       <header className={participante.faixa}>
         <div className={`${participante.faixaInterna} ${participante.faixaLarga}`}>
-          <SeletorIdioma slug={slug} idioma={idioma} textos={textos.idioma} voltar="questionario" />
+          <SeletorIdioma slug={slug} idioma={idioma} textos={textos.idioma} aguarde={textos.aguarde} voltar="questionario" />
           <div className={participante.nomeEstudo}>
             <p className={participante.etapaFaixa}>
               {formatar(textos.etapas.etapaDeTotal, { n: 2, total: estudo.coletarDemografia ? 3 : 2, nome: textos.etapas.nomes[1] })}
@@ -58,6 +58,7 @@ export default async function PaginaQuestionario({ params }: Propriedades) {
         tituloDocumento={`${textos.titulos.questionario} · ${doEstudo.titulo}`}
         itens={itens}
         textos={textos.questionario}
+        aguarde={textos.aguarde}
         lang={idioma.lang}
         direcao={idioma.direcao}
       >

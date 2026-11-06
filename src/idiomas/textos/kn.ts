@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const kn: TextosParticipante = {
   pularConteudo: "ಮುಖ್ಯ ವಿಷಯಕ್ಕೆ ಹೋಗಿ",
+  aguarde: "ದಯವಿಟ್ಟು ಕಾಯಿರಿ…",
   idioma: {
     rotulo: "ಭಾಷೆ",
     aplicar: "ಅನ್ವಯಿಸಿ",

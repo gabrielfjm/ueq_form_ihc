@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const ko: TextosParticipante = {
   pularConteudo: "본문으로 건너뛰기",
+  aguarde: "잠시만 기다려 주세요…",
   idioma: {
     rotulo: "언어",
     aplicar: "적용",

@@ -23,7 +23,7 @@ export async function criarEstudo(page: Page, titulo = TITULO_ESTUDO, { demograf
   if (idioma) await page.getByLabel("Idioma do questionário").selectOption(idioma);
   await page.getByRole("main").getByRole("button", { name: "Criar estudo" }).click();
   await expect(page.getByRole("status")).toHaveText(
-    "Estudo criado em rascunho. Confira os dados e abra a coleta quando estiver pronto.",
+    "Estudo criado com sucesso. Ele está em rascunho: confira os dados e abra a coleta quando estiver pronto.",
   );
 }
 

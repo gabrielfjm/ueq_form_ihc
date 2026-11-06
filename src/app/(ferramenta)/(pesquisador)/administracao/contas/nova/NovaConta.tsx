@@ -11,6 +11,7 @@ import { criarConta } from "../../acoes";
 import estilos from "../../administracao.module.css";
 import { useT } from "@/traducao/cliente";
 import { m } from "@/traducao/nucleo";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 
 const CAMPOS = [
@@ -22,7 +23,7 @@ const CAMPOS = [
 export function NovaConta() {
   const t = useT();
   const [status, setStatus] = useState({ mensagem: "", vez: 0 });
-  const { estado, aoEnviar } = useEnvioFormulario(criarConta, (mensagem, formularioConta) => {
+  const { estado, enviando, aoEnviar } = useEnvioFormulario(criarConta, (mensagem, formularioConta) => {
     setStatus((atual) => ({ mensagem, vez: atual.vez + 1 }));
     formularioConta.reset();
   });
@@ -42,10 +43,14 @@ export function NovaConta() {
         textoMostrar={t("Mostrar")}
         erro={estado.erros?.senha}
       />
-      <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.alinharInicio}`}>
-        <UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-        <span>{t("Criar conta")}</span>
-      </button>
+      <BotaoEnvio
+        enviando={enviando}
+        textoEnviando={t("Criando a conta…")}
+        icone={<UserPlus size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
+        className={`${formulario.botao} ${formulario.primario} ${estilos.alinharInicio}`}
+      >
+        {t("Criar conta")}
+      </BotaoEnvio>
     </form>
   );
 }

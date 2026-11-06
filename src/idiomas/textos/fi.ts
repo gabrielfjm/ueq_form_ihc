@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const fi: TextosParticipante = {
   pularConteudo: "Siirry sisältöön",
+  aguarde: "Odota…",
   idioma: {
     rotulo: "Kieli",
     aplicar: "Käytä",

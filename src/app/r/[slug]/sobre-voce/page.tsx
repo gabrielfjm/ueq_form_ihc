@@ -7,6 +7,7 @@ import { estudoPublico, textosDoEstudo, idiomaDoParticipante, participacaoAtual 
 import { salvarDemografia } from "../acoes";
 import participante from "../participante.module.css";
 import estilos from "./sobre-voce.module.css";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 type Propriedades = { params: Promise<{ slug: string }> };
 
@@ -67,12 +68,12 @@ export default async function PaginaSobreVoce({ params }: Propriedades) {
             );
           })}
           <div className={estilos.botoes}>
-            <button type="submit" name="acao" value="continuar" className={estilos.botao}>
+            <BotaoEnvio semIndicador textoEnviando={textos.aguarde} name="acao" value="continuar" className={estilos.botao}>
               {sobreVoce.continuar}
-            </button>
-            <button type="submit" name="acao" value="pular" className={estilos.botao}>
+            </BotaoEnvio>
+            <BotaoEnvio semIndicador textoEnviando={textos.aguarde} name="acao" value="pular" className={estilos.botao}>
               {sobreVoce.pular}
-            </button>
+            </BotaoEnvio>
           </div>
         </form>
       </main>

@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const nb: TextosParticipante = {
   pularConteudo: "Gå til innholdet",
+  aguarde: "Vent litt…",
   idioma: {
     rotulo: "Språk",
     aplicar: "Bruk",

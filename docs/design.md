@@ -112,6 +112,13 @@ Escala (rem): 0.8125 · 0.9375 · 1.0625 · 1.25 · 1.625 · 2.25. Corpo em 1.06
 - Ajuda da página (protótipo r30): botão redondo (?) no cabeçalho de cada página do pesquisador, com `aria-label`, que abre a janela média. Ela diz para que serve a página e o que dá para fazer nela, leva à Política de privacidade e oferece rever o tour
 - Compartilhar (protótipo r25): janela média com quem tem acesso e o convite por e-mail, escolhendo Editor ou Leitor
 
+## Ações em andamento e confirmações
+
+- Toda ação que vai ao servidor usa `BotaoEnvio` (protótipo r39). Enquanto ela roda, o botão diz o que está acontecendo ("Criando o estudo…"), com o indicador girando, fica com `aria-busy` e `aria-disabled` e ignora novos cliques, e o resto do formulário deixa de responder ao clique. Nada é enviado duas vezes
+- O indicador é a única animação contínua da ferramenta e para com `prefers-reduced-motion`. Nas telas do participante não há indicador nem ícone: só o texto "Aguarde…", no idioma da pessoa
+- Toda ação concluída confirma na tela (protótipo r40): quadro em `--destaque-fundo` com borda `--destaque`, em `role="status"`, de preferência dizendo o resultado ("Estudo criado com sucesso."). Ele acompanha a rolagem, logo abaixo da barra, e fica até a pessoa fechar. Erro de uma ação usa `--alerta-fundo`, borda `--alerta` e outro ícone, para não parecer confirmação
+- O aviso que veio pelo endereço (`?aviso=`) sai dele depois de mostrado: recarregar não confirma de novo
+
 ## Sino e tour
 
 - Sino (protótipo r26): fica entre Minha conta e Sair. As não lidas aparecem num contador `--alerta` com o número em texto. Abre os avisos mais recentes e leva à página Notificações (r27), onde os convites têm Aceitar e Recusar ali mesmo
@@ -130,7 +137,7 @@ Lucide (`lucide-react`), contorno de 1,5 px, 18 px, na cor do texto ao lado.
 - Ação destrutiva usa o ícone na cor `--alerta`, junto com o texto
 - **Nenhum ícone nas telas do participante dentro do questionário** (ihc.md, seção 3: qualquer elemento a mais pode influenciar a resposta)
 - Mapa usado nas telas: Estudos `folder`, Criar estudo `plus`, Minha conta `user`, Salvar alterações `save`, Trocar senha `lock`, Sair `log-out`, Entrar `log-in`, Criar conta `user-plus`, Visão geral `layout-dashboard`, Resultados `bar-chart-3`, Respostas `list`, Copiar link `copy`, Abrir coleta `play`, Encerrar coleta `square`, Reabrir `rotate-ccw`, Editar `pencil`, Excluir `trash-2`, Exportar `download`, Mostrar senha `eye`, Adicionar versão `plus`, Remover `x`, Tirar da análise `minus-circle`, mensagem de status `check-circle`, Documentação `book-open`, Ver no GitHub e Abrir em tamanho real `external-link`, Baixar `download`, Voltar `arrow-left`, Administração e Política de privacidade `shield-check`, Notificações `bell`, Ajuda `circle-help`, Rever o tour `compass`, Idioma `languages`. Abas da documentação: Visão geral `layout-dashboard`, Requisitos `list-checks`, Usuários `users`, Modelagem `shapes`, Arquitetura `layers`, Testes `flask-conical`, Especificação `file-text`
-- Movimento: só transição de 120ms em cor/borda. Respeitar `prefers-reduced-motion`
+- Movimento: só transição de 120ms em cor/borda e o indicador de ação em andamento. Respeitar `prefers-reduced-motion`
 
 ## Telas-chave
 

@@ -3,6 +3,7 @@ import type { TextosParticipante } from "../tipos";
 // Textos originais das telas (protótipo de alta fidelidade, p1 a p7)
 export const pt: TextosParticipante = {
   pularConteudo: "Pular para o conteúdo",
+  aguarde: "Aguarde…",
   idioma: {
     rotulo: "Idioma",
     aplicar: "Aplicar",

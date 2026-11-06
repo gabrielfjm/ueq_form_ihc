@@ -10,7 +10,7 @@ NVDA + Firefox no Windows, VoiceOver + Safari no iPhone (ou TalkBack + Chrome no
 - [ ] O progresso é anunciado sem interromper a cada clique
 - [ ] Ao enviar incompleto, o leitor anuncia o resumo de erros e dá para ir até o item faltando
 - [ ] No painel, o gráfico é anunciado com a descrição e a tabela é navegável por célula com cabeçalho lido
-- [ ] Mensagens de sucesso ("Coleta aberta") são anunciadas
+- [ ] Mensagens de sucesso ("Coleta aberta") são anunciadas, e o texto "Criando o estudo…" do botão também
 - [ ] As janelas (Entrar, Criar conta, Sair, excluir, Compartilhar, ajuda) anunciam o título ao abrir, prendem o foco e devolvem o foco a quem abriu
 - [ ] O número de avisos do sino é anunciado, e dá para aceitar um convite só ouvindo
 - [ ] O tour guiado se entende só ouvindo, e dá para pular

@@ -12,6 +12,7 @@ import { trocarSenha } from "./acoes";
 import estilos from "./conta.module.css";
 import { useT } from "@/traducao/cliente";
 import { m } from "@/traducao/nucleo";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 const CAMPOS = [
   { nome: "senhaAtual", rotulo: m("Senha atual"), id: "senha-atual" },
@@ -21,7 +22,7 @@ const CAMPOS = [
 export function FormularioSenha({ email }: { email: string }) {
   const t = useT();
   const [status, setStatus] = useState({ mensagem: "", vez: 0 });
-  const { estado, aoEnviar } = useEnvioFormulario(trocarSenha, (mensagem, form) => {
+  const { estado, enviando, aoEnviar } = useEnvioFormulario(trocarSenha, (mensagem, form) => {
     form.reset();
     setStatus((atual) => ({ mensagem, vez: atual.vez + 1 }));
   });
@@ -50,10 +51,14 @@ export function FormularioSenha({ email }: { email: string }) {
         erro={estado.erros?.senhaNova}
       />
       <p className={formulario.ajuda}>{t("Depois de trocar, as outras sessões abertas com a senha antiga são encerradas.")}</p>
-      <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.alinharInicio}`}>
-        <Lock size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-        <span>{t("Trocar senha")}</span>
-      </button>
+      <BotaoEnvio
+        enviando={enviando}
+        textoEnviando={t("Trocando a senha…")}
+        icone={<Lock size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
+        className={`${formulario.botao} ${formulario.primario} ${estilos.alinharInicio}`}
+      >
+        {t("Trocar senha")}
+      </BotaoEnvio>
     </form>
   );
 }

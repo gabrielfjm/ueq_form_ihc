@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { verificarAcessibilidade } from "./acessibilidade";
-import { abrirMenuComTeclado, cadastrarComTeclado, emailDeTeste, entrarComTeclado, janelaDeAcesso, tabAte } from "./contas";
+import { abrirMenu, abrirMenuComTeclado, cadastrarComTeclado, emailDeTeste, entrarComTeclado, janelaDeAcesso, pularTutorial, SENHA, tabAte } from "./contas";
 
 test("cadastra, sai e entra de novo usando só o teclado", async ({ page }, info) => {
   const email = emailDeTeste(info);
@@ -14,7 +14,7 @@ test("cadastra, sai e entra de novo usando só o teclado", async ({ page }, info
   const confirmacao = page.getByRole("alertdialog", { name: "Sair da conta?" });
   await expect(confirmacao.getByRole("button", { name: "Sair" })).toBeFocused();
   await page.keyboard.press("Enter");
-  await expect(page).toHaveURL(/\/\?aviso=saiu$/);
+  await expect(page).toHaveURL(/:\d+\/$/);
   await expect(page.getByRole("status")).toHaveText("Você saiu da sua conta.");
 
   // A página inicial abre a janela de Entrar pela barra
@@ -95,3 +95,25 @@ test("Mostrar senha alterna a visibilidade e anuncia o estado", async ({ page })
   await expect(mostrar).toHaveAttribute("aria-pressed", "true");
 });
 
+test("criar a conta e entrar confirmam na tela", async ({ page }, info) => {
+  const email = `confirma-${emailDeTeste(info)}`;
+  await page.goto("/cadastrar");
+  await page.getByLabel("Nome").fill("Pessoa da confirmação");
+  await page.getByLabel("E-mail").fill(email);
+  await page.getByLabel("Senha", { exact: true }).fill(SENHA);
+  await page.getByRole("dialog").getByRole("button", { name: "Criar conta" }).click();
+  await pularTutorial(page);
+  await expect(page.getByRole("status").getByText("Conta criada com sucesso.")).toBeVisible();
+
+  await abrirMenu(page);
+  await page.getByRole("button", { name: "Sair" }).click();
+  await page.getByRole("alertdialog").getByRole("button", { name: "Sair" }).click();
+  await expect(page.getByRole("status").getByText("Você saiu da sua conta.")).toBeVisible();
+
+  await page.goto("/entrar");
+  await page.getByLabel("E-mail").fill(email);
+  await page.getByLabel("Senha", { exact: true }).fill(SENHA);
+  await page.getByRole("dialog").getByRole("button", { name: "Entrar" }).click();
+  await expect(page.getByRole("status").getByText("Você entrou na sua conta.")).toBeVisible();
+  await expect(page).toHaveURL(/:\d+\/$/);
+});

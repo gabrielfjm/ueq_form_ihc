@@ -2,6 +2,7 @@ import type { TextosParticipante } from "../tipos";
 
 export const ja: TextosParticipante = {
   pularConteudo: "本文へスキップ",
+  aguarde: "お待ちください…",
   idioma: {
     rotulo: "言語",
     aplicar: "適用",

@@ -12,6 +12,7 @@ import { responderConvite } from "./acoes";
 import estilos from "./notificacoes.module.css";
 import { tradutor } from "@/traducao/servidor";
 import { m } from "@/traducao/nucleo";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 export async function generateMetadata(): Promise<Metadata> {
   const t = await tradutor();
@@ -91,16 +92,23 @@ export default async function PaginaNotificacoes({ searchParams }: Propriedades)
                   </div>
                   <div className={estilos.acoes}>
                     <form action={responderConvite.bind(null, convite.id, true)}>
-                      <button type="submit" className={`${formulario.botao} ${formulario.primario}`} data-tutorial="aceitar-convite">
-                        <Check size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-                        <span>{t("Aceitar")}</span>
-                      </button>
+                      <BotaoEnvio
+                        textoEnviando={t("Aguarde…")}
+                        icone={<Check size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
+                        className={`${formulario.botao} ${formulario.primario}`}
+                        data-tutorial="aceitar-convite"
+                      >
+                        {t("Aceitar")}
+                      </BotaoEnvio>
                     </form>
                     <form action={responderConvite.bind(null, convite.id, false)}>
-                      <button type="submit" className={`${formulario.botao} ${formulario.secundario}`}>
-                        <X size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-                        <span>{t("Recusar")}</span>
-                      </button>
+                      <BotaoEnvio
+                        textoEnviando={t("Aguarde…")}
+                        icone={<X size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />}
+                        className={`${formulario.botao} ${formulario.secundario}`}
+                      >
+                        {t("Recusar")}
+                      </BotaoEnvio>
                     </form>
                   </div>
                 </li>

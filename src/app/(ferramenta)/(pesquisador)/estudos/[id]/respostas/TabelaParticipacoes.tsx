@@ -10,6 +10,7 @@ import formulario from "@/componentes/formulario/formulario.module.css";
 import { alterarInclusao, tirarSuspeitasDaAnalise } from "./acoes";
 import estilos from "./respostas.module.css";
 import { useT } from "@/traducao/cliente";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 export type LinhaParticipacao = {
   id: string;
@@ -43,7 +44,7 @@ export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limi
   const router = useRouter();
   const caminho = usePathname();
   const [aberta, setAberta] = useState<string | null>(null);
-  const [, iniciar] = useTransition();
+  const [ocupado, iniciar] = useTransition();
   const [filtrando, filtrarOtimista] = useOptimistic(soSuspeitas);
   // A caixa muda na hora; o servidor confirma e a página recarrega com o valor gravado
   const [linhasVisiveis, marcarOtimista] = useOptimistic(linhas, (atuais, mudanca: { id: string; incluida: boolean }) =>
@@ -54,14 +55,14 @@ export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limi
     iniciar(async () => {
       marcarOtimista({ id: linha.id, incluida });
       const resultado = await alterarInclusao(estudoId, linha.id, incluida);
-      anunciar(resultado.sucesso ?? resultado.erro ?? "");
+      anunciar(resultado.erro ?? resultado.sucesso ?? "", Boolean(resultado.erro));
     });
   }
 
   function tirarSuspeitas() {
     iniciar(async () => {
       const resultado = await tirarSuspeitasDaAnalise(estudoId);
-      anunciar(resultado.sucesso ?? resultado.erro ?? "");
+      anunciar(resultado.erro ?? resultado.sucesso ?? "", Boolean(resultado.erro));
     });
   }
 
@@ -89,10 +90,16 @@ export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limi
             {t("Mostrar só suspeitas")}
           </label>
           {!somenteLeitura && (
-            <button type="button" className={`${formulario.botao} ${formulario.secundario}`} onClick={tirarSuspeitas}>
-              <CircleMinus size={18} strokeWidth={1.5} aria-hidden="true" />
-              <span>{t("Tirar suspeitas da análise")}</span>
-            </button>
+            <BotaoEnvio
+              type="button"
+              enviando={ocupado}
+              textoEnviando={t("Aguarde…")}
+              icone={<CircleMinus size={18} strokeWidth={1.5} aria-hidden="true" />}
+              className={`${formulario.botao} ${formulario.secundario}`}
+              onClick={tirarSuspeitas}
+            >
+              {t("Tirar suspeitas da análise")}
+            </BotaoEnvio>
           )}
         </div>
       </div>

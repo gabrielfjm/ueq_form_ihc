@@ -11,6 +11,8 @@ type T3 = [string, string, string];
 
 export type TextosParticipante = {
   pularConteudo: string;
+  // O que o botão diz enquanto o envio roda
+  aguarde: string;
   idioma: {
     rotulo: string;
     aplicar: string;

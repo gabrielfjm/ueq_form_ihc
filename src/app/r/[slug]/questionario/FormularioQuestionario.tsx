@@ -10,6 +10,7 @@ import { desistir, enviarRespostas, type ResultadoEnvio } from "../acoes";
 import estilos from "./questionario.module.css";
 import { RodapeProgresso } from "./RodapeProgresso";
 import { useRascunho } from "./useRascunho";
+import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
 type Item = { numero: number; termoEsquerdo: string; termoDireito: string };
 
@@ -19,6 +20,7 @@ type Propriedades = {
   tituloDocumento: string;
   itens: Item[];
   textos: TextosParticipante["questionario"];
+  aguarde: string;
   lang: string;
   direcao: "ltr" | "rtl";
   children: React.ReactNode;
@@ -30,6 +32,7 @@ export function FormularioQuestionario({
   tituloDocumento,
   itens,
   textos,
+  aguarde,
   lang,
   direcao,
   children,
@@ -148,9 +151,14 @@ export function FormularioQuestionario({
               />
             ))}
           </div>
-          <button type="submit" className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}>
+          <BotaoEnvio
+            semIndicador
+            enviando={enviando}
+            textoEnviando={aguarde}
+            className={`${formulario.botao} ${formulario.primario} ${estilos.enviar}`}
+          >
             {textos.enviar}
-          </button>
+          </BotaoEnvio>
         </form>
         <p aria-live="polite" className="visualmente-oculto">
           {anuncio}
