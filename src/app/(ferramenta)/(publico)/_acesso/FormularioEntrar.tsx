@@ -9,6 +9,7 @@ import { ResumoErros } from "@/componentes/formulario/ResumoErros";
 import { estadoInicial } from "@/lib/formulario";
 import { entrar, type CampoEntrar } from "./acoes";
 import estilos from "./acesso.module.css";
+import { LinkPrivacidade } from "./LinkPrivacidade";
 import { useT } from "@/traducao/cliente";
 import { m } from "@/traducao/nucleo";
 
@@ -62,8 +63,11 @@ export function FormularioEntrar({ idTitulo, voltar }: { idTitulo: string; volta
         <span>{t("Entrar")}</span>
       </button>
       {/* A janela troca para Criar conta sem fechar (JanelaAcesso); aberto em outra aba, o link abre a janela lá */}
-      <p className={estilos.alternativa}>
-        {t("Ainda não tem conta?")}{" "}<Link href="/cadastrar">{t("Criar conta")}</Link>
+      <p className={`${estilos.alternativa} ${estilos.alternativaCadastro}`}>
+        <span>
+          {t("Ainda não tem conta?")}{" "}<Link href="/cadastrar">{t("Criar conta")}</Link>
+        </span>
+        <LinkPrivacidade />
       </p>
     </form>
   );

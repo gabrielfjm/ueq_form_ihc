@@ -1,3 +1,6 @@
+/* Política de privacidade: faixa com o resumo ao lado e, abaixo, conteúdo mais ficha lateral (docs/design.md,
+   Layout). As seções são numeradas como na página inicial e as linhas têm a régua do termo de consentimento */
+
 .faixa {
   background: var(--fundo-faixa);
   border-bottom: 1px solid var(--linha);
@@ -6,17 +9,48 @@
 .faixaInterna {
   max-width: var(--largura-painel);
   margin: 0 auto;
-  padding: 48px 24px 40px;
+  padding: 32px 24px 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  align-items: start;
+  gap: 32px 64px;
+}
+
+.apresentacao {
+  min-width: 0;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
+}
+
+.voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-size: var(--texto-sm);
+}
+
+.apresentacao .voltar {
+  margin-bottom: 16px;
+}
+
+.aviso {
+  margin: 0 0 8px;
+  padding: 12px 16px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--linha);
+  border-left: 3px solid var(--destaque);
+  border-radius: var(--raio);
+  font-size: var(--texto-sm);
 }
 
 .area {
   margin: 0;
   font-size: var(--texto-sm);
   font-weight: 700;
-  color: var(--tinta-fraca);
+  color: var(--destaque);
 }
 
 .titulo {
@@ -27,48 +61,243 @@
 
 .descricao {
   margin: 0;
-  max-width: var(--largura-leitura);
+  max-width: 52ch;
+  font-size: var(--texto-lg);
   color: var(--tinta-suave);
 }
 
-.conteudo {
-  max-width: var(--largura-painel);
-  margin: 0 auto;
-  padding: 16px 24px 64px;
+.atualizada {
+  margin: 0;
+  font-size: var(--texto-sm);
+  color: var(--tinta-fraca);
 }
 
-.conteudo section {
-  max-width: var(--largura-leitura);
-  padding: 28px 0 0;
+.resumo {
+  min-width: 0;
+  padding: 20px 24px 8px;
+  background: var(--fundo);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
 }
 
-.conteudo h2 {
-  margin: 0 0 12px;
-  font-size: 1.625rem;
+.marcacoes {
+  display: block;
+  width: 100%;
+  max-width: 224px;
+  margin-bottom: 16px;
 }
 
-.conteudo p,
-.conteudo ul {
+.marcacoes line {
+  stroke: var(--linha);
+}
+
+.marcacoes .vazia {
+  fill: var(--fundo);
+  stroke: var(--tinta);
+  stroke-width: 1.5;
+}
+
+.marcacoes .marcada {
+  fill: var(--destaque);
+  stroke: var(--destaque);
+  stroke-width: 1.5;
+}
+
+.resumoTitulo {
+  margin: 0 0 8px;
+  font-size: var(--texto-lg);
+  line-height: 1.2;
+}
+
+.resumoLista {
   margin: 0;
 }
 
-.conteudo ul {
-  padding-left: 22px;
+.resumoLista > div {
+  padding: 12px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.resumoLista dt {
+  font-size: var(--texto-sm);
+  font-weight: 700;
+}
+
+.resumoLista dd {
+  margin: 0;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+.colunas {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 48px 24px 64px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  align-items: start;
+  gap: 40px 64px;
+}
+
+/* Primeira no código, para o índice vir antes do texto no teclado e no celular; à direita no computador */
+.ficha {
+  grid-column: 2;
+  grid-row: 1;
+  position: sticky;
+  top: calc(var(--altura-barra, 64px) + 24px);
   display: flex;
   flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background: var(--fundo-painel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+}
+
+.fichaTitulo {
+  margin: 0 0 8px;
+  font-size: var(--texto-md);
+  line-height: 1.3;
+}
+
+.indice {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--texto-sm);
+}
+
+.indice li {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 4px;
+  padding: 8px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.fichaAcoes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid var(--linha);
+  font-size: var(--texto-sm);
+}
+
+.fichaAcoes .fichaTitulo {
+  margin-bottom: 0;
+}
+
+.numero {
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.conteudo {
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.secao {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.secaoTitulo {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+}
+
+.secaoTitulo h2 {
+  margin: 0;
+  font-size: var(--texto-xl);
+  line-height: 1.2;
+}
+
+.linhas {
+  margin: 0;
+}
+
+.linhas > div {
+  display: grid;
+  grid-template-columns: 184px minmax(0, 1fr);
+  gap: 4px 24px;
+  padding: 14px 0;
+  border-top: 1px solid var(--linha);
+}
+
+.linhas > div:last-child {
+  border-bottom: 1px solid var(--linha);
+}
+
+.linhas dt {
+  font-weight: 700;
+}
+
+.linhas dd {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
+.fim {
+  display: flex;
+}
+
+@media (max-width: 56rem) {
+  .faixaInterna,
+  .colunas {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ficha,
+  .conteudo {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .ficha {
+    position: static;
+  }
 }
 
 @media (max-width: 40rem) {
   .faixaInterna {
-    padding: 32px 16px 28px;
+    padding: 16px 16px 32px;
   }
 
   .titulo {
     font-size: 2rem;
   }
 
-  .conteudo {
-    padding: 8px 16px 48px;
+  .colunas {
+    padding: 32px 16px 48px;
+  }
+
+  .ficha {
+    padding: 16px;
+  }
+
+  .linhas > div {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (forced-colors: active) {
+  .marcacoes .marcada {
+    fill: Highlight;
+    stroke: Highlight;
+  }
+
+  .marcacoes .vazia {
+    stroke: CanvasText;
   }
 }

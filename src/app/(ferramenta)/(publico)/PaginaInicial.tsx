@@ -20,6 +20,7 @@ import { REPOSITORIO } from "@/lib/documentacao/catalogo";
 import { BotaoAcesso } from "./_acesso/Acesso";
 import { AUTORES_DO_UEQ, ESCALAS_DO_UEQ, ESTUDOS_DO_UEQ, FAIXAS_DO_BENCHMARK, PASSOS } from "./conteudo";
 import estilos from "./inicio.module.css";
+import { enderecoDaPrivacidade } from "./privacidade/origem";
 import { tradutor } from "@/traducao/servidor";
 import { m } from "@/traducao/nucleo";
 
@@ -353,11 +354,12 @@ export async function PaginaInicial({ logado, aviso }: Propriedades) {
         </section>
       </div>
 
-      <footer className={estilos.rodape}>
+      {/* O Voltar da política traz a pessoa de volta a este rodapé, não ao topo de uma página longa */}
+      <footer id="rodape" className={estilos.rodape}>
         <div className={estilos.rodapeInterno}>
           <p>{t("Fundamentos da IHC · PPGIa · PUCPR · 2026")}</p>
           <p>
-            {t("UEQ © Laugwitz, Held e Schrepp ·")}{" "}<Link href="/privacidade">{t("Política de privacidade")}</Link>
+            {t("UEQ © Laugwitz, Held e Schrepp ·")}{" "}<Link href={enderecoDaPrivacidade("/#rodape")}>{t("Política de privacidade")}</Link>
           </p>
         </div>
       </footer>

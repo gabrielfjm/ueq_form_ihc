@@ -31,7 +31,9 @@ export const senhaNova = z
 export const senhaDigitada = (mensagemVazia: string) => z.string().min(1, mensagemVazia);
 
 // Só aceita caminho interno ("/conta"), para o ?voltar= não virar redirecionamento para outro site.
+// Tabulação e quebra de linha ficam de fora porque o navegador as apaga da URL: "/\t/site.com" viraria "//site.com".
 // Sem destino, o login termina na página inicial, que explica o UEQ e leva aos estudos
 export function destinoInterno(valor: string): string {
-  return valor.startsWith("/") && !valor.startsWith("//") && !valor.startsWith("/\\") ? valor : "/";
+  const interno = valor.startsWith("/") && !valor.startsWith("//") && !valor.startsWith("/\\") && !/[\t\r\n]/.test(valor);
+  return interno ? valor : "/";
 }

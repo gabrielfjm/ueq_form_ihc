@@ -1,6 +1,7 @@
 import { Download, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import formulario from "@/componentes/formulario/formulario.module.css";
+import { enderecoDaPrivacidade } from "../../(publico)/privacidade/origem";
 import estilos from "./conta.module.css";
 import { tradutor } from "@/traducao/servidor";
 
@@ -49,7 +50,7 @@ export async function FichaConta({ estudos, detalheEstudos, respostas, criadaEm 
               <Download size={18} strokeWidth={1.5} aria-hidden="true" />
               <span>{t("Baixar meus dados")}</span>
             </a>
-            <Link href="/privacidade" className={formulario.linkAcao}>
+            <Link href={enderecoDaPrivacidade("/conta")} className={formulario.linkAcao}>
               <ShieldCheck size={18} strokeWidth={1.5} aria-hidden="true" />
               <span>{t("Política de privacidade")}</span>
             </Link>
