@@ -6,7 +6,9 @@ import { infoIdioma, type CodigoIdioma } from "@/idiomas";
 
 // Tradução automática pela API do Claude. Só funciona com ANTHROPIC_API_KEY no ambiente; sem ela, quem
 // chama recebe null e a tela continua no idioma de origem
-export const MODELO_TRADUCAO = "claude-opus-5-5";
+// O modelo mais barato: traduzir a interface inteira para os 36 idiomas custa cerca de US$ 0,75 nele, contra
+// cerca de US$ 29 no Opus. O questionário não passa por aqui: os 26 pares usam sempre a tradução oficial
+export const MODELO_TRADUCAO = "claude-haiku-5-5";
 
 export function traducaoAutomaticaLigada(): boolean {
   return Boolean(process.env.ANTHROPIC_API_KEY);
@@ -59,8 +61,8 @@ export async function traduzirLote(
   const resposta = await clienteDaApi().beta.messages.parse({
     model: MODELO_TRADUCAO,
     max_tokens: 16000,
-    betas: ["server-side-fallback-2026-07-01"],
-    fallbacks: "default",
+    // Traduzir frases curtas não precisa de raciocínio, que é cobrado como saída
+    thinking: { type: "disabled" },
     output_config: { effort: "low", format: betaZodOutputFormat(Resposta) },
     system: INSTRUCOES[tipo],
     messages: [
