@@ -1,6 +1,6 @@
 # Casos e cenários de teste
 
-Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **171 casos de teste**: 83 de ponta a ponta, 63 de unidade e 25 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
+Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **177 casos de teste**: 87 de ponta a ponta, 65 de unidade e 25 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
 
 A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). A ligação de cada cenário e de cada caso com os requisitos entra quando a lista de requisitos estiver pronta.
 
@@ -8,12 +8,13 @@ A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). A ligação de 
 
 | Nível | Ferramenta | Casos | Execuções | Passaram | Pulados | Falharam |
 |---|---|---|---|---|---|---|
-| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 83 | 166 | 160 | 5 | 1 |
-| Unidade | Vitest 5 | 63 | 282 | 274 | 8 | 0 |
+| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 87 | 174 | 170 | 3 | 1 |
+| Unidade | Vitest 5 | 65 | 290 | 282 | 8 | 0 |
 | Manual | Pessoas da equipe | 25 | — | — | — | — |
 
-- **Ponta a ponta:** cada caso roda duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7). As execuções puladas são de propósito: [CT-E49](casos-de-teste.md#ct-e49) e [CT-E57](casos-de-teste.md#ct-e57) só rodam quando os documentos que eles usam forem publicados, e [CT-E67](casos-de-teste.md#ct-e67) roda só no desktop.
+- **Ponta a ponta:** cada caso roda duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7). As execuções puladas são de propósito: [CT-E49](casos-de-teste.md#ct-e49) só roda quando os documentos que ele usa forem publicados, e [CT-E67](casos-de-teste.md#ct-e67) roda só no desktop.
 - **Unidade:** alguns casos são parametrizados (um por idioma, um por par de cores), por isso há mais execuções que casos. As 8 puladas esperam dados que só a equipe pode copiar das fontes oficiais ([CT-U29](#ct-u29) e [CT-U53](#ct-u53)).
+- **Rodadas:** os arquivos `documentacao.spec.ts` e `barra.spec.ts` foram repetidos depois da divisão da documentação em páginas; os outros resultados são da rodada completa anterior, no mesmo dia.
 - **Falha da rodada:** [CT-E63](casos-de-teste.md#ct-e63), no celular, estourou os 60 s com a suíte inteira em paralelo. Repetido sozinho, passou 4 de 4, em cerca de 12 s cada. É instabilidade sob carga, não regressão, mas conta como falha na tabela.
 - **Manual:** a checklist de [docs/checklist-manual.md](../checklist-manual.md) e as conferências que dependem de pessoas ainda estão por fazer.
 - **Ambiente:** servidor de desenvolvimento e PostgreSQL local. A execução não exercita a produção na Vercel, a API do Claude nem o envio de e-mail.
@@ -74,7 +75,7 @@ pnpm exec playwright show-report   # relatório com as capturas de daltonismo do
 | <a id="cn14"></a>CN14 | **Cores e contraste** | Garantir o contraste de todos os pares de cor do tema | a definir | [CT-U51](casos-de-teste.md#ct-u51), [CT-U52](casos-de-teste.md#ct-u52) | Passou |
 | <a id="cn15"></a>CN15 | **Validação contra a planilha oficial** | Comparar cada número da ferramenta com a UEQ Data Analysis Tool, com tolerância de 1e-6 | a definir | [CT-U29](casos-de-teste.md#ct-u29), [CT-M15](casos-de-teste.md#ct-m15) | Pendente |
 | <a id="cn16"></a>CN16 | **UEQ-S** | Conferir os 8 itens e o benchmark do UEQ-S quando a equipe preencher os dados | a definir | [CT-U53](casos-de-teste.md#ct-u53) | Pendente |
-| <a id="cn18"></a>CN18 | **Documentação na ferramenta** | Navegar pelas seções e documentos com e sem conta, seguir links e âncoras, ver os diagramas e baixar os arquivos, sem violações de acessibilidade | a definir | [CT-U54](casos-de-teste.md#ct-u54), [CT-U55](casos-de-teste.md#ct-u55), [CT-U56](casos-de-teste.md#ct-u56), [CT-U57](casos-de-teste.md#ct-u57), [CT-E47](casos-de-teste.md#ct-e47), [CT-E48](casos-de-teste.md#ct-e48), [CT-E49](casos-de-teste.md#ct-e49), [CT-E50](casos-de-teste.md#ct-e50), [CT-E51](casos-de-teste.md#ct-e51), [CT-E57](casos-de-teste.md#ct-e57), [CT-E62](casos-de-teste.md#ct-e62) | Passou, com casos pulados até os documentos serem publicados |
+| <a id="cn18"></a>CN18 | **Documentação na ferramenta** | Navegar pelas seções e documentos com e sem conta, seguir links e âncoras, ver os diagramas e baixar os arquivos, sem violações de acessibilidade | a definir | [CT-U54](casos-de-teste.md#ct-u54), [CT-U55](casos-de-teste.md#ct-u55), [CT-U56](casos-de-teste.md#ct-u56), [CT-U57](casos-de-teste.md#ct-u57), [CT-E47](casos-de-teste.md#ct-e47), [CT-E48](casos-de-teste.md#ct-e48), [CT-E49](casos-de-teste.md#ct-e49), [CT-E50](casos-de-teste.md#ct-e50), [CT-E51](casos-de-teste.md#ct-e51), [CT-E57](casos-de-teste.md#ct-e57), [CT-E62](casos-de-teste.md#ct-e62), [CT-E84](casos-de-teste.md#ct-e84), [CT-E85](casos-de-teste.md#ct-e85), [CT-E86](casos-de-teste.md#ct-e86), [CT-E87](casos-de-teste.md#ct-e87), [CT-U64](casos-de-teste.md#ct-u64), [CT-U65](casos-de-teste.md#ct-u65) | Passou, com casos pulados até os documentos serem publicados |
 | <a id="cn19"></a>CN19 | **Navegação e barra fixa** | Manter a barra superior à vista durante a rolagem, sem esconder o foco nem as âncoras, com menu no celular | a definir | [CT-E53](casos-de-teste.md#ct-e53), [CT-E54](casos-de-teste.md#ct-e54), [CT-E55](casos-de-teste.md#ct-e55), [CT-E56](casos-de-teste.md#ct-e56) | Passou |
 | <a id="cn20"></a>CN20 | **Página inicial e janelas** | Apresentar a ferramenta a quem não tem conta, abrir Entrar e Criar conta numa janela sem rolar, fechar devolvendo o foco e entregar o ícone do site | a definir | [CT-E58](casos-de-teste.md#ct-e58), [CT-E59](casos-de-teste.md#ct-e59), [CT-E60](casos-de-teste.md#ct-e60), [CT-E61](casos-de-teste.md#ct-e61), [CT-E69](casos-de-teste.md#ct-e69), [CT-E70](casos-de-teste.md#ct-e70) | Passou |
 | <a id="cn21"></a>CN21 | **Equipe e notificações** | Convidar por e-mail, aceitar no sino, limitar o que o leitor faz e avisar a equipe | a definir | [CT-U59](casos-de-teste.md#ct-u59), [CT-E63](casos-de-teste.md#ct-e63), [CT-E64](casos-de-teste.md#ct-e64) | Passou |
@@ -1204,7 +1205,7 @@ Resultado esperado: O botão Menu não aparece e o botão Entrar está visível 
 | Teste | `tests/e2e/documentacao.spec.ts` › "clicar no diagrama abre em tela cheia, com zoom, arrasto, Voltar e Esc" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Pulado (celular e desktop), até o documento ser publicado |
+| Resultado em 06/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1727,6 +1728,87 @@ Passos:
 
 Resultado esperado: Aparece "This policy has not been translated into your language yet". O main tem lang=pt-BR, e o link é "Back". Zero violações.
 
+### CT-E84
+
+**Documento longo abre como índice, e cada seção abre em página própria, com o diagrama à vista.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN18 · Documentação na ferramenta](#cn18) |
+| Teste | `tests/e2e/documentacao.spec.ts` › "documento longo abre como índice, e cada seção em página própria com o diagrama à vista" |
+| Pré-condições | Navegador sem cookie de sessão. |
+| Requisitos | a definir |
+| Resultado em 06/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir /documentacao/diagramas-de-sequencia e rodar o axe.
+2. Clicar em 7. Convidar alguém para o estudo e rodar o axe.
+3. Clicar em Próxima.
+4. Clicar em Anterior.
+
+Resultado esperado: O índice "Neste documento" tem 8 itens, sem nenhum diagrama na abertura. A seção tem endereço próprio, título de página com o documento, h1, "7 de 8" e o diagrama carregado e à vista sem rolar. Na última seção não há Próxima. Zero violações.
+
+### CT-E85
+
+**Voltar leva à página de onde a pessoa veio e, sem histórico, à página de cima.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN18 · Documentação na ferramenta](#cn18) |
+| Teste | `tests/e2e/documentacao.spec.ts` › "Voltar leva à página de onde a pessoa veio e, sem histórico, à página de cima" |
+| Pré-condições | Navegador sem cookie de sessão. |
+| Requisitos | a definir |
+| Resultado em 06/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Numa seção de Diagramas de sequência, seguir o link para Arquitetura.
+2. Clicar em Voltar.
+3. Em outra aba, abrir direto o diagrama do modelo lógico.
+4. Clicar em Voltar.
+
+Resultado esperado: O link leva a /documentacao/arquitetura/implantacao. O primeiro Voltar retorna à seção de origem, em outro documento. Sem histórico, Voltar leva à abertura do documento.
+
+### CT-E86
+
+**Seção com muitas subseções vira índice, e os links de tabela e os endereços antigos acham a página certa.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN18 · Documentação na ferramenta](#cn18) |
+| Teste | `tests/e2e/documentacao.spec.ts` › "seção com muitas subseções vira índice, e o link de uma tabela leva à página da linha" |
+| Pré-condições | Navegador sem cookie de sessão. |
+| Requisitos | a definir |
+| Resultado em 06/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir Casos de ponta a ponta e clicar em CT-E02.
+2. Em Cenários, clicar em CT-E01.
+3. Abrir /documentacao/casos-de-teste#ct-e03 e #ct-u01.
+4. Abrir uma seção que não existe e uma de documento não publicado.
+
+Resultado esperado: Cada caso tem página própria, sem violações. O fragmento antigo redireciona para a página nova, e #ct-u01 fica à vista na tabela do cenário. Seção inexistente e documento não publicado dão 404.
+
+### CT-E87
+
+**Documento curto continua inteiro, sem cliques a mais.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN18 · Documentação na ferramenta](#cn18) |
+| Teste | `tests/e2e/documentacao.spec.ts` › "documento curto continua inteiro, com o índice da página na ficha" |
+| Pré-condições | Navegador sem cookie de sessão. |
+| Requisitos | a definir |
+| Resultado em 06/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir /documentacao/checklist-manual.
+
+Resultado esperado: As seções aparecem na mesma página, sem o índice "Neste documento", e a ficha lista as âncoras.
+
 ## Casos de unidade
 
 Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções conta os testes reais: um caso parametrizado roda uma vez por idioma ou por par de cores.
@@ -1842,6 +1924,8 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 | <a id="ct-u55"></a>CT-U55 | `documentacao.test.ts` | `diagramas` | Cada diagrama Mermaid dos documentos tem o SVG gerado e o arquivo-fonte igual ao do documento, e não sobra SVG sem uso | 3 | a definir | Passou (3 de 3) |
 | <a id="ct-u56"></a>CT-U56 | `documentacao.test.ts` | `destinoDoLink` | Link para outro documento abre na aba Documentação com a âncora; arquivo para baixar sai pela rota de download; o resto do repositório abre no GitHub; nenhum link relativo dos documentos aponta para arquivo que não existe | 4 | a definir | Passou (4 de 4) |
 | <a id="ct-u57"></a>CT-U57 | `documentacao.test.ts` | `renderizarMarkdown` | Título separado, âncoras iguais às do GitHub (inclusive repetidas), tabela numa região rolável com nome, links reescritos e diagrama como botão de ampliar com imagem de texto alternativo e o código à vista | 3 | a definir | Passou (3 de 3) |
+| <a id="ct-u64"></a>CT-U64 | `documentacao.test.ts` | `dividirDocumento` | Separa a abertura das seções sem confundir código com título; usa endereço sem acento; divide só a seção com 3 subseções ou mais; acha a página de cada âncora, inclusive de uma linha de tabela; resume pelo primeiro parágrafo; documento curto fica inteiro | 5 | a definir | Passou (5 de 5) |
+| <a id="ct-u65"></a>CT-U65 | `documentacao.test.ts` | `rota das âncoras em documentos divididos` | Leva à página da âncora, com fragmento só no meio da página; reescreve os links da seção; toda página de todo documento publicado tem título e não repete o h1 | 3 | a definir | Passou (3 de 3) |
 
 ### CN10 · Painel de resultados: perfil dos participantes
 

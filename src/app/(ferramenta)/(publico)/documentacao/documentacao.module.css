@@ -263,6 +263,223 @@
   color: var(--tinta-suave);
 }
 
+/* Abertura de um documento dividido em páginas: o texto inicial e a lista das seções */
+.abertura {
+  flex: 999 1 560px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Em coluna, o artigo não pode herdar a largura mínima de .texto como altura mínima */
+.abertura > article,
+.corpoPagina > article {
+  flex: none;
+}
+
+/* Introdução longa fica recolhida, para o índice aparecer sem rolar (revelação progressiva) */
+.introducao > summary {
+  min-height: 44px;
+  display: list-item;
+  padding: 10px 0;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.listaTitulo {
+  margin: 0 0 8px;
+  font-size: var(--texto-xl);
+  line-height: 1.2;
+}
+
+.listaPaginas {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* O título é o link, e a linha inteira responde ao clique, sem perder a semântica de lista */
+/* Muitos itens: duas colunas, para a lista não virar outra página longa */
+.listaLonga {
+  column-gap: 32px;
+}
+
+@media (min-width: 56rem) {
+  .listaLonga {
+    column-count: 2;
+  }
+}
+
+.listaLonga .linhaPagina {
+  break-inside: avoid;
+}
+
+.linhaPagina {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr) auto;
+  gap: 2px 8px;
+  padding: 12px 8px 12px 0;
+  border-top: 1px solid var(--linha);
+  transition: background-color var(--transicao);
+}
+
+.linhaPagina:last-child {
+  border-bottom: 1px solid var(--linha);
+}
+
+.linhaPagina:hover {
+  background: var(--fundo-painel);
+}
+
+.linhaNumero {
+  grid-row: 1 / span 2;
+  font-family: var(--fonte-numero);
+  font-variant-numeric: tabular-nums lining-nums;
+  font-weight: 700;
+  color: var(--destaque);
+}
+
+.linhaTitulo {
+  font-weight: 700;
+}
+
+.linhaTitulo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.linhaMeta {
+  grid-column: 3;
+  grid-row: 1;
+  font-size: var(--texto-sm);
+  color: var(--tinta-fraca);
+  white-space: nowrap;
+}
+
+.linhaResumo {
+  grid-column: 2 / -1;
+  margin: 0;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
+/* Página de uma seção: faixa curta e uma coluna só, para o conteúdo aparecer sem rolar */
+.faixaPagina {
+  background: var(--fundo-faixa);
+  border-bottom: 1px solid var(--linha);
+}
+
+.faixaPaginaInterna {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 4px 24px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.faixaPaginaLinha {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 20px;
+}
+
+.faixaPaginaTitulo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0 16px;
+}
+
+.voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-weight: 700;
+}
+
+.tituloPagina {
+  margin: 0;
+  font-size: var(--texto-2xl);
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+
+.posicao {
+  margin: 0;
+  font-size: var(--texto-sm);
+  color: var(--tinta-fraca);
+}
+
+.corpoPagina {
+  max-width: var(--largura-painel);
+  margin: 0 auto;
+  padding: 16px 24px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.vizinhas {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--linha);
+}
+
+.vizinha {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 44px;
+  overflow-wrap: anywhere;
+}
+
+.vizinhaProxima {
+  grid-column: 2;
+  text-align: right;
+  align-items: flex-end;
+}
+
+.vizinhaRotulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--texto-sm);
+  font-weight: 700;
+  color: var(--tinta-suave);
+}
+
+@media (max-width: 40rem) {
+  .tituloPagina {
+    font-size: var(--texto-xl);
+  }
+
+  .faixaPaginaInterna {
+    padding: 8px 16px 16px;
+  }
+
+  .corpoPagina {
+    padding: 16px 16px 40px;
+  }
+
+  .linhaPagina {
+    grid-template-columns: 32px minmax(0, 1fr);
+  }
+
+  .linhaMeta {
+    grid-column: 2;
+    grid-row: auto;
+  }
+}
+
 @media (forced-colors: active) {
   .aba[aria-current="page"],
   .subaba[aria-current="page"] {

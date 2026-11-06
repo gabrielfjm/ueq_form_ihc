@@ -171,3 +171,14 @@
   background: var(--alerta-fundo);
 }
 
+/* O ponto de destino de um link fica marcado: numa tabela longa, a pessoa acha a linha sem procurar */
+.texto :global(:target),
+.texto :global(tr:has(:target)) {
+  background: var(--destaque-fundo);
+}
+
+/* Página de uma seção: o diagrama é o destaque e cabe inteiro na tela, sem rolar; a tela cheia dá o zoom */
+.destaque :global(.figura-imagem img) {
+  max-height: max(20rem, calc(100vh - 19rem));
+  width: auto;
+}

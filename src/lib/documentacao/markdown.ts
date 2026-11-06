@@ -1,11 +1,27 @@
 import { existsSync } from "node:fs";
 import { join, posix } from "node:path";
 import { Marked, Renderer, type Tokens } from "marked";
-import { DOCUMENTOS, DOWNLOADS, REPOSITORIO, enderecoDoDocumento } from "./catalogo";
+import { DOCUMENTOS, DOWNLOADS, REPOSITORIO, enderecoDoDocumento, type Documento } from "./catalogo";
 import { PASTA_DIAGRAMAS, nomeDoDiagrama } from "./diagramas";
 
 export type Titulo = { id: string; texto: string };
 export type DocumentoRenderizado = { titulo: string; html: string; secoes: Titulo[] };
+
+// Em que página fica uma âncora de um documento: quem sabe disso é src/lib/documentacao/paginas.ts
+export type RotaDaAncora = (documento: Documento, ancora?: string) => string;
+
+export type OpcoesRenderizacao = {
+  rota?: RotaDaAncora;
+  // O documento e o endereço da página que está sendo montada: âncora na própria página fica só como #
+  documento?: Documento;
+  enderecoAtual?: string;
+  // Trecho de um documento, sem o # do título
+  semTitulo?: boolean;
+  // Na página de uma seção, o título dela é o h1: os níveis de dentro sobem, sem pular nenhum
+  deslocamento?: number;
+  // Legenda do diagrama que vem antes de qualquer título do trecho
+  tituloInicial?: string;
+};
 
 const ICONE_LINK =
   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>';
@@ -27,13 +43,20 @@ export function slugDoTitulo(texto: string): string {
 
 // Link relativo do .md: outro documento do catálogo abre na ferramenta, arquivo para baixar sai pela rota
 // de download, e o resto do repositório (código, dados) abre no GitHub
-export function destinoDoLink(href: string, arquivoAtual: string): string {
-  if (/^[a-z]+:/i.test(href) || href.startsWith("#")) return href;
+export function destinoDoLink(href: string, arquivoAtual: string, opcoes: OpcoesRenderizacao = {}): string {
+  const { rota, documento: atual, enderecoAtual } = opcoes;
+  // Link para um documento dividido em páginas leva à página da âncora; se ela é esta, fica só o fragmento
+  const naPagina = (destino: string) => {
+    const [semFragmento = "", fragmento] = destino.split("#");
+    return fragmento && semFragmento === enderecoAtual ? `#${fragmento}` : destino;
+  };
+  if (/^[a-z]+:/i.test(href)) return href;
+  if (href.startsWith("#")) return rota && atual ? naPagina(rota(atual, href.slice(1))) : href;
   const [caminho = "", ancora] = href.split("#");
   const alvo = posix.normalize(posix.join(posix.dirname(arquivoAtual), decodeURIComponent(caminho)));
   const sufixo = ancora ? `#${ancora}` : "";
   const documento = DOCUMENTOS.find((candidato) => candidato.arquivo === alvo);
-  if (documento) return enderecoDoDocumento(documento) + sufixo;
+  if (documento) return rota ? naPagina(rota(documento, ancora)) : enderecoDoDocumento(documento) + sufixo;
   if (DOWNLOADS.some((download) => download.arquivo === alvo)) return `/api/documentacao/${posix.basename(alvo)}`;
   return `${REPOSITORIO}/blob/main/${alvo.replace(/\/$/, "")}${sufixo}`;
 }
@@ -41,10 +64,14 @@ export function destinoDoLink(href: string, arquivoAtual: string): string {
 class RenderizadorDocumento extends Renderer {
   readonly secoes: Titulo[] = [];
   private readonly usados = new Map<string, number>();
-  private tituloAtual = "";
+  private tituloAtual: string;
 
-  constructor(private readonly arquivo: string) {
+  constructor(
+    private readonly arquivo: string,
+    private readonly opcoes: OpcoesRenderizacao = {},
+  ) {
     super();
+    this.tituloAtual = opcoes.tituloInicial ?? "";
   }
 
   override heading({ tokens, depth, text }: Tokens.Heading): string {
@@ -56,11 +83,12 @@ class RenderizadorDocumento extends Renderer {
     const texto = conteudo.replace(/<[^>]+>/g, "");
     this.tituloAtual = texto;
     if (depth === 2) this.secoes.push({ id, texto });
-    return `<h${depth} id="${id}">${conteudo}</h${depth}>\n`;
+    const nivel = Math.max(2, depth - (this.opcoes.deslocamento ?? 0));
+    return `<h${nivel} id="${id}">${conteudo}</h${nivel}>\n`;
   }
 
   override link({ href, title, tokens }: Tokens.Link): string {
-    const destino = escapar(destinoDoLink(href, this.arquivo));
+    const destino = escapar(destinoDoLink(href, this.arquivo, this.opcoes));
     const externo = destino.startsWith("http") ? ' rel="noreferrer"' : "";
     return `<a href="${destino}"${title ? ` title="${escapar(title)}"` : ""}${externo}>${this.parser.parseInline(tokens)}</a>`;
   }
@@ -93,10 +121,10 @@ class RenderizadorDocumento extends Renderer {
 }
 
 // O conteúdo vem só dos .md do próprio repositório (o catálogo diz quais), por isso o HTML não é sanitizado
-export function renderizarMarkdown(markdown: string, arquivo: string): DocumentoRenderizado {
-  const titulo = /^# (.+)$/m.exec(markdown)?.[1]?.trim() ?? "";
-  const semTitulo = markdown.replace(/^# .+\r?\n/m, "");
-  const renderizador = new RenderizadorDocumento(arquivo);
+export function renderizarMarkdown(markdown: string, arquivo: string, opcoes: OpcoesRenderizacao = {}): DocumentoRenderizado {
+  const titulo = opcoes.semTitulo ? "" : (/^# (.+)$/m.exec(markdown)?.[1]?.trim() ?? "");
+  const semTitulo = opcoes.semTitulo ? markdown : markdown.replace(/^# .+\r?\n/m, "");
+  const renderizador = new RenderizadorDocumento(arquivo, opcoes);
   // A instância vai no parse, não no construtor: o use() do marked só copia métodos enumeráveis,
   // e os métodos sobrescritos de uma classe não são
   const html = new Marked({ gfm: true }).parse(semTitulo, { async: false, renderer: renderizador });

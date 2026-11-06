@@ -98,6 +98,8 @@ Formato: requisito → princípio (fonte).
 | Política de privacidade a um clique: nas janelas de acesso, na página inicial, em Minha conta e na ajuda. O "Voltar" diz para onde vai e a política abre em outra aba quando há formulário preenchido | Controle do usuário (Nielsen 3), Shneiderman 7, transparência (LGPD, art. 9º) |
 | Interface no idioma da conta, escolhido ao criar a conta e trocado em Minha conta. `lang` e `dir` acompanham o idioma em que a tela de fato sai | Usabilidade universal (Shneiderman 2), 3.1.1 |
 
+A documentação segue o mesmo princípio de carga: documento longo abre como índice, cada seção em página própria com Voltar e Anterior/Próxima, e o diagrama cabendo na tela (revelação progressiva, Nielsen 3 e 8, WCAG 2.4.5 e 2.4.8).
+
 ### 4.3 Painel de resultados e gráficos
 
 | Requisito | Princípio |

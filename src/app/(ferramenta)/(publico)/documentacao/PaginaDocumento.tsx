@@ -2,11 +2,13 @@ import { FileText, FlaskConical, Layers, LayoutDashboard, ListChecks, Shapes, Us
 import type { Route } from "next";
 import Link from "next/link";
 import { SECOES, VISAO_GERAL, enderecoDoDocumento, secaoDoDocumento, type Documento } from "@/lib/documentacao/catalogo";
-import type { DocumentoRenderizado } from "@/lib/documentacao/markdown";
+import { enderecoDaPagina, mapaDeAncoras, type AberturaDocumento } from "@/lib/documentacao/paginas";
 import estilos from "./documentacao.module.css";
 import { ArtigoDocumento } from "./ArtigoDocumento";
 import { EmProducao } from "./EmProducao";
 import { FichaDocumento } from "./FichaDocumento";
+import { ListaPaginas } from "./ListaPaginas";
+import { RegistroDeVisita } from "./NavegacaoDocumento";
 import texto from "./texto.module.css";
 import { tradutor } from "@/traducao/servidor";
 
@@ -20,17 +22,24 @@ const ICONES: Record<string, LucideIcon> = {
   especificacao: FileText,
 };
 
+// Acima disso, a introdução ocuparia a tela toda e empurraria o índice para baixo
+const INTRODUCAO_CURTA = 400;
+
 const endereco = (documento: Documento) => enderecoDoDocumento(documento) as Route;
 
 // Protótipo r10 a r12: abas das seções na faixa (como as do estudo) e sub-abas dos documentos logo abaixo,
 // as duas com aria-current, para a pessoa sempre saber onde está (Nielsen 1, WCAG 2.4.8)
-// renderizado é null quando o documento ainda está em produção (catalogo.ts, PRONTOS)
-export async function PaginaDocumento({ documento, renderizado }: { documento: Documento; renderizado: DocumentoRenderizado | null }) {
+// abertura é null quando o documento ainda está em produção (catalogo.ts, PRONTOS). Documento longo mostra só
+// a abertura e a lista das seções, cada uma em página própria; documento curto é lido inteiro aqui
+export async function PaginaDocumento({ documento, abertura }: { documento: Documento; abertura: AberturaDocumento | null }) {
   const t = await tradutor();
   const atual = secaoDoDocumento(documento);
   const visaoGeral = documento === VISAO_GERAL;
+  const renderizado = abertura?.renderizado ?? null;
+  const dividido = abertura !== null && !abertura.estrutura.inteiro;
   return (
     <>
+      <RegistroDeVisita ancoras={mapaDeAncoras(documento)} />
       <div className={estilos.faixa}>
         <div className={estilos.faixaInterna}>
           {visaoGeral ? (
@@ -79,12 +88,30 @@ export async function PaginaDocumento({ documento, renderizado }: { documento: D
         </div>
       )}
       <div className={estilos.conteudo}>
-        {renderizado ? (
+        {dividido ? (
+          <div className={estilos.abertura}>
+            {renderizado?.html.trim() &&
+              (abertura.estrutura.abertura.length > INTRODUCAO_CURTA ? (
+                <details className={estilos.introducao}>
+                  <summary>{t("Ler a introdução")}</summary>
+                  <ArtigoDocumento className={texto.texto} html={renderizado.html} />
+                </details>
+              ) : (
+                <ArtigoDocumento className={texto.texto} html={renderizado.html} />
+              ))}
+            <ListaPaginas
+              t={t}
+              titulo={t("Neste documento")}
+              paginas={abertura.estrutura.secoes}
+              endereco={(pagina) => enderecoDaPagina(documento, pagina.slug)}
+            />
+          </div>
+        ) : renderizado ? (
           <ArtigoDocumento className={texto.texto} html={renderizado.html} />
         ) : (
           <EmProducao documento={documento} visaoGeral={visaoGeral} />
         )}
-        <FichaDocumento documento={documento} secoes={renderizado?.secoes ?? []} pronto={renderizado !== null} />
+        <FichaDocumento documento={documento} secoes={dividido ? [] : (renderizado?.secoes ?? [])} pronto={renderizado !== null} />
       </div>
     </>
   );

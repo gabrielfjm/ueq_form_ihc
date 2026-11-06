@@ -64,7 +64,7 @@ Para cada tela, faça a tarefa e compare com o protótipo em `docs/prototipos/al
 | 15d | Ajuda da página | botão (?) no cabeçalho de cada página | r30 | Abra em duas páginas e diga se a explicação ajuda |
 | 16 | Minha conta | menu "Minha conta" | r9, r35 para o idioma | Mude o nome e baixe os seus dados |
 | 16a | Administração | menu "Administração", só para conta administradora | r24, r24b, r24c, r34 | Crie uma conta e veja a cobertura dos idiomas |
-| 16b | Documentação | menu "Documentação", com e sem login | r10 a r15, r23 | Abra um documento, amplie um diagrama e volte |
+| 16b | Documentação | menu "Documentação", com e sem login | r10 a r15, r23, r36 a r38 | Abra um documento, entre numa seção, amplie um diagrama, siga um link para outro documento e use Voltar |
 | 16c | Sair e exclusões | "Sair"; excluir estudo; excluir conta | r20, r21, r22 | Cancele e confirme, usando também o Esc |
 | 17 | Exportar | fim da aba "Resultados" | r6, seção 04 | Baixe o CSV da planilha oficial e o painel em PDF |
 | 18 | Importar respostas | aba "Respostas", "Importar respostas de um CSV" | sem protótipo | Importe `data/fixtures/basico/respostas.csv` numa versão |

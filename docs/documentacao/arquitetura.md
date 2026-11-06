@@ -254,6 +254,7 @@ O `matcher` de [`src/proxy.ts`](../../src/proxy.ts) exclui o que nunca exige ses
 | Gráficos em SVG feitos à mão | Controle total de `title`, `desc`, contraste, formas por versão e reorganização em tela estreita | Sem biblioteca de gráficos para atualizar |
 | PDF gerado por Chromium no servidor | O PDF sai igual ao painel, com gráficos em vetor e as mesmas fontes | Na Vercel, o navegador é baixado na primeira chamada (ver [Implantação](#implantação)) |
 | Documentação lida dos mesmos `.md` do repositório, com os diagramas desenhados antes, em SVG (`pnpm docs:diagramas`) | Um arquivo só para o GitHub e para a ferramenta; a ferramenta não carrega a biblioteca Mermaid e cada diagrama vira imagem com texto alternativo | Mudar um diagrama exige gerar o SVG e a fonte de novo; um teste de unidade avisa |
+| Documento longo dividido em páginas na hora de mostrar, sem mudar o `.md` | O arquivo continua único e legível no GitHub, e a ferramenta não obriga a rolar um documento inteiro | Links e âncoras passam por `rotaDaAncora`, que acha a página de cada uma, e endereços antigos só com o fragmento são redirecionados |
 | Dados oficiais em JSON versionado | Cada número tem fonte rastreável e muda por pull request, não no código | Mudar um limiar exige `pnpm suspeitas:recalcular` para atualizar as participações já gravadas |
 | Cookies do participante restritos a `/r/<slug>` | Anonimato: só o id aleatório da participação, a marca de já respondido e o idioma | A proteção contra envio duplicado vale por navegador, não por pessoa |
 

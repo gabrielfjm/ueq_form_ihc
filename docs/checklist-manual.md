@@ -21,6 +21,7 @@ NVDA + Firefox no Windows, VoiceOver + Safari no iPhone (ou TalkBack + Chrome no
 - [ ] Foco sempre visível e nunca escondido atrás do rodapé fixo
 - [ ] Ordem de foco faz sentido em todas as telas
 - [ ] Tour, sino, ajuda (?) e Compartilhar funcionam sem mouse; Esc fecha as janelas
+- [ ] Na documentação, índice, seção, Voltar, Anterior e Próxima funcionam sem mouse, e o diagrama aparece sem rolar
 
 ## Visão
 - [ ] Zoom de 200% e 400% no navegador: nada corta, nada sobrepõe
