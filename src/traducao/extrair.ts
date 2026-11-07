@@ -4,7 +4,8 @@ import fs from "node:fs";
 import path from "node:path";
 import ts from "typescript";
 
-export type EntradaCatalogo = { texto: string; cliente: boolean };
+// origem: o arquivo que usa o texto, para a tradução saber em que tela ele aparece
+export type EntradaCatalogo = { texto: string; cliente: boolean; origem: string };
 
 const IGNORAR = /[\\/](__tests__|generated|idiomas)[\\/]|[\\/]traducao[\\/]extrair\.ts$/;
 
@@ -17,8 +18,8 @@ function arquivos(pasta: string): string[] {
 }
 
 export function extrairCatalogo(raiz: string): EntradaCatalogo[] {
-  const textos = new Map<string, boolean>();
-  for (const arquivo of arquivos(raiz)) {
+  const textos = new Map<string, { cliente: boolean; origem: string }>();
+  for (const arquivo of arquivos(raiz).sort()) {
     const codigo = fs.readFileSync(arquivo, "utf8");
     if (!/\b[tm]\(/.test(codigo)) continue;
     const cliente = /^\s*["']use client["']/.test(codigo);
@@ -29,7 +30,11 @@ export function extrairCatalogo(raiz: string): EntradaCatalogo[] {
         if (primeiro && (ts.isStringLiteral(primeiro) || ts.isNoSubstitutionTemplateLiteral(primeiro)) && /\p{L}/u.test(primeiro.text)) {
           // Constantes marcadas com m() podem ser mostradas por qualquer componente, inclusive de cliente
           const doCliente = cliente || no.expression.text === "m";
-          textos.set(primeiro.text, (textos.get(primeiro.text) ?? false) || doCliente);
+          const anterior = textos.get(primeiro.text);
+          textos.set(primeiro.text, {
+            cliente: (anterior?.cliente ?? false) || doCliente,
+            origem: anterior?.origem ?? path.relative(raiz, arquivo).split(path.sep).join("/"),
+          });
         }
       }
       ts.forEachChild(no, visitar);
@@ -37,6 +42,6 @@ export function extrairCatalogo(raiz: string): EntradaCatalogo[] {
     visitar(fonte);
   }
   return [...textos]
-    .map(([texto, cliente]) => ({ texto, cliente }))
+    .map(([texto, dados]) => ({ texto, ...dados }))
     .sort((a, b) => (a.texto < b.texto ? -1 : a.texto > b.texto ? 1 : 0));
 }

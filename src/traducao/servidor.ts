@@ -10,7 +10,7 @@ import { traducaoAutomaticaLigada, traduzirLote, type Tipo } from "./claude";
 import { COOKIE_IDIOMA } from "./cookie";
 import { chaveDoTexto, criarTradutor, interpolar, type Dicionario, type Traduzir } from "./nucleo";
 
-type Entrada = { texto: string; cliente: boolean };
+type Entrada = { texto: string; cliente: boolean; origem: string };
 const TEXTOS = catalogo.textos as Entrada[];
 const CHAVES = TEXTOS.map((entrada) => chaveDoTexto(entrada.texto));
 const CHAVES_DO_CLIENTE = new Set(TEXTOS.filter((entrada) => entrada.cliente).map((entrada) => chaveDoTexto(entrada.texto)));
@@ -139,17 +139,24 @@ export async function completarCatalogo(idioma: string, limiteMs = 240_000): Pro
         (linha) => linha.hashOrigem,
       ),
     );
-    const faltando = TEXTOS.filter((_, indice) => !existentes.has(CHAVES[indice]!)).map((entrada) => entrada.texto);
-    const lotes: string[][] = [];
+    // Textos da mesma tela vão juntos: um ajuda a entender o outro
+    const faltando = TEXTOS.filter((_, indice) => !existentes.has(CHAVES[indice]!)).sort((a, b) => (a.origem < b.origem ? -1 : a.origem > b.origem ? 1 : 0));
+    const lotes: Entrada[][] = [];
     for (let i = 0; i < faltando.length; i += TAMANHO_DO_LOTE) lotes.push(faltando.slice(i, i + TAMANHO_DO_LOTE));
     await emParalelo(
       lotes.map((lote) => async () => {
         if (Date.now() - inicio > limiteMs) return;
         try {
-          const traducoes = await traduzirLote(lote, IDIOMA_PADRAO, idioma, "interface");
-          const pares = lote.flatMap((texto, indice) => {
+          const traducoes = await traduzirLote(
+            lote.map((entrada) => entrada.texto),
+            IDIOMA_PADRAO,
+            idioma,
+            "interface",
+            lote.map((entrada) => entrada.origem),
+          );
+          const pares = lote.flatMap((entrada, indice) => {
             const traducao = traducoes[indice];
-            return traducao ? [{ hashOrigem: chaveDoTexto(texto), texto: traducao }] : [];
+            return traducao ? [{ hashOrigem: chaveDoTexto(entrada.texto), texto: traducao }] : [];
           });
           await guardar(idioma, pares);
           traduzidos += pares.length;

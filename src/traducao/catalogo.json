@@ -2,4191 +2,5233 @@
  "textos": [
   {
    "texto": " (você)",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": " Com menos de 50 respostas o alfa oscila bastante; trate como indício, não como conclusão.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "(abre em nova aba)",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/LinkPrivacidade.tsx"
   },
   {
    "texto": "({email}) convidou você em {data}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "* Alfa abaixo de 0,7.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": ", abaixo de 0,7",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": ", compartilhados com {quantidade}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": ", {faixa} no benchmark",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": ". Confira as {v}: cada coluna é um item, de 1 a 7. As respostas entram marcadas como importadas, na análise e com a mesma regra de suspeita das respostas pelo link.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": ". Esta ferramenta não é oficial nem ligada aos autores do método.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "1 participação fora da análise.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ControlesResultados.tsx"
   },
   {
    "texto": "10% dos resultados da base são melhores e 75% são piores.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "18 a 24 anos",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "1º de novembro de 2026",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "25 a 34 anos",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "25% dos resultados da base são melhores e 50% são piores.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "26 pares de palavras, 6 escalas e um link para os participantes.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/Paineis.tsx"
   },
   {
    "texto": "35 a 44 anos",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "45 a 59 anos",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "50% dos resultados da base são melhores e 25% são piores.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "60 anos ou mais",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "A base de comparação que diz se um resultado é excelente, bom, acima ou abaixo da média, ou ruim.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "A coleta só começa quando você clicar em “Abrir coleta”. As datas servem de referência no painel.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "A coluna “Na análise” tira ou devolve cada resposta ao cálculo, e “Tirar suspeitas da análise” faz isso com todas as suspeitas de uma vez. O painel de Resultados recalcula na hora. Nada é apagado.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "A comparação mostra as médias lado a lado, sem teste estatístico. Para afirmar que uma versão é melhor, rode um teste adequado sobre os dados exportados.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "A data de fim prevista já passou.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "A data de fim vem antes da de início. Confira as duas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "A data de início já chegou. Abra a coleta quando estiver pronto.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "A documentação está sendo escrita pela equipe.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/EmProducao.tsx"
   },
   {
    "texto": "A equipe",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "A equipe está escrevendo este documento. Ele aparece aqui assim que ficar pronto; a ficha ao lado diz o que ele vai trazer.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/EmProducao.tsx"
   },
   {
-   "texto": "A equipe é a controladora.",
-   "cliente": false
+   "texto": "A equipe é a controladora desses dados.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "A experiência foi avaliada como positiva em {positivas} das {total} escalas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "A experiência foi avaliada como positiva nas {total} escalas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "A ferramenta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "A ferramenta ainda não está configurada para enviar e-mails. Quer avisar a pessoa?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "A ferramenta marca como suspeita quem respondeu de forma inconsistente em 3 ou mais escalas, ou marcou mais de 15 itens na mesma posição (regras do Handbook do UEQ). Suspeita é só um alerta: quem decide é você.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "A ferramenta mostra quantas linhas leu e os problemas que achou antes de importar. Nada é gravado até você confirmar.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "A ferramenta não rastreia ninguém: não usa cookies de rastreamento nem de publicidade.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "A ferramenta é traduzida para os 37 idiomas do UEQ pela API do Claude. Cada idioma é traduzido sozinho na primeira visita de quem o usa; “Traduzir agora” adianta isso. Sem a chave ANTHROPIC_API_KEY, tudo fica em português.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "A impressão geral sobre o produto.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "A janela muda na hora. Dá para trocar depois, em Minha conta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/FormularioCadastro.tsx"
   },
   {
    "texto": "A lista de todos os estudos que você pode abrir: os seus e os que outras pessoas compartilharam com você.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "A maior diferença está em {partes}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "A maior média por escala fica com {partes}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "A mesma posição foi marcada em {iguais} dos 26 itens{v}",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "A pessoa precisa ter conta na ferramenta. Ela aceita o convite em Convites.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "A prévia acompanha o que você digita. O texto fixo do termo vem da própria ferramenta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
   },
   {
    "texto": "A senha atual não confere. Confira e tente de novo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/acoes.ts"
   },
   {
    "texto": "A senha ficou longa demais. Use no máximo 72 caracteres.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-conta.ts"
   },
   {
    "texto": "A senha precisa ter pelo menos 8 caracteres.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-conta.ts"
+  },
+  {
+   "texto": "A sessão fica num cookie que o JavaScript da página não lê e que só vai por HTTPS; no banco fica apenas o hash dele. Trocar a senha encerra as outras sessões.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "A tradução da ferramenta para os 37 idiomas do UEQ, pela API do Claude.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "A tradução e a validação do UEQ em português, usada no link do participante.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "A versão \"{nome}\" já tem respostas e não pode ser removida.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
   },
   {
    "texto": "A versão curta, com 8 itens, para quando o tempo do participante é pouco.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "A versão sem nome",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/ListaVersoes.tsx"
   },
   {
    "texto": "Abaixo da média",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Abaixo de −0,8 a avaliação é negativa; entre −0,8 e +0,8, neutra; acima de +0,8, positiva.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Abas",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Aberto",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/status-estudo.ts"
   },
   {
    "texto": "Abra a coleta e compartilhe o link para começar. Enquanto o estudo estiver em rascunho, quem abrir o link verá “Este estudo ainda não está aberto”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
   },
   {
    "texto": "Abrindo a coleta…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/BotaoColeta.tsx"
+  },
+  {
+   "texto": "Abrir Minha conta",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Abrir coleta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/BotaoColeta.tsx"
   },
   {
    "texto": "Abrir na ferramenta",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/notificacoes.ts"
   },
   {
    "texto": "Abrir o PDF",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Abrir os convites na ferramenta",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Abrir, encerrar e reabrir",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Aceitar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "Aceitar ou recusar convites",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Aceito",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Acesso",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/ContasAdmin.tsx"
   },
   {
    "texto": "Acessível",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Acima da média",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Acima de +0,8 é avaliação positiva, abaixo de −0,8 é negativa e no meio é neutra. Com poucas respostas o intervalo fica largo: a ferramenta avisa quando ainda é cedo para concluir.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Acompanhe a coleta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Adicionar versão",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/ListaVersoes.tsx"
   },
   {
    "texto": "Administração",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/BarraSuperior.tsx"
   },
   {
    "texto": "Administração · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Agora as respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Agradável",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Agrupado por escala",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Aguarde…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "Ainda não tem conta?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/FormularioEntrar.tsx"
   },
   {
    "texto": "Ajuda desta página",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/ajuda/BotaoAjuda.tsx"
   },
   {
    "texto": "Ajuda em toda página",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Ajustar à tela",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ArtigoDocumento.tsx"
   },
   {
    "texto": "Alfa",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Algumas vezes",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Alterações salvas com sucesso.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "Amostra insuficiente para intervalo de confiança.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Amplitude acima de",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Amplitude por escala na participação de {quando}",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Anterior",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/PaginaSecao.tsx"
   },
   {
    "texto": "Antes de abrir, confira",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
   },
   {
    "texto": "Ao aceitar, o estudo passa a aparecer em “Seus estudos”, na seção “Compartilhados com você”. Ao recusar, quem convidou é avisado e pode convidar de novo depois.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Ao lado do formulário você vê como o participante vai receber o convite, antes de criar.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Ao trocar a senha, as outras sessões abertas (em outro computador, por exemplo) são encerradas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Apaga a conta, os estudos de que você é dono e todas as respostas deles. Estudos de outras pessoas compartilhados com você continuam com os donos.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Apaga a conta, os seus estudos e as respostas deles. Não dá para desfazer.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Apagar",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Aparece no termo de consentimento. Escreva para o participante, em linguagem simples.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Aparece para o participante no topo do questionário.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Aparece só para você, no topo do painel.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioDados.tsx"
   },
   {
    "texto": "Aqui ficam os seus estudos e os que a equipe compartilhou com você. Separamos um estudo com respostas para o tour. Clique no título dele para abrir.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Aqui você baixa os dados em CSV, no formato da planilha oficial do UEQ, e o painel em PDF.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Arquivo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/FichaDocumento.tsx"
   },
   {
    "texto": "Arquivo CSV",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "As 26 respostas do questionário, a versão do produto que você avaliou, o idioma, a data e, só se o pesquisador ligou essa etapa e você quis responder, a faixa etária, o gênero, a escolaridade e se você já usava o produto. Todas essas perguntas têm “Prefiro não responder” e podem ser puladas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "As datas de início e fim são só referência para a equipe: quem decide se o link aceita respostas é o botão de abrir e encerrar a coleta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "As maiores diferenças estão em {partes}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "As mudanças valem para quem abrir o link depois de salvar. Versões que já têm respostas não podem ser removidas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/editar/page.tsx"
   },
   {
    "texto": "As médias das 6 escalas aparecem assim que chegar a primeira resposta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "As médias, os intervalos de confiança, o alfa e o benchmark das 6 escalas aparecem aqui assim que chegar a primeira resposta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/page.tsx"
   },
   {
    "texto": "As respostas entram na versão",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "As seis escalas do UEQ",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
+  },
+  {
+   "texto": "As senhas são guardadas só como hash bcrypt (custo 12). Depois de {MAXIMO_TENTATIVAS} senhas erradas para o mesmo e-mail, o login espera {JANELA_MINUTOS} minutos.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "As versões ficam próximas em todas as escalas: nenhuma diferença chega a {limite}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "Ativa. Os dados novos já entram cifrados e os antigos são cifrados a cada deploy.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "Atratividade",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Atualizada em {ATUALIZADA_EM}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Até enviar, é só fechar a página ou usar “Sair sem enviar”: nada do que você marcou é gravado. Participações começadas e não enviadas são apagadas em até 2 dias.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Aumentar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ArtigoDocumento.tsx"
   },
   {
    "texto": "Avisar por e-mail",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Ações",
-   "cliente": false
-  },
-  {
-   "texto": "Baixa ou apaga os próprios dados quando quiser.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Baixar",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/FichaDocumento.tsx"
   },
   {
    "texto": "Baixar meus dados",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FichaConta.tsx"
   },
   {
    "texto": "Banco de dados",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Base legal",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Benchmark",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Bettina Laugwitz, Theo Held e Martin Schrepp",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Boas-vindas à Ferramenta UEQ",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Bom",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "COTA, M. P.; THOMASCHEWSKI, J.; SCHREPP, M.; GONÇALVES, R. Efficient measurement of the user experience: a Portuguese version. Procedia Computer Science, v. 27, p. 491-498, 2014.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "CSV no formato da UEQ Data Analysis Tool, para conferir os cálculos.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Cada aviso também vai para o seu e-mail. Se preferir só o sino, desligue em Minha conta, na seção Notificações.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Cada barra é a média de uma escala, de −3 a +3, com o intervalo de confiança de 95%. O fundo em faixas mostra o benchmark do UEQ: onde o produto cai em relação a centenas de outros produtos avaliados.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Cada barra é a média de uma escala, de −3 a +3, com o intervalo de confiança. As faixas ao fundo comparam o produto com o benchmark do UEQ.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Cada documento aparece aqui assim que fica pronto. Enquanto isso, a ficha ao lado de cada um diz o que ele vai trazer.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/EmProducao.tsx"
   },
   {
    "texto": "Cada escala vai de −3 a +3",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Cada linha é um estudo, do atualizado mais recentemente ao mais antigo. Status diz se a coleta está em rascunho, aberta ou encerrada; a régua mostra onde hoje cai no período da coleta; Respostas conta só quem terminou o questionário.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Cada participante responde sobre uma versão, e a ferramenta distribui as pessoas para equilibrar as respostas. Com uma versão só, o painel não mostra comparação.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Cada participação concluída aparece aqui, com as respostas suspeitas marcadas para você decidir se ficam na análise.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Cada participação concluída, com as marcadas como suspeitas e as que estão fora da análise.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Cada pessoa que entra pelo link vai para a versão com menos respostas, para manter o equilíbrio.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Cada pessoa só vê os estudos que são dela ou que foram compartilhados com ela. Nem os administradores da ferramenta veem os estudos ou as respostas de outras pessoas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Cada ponto é a média das respostas no par, do termo da esquerda (-3) ao da direita (+3). A ordem e os lados são os do questionário.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Cancelar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Cancelar convite",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Carregando…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "Casos de uso, diagrama de classes e verificação do cálculo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Cenários de demonstração",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/page.tsx"
   },
   {
    "texto": "Cenários de demonstração · Administração · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/page.tsx"
   },
   {
    "texto": "Chegou ao limite de {MAXIMO_VERSOES} versões por estudo.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/ListaVersoes.tsx"
   },
   {
    "texto": "Clique na aba Respostas para ver cada participação.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Clique na aba Resultados para abrir o painel do estudo.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Clique no destaque para continuar",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Coleta aberta. O link já aceita respostas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/status-estudo.ts"
   },
   {
    "texto": "Coleta encerrada.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "Coleta encerrada. O link não aceita mais respostas. Dá para reabrir quando quiser.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/status-estudo.ts"
   },
   {
    "texto": "Coleta por versão",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Coleta reaberta. O link voltou a aceitar respostas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/status-estudo.ts"
   },
   {
    "texto": "Coletadas em papel ou em outro formulário, entram por um CSV no formato da planilha oficial.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Coletar dados demográficos no fim do questionário",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Com 20 a 30 pessoas, o resultado costuma ficar estável.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Com a coleta encerrada, quem abrir o link verá “A coleta deste estudo foi encerrada”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Com frequência",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Com menos de 2 respostas na análise não há desvio-padrão nem IC95, e o gráfico mostra só a média. Espere mais respostas antes de interpretar.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Começa em {dias}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "Começar o tour",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Como editor, você pode editar o estudo, abrir e encerrar a coleta e revisar as respostas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Como funciona",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Como leitor, você pode ver o painel de resultados e as respostas, e exportar os dados.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Como ler os resultados",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Como nada liga as respostas a você, não temos como encontrá-las para mostrar ou apagar. Fale com o pesquisador que enviou o link.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Como os dados são protegidos (LGPD, art. 46)",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Como uma resposta vira suspeita",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Como usar o UEQ para comparar versões, acompanhar um produto ao longo do tempo e decidir onde melhorar.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Comparar versões",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ControlesResultados.tsx"
   },
   {
    "texto": "Comparação com 21.175 pessoas de 468 estudos (planilha oficial, versão 15).",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Comparação entre as versões",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
    "texto": "Compartilhados com você",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Compartilhar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Compartilhar com",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Compartilhar “{titulo}”",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Concluída em",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Concluído",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Concordo e quero participar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
   },
   {
    "texto": "Conexão",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Conferência antes de gravar",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Confiabilidade",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Construíram o benchmark, a versão curta (UEQ-S) e o guia de uso em diferentes cenários de avaliação.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Conta criada com sucesso.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Conta criada em",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FichaConta.tsx"
   },
   {
    "texto": "Conta de {nome} criada. Passe o e-mail e a senha para a pessoa.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "Conta excluída. Os estudos e as respostas foram apagados.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Contas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/page.tsx"
   },
   {
    "texto": "Contas e Criar conta para alguém",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Contas · Administração · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/page.tsx"
   },
   {
    "texto": "Contas, estudos de demonstração e a proteção de dados da ferramenta.",
-   "cliente": false
-  },
-  {
-   "texto": "Controlador é o pesquisador responsável por ele; a ferramenta só opera os dados em nome dele.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Convidando…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Convidar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Convidar pessoa",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Convite aceito. O estudo agora aparece em Seus estudos, na seção Compartilhados com você.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "Convite de {data} para o estudo de {nome}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Convite enviado para {nome}, na ferramenta e por e-mail.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "Convite enviado para {nome}. Ele já aparece no sino de notificações da pessoa, na ferramenta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "Convite para {nome} cancelado.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "Convite pendente",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Convite recusado. Quem convidou pode chamar você de novo depois.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Convites",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Convites esperando resposta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Convites já respondidos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Convites para estudos, respostas novas (agrupadas: dez respostas numa manhã viram um aviso só) e mudanças feitas por outras pessoas da equipe, como editar o estudo, abrir ou encerrar a coleta, importar respostas ou tirar respostas da análise. O que você mesmo faz não gera aviso.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Convites pendentes",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Convites, respostas novas e mudanças que a equipe faz nos seus estudos aparecem aqui, e também no seu e-mail.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Convites, respostas que chegaram e o que a equipe mudou nos estudos que você acompanha.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Copiar link",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/LinkPublico.tsx"
   },
   {
    "texto": "Corrigir",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Corrija 1 campo para continuar",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/formulario/ResumoErros.tsx"
   },
   {
    "texto": "Corrija {n} campos para continuar",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/formulario/ResumoErros.tsx"
   },
   {
    "texto": "Cria três estudos com dados inventados (A/B com coleta aberta, encerrado com respostas importadas e um rascunho), com o dono e as pessoas que você escolher.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Cria três estudos com dados inventados: uma comparação A/B com a coleta aberta e respostas suspeitas, um estudo encerrado com respostas importadas e um rascunho com 3 versões.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/page.tsx"
   },
   {
    "texto": "Criada em",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/ContasAdmin.tsx"
   },
   {
    "texto": "Criado em",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
   },
   {
    "texto": "Criando a conta…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/NovaConta.tsx"
   },
   {
    "texto": "Criando o estudo…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Criando os estudos…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Criar conta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/NovaConta.tsx"
   },
   {
    "texto": "Criar conta para alguém",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/NovaConta.tsx"
   },
   {
    "texto": "Criar conta para alguém · Administração · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/page.tsx"
   },
   {
    "texto": "Criar conta · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/cadastrar/page.tsx"
   },
   {
    "texto": "Criar estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/BarraSuperior.tsx"
   },
   {
    "texto": "Criar estudo · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/novo/page.tsx"
   },
   {
    "texto": "Criar os estudos de demonstração",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Criar os três estudos",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Criar um estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Criaram o UEQ em 2005 e publicaram a construção e a validação do questionário em 2008.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Crie o estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Crie o estudo, mande um link e veja as seis escalas do UEQ calculadas e comparadas com o benchmark oficial.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Crie o primeiro para gerar o link de coleta: título, objetivo, período e versões.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Crie outra conta para poder compartilhar.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Criptografia dos dados demográficos (AES-256-GCM)",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "Criptografia, envio de e-mails e as proteções que estão sempre ativas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Créditos",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Código aberto (MIT) em",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Código aberto · licença MIT",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/PaginaDocumento.tsx"
   },
   {
    "texto": "DP",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Da conta mais antiga para a mais nova",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/ContasAdmin.tsx"
   },
   {
    "texto": "Da mais recente para a mais antiga",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Dados cadastrais",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioDados.tsx"
   },
   {
    "texto": "Dados cadastrais · Minha conta · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/dados/page.tsx"
   },
   {
    "texto": "Dados das contas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Dados demográficos",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/AbasResultados.tsx"
   },
   {
    "texto": "Dados demográficos · {titulo} · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/demograficos/page.tsx"
   },
   {
    "texto": "Dados do estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Dados do participante",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Dados do participante (LGPD)",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Dados protegidos",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Dados salvos.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/acoes.ts"
   },
   {
    "texto": "Dados salvos. O novo e-mail já vale para o próximo login.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/acoes.ts"
   },
   {
    "texto": "Data de fim",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Data de início",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "De 3 a 5 minutos · voluntária e anônima",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
   },
   {
    "texto": "De {intervalo}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
   },
   {
    "texto": "De {nome} · você é {v}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Depois de enviar",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Depois de trocar, as outras sessões abertas com a senha antiga são encerradas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioSenha.tsx"
   },
   {
    "texto": "Desagradável",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Descartar alterações",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioDados.tsx"
   },
   {
    "texto": "Desenvolvimento, protótipos, arquitetura, protocolo do UEQ e casos de teste",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Desistir",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Desligada. Configure CHAVE_CRIPTOGRAFIA na Vercel (openssl rand -base64 32) e faça um novo deploy.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "Desligado por padrão. Ligue só se o estudo precisar de faixa etária, gênero, escolaridade e familiaridade com o produto. Ligado, o participante vê no fim uma etapa opcional e pode responder ou pular direto para o agradecimento; nada identifica a pessoa.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Desligado, a participação termina no envio do questionário.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Desligado. Os avisos ficam só no sino. Configure SMTP_HOST, SMTP_USUARIO e SMTP_SENHA na Vercel.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "Desligue “Receber os avisos também por e-mail” em Minha conta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Detalhes",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Diagrama ampliado. Use as setas para mover",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ArtigoDocumento.tsx"
   },
   {
    "texto": "Diagrama: {legenda}. A descrição está no texto da seção.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ArtigoDocumento.tsx"
   },
   {
    "texto": "Diferença",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Diferença =",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Diga qual produto será avaliado.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Digite o e-mail da sua conta para confirmar.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/acoes.ts"
   },
   {
    "texto": "Digite o título do estudo para confirmar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AcoesEstudo.tsx"
   },
   {
    "texto": "Digite o título do estudo para confirmar.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
   },
   {
    "texto": "Digite seu e-mail para confirmar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/ExcluirConta.tsx"
   },
   {
    "texto": "Diminuir",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ArtigoDocumento.tsx"
   },
   {
    "texto": "Do arquivo {arquivo}, na versão",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Do atualizado mais recentemente ao mais antigo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Do cadastro do estudo à planilha oficial.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/Paineis.tsx"
   },
   {
    "texto": "Documentação",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/BarraSuperior.tsx"
   },
   {
    "texto": "Documentação · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/page.tsx"
   },
   {
    "texto": "Documento",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/EmProducao.tsx"
   },
   {
    "texto": "Documentos de {titulo}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/PaginaDocumento.tsx"
   },
   {
    "texto": "Dono",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Dono dos estudos",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Dê um nome à versão ou remova.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Dê um título ao estudo.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Dúvidas e pedidos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "E-mail",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/NovaConta.tsx"
   },
   {
    "texto": "E-mail de quem vai participar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "E-mail ou senha não conferem. Confira os dois e tente de novo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/_acesso/acoes.ts"
   },
   {
    "texto": "Editar estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AcoesEstudo.tsx"
   },
   {
    "texto": "Editar estudo · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/editar/page.tsx"
   },
   {
    "texto": "Editor",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Editor pode editar o estudo, abrir e encerrar a coleta, importar respostas e tirar respostas da análise. Leitor vê o painel e as respostas e exporta, sem mudar nada. Excluir o estudo e convidar pessoas é só com o dono.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Editor: edita o estudo e as respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Editor: pode editar o estudo, mudar a coleta e revisar as respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Eficiência",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Em Compartilhar você convida outras pessoas pelo e-mail da conta delas, como Editor ou Leitor, no estilo do Google Docs. O convite chega no sino e por e-mail.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Em Minha conta, “Baixar meus dados” gera um arquivo com tudo o que a ferramenta guarda sobre a sua conta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Em cada escala, a ferramenta compara os itens da mesma pessoa. Muita diferença entre eles, ou a mesma posição marcada em quase tudo, sugere resposta sem atenção.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Em equipe",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Em estudos com mais de uma versão, o modo de comparação põe as médias das versões lado a lado, escala por escala, com a diferença entre elas. Olhe os intervalos de confiança antes de concluir que uma versão é melhor.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Em pouco mais de um minuto, o tour mostra o caminho de um estudo: o link da coleta, o trabalho em equipe, o painel de resultados, as respostas suspeitas, as notificações e a ajuda de cada página.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Em produção",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/EmProducao.tsx"
   },
   {
    "texto": "Em rascunho, o link mostra que o questionário está em preparação. Abrir a coleta começa a aceitar respostas; encerrar para de aceitar, e dá para reabrir depois sem perder nada.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Em resumo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Encerrado",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/status-estudo.ts"
   },
   {
    "texto": "Encerrando a coleta…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/BotaoColeta.tsx"
   },
   {
    "texto": "Encerrar coleta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/BotaoColeta.tsx"
   },
   {
    "texto": "Enquanto a conta existir. Ao excluir a conta, apagamos na hora a conta, os estudos de que você é dono e todas as respostas deles.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Ensino fundamental",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Ensino médio",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Ensino superior",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Entendi",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/ajuda/BotaoAjuda.tsx"
   },
   {
    "texto": "Entrando…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/FormularioEntrar.tsx"
   },
   {
    "texto": "Entrar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/BarraPublica.tsx"
   },
   {
    "texto": "Entrar na ferramenta, organizar os estudos e trabalhar em equipe. Seu nome e e-mail aparecem só para as pessoas com quem você compartilha um estudo; os participantes nunca os veem.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Entrar · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/entrar/page.tsx"
   },
   {
    "texto": "Entre os 10% melhores resultados da base.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Entre os 25% piores resultados da base.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Entre por aqui.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/acoes.ts"
   },
   {
    "texto": "Envie o link",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Envie por e-mail ou mensagem. Quem abrir verá o termo de consentimento antes do questionário.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Envio de e-mails (convites e notificações)",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "Esc fecha · + e - mudam o zoom · arraste para mover",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ArtigoDocumento.tsx"
   },
   {
    "texto": "Escala",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Escala inconsistente",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Escalas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Escalas do UEQ",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/AbasResultados.tsx"
   },
   {
    "texto": "Escalas e benchmark",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Escalas por versão",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Escolaridade",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Escolha a conta que vai ser dona dos estudos.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "Escolha a versão",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Escolha a versão que essas respostas avaliaram.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/acoes.ts"
   },
   {
    "texto": "Escolha o idioma",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/idioma/page.tsx"
   },
   {
    "texto": "Escolha um arquivo CSV com as respostas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/acoes.ts"
   },
   {
    "texto": "Escolher outro arquivo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Escreva o e-mail no formato nome@exemplo.com.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-conta.ts"
   },
   {
    "texto": "Escreva o objetivo. É o que o participante lê no termo.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Essa conta não existe mais. Recarregue a página.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "Essa participação não está neste estudo. Recarregue a página.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/acoes.ts"
   },
   {
    "texto": "Essa pessoa não está mais no estudo. Feche a janela e abra de novo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "Essa versão não está neste estudo. Recarregue a página.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/acoes.ts"
   },
   {
    "texto": "Esse convite não está mais disponível: foi cancelado ou já foi respondido.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Esse e-mail já tem conta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "Esse e-mail já é de outra conta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/acoes.ts"
   },
   {
    "texto": "Esse e-mail é do dono do estudo, que já tem acesso total.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "Esse não é o e-mail da sua conta. Nada foi excluído.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/acoes.ts"
   },
   {
    "texto": "Esta comparação em A4, com os gráficos em vetor.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/page.tsx"
   },
   {
    "texto": "Esta ferramenta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Este painel, com a versão escolhida, em A4 e com os gráficos em vetor. Para anexar ao relatório ou imprimir.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Este é o endereço que você manda para os participantes. Ele abre o termo de consentimento e o questionário, em 37 idiomas, enquanto a coleta estiver aberta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Estimulação",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Estudo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Estudo completo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
    "texto": "Estudo criado com sucesso. Ele está em rascunho: confira os dados e abra a coleta quando estiver pronto.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "Estudo de {nome} · {v}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
    "texto": "Estudo excluído.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Estudos",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/BarraSuperior.tsx"
   },
   {
    "texto": "Estudos compartilhados com editores e leitores.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Estudos de avaliação de experiência do usuário com o User Experience Questionnaire",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/layout.tsx"
   },
   {
    "texto": "Estudos de experiência do usuário com o UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Estudos de outras pessoas da equipe em que você foi convidado",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Estudos sobre o método",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Estudos · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Etapa 1 de {etapas} · Consentimento",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
   },
   {
    "texto": "Excelente",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Excluindo…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/ExcluirConta.tsx"
   },
   {
    "texto": "Excluir apaga o estudo e {versoes}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "Excluir apaga o estudo, {versoes} e {respostas}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "Excluir apaga sua conta e {estudos}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Excluir apaga sua conta, {estudos} e {respostas}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Excluir apaga sua conta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Excluir conta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Excluir conta definitivamente",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/ExcluirConta.tsx"
   },
   {
    "texto": "Excluir da análise",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Excluir definitivamente",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AcoesEstudo.tsx"
   },
   {
    "texto": "Excluir este estudo?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AcoesEstudo.tsx"
   },
   {
    "texto": "Excluir estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AcoesEstudo.tsx"
   },
   {
    "texto": "Excluir minha conta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/ExcluirConta.tsx"
   },
   {
    "texto": "Excluir sua conta?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/ExcluirConta.tsx"
   },
   {
    "texto": "Exemplo de resultado: média de cada escala, de −3 a +3",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Exportar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Exporte os dados",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Faixa etária",
-   "cliente": true
-  },
-  {
-   "texto": "Falam com o pesquisador que enviou o link do estudo, que é quem responde pela pesquisa.",
-   "cliente": false
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Falta configurar algo",
-   "cliente": false
-  },
-  {
-   "texto": "Fazem tudo direto em",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Fazer a tarefa com facilidade.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Fazer por mim",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Fechar",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/formulario/MensagemStatus.tsx"
   },
   {
    "texto": "Fechar esta aba e voltar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/privacidade/origem.ts"
   },
   {
    "texto": "Fechar o tutorial",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/layout.tsx"
   },
   {
    "texto": "Ferramenta UEQ · Estudos de experiência do usuário",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/page.tsx"
   },
   {
    "texto": "Ferramenta UEQ · Painel de resultados",
-   "cliente": false
-  },
-  {
-   "texto": "Fica anônimo: nada liga as respostas à pessoa.",
-   "cliente": false
-  },
-  {
-   "texto": "Fica cifrado em disco no provedor (Neon, região de São Paulo).",
-   "cliente": false
-  },
-  {
-   "texto": "Fica num cookie que o JavaScript da página não lê e que só vai por HTTPS; no banco fica apenas o hash dele. Trocar a senha encerra as outras sessões.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
    "texto": "Ficha do estudo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
   },
   {
    "texto": "Ficou com dúvida? Toda página tem este botão (?) que explica o que dá para fazer nela. Clique nele para terminar o tour.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Fonte dos limiares",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Formato da planilha oficial (CSV)",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Formato do arquivo",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Fundamentos da IHC · PPGIa · PUCPR · 2026",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Fundamentos da Interação Humano-Computador",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Gabriel Meira",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Gerado em",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
    "texto": "Gostar de usar.",
-   "cliente": true
-  },
-  {
-   "texto": "Gravados cifrados com AES-256-GCM, com a chave guardada fora do banco: quem tivesse uma cópia do banco não conseguiria lê-los.",
-   "cliente": false
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Gráficos dos dados demográficos",
-   "cliente": false
-  },
-  {
-   "texto": "Guardadas só como hash bcrypt (custo 12). Depois de {MAXIMO_TENTATIVAS} senhas erradas para o mesmo e-mail, o login espera {JANELA_MINUTOS} minutos.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/demograficos/page.tsx"
   },
   {
    "texto": "Guardamos só nome, e-mail e a senha como hash, que não dá para desfazer. As respostas dos participantes são anônimas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FichaConta.tsx"
   },
   {
    "texto": "Gênero",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "HTTPS com HSTS, política de conteúdo (CSP), senhas em bcrypt custo 12, limite de tentativas de login, cookie de sessão httpOnly e Secure, limpeza das participações abandonadas em 2 dias e nenhum acesso do administrador aos estudos de outras pessoas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "Handbook UEQ e data/protocolo.json",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Hoje é o dia {dia} de {total}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "Homem",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "IC de {inferior} a {superior}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "IC95",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Idioma",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/idioma/page.tsx"
   },
   {
    "texto": "Idioma da ferramenta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/FormularioCadastro.tsx"
   },
   {
    "texto": "Idioma da ferramenta e o padrão dos estudos que você cria.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Idioma da ferramenta trocado.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Idioma do questionário",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Idioma · Minha conta · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/idioma/page.tsx"
   },
   {
    "texto": "Idiomas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Iguais",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Importando…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Importar respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Importar respostas de um CSV",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/page.tsx"
   },
   {
    "texto": "Importar respostas · {titulo} · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/page.tsx"
   },
   {
    "texto": "Inconsistentes",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Informe a data de fim.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Informe a data de início.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Informe seu e-mail.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-conta.ts"
   },
   {
    "texto": "Informe seu nome.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-conta.ts"
   },
   {
    "texto": "Informe sua senha atual.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/acoes.ts"
   },
   {
    "texto": "Informe sua senha.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/acoes.ts"
   },
   {
    "texto": "Informe uma senha.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-conta.ts"
   },
   {
    "texto": "Instrumento",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
   },
   {
    "texto": "Ir para lá",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Item",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Item do questionário: sete círculos entre Desagradável e Agradável, com o quinto marcado",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Item {numero}, de {termoEsquerdo} a {termoDireito}: média {decimal}",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/MediasPorItem.tsx"
   },
   {
    "texto": "Jean Weiss",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Já aceitos: os estudos aparecem direto",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Já existe outra versão com esse nome. Use nomes diferentes.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Já tem conta?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/FormularioCadastro.tsx"
   },
   {
    "texto": "Já tem respostas coletadas fora da ferramenta?",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Já tem {respostas} {v} e não pode ser removida.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/ListaVersoes.tsx"
   },
   {
    "texto": "Já tenho conta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "LAUGWITZ, B.; HELD, T.; SCHREPP, M. Construction and evaluation of a user experience questionnaire. In: HOLZINGER, A. (ed.). HCI and Usability for Education and Work: USAB 2008. Berlin: Springer, 2008. (Lecture Notes in Computer Science, v. 5298). p. 63-76.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "LGPD:",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Legenda das versões",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Leitor",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Leitor: pode ver o painel e as respostas e exportar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Leitor: só vê e exporta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Leitura",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Leitura rápida",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Ler a introdução",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/PaginaDocumento.tsx"
   },
   {
    "texto": "Leve os dados para o relatório",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Ligado, cada aviso do sino também chega no seu e-mail. Desligado, os avisos ficam só no sino.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Ligado, o participante vê no fim a etapa opcional “Dados opcionais”, com faixa etária, gênero, escolaridade e familiaridade com o produto. Ele pode responder ou pular a etapa e ir direto para o agradecimento.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Linha",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Link copiado.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/LinkPublico.tsx"
   },
   {
    "texto": "Link da coleta",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Link para participantes",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Luiza Pedralli",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Mais publicações em",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Manuel Pérez Cota e Ramiro Gonçalves",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Marcar todas como lidas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "Martin Schrepp, Andreas Hinderks e Jörg Thomaschewski",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Mede se os itens de uma escala andaram juntos neste grupo de participantes. Abaixo de 0,7 é sinal de que a escala pode ter sido entendida de jeitos diferentes. Com menos de 50 respostas o alfa oscila bastante, então trate um valor baixo como indício, não como conclusão.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "Menu",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/BarraFixa.tsx"
   },
   {
    "texto": "Mesmo formato, com valores de -3 a +3 e a polaridade já corrigida.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Minha conta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/BarraSuperior.tsx"
   },
   {
    "texto": "Minha conta · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Modo de visualização",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ControlesResultados.tsx"
   },
   {
    "texto": "Mostra se a criptografia e o envio de e-mails estão configurados em produção. O administrador não vê os estudos nem as respostas de ninguém: só a quantidade de estudos de cada conta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Mostrando {length} de {total}.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Mostrar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/NovaConta.tsx"
   },
   {
    "texto": "Mostrar senha",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/formulario/Campo.tsx"
   },
   {
    "texto": "Mostrar só suspeitas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Mostrar todas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Mude os dados, o período ou as versões do estudo.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Muitas tentativas com este e-mail. Por segurança, espere {JANELA_MINUTOS} minutos e tente de novo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/_acesso/acoes.ts"
   },
   {
    "texto": "Mulher",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Média",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Média e IC95 de cada escala, por versão",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Médias das seis escalas do UEQ com intervalo de confiança de 95% e faixas do benchmark.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Médias por escala nas duas versões.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Médias por escala nas {n} versões.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Médias por item",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Médias por versão",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "Médias, intervalo de confiança, alfa e benchmark das 6 escalas, com {quantidade}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Médias, intervalos de confiança, alfa e benchmark por escala, e as respostas suspeitas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Mínimo de {MINIMO_SENHA} caracteres. Pode colar.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/FormularioCadastro.tsx"
   },
   {
    "texto": "Na análise",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Nada foi importado. Corrija estas linhas no arquivo e envie de novo; as outras estão certas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Nada identifica o participante; dados sensíveis cifrados (LGPD).",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Nada muda até você salvar. Para desistir, volte para o estudo sem salvar.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Nada novo. Convites, respostas e mudanças da equipe nos seus estudos aparecem aqui.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "Nada por aqui ainda. Quando alguém convidar você, quando chegarem respostas nos seus estudos ou quando um parceiro mudar algo, o aviso aparece aqui, no sino do topo e no seu e-mail. Para ser convidado, a pessoa usa o e-mail da sua conta:",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Nada que identifique você: nem nome, nem e-mail, nem endereço IP, nem localização. A ferramenta não usa cookies de rastreamento ou de publicidade.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Nas outras escalas as versões ficam próximas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "Negativa",
-   "cliente": false
-  },
-  {
-   "texto": "Nenhum: sem cookies de rastreamento ou de publicidade.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Nenhuma escala ficou na faixa positiva.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "Nenhuma nova",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Nenhuma participação na análise para mostrar os dados demográficos ainda.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/demograficos/page.tsx"
   },
   {
    "texto": "Nenhuma participação suspeita estava na análise. Nada mudou.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/acoes.ts"
   },
   {
    "texto": "Nenhuma resposta ainda.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
   },
   {
    "texto": "Nenhuma resposta na análise ainda.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
    "texto": "Nesta página",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Nesta seção",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/PaginaSecao.tsx"
   },
   {
    "texto": "Neste documento",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/PaginaDocumento.tsx"
   },
   {
    "texto": "Neutra",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Ninguém além do dono tem acesso a este estudo ainda.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "No fim da página você baixa os dados em CSV (no formato da planilha oficial do UEQ) e o painel em PDF, para o relatório.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "No resumo ao lado, “Baixar meus dados” gera um arquivo com tudo o que a ferramenta guarda sobre a sua conta, e “Política de privacidade” explica o que é guardado, para quê e como é protegido.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Nome",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/NovaConta.tsx"
   },
   {
    "texto": "Nome dos arquivos: {v}. Os arquivos trazem todas as versões do estudo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Nome e e-mail",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Nome e e-mail que você usa para entrar.",
-   "cliente": false
-  },
-  {
-   "texto": "Nome e e-mail se mudam em Minha conta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Nome, e-mail, a senha (só como hash, nunca a senha), os estudos, os convites e as notificações. A sessão usa um único cookie necessário para manter você conectado.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Notificações",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "Notificações por e-mail",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Notificações · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Notificações: {naoLidas} {v}",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "Nova",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Nova resposta em “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/notificacoes.ts"
   },
   {
    "texto": "Nova senha",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioSenha.tsx"
   },
   {
    "texto": "Nova:",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "Novidade",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Nunca tinha usado",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Não apaga nada. A resposta continua na exportação de respostas brutas, com a coluna de inclusão.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Não deu para concluir",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/formulario/ResumoErros.tsx"
   },
   {
    "texto": "Não deu para copiar automaticamente. Selecione o link acima e copie.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/LinkPublico.tsx"
   },
   {
    "texto": "Não deu para salvar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Não dá para desfazer.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Não dá para desfazer. Se quiser só parar a coleta, use “Encerrar coleta”, que pode ser reaberta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "Não foi possível entrar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/FormularioEntrar.tsx"
   },
   {
    "texto": "Não há conta com esse e-mail na ferramenta. Peça para a pessoa criar uma conta e convide de novo com o mesmo e-mail.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "Não respondeu",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/perfil-demografico.ts"
   },
   {
    "texto": "O arquivo não tem nenhuma linha de respostas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/acoes.ts"
   },
   {
    "texto": "O arquivo tem erros. Corrija e envie de novo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/acoes.ts"
   },
   {
    "texto": "O arquivo tem mais de {v} KB. Divida em arquivos menores.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/acoes.ts"
   },
   {
    "texto": "O artigo que apresenta o UEQ: como os 26 itens e as 6 escalas foram escolhidos e validados.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
+   "texto": "O banco de dados fica cifrado em disco no provedor (Neon, região de São Paulo).",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "O benchmark",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "O botão “Compartilhar” convida outra pessoa com conta na ferramenta para trabalhar no estudo, como Editor ou Leitor. Ela recebe o convite no sino de notificações e por e-mail.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "O controlador dos dados é o pesquisador responsável pelo estudo; a ferramenta só trata os dados em nome dele.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "O e-mail é o que você usa para entrar e como a equipe convida você para um estudo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/dados/page.tsx"
   },
   {
    "texto": "O e-mail é o que você usa para entrar e também como as outras pessoas da equipe convidam você para um estudo.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O estado do estudo mudou em outra aba. Recarregue a página para ver o atual.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
   },
   {
    "texto": "O estudo começa em rascunho. Nada vai para os participantes até você abrir a coleta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/novo/page.tsx"
   },
   {
    "texto": "O estudo continua em rascunho. Nada vai para os participantes até você abrir a coleta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/editar/page.tsx"
   },
   {
    "texto": "O formulário que define o que vai ser avaliado e quem vai responder o quê.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O idioma da ferramenta e o idioma padrão dos estudos que você cria. Quem responde pode trocar o idioma do questionário a qualquer momento.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/idioma/page.tsx"
   },
   {
    "texto": "O idioma da ferramenta inteira, dos avisos e dos e-mails que você recebe. Também é o idioma em que seus estudos novos nascem; cada estudo pode ter outro, no formulário.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O intervalo de confiança de 95% é a faixa em que a média provavelmente ficaria se o estudo fosse repetido com outras pessoas do mesmo público. Quanto menos respostas, mais largo o traço. Se os traços de duas versões não se sobrepõem, a diferença tende a ser real; se se sobrepõem, não dá para concluir sem um teste estatístico.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "O link abre neste idioma e o participante pode trocar a qualquer momento. Título, produto e objetivo são traduzidos automaticamente para o idioma que ele escolher.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "O link abre no idioma escolhido, e o participante pode trocar para qualquer um dos 37 idiomas do UEQ. Os 26 pares de palavras usam a tradução oficial; título, produto e objetivo são traduzidos automaticamente.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O link da coleta",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "O manual oficial: aplicação, cálculo das escalas, interpretação e respostas suspeitas. A ferramenta segue este manual.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "O método UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "O objetivo aparece aqui.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
   },
   {
    "texto": "O painel do UEQ: médias das seis escalas, comparação com o benchmark, itens e exportações.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O painel do superusuário. Cada cartão abre a página da ação.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O participante marca, a ferramenta calcula",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "O participante responde no idioma dele, com as traduções oficiais.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "O que a Ferramenta UEQ guarda, para quê, por quanto tempo e como você controla os seus dados.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "O que avisa",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O que dá para mudar",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O que está configurado em produção e o que está sempre ativo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "O que fica gravado",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "O que não guardamos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "O que tem na tabela",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O que é",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/FichaDocumento.tsx"
   },
   {
    "texto": "O que é Perspicuidade?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "O que é o IC95?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "O que é o UEQ",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "O que é o alfa de Cronbach?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "O que é o benchmark?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "O resumo do estudo, o link da coleta e as ações que mudam o estado dele.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O seu consentimento, dado na primeira tela (art. 7º, I), para pesquisa acadêmica (art. 7º, IV).",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "O sino avisa sobre convites, respostas novas e mudanças da equipe.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "O sino de notificações",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "O sino na barra do topo, entre Minha conta e Sair, mostra quantas novidades você ainda não viu: convites (que você aceita ou recusa ali mesmo), respostas que chegaram e mudanças que outras pessoas fizeram nos seus estudos.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "O texto não é igual ao título do estudo. Nada foi excluído.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
   },
   {
    "texto": "O tour continua em outra página",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Objetivo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
   },
   {
    "texto": "Olá!",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Opção",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "Opções da conta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Opções de administração",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Ordem dos itens",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Ordem oficial",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+  },
+  {
+   "texto": "Os dados demográficos são gravados cifrados com AES-256-GCM, com a chave guardada fora do banco: quem tivesse uma cópia do banco não conseguiria lê-los.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Os itens de {escalas} não andaram juntos neste grupo: a escala pode ter sido entendida de jeitos diferentes. Confira os itens {itens} em “Médias por item” antes de tirar conclusões sobre essa escala.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Os itens de {escalas} não andaram juntos neste grupo: as escalas podem ter sido entendidas de jeitos diferentes. Confira os itens {itens} em “Médias por item” antes de tirar conclusões sobre essas escalas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Os links públicos param de funcionar. Não dá para desfazer.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
+  },
+  {
+   "texto": "Os participantes devem falar com o pesquisador que enviou o link do estudo, que é quem responde pela pesquisa.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Os participantes respondem sem conta, pelo celular ou computador.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
+   "texto": "Os pesquisadores fazem tudo direto na página Minha conta.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Outro",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Painel em PDF",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Painel para impressão · {titulo} · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
    "texto": "Panorama das {quantidade}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Papel",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Papel de quem recebe",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
   },
   {
    "texto": "Papel de {nome}",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Papéis",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Para aceitar ou recusar, entre na ferramenta e abra Convites.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Para aceitar ou recusar, entre na ferramenta e abra Convites: {link}",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Para comparar duas ou mais versões do produto (teste A/B), adicione uma versão para cada. O link é um só: a ferramenta distribui cada participante para a versão com menos respostas, para os grupos ficarem equilibrados.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Para mostrar a ferramenta e o questionário em outros idiomas, os textos da interface e o título, o produto e o objetivo de cada estudo vão para a API do Claude (Anthropic), que devolve a tradução. Nenhuma resposta, nome, e-mail ou dado demográfico vai junto.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Para que serve",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/FichaDocumento.tsx"
   },
   {
    "texto": "Para quem vai testar ou avaliar a ferramenta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Para quem vai testar ou avaliar a ferramenta. Passe o e-mail e a senha para a pessoa.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/page.tsx"
   },
   {
    "texto": "Para quê",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Para trazer respostas coletadas fora da ferramenta, em papel ou em outro formulário. O formato é o da aba Data da planilha oficial, o mesmo da exportação “Formato da planilha oficial”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/page.tsx"
   },
   {
    "texto": "Parar os e-mails",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Partes dos resultados",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/AbasResultados.tsx"
   },
   {
    "texto": "Participantes",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Participação de {quando} na análise",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Participação de {quando} saiu da análise. Nada foi apagado: marque “Na análise” para incluir de novo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/acoes.ts"
   },
   {
    "texto": "Participação de {quando} voltou para a análise.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/acoes.ts"
   },
   {
    "texto": "Participação suspeita",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Participações",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Passo {v} de {length}",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Pelo menos 8 caracteres. A pessoa pode trocar depois, em Minha conta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/NovaConta.tsx"
   },
   {
    "texto": "Pendentes: a pessoa aceita pelo sino",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
+  },
+  {
+   "texto": "Permanece anônimo: nada liga as respostas à pessoa.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Perspicuidade",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Período",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
   },
   {
    "texto": "Período da coleta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
   },
   {
    "texto": "Pesquisadores",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Pessoa",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/ContasAdmin.tsx"
   },
   {
    "texto": "Pessoas",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "Pessoas com acesso",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
+  },
+  {
+   "texto": "Pode fazer o download dos próprios dados ou apagá-los quando quiser.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Política de privacidade",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FichaConta.tsx"
   },
   {
    "texto": "Política de privacidade · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/page.tsx"
   },
   {
    "texto": "Por e-mail",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Por quanto tempo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Por que a faixa neutra vai de -0,8 a +0,8?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "Positiva",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Prefiro não responder",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Preparando…",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Primeiras linhas do arquivo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Primeiro acesso",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Principal",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/BarraFixa.tsx"
   },
   {
    "texto": "Problema",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Produto avaliado",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
   },
   {
    "texto": "Projeto da disciplina",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Pronto: os avisos do sino também vão chegar no seu e-mail.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/acoes.ts"
   },
   {
    "texto": "Pronto: os avisos ficam só no sino, sem e-mail.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/acoes.ts"
   },
   {
    "texto": "Proporção entre as {responderam} pessoas que escolheram uma opção.",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "Proteção de dados",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Proteção de dados · Administração · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "Proteção de dados · LGPD",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Prévia",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Prévia para o participante",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
   },
   {
    "texto": "Próxima",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/PaginaSecao.tsx"
   },
   {
    "texto": "Próximo",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Próximos passos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Pular para o conteúdo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/layout.tsx"
   },
   {
    "texto": "Pular tutorial",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Páginas vizinhas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/PaginaSecao.tsx"
   },
   {
    "texto": "Pós-graduação",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Qualidade hedônica",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Qualidade pragmática",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Quando alguém da equipe convida você e você aceita, o estudo aparece na seção “Compartilhados com você”, com o nome de quem é o dono e o seu papel: Editor pode mexer no estudo; Leitor só vê e exporta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Quando o estudo coleta dados demográficos, a sub-aba “Dados demográficos” mostra cada pergunta no gráfico que combina com ela: faixa etária em colunas, gênero e escolaridade em barras e familiaridade numa barra dividida. “Ver os números” abre a tabela de cada gráfico.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Quem cuida dos dados",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Quem deve ler",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/FichaDocumento.tsx"
   },
   {
    "texto": "Quem responde",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Quem respondeu de forma contraditória ou marcou quase tudo igual aparece como suspeito. Você decide, na coluna “Na análise”, se a resposta entra no cálculo. Nada é apagado.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Quem tem conta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Quem tem conta na ferramenta e quem é administrador.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Quem vê o quê",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Rascunho",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/status-estudo.ts"
   },
   {
    "texto": "Rastreamento",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Reabrindo a coleta…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/BotaoColeta.tsx"
   },
   {
    "texto": "Reabrir coleta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/BotaoColeta.tsx"
   },
   {
    "texto": "Receber os avisos também por e-mail",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/PreferenciaEmail.tsx"
   },
   {
    "texto": "Recusado",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Recusar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "Remover a versão {v}?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/ListaVersoes.tsx"
   },
   {
    "texto": "Remover versão",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/ListaVersoes.tsx"
   },
   {
    "texto": "Remover versão {v}",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/ListaVersoes.tsx"
   },
   {
    "texto": "Requisitos, rastreabilidade, personas e histórias de usuário",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AbasEstudo.tsx"
   },
   {
    "texto": "Respostas brutas (CSV)",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Respostas coletadas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FichaConta.tsx"
   },
   {
    "texto": "Respostas concluídas por versão",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Respostas da etapa opcional “Dados opcionais”, das {quantidade} na análise que vieram pelo link da versão “{versao}”. As importadas de CSV não têm essa etapa.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/demograficos/page.tsx"
   },
   {
    "texto": "Respostas da etapa opcional “Dados opcionais”, das {quantidade} na análise que vieram pelo link. As importadas de CSV não têm essa etapa.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/demograficos/page.tsx"
   },
   {
    "texto": "Respostas de fora da ferramenta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Respostas de um estudo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Respostas recodificadas (CSV)",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Respostas suspeitas",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Respostas · {titulo} · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "Resultados",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AbasEstudo.tsx"
   },
   {
    "texto": "Resultados mostra o painel com as seis escalas e o benchmark; Respostas lista cada participação e as suspeitas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Resultados por escala",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Resultados por escala (CSV)",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Resultados · {titulo} · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/page.tsx"
   },
   {
    "texto": "Resumo da conta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FichaConta.tsx"
   },
   {
    "texto": "Rever o tour guiado",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/ajuda/BotaoAjuda.tsx"
   },
   {
    "texto": "Revisar",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
   },
   {
    "texto": "Revisar respostas suspeitas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Revisar {v}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
   },
   {
    "texto": "Ruim",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "SCHREPP, M. User Experience Questionnaire Handbook. Versão 11. 2023. Disponível em: https://www.ueq-online.org.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "SCHREPP, M.; HINDERKS, A.; THOMASCHEWSKI, J. Applying the User Experience Questionnaire (UEQ) in different evaluation scenarios. In: MARCUS, A. (ed.). Design, User Experience, and Usability: DUXU 2014. Cham: Springer, 2014. (Lecture Notes in Computer Science, v. 8517). p. 383-392.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "SCHREPP, M.; HINDERKS, A.; THOMASCHEWSKI, J. Construction of a benchmark for the User Experience Questionnaire (UEQ). International Journal of Interactive Multimedia and Artificial Intelligence, v. 4, n. 4, p. 40-44, 2017.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "SCHREPP, M.; HINDERKS, A.; THOMASCHEWSKI, J. Design and evaluation of a short version of the User Experience Questionnaire (UEQ-S). International Journal of Interactive Multimedia and Artificial Intelligence, v. 4, n. 6, p. 103-108, 2017.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Saindo do estudo…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Sair",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/BarraSuperior.tsx"
   },
   {
    "texto": "Sair da conta?",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/BarraSuperior.tsx"
   },
   {
    "texto": "Sair deste estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
    "texto": "Salvando…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioDados.tsx"
   },
   {
    "texto": "Salvar alterações",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioDados.tsx"
   },
   {
    "texto": "Salvar idioma",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/idioma/page.tsx"
   },
   {
    "texto": "Salvar ou descartar",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Se a pessoa se sente no controle.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Se dá para fazer as tarefas sem esforço desnecessário.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Se o botão não funcionar, copie e cole este endereço no navegador:",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Se o produto é criativo e inovador.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Se você aplicou o questionário fora da ferramenta (papel, outro formulário), importe um CSV no formato da planilha oficial. As importadas aparecem marcadas na tabela.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Se você respondeu um questionário",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Se você tem conta de pesquisador",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Se é fácil de entender e de aprender a usar.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Se é interessante e motivador usar.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Seleção",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
    "texto": "Sempre ativos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "Senha",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/NovaConta.tsx"
   },
   {
    "texto": "Senha atual",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioSenha.tsx"
   },
   {
    "texto": "Senha trocada. As outras sessões abertas foram encerradas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/acoes.ts"
   },
   {
    "texto": "Senha · Minha conta · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/senha/page.tsx"
   },
   {
    "texto": "Senhas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Sessão",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Seus dados",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FichaConta.tsx"
   },
   {
    "texto": "Seus dados (LGPD)",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Seus dados de acesso e a exclusão da conta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Seus dados de acesso e preferências. Os participantes nunca veem seu nome nem seu e-mail.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Seus direitos (LGPD, art. 18)",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Seus estudos",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Seus estudos continuam salvos e os links seguem aceitando respostas. Para voltar, entre de novo com seu e-mail e senha.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/BarraSuperior.tsx"
   },
   {
    "texto": "Seção",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/EmProducao.tsx"
   },
   {
    "texto": "Seções da documentação",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/PaginaDocumento.tsx"
   },
   {
    "texto": "Seções do estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AbasEstudo.tsx"
   },
   {
    "texto": "Sino de notificações",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Situação",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Situação dos documentos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/EmProducao.tsx"
   },
   {
    "texto": "Sobre este documento",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/FichaDocumento.tsx"
   },
   {
    "texto": "Sobre o estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Sobre o instrumento",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/Paineis.tsx"
   },
   {
    "texto": "Status",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Sugerido a partir do produto avaliado. Pode trocar.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/ListaVersoes.tsx"
   },
   {
    "texto": "Suspeita",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Só os 26 valores por linha, das participações na análise. Cole na aba de dados da UEQ Data Analysis Tool para conferir os cálculos.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Teclado, leitor de tela e zoom de 400% (WCAG 2.2 AA).",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Texto gerado a partir das médias e das faixas de interpretação. Os números estão no gráfico e na tabela logo abaixo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "Tirar administrador",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/ContasAdmin.tsx"
   },
   {
    "texto": "Tirar ou devolver à análise",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Tirar suspeitas da análise",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Toda a conexão usa HTTPS (TLS), inclusive entre a ferramenta e o banco de dados.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Todas as linhas do arquivo entram nesta versão.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Todas as notificações",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "Todas as respostas coletadas estão fora da análise. Inclua de volta pela aba Respostas para ver os resultados.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/page.tsx"
   },
   {
    "texto": "Todas as versões",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/demograficos/page.tsx"
   },
   {
    "texto": "Todas as versões ({naAnaliseTotal} na análise)",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ControlesResultados.tsx"
   },
   {
    "texto": "Tornar administrador",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/ContasAdmin.tsx"
   },
   {
    "texto": "Trabalhe em equipe",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Traduziram o UEQ para o português, com Thomaschewski e Schrepp. É a versão que o participante vê aqui.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Tradução automática desligada",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Tradução automática ligada",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Traduções",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Traga para o estudo respostas coletadas fora da ferramenta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Trocando a senha…",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioSenha.tsx"
   },
   {
    "texto": "Trocar senha",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioSenha.tsx"
   },
   {
    "texto": "Troque a senha; as outras sessões abertas são encerradas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "Três estudos com dados inventados, para mostrar a ferramenta funcionando.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Tudo configurado",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "Tudo o que aconteceu nos estudos que você acompanha, do mais recente ao mais antigo.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Tudo pode ser mudado a qualquer momento, inclusive ligar ou desligar a coleta de dados demográficos (vale para as próximas respostas). Só não dá para remover uma versão que já tem respostas, para não perder dados.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Título do estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Título e produto aparecem para você; o objetivo também aparece para o participante, na tela de consentimento. Escreva em linguagem simples.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Título, objetivo, período e as versões do produto que serão comparadas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "UEQ completo · 26 itens · {length} idiomas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
   },
   {
    "texto": "UEQ © Laugwitz, Held e Schrepp ·",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Um CSV com 26 colunas (uma por item, na ordem oficial) e uma linha por participante, com valores de 1 a 7, como na aba Data da planilha do UEQ.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Um projeto acadêmico da disciplina Fundamentos da IHC do PPGIa da PUCPR, feito por Gabriel Meira, Jean Weiss e Luiza Pedralli.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Um questionário padronizado e gratuito: em poucos minutos, quem usou um produto marca 26 pares de palavras opostas, e o resultado vira seis notas comparáveis entre produtos e versões.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Uma comparação com a base oficial do UEQ, com 21.175 pessoas de 468 estudos de produtos variados. A faixa diz em que parte dessa base a média caiu: Excelente fica entre os 10% melhores; Bom tem 10% de resultados melhores e 75% piores; Acima da média, 25% melhores e 50% piores; Abaixo da média, 50% melhores e 25% piores; Ruim fica entre os 25% piores.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "Uma das versões não é deste estudo. Recarregue a página e tente de novo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
   },
   {
    "texto": "Uma escala só, com 6 itens.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Uma linha por participação, valores de 1 a 7, com colunas de inclusão na análise e suspeita. Para arquivar ou analisar em outro programa.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Uma pessoa por linha, com os 26 valores de 1 a 7 na ordem oficial e sem cabeçalho. Separados por ponto e vírgula, vírgula ou tabulação. Até 5000 linhas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Uma versão",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ControlesResultados.tsx"
   },
   {
    "texto": "Use no máximo 120 caracteres no nome.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-conta.ts"
   },
   {
    "texto": "Use no máximo 120 caracteres no produto.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Use no máximo 160 caracteres no título.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Use no máximo 2000 caracteres no objetivo.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Use no máximo 80 caracteres no nome da versão.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Use pelo menos {MINIMO_SENHA} caracteres. Pode colar de um gerenciador de senhas.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioSenha.tsx"
   },
   {
    "texto": "Use “Criar estudo” para começar: título, produto avaliado, objetivo, período e as versões que vão ser comparadas. O estudo nasce em rascunho e só recebe respostas depois de você abrir a coleta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "User Experience Questionnaire",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Vamos ver os resultados",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Veja quem tem conta, torne alguém administrador e crie a conta de quem vai testar ou avaliar a ferramenta. No primeiro acesso a pessoa faz o tour e pode trocar a senha em Minha conta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Ver convites",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Ver e levar seus dados",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Ver escalas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "Ver no GitHub",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/FichaDocumento.tsx"
   },
   {
    "texto": "Ver os números",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "Ver prévia",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Ver respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ControlesResultados.tsx"
   },
   {
    "texto": "Ver resultados",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Ver seus estudos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Ver todas as notificações",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "Versão",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "Versão {nome}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
    "texto": "Versão {v}",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Versões",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Visão geral",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AbasEstudo.tsx"
   },
   {
    "texto": "Visão geral do estudo",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Você ainda não tem estudos.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
+  },
+  {
+   "texto": "Você altera o nome e o e-mail em Minha conta.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Você entrou na sua conta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Você foi convidado para um estudo",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Você já usava este produto?",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Você mesmo clica nas ações que o tour destacar. Dá para pular ou fechar quando quiser, e rever depois pelo botão (?) de qualquer página.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Você não pode tirar o seu próprio acesso de administrador.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "Você recebe estes avisos porque participa deste estudo. Para parar de receber por e-mail, desligue em Minha conta.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/notificacoes.ts"
   },
   {
    "texto": "Você saiu da sua conta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Você saiu do caminho do tour. Volte para onde ele parou ou pule o tutorial.",
-   "cliente": true
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
    "texto": "Você saiu do estudo. Ele continua com o dono e com o resto da equipe.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Você tem {quantidade} para trabalhar em estudos da equipe.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "Voltar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ArtigoDocumento.tsx"
   },
   {
    "texto": "Voltar para Minha conta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/privacidade/origem.ts"
   },
   {
    "texto": "Voltar para Respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "Voltar para a página anterior",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/privacidade/origem.ts"
   },
   {
    "texto": "Voltar para a página inicial",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/privacidade/origem.ts"
   },
   {
    "texto": "Voltar para os resultados",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
    "texto": "Zoom",
-   "cliente": true
-  },
-  {
-   "texto": "[data-ampliar]",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ArtigoDocumento.tsx"
   },
   {
    "texto": "a coleta ainda não foi aberta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "a resposta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "a resposta coletada",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "a versão",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "aberto",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "abertos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "abriu a coleta de “{titulo}”.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
   },
   {
    "texto": "aceitando respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/status-estudo.ts"
   },
   {
    "texto": "administrador",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "administradores",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/page.tsx"
   },
   {
    "texto": "agora",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "ainda não fez o tour do primeiro acesso",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/ContasAdmin.tsx"
   },
   {
    "texto": "amplitude",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "as {n} respostas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "as {n} respostas coletadas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "as {n} versões",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "cinco",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "começa em {dia}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "conta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/page.tsx"
   },
   {
    "texto": "contas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/page.tsx"
   },
   {
    "texto": "convite pendente",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "convites pendentes",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "círculo cheio",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "círculo vazado",
-   "cliente": true
+   "cliente": true,
+   "origem": "graficos/EscalasComBenchmark.tsx"
   },
   {
    "texto": "devolveu uma resposta à análise em “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/acoes.ts"
   },
   {
    "texto": "dia",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "diagrama",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ListaPaginas.tsx"
   },
   {
    "texto": "diagramas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ListaPaginas.tsx"
   },
   {
    "texto": "dias",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "diferença {decimal}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "do PPGIa da PUCPR, 2026.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "dos 26 itens",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "duas",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "editou os dados de “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
   },
   {
    "texto": "em {data}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "encerrado",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "encerrados",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "encerrou a coleta de “{titulo}”.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
   },
   {
    "texto": "escalas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "estimulação e novidade",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "estudo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "estudo de demonstração criado",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "estudos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "estudos de demonstração criados",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "fora da análise",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "github.com/gabrielfjm/ueq_form_ihc",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "há {n} dias",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "há {n} h",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "há {n} min",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "idiomas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "importada de CSV",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "importou {quantidade} de um CSV em “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/acoes.ts"
   },
   {
    "texto": "item",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/ListaPaginas.tsx"
   },
   {
    "texto": "itens",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "ligue só se o objetivo do estudo precisar desses dados (princípio da necessidade). As perguntas usam faixas fechadas, todas têm “Prefiro não responder”, e nada identifica a pessoa: sem nome, e-mail ou IP. Os dados ficam só com a equipe do estudo, saem nas exportações e são apagados junto com o estudo.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "linha",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "linhas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "losango cheio",
-   "cliente": true
+   "cliente": true,
+   "origem": "graficos/EscalasComBenchmark.tsx"
   },
   {
    "texto": "losango vazado",
-   "cliente": true
+   "cliente": true,
+   "origem": "graficos/EscalasComBenchmark.tsx"
   },
   {
    "texto": "menos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "n",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "n na análise",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
    "texto": "n, média, DP, IC95, alfa e faixas de cada escala e versão, só com as participações na análise. Para as tabelas do relatório.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "na análise",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "negativa",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/nomes-ueq.ts"
   },
   {
    "texto": "nenhum estudo criado ainda",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "nenhuma",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "nenhuma ainda",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "neutra",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/nomes-ueq.ts"
   },
   {
    "texto": "neutro",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/EscalasComBenchmark.tsx"
   },
   {
    "texto": "nova",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "nova resposta",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/notificacoes.ts"
   },
   {
    "texto": "novas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/page.tsx"
   },
   {
    "texto": "novas respostas",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/notificacoes.ts"
   },
   {
    "texto": "não responderam",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "não respondeu",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "o estudo",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "o link ainda não aceita respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/status-estudo.ts"
   },
   {
    "texto": "o link não aceita mais respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/status-estudo.ts"
   },
   {
    "texto": "ontem",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
   },
   {
    "texto": "os {n} estudos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "ou mais escalas inconsistentes, ou a mesma posição em mais de",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "participação",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "participação respondeu",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "participações",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "participações responderam",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "perspicuidade, eficiência e confiabilidade",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "pessoa escolheu uma opção",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "pessoa preferiu",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "pessoas escolheram uma opção",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "pessoas preferiram",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "pontos por item",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "positiva",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/nomes-ueq.ts"
   },
   {
    "texto": "previsto de {datas}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "quadrado cheio",
-   "cliente": true
+   "cliente": true,
+   "origem": "graficos/EscalasComBenchmark.tsx"
   },
   {
    "texto": "quadrado vazado",
-   "cliente": true
+   "cliente": true,
+   "origem": "graficos/EscalasComBenchmark.tsx"
   },
   {
    "texto": "quatro",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "reabriu a coleta de “{titulo}”.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
   },
   {
    "texto": "resposta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
    "texto": "resposta importada",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "resposta pronta",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "resposta suspeita",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/acoes.ts"
   },
   {
    "texto": "respostas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
    "texto": "respostas iguais",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "respostas importadas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "respostas prontas",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "respostas suspeitas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/acoes.ts"
   },
   {
    "texto": "sai da lista. Ela ainda não tem respostas; a mudança só vale quando você salvar o estudo.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/ListaVersoes.tsx"
   },
   {
    "texto": "seis",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "sem intervalo de confiança",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "sem leitura",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "sem média",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "somando todos os estudos",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FichaConta.tsx"
   },
   {
    "texto": "suspeita",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
    "texto": "suspeitas",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
    "texto": "tirou uma resposta da análise em “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/acoes.ts"
   },
   {
    "texto": "tirou {quantidade} da análise em “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/acoes.ts"
   },
   {
    "texto": "todas na análise",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "tradução não aprovada",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "três",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "ueq-online.org",
-   "cliente": false
-  },
-  {
-   "texto": "ueq:iniciar-tour",
-   "cliente": true
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "uma",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "versão",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
    "texto": "versões",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
    "texto": "você é editor",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
    "texto": "você é leitor: pode ver e exportar, sem alterar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
    "texto": "{datas} · concluída",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "{datas} · dia {dia} de {total}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "{datas} · passou do fim",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
    "texto": "{data} · atualizado em {data2}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
   },
   {
    "texto": "{escala} ({diferenca} a favor de {versao})",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "{foraDaAnalise} participações fora da análise.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ControlesResultados.tsx"
   },
   {
    "texto": "{itens} itens",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/_acesso/Paineis.tsx"
   },
   {
    "texto": "{naAnalise} na análise · {fora} fora da análise",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "{nomesVersoes}. Depois da primeira resposta, versões com respostas não podem ser removidas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
   },
   {
    "texto": "{nomes} fica na faixa negativa",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "{nomes} fica na faixa neutra",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "{nomes} ficam na faixa negativa",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "{nomes} ficam na faixa neutra",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "{nome} ({email}) convidou você para trabalhar no estudo “{titulo}” na Ferramenta UEQ, como editor.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "{nome} ({email}) convidou você para trabalhar no estudo “{titulo}” na Ferramenta UEQ, como leitor.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "{nome} aceitou o convite para o estudo “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/acoes.ts"
   },
   {
    "texto": "{nome} agora é administrador.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "{nome} agora é editor.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "{nome} agora é leitor.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "{nome} convidou você para o estudo “{titulo}”",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "{nome} convidou você para o estudo “{titulo}” como editor.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "{nome} convidou você para o estudo “{titulo}” como leitor.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "{nome} excluiu o estudo “{titulo}”, com as versões e as respostas.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
   },
   {
    "texto": "{nome} já tem acesso a este estudo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "{nome} mudou seu papel em “{titulo}” para editor.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "{nome} mudou seu papel em “{titulo}” para leitor.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "{nome} não tem mais acesso ao estudo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "{nome} não é mais administrador.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "{nome} recusou o convite para o estudo “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/notificacoes/acoes.ts"
   },
   {
    "texto": "{nome} removeu seu acesso ao estudo “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "{nome} saiu do estudo “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
   },
   {
    "texto": "{nome} · n = {n}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
   },
   {
    "texto": "{nome} é o ponto mais forte",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "{nome}: média {media}, {ic}, {leitura}{benchmark}.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "{n} na análise",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
    "texto": "{posicao} de {total}",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/PaginaSecao.tsx"
   },
   {
    "texto": "{quantidade} com problema em {arquivo}",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "{quantidade} da análise. Nada foi apagado: marque “Na análise” para incluir de novo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/acoes.ts"
   },
   {
    "texto": "{quantidade} de forma contraditória. Decida se ficam na análise.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
   },
   {
    "texto": "{quantidade} de {total}",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "{quantidade} não responder · {quantidade2}",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "{quantidade} para importar",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
    "texto": "{quantidade} · {abertos} com coleta aberta · {quantidade2} no total",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "{quantidade}. Elas aparecem na lista com a marca “importada de CSV”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "{quantidade}: {v} na análise e {fora} fora da análise.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "{rascunhos} em rascunho",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
    "texto": "{respostas} em “{titulo}”.",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/notificacoes.ts"
   },
   {
    "texto": "{rotuloSelecao}, {quantidade} na análise",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
    "texto": "{rotulo}: em produção.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/EmProducao.tsx"
   },
   {
    "texto": "{titulo} · Documentação · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/[documento]/[secao]/[parte]/page.tsx"
   },
   {
    "texto": "{titulo} · Ferramenta UEQ",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
    "texto": "{titulo}: pessoas por opção",
-   "cliente": false
+   "cliente": false,
+   "origem": "graficos/Demografia.tsx"
   },
   {
    "texto": "{versao} em {quantas}",
-   "cliente": false
+   "cliente": false,
+   "origem": "lib/leitura-rapida.ts"
   },
   {
    "texto": "{v} escalas da participação de {quando}",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
    "texto": "{v}tracejado: faixa neutra de -0,8 a +0,8",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/partes.tsx"
   },
   {
    "texto": "Área do pesquisador",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/FaixaCabecalho.tsx"
   },
   {
    "texto": "É a leitura padrão do handbook do UEQ: médias entre -0,8 e +0,8 indicam avaliação neutra, acima de +0,8 positiva e abaixo de -0,8 negativa. Médias acima de +2 ou abaixo de -2 são raras, porque as pessoas tendem a evitar os extremos da escala.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "É o endereço que você manda para os participantes. Ele funciona nos 37 idiomas oficiais do UEQ e só aceita respostas enquanto a coleta está aberta.",
-   "cliente": true
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "É o nome oficial da escala que mede se o produto é fácil de entender e de aprender a usar. As outras: Atratividade é a impressão geral; Eficiência, se dá para fazer as tarefas sem esforço desnecessário; Confiabilidade, se a pessoa se sente no controle; Estimulação, se é interessante e motivador usar; Novidade, se o produto é criativo e inovador.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "É o que o participante lê no termo de consentimento.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
   },
   {
    "texto": "É o que você usa para entrar.",
-   "cliente": true
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioDados.tsx"
   },
   {
    "texto": "Última resposta",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
   },
   {
    "texto": "“Excluir conta”, em Minha conta, apaga tudo, sem período de espera.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "“{name}” não é um CSV. Salve a planilha como CSV e envie de novo.",
-   "cliente": false
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/acoes.ts"
   }
  ]
 }

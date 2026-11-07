@@ -78,9 +78,20 @@ O idioma é escolhido ao criar a conta e trocado em Minha conta › Idioma. Ante
 Como funciona:
 
 1. Todo texto de tela é escrito em português dentro de `t("…")` ou `m("…")`. O comando `pnpm i18n:catalogo` extrai esses textos para `src/traducao/catalogo.json`.
-2. Ao abrir uma tela em outro idioma, o servidor lê as traduções da tabela `traducao`. O que falta sai em português, e os lotes de 60 textos rodam depois da resposta, com até 6 ao mesmo tempo, pelo modelo definido em `src/traducao/claude.ts`.
+2. Ao abrir uma tela em outro idioma, o servidor lê as traduções da tabela `traducao`. O que falta sai em português, e os lotes de 60 textos, agrupados por tela, rodam depois da resposta, com até 6 ao mesmo tempo, pelo modelo definido em `src/traducao/claude.ts` (Claude Haiku 5.5, o mais barato).
+   - Cada texto vai com o arquivo que o usa e com um glossário dos termos da ferramenta, para "baixar" não virar "dar baixa".
+   - Uma segunda leitura compara original e tradução e corrige o que mudou de sentido.
+   - Tradução com `{marcadores}` diferentes do original é descartada: o texto fica em português.
+   - Isso reduz os erros, mas não substitui a revisão por falante nativo.
 3. Cada tradução é guardada por idioma e pelo hash do texto, então nunca é pedida duas vezes. Mudar um texto em português gera uma tradução nova.
 4. Administração › Idiomas mostra a cobertura de cada idioma e tem o botão "Traduzir agora".
+
+Ao escrever um texto novo, pense em quem vai traduzi-lo sem ver a tela:
+
+- Escreva a frase completa, com sujeito. "Fica num cookie" não diz o que fica.
+- Evite palavra com dois sentidos. "Baixa os dados" pode virar "dá baixa"; prefira "faz o download".
+- Não monte frase com pedaços de texto e link: a ordem das palavras muda de idioma para idioma.
+- Só passe por `t()` ou `m()` o que aparece na tela. Seletor e nome de evento traduzidos quebram a tela.
 
 Sem `ANTHROPIC_API_KEY` no ambiente, nada é traduzido e a ferramenta aparece em português. Enquanto mais da metade do catálogo de um idioma não estiver traduzida, o `<html lang>` e a direção ficam em português, para o leitor de tela pronunciar certo.
 

@@ -15,9 +15,12 @@ sequenceDiagram
     alt faltam traduções e há ANTHROPIC_API_KEY
         Trad-->>Pag: t() com o que existe, e o resto em português
         Pag-->>Nav: HTML
-        loop depois da resposta, em lotes de 60, até 6 ao mesmo tempo
-            Trad->>Claude: traduzirLote(textos, pt, es)
-            Claude-->>Trad: traduções com os marcadores preservados
+        loop depois da resposta, em lotes de 60 agrupados por tela, até 6 ao mesmo tempo
+            Trad->>Claude: traduzirLote(textos e telas, pt, es), com o glossário
+            Claude-->>Trad: primeira tradução
+            Trad->>Claude: revisão, com original e tradução lado a lado
+            Claude-->>Trad: correções do que mudou de sentido
+            Note over Trad: tradução com marcadores diferentes do original é descartada
             Trad->>BD: guarda em Traducao, por idioma e hash do texto
         end
     else catálogo completo ou sem chave da API
