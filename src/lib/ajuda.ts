@@ -149,7 +149,7 @@ export const AJUDA = {
       {
         titulo: m("Respostas suspeitas"),
         texto:
-          m("A ferramenta marca como suspeita quem respondeu de forma inconsistente em 3 ou mais escalas, ou marcou mais de 15 itens na mesma posição (regras do Handbook do UEQ). Suspeita é só um alerta: quem decide é você."),
+          m("A ferramenta marca como suspeita a resposta de quem respondeu de forma inconsistente em 3 ou mais escalas, ou marcou mais de 15 itens na mesma posição (regras do Handbook do UEQ). Suspeita é só um alerta: quem decide é você."),
       },
       {
         titulo: m("Tirar ou devolver à análise"),

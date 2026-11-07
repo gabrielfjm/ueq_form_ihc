@@ -322,7 +322,7 @@ export function Tutorial({ primeiroAcesso, pesquisadorId }: { primeiroAcesso: bo
             {naPagina && passo.modo === "clique" && retangulo && (
               <p className={estilos.dica}>
                 <MousePointerClick size={18} strokeWidth={1.5} aria-hidden="true" />
-                <span>{t("Clique no destaque para continuar")}</span>
+                <span>{t("Clique na área destacada para continuar")}</span>
               </p>
             )}
             <div className={estilos.acoes}>

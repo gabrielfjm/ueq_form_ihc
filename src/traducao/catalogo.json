@@ -181,7 +181,7 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
-   "texto": "A ferramenta marca como suspeita quem respondeu de forma inconsistente em 3 ou mais escalas, ou marcou mais de 15 itens na mesma posição (regras do Handbook do UEQ). Suspeita é só um alerta: quem decide é você.",
+   "texto": "A ferramenta marca como suspeita a resposta de quem respondeu de forma inconsistente em 3 ou mais escalas, ou marcou mais de 15 itens na mesma posição (regras do Handbook do UEQ). Suspeita é só um alerta: quem decide é você.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
   },
@@ -239,6 +239,11 @@
    "texto": "A prévia acompanha o que você digita. O texto fixo do termo vem da própria ferramenta.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
+  },
+  {
+   "texto": "A resposta de quem respondeu de forma contraditória ou marcou quase tudo igual aparece como suspeita. Você decide, na coluna “Na análise”, se a resposta entra no cálculo. Nada é apagado.",
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "A senha atual não confere. Confira e tente de novo.",
@@ -786,7 +791,7 @@
    "origem": "componentes/tutorial/passos.ts"
   },
   {
-   "texto": "Clique no destaque para continuar",
+   "texto": "Clique na área destacada para continuar",
    "cliente": true,
    "origem": "componentes/tutorial/Tutorial.tsx"
   },
@@ -3424,11 +3429,6 @@
    "texto": "Quem responde",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
-  },
-  {
-   "texto": "Quem respondeu de forma contraditória ou marcou quase tudo igual aparece como suspeito. Você decide, na coluna “Na análise”, se a resposta entra no cálculo. Nada é apagado.",
-   "cliente": true,
-   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Quem tem conta",
