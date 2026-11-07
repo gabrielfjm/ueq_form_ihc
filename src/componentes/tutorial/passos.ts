@@ -75,7 +75,7 @@ export const PASSOS: readonly Passo[] = [
     alvo: () => '[data-tutorial="participacoes"]',
     titulo: m("Respostas suspeitas"),
     texto:
-      m("Quem respondeu de forma contraditória ou marcou quase tudo igual aparece como suspeito. Você decide, na coluna “Na análise”, se a resposta entra no cálculo. Nada é apagado."),
+      m("A resposta de quem respondeu de forma contraditória ou marcou quase tudo igual aparece como suspeita. Você decide, na coluna “Na análise”, se a resposta entra no cálculo. Nada é apagado."),
     modo: "proximo",
   },
   {

@@ -3,6 +3,13 @@
 
 // Termos que precisam sair iguais em todo o catálogo. O sentido de cada um está nas instruções de claude.ts
 export const TERMOS_DO_GLOSSARIO = [
+  // A frase-modelo fixa o tratamento: sem ela, um lote trata por "tú" e o outro por "usted"
+  "você",
+  "Clique no seu estudo, confira os seus dados e salve.",
+  "do UEQ",
+  "linha",
+  "informe",
+  "remover",
   "estudo",
   "coleta",
   "participação",

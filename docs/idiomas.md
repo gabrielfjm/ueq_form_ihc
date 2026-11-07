@@ -81,6 +81,7 @@ Como funciona:
 2. Ao abrir uma tela em outro idioma, o servidor lê as traduções da tabela `traducao`. O que falta sai em português, e os lotes de 60 textos, agrupados por tela, rodam depois da resposta, com até 6 ao mesmo tempo, pelo modelo definido em `src/traducao/claude.ts` (Claude Haiku 5.5, o mais barato).
    - A tradução anda em três etapas, para os lotes não escolherem palavras diferentes para a mesma coisa: primeiro o glossário do idioma (`src/traducao/rodadas.ts`), guardado na tabela; depois os rótulos curtos; por fim os textos longos, que recebem a tradução dos botões que citam.
    - Cada texto vai com o arquivo que o usa e com as instruções sobre o sentido dos termos, para "baixar" não virar "dar baixa".
+   - O glossário traz uma frase-modelo que fixa o tratamento formal do idioma, e a revisão trata qualquer outro tratamento como erro.
    - O nome "Ferramenta UEQ" viaja como marcador e sai igual em todos os idiomas.
    - Uma segunda leitura compara original e tradução e corrige o que mudou de sentido.
    - Tradução com `{marcadores}` diferentes do original é descartada: o texto fica em português.
