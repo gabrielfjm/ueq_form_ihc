@@ -65,7 +65,7 @@ export function ArtigoDocumento({ html, className }: { html: string; className?:
   }, []);
 
   function aoClicar(evento: MouseEvent<HTMLElement>) {
-    const gatilho = (evento.target as HTMLElement).closest<HTMLElement>(t("[data-ampliar]"));
+    const gatilho = (evento.target as HTMLElement).closest<HTMLElement>("[data-ampliar]");
     if (!gatilho) return;
     evento.preventDefault();
     origem.current = gatilho;

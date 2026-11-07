@@ -35,6 +35,12 @@ export function m<T extends string>(texto: T): T {
   return texto;
 }
 
+// A tradução tem de ter exatamente os mesmos {marcadores} do original: senão, a tela mostraria a chave crua
+export function mesmosMarcadores(original: string, traducao: string): boolean {
+  const marcadores = (texto: string) => [...texto.matchAll(/\{\w+\}/g)].map(([nome]) => nome).sort().join();
+  return marcadores(original) === marcadores(traducao);
+}
+
 export function interpolar(texto: string, valores?: Valores): string {
   if (!valores) return texto;
   return texto.replace(/\{(\w+)\}/g, (inteiro, nome: string) => (nome in valores ? String(valores[nome]) : inteiro));

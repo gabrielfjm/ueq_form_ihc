@@ -25,15 +25,14 @@ type Propriedades = {
 // direitos a pessoa tem. Escrita para ser lida por pesquisadores e participantes, sem juridiquês.
 // Cada seção é uma lista de rótulo e explicação com régua entre as linhas, como as condições do consentimento
 export function Politica({ t, voltar, comLinkDaConta, aviso, ficha }: Propriedades) {
-  const minhaConta = comLinkDaConta ? <Link href="/conta">{t("Minha conta")}</Link> : t("Minha conta");
   const secoes: readonly Secao[] = [
     {
       id: "quem",
       titulo: t("Quem cuida dos dados"),
       linhas: [
         [t("A ferramenta"), t("Um projeto acadêmico da disciplina Fundamentos da IHC do PPGIa da PUCPR, feito por Gabriel Meira, Jean Weiss e Luiza Pedralli.")],
-        [t("Dados das contas"), t("A equipe é a controladora.")],
-        [t("Respostas de um estudo"), t("Controlador é o pesquisador responsável por ele; a ferramenta só opera os dados em nome dele.")],
+        [t("Dados das contas"), t("A equipe é a controladora desses dados.")],
+        [t("Respostas de um estudo"), t("O controlador dos dados é o pesquisador responsável pelo estudo; a ferramenta só trata os dados em nome dele.")],
       ],
     },
     {
@@ -61,7 +60,7 @@ export function Politica({ t, voltar, comLinkDaConta, aviso, ficha }: Propriedad
       titulo: t("Seus direitos (LGPD, art. 18)"),
       linhas: [
         [t("Ver e levar seus dados"), t("Em Minha conta, “Baixar meus dados” gera um arquivo com tudo o que a ferramenta guarda sobre a sua conta.")],
-        [t("Corrigir"), t("Nome e e-mail se mudam em Minha conta.")],
+        [t("Corrigir"), t("Você altera o nome e o e-mail em Minha conta.")],
         [t("Apagar"), t("“Excluir conta”, em Minha conta, apaga tudo, sem período de espera.")],
         [t("Parar os e-mails"), t("Desligue “Receber os avisos também por e-mail” em Minha conta.")],
       ],
@@ -72,11 +71,11 @@ export function Politica({ t, voltar, comLinkDaConta, aviso, ficha }: Propriedad
       linhas: [
         [t("Conexão"), t("Toda a conexão usa HTTPS (TLS), inclusive entre a ferramenta e o banco de dados.")],
         ...(criptografiaAtiva()
-          ? ([[t("Dados demográficos"), t("Gravados cifrados com AES-256-GCM, com a chave guardada fora do banco: quem tivesse uma cópia do banco não conseguiria lê-los.")]] as const)
+          ? ([[t("Dados demográficos"), t("Os dados demográficos são gravados cifrados com AES-256-GCM, com a chave guardada fora do banco: quem tivesse uma cópia do banco não conseguiria lê-los.")]] as const)
           : []),
-        [t("Banco de dados"), t("Fica cifrado em disco no provedor (Neon, região de São Paulo).")],
-        [t("Senhas"), t("Guardadas só como hash bcrypt (custo 12). Depois de {MAXIMO_TENTATIVAS} senhas erradas para o mesmo e-mail, o login espera {JANELA_MINUTOS} minutos.", { MAXIMO_TENTATIVAS, JANELA_MINUTOS })],
-        [t("Sessão"), t("Fica num cookie que o JavaScript da página não lê e que só vai por HTTPS; no banco fica apenas o hash dele. Trocar a senha encerra as outras sessões.")],
+        [t("Banco de dados"), t("O banco de dados fica cifrado em disco no provedor (Neon, região de São Paulo).")],
+        [t("Senhas"), t("As senhas são guardadas só como hash bcrypt (custo 12). Depois de {MAXIMO_TENTATIVAS} senhas erradas para o mesmo e-mail, o login espera {JANELA_MINUTOS} minutos.", { MAXIMO_TENTATIVAS, JANELA_MINUTOS })],
+        [t("Sessão"), t("A sessão fica num cookie que o JavaScript da página não lê e que só vai por HTTPS; no banco fica apenas o hash dele. Trocar a senha encerra as outras sessões.")],
         [t("Quem vê o quê"), t("Cada pessoa só vê os estudos que são dela ou que foram compartilhados com ela. Nem os administradores da ferramenta veem os estudos ou as respostas de outras pessoas.")],
         [t("Traduções"), t("Para mostrar a ferramenta e o questionário em outros idiomas, os textos da interface e o título, o produto e o objetivo de cada estudo vão para a API do Claude (Anthropic), que devolve a tradução. Nenhuma resposta, nome, e-mail ou dado demográfico vai junto.")],
       ],
@@ -85,8 +84,8 @@ export function Politica({ t, voltar, comLinkDaConta, aviso, ficha }: Propriedad
       id: "contato",
       titulo: t("Dúvidas e pedidos"),
       linhas: [
-        [t("Pesquisadores"), <>{t("Fazem tudo direto em")}{" "}{minhaConta}.</>],
-        [t("Participantes"), t("Falam com o pesquisador que enviou o link do estudo, que é quem responde pela pesquisa.")],
+        [t("Pesquisadores"), <>{t("Os pesquisadores fazem tudo direto na página Minha conta.")}{comLinkDaConta && <>{" "}<Link href="/conta">{t("Abrir Minha conta")}</Link></>}</>],
+        [t("Participantes"), t("Os participantes devem falar com o pesquisador que enviou o link do estudo, que é quem responde pela pesquisa.")],
       ],
     },
   ];
@@ -118,15 +117,15 @@ export function Politica({ t, voltar, comLinkDaConta, aviso, ficha }: Propriedad
             <dl className={estilos.resumoLista}>
               <div>
                 <dt>{t("Quem responde")}</dt>
-                <dd>{t("Fica anônimo: nada liga as respostas à pessoa.")}</dd>
+                <dd>{t("Permanece anônimo: nada liga as respostas à pessoa.")}</dd>
               </div>
               <div>
                 <dt>{t("Quem tem conta")}</dt>
-                <dd>{t("Baixa ou apaga os próprios dados quando quiser.")}</dd>
+                <dd>{t("Pode fazer o download dos próprios dados ou apagá-los quando quiser.")}</dd>
               </div>
               <div>
                 <dt>{t("Rastreamento")}</dt>
-                <dd>{t("Nenhum: sem cookies de rastreamento ou de publicidade.")}</dd>
+                <dd>{t("A ferramenta não rastreia ninguém: não usa cookies de rastreamento nem de publicidade.")}</dd>
               </div>
             </dl>
           </section>

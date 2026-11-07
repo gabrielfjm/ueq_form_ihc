@@ -45,6 +45,7 @@ A tabela serve para três coisas:
 |---|---|---|---|
 | Consentimento com uma ação principal. Recusar é um link igualmente visível | Hick, Nielsen 8, §3.7 | `src/app/r/[slug]/page.tsx` | e2e questionario: "não quero participar sai sem gravar…" |
 | O termo tem link para a política, numa página sem barra e sem caminho para a ferramenta, que volta ao termo | LGPD art. 9º, Nielsen 3 | `src/app/r/[slug]/page.tsx`, `src/app/r/[slug]/privacidade/page.tsx` | e2e questionario: "a política de privacidade abre pelo termo, dentro do link do participante, e volta para ele" |
+| A tradução automática recebe a tela de cada texto e um glossário, passa por uma segunda leitura e, com `{marcadores}` diferentes do original, é descartada. O texto fica em português, sem frase de sentido trocado | Nielsen 2 e 4, WCAG 3.1.2 | `src/traducao/claude.ts`, `src/traducao/extrair.ts` | unidade: `claude.test.ts`, `catalogo.test.ts` |
 | Sem tradução, a política avisa no idioma da pessoa que aparece em português, e o texto sai marcado com o `lang` do português | Nielsen 1, WCAG 3.1.2 | `src/app/r/[slug]/privacidade/page.tsx` | e2e questionario: "sem tradução automática, a política avisa no idioma da pessoa e sai marcada como português" |
 | Nada sobre a pessoa é gravado antes de "Concordo" | §3.7 (ética em pesquisa) | `src/app/r/[slug]/acoes.ts` (`consentir`) | e2e questionario |
 | Etapas numeradas (1 Consentimento · 2 Questionário · 3 Dados opcionais) | Shneiderman 4, Nielsen 1 | `src/app/r/[slug]/Etapas.tsx` | e2e questionario (aria-current na etapa) |
