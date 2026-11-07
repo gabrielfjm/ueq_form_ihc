@@ -30,8 +30,11 @@ const GLOSSARIO = [
   "- estudo: uma pesquisa de experiência do usuário (research study), nunca o ato de estudar.",
   "- coleta: o período em que o link recebe respostas (data collection). Abrir, encerrar e reabrir a coleta.",
   "- participação: uma pessoa que respondeu o questionário. resposta: o que ela enviou. versão: variante do produto avaliado.",
-  "- suspeita: resposta possivelmente dada sem atenção (flagged as suspicious), nunca uma acusação.",
-  "- análise: o cálculo dos resultados. Tirar da análise não apaga nada.",
+  "- suspeita: adjetivo de uma participação ou resposta possivelmente dada sem atenção (flagged as suspicious). Nunca o substantivo \"desconfiança\" nem uma acusação.",
+  "- análise: o cálculo dos resultados. Tirar da análise e devolver à análise não apagam nada.",
+  "- tour: a visita guiada do primeiro acesso. pular: deixar o tour de lado (skip).",
+  "- planilha: planilha eletrônica (spreadsheet). prévia: como vai ficar (preview). termo de consentimento: o texto que o participante aceita antes de responder.",
+  "- faixa etária: grupo de idade. faixa do benchmark: Excelente, Bom e as demais.",
   "- baixar: fazer o download de um arquivo. Nunca cancelar, reduzir ou dar baixa.",
   "- arquivo: um arquivo de computador (file). Nunca um arquivo morto.",
   "- entrar e sair: fazer login e logout, salvo em \"sair do estudo\". conta: conta de usuário.",
@@ -47,12 +50,37 @@ const REGRAS_INTERFACE = [
   "- O sentido é o mais importante. Nunca troque, omita ou acrescente uma ideia, e a frase não pode ficar ambígua.",
   "- Trate a pessoa sempre da mesma forma, no registro formal do idioma (usted, Sie, vous e equivalentes). Nunca misture tratamentos.",
   "- Concorde gênero e número com o substantivo a que o texto se refere, mesmo que ele esteja em outro rótulo da mesma tela.",
+  "- Não presuma o gênero de quem lê: quando o idioma permitir, prefira uma forma neutra.",
+  "- Use uma só variante regional do idioma, a mais neutra, e sempre a mesma palavra para o mesmo conceito.",
+  "- A mensagem traz os \"termos\" já definidos para este idioma: use exatamente essa palavra, flexionando quando a gramática pedir. Nunca use sinônimo.",
+  "- Quando um texto vem com \"rotulos\", são nomes de botões e telas já traduzidos. Ao citá-los, use exatamente a tradução dada.",
+  "- Se o original não termina em ponto, a tradução também não termina. Se começa com minúscula, a tradução também começa, salvo regra do idioma.",
   "- Mantenha exatamente os marcadores entre chaves, como {n} ou {nome}, sem traduzir o que está dentro.",
-  "- Mantenha como estão: Ferramenta UEQ, UEQ, UEQ-S, CSV, PDF, JSON, LGPD, WCAG, PUCPR, PPGIa, Excel, GitHub, HTTPS, nomes de pessoas, referências bibliográficas, endereços, caminhos de arquivo e variáveis de ambiente. Minha conta, Estudos e outros nomes de tela são traduzidos sempre do mesmo jeito.",
+  "- Mantenha como estão: UEQ, UEQ-S, CSV, PDF, JSON, LGPD, WCAG, PUCPR, PPGIa, Excel, GitHub, HTTPS, nomes de pessoas, referências bibliográficas, endereços, caminhos de arquivo e variáveis de ambiente. Minha conta, Estudos e outros nomes de tela são traduzidos sempre do mesmo jeito.",
   "- Siglas estatísticas: IC95 e DP podem usar a sigla habitual do idioma; n e alfa ficam como estão.",
   "- Para os nomes das escalas e grupos do UEQ (Atratividade, Perspicuidade, Eficiência, Confiabilidade, Estimulação, Novidade, Qualidade pragmática, Qualidade hedônica) use os nomes oficiais do UEQ no idioma de destino.",
   "- Textos que começam ou terminam com espaço ou pontuação, ou com letra minúscula, são pedaços de uma frase maior: traduza o pedaço preservando esses espaços e a pontuação, para encaixar na frase.",
 ].join("\n");
+
+// O nome da ferramenta sai igual em qualquer idioma. Em vez de confiar no modelo, ele viaja como marcador
+const NOME_DA_FERRAMENTA = "Ferramenta UEQ";
+const MARCADOR_DO_NOME = "{ferramenta_ueq}";
+const esconderNome = (texto: string) => texto.replaceAll(NOME_DA_FERRAMENTA, MARCADOR_DO_NOME);
+const mostrarNome = (texto: string) => texto.replaceAll(MARCADOR_DO_NOME, NOME_DA_FERRAMENTA);
+
+// Pedaço de frase sem ponto final não pode ganhar um: ele entra no meio de outra frase
+function semPontoAMais(original: string, traducao: string): string {
+  return /[.。]$/.test(original.trim()) ? traducao : traducao.replace(/[.。]$/, "");
+}
+
+export type Contexto = {
+  // De onde vem cada texto, para desfazer ambiguidades (só na interface)
+  telas?: string[];
+  // Os rótulos que cada texto cita, já traduzidos
+  rotulos?: Record<string, string>[];
+  // Os termos que o idioma já definiu
+  termos?: Record<string, string>;
+};
 
 const INSTRUCOES: Record<Tipo, string> = {
   interface: [
@@ -104,10 +132,11 @@ function nomeDoIdioma(codigo: string): string {
 
 // A segunda leitura compara original e tradução e corrige o que mudou de sentido. Se ela falhar, fica a primeira
 async function revisar(
-  pares: { id: string; original: string; traducao: string }[],
+  pares: { id: string; original: string; traducao: string; rotulos?: Record<string, string> }[],
   origem: string,
   destino: string,
   tipo: Tipo,
+  blocoDeTermos: string,
 ): Promise<Map<string, string>> {
   if (pares.length === 0) return new Map();
   const resposta = await clienteDaApi().beta.messages.parse({
@@ -119,7 +148,7 @@ async function revisar(
     messages: [
       {
         role: "user",
-        content: `Revise a tradução de ${nomeDoIdioma(origem)} para ${nomeDoIdioma(destino)}.\n\n${JSON.stringify(pares)}`,
+        content: `Revise a tradução de ${nomeDoIdioma(origem)} para ${nomeDoIdioma(destino)}.${blocoDeTermos}\n\n${JSON.stringify(pares)}`,
       },
     ],
   });
@@ -129,15 +158,21 @@ async function revisar(
 
 // Traduz um lote pequeno (até algumas dezenas de textos) e revisa o resultado. Devolve os textos na mesma ordem,
 // com null onde não há tradução confiável: sem resposta, ou com os {marcadores} diferentes do original.
-// telas: de onde vem cada texto, para desfazer ambiguidades (só na interface)
 export async function traduzirLote(
   textos: string[],
   origem: string,
   destino: string,
   tipo: Tipo,
-  telas?: string[],
+  { telas, rotulos, termos }: Contexto = {},
 ): Promise<(string | null)[]> {
-  const entrada = textos.map((texto, indice) => ({ id: String(indice), texto, ...(telas?.[indice] ? { tela: telas[indice] } : {}) }));
+  const comRotulos = (indice: number) => (rotulos?.[indice] && Object.keys(rotulos[indice]).length > 0 ? { rotulos: rotulos[indice] } : {});
+  const entrada = textos.map((texto, indice) => ({
+    id: String(indice),
+    texto: esconderNome(texto),
+    ...(telas?.[indice] ? { tela: telas[indice] } : {}),
+    ...comRotulos(indice),
+  }));
+  const blocoDeTermos = termos && Object.keys(termos).length > 0 ? `\n\nTermos já definidos para este idioma: ${JSON.stringify(termos)}` : "";
   const resposta = await clienteDaApi().beta.messages.parse({
     model: MODELO_TRADUCAO,
     max_tokens: 16000,
@@ -148,18 +183,18 @@ export async function traduzirLote(
     messages: [
       {
         role: "user",
-        content: `Traduza de ${nomeDoIdioma(origem)} para ${nomeDoIdioma(destino)}.\n\n${JSON.stringify(entrada)}`,
+        content: `Traduza de ${nomeDoIdioma(origem)} para ${nomeDoIdioma(destino)}.${blocoDeTermos}\n\n${JSON.stringify(entrada)}`,
       },
     ],
   });
   if (resposta.stop_reason === "refusal" || !resposta.parsed_output) return textos.map(() => null);
   const primeira = new Map(resposta.parsed_output.traducoes.map((item) => [item.id, item.texto.trim()]));
 
-  const pares = entrada.flatMap(({ id, texto }) => {
+  const pares = entrada.flatMap(({ id, texto }, indice) => {
     const traducao = primeira.get(id);
-    return traducao ? [{ id, original: texto, traducao }] : [];
+    return traducao ? [{ id, original: texto, traducao, ...comRotulos(indice) }] : [];
   });
-  const correcoes = await revisar(pares, origem, destino, tipo).catch((erro) => {
+  const correcoes = await revisar(pares, origem, destino, tipo, blocoDeTermos).catch((erro) => {
     // eslint-disable-next-line no-console -- vai para o log da Vercel; fica a primeira tradução
     console.error(`Revisão da tradução (${origem}→${destino}) falhou:`, erro);
     return new Map<string, string>();
@@ -168,8 +203,9 @@ export async function traduzirLote(
   return entrada.map(({ id, texto: original }) => {
     const corrigida = correcoes.get(id)?.trim();
     const candidatas = [corrigida, primeira.get(id)];
-    const texto = candidatas.find((candidata) => candidata && mesmosMarcadores(original, candidata));
-    if (!texto) return null;
+    const escolhida = candidatas.find((candidata) => candidata && mesmosMarcadores(original, candidata));
+    if (!escolhida) return null;
+    const texto = mostrarNome(semPontoAMais(original, escolhida));
     // Os pedaços de frase voltam com os espaços das pontas do original
     const inicio = original.match(/^\s*/)?.[0] ?? "";
     const fim = original.match(/\s*$/)?.[0] ?? "";

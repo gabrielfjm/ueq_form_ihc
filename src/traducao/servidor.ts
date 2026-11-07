@@ -9,6 +9,7 @@ import catalogo from "./catalogo.json";
 import { traducaoAutomaticaLigada, traduzirLote, type Tipo } from "./claude";
 import { COOKIE_IDIOMA } from "./cookie";
 import { chaveDoTexto, criarTradutor, interpolar, type Dicionario, type Traduzir } from "./nucleo";
+import { chaveDoGlossario, ehRotulo, rotulosCitados, TERMOS_DO_GLOSSARIO } from "./rodadas";
 
 type Entrada = { texto: string; cliente: boolean; origem: string };
 const TEXTOS = catalogo.textos as Entrada[];
@@ -124,8 +125,35 @@ async function emParalelo<T>(tarefas: (() => Promise<T>)[], limite: number): Pro
 const TAMANHO_DO_LOTE = 60;
 const emAndamento = new Set<string>();
 
-// Traduz o que falta do catálogo de um idioma, em lotes paralelos. Cada lote é guardado assim que volta,
-// então uma execução interrompida (fim do tempo da função) continua de onde parou na próxima
+async function traducoesGuardadas(idioma: string, chaves: string[]): Promise<Map<string, string>> {
+  const linhas = await banco.traducao.findMany({ where: { idioma, hashOrigem: { in: chaves } }, select: { hashOrigem: true, texto: true } });
+  return new Map(linhas.map((linha) => [linha.hashOrigem, linha.texto]));
+}
+
+// Os termos do idioma ficam guardados, para uma execução que recomeça usar as mesmas palavras. A leitura final
+// vem do banco porque, se duas instâncias traduzirem ao mesmo tempo, vale a que gravou primeiro
+async function glossarioDoIdioma(idioma: string): Promise<Record<string, string>> {
+  const chave = (termo: string) => chaveDoTexto(chaveDoGlossario(termo));
+  const chaves = TERMOS_DO_GLOSSARIO.map(chave);
+  const existentes = await traducoesGuardadas(idioma, chaves);
+  const faltando = TERMOS_DO_GLOSSARIO.filter((termo) => !existentes.has(chave(termo)));
+  if (faltando.length > 0) {
+    const traducoes = await traduzirLote(faltando, IDIOMA_PADRAO, idioma, "interface");
+    await guardar(
+      idioma,
+      faltando.flatMap((termo, indice) => {
+        const traducao = traducoes[indice];
+        return traducao ? [{ hashOrigem: chave(termo), texto: traducao }] : [];
+      }),
+    );
+  }
+  const guardadas = await traducoesGuardadas(idioma, chaves);
+  return Object.fromEntries(TERMOS_DO_GLOSSARIO.flatMap((termo) => (guardadas.has(chave(termo)) ? [[termo, guardadas.get(chave(termo))!]] : [])));
+}
+
+// Traduz o que falta do catálogo de um idioma: primeiro o glossário, depois os rótulos e por fim os textos
+// longos (ver rodadas.ts). Cada lote é guardado assim que volta, então uma execução interrompida (fim do tempo
+// da função) continua de onde parou na próxima
 export async function completarCatalogo(idioma: string, limiteMs = 240_000): Promise<{ traduzidos: number; faltam: number }> {
   if (!traducaoAutomaticaLigada() || !ehIdioma(idioma) || idioma === IDIOMA_PADRAO || emAndamento.has(idioma)) {
     return { traduzidos: 0, faltam: (await dicionarioDoIdioma(idioma)).faltam };
@@ -133,16 +161,10 @@ export async function completarCatalogo(idioma: string, limiteMs = 240_000): Pro
   emAndamento.add(idioma);
   const inicio = Date.now();
   let traduzidos = 0;
-  try {
-    const existentes = new Set(
-      (await banco.traducao.findMany({ where: { idioma, hashOrigem: { in: CHAVES } }, select: { hashOrigem: true } })).map(
-        (linha) => linha.hashOrigem,
-      ),
-    );
-    // Textos da mesma tela vão juntos: um ajuda a entender o outro
-    const faltando = TEXTOS.filter((_, indice) => !existentes.has(CHAVES[indice]!)).sort((a, b) => (a.origem < b.origem ? -1 : a.origem > b.origem ? 1 : 0));
+
+  const traduzirEmLotes = async (entradas: Entrada[], termos: Record<string, string>, rotulos?: Map<string, string>) => {
     const lotes: Entrada[][] = [];
-    for (let i = 0; i < faltando.length; i += TAMANHO_DO_LOTE) lotes.push(faltando.slice(i, i + TAMANHO_DO_LOTE));
+    for (let i = 0; i < entradas.length; i += TAMANHO_DO_LOTE) lotes.push(entradas.slice(i, i + TAMANHO_DO_LOTE));
     await emParalelo(
       lotes.map((lote) => async () => {
         if (Date.now() - inicio > limiteMs) return;
@@ -152,7 +174,11 @@ export async function completarCatalogo(idioma: string, limiteMs = 240_000): Pro
             IDIOMA_PADRAO,
             idioma,
             "interface",
-            lote.map((entrada) => entrada.origem),
+            {
+              termos,
+              telas: lote.map((entrada) => entrada.origem),
+              rotulos: rotulos && lote.map((entrada) => rotulosCitados(entrada.texto, rotulos)),
+            },
           );
           const pares = lote.flatMap((entrada, indice) => {
             const traducao = traducoes[indice];
@@ -167,6 +193,36 @@ export async function completarCatalogo(idioma: string, limiteMs = 240_000): Pro
       }),
       6,
     );
+  };
+
+  try {
+    const existentes = new Set(
+      (await banco.traducao.findMany({ where: { idioma, hashOrigem: { in: CHAVES } }, select: { hashOrigem: true } })).map(
+        (linha) => linha.hashOrigem,
+      ),
+    );
+    // Textos da mesma tela vão juntos: um ajuda a entender o outro
+    const faltando = TEXTOS.filter((_, indice) => !existentes.has(CHAVES[indice]!)).sort((a, b) => (a.origem < b.origem ? -1 : a.origem > b.origem ? 1 : 0));
+    if (faltando.length > 0) {
+      const termos = await glossarioDoIdioma(idioma);
+      await traduzirEmLotes(faltando.filter((entrada) => ehRotulo(entrada.texto)), termos);
+
+      // Os textos longos só andam com todos os rótulos prontos, para citarem os botões pelo nome certo
+      const todosOsRotulos = TEXTOS.filter((entrada) => ehRotulo(entrada.texto)).map((entrada) => entrada.texto);
+      const guardados = await traducoesGuardadas(idioma, todosOsRotulos.map((texto) => chaveDoTexto(texto)));
+      const rotulos = new Map(
+        todosOsRotulos.flatMap((texto) => {
+          const traducao = guardados.get(chaveDoTexto(texto));
+          return traducao ? [[texto, traducao] as const] : [];
+        }),
+      );
+      if (rotulos.size === todosOsRotulos.length) {
+        await traduzirEmLotes(faltando.filter((entrada) => !ehRotulo(entrada.texto)), termos, rotulos);
+      }
+    }
+  } catch (erro) {
+    // eslint-disable-next-line no-console -- vai para o log da Vercel; a tela segue no original
+    console.error(`Tradução do catálogo (${idioma}) falhou:`, erro);
   } finally {
     emAndamento.delete(idioma);
     memoria.delete(idioma);

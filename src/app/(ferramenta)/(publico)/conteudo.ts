@@ -8,7 +8,7 @@ export const ESCALAS_DO_UEQ = [
   { nome: m("Perspicuidade"), grupo: m("Qualidade pragmática"), itens: 4, mede: m("Se é fácil de entender e de aprender a usar.") },
   { nome: m("Eficiência"), grupo: m("Qualidade pragmática"), itens: 4, mede: m("Se dá para fazer as tarefas sem esforço desnecessário.") },
   { nome: m("Confiabilidade"), grupo: m("Qualidade pragmática"), itens: 4, mede: m("Se a pessoa se sente no controle.") },
-  { nome: m("Estimulação"), grupo: m("Qualidade hedônica"), itens: 4, mede: m("Se é interessante e motivador usar.") },
+  { nome: m("Estimulação"), grupo: m("Qualidade hedônica"), itens: 4, mede: m("Se usar o produto é interessante e motivador.") },
   { nome: m("Novidade"), grupo: m("Qualidade hedônica"), itens: 4, mede: m("Se o produto é criativo e inovador.") },
 ] as const;
 

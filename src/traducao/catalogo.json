@@ -2091,11 +2091,6 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
-   "texto": "Gostar de usar.",
-   "cliente": true,
-   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
-  },
-  {
    "texto": "Gráficos dos dados demográficos",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/demograficos/page.tsx"
@@ -3696,6 +3691,11 @@
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
+   "texto": "Se usar o produto é interessante e motivador.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
    "texto": "Se você aplicou o questionário fora da ferramenta (papel, outro formulário), importe um CSV no formato da planilha oficial. As importadas aparecem marcadas na tabela.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
@@ -3712,11 +3712,6 @@
   },
   {
    "texto": "Se é fácil de entender e de aprender a usar.",
-   "cliente": true,
-   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
-  },
-  {
-   "texto": "Se é interessante e motivador usar.",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
@@ -4054,6 +4049,11 @@
    "texto": "Uma versão",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ControlesResultados.tsx"
+  },
+  {
+   "texto": "Usar o produto com prazer.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Use no máximo 120 caracteres no nome.",

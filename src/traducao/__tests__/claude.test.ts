@@ -29,7 +29,7 @@ describe("traduzirLote", () => {
   it("fica com a correção da revisão, e manda a tela de cada texto e o par original e tradução", async () => {
     parse.mockResolvedValueOnce(primeiraLeitura("Dar de baja", "Salir")).mockResolvedValueOnce(revisao({ 0: "Descargar" }));
 
-    const saida = await traduzirLote(["Baixar", "Sair"], "pt", "es", "interface", ["a/conta.tsx", "b/barra.tsx"]);
+    const saida = await traduzirLote(["Baixar", "Sair"], "pt", "es", "interface", { telas: ["a/conta.tsx", "b/barra.tsx"] });
 
     expect(saida).toEqual(["Descargar", "Salir"]);
     expect(parse.mock.calls[0]![0].messages[0].content).toContain('"tela":"a/conta.tsx"');
@@ -60,5 +60,37 @@ describe("traduzirLote", () => {
     parse.mockResolvedValueOnce({ stop_reason: "refusal", parsed_output: null });
     await expect(traduzirLote(["Baixar", "Sair"], "pt", "es", "interface")).resolves.toEqual([null, null]);
     expect(parse).toHaveBeenCalledTimes(1);
+  });
+
+  it("o nome da ferramenta viaja como marcador e sai igual, sem o modelo poder traduzi-lo", async () => {
+    parse.mockResolvedValueOnce(primeiraLeitura("Le damos la bienvenida a {ferramenta_ueq}")).mockResolvedValueOnce(revisao());
+
+    await expect(traduzirLote(["Boas-vindas à Ferramenta UEQ"], "pt", "es", "interface")).resolves.toEqual(["Le damos la bienvenida a Ferramenta UEQ"]);
+    expect(parse.mock.calls[0]![0].messages[0].content).toContain("{ferramenta_ueq}");
+    expect(parse.mock.calls[0]![0].messages[0].content).not.toContain("Ferramenta UEQ");
+  });
+
+  it("recusa a tradução que troca o nome da ferramenta", async () => {
+    parse.mockResolvedValueOnce(primeiraLeitura("Bienvenido a la Herramienta UEQ")).mockResolvedValueOnce(revisao());
+    await expect(traduzirLote(["Boas-vindas à Ferramenta UEQ"], "pt", "es", "interface")).resolves.toEqual([null]);
+  });
+
+  it("os termos do idioma e os rótulos citados vão para a tradução e para a revisão", async () => {
+    parse.mockResolvedValueOnce(primeiraLeitura("Haga clic en Cerrar sesión.")).mockResolvedValueOnce(revisao());
+
+    await traduzirLote(["Clique em Sair."], "pt", "es", "interface", { termos: { coleta: "recopilación" }, rotulos: [{ Sair: "Cerrar sesión" }] });
+
+    for (const [chamada] of parse.mock.calls) {
+      expect(chamada.messages[0].content).toContain('{"coleta":"recopilación"}');
+      expect(chamada.messages[0].content).toContain('"rotulos":{"Sair":"Cerrar sesión"}');
+    }
+  });
+
+  it("pedaço de frase sem ponto final não ganha um, e frase com ponto continua com ele", async () => {
+    parse.mockResolvedValueOnce(primeiraLeitura("el enlace ya no acepta respuestas.", "Enlace copiado.")).mockResolvedValueOnce(revisao());
+    await expect(traduzirLote(["o link não aceita mais respostas", "Link copiado."], "pt", "es", "interface")).resolves.toEqual([
+      "el enlace ya no acepta respuestas",
+      "Enlace copiado.",
+    ]);
   });
 });
