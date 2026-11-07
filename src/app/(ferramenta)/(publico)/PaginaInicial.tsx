@@ -39,7 +39,7 @@ const PREVIA = [
 const GRUPOS = [
   { nome: m("Atratividade"), classe: "atratividade", texto: m("Uma escala só, com 6 itens.") },
   { nome: m("Qualidade pragmática"), classe: "pragmatica", texto: m("Fazer a tarefa com facilidade.") },
-  { nome: m("Qualidade hedônica"), classe: "hedonica", texto: m("Gostar de usar.") },
+  { nome: m("Qualidade hedônica"), classe: "hedonica", texto: m("Usar o produto com prazer.") },
 ] as const;
 
 const ICONES_PASSOS: LucideIcon[] = [SquarePen, Send, ChartColumn, Download];

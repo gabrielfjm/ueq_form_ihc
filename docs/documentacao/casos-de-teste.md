@@ -1,6 +1,6 @@
 # Casos e cenários de teste
 
-Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **182 casos de teste**: 90 de ponta a ponta, 67 de unidade e 25 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
+Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **183 casos de teste**: 90 de ponta a ponta, 68 de unidade e 25 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
 
 A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). A ligação de cada cenário e de cada caso com os requisitos entra quando a lista de requisitos estiver pronta.
 
@@ -9,7 +9,7 @@ A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). A ligação de 
 | Nível | Ferramenta | Casos | Execuções | Passaram | Pulados | Falharam |
 |---|---|---|---|---|---|---|
 | Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 90 | 180 | 177 | 3 | 0 |
-| Unidade | Vitest 5 | 67 | 298 | 290 | 8 | 0 |
+| Unidade | Vitest 5 | 68 | 306 | 298 | 8 | 0 |
 | Manual | Pessoas da equipe | 25 | — | — | — | — |
 
 - **Ponta a ponta:** cada caso roda duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7). As execuções puladas são de propósito: [CT-E49](casos-de-teste.md#ct-e49) só roda quando os documentos que ele usa forem publicados, e [CT-E67](casos-de-teste.md#ct-e67) roda só no desktop.
@@ -79,7 +79,7 @@ pnpm exec playwright show-report   # relatório com as capturas de daltonismo do
 | <a id="cn21"></a>CN21 | **Equipe e notificações** | Convidar por e-mail, aceitar no sino, limitar o que o leitor faz e avisar a equipe | a definir | [CT-U59](casos-de-teste.md#ct-u59), [CT-E63](casos-de-teste.md#ct-e63), [CT-E64](casos-de-teste.md#ct-e64) | Passou |
 | <a id="cn22"></a>CN22 | **Aprender a usar** | Explicar cada página na ajuda (?) e guiar o primeiro acesso com um tour que pode ser pulado | a definir | [CT-E65](casos-de-teste.md#ct-e65), [CT-E66](casos-de-teste.md#ct-e66) | Passou |
 | <a id="cn23"></a>CN23 | **Proteção de dados** | Cumprir a LGPD na interface e no servidor: política pública, cabeçalhos, criptografia, limite de tentativas e download dos dados | a definir | [CT-U58](casos-de-teste.md#ct-u58), [CT-E73](casos-de-teste.md#ct-e73), [CT-E74](casos-de-teste.md#ct-e74), [CT-E75](casos-de-teste.md#ct-e75), [CT-E76](casos-de-teste.md#ct-e76), [CT-E77](casos-de-teste.md#ct-e77), [CT-E78](casos-de-teste.md#ct-e78), [CT-E79](casos-de-teste.md#ct-e79), [CT-E80](casos-de-teste.md#ct-e80), [CT-E81](casos-de-teste.md#ct-e81) | Passou |
-| <a id="cn24"></a>CN24 | **Idioma da ferramenta** | Escolher o idioma ao criar a conta, trocar em Minha conta e manter o catálogo de textos em dia | a definir | [CT-U62](casos-de-teste.md#ct-u62), [CT-U63](casos-de-teste.md#ct-u63), [CT-U66](casos-de-teste.md#ct-u66), [CT-U67](casos-de-teste.md#ct-u67), [CT-E67](casos-de-teste.md#ct-e67) | Passou |
+| <a id="cn24"></a>CN24 | **Idioma da ferramenta** | Escolher o idioma ao criar a conta, trocar em Minha conta e manter o catálogo de textos em dia | a definir | [CT-U62](casos-de-teste.md#ct-u62), [CT-U63](casos-de-teste.md#ct-u63), [CT-U66](casos-de-teste.md#ct-u66), [CT-U67](casos-de-teste.md#ct-u67), [CT-U68](casos-de-teste.md#ct-u68), [CT-E67](casos-de-teste.md#ct-e67) | Passou |
 | <a id="cn25"></a>CN25 | **Cenários de demonstração** | Gerar respostas sintéticas coerentes com o perfil de cada cenário | a definir | [CT-U61](casos-de-teste.md#ct-u61) | Passou |
 | <a id="cn17"></a>CN17 | **Verificação manual com pessoas** | O que a automação não vê: leitor de tela real, celular real, zoom, espaçamento de texto, avaliação heurística e teste com usuários | a definir | [CT-M01](casos-de-teste.md#ct-m01), [CT-M02](casos-de-teste.md#ct-m02), [CT-M03](casos-de-teste.md#ct-m03), [CT-M04](casos-de-teste.md#ct-m04), [CT-M05](casos-de-teste.md#ct-m05), [CT-M06](casos-de-teste.md#ct-m06), [CT-M07](casos-de-teste.md#ct-m07), [CT-M08](casos-de-teste.md#ct-m08), [CT-M09](casos-de-teste.md#ct-m09), [CT-M10](casos-de-teste.md#ct-m10), [CT-M11](casos-de-teste.md#ct-m11), [CT-M12](casos-de-teste.md#ct-m12), [CT-M13](casos-de-teste.md#ct-m13), [CT-M14](casos-de-teste.md#ct-m14), [CT-M18](casos-de-teste.md#ct-m18), [CT-M19](casos-de-teste.md#ct-m19), [CT-M20](casos-de-teste.md#ct-m20), [CT-M21](casos-de-teste.md#ct-m21), [CT-M22](casos-de-teste.md#ct-m22), [CT-M23](casos-de-teste.md#ct-m23), [CT-M24](casos-de-teste.md#ct-m24), [CT-M25](casos-de-teste.md#ct-m25) | Manual, a fazer |
 
@@ -2012,7 +2012,8 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 | <a id="ct-u62"></a>CT-U62 | `catalogo.test.ts` | `catálogo da interface` | O catálogo está em dia com os t() e m() do código, só tem texto de tela, cada texto sabe de que arquivo vem, e nenhum é vazio | 4 | a definir | Passou (4 de 4) |
 | <a id="ct-u63"></a>CT-U63 | `catalogo.test.ts` | `tradutor` | Devolve o original sem tradução e interpola os marcadores; a chave muda com o idioma de origem, menos no português; marcadores desconhecidos ficam como estão | 3 | a definir | Passou (3 de 3) |
 | <a id="ct-u66"></a>CT-U66 | `catalogo.test.ts` | `mesmosMarcadores` | Aceita os marcadores em outra ordem e recusa marcador traduzido, sumido ou a mais | 1 | a definir | Passou (1 de 1) |
-| <a id="ct-u67"></a>CT-U67 | `claude.test.ts` | `traduzirLote` | Fica com a correção da revisão e manda a tela de cada texto; se a revisão falhar, fica a primeira tradução; tradução com marcadores diferentes é recusada; pedaços de frase mantêm os espaços das pontas; sem resposta da API, o lote fica sem tradução | 5 | a definir | Passou (5 de 5) |
+| <a id="ct-u67"></a>CT-U67 | `claude.test.ts` | `traduzirLote` | Fica com a correção da revisão e manda a tela de cada texto; se a revisão falhar, fica a primeira tradução; tradução com marcadores diferentes é recusada; pedaços de frase mantêm os espaços das pontas; sem resposta da API, o lote fica sem tradução; o nome da ferramenta viaja como marcador e sai igual; termos do idioma e rótulos citados vão para a tradução e para a revisão; pedaço de frase não ganha ponto final | 9 | a definir | Passou (9 de 9) |
+| <a id="ct-u68"></a>CT-U68 | `rodadas.test.ts` | `rodadas da tradução` | Rótulo é texto curto sem pontuação de frase; acha os botões citados num texto, com a tradução já escolhida; prefere o rótulo mais longo e não confunde pedaço de palavra, minúscula ou marcador; os botões citados na ajuda existem como rótulos | 4 | a definir | Passou (4 de 4) |
 
 ### CN25 · Cenários de demonstração
 
