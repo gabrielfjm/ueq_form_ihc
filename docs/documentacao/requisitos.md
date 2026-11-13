@@ -1,0 +1,225 @@
+# Requisitos
+
+A Ferramenta UEQ tem **68 requisitos funcionais** (RF), o que ela faz, e **26 requisitos não funcionais** (RNF), como ela tem de ser. Deles, 67 RF e 25 RNF estão entregues; 2 estão pendentes. A mesma lista está em [requisitos.csv](requisitos.csv) e na [planilha de requisitos](planilha-requisitos.xlsx).
+
+Atualizado em 04/11/2026.
+
+## Como ler
+
+Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito sair, ele fica com o status Removido, porque os casos de uso e os casos de teste citam os requisitos pelo número.
+
+**Prioridade**
+
+- **Essencial:** sem ele a ferramenta não cumpre os cinco requisitos da disciplina (criar e gerenciar estudos, aplicar o instrumento, calcular conforme o protocolo, analisar e visualizar, exportar) ou não é acessível.
+- **Importante:** melhora a qualidade de uso, a segurança ou a confiança nos resultados, mas a ferramenta funciona sem ele.
+- **Desejável:** extensão além do escopo obrigatório da proposta.
+
+**Status**
+
+- **Entregue:** está na `main` e pode ser conferido na ferramenta.
+- **Pendente:** ainda falta alguma parte.
+- **Removido:** saiu do escopo. O ID continua reservado.
+
+**Sprint** é a sprint em que o requisito foi entregue (tabela abaixo). "A confirmar" marca o que entrou na `main` depois de 30/10/2026, com a data da mudança no banco; a sprint e o PR ainda vão ser conferidos.
+
+**Como verificar** cita os [casos de teste](casos-de-teste.md) que provam o requisito, quando existem, e diz o que fazer na ferramenta para conferir. Para rodar a ferramenta, use a conta de teste `pesquisador@exemplo.com` (senha `senha-de-teste`) e o Estudo de exemplo.
+
+### Sprints
+
+| Sprint | PR | Data | O que entregou |
+|---|---|---|---|
+| Sprint 00 · Setup | #1 | 22/10/2026 | Esqueleto do projeto com Next, Prisma e testes |
+| Sprint 01 · Banco e seed | #5 | 23/10/2026 | Modelo do banco e os 26 itens do UEQ no seed |
+| Sprint 02 · Cálculo | #6 | 23/10/2026 | Módulo de cálculo do UEQ |
+| Sprint 03 · Autenticação | #7 | 23/10/2026 | Cadastro, login e Minha conta |
+| Sprint 04 · Estudos | #8 | 23/10/2026 | Lista, cadastro e página do estudo |
+| Sprint 05 · Questionário | #9 | 23/10/2026 | Questionário do participante |
+| Sprint 06 · Resultados | #10 | 23/10/2026 | Painel de resultados e comparação entre versões |
+| Sprint 07 · Suspeitas | #11 | 29/10/2026 | Página de respostas e controle das suspeitas |
+| Sprint 08 · Exportação | #12 | 29/10/2026 | Exportações em CSV |
+| Sprint de idiomas | #13 | 29/10/2026 | Questionário nos 37 idiomas do UEQ |
+| Sprint 10 · Extensões | #14 | 30/10/2026 | Importação por CSV, painel em PDF, estrutura do UEQ-S |
+| Sprint de documentação | #15, #16 | 30/10/2026 | Aba Documentação, licença MIT, barra fixa, diagramas em tela cheia |
+| Página inicial e janelas | #17 | 30/10/2026 | Página inicial, Entrar em janela, confirmação de sair e de excluir, ícone |
+| Sprint 09 · Revisão final | pendente |  | Revisão geral e conferência com a planilha oficial |
+
+## Requisitos funcionais
+
+### Acesso e conta
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rf01"></a>RF01 | **Criar conta** | O pesquisador cria uma conta com nome, e-mail e senha, e vê as regras da senha antes de digitar. | Essencial | Sprint 03 · Autenticação | Entregue | [CT-E03](casos-de-teste.md#ct-e03), [CT-E06](casos-de-teste.md#ct-e06), [CT-E07](casos-de-teste.md#ct-e07). Na página inicial, clique em Criar conta e cadastre-se deixando um campo vazio na primeira tentativa. |
+| <a id="rf02"></a>RF02 | **Entrar e sair** | O pesquisador entra com e-mail e senha e sai da sessão, que pede confirmação numa janela. | Essencial | Sprint 03 · Autenticação | Entregue | [CT-E03](casos-de-teste.md#ct-e03), [CT-E08](casos-de-teste.md#ct-e08), [CT-E58](casos-de-teste.md#ct-e58). Entre com a conta de teste, primeiro errando a senha; depois clique em Sair. |
+| <a id="rf03"></a>RF03 | **Proteger a área do pesquisador** | Quem abre uma página do pesquisador sem sessão vai para Entrar e, depois do login, volta para a página que pediu. | Essencial | Sprint 03 · Autenticação | Entregue | [CT-E04](casos-de-teste.md#ct-e04). Sem estar logado, abra http://localhost:3000/estudos. |
+| <a id="rf04"></a>RF04 | **Editar dados da conta** | O pesquisador muda nome e e-mail em Minha conta; um e-mail que já é de outra conta é recusado. | Importante | Sprint 03 · Autenticação | Entregue | [CT-E09](casos-de-teste.md#ct-e09). Minha conta › Dados cadastrais: mude o nome e salve. |
+| <a id="rf05"></a>RF05 | **Trocar a senha** | O pesquisador troca a senha informando a atual, e a troca encerra as sessões abertas em outros navegadores. | Importante | Sprint 03 · Autenticação | Entregue | [CT-E10](casos-de-teste.md#ct-e10). Minha conta › Senha. |
+| <a id="rf06"></a>RF06 | **Excluir a conta** | O pesquisador exclui a conta digitando o e-mail, e a exclusão apaga junto os estudos e as respostas dele. | Importante | Sprint 03 · Autenticação | Entregue | [CT-E11](casos-de-teste.md#ct-e11). Minha conta › Excluir conta, com uma conta criada só para o teste. |
+| <a id="rf07"></a>RF07 | **Baixar meus dados** | O pesquisador baixa, em Minha conta, um arquivo JSON com tudo o que a ferramenta guarda sobre a conta dele. | Importante | A confirmar (31/10/2026) | Entregue | Minha conta › Baixar meus dados: o arquivo .json baixa e traz os dados da conta. |
+| <a id="rf08"></a>RF08 | **Escolher o idioma da ferramenta** | O pesquisador escolhe o idioma da interface ao criar a conta e troca em Minha conta › Idioma, entre os 37 idiomas do UEQ. | Desejável | A confirmar (02/11/2026) | Entregue | Minha conta › Idioma: escolha outro idioma, salve e confira o menu traduzido. |
+| <a id="rf09"></a>RF09 | **Tour guiado no primeiro acesso** | Quem entra pela primeira vez faz um tour pelas próprias ações, e pode pular, fechar ou rever o tour depois pela ajuda. | Desejável | A confirmar (31/10/2026) | Entregue | Crie uma conta nova e entre: o tour começa sozinho. |
+| <a id="rf10"></a>RF10 | **Ajuda em toda página** | Toda página do pesquisador tem um botão de ajuda (?) no cabeçalho, que explica a própria página. | Desejável | A confirmar (31/10/2026) | Entregue | Em qualquer página do pesquisador, clique em (?). |
+| <a id="rf11"></a>RF11 | **Página inicial** | A página inicial explica o UEQ (escalas, leitura dos resultados e benchmark) e dá os créditos; Entrar e Criar conta abrem numa janela sobre ela. | Importante | Página inicial e janelas | Entregue | [CT-E01](casos-de-teste.md#ct-e01), [CT-E58](casos-de-teste.md#ct-e58), [CT-E59](casos-de-teste.md#ct-e59), [CT-E60](casos-de-teste.md#ct-e60). Abra http://localhost:3000 sem estar logado e clique em Entrar. |
+
+### Estudos
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rf12"></a>RF12 | **Listar os estudos** | O pesquisador vê os estudos dele numa tabela com título, produto, status, versões, respostas e última resposta, ordenada pela atualização. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E12](casos-de-teste.md#ct-e12), [CT-E17](casos-de-teste.md#ct-e17). Menu Estudos. |
+| <a id="rf13"></a>RF13 | **Criar estudo** | O pesquisador cria um estudo com título, produto avaliado, objetivo, período de coleta e uma ou mais versões do produto; o nome do produto sugere o nome da primeira versão. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E13](casos-de-teste.md#ct-e13), [CT-E14](casos-de-teste.md#ct-e14). Criar estudo: crie um estudo com 2 versões. |
+| <a id="rf14"></a>RF14 | **Editar estudo** | O pesquisador edita os dados e as versões do estudo; com a coleta aberta, uma versão que já tem respostas não pode ser removida. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E18](casos-de-teste.md#ct-e18). Página do estudo › Editar. |
+| <a id="rf15"></a>RF15 | **Abrir, encerrar e reabrir a coleta** | O pesquisador abre, encerra e reabre a coleta; o link só aceita respostas com a coleta aberta e, nos outros casos, mostra um aviso. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E15](casos-de-teste.md#ct-e15). Página do estudo: Abrir coleta, Encerrar coleta e Reabrir, abrindo o link a cada passo. |
+| <a id="rf16"></a>RF16 | **Copiar o link público** | Cada estudo tem um link público curto e não sequencial, que o pesquisador copia com um botão. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E16](casos-de-teste.md#ct-e16). Página do estudo › Copiar link. |
+| <a id="rf17"></a>RF17 | **Excluir estudo** | O pesquisador exclui um estudo digitando o título; o aviso diz quantas respostas vão junto, e versões, participações e respostas são apagadas. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E19](casos-de-teste.md#ct-e19). Página do estudo › Excluir estudo. |
+| <a id="rf18"></a>RF18 | **Ligar a coleta de dados demográficos** | O pesquisador decide, em cada estudo, se o link mostra a etapa de dados demográficos; ela vem desligada. | Importante | A confirmar (01/11/2026) | Entregue | Criar estudo: ligue os dados demográficos e abra o link: a etapa Dados opcionais aparece. |
+| <a id="rf19"></a>RF19 | **Escolher o idioma do estudo** | O pesquisador escolhe o idioma em que o estudo é escrito e em que o link abre; estudos novos nascem no idioma da conta. | Desejável | A confirmar (02/11/2026) | Entregue | Criar estudo: troque o idioma e abra o link. |
+
+### Equipe e notificações
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rf20"></a>RF20 | **Compartilhar estudo** | O dono convida uma conta cadastrada, pelo e-mail, como Editor (mexe no estudo) ou Leitor (vê e exporta); só o dono convida e exclui o estudo. | Desejável | A confirmar (31/10/2026) | Entregue | Página do estudo › Compartilhar: convide a conta de outra pessoa da equipe como Leitor. |
+| <a id="rf21"></a>RF21 | **Aceitar ou recusar convite** | Quem é convidado aceita ou recusa o convite, e o estudo só aparece na lista dele depois de aceito. | Desejável | A confirmar (31/10/2026) | Entregue | Com a conta convidada, abra o sino e aceite o convite. |
+| <a id="rf22"></a>RF22 | **Sino de notificações** | O sino avisa sobre convites, respostas novas (agrupadas enquanto não lidas) e mudanças feitas pelos parceiros. | Desejável | A confirmar (31/10/2026) | Entregue | Responda o link de um estudo seu e abra o sino. |
+| <a id="rf23"></a>RF23 | **Notificações por e-mail** | Cada notificação também vai por e-mail, no idioma de quem recebe, quando o envio está configurado; o pesquisador desliga em Minha conta. | Desejável | A confirmar (31/10/2026) | Entregue | Minha conta › Notificações por e-mail (o envio depende das variáveis SMTP do .env). |
+
+### Questionário do participante
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rf24"></a>RF24 | **Responder sem conta** | O participante responde pelo link público, sem conta nem login, e não encontra caminho para a área do pesquisador. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E05](casos-de-teste.md#ct-e05), [CT-E52](casos-de-teste.md#ct-e52). Abra http://localhost:3000/r/exemplo numa janela anônima. |
+| <a id="rf25"></a>RF25 | **Consentimento** | O participante lê o termo (objetivo, tempo de 3 a 5 minutos, participação voluntária e anônima) e só participa depois de clicar em Concordo; Não quero participar sai sem gravar nada. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E21](casos-de-teste.md#ct-e21), [CT-E28](casos-de-teste.md#ct-e28). Abra o link do estudo de exemplo. |
+| <a id="rf26"></a>RF26 | **Distribuir participantes entre as versões** | Com mais de uma versão, cada participante vai para a versão com menos respostas concluídas; no empate, para a de menor ordem. | Essencial | Sprint 05 · Questionário | Entregue | [CT-U30](casos-de-teste.md#ct-u30). Responda o link duas vezes (em janelas anônimas) num estudo com 2 versões e confira a aba Respostas. |
+| <a id="rf27"></a>RF27 | **Responder os 26 itens** | O participante responde os 26 itens na ordem e na polaridade oficiais, com a instrução oficial e 7 posições por item, nenhuma marcada de início. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E21](casos-de-teste.md#ct-e21), [CT-E24](casos-de-teste.md#ct-e24). Concordo e quero participar: confira os 26 itens. |
+| <a id="rf28"></a>RF28 | **Acompanhar o progresso** | Um rodapé fixo mostra quantos itens já foram respondidos, de 26. | Importante | Sprint 05 · Questionário | Entregue | [CT-E22](casos-de-teste.md#ct-e22), [CT-M03](casos-de-teste.md#ct-m03). Marque alguns itens e veja o rodapé. |
+| <a id="rf29"></a>RF29 | **Avisar os itens que faltam** | Ao enviar com itens em branco, um resumo no topo diz quais faltam, com um link para cada, e nada é gravado. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E23](casos-de-teste.md#ct-e23). Envie deixando 2 itens em branco e use os links do resumo. |
+| <a id="rf30"></a>RF30 | **Recuperar as respostas marcadas** | Se a página recarregar, as respostas já marcadas voltam e um aviso diz isso. | Importante | Sprint 05 · Questionário | Entregue | [CT-E26](casos-de-teste.md#ct-e26). Marque alguns itens e recarregue a página. |
+| <a id="rf31"></a>RF31 | **Sair sem enviar** | O participante sai a qualquer momento por Sair sem enviar, que confirma numa janela e não grava nada. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E27](casos-de-teste.md#ct-e27). No questionário, clique em Sair sem enviar. |
+| <a id="rf32"></a>RF32 | **Dados demográficos opcionais** | Quando o estudo coleta, o participante responde faixa etária, gênero, escolaridade e familiaridade em faixas fechadas, todas com Prefiro não responder, e pode pular a etapa inteira. | Importante | Sprint 05 · Questionário | Entregue | [CT-E21](casos-de-teste.md#ct-e21). Num estudo com dados demográficos ligados, responda uma pergunta e pule as outras. |
+| <a id="rf33"></a>RF33 | **Concluir e não responder de novo** | Depois do envio, o participante vê o agradecimento, e o mesmo navegador não envia outra resposta para o estudo. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E21](casos-de-teste.md#ct-e21), [CT-E28](casos-de-teste.md#ct-e28). Termine o questionário e abra o link de novo no mesmo navegador. |
+| <a id="rf34"></a>RF34 | **Responder em 37 idiomas** | O link abre no idioma do estudo ou do navegador, o participante troca no seletor entre os 37 idiomas oficiais do UEQ, e os idiomas da direita para a esquerda viram a página. | Importante | Sprint de idiomas | Entregue | [CT-E45](casos-de-teste.md#ct-e45), [CT-E46](casos-de-teste.md#ct-e46), [CT-U45](casos-de-teste.md#ct-u45), [CT-U50](casos-de-teste.md#ct-u50). No consentimento, troque o idioma para árabe ou japonês e responda. |
+| <a id="rf35"></a>RF35 | **Traduzir os textos do estudo** | Título, produto e objetivo escritos pelo pesquisador aparecem traduzidos para o idioma do participante. | Desejável | A confirmar (02/11/2026) | Entregue | Abra o link em outro idioma e confira o título e o objetivo (depende da ANTHROPIC_API_KEY no .env). |
+
+### Cálculo do UEQ
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rf36"></a>RF36 | **Recodificar as respostas** | A ferramenta converte cada resposta de 1 a 7 para -3 a +3, conforme a polaridade do item. | Essencial | Sprint 02 · Cálculo | Entregue | [CT-U01](casos-de-teste.md#ct-u01), [CT-U02](casos-de-teste.md#ct-u02), [CT-U03](casos-de-teste.md#ct-u03), [CT-U04](casos-de-teste.md#ct-u04), [CT-U05](casos-de-teste.md#ct-u05). Resultados › Exportar › respostas recodificadas. |
+| <a id="rf37"></a>RF37 | **Estatísticas por escala** | Para cada escala e versão, a ferramenta calcula n, média, desvio-padrão amostral, intervalo de confiança de 95% e alfa de Cronbach padronizado. | Essencial | Sprint 02 · Cálculo | Entregue | [CT-U07](casos-de-teste.md#ct-u07), [CT-U08](casos-de-teste.md#ct-u08), [CT-U09](casos-de-teste.md#ct-u09), [CT-U10](casos-de-teste.md#ct-u10), [CT-U11](casos-de-teste.md#ct-u11), [CT-U14](casos-de-teste.md#ct-u14). Aba Resultados, tabela de escalas. |
+| <a id="rf38"></a>RF38 | **Interpretar as médias** | Cada média é lida como positiva (acima de +0,8), neutra (de -0,8 a +0,8) ou negativa (abaixo de -0,8). | Essencial | Sprint 02 · Cálculo | Entregue | [CT-U13](casos-de-teste.md#ct-u13). Aba Resultados, coluna Interpretação. |
+| <a id="rf39"></a>RF39 | **Qualidade pragmática e hedônica** | A ferramenta calcula a qualidade pragmática (média de Perspicuidade, Eficiência e Confiabilidade) e a hedônica (média de Estimulação e Novidade). | Essencial | Sprint 02 · Cálculo | Entregue | [CT-U20](casos-de-teste.md#ct-u20). Aba Resultados, linha abaixo da tabela de escalas. |
+| <a id="rf40"></a>RF40 | **Classificar no benchmark** | Cada média é classificada nas 5 faixas do benchmark oficial (excelente, bom, acima da média, abaixo da média, ruim); média igual ao limite cai na faixa de baixo. | Essencial | Sprint 02 · Cálculo | Entregue | [CT-U16](casos-de-teste.md#ct-u16), [CT-U17](casos-de-teste.md#ct-u17). Aba Resultados, coluna Benchmark. |
+| <a id="rf41"></a>RF41 | **Média por item** | A ferramenta calcula a média recodificada e a distribuição de 1 a 7 de cada um dos 26 itens. | Importante | Sprint 02 · Cálculo | Entregue | [CT-U15](casos-de-teste.md#ct-u15). Aba Resultados, gráfico Médias por item. |
+| <a id="rf42"></a>RF42 | **Calcular só com quem está na análise** | As estatísticas usam só as participações incluídas na análise. | Essencial | Sprint 02 · Cálculo | Entregue | [CT-U18](casos-de-teste.md#ct-u18), [CT-U22](casos-de-teste.md#ct-u22). Tire uma resposta da análise na aba Respostas e veja o n mudar em Resultados. |
+
+### Resultados
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rf43"></a>RF43 | **Painel de resultados** | O pesquisador vê um resumo da coleta, o gráfico das 6 escalas com IC95 e faixas do benchmark, e a tabela com os mesmos números. | Essencial | Sprint 06 · Resultados | Entregue | [CT-E29](casos-de-teste.md#ct-e29). Estudo de exemplo › aba Resultados. |
+| <a id="rf44"></a>RF44 | **Leitura rápida** | Uma frase no topo do painel resume o resultado: as escalas por faixa do benchmark e as negativas. | Importante | Sprint 06 · Resultados | Entregue | [CT-U42](casos-de-teste.md#ct-u42). Aba Resultados, frase do topo. |
+| <a id="rf45"></a>RF45 | **Avisos de alfa baixo e amostra pequena** | O painel avisa quando o alfa fica abaixo de 0,7 e quando a amostra não permite intervalo de confiança, dizendo o que isso significa e o que fazer. | Importante | Sprint 06 · Resultados | Entregue | [CT-U21](casos-de-teste.md#ct-u21), [CT-E30](casos-de-teste.md#ct-e30). Crie um estudo com uma resposta só e abra Resultados. |
+| <a id="rf46"></a>RF46 | **Gráfico por item** | O pesquisador vê a média de cada item entre os dois termos, na ordem oficial ou agrupada por escala. | Importante | Sprint 06 · Resultados | Entregue | [CT-E29](casos-de-teste.md#ct-e29). Aba Resultados › Médias por item: alterne a ordem. |
+| <a id="rf47"></a>RF47 | **Comparar versões** | Com mais de uma versão, o pesquisador compara as versões lado a lado no mesmo gráfico, com marcadores de formas diferentes e uma leitura das maiores diferenças. | Essencial | Sprint 06 · Resultados | Entregue | [CT-E29](casos-de-teste.md#ct-e29), [CT-U43](casos-de-teste.md#ct-u43). Aba Resultados › Comparar versões. |
+| <a id="rf48"></a>RF48 | **Guardar a visão no endereço** | A versão escolhida e o modo (uma versão ou comparação) ficam no endereço da página, para voltar, recarregar e compartilhar. | Importante | Sprint 06 · Resultados | Entregue | [CT-E29](casos-de-teste.md#ct-e29). Escolha Comparar versões e recarregue a página. |
+| <a id="rf49"></a>RF49 | **Explicar os termos** | Cada termo técnico (escalas, IC95, alfa de Cronbach, benchmark) tem uma explicação curta que abre perto de onde aparece. | Importante | Sprint 06 · Resultados | Entregue | Aba Resultados: abra O que é Perspicuidade? |
+| <a id="rf50"></a>RF50 | **Ver os dados demográficos** | Quando o estudo coleta, uma aba mostra cada pergunta demográfica num gráfico com a tabela dos números, com filtro por versão. | Desejável | A confirmar (01/11/2026) | Entregue | Num estudo com dados demográficos, aba Resultados › Dados demográficos. |
+
+### Respostas e suspeitas
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rf51"></a>RF51 | **Marcar respostas suspeitas** | Cada participação é marcada como suspeita ao ser concluída quando tem 3 ou mais escalas com amplitude maior que 3 ou mais de 15 respostas iguais. | Essencial | Sprint 07 · Suspeitas | Entregue | [CT-U23](casos-de-teste.md#ct-u23), [CT-U25](casos-de-teste.md#ct-u25), [CT-U26](casos-de-teste.md#ct-u26), [CT-U27](casos-de-teste.md#ct-u27), [CT-U28](casos-de-teste.md#ct-u28), [CT-E33](casos-de-teste.md#ct-e33). Estudo de exemplo › aba Respostas › Só suspeitas. |
+| <a id="rf52"></a>RF52 | **Tabela de participações** | O pesquisador vê todas as participações com data, versão, idioma, origem, escalas inconsistentes, maior número de respostas iguais, motivo da suspeita e se está na análise, e filtra só as suspeitas. | Essencial | Sprint 07 · Suspeitas | Entregue | [CT-E33](casos-de-teste.md#ct-e33), [CT-E36](casos-de-teste.md#ct-e36). Aba Respostas. |
+| <a id="rf53"></a>RF53 | **Ver as escalas de um participante** | Ao abrir uma participação, o pesquisador vê a amplitude de cada escala, com as que passaram do limiar em destaque. | Importante | Sprint 07 · Suspeitas | Entregue | [CT-E35](casos-de-teste.md#ct-e35). Aba Respostas: abra Ver escalas de uma suspeita. |
+| <a id="rf54"></a>RF54 | **Tirar e devolver respostas da análise** | O pesquisador tira ou devolve cada participação da análise, ou todas as suspeitas de uma vez, sem apagar nenhum dado, e o painel mostra quantas estão fora. | Essencial | Sprint 07 · Suspeitas | Entregue | [CT-E33](casos-de-teste.md#ct-e33), [CT-E34](casos-de-teste.md#ct-e34). Aba Respostas: tire uma suspeita da análise e coloque de volta. |
+| <a id="rf55"></a>RF55 | **Recalcular as suspeitas** | Um comando recalcula a marca de suspeita de todas as participações depois que a equipe ajusta os limiares do protocolo. | Desejável | Sprint 07 · Suspeitas | Entregue | [CT-M16](casos-de-teste.md#ct-m16). Terminal: pnpm suspeitas:recalcular. |
+
+### Exportação e importação
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rf56"></a>RF56 | **Exportar respostas brutas** | O pesquisador baixa um CSV com as respostas de 1 a 7 de cada participação, com versão e dados demográficos. | Essencial | Sprint 08 · Exportação | Entregue | [CT-U35](casos-de-teste.md#ct-u35), [CT-E37](casos-de-teste.md#ct-e37). Aba Resultados › Exportar › respostas brutas. |
+| <a id="rf57"></a>RF57 | **Exportar respostas recodificadas** | O pesquisador baixa um CSV com as respostas já convertidas para -3 a +3. | Essencial | Sprint 08 · Exportação | Entregue | [CT-U37](casos-de-teste.md#ct-u37), [CT-E37](casos-de-teste.md#ct-e37). Aba Resultados › Exportar › respostas recodificadas. |
+| <a id="rf58"></a>RF58 | **Exportar resultados por escala** | O pesquisador baixa um CSV com uma linha por escala e versão, com as estatísticas do painel. | Essencial | Sprint 08 · Exportação | Entregue | [CT-U38](casos-de-teste.md#ct-u38), [CT-E37](casos-de-teste.md#ct-e37). Aba Resultados › Exportar › resultados por escala. |
+| <a id="rf59"></a>RF59 | **Exportar no formato da planilha oficial** | O pesquisador baixa um CSV com os 26 valores de cada participação na análise, pronto para colar na UEQ Data Analysis Tool. | Essencial | Sprint 08 · Exportação | Entregue | [CT-U34](casos-de-teste.md#ct-u34), [CT-E37](casos-de-teste.md#ct-e37). Aba Resultados › Exportar › compatível com a planilha oficial. |
+| <a id="rf60"></a>RF60 | **Exportar o painel em PDF** | O pesquisador baixa o painel da versão escolhida em PDF, com título do estudo, n e data no cabeçalho. | Desejável | Sprint 10 · Extensões | Entregue | [CT-E39](casos-de-teste.md#ct-e39), [CT-E40](casos-de-teste.md#ct-e40). Aba Resultados › Painel em PDF. |
+| <a id="rf61"></a>RF61 | **Importar respostas por CSV** | O pesquisador importa respostas no formato da planilha oficial para uma versão, com prévia e erros apontados por linha, e as respostas importadas ficam marcadas assim. | Desejável | Sprint 10 · Extensões | Entregue | [CT-U39](casos-de-teste.md#ct-u39), [CT-U40](casos-de-teste.md#ct-u40), [CT-U41](casos-de-teste.md#ct-u41), [CT-E42](casos-de-teste.md#ct-e42), [CT-E43](casos-de-teste.md#ct-e43). Aba Respostas › Importar respostas de um CSV, com data/fixtures/basico/respostas.csv. |
+| <a id="rf62"></a>RF62 | **Aplicar o UEQ-S** | O pesquisador escolhe o UEQ-S (versão curta, 8 itens, escalas pragmática e hedônica) ao criar o estudo. | Desejável | Sprint 10 · Extensões | Pendente | [CT-U53](casos-de-teste.md#ct-u53). Pendente: a estrutura existe, mas os itens e o benchmark do UEQ-S ainda não foram preenchidos pela equipe (data/ueq-s-itens-ptbr.json). |
+
+### Documentação
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rf63"></a>RF63 | **Aba Documentação** | Qualquer pessoa, com ou sem conta, lê a documentação do projeto numa aba pública, em 7 seções; documento ainda não publicado aparece como Em produção. | Importante | Sprint de documentação | Entregue | [CT-E47](casos-de-teste.md#ct-e47), [CT-E48](casos-de-teste.md#ct-e48), [CT-E62](casos-de-teste.md#ct-e62), [CT-U54](casos-de-teste.md#ct-u54). Abra http://localhost:3000/documentacao sem estar logado. |
+| <a id="rf64"></a>RF64 | **Diagramas em tela cheia** | Cada diagrama abre em tela cheia, com zoom de 50% a 400% e arrasto, e fecha com Voltar ou Esc. | Importante | Sprint de documentação | Entregue | [CT-E57](casos-de-teste.md#ct-e57), [CT-U55](casos-de-teste.md#ct-u55). Abra um documento com diagrama e clique nele. |
+| <a id="rf65"></a>RF65 | **Links e downloads da documentação** | Os links entre documentos levam à âncora certa dentro da ferramenta, e os arquivos da ficha (CSV, planilha, fontes) baixam sem conta. | Importante | Sprint de documentação | Entregue | [CT-E49](casos-de-teste.md#ct-e49), [CT-E51](casos-de-teste.md#ct-e51), [CT-U56](casos-de-teste.md#ct-u56). Na aba Documentação, clique num link para outro documento e num download. |
+
+### Administração
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rf66"></a>RF66 | **Gerenciar contas** | O superusuário abre a página Administração, vê as contas e cria uma conta para outra pessoa; quem não é superusuário não acessa. | Desejável | A confirmar (31/10/2026) | Entregue | Com uma conta de administrador, menu Administração › Contas. |
+| <a id="rf67"></a>RF67 | **Cenários de demonstração** | O superusuário cria estudos de demonstração com respostas inventadas, para apresentar a ferramenta. | Desejável | A confirmar (31/10/2026) | Entregue | Administração › Cenários. |
+| <a id="rf68"></a>RF68 | **Situação da proteção de dados e das traduções** | O superusuário vê se a criptografia de campo está ligada e quanto de cada idioma já está traduzido. | Desejável | A confirmar (31/10/2026) | Entregue | Administração › Proteção de dados e Administração › Idiomas. |
+
+## Requisitos não funcionais
+
+### Acessibilidade
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rnf01"></a>RNF01 | **WCAG 2.2 AA** | Toda tela, inclusive nos estados de erro, atende à WCAG 2.2 nível AA, base da ABNT NBR 17225:2025, sem violação apontada pelo axe-core. | Essencial | Sprint 00 · Setup | Entregue | [CT-E06](casos-de-teste.md#ct-e06), [CT-E14](casos-de-teste.md#ct-e14), [CT-E21](casos-de-teste.md#ct-e21), [CT-E47](casos-de-teste.md#ct-e47). Os testes de ponta a ponta rodam o axe-core em cada tela; a checklist manual completa o que a automação não vê. |
+| <a id="rnf02"></a>RNF02 | **320 px e zoom de 400%** | Nenhuma tela rola na horizontal em 320 px de largura ou com zoom de 400%, e nada fica cortado. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E25](casos-de-teste.md#ct-e25), [CT-E31](casos-de-teste.md#ct-e31), [CT-E36](casos-de-teste.md#ct-e36), [CT-E44](casos-de-teste.md#ct-e44), [CT-E50](casos-de-teste.md#ct-e50), [CT-M08](casos-de-teste.md#ct-m08). No navegador, zoom de 400% em cada tela. |
+| <a id="rnf03"></a>RNF03 | **Uso só com teclado** | Todo fluxo funciona só com teclado, com o foco sempre visível, em ordem lógica e nunca coberto pela barra ou pelo rodapé fixos. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E03](casos-de-teste.md#ct-e03), [CT-E22](casos-de-teste.md#ct-e22), [CT-E54](casos-de-teste.md#ct-e54), [CT-M07](casos-de-teste.md#ct-m07). Percorra criar estudo, responder e exportar só com Tab, setas, Espaço e Enter. |
+| <a id="rnf04"></a>RNF04 | **Leitor de tela** | Cada item do questionário é anunciado com número, termos e posição, e toda mensagem de resultado ("Coleta aberta") é anunciada pelo leitor de tela. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E24](casos-de-teste.md#ct-e24), [CT-M01](casos-de-teste.md#ct-m01), [CT-M02](casos-de-teste.md#ct-m02), [CT-M04](casos-de-teste.md#ct-m04), [CT-M06](casos-de-teste.md#ct-m06). Responda o questionário com NVDA, VoiceOver ou TalkBack. |
+| <a id="rnf05"></a>RNF05 | **Área de toque** | Cada círculo do questionário tem área de toque de pelo menos 44 × 44 px. | Importante | Sprint 05 · Questionário | Entregue | [CT-M12](casos-de-teste.md#ct-m12). Responda no celular, com o polegar. |
+| <a id="rnf06"></a>RNF06 | **Contraste** | Todo texto tem contraste de pelo menos 4,5:1, e bordas de campo, foco e marcadores de gráfico, de pelo menos 3:1. | Essencial | Sprint 00 · Setup | Entregue | [CT-U51](casos-de-teste.md#ct-u51), [CT-U52](casos-de-teste.md#ct-u52). Teste automático de contraste dos tokens de cor. |
+| <a id="rnf07"></a>RNF07 | **Informação além da cor** | Nenhuma informação depende só da cor: os gráficos continuam legíveis com daltonismo simulado e em alto contraste. | Essencial | Sprint 06 · Resultados | Entregue | [CT-E32](casos-de-teste.md#ct-e32), [CT-M09](casos-de-teste.md#ct-m09), [CT-M10](casos-de-teste.md#ct-m10). DevTools › Rendering › Emulate vision deficiencies, na aba Resultados. |
+| <a id="rnf08"></a>RNF08 | **Gráficos com texto equivalente** | Todo gráfico tem descrição em texto e uma tabela visível com os mesmos números. | Essencial | Sprint 06 · Resultados | Entregue | [CT-E29](casos-de-teste.md#ct-e29), [CT-M05](casos-de-teste.md#ct-m05). Aba Resultados: confira a tabela abaixo de cada gráfico. |
+
+### Fidelidade ao instrumento
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rnf09"></a>RNF09 | **Questionário sem viés de interface** | As 7 posições têm o mesmo peso visual, sem número nem cor graduada, nenhuma vem marcada, e todos os itens têm o mesmo layout. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E24](casos-de-teste.md#ct-e24). Confira os itens no computador e no celular. |
+| <a id="rnf10"></a>RNF10 | **Termos oficiais** | Os 26 pares de termos usam sempre a tradução oficial do pacote de idiomas do UEQ, nunca uma tradução automática. | Essencial | Sprint de idiomas | Entregue | [CT-U45](casos-de-teste.md#ct-u45), [CT-U46](casos-de-teste.md#ct-u46), [CT-U47](casos-de-teste.md#ct-u47). Compare os termos do questionário com o pacote oficial de idiomas do UEQ. |
+| <a id="rnf11"></a>RNF11 | **Cálculo igual ao da planilha oficial** | Todos os números da ferramenta batem com a UEQ Data Analysis Tool, com tolerância de 1e-6. | Essencial | Sprint 09 · Revisão final | Pendente | [CT-U29](casos-de-teste.md#ct-u29), [CT-M15](casos-de-teste.md#ct-m15). Pendente: falta a equipe preencher os esperado.json a partir da planilha oficial (data/fixtures/LEIA-ME.md). |
+
+### Segurança e privacidade
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rnf12"></a>RNF12 | **Anonimato do participante** | A ferramenta não coleta nada que identifique o participante: nome, e-mail, IP, navegador detalhado ou cookie de rastreamento. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E21](casos-de-teste.md#ct-e21). Confira no modelo do banco que a participação não tem esses campos. |
+| <a id="rnf13"></a>RNF13 | **Coleta mínima** | Os dados demográficos vêm desligados em cada estudo, e participações começadas e não enviadas são apagadas em até 2 dias. | Importante | A confirmar (01/11/2026) | Entregue | Crie um estudo e confira que os dados demográficos começam desligados. |
+| <a id="rnf14"></a>RNF14 | **Criptografia dos dados demográficos** | Os dados demográficos são gravados cifrados com AES-256-GCM, com a chave fora do banco. | Importante | A confirmar (01/11/2026) | Entregue | Administração › Proteção de dados mostra se a criptografia está ligada. |
+| <a id="rnf15"></a>RNF15 | **Senha e sessão protegidas** | As senhas ficam guardadas com bcrypt, a sessão usa cookie httpOnly, Secure e SameSite=Lax, e o banco guarda só o hash da sessão. | Essencial | Sprint 03 · Autenticação | Entregue | [CT-E10](casos-de-teste.md#ct-e10). No DevTools › Application › Cookies, confira as marcas do cookie de sessão. |
+| <a id="rnf16"></a>RNF16 | **Limite de tentativas de login** | Depois de 5 senhas erradas para o mesmo e-mail em 15 minutos, a ferramenta bloqueia novas tentativas por um tempo. | Importante | A confirmar (01/11/2026) | Entregue | Erre a senha 6 vezes seguidas com a mesma conta. |
+| <a id="rnf17"></a>RNF17 | **Acesso só aos próprios estudos** | Cada pesquisador só vê, altera e exporta os próprios estudos e os compartilhados com ele; nem o administrador vê os estudos dos outros. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E20](casos-de-teste.md#ct-e20), [CT-E38](casos-de-teste.md#ct-e38), [CT-E41](casos-de-teste.md#ct-e41). Com outra conta, abra o endereço de um estudo que não é dela. |
+| <a id="rnf18"></a>RNF18 | **Proteções do navegador** | A ferramenta usa HTTPS com HSTS e envia Content Security Policy e os demais cabeçalhos de segurança. | Importante | A confirmar (31/10/2026) | Entregue | Na versão publicada, DevTools › Network › cabeçalhos da resposta. |
+| <a id="rnf19"></a>RNF19 | **Política de privacidade** | Uma política de privacidade pública explica o que é guardado, para quê e como é protegido, conforme a LGPD. | Importante | A confirmar (31/10/2026) | Entregue | Abra http://localhost:3000/privacidade. |
+
+### Usabilidade
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rnf20"></a>RNF20 | **Retorno de cada ação** | Toda ação do pesquisador confirma o resultado e a consequência numa mensagem anunciada ("Coleta aberta. O link já aceita respostas."). | Importante | Sprint 04 · Estudos | Entregue | [CT-E09](casos-de-teste.md#ct-e09), [CT-E15](casos-de-teste.md#ct-e15), [CT-E16](casos-de-teste.md#ct-e16), [CT-M06](casos-de-teste.md#ct-m06). Abra a coleta de um estudo e leia a mensagem. |
+| <a id="rnf21"></a>RNF21 | **Confirmação antes de perder dados** | Sair e toda exclusão pedem confirmação dizendo o que vai acontecer, e excluir conta ou estudo exige digitar o e-mail ou o título. | Importante | Sprint 04 · Estudos | Entregue | [CT-E11](casos-de-teste.md#ct-e11), [CT-E19](casos-de-teste.md#ct-e19), [CT-E27](casos-de-teste.md#ct-e27). Tente excluir um estudo. |
+| <a id="rnf22"></a>RNF22 | **Padrão brasileiro de números e datas** | Em português, números usam vírgula decimal e datas usam dd/mm/aaaa, na tela e nas exportações. | Importante | Sprint 06 · Resultados | Entregue | [CT-U33](casos-de-teste.md#ct-u33), [CT-U44](casos-de-teste.md#ct-u44). Aba Resultados e o CSV de resultados. |
+
+### Plataforma e manutenção
+
+| ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
+|---|---|---|---|---|---|---|
+| <a id="rnf23"></a>RNF23 | **Computador e celular** | A ferramenta funciona no navegador do computador e do celular; todo teste de ponta a ponta roda nos dois. | Essencial | Sprint 00 · Setup | Entregue | [CT-M12](casos-de-teste.md#ct-m12). Abra o link do participante no celular. |
+| <a id="rnf24"></a>RNF24 | **Aplicação web com código aberto** | A ferramenta é uma aplicação web (Next.js e PostgreSQL), com o código no GitHub sob a licença MIT. | Essencial | Sprint 00 · Setup | Entregue | [CT-M19](casos-de-teste.md#ct-m19). Num clone limpo, siga o Como rodar do README. |
+| <a id="rnf25"></a>RNF25 | **Cálculo isolado e testado** | O cálculo do UEQ fica num módulo de funções puras (src/ueq), sem banco nem interface, coberto por testes de unidade. | Importante | Sprint 02 · Cálculo | Entregue | [CT-U01](casos-de-teste.md#ct-u01), [CT-U12](casos-de-teste.md#ct-u12), [CT-U14](casos-de-teste.md#ct-u14), [CT-U22](casos-de-teste.md#ct-u22). Terminal: pnpm test. |
+| <a id="rnf26"></a>RNF26 | **Verificações antes de integrar** | Nenhum pull request entra na main sem lint, checagem de tipos e testes de unidade passando. | Importante | Sprint 00 · Setup | Entregue | Terminal: pnpm lint && pnpm typecheck && pnpm test. |
+
+## Resumo
+
+| Tipo | Essencial | Importante | Desejável | Entregue | Pendente | Removido | Total |
+|---|---|---|---|---|---|---|---|
+| Funcional | 31 | 20 | 17 | 67 | 1 | 0 | 68 |
+| Não funcional | 15 | 11 | 0 | 25 | 1 | 0 | 26 |
+| Total | 46 | 31 | 17 | 92 | 2 | 0 | 94 |
