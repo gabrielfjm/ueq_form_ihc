@@ -209,7 +209,7 @@ describe("rota das âncoras em documentos divididos", () => {
   it("leva à página da âncora, com fragmento só no meio da página", () => {
     expect(rotaDaAncora(documento("casos-de-teste"), "ct-e01")).toBe("/documentacao/casos-de-teste/casos-de-ponta-a-ponta/ct-e01");
     expect(rotaDaAncora(documento("casos-de-teste"), "cn01")).toBe("/documentacao/casos-de-teste/cenarios#cn01");
-    expect(rotaDaAncora(documento("requisitos"), "rf19")).toBe("/documentacao/requisitos#rf19");
+    expect(rotaDaAncora(documento("requisitos"), "rf19")).toBe("/documentacao/requisitos/requisitos-funcionais/estudos#rf19");
   });
 
   it("a página de uma seção reescreve o link e mantém só o fragmento dentro dela", () => {

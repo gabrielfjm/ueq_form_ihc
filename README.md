@@ -1,4 +1,4 @@
-﻿# Ferramenta UEQ
+# Ferramenta UEQ
 
 Ferramenta web para conduzir estudos de avaliação de experiência do usuário com o UEQ (User Experience Questionnaire), do cadastro do estudo à exportação dos dados.
 
