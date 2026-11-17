@@ -1,0 +1,170 @@
+classDiagram
+    direction LR
+
+    class Pesquisador {
+        +String id
+        +String nome
+        +String email «único»
+        +String senhaHash «bcrypt»
+        +DateTime criadoEm
+        +Boolean administrador
+        +DateTime? tutorialVistoEm
+        +Boolean notificacoesPorEmail
+        +String idioma
+    }
+
+    class Sessao {
+        +String id «SHA-256 do token»
+        +DateTime criadaEm
+        +DateTime expiraEm
+    }
+
+    class Estudo {
+        +String id
+        +String titulo
+        +String produtoAvaliado
+        +String objetivo
+        +StatusEstudo status
+        +Date dataInicio
+        +Date dataFim
+        +String slugPublico «único»
+        +Boolean coletarDemografia
+        +String idioma
+        +String responsavelNome
+        +String responsavelEmail
+        +String instituicao
+        +String riscos
+        +String beneficios
+        +String? comiteEtica
+        +DateTime criadoEm
+        +DateTime atualizadoEm
+    }
+
+    class Colaboracao {
+        +String id
+        +PapelColaborador papel
+        +StatusConvite status
+        +DateTime criadoEm
+        +DateTime? respondidoEm
+    }
+
+    class Versao {
+        +String id
+        +String nome
+        +Int ordem «única no estudo»
+    }
+
+    class Participacao {
+        +String id
+        +DateTime consentiuEm
+        +DateTime criadaEm
+        +DateTime? concluidaEm
+        +Json? demografia «cifrada»
+        +Boolean suspeita
+        +Boolean incluidaNaAnalise
+        +String? idioma
+        +OrigemParticipacao origem
+        +Boolean menorDeIdade
+    }
+
+    class Resposta {
+        +String id
+        +Int valor «1 a 7»
+    }
+
+    class Item {
+        +Int id
+        +Int numero «1 a 26, único»
+        +String termoEsquerdo
+        +String termoDireito
+        +Escala escala
+        +Polaridade polaridade
+    }
+
+    class Notificacao {
+        +String id
+        +TipoNotificacao tipo
+        +String texto
+        +String link
+        +Int quantidade
+        +DateTime criadaEm
+        +DateTime? lidaEm
+    }
+
+    class TentativaAcesso {
+        +String id
+        +String chave «hash do e-mail»
+        +DateTime criadaEm
+    }
+
+    class Traducao {
+        +String id
+        +String idioma
+        +String hashOrigem
+        +String texto
+        +DateTime criadaEm
+    }
+
+    class StatusEstudo {
+        <<enumeration>>
+        RASCUNHO
+        ABERTO
+        ENCERRADO
+    }
+    class Escala {
+        <<enumeration>>
+        ATRATIVIDADE
+        PERSPICUIDADE
+        EFICIENCIA
+        CONFIABILIDADE
+        ESTIMULACAO
+        NOVIDADE
+    }
+    class Polaridade {
+        <<enumeration>>
+        POSITIVA_DIREITA
+        POSITIVA_ESQUERDA
+    }
+    class OrigemParticipacao {
+        <<enumeration>>
+        LINK
+        IMPORTADA
+    }
+    class PapelColaborador {
+        <<enumeration>>
+        EDITOR
+        LEITOR
+    }
+    class StatusConvite {
+        <<enumeration>>
+        PENDENTE
+        ACEITO
+        RECUSADO
+    }
+    class TipoNotificacao {
+        <<enumeration>>
+        CONVITE
+        RESPOSTA
+        ALTERACAO
+    }
+
+    Pesquisador "1" *-- "0..*" Sessao : abre
+    Pesquisador "1" *-- "0..*" Estudo : é dono de
+    Estudo "1" *-- "1..6" Versao : compara
+    Versao "1" *-- "0..*" Participacao : recebe
+    Participacao "1" *-- "0..26" Resposta : contém
+    Item "1" <-- "0..*" Resposta : responde
+    Estudo "1" *-- "0..*" Colaboracao : é compartilhado em
+    Pesquisador "1" *-- "0..*" Colaboracao : participa como
+    Pesquisador "0..1" o-- "0..*" Colaboracao : convidou
+    Pesquisador "1" *-- "0..*" Notificacao : recebe
+    Pesquisador "0..1" o-- "0..*" Notificacao : causou
+    Estudo "0..1" o-- "0..*" Notificacao : origina
+
+    Estudo ..> StatusEstudo
+    Item ..> Escala
+    Item ..> Polaridade
+    Participacao ..> OrigemParticipacao
+    Colaboracao ..> PapelColaborador
+    Colaboracao ..> StatusConvite
+    Notificacao ..> TipoNotificacao

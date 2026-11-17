@@ -1,0 +1,8 @@
+stateDiagram-v2
+    [*] --> RASCUNHO: criar estudo
+    RASCUNHO --> ABERTO: abrir coleta
+    ABERTO --> ENCERRADO: encerrar coleta
+    ENCERRADO --> ABERTO: reabrir coleta
+    RASCUNHO --> [*]: excluir
+    ABERTO --> [*]: excluir
+    ENCERRADO --> [*]: excluir

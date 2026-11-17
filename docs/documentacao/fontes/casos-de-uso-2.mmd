@@ -1,0 +1,40 @@
+flowchart LR
+    subgraph primarios[" "]
+    pesquisador@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "Pesquisador", pos: "b", w: 40, h: 64, constraint: "on" }
+    end
+
+    subgraph sistema["Ferramenta UEQ · resultados e respostas"]
+        uc18(["UC18 Ver resultados"])
+        uc20(["UC20 Comparar versões"])
+        uc21(["UC21 Ver os dados demográficos"])
+        uc22(["UC22 Exportar o painel em PDF"])
+        uc23(["UC23 Revisar respostas suspeitas"])
+        uc25(["UC25 Exportar dados em CSV"])
+        uc26(["UC26 Importar respostas"])
+        uc19(["UC19 Calcular a análise UEQ"])
+        uc24(["UC24 Avaliar a suspeita<br/>da participação"])
+    end
+
+    pesquisador --- uc18
+    pesquisador --- uc23
+    pesquisador --- uc25
+    pesquisador --- uc26
+
+    uc20 -. "«extend»" .-> uc18
+    uc21 -. "«extend»" .-> uc18
+    uc22 -. "«extend»" .-> uc18
+    uc18 -. "«include»" .-> uc19
+    uc23 -. "«include»" .-> uc24
+    uc25 -. "«include»" .-> uc19
+    uc26 -. "«include»" .-> uc24
+
+    uc25 --- planilha
+    uc26 --- planilha
+
+    subgraph secundarios[" "]
+    planilha@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "«sistema»<br/>Planilha oficial do UEQ", pos: "b", w: 40, h: 64, constraint: "on" }
+    end
+    style primarios fill:transparent,stroke:transparent
+    style secundarios fill:transparent,stroke:transparent
+    classDef ator fill:transparent,stroke:transparent
+    class pesquisador,planilha ator
