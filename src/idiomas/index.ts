@@ -90,6 +90,11 @@ export const IDIOMAS: InfoIdioma[] = [...porCodigo.values()]
   .map(({ info }) => info)
   .sort((a, b) => a.nome.localeCompare(b.nome, "en"));
 
+// Só o que os seletores do navegador precisam (Criar conta e a barra), sem os textos e os termos
+export function opcoesDeIdioma(): { codigo: CodigoIdioma; nome: string; lang: string; direcao: "ltr" | "rtl" }[] {
+  return IDIOMAS.map(({ codigo, nome, lang, direcao }) => ({ codigo, nome, lang, direcao }));
+}
+
 export function infoIdioma(codigo: CodigoIdioma): InfoIdioma {
   return porCodigo.get(codigo)!.info;
 }

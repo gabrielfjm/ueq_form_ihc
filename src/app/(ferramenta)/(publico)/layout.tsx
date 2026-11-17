@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { Tutorial } from "@/componentes/tutorial/Tutorial";
-import { IDIOMAS } from "@/idiomas";
+import { opcoesDeIdioma } from "@/idiomas";
 import { banco } from "@/lib/banco";
 import { pesquisadorDaSessao } from "@/lib/sessao";
 import { BarraSuperior } from "../(pesquisador)/BarraSuperior";
@@ -19,11 +19,12 @@ export default async function LayoutPublico({ children }: { children: ReactNode 
       {children}
     </main>
   );
+  const idiomas = opcoesDeIdioma();
   if (pesquisador) {
     const naoLidas = await banco.notificacao.count({ where: { pesquisadorId: pesquisador.id, lidaEm: null } });
     return (
       <>
-        <BarraSuperior naoLidas={naoLidas} administrador={pesquisador.administrador} />
+        <BarraSuperior naoLidas={naoLidas} administrador={pesquisador.administrador} idiomas={idiomas} />
         {principal}
         {/* A página inicial é onde o login termina: as boas-vindas do tour aparecem já aqui */}
         <Tutorial primeiroAcesso={!pesquisador.tutorialVistoEm} pesquisadorId={pesquisador.id} />
@@ -31,11 +32,8 @@ export default async function LayoutPublico({ children }: { children: ReactNode 
     );
   }
   return (
-    <ProvedorAcesso
-      idiomas={IDIOMAS.map(({ codigo, nome, lang, direcao }) => ({ codigo, nome, lang, direcao }))}
-      idiomaAtual={await idiomaDaInterface()}
-    >
-      <BarraPublica />
+    <ProvedorAcesso idiomas={idiomas} idiomaAtual={await idiomaDaInterface()}>
+      <BarraPublica idiomas={idiomas} />
       {principal}
     </ProvedorAcesso>
   );

@@ -1,10 +1,10 @@
-import "dotenv/config";
+﻿import "dotenv/config";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { expect, test } from "@playwright/test";
 import { PrismaClient } from "../../src/generated/prisma/client";
 import { chaveDoTexto } from "../../src/traducao/nucleo";
 import { verificarAcessibilidade } from "./acessibilidade";
-import { emailDeTeste, janelaDeAcesso, pularTutorial, SENHA } from "./contas";
+import { abrirMenu, cadastrarComTeclado, emailDeTeste, janelaDeAcesso, pularTutorial, SENHA } from "./contas";
 
 // Sem ANTHROPIC_API_KEY nos testes: uma tradução é gravada direto no banco, como a API gravaria
 const banco = new PrismaClient({ adapter: new PrismaPg(process.env.DATABASE_URL ?? "") });
@@ -52,4 +52,44 @@ test("o idioma escolhido ao criar a conta vale para a ferramenta e pode ser troc
   await page.getByRole("button", { name: "Salvar idioma" }).click();
   await expect(page.getByRole("status").filter({ hasText: "Idioma da ferramenta trocado." })).toBeVisible();
   await expect(principal.getByRole("link", { name: "Minha conta" })).toBeVisible();
+});
+
+test("o seletor de idioma da barra troca a ferramenta e a conta sem sair da página", async ({ page }, info) => {
+  await cadastrarComTeclado(page, emailDeTeste(info));
+  await abrirMenu(page);
+  const seletor = page.getByRole("button", { name: /Idioma: Português/ });
+  await seletor.click();
+  const lista = page.getByRole("region", { name: "Idioma da ferramenta" });
+  await expect(lista).toBeVisible();
+  await expect(lista.getByRole("button", { name: "Português" })).toHaveAttribute("aria-current", "true");
+  await verificarAcessibilidade(page);
+
+  // Não é modal: Esc fecha e devolve o foco ao seletor
+  await page.keyboard.press("Escape");
+  await expect(lista).toBeHidden();
+  await expect(seletor).toBeFocused();
+
+  // Só o clique troca; a página continua a mesma, já no idioma novo, com o foco de volta no seletor
+  await seletor.click();
+  await lista.getByRole("button", { name: "Deutsch" }).click();
+  const alemao = page.getByRole("button", { name: /Sprache: Deutsch/ });
+  await expect(alemao).toBeFocused();
+  await expect(page.getByRole("region", { name: "Idioma da ferramenta" })).toBeHidden();
+  await expect(page).toHaveURL(/\/estudos$/);
+  await expect(page.getByRole("navigation", { name: "Principal" }).getByRole("link", { name: "Mein Konto" })).toBeAttached();
+
+  // É o mesmo que Minha conta › Idioma: a conta passa a ser em alemão
+  await page.goto("/conta/idioma");
+  await expect(page.getByRole("radio", { name: /^Deutsch/ })).toBeChecked();
+});
+
+test("sem login, o seletor de idioma da barra fica guardado neste navegador", async ({ page }) => {
+  await page.goto("/documentacao");
+  await abrirMenu(page);
+  await page.getByRole("button", { name: /Idioma: Português/ }).click();
+  await page.getByRole("region", { name: "Idioma da ferramenta" }).getByRole("button", { name: "English" }).click();
+  await expect(page.getByRole("button", { name: /^EN Language: English$|^Language: English$/ })).toBeFocused();
+  await page.reload();
+  await abrirMenu(page);
+  await expect(page.getByRole("button", { name: /^EN Language: English$|^Language: English$/ })).toBeVisible();
 });

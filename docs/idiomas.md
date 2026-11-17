@@ -73,7 +73,7 @@ As respostas de dados opcionais são gravadas sempre com a categoria em portugu�
 
 ## A ferramenta do pesquisador
 
-O idioma é escolhido ao criar a conta e trocado em Minha conta › Idioma. Antes de entrar, vale o último escolhido no navegador (cookie `idioma_interface`). Avisos do sino e e-mails saem no idioma de quem recebe.
+O idioma é escolhido ao criar a conta e trocado em Minha conta › Idioma ou, mais rápido, pelo seletor de idioma da barra (protótipo r41), que faz o mesmo sem sair da página. Antes de entrar, vale o último escolhido no navegador (cookie `idioma_interface`), e o seletor da barra também aparece para quem não entrou. Avisos do sino e e-mails saem no idioma de quem recebe.
 
 Como funciona:
 

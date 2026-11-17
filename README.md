@@ -1,4 +1,4 @@
-# Ferramenta UEQ
+﻿# Ferramenta UEQ
 
 Ferramenta web para conduzir estudos de avaliação de experiência do usuário com o UEQ (User Experience Questionnaire), do cadastro do estudo à exportação dos dados.
 
@@ -185,9 +185,11 @@ Página do estudo e resultados:
 
 <img src="docs/prototipos/alta-fidelidade/r5-pagina-do-estudo.png" alt="Página do estudo: link para participantes, coleta por versão, próximos passos, ações e ficha lateral" width="400"> <img src="docs/prototipos/alta-fidelidade/r6-resultados.png" alt="Resultados: leitura rápida, gráfico das seis escalas com benchmark e IC95, tabela, médias por item e exportação" width="400">
 
-Comparação entre versões, respostas suspeitas e minha conta:
+Comparação entre versões, respostas suspeitas, minha conta e o seletor de idioma da barra:
 
 <img src="docs/prototipos/alta-fidelidade/r7-comparar-versoes.png" alt="Comparar versões: marcador cheio e vazado por escala, leitura rápida das diferenças e tabela" width="400"> <img src="docs/prototipos/alta-fidelidade/r8-respostas-e-suspeitas.png" alt="Respostas: faixa com as 34 participações, tabela com suspeitas e regra de suspeita ao lado" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r41-seletor-de-idioma.png" alt="Seletor de idioma aberto na barra: Idioma da ferramenta, a explicação e os 37 idiomas pelo próprio nome em três colunas, com Português marcado" width="400">
 
 <img src="docs/prototipos/alta-fidelidade/r9-minha-conta.png" alt="Minha conta como painel: cartões de Dados cadastrais, Senha, Idioma, Notificações e Excluir conta, com o resumo da conta ao lado" width="400"> <img src="docs/prototipos/alta-fidelidade/r35-idioma-da-conta.png" alt="Minha conta, Idioma: os idiomas do UEQ pelo próprio nome e pelo nome em português, com Salvar idioma" width="400">
 
@@ -199,7 +201,7 @@ Documentação dentro da ferramenta: visão geral, documento com diagrama e docu
 
 Diagrama em tela cheia, com zoom, e barra fixa no celular com o menu aberto:
 
-<img src="docs/prototipos/alta-fidelidade/r14-diagrama-tela-cheia.png" alt="Diagrama em tela cheia: Voltar, título e zoom em 150% parados no topo, com o diagrama ampliado embaixo" width="400"> <img src="docs/prototipos/alta-fidelidade/r15-barra-celular.png" alt="Barra fixa no celular com o menu aberto: Estudos, Criar estudo, Documentação, Minha conta e Sair" width="200">
+<img src="docs/prototipos/alta-fidelidade/r14-diagrama-tela-cheia.png" alt="Diagrama em tela cheia: Voltar, título e zoom em 150% parados no topo, com o diagrama ampliado embaixo" width="400"> <img src="docs/prototipos/alta-fidelidade/r15-barra-celular.png" alt="Barra fixa no celular com o menu aberto: Estudos, Criar estudo, Documentação, Minha conta, Idioma: Português e Sair" width="200">
 
 Página inicial, para quem ainda não tem conta, e Entrar e Criar conta numa janela por cima da página:
 
@@ -225,7 +227,7 @@ Equipe, notificações, ajuda e LGPD:
 
 <img src="docs/prototipos/alta-fidelidade/r24-administracao.png" alt="Administração: painel com Contas, Criar conta para alguém, Cenários de demonstração, Proteção de dados e Idiomas" width="400"> <img src="docs/prototipos/alta-fidelidade/r24b-contas.png" alt="Administração, Contas: tabela com cada pessoa, a data da conta, o papel e Tornar administrador" width="400"> <img src="docs/prototipos/alta-fidelidade/r24c-criar-conta-para-alguem.png" alt="Administração, Criar conta para alguém: nome, e-mail, senha e administrador numa coluna" width="400"> <img src="docs/prototipos/alta-fidelidade/r34-idiomas.png" alt="Administração, Idiomas: situação da tradução automática pela API do Claude e quanto de cada idioma já está traduzido, com Traduzir agora" width="400"> <img src="docs/prototipos/alta-fidelidade/r25-compartilhar.png" alt="Janela Compartilhar: convite por e-mail com papel Editor ou Leitor e a lista de pessoas com acesso" width="400">
 
-<img src="docs/prototipos/alta-fidelidade/r26-sino-de-notificacoes.png" alt="Sino de notificações aberto entre Minha conta e Sair: convite com Aceitar e Recusar, respostas novas e mudanças da equipe" width="400"> <img src="docs/prototipos/alta-fidelidade/r27-notificacoes.png" alt="Notificações: convites esperando resposta e o histórico de avisos" width="400">
+<img src="docs/prototipos/alta-fidelidade/r26-sino-de-notificacoes.png" alt="Sino de notificações aberto entre Minha conta e o seletor de idioma: convite com Aceitar e Recusar, respostas novas e mudanças da equipe" width="400"> <img src="docs/prototipos/alta-fidelidade/r27-notificacoes.png" alt="Notificações: convites esperando resposta e o histórico de avisos" width="400">
 
 <img src="docs/prototipos/alta-fidelidade/r28-tour-boas-vindas.png" alt="Boas-vindas do primeiro acesso: Pular tutorial e Começar o tour" width="400"> <img src="docs/prototipos/alta-fidelidade/r29-tour-passo.png" alt="Passo do tour: a página escurecida em volta do estudo destacado e o cartão Passo 1 de 10" width="400">
 
