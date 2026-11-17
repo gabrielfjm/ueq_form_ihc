@@ -2,7 +2,7 @@
 
 O banco da Ferramenta UEQ é um **PostgreSQL 16** com 11 tabelas e 7 tipos enumerados. O modelo é declarado em [`prisma/schema.prisma`](../../prisma/schema.prisma) e aplicado pelas 9 migrations de [`prisma/migrations/`](../../prisma/migrations/). Os nomes abaixo são os do banco. No código, os mesmos campos aparecem em camelCase (`slug_publico` é `slugPublico`).
 
-As colunas, as chaves e as regras de exclusão deste documento foram lidas do catálogo do próprio PostgreSQL (`information_schema` e `pg_constraint`) em 06/11/2026, com todas as migrations aplicadas.
+As colunas, as chaves e as regras de exclusão deste documento foram lidas do catálogo do próprio PostgreSQL (`information_schema` e `pg_constraint`) em 13/11/2026, com todas as migrations aplicadas.
 
 ## Diagrama
 
@@ -50,6 +50,12 @@ erDiagram
         text slug_publico UK
         boolean coletar_demografia
         text idioma
+        text responsavel_nome
+        text responsavel_email
+        text instituicao
+        text riscos
+        text beneficios
+        text comite_etica "pode ser nulo"
         timestamp criado_em
         timestamp atualizado_em
     }
@@ -88,6 +94,7 @@ erDiagram
         boolean incluida_na_analise
         text idioma "pode ser nulo"
         OrigemParticipacao origem
+        boolean menor_de_idade
     }
     resposta {
         text id PK
@@ -189,6 +196,12 @@ Conta as senhas erradas para limitar a adivinhação: 5 erros em 15 minutos bloq
 | `slug_publico` | text | não | | Único | O endereço `/r/<slug>` do participante |
 | `coletar_demografia` | boolean | não | `false` | | LGPD, princípio da necessidade: a etapa de dados opcionais só existe se o pesquisador ligar |
 | `idioma` | text | não | `'pt'` | | Idioma em que o estudo foi escrito e em que o link abre |
+| `responsavel_nome` | text | não | | | Quem responde pela pesquisa, mostrado no termo (LGPD, art. 9º). O formulário sugere o nome da conta |
+| `responsavel_email` | text | não | | | Contato do responsável, mostrado no termo. O formulário sugere o e-mail da conta |
+| `instituicao` | text | não | | | Instituição da pesquisa, no subtítulo e no termo |
+| `riscos` | text | não | | | Riscos para o participante, no termo (Resolução CNS 510/2016). O formulário sugere um texto |
+| `beneficios` | text | não | | | Benefícios, no termo. O formulário sugere um texto |
+| `comite_etica` | text | sim | | | Comitê de ética, parecer ou CAAE e contato, quando o estudo passou por um |
 | `criado_em` | timestamp | não | agora | | |
 | `atualizado_em` | timestamp | não | | | Atualizado pelo Prisma |
 
@@ -249,6 +262,7 @@ Uma pessoa respondendo uma versão. Não há nome, e-mail, IP nem ligação com 
 | `incluida_na_analise` | boolean | não | `true` | | Decisão do pesquisador. Tirar da análise não apaga nada |
 | `idioma` | text | sim | `'pt'` | | Idioma em que respondeu. Vazio nas importadas, porque o CSV não informa |
 | `origem` | OrigemParticipacao | não | `LINK` | | Resposta pelo link ou importada de CSV |
+| `menor_de_idade` | boolean | não | `false` | | A pessoa declarou ter menos de 18 anos e confirmou a autorização do responsável (LGPD, art. 14). Sem a autorização, a participação nem é criada |
 
 ### resposta
 

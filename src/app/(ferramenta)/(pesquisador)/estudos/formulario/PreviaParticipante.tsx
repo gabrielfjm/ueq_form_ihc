@@ -5,7 +5,9 @@ import estilos from "./formulario-estudo.module.css";
 import { useT } from "@/traducao/cliente";
 
 // Mostra o começo do termo de consentimento como o participante vai ver (protótipo r4)
-export function PreviaParticipante({ titulo, objetivo, etapas }: { titulo: string; objetivo: string; etapas: number }) {
+type Propriedades = { titulo: string; objetivo: string; etapas: number; responsavel: string; instituicao: string };
+
+export function PreviaParticipante({ titulo, objetivo, etapas, responsavel, instituicao }: Propriedades) {
   const t = useT();
   return (
     <aside aria-labelledby="titulo-previa" className={estilos.previa}>
@@ -23,7 +25,15 @@ export function PreviaParticipante({ titulo, objetivo, etapas }: { titulo: strin
           <p className={estilos.cartaoObjetivo}>
             {objetivo.trim() || <span className={estilos.marcador}>{t("O objetivo aparece aqui.")}</span>}
           </p>
-          <p className={estilos.cartaoDuracao}>{t("De 3 a 5 minutos · voluntária e anônima")}</p>
+          <p className={estilos.cartaoDuracao}>
+            {etapas === 3 ? t("De 4 a 6 minutos · voluntária e anônima") : t("De 3 a 5 minutos · voluntária e anônima")}
+          </p>
+          <p className={estilos.cartaoDuracao}>
+            {t("Responsável:")}{" "}
+            {[responsavel.trim(), instituicao.trim()].filter(Boolean).join(" · ") || (
+              <span className={estilos.marcador}>{t("Nome do responsável")}</span>
+            )}
+          </p>
           <span className={estilos.cartaoBotao} aria-hidden="true">
             {t("Concordo e quero participar")}
           </span>

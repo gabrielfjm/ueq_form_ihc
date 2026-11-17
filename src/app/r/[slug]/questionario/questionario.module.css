@@ -18,6 +18,11 @@
 }
 
 /* Instrução oficial num quadro calmo, separado dos itens; o texto continua inteiro e na ordem do pacote */
+.tempo {
+  margin: 0;
+  color: var(--tinta-suave);
+}
+
 .instrucao {
   display: flex;
   flex-direction: column;

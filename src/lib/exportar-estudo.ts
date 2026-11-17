@@ -35,6 +35,7 @@ async function participacoesExportadas(estudoId: string): Promise<ParticipacaoEx
         suspeita: true,
         idioma: true,
         origem: true,
+        menorDeIdade: true,
         demografia: true,
         versao: { select: { nome: true } },
         respostas: { select: { valor: true, item: { select: { numero: true } } } },
@@ -55,6 +56,7 @@ async function participacoesExportadas(estudoId: string): Promise<ParticipacaoEx
       origem: importada ? "importada" : "link",
       idioma: idioma?.codigo ?? null,
       traducaoAprovada: idioma?.traducaoAprovada ?? null,
+      menorDeIdade: importada ? null : participacao.menorDeIdade,
       demografia: decifrarJson<Demografia>(participacao.demografia),
       valores,
     };

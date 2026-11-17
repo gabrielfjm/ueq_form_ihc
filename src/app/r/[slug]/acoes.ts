@@ -19,6 +19,7 @@ import {
   participacaoAtual,
 } from "@/lib/participacao";
 import { notificarResposta } from "@/lib/notificacoes";
+import { lerIdade } from "@/lib/termo";
 import { avaliarSuspeita } from "@/ueq";
 
 const rota = (slug: string, etapa = "") => `/r/${slug}${etapa}` as Route;
@@ -33,9 +34,13 @@ export async function escolherIdioma(slug: string, dados: FormData): Promise<voi
 }
 
 // Só aqui nasce a Participacao: antes de concordar, nada sobre a pessoa é gravado (docs/ihc.md §3.7)
-export async function consentir(slug: string): Promise<void> {
+export async function consentir(slug: string, dados: FormData): Promise<void> {
   const estudo = await estudoPublico(slug);
   if (estudo.status !== "ABERTO") redirect(rota(slug));
+
+  // LGPD, art. 14: sem a idade, ou com menos de 18 anos sem a autorização do responsável, nada é gravado
+  const idade = lerIdade(dados);
+  if ("erro" in idade) redirect(rota(slug, idade.erro === "autorizacao" ? "?erro=autorizacao&idade=menor" : "?erro=idade"));
 
   const atual = await participacaoAtual(estudo.id);
   if (atual && !atual.concluidaEm) redirect(rota(slug, "/questionario"));
@@ -51,7 +56,7 @@ export async function consentir(slug: string): Promise<void> {
     where: { concluidaEm: null, criadaEm: { lt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000) } },
   });
   const participacao = await banco.participacao.create({
-    data: { versaoId: versao.id, consentiuEm: new Date(), idioma: await idiomaDoParticipante(slug) },
+    data: { versaoId: versao.id, consentiuEm: new Date(), idioma: await idiomaDoParticipante(slug), menorDeIdade: idade.menorDeIdade },
     select: { id: true },
   });
   await guardarParticipacao(slug, participacao.id);

@@ -71,6 +71,8 @@ Formato: requisito → princípio (fonte).
 | Uma única ação principal por página (Concordo / Enviar respostas) | Lei de Hick, design minimalista (Nielsen 8) |
 | O termo de consentimento tem link para a política de privacidade, numa página dentro do link do participante, sem caminho para o resto da ferramenta. O questionário em si não tem esse link, para não acrescentar nada ao instrumento | Transparência (LGPD, art. 9º), ética em pesquisa, §3 |
 | Etapas claras: Consentimento → Questionário → Dados opcionais → Fim, com indicação textual da etapa atual | Diálogos com fechamento (Shneiderman 4) |
+| O termo diz o tempo e que não há limite, como desistir, o que acontece depois de enviar, quanto tempo os dados ficam guardados, riscos, benefícios e quem responde pela pesquisa. O questionário repete o tempo acima da instrução | Visibilidade do status (Nielsen 1), LGPD art. 9º |
+| Menores de 18 anos só participam confirmando a autorização do responsável | LGPD art. 14 |
 
 ### 4.2 Telas do pesquisador
 

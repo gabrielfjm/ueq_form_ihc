@@ -146,6 +146,7 @@ A tela mais importante. É onde a equipe mostra que entende de IHC.
 
 - Cabeçalho mínimo: nome do produto avaliado e uma frase de instrução no estilo do UEQ oficial
 - Termo de consentimento antes, em página própria, com texto completo, link para a política de privacidade e botão "Concordo e quero participar". Sem checkbox escondido
+- O termo (protótipo p1) lista, numeradas: tempo, dados opcionais (quando houver), participação, depois de enviar, anonimato, uso dos dados, riscos, benefícios, responsável e comitê de ética (quando houver). O subtítulo leva a instituição do estudo. Abaixo, "Política de privacidade" e "Guardar uma via deste termo" (protótipo p10), a pergunta "Qual é a sua idade?" e, para "Menos de 18 anos", a confirmação da autorização do responsável
 - Itens em linhas, uma por item, com régua fina entre elas. Termo da esquerda alinhado à direita, 7 círculos no centro, termo da direita alinhado à esquerda. Nada de números visíveis
 - Círculos com área de toque de 44×44px, contorno 1.5px `--tinta`, preenchido em `--tinta` quando marcado
 - Teclado: comportamento nativo de rádio (Tab entre itens, setas dentro do item). Sem atalho de tecla única, que conflita com leitor de tela (WCAG 2.1.4). Cada item é um `<fieldset>` com `<legend>`, detalhes em `docs/ihc.md` seção 4.1

@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { verificarAcessibilidade } from "./acessibilidade";
-import { estudoAberto } from "./preparacao";
+import { estudoAberto, menoresDeIdade } from "./preparacao";
 
 // Cada teste cria pesquisador, estudo e respostas antes de começar: com a suíte inteira no servidor de
 // desenvolvimento, 60 s não bastam
@@ -16,6 +16,7 @@ async function responder(page: Page, pular: number[] = []) {
 
 async function concordar(page: Page, link: string) {
   await page.goto(link);
+  await page.getByLabel("18 anos ou mais").check();
   await page.getByRole("button", { name: "Concordo e quero participar" }).click();
   await expect(page).toHaveURL(/\/questionario$/);
 }
@@ -47,6 +48,7 @@ test("fluxo completo do participante, com axe em todas as etapas", async ({ page
   );
   await verificarAcessibilidade(page);
 
+  await page.getByLabel("18 anos ou mais").check();
   await page.getByRole("button", { name: "Concordo e quero participar" }).click();
   await expect(page).toHaveTitle(/^Questionário · /);
   await expect(page.getByText("Etapa 2 de 3 · Questionário")).toBeVisible();
@@ -76,6 +78,7 @@ test("sem coleta de dados demográficos, o envio leva direto ao agradecimento", 
   const estudo = await estudoAberto(browser, info, { demografia: false });
   await page.goto(estudo.link);
   await expect(page.getByRole("list", { name: "Etapas da participação" }).getByRole("listitem")).toHaveCount(2);
+  await page.getByLabel("18 anos ou mais").check();
   await page.getByRole("button", { name: "Concordo e quero participar" }).click();
   await expect(page.getByText("Etapa 2 de 2 · Questionário")).toBeVisible();
   await responder(page);
@@ -92,6 +95,12 @@ test("fluxo completo só com teclado, com o foco sempre visível", async ({ page
   const estudo = await estudoAberto(browser, info);
   await page.goto(estudo.link);
 
+  const maior = page.getByLabel("18 anos ou mais");
+  for (let i = 0; i < 20 && !(await maior.evaluate((el) => el === document.activeElement)); i++) {
+    await page.keyboard.press("Tab");
+  }
+  await page.keyboard.press("Space");
+  await expect(maior).toBeChecked();
   const concordo = page.getByRole("button", { name: "Concordo e quero participar" });
   for (let i = 0; i < 10 && !(await concordo.evaluate((el) => el === document.activeElement)); i++) {
     await page.keyboard.press("Tab");
@@ -165,7 +174,10 @@ test("em 320 px (zoom de 400%) nenhuma etapa rola na horizontal", async ({ page,
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
 
   await page.goto(estudo.link);
+  // No next dev, o selo de avisos do Next fica sobre o rodapé em 320 px; ele não existe em produção
+  await page.addStyleTag({ content: "nextjs-portal { display: none !important; }" });
   await semRolagem();
+  await page.getByLabel("18 anos ou mais").check();
   await page.getByRole("button", { name: "Concordo e quero participar" }).click();
   await expect(page).toHaveURL(/\/questionario$/);
   await semRolagem();
@@ -226,7 +238,10 @@ test("sair sem enviar confirma numa janela e não grava nada", async ({ page, br
 // Quem responde só vê o formulário, o seletor de idioma e a política: nenhum link sai do próprio estudo
 async function soLinksDoFormulario(page: Page) {
   await expect(page.getByRole("navigation", { name: "Principal" })).toHaveCount(0);
-  const destinos = await page.locator("a[href]").evaluateAll((links) => links.map((link) => link.getAttribute("href") ?? ""));
+  // O painel de desenvolvimento do Next (só no next dev) fica num shadow root e tem links próprios: não é da tela
+  const destinos = await page
+    .locator("a[href]")
+    .evaluateAll((links) => links.filter((link) => link.getRootNode() === document).map((link) => link.getAttribute("href") ?? ""));
   for (const destino of destinos) expect(destino, destino).toMatch(/^(#|\/r\/)/);
 }
 
@@ -236,6 +251,7 @@ test("o link do participante só mostra o formulário e o seletor de idioma, sem
   await expect(page.getByLabel("Idioma")).toBeVisible();
   await soLinksDoFormulario(page);
 
+  await page.getByLabel("18 anos ou mais").check();
   await page.getByRole("button", { name: "Concordo e quero participar" }).click();
   await expect(page).toHaveURL(/\/questionario$/);
   await soLinksDoFormulario(page);
@@ -291,3 +307,63 @@ test("não quero participar sai sem gravar e o link respondido não aceita outro
   await expect(page.getByRole("heading", { name: "Você já respondeu este estudo" })).toBeVisible();
   await estudo.fechar();
 });
+
+test("o termo diz o tempo, como desistir, o que acontece depois de enviar, riscos, benefícios e quem responde, e tem uma via para guardar", async ({ page, browser }, info) => {
+  const estudo = await estudoAberto(browser, info);
+  await page.goto(estudo.link);
+  await expect(page.getByText("Pesquisa de experiência do usuário · PPGIa · PUCPR")).toBeVisible();
+  const termo = page.getByRole("region", { name: "Termo de consentimento" });
+  await expect(termo.getByText("De 4 a 6 minutos, sem limite de tempo.")).toBeVisible();
+  await expect(termo.getByText("No fim, há perguntas opcionais sobre faixa etária")).toBeVisible();
+  await expect(termo.getByText("use “Sair sem enviar” ou feche a página")).toBeVisible();
+  await expect(termo.getByText("depois de enviadas não há como encontrá-las para retirá-las")).toBeVisible();
+  await expect(termo.getByText("enquanto o pesquisador estiver realizando a pesquisa")).toBeVisible();
+  await expect(termo.getByText("Os riscos são mínimos")).toBeVisible();
+  await expect(termo.getByText("Não há benefício direto para você")).toBeVisible();
+  await expect(termo.getByText(/^Contato: .+@e2e\.exemplo\.com$/)).toBeVisible();
+  await verificarAcessibilidade(page);
+
+  await page.getByRole("link", { name: "Guardar uma via deste termo" }).click();
+  await expect(page).toHaveURL(/\/termo$/);
+  await expect(page.getByRole("button", { name: "Imprimir ou salvar em PDF" })).toBeVisible();
+  await expect(page.getByText(/^Contato: .+@e2e\.exemplo\.com$/)).toBeVisible();
+  await soLinksDoFormulario(page);
+  await verificarAcessibilidade(page);
+  await page.getByRole("link", { name: "Voltar" }).click();
+
+  await page.getByLabel("18 anos ou mais").check();
+  await page.getByRole("button", { name: "Concordo e quero participar" }).click();
+  await expect(page.getByText("Tempo: De 4 a 6 minutos, sem limite de tempo.")).toBeVisible();
+  await estudo.fechar();
+});
+
+test("quem tem menos de 18 anos só participa com a autorização do responsável, e sem idade nada é gravado", async ({ page, browser }, info) => {
+  const estudo = await estudoAberto(browser, info);
+  await page.goto(estudo.link);
+  const autorizacao = page.getByLabel("Meu pai, minha mãe ou o responsável legal por mim autorizou a minha participação.");
+  await expect(autorizacao).toBeHidden();
+
+  await page.getByRole("button", { name: "Concordo e quero participar" }).click();
+  await expect(page.locator("#erro-idade")).toHaveText("Escolha a sua idade para continuar.");
+  await expect(page.locator("#erro-idade")).toHaveAttribute("role", "alert");
+  await expect(page.getByLabel("18 anos ou mais")).toBeFocused();
+
+  await page.getByLabel("Menos de 18 anos").check();
+  await expect(autorizacao).toBeVisible();
+  await page.getByRole("button", { name: "Concordo e quero participar" }).click();
+  await expect(page.locator("#erro-idade")).toHaveText("Para participar com menos de 18 anos, confirme que o seu responsável autorizou.");
+  await expect(autorizacao).toBeFocused();
+  await verificarAcessibilidade(page);
+
+  await autorizacao.check();
+  await page.getByRole("button", { name: "Concordo e quero participar" }).click();
+  await expect(page).toHaveURL(/\/questionario$/);
+  await responder(page);
+  await page.getByRole("button", { name: "Enviar respostas" }).click();
+  await expect(page.getByRole("radio", { name: "Menos de 18 anos" })).toBeVisible();
+  await page.getByRole("button", { name: "Pular esta etapa" }).click();
+  await expect(page).toHaveURL(/\/fim$/);
+  expect(await menoresDeIdade(estudo.link)).toEqual([true]);
+  await estudo.fechar();
+});
+

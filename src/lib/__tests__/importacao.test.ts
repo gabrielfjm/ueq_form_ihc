@@ -26,6 +26,7 @@ describe("lerCsvDeRespostas", () => {
       origem: "link" as const,
       idioma: "pt",
       traducaoAprovada: true,
+      menorDeIdade: false,
       demografia: null,
       valores,
     }));

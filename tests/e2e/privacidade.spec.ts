@@ -136,6 +136,7 @@ test("os dados demográficos aparecem em Resultados, numa sub-aba própria", asy
   test.slow();
   const estudo = await estudoAberto(browser, info);
   await page.goto(estudo.link);
+  await page.getByLabel("18 anos ou mais").check();
   await page.getByRole("button", { name: "Concordo e quero participar" }).click();
   for (let numero = 1; numero <= 26; numero++) await page.locator(`input[name="item-${numero}"]`).nth(3).check();
   await page.getByRole("button", { name: "Enviar respostas" }).click();

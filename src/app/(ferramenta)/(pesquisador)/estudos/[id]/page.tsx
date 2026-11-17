@@ -80,6 +80,7 @@ export default async function PaginaEstudo({ params, searchParams }: Propriedade
               ? t("{naAnalise} na análise · {fora} fora da análise", { naAnalise: respostas.naAnalise, fora: fora })
               : t("todas na análise")
       }
+      responsavel={{ nome: estudo.responsavelNome, email: estudo.responsavelEmail, instituicao: estudo.instituicao }}
       inicio={estudo.dataInicio}
       fim={estudo.dataFim}
       hoje={hojeEmBrasilia()}

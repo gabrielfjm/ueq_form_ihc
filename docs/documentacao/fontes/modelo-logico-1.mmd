@@ -41,6 +41,12 @@ erDiagram
         text slug_publico UK
         boolean coletar_demografia
         text idioma
+        text responsavel_nome
+        text responsavel_email
+        text instituicao
+        text riscos
+        text beneficios
+        text comite_etica "pode ser nulo"
         timestamp criado_em
         timestamp atualizado_em
     }
@@ -79,6 +85,7 @@ erDiagram
         boolean incluida_na_analise
         text idioma "pode ser nulo"
         OrigemParticipacao origem
+        boolean menor_de_idade
     }
     resposta {
         text id PK

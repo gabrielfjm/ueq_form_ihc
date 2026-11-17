@@ -19,7 +19,7 @@ A Ferramenta UEQ funciona nos 37 idiomas do pacote oficial do UEQ, com dois cami
 |---|---|---|
 | 26 pares de termos | `data/ueq-idiomas.json` | PDF oficial de cada idioma, conferido contra a imagem da página |
 | Instrução antes dos itens | `data/ueq-instrucoes.json` | PDF oficial de cada idioma, sem o exemplo com círculo marcado (como em português) |
-| Textos das telas (consentimento, botões, nomes acessíveis, erros, dados opcionais, fim) | `src/idiomas/textos/*.ts` | Tradução da equipe |
+| Textos das telas (consentimento, botões, nomes acessíveis, erros, dados opcionais, fim) | `src/idiomas/textos/*.ts` | Tradução da equipe; os textos do termo completo (13/11/2026) foram traduzidos pelo Claude (Opus) e precisam de revisão nativa |
 | Política de privacidade, vista pelo link do participante | Tabela `traducao` do banco | API do Claude, com os mesmos textos da ferramenta. Sem tradução, aparece em português, com um aviso no idioma da pessoa |
 | Título, produto e objetivo do estudo | Tabela `traducao` do banco | API do Claude, a partir do idioma do estudo. A página espera até 8 segundos; o que não chegar a tempo sai no original, marcado com o `lang` dele, e fica para a próxima visita |
 
@@ -95,6 +95,8 @@ Ao escrever um texto novo, pense em quem vai traduzi-lo sem ver a tela:
 - Evite palavra com dois sentidos. "Baixa os dados" pode virar "dá baixa"; prefira "faz o download".
 - Não monte frase com pedaços de texto e link: a ordem das palavras muda de idioma para idioma.
 - Só passe por `t()` ou `m()` o que aparece na tela. Seletor e nome de evento traduzidos quebram a tela.
+
+Textos novos também podem entrar já traduzidos, por uma migration que grava na tabela `traducao` (como `20261113120100_traducoes_do_termo`, escrita pelo Claude sem a API). Assim a API não é chamada para eles.
 
 Sem `ANTHROPIC_API_KEY` no ambiente, nada é traduzido e a ferramenta aparece em português. Enquanto mais da metade do catálogo de um idioma não estiver traduzida, o `<html lang>` e a direção ficam em português, para o leitor de tela pronunciar certo.
 

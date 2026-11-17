@@ -24,6 +24,7 @@ function participacoes(pasta: string): ParticipacaoExportada[] {
     origem: "link",
     idioma: "pt",
     traducaoAprovada: true,
+    menorDeIdade: false,
     demografia: null,
     valores,
   }));
@@ -47,7 +48,7 @@ describe("exportarBrutas", () => {
     const texto = exportarBrutas(participacoes("basico"));
     expect(texto.startsWith(BOM)).toBe(true);
     const [cabecalho] = texto.slice(1).split("\r\n");
-    expect(cabecalho?.split(";")).toHaveLength(12 + 26);
+    expect(cabecalho?.split(";")).toHaveLength(13 + 26);
     expect(cabecalho).toContain("item01");
     expect(cabecalho).toContain("item26");
   });
@@ -63,7 +64,7 @@ describe("exportarBrutas", () => {
     ]);
     expect(texto).toContain('"Checkout ""novo""; com cupom"');
     expect(texto).toContain('"Outro\nnão listado"');
-    expect(texto).toContain(";sim;não;link;pt;sim;25 a 34 anos;");
+    expect(texto).toContain(";sim;não;link;pt;sim;não;25 a 34 anos;");
   });
 });
 
@@ -86,8 +87,8 @@ describe("exportarRecodificadas", () => {
     const texto = exportarRecodificadas([{ ...participacoes("basico")[0]!, valores: Array(26).fill(7) }], itens);
     const linha = texto.split("\r\n")[1]?.split(";") ?? [];
     // item 1 tem positivo à direita (+3), item 3 à esquerda (-3)
-    expect(linha[12]).toBe("3");
-    expect(linha[14]).toBe("-3");
+    expect(linha[13]).toBe("3");
+    expect(linha[15]).toBe("-3");
   });
 });
 

@@ -102,6 +102,15 @@ model Estudo {
   // Idioma em que o estudo foi escrito e em que o link abre; o participante pode trocar, e título, produto
   // e objetivo são traduzidos para o idioma dele
   idioma          String       @default("pt")
+  // LGPD, art. 9º: o termo diz quem responde pela pesquisa e como falar com essa pessoa. O formulário sugere
+  // o nome e o e-mail da conta de quem cria o estudo
+  responsavelNome  String      @map("responsavel_nome")
+  responsavelEmail String      @map("responsavel_email")
+  instituicao      String
+  // Resolução CNS 510/2016: o termo informa riscos e benefícios, e o comitê de ética quando houver um
+  riscos           String
+  beneficios       String
+  comiteEtica      String?     @map("comite_etica")
   criadoEm        DateTime     @default(now()) @map("criado_em")
   atualizadoEm    DateTime     @updatedAt @map("atualizado_em")
 
@@ -175,6 +184,8 @@ model Participacao {
   // Vazio nas importadas, porque o CSV não diz em que idioma o questionário foi aplicado
   idioma            String?   @default("pt")
   origem            OrigemParticipacao @default(LINK)
+  // LGPD, art. 14: quem tem menos de 18 anos só participa com a autorização do responsável, confirmada no termo
+  menorDeIdade      Boolean   @default(false) @map("menor_de_idade")
 
   versao    Versao     @relation(fields: [versaoId], references: [id], onDelete: Cascade)
   respostas Resposta[]

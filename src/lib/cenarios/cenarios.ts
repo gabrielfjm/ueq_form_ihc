@@ -1,4 +1,5 @@
 import "server-only";
+import { BENEFICIOS_SUGERIDOS, RISCOS_SUGERIDOS } from "@/lib/validacao-estudo";
 import { randomUUID } from "node:crypto";
 import type { OrigemParticipacao, StatusEstudo } from "@/generated/prisma/enums";
 import { banco } from "../banco";
@@ -147,7 +148,9 @@ function demografiaSorteada(sorteio: Sorteador): Demografia | null {
   if (sorteio.numero() < 0.2) return null;
   const demografia: Demografia = {};
   for (const pergunta of PERGUNTAS_DEMOGRAFIA) {
-    demografia[pergunta.campo] = sorteio.numero() < 0.08 ? PREFIRO_NAO_RESPONDER : sorteio.escolher(pergunta.opcoes);
+    // Os cenários não têm participantes menores de idade
+    const opcoes = pergunta.campo === "faixaEtaria" ? pergunta.opcoes.slice(1) : pergunta.opcoes;
+    demografia[pergunta.campo] = sorteio.numero() < 0.08 ? PREFIRO_NAO_RESPONDER : sorteio.escolher(opcoes);
   }
   return demografia;
 }
@@ -159,9 +162,15 @@ export async function criarCenario(definicao: DefinicaoCenario, donoId: string):
   const dia = (deslocamento: number) => new Date(hoje.getTime() + deslocamento * DIA_MS);
   const itens = await itensDoQuestionario();
 
+  const dono = await banco.pesquisador.findUniqueOrThrow({ where: { id: donoId }, select: { nome: true, email: true } });
   const estudo = await banco.estudo.create({
     data: {
       pesquisadorId: donoId,
+      responsavelNome: dono.nome,
+      responsavelEmail: dono.email,
+      instituicao: "PPGIa · PUCPR",
+      riscos: RISCOS_SUGERIDOS,
+      beneficios: BENEFICIOS_SUGERIDOS,
       titulo: definicao.titulo,
       produtoAvaliado: definicao.produtoAvaliado,
       objetivo: definicao.objetivo,

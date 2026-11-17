@@ -61,14 +61,14 @@
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
+   "texto": "13 de novembro de 2026",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
+  },
+  {
    "texto": "18 a 24 anos",
    "cliente": true,
    "origem": "lib/demografia.ts"
-  },
-  {
-   "texto": "1º de novembro de 2026",
-   "cliente": true,
-   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "25 a 34 anos",
@@ -521,6 +521,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
+   "texto": "Aparece no termo de consentimento: o participante precisa saber quem responde pela pesquisa e como falar com essa pessoa (LGPD, art. 9º).",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
    "texto": "Aparece para o participante no topo do questionário.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
@@ -529,6 +534,11 @@
    "texto": "Aparece só para você, no topo do painel.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioDados.tsx"
+  },
+  {
+   "texto": "Aparecem no termo de consentimento. A ferramenta sugere um texto: ajuste ao que o seu estudo pede.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Aqui ficam os seus estudos e os que a equipe compartilhou com você. Separamos um estudo com respostas para o tour. Clique no título dele para abrir.",
@@ -551,7 +561,7 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
-   "texto": "As 26 respostas do questionário, a versão do produto que você avaliou, o idioma, a data e, só se o pesquisador ligou essa etapa e você quis responder, a faixa etária, o gênero, a escolaridade e se você já usava o produto. Todas essas perguntas têm “Prefiro não responder” e podem ser puladas.",
+   "texto": "As 26 respostas do questionário, a versão do produto que você avaliou, o idioma, a data, se você declarou ter menos de 18 anos com a autorização do responsável e, só se o pesquisador ligou essa etapa e você quis responder, a faixa etária, o gênero, a escolaridade e se você já usava o produto. Todas essas perguntas têm “Prefiro não responder” e podem ser puladas.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
@@ -659,6 +669,11 @@
    "texto": "Benchmark",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+  },
+  {
+   "texto": "Benefícios",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Bettina Laugwitz, Theo Held e Martin Schrepp",
@@ -861,6 +876,11 @@
    "origem": "componentes/tutorial/Tutorial.tsx"
   },
   {
+   "texto": "Comitê de ética (opcional)",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
    "texto": "Como editor, você pode editar o estudo, abrir e encerrar a coleta e revisar as respostas.",
    "cliente": false,
    "origem": "lib/email.ts"
@@ -881,7 +901,7 @@
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
-   "texto": "Como nada liga as respostas a você, não temos como encontrá-las para mostrar ou apagar. Fale com o pesquisador que enviou o link.",
+   "texto": "Como nada liga as respostas a você, não temos como encontrá-las para mostrar ou apagar. Fale com o pesquisador responsável, cujo contato está no termo de consentimento.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
@@ -1331,6 +1351,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
   },
   {
+   "texto": "De 4 a 6 minutos · voluntária e anônima",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
+  },
+  {
    "texto": "De {intervalo}.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
@@ -1359,6 +1384,16 @@
    "texto": "Descartar alterações",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/conta/FormularioDados.tsx"
+  },
+  {
+   "texto": "Descreva os benefícios. Se não houver benefício direto, diga isso.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
+  },
+  {
+   "texto": "Descreva os riscos para o participante. Se forem mínimos, diga isso.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Desenvolvimento, protótipos, arquitetura, protocolo do UEQ e casos de teste",
@@ -1516,6 +1551,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/NovaConta.tsx"
   },
   {
+   "texto": "E-mail de contato",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
    "texto": "E-mail de quem vai participar",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
@@ -1622,6 +1662,11 @@
   },
   {
    "texto": "Enquanto a conta existir. Ao excluir a conta, apagamos na hora a conta, os estudos de que você é dono e todas as respostas deles.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
+  },
+  {
+   "texto": "Enquanto o pesquisador estiver realizando a pesquisa. Quando ele exclui o estudo, todas as respostas são apagadas.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
@@ -2216,6 +2261,16 @@
    "origem": "lib/validacao-estudo.ts"
   },
   {
+   "texto": "Informe a instituição da pesquisa.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
+  },
+  {
+   "texto": "Informe quem responde pela pesquisa.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
+  },
+  {
    "texto": "Informe seu e-mail.",
    "cliente": true,
    "origem": "lib/validacao-conta.ts"
@@ -2239,6 +2294,11 @@
    "texto": "Informe uma senha.",
    "cliente": true,
    "origem": "lib/validacao-conta.ts"
+  },
+  {
+   "texto": "Instituição",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Instrumento",
@@ -2409,6 +2469,16 @@
    "texto": "Mede se os itens de uma escala andaram juntos neste grupo de participantes. Abaixo de 0,7 é sinal de que a escala pode ter sido entendida de jeitos diferentes. Com menos de 50 respostas o alfa oscila bastante, então trate um valor baixo como indício, não como conclusão.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
+  },
+  {
+   "texto": "Menores de 18 anos",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
+  },
+  {
+   "texto": "Menos de 18 anos",
+   "cliente": true,
+   "origem": "lib/demografia.ts"
   },
   {
    "texto": "Menu",
@@ -2646,6 +2716,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/nova/NovaConta.tsx"
   },
   {
+   "texto": "Nome do responsável",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
    "texto": "Nome dos arquivos: {v}. Os arquivos trazem todas as versões do estudo.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
@@ -2751,6 +2826,11 @@
    "origem": "app/(ferramenta)/(publico)/_acesso/FormularioEntrar.tsx"
   },
   {
+   "texto": "Não há benefício direto para você. As respostas ajudam a melhorar o produto avaliado.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
+  },
+  {
    "texto": "Não há conta com esse e-mail na ferramenta. Peça para a pessoa criar uma conta e convide de novo com o mesmo e-mail.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/acoes-compartilhar.ts"
@@ -2796,7 +2876,7 @@
    "origem": "lib/ajuda.ts"
   },
   {
-   "texto": "O controlador dos dados é o pesquisador responsável pelo estudo; a ferramenta só trata os dados em nome dele.",
+   "texto": "O controlador dos dados é o pesquisador responsável pelo estudo, com nome e contato no termo de consentimento; a ferramenta só trata os dados em nome dele.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
@@ -3051,7 +3131,7 @@
    "origem": "app/(ferramenta)/(pesquisador)/conta/page.tsx"
   },
   {
-   "texto": "Os participantes devem falar com o pesquisador que enviou o link do estudo, que é quem responde pela pesquisa.",
+   "texto": "Os participantes devem falar com o pesquisador responsável pelo estudo, cujo nome e contato estão no termo de consentimento.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
@@ -3064,6 +3144,11 @@
    "texto": "Os pesquisadores fazem tudo direto na página Minha conta.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
+  },
+  {
+   "texto": "Os riscos são mínimos: responder pode cansar um pouco ou causar algum desconforto. Você pode parar a qualquer momento.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Outro",
@@ -3264,6 +3349,11 @@
    "texto": "Por e-mail",
    "cliente": true,
    "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "Por exemplo: PPGIa · PUCPR.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Por quanto tempo",
@@ -3501,6 +3591,21 @@
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
+   "texto": "Responsável",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
+  },
+  {
+   "texto": "Responsável pela pesquisa",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
+   "texto": "Responsável:",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
+  },
+  {
    "texto": "Respostas",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AbasEstudo.tsx"
@@ -3606,6 +3711,16 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoRascunho.tsx"
   },
   {
+   "texto": "Riscos e benefícios",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
+   "texto": "Riscos para o participante",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
    "texto": "Ruim",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
@@ -3684,6 +3799,11 @@
    "texto": "Se o botão não funcionar, copie e cole este endereço no navegador:",
    "cliente": false,
    "origem": "lib/email.ts"
+  },
+  {
+   "texto": "Se o estudo foi aprovado por um comitê de ética, informe o nome do comitê, o número do parecer ou CAAE e o contato.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Se o produto é criativo e inovador.",
@@ -3854,6 +3974,11 @@
    "texto": "Só os 26 valores por linha, das participações na análise. Cole na aba de dados da UEQ Data Analysis Tool para conferir os cálculos.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
+   "texto": "Só participam com a autorização do pai, da mãe ou do responsável legal, confirmada na primeira tela (art. 14).",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
    "texto": "Teclado, leitor de tela e zoom de 400% (WCAG 2.2 AA).",
@@ -4056,6 +4181,16 @@
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
+   "texto": "Use no máximo 1000 caracteres nos benefícios.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
+  },
+  {
+   "texto": "Use no máximo 1000 caracteres nos riscos.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
+  },
+  {
    "texto": "Use no máximo 120 caracteres no nome.",
    "cliente": true,
    "origem": "lib/validacao-conta.ts"
@@ -4066,12 +4201,22 @@
    "origem": "lib/validacao-estudo.ts"
   },
   {
+   "texto": "Use no máximo 160 caracteres na instituição.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
+  },
+  {
    "texto": "Use no máximo 160 caracteres no título.",
    "cliente": true,
    "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Use no máximo 2000 caracteres no objetivo.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
+  },
+  {
+   "texto": "Use no máximo 500 caracteres no comitê de ética.",
    "cliente": true,
    "origem": "lib/validacao-estudo.ts"
   },

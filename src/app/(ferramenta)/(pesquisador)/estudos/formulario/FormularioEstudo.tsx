@@ -20,6 +20,12 @@ export type ValoresEstudo = {
   titulo: string;
   produtoAvaliado: string;
   objetivo: string;
+  responsavelNome: string;
+  responsavelEmail: string;
+  instituicao: string;
+  riscos: string;
+  beneficios: string;
+  comiteEtica: string;
   dataInicio: string;
   dataFim: string;
   coletarDemografia: boolean;
@@ -33,6 +39,12 @@ const CAMPOS_FIXOS = [
   { nome: "titulo", rotulo: m("Título do estudo"), id: "estudo-titulo" },
   { nome: "produtoAvaliado", rotulo: m("Produto avaliado"), id: "estudo-produto" },
   { nome: "objetivo", rotulo: m("Objetivo"), id: "estudo-objetivo" },
+  { nome: "responsavelNome", rotulo: m("Nome do responsável"), id: "estudo-responsavel" },
+  { nome: "responsavelEmail", rotulo: m("E-mail de contato"), id: "estudo-contato" },
+  { nome: "instituicao", rotulo: m("Instituição"), id: "estudo-instituicao" },
+  { nome: "riscos", rotulo: m("Riscos para o participante"), id: "estudo-riscos" },
+  { nome: "beneficios", rotulo: m("Benefícios"), id: "estudo-beneficios" },
+  { nome: "comiteEtica", rotulo: m("Comitê de ética (opcional)"), id: "estudo-comite" },
   { nome: "dataInicio", rotulo: m("Data de início"), id: "estudo-inicio" },
   { nome: "dataFim", rotulo: m("Data de fim"), id: "estudo-fim" },
 ];
@@ -46,6 +58,8 @@ export function FormularioEstudo(propriedades: Propriedades) {
   const proximaChave = useRef(valores.versoes.length);
   const [titulo, setTitulo] = useState(valores.titulo);
   const [objetivo, setObjetivo] = useState(valores.objetivo);
+  const [responsavel, setResponsavel] = useState(valores.responsavelNome);
+  const [instituicao, setInstituicao] = useState(valores.instituicao);
   const [demografia, setDemografia] = useState(valores.coletarDemografia);
   const [versoes, setVersoes] = useState<VersaoEditavel[]>(() =>
     (valores.versoes.length > 0 ? valores.versoes : [{ id: "", nome: "", respostas: 0 }]).map((versao, posicao) => ({
@@ -146,9 +160,84 @@ export function FormularioEstudo(propriedades: Propriedades) {
           </div>
         </section>
 
-        <section aria-labelledby="secao-periodo" className={estilos.secao}>
+        {/* LGPD, art. 9º: o participante precisa saber quem responde pela pesquisa e como falar com essa pessoa */}
+        <section aria-labelledby="secao-responsavel" className={estilos.secao}>
           <div className={estilos.secaoTitulo}>
             <span className={estilos.secaoNumero}>02</span>
+            <h2 id="secao-responsavel" className={estilos.secaoNome}>{t("Responsável pela pesquisa")}</h2>
+          </div>
+          <p className={formulario.ajuda}>
+            {t("Aparece no termo de consentimento: o participante precisa saber quem responde pela pesquisa e como falar com essa pessoa (LGPD, art. 9º).")}
+          </p>
+          <Campo
+            id="estudo-responsavel"
+            name="responsavelNome"
+            rotulo={t("Nome do responsável")}
+            autoComplete="name"
+            value={responsavel}
+            onChange={(evento) => setResponsavel(evento.target.value)}
+            erro={estado.erros?.responsavelNome}
+          />
+          <Campo
+            id="estudo-contato"
+            name="responsavelEmail"
+            type="email"
+            rotulo={t("E-mail de contato")}
+            autoComplete="email"
+            defaultValue={valores.responsavelEmail}
+            erro={estado.erros?.responsavelEmail}
+          />
+          <Campo
+            id="estudo-instituicao"
+            name="instituicao"
+            rotulo={t("Instituição")}
+            ajuda={t("Por exemplo: PPGIa · PUCPR.")}
+            autoComplete="organization"
+            value={instituicao}
+            onChange={(evento) => setInstituicao(evento.target.value)}
+            erro={estado.erros?.instituicao}
+          />
+        </section>
+
+        {/* Resolução CNS 510/2016: o termo informa riscos, benefícios e, quando houver, o comitê de ética */}
+        <section aria-labelledby="secao-etica" className={estilos.secao}>
+          <div className={estilos.secaoTitulo}>
+            <span className={estilos.secaoNumero}>03</span>
+            <h2 id="secao-etica" className={estilos.secaoNome}>{t("Riscos e benefícios")}</h2>
+          </div>
+          <p className={formulario.ajuda}>
+            {t("Aparecem no termo de consentimento. A ferramenta sugere um texto: ajuste ao que o seu estudo pede.")}
+          </p>
+          <AreaTexto
+            id="estudo-riscos"
+            name="riscos"
+            rotulo={t("Riscos para o participante")}
+            rows={3}
+            defaultValue={valores.riscos}
+            erro={estado.erros?.riscos}
+          />
+          <AreaTexto
+            id="estudo-beneficios"
+            name="beneficios"
+            rotulo={t("Benefícios")}
+            rows={3}
+            defaultValue={valores.beneficios}
+            erro={estado.erros?.beneficios}
+          />
+          <AreaTexto
+            id="estudo-comite"
+            name="comiteEtica"
+            rotulo={t("Comitê de ética (opcional)")}
+            ajuda={t("Se o estudo foi aprovado por um comitê de ética, informe o nome do comitê, o número do parecer ou CAAE e o contato.")}
+            rows={2}
+            defaultValue={valores.comiteEtica}
+            erro={estado.erros?.comiteEtica}
+          />
+        </section>
+
+        <section aria-labelledby="secao-periodo" className={estilos.secao}>
+          <div className={estilos.secaoTitulo}>
+            <span className={estilos.secaoNumero}>04</span>
             <h2 id="secao-periodo" className={estilos.secaoNome}>{t("Período da coleta")}</h2>
           </div>
           <div className={estilos.datas}>
@@ -162,7 +251,7 @@ export function FormularioEstudo(propriedades: Propriedades) {
 
         <section aria-labelledby="secao-versoes" className={estilos.secao}>
           <div className={estilos.secaoTitulo}>
-            <span className={estilos.secaoNumero}>03</span>
+            <span className={estilos.secaoNumero}>05</span>
             <h2 id="secao-versoes" className={estilos.secaoNome}>{t("Versões")}</h2>
           </div>
           <p className={formulario.ajuda}>
@@ -181,7 +270,7 @@ export function FormularioEstudo(propriedades: Propriedades) {
         {/* LGPD (Lei 13.709/2018), art. 6º, III: só coletar o que a pesquisa precisa. Por isso nasce desligado */}
         <section aria-labelledby="secao-demografia" className={estilos.secao}>
           <div className={estilos.secaoTitulo}>
-            <span className={estilos.secaoNumero}>04</span>
+            <span className={estilos.secaoNumero}>06</span>
             <h2 id="secao-demografia" className={estilos.secaoNome}>{t("Dados do participante")}</h2>
           </div>
           <label className={formulario.opcao}>
@@ -218,7 +307,13 @@ export function FormularioEstudo(propriedades: Propriedades) {
           <Link href={cancelar}>{t("Cancelar")}</Link>
         </div>
       </form>
-      <PreviaParticipante titulo={titulo} objetivo={objetivo} etapas={demografia ? 3 : 2} />
+      <PreviaParticipante
+        titulo={titulo}
+        objetivo={objetivo}
+        etapas={demografia ? 3 : 2}
+        responsavel={responsavel}
+        instituicao={instituicao}
+      />
     </div>
   );
 }
