@@ -23,6 +23,7 @@ describe("perfilDemografico", () => {
 
   it("escala ordenada fica na ordem da escala, mesmo com opções zeradas", () => {
     expect(idade.opcoes.map((opcao) => opcao.rotulo)).toEqual([
+      "Menos de 18 anos",
       "18 a 24 anos",
       "25 a 34 anos",
       "35 a 44 anos",

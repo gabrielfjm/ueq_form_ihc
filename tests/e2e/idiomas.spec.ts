@@ -25,6 +25,7 @@ test("estudo em espanhol: o link abre no idioma do estudo, mesmo com o navegador
   await expect(page.getByRole("heading", { name: "Consentimiento informado" })).toBeVisible();
   await verificarAcessibilidade(page);
 
+  await page.getByLabel("18 años o más").check();
   await page.getByRole("button", { name: "Acepto y quiero participar" }).click();
   await expect(page).toHaveTitle(/^Cuestionario · /);
   await expect(page.getByText("Etapa 2 de 3 · Cuestionario")).toBeVisible();
@@ -61,8 +62,8 @@ test("estudo em espanhol: o link abre no idioma do estudo, mesmo com o navegador
     pesquisador.getByRole("link", { name: "Respostas brutas (CSV)" }).click(),
   ]);
   const [cabecalho, primeira] = readFileSync(await download.path(), "utf8").slice(1).split("\r\n");
-  expect(cabecalho).toContain(";suspeita;origem;idioma;traducao_aprovada;faixa_etaria;");
-  expect(primeira).toMatch(/;link;es;sim;25 a 34 anos;/);
+  expect(cabecalho).toContain(";suspeita;origem;idioma;traducao_aprovada;menor_de_idade;faixa_etaria;");
+  expect(primeira).toMatch(/;link;es;sim;não;25 a 34 anos;/);
   await estudo.fechar();
 });
 
@@ -81,6 +82,7 @@ test("em árabe pelo seletor: página da direita para a esquerda, escala na orde
   await expect(page.getByText("لم يعتمد مؤلفو UEQ بعدُ ترجمة الاستبيان")).toBeVisible();
   await verificarAcessibilidade(page);
 
+  await page.getByLabel("18 سنة أو أكثر").check();
   await page.getByRole("button", { name: "أوافق وأرغب في المشاركة" }).click();
   await expect(page).toHaveURL(/\/questionario$/);
   await expect(page.locator("html")).toHaveAttribute("dir", "rtl");
@@ -126,6 +128,7 @@ test("em árabe pelo seletor: página da direita para a esquerda, escala na orde
 test("o idioma também troca no meio do questionário, sem perder o que já foi marcado", async ({ page, browser }, info) => {
   const estudo = await estudoAberto(browser, info);
   await page.goto(estudo.link);
+  await page.getByLabel("18 anos ou mais").check();
   await page.getByRole("button", { name: "Concordo e quero participar" }).click();
   await expect(page).toHaveURL(/\/questionario$/);
   await page.getByRole("group", { name: "Item 1 de 26: Desagradável ou Agradável" }).getByRole("radio").nth(5).check();

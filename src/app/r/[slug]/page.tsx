@@ -4,13 +4,15 @@ import { redirect } from "next/navigation";
 import formulario from "@/componentes/formulario/formulario.module.css";
 import { infoIdioma, textosDoIdioma } from "@/idiomas";
 import { estudoPublico, textosDoEstudo, idiomaDoParticipante, jaRespondeu, participacaoAtual } from "@/lib/participacao";
+import { condicoesDoTermo } from "@/lib/termo";
+import { Termo } from "./Termo";
 import { consentir } from "./acoes";
 import { Etapas, Marcacoes } from "./Etapas";
 import estilos from "./participante.module.css";
 import { SeletorIdioma } from "./SeletorIdioma";
 import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 
-type Propriedades = { params: Promise<{ slug: string }> };
+type Propriedades = { params: Promise<{ slug: string }>; searchParams: Promise<{ erro?: string; idade?: string }> };
 
 export async function generateMetadata({ params }: Propriedades): Promise<Metadata> {
   const { slug } = await params;
@@ -32,8 +34,9 @@ function Aviso({ etapa, titulo, texto }: { etapa: string; titulo: string; texto:
   );
 }
 
-export default async function PaginaConsentimento({ params }: Propriedades) {
+export default async function PaginaConsentimento({ params, searchParams }: Propriedades) {
   const { slug } = await params;
+  const { erro, idade } = await searchParams;
   const estudo = await estudoPublico(slug);
   const doEstudo = await textosDoEstudo(slug);
   const idioma = infoIdioma(await idiomaDoParticipante(slug));
@@ -48,6 +51,8 @@ export default async function PaginaConsentimento({ params }: Propriedades) {
   if (atual && !atual.concluidaEm) redirect(`/r/${slug}/questionario` as Route);
 
   const { consentimento } = textos;
+  const erroIdade = erro === "idade" ? consentimento.idade.erroIdade : erro === "autorizacao" ? consentimento.idade.erroAutorizacao : null;
+  const marcada = erro === "autorizacao" || idade === "menor" ? "menor" : undefined;
   return (
     <>
       <header className={estilos.faixa}>
@@ -56,41 +61,57 @@ export default async function PaginaConsentimento({ params }: Propriedades) {
           <Etapas atual={0} textos={textos.etapas} comDadosOpcionais={estudo.coletarDemografia} />
           <Marcacoes />
           <div className={estilos.nomeEstudo}>
-            {/* Título e objetivo são escritos pelo pesquisador, em português */}
+            {/* Título e objetivo são escritos pelo pesquisador e traduzidos para o idioma do participante */}
             <h1 className={estilos.tituloGrande} lang={doEstudo.lang}>
               {doEstudo.titulo}
             </h1>
-            <p className={estilos.subtitulo}>{consentimento.subtitulo}</p>
+            <p className={estilos.subtitulo}>
+              {consentimento.subtitulo} · {estudo.instituicao}
+            </p>
           </div>
         </div>
       </header>
       <main id="conteudo" tabIndex={-1} className={estilos.corpo}>
-        <section aria-labelledby="titulo-termo" className={estilos.termo}>
-          <h2 id="titulo-termo" className={estilos.termoTitulo}>
-            {consentimento.termoTitulo}
-          </h2>
-          <p className={estilos.texto}>
-            <span lang={doEstudo.lang}>{doEstudo.objetivo}</span> {consentimento.termoTexto}
-          </p>
-          <dl className={estilos.condicoes}>
-            {consentimento.condicoes.map(([condicao, explicacao], posicao) => (
-              <div key={condicao}>
-                <span className={estilos.condicaoNumero} aria-hidden="true">
-                  {String(posicao + 1).padStart(2, "0")}
-                </span>
-                <dt>{condicao}</dt>
-                <dd>{explicacao}</dd>
-              </div>
-            ))}
-          </dl>
-          {/* LGPD, art. 9º: quem vai consentir precisa poder ler o que acontece com os dados. A página fica
-              dentro do link do participante: nenhum caminho leva ao resto da ferramenta */}
-          <p className={estilos.linkPrivacidade}>
+        <Termo
+          textos={consentimento}
+          objetivo={doEstudo.objetivo}
+          langDoEstudo={doEstudo.lang}
+          condicoes={condicoesDoTermo(textos, { ...estudo, ...doEstudo })}
+        >
+          {/* LGPD, art. 9º: quem vai consentir precisa poder ler o que acontece com os dados. As duas páginas
+              ficam dentro do link do participante: nenhum caminho leva ao resto da ferramenta */}
+          <p className={estilos.linksTermo}>
             <Link href={`/r/${slug}/privacidade` as Route}>{consentimento.privacidade}</Link>
+            <Link href={`/r/${slug}/termo` as Route}>{consentimento.via}</Link>
           </p>
-        </section>
+        </Termo>
         {/* Uma ação principal só (Hick, Nielsen 8); recusar é um link igualmente visível (§3.7) */}
-        <form action={consentir.bind(null, slug)} className={estilos.decisao}>
+        <form action={consentir.bind(null, slug)} className={estilos.decisao} noValidate>
+          {/* LGPD, art. 14: menores de 18 anos só com a autorização do responsável. A confirmação aparece ao
+              escolher "Menos de 18 anos" (sem JavaScript, ela fica sempre à vista) e é conferida no servidor */}
+          <fieldset className={estilos.idade} aria-describedby={erroIdade ? "erro-idade" : undefined}>
+            <legend className={estilos.idadeLegenda}>{consentimento.idade.legenda}</legend>
+            {erroIdade && (
+              <p id="erro-idade" role="alert" className={formulario.erro}>
+                {erroIdade}
+              </p>
+            )}
+            <label className={formulario.opcao}>
+              <input type="radio" name="idade" value="maior" autoFocus={erro === "idade"} />
+              <span>{consentimento.idade.maior}</span>
+            </label>
+            <label className={formulario.opcao}>
+              <input type="radio" name="idade" value="menor" defaultChecked={marcada === "menor"} />
+              <span>{consentimento.idade.menor}</span>
+            </label>
+            <div className={estilos.autorizacao}>
+              <label className={formulario.opcao}>
+                <input type="checkbox" name="autorizacao" value="sim" autoFocus={erro === "autorizacao"} />
+                <span>{consentimento.idade.autorizacao}</span>
+              </label>
+              <p className={formulario.ajuda}>{consentimento.idade.ajudaMenor}</p>
+            </div>
+          </fieldset>
           <BotaoEnvio semIndicador textoEnviando={textos.aguarde} className={`${formulario.botao} ${formulario.primario} ${estilos.concordo}`}>
             {consentimento.concordo}
           </BotaoEnvio>

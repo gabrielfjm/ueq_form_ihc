@@ -15,6 +15,8 @@ export type ParticipacaoExportada = {
   // Código do idioma em que a pessoa respondeu (data/ueq-idiomas.json); null nas importadas, que não dizem
   idioma: string | null;
   traducaoAprovada: boolean | null;
+  // Declarou ter menos de 18 anos, com a autorização do responsável; null nas importadas
+  menorDeIdade: boolean | null;
   demografia: Demografia | null;
   // os 26 valores de 1 a 7, na ordem oficial
   valores: number[];
@@ -34,6 +36,7 @@ function cabecalhoRespostas(): string[] {
     "origem",
     "idioma",
     "traducao_aprovada",
+    "menor_de_idade",
     "faixa_etaria",
     "genero",
     "escolaridade",
@@ -53,6 +56,7 @@ function linhaRespostas(participacao: ParticipacaoExportada, valores: readonly n
     participacao.origem,
     participacao.idioma,
     participacao.traducaoAprovada === null ? null : simNao(participacao.traducaoAprovada),
+    participacao.menorDeIdade === null ? null : simNao(participacao.menorDeIdade),
     demografia?.faixaEtaria,
     demografia?.genero,
     demografia?.escolaridade,

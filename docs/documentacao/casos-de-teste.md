@@ -1,15 +1,15 @@
 # Casos e cenários de teste
 
-Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **183 casos de teste**: 90 de ponta a ponta, 68 de unidade e 25 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
+Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **187 casos de teste**: 93 de ponta a ponta, 69 de unidade e 25 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
 
 A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). A ligação de cada cenário e de cada caso com os requisitos entra quando a lista de requisitos estiver pronta.
 
-## Execução de 06/11/2026
+## Execução de 13/11/2026
 
 | Nível | Ferramenta | Casos | Execuções | Passaram | Pulados | Falharam |
 |---|---|---|---|---|---|---|
-| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 90 | 180 | 177 | 3 | 0 |
-| Unidade | Vitest 5 | 68 | 306 | 298 | 8 | 0 |
+| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 93 | 186 | 183 | 3 | 0 |
+| Unidade | Vitest 5 | 69 | 346 | 338 | 8 | 0 |
 | Manual | Pessoas da equipe | 25 | — | — | — | — |
 
 - **Ponta a ponta:** cada caso roda duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7). As execuções puladas são de propósito: [CT-E49](casos-de-teste.md#ct-e49) só roda quando os documentos que ele usa forem publicados, e [CT-E67](casos-de-teste.md#ct-e67) roda só no desktop.
@@ -59,9 +59,9 @@ pnpm exec playwright show-report   # relatório com as capturas de daltonismo do
 |---|---|---|---|---|---|
 | <a id="cn01"></a>CN01 | **Acesso e autenticação** | Cadastrar, entrar, sair e proteger a área do pesquisador, só com teclado e sem violações de acessibilidade | a definir | [CT-E01](casos-de-teste.md#ct-e01), [CT-E02](casos-de-teste.md#ct-e02), [CT-E03](casos-de-teste.md#ct-e03), [CT-E04](casos-de-teste.md#ct-e04), [CT-E06](casos-de-teste.md#ct-e06), [CT-E07](casos-de-teste.md#ct-e07), [CT-E08](casos-de-teste.md#ct-e08), [CT-E90](casos-de-teste.md#ct-e90) | Passou |
 | <a id="cn02"></a>CN02 | **Minha conta** | Editar dados, trocar a senha derrubando outras sessões e excluir a conta com confirmação | a definir | [CT-E09](casos-de-teste.md#ct-e09), [CT-E10](casos-de-teste.md#ct-e10), [CT-E11](casos-de-teste.md#ct-e11) | Passou |
-| <a id="cn03"></a>CN03 | **Gestão de estudos** | Criar, listar, editar, abrir, encerrar, reabrir, copiar o link e excluir estudos | a definir | [CT-E12](casos-de-teste.md#ct-e12), [CT-E13](casos-de-teste.md#ct-e13), [CT-E14](casos-de-teste.md#ct-e14), [CT-E15](casos-de-teste.md#ct-e15), [CT-E16](casos-de-teste.md#ct-e16), [CT-E17](casos-de-teste.md#ct-e17), [CT-E18](casos-de-teste.md#ct-e18), [CT-E19](casos-de-teste.md#ct-e19), [CT-E88](casos-de-teste.md#ct-e88), [CT-E89](casos-de-teste.md#ct-e89) | Passou |
+| <a id="cn03"></a>CN03 | **Gestão de estudos** | Criar, listar, editar, abrir, encerrar, reabrir, copiar o link e excluir estudos | a definir | [CT-E12](casos-de-teste.md#ct-e12), [CT-E13](casos-de-teste.md#ct-e13), [CT-E14](casos-de-teste.md#ct-e14), [CT-E15](casos-de-teste.md#ct-e15), [CT-E16](casos-de-teste.md#ct-e16), [CT-E17](casos-de-teste.md#ct-e17), [CT-E18](casos-de-teste.md#ct-e18), [CT-E19](casos-de-teste.md#ct-e19), [CT-E88](casos-de-teste.md#ct-e88), [CT-E89](casos-de-teste.md#ct-e89), [CT-E93](casos-de-teste.md#ct-e93) | Passou |
 | <a id="cn04"></a>CN04 | **Isolamento e proteção de dados** | Garantir que um pesquisador não veja nem exporte o estudo de outro e que o participante nunca precise de sessão | a definir | [CT-E05](casos-de-teste.md#ct-e05), [CT-E20](casos-de-teste.md#ct-e20), [CT-E38](casos-de-teste.md#ct-e38), [CT-E41](casos-de-teste.md#ct-e41) | Passou |
-| <a id="cn05"></a>CN05 | **Participação no estudo** | Percorrer o link do participante do consentimento ao fim, inclusive recusar, desistir, recarregar e tentar responder de novo | a definir | [CT-U30](casos-de-teste.md#ct-u30), [CT-E21](casos-de-teste.md#ct-e21), [CT-E23](casos-de-teste.md#ct-e23), [CT-E26](casos-de-teste.md#ct-e26), [CT-E27](casos-de-teste.md#ct-e27), [CT-E28](casos-de-teste.md#ct-e28), [CT-E52](casos-de-teste.md#ct-e52), [CT-E71](casos-de-teste.md#ct-e71), [CT-E82](casos-de-teste.md#ct-e82), [CT-E83](casos-de-teste.md#ct-e83) | Passou |
+| <a id="cn05"></a>CN05 | **Participação no estudo** | Percorrer o link do participante do consentimento ao fim, inclusive recusar, desistir, recarregar e tentar responder de novo | a definir | [CT-U30](casos-de-teste.md#ct-u30), [CT-E21](casos-de-teste.md#ct-e21), [CT-E23](casos-de-teste.md#ct-e23), [CT-E26](casos-de-teste.md#ct-e26), [CT-E27](casos-de-teste.md#ct-e27), [CT-E28](casos-de-teste.md#ct-e28), [CT-E52](casos-de-teste.md#ct-e52), [CT-E71](casos-de-teste.md#ct-e71), [CT-E82](casos-de-teste.md#ct-e82), [CT-E83](casos-de-teste.md#ct-e83), [CT-E91](casos-de-teste.md#ct-e91) | Passou |
 | <a id="cn06"></a>CN06 | **Acessibilidade do questionário** | Responder só com teclado e leitor de tela, em 320 px, com foco sempre visível e o instrumento intacto | a definir | [CT-E22](casos-de-teste.md#ct-e22), [CT-E24](casos-de-teste.md#ct-e24), [CT-E25](casos-de-teste.md#ct-e25) | Passou |
 | <a id="cn07"></a>CN07 | **Idiomas** | Responder em outro idioma, pelo navegador ou pelo seletor, inclusive da direita para a esquerda, e o pesquisador ver o idioma | a definir | [CT-U36](casos-de-teste.md#ct-u36), [CT-U45](casos-de-teste.md#ct-u45), [CT-U46](casos-de-teste.md#ct-u46), [CT-U47](casos-de-teste.md#ct-u47), [CT-U48](casos-de-teste.md#ct-u48), [CT-U49](casos-de-teste.md#ct-u49), [CT-U50](casos-de-teste.md#ct-u50), [CT-E45](casos-de-teste.md#ct-e45), [CT-E46](casos-de-teste.md#ct-e46), [CT-E68](casos-de-teste.md#ct-e68) | Passou |
 | <a id="cn08"></a>CN08 | **Cálculo UEQ** | Conferir recodificação, estatística, escalas, alfa, benchmark e grupos em funções puras, com as bordas | a definir | [CT-U01](casos-de-teste.md#ct-u01), [CT-U02](casos-de-teste.md#ct-u02), [CT-U03](casos-de-teste.md#ct-u03), [CT-U04](casos-de-teste.md#ct-u04), [CT-U05](casos-de-teste.md#ct-u05), [CT-U06](casos-de-teste.md#ct-u06), [CT-U07](casos-de-teste.md#ct-u07), [CT-U08](casos-de-teste.md#ct-u08), [CT-U09](casos-de-teste.md#ct-u09), [CT-U10](casos-de-teste.md#ct-u10), [CT-U11](casos-de-teste.md#ct-u11), [CT-U12](casos-de-teste.md#ct-u12), [CT-U13](casos-de-teste.md#ct-u13), [CT-U14](casos-de-teste.md#ct-u14), [CT-U15](casos-de-teste.md#ct-u15), [CT-U16](casos-de-teste.md#ct-u16), [CT-U17](casos-de-teste.md#ct-u17), [CT-U18](casos-de-teste.md#ct-u18), [CT-U20](casos-de-teste.md#ct-u20), [CT-U21](casos-de-teste.md#ct-u21), [CT-U22](casos-de-teste.md#ct-u22), [CT-M17](casos-de-teste.md#ct-m17) | Passou, com itens pendentes |
@@ -78,7 +78,7 @@ pnpm exec playwright show-report   # relatório com as capturas de daltonismo do
 | <a id="cn20"></a>CN20 | **Página inicial e janelas** | Apresentar a ferramenta a quem não tem conta, abrir Entrar e Criar conta numa janela sem rolar, fechar devolvendo o foco e entregar o ícone do site | a definir | [CT-E58](casos-de-teste.md#ct-e58), [CT-E59](casos-de-teste.md#ct-e59), [CT-E60](casos-de-teste.md#ct-e60), [CT-E61](casos-de-teste.md#ct-e61), [CT-E69](casos-de-teste.md#ct-e69), [CT-E70](casos-de-teste.md#ct-e70) | Passou |
 | <a id="cn21"></a>CN21 | **Equipe e notificações** | Convidar por e-mail, aceitar no sino, limitar o que o leitor faz e avisar a equipe | a definir | [CT-U59](casos-de-teste.md#ct-u59), [CT-E63](casos-de-teste.md#ct-e63), [CT-E64](casos-de-teste.md#ct-e64) | Passou |
 | <a id="cn22"></a>CN22 | **Aprender a usar** | Explicar cada página na ajuda (?) e guiar o primeiro acesso com um tour que pode ser pulado | a definir | [CT-E65](casos-de-teste.md#ct-e65), [CT-E66](casos-de-teste.md#ct-e66) | Passou |
-| <a id="cn23"></a>CN23 | **Proteção de dados** | Cumprir a LGPD na interface e no servidor: política pública, cabeçalhos, criptografia, limite de tentativas e download dos dados | a definir | [CT-U58](casos-de-teste.md#ct-u58), [CT-E73](casos-de-teste.md#ct-e73), [CT-E74](casos-de-teste.md#ct-e74), [CT-E75](casos-de-teste.md#ct-e75), [CT-E76](casos-de-teste.md#ct-e76), [CT-E77](casos-de-teste.md#ct-e77), [CT-E78](casos-de-teste.md#ct-e78), [CT-E79](casos-de-teste.md#ct-e79), [CT-E80](casos-de-teste.md#ct-e80), [CT-E81](casos-de-teste.md#ct-e81) | Passou |
+| <a id="cn23"></a>CN23 | **Proteção de dados** | Cumprir a LGPD na interface e no servidor: política pública, cabeçalhos, criptografia, limite de tentativas e download dos dados | a definir | [CT-U58](casos-de-teste.md#ct-u58), [CT-E73](casos-de-teste.md#ct-e73), [CT-E74](casos-de-teste.md#ct-e74), [CT-E75](casos-de-teste.md#ct-e75), [CT-E76](casos-de-teste.md#ct-e76), [CT-E77](casos-de-teste.md#ct-e77), [CT-E78](casos-de-teste.md#ct-e78), [CT-E79](casos-de-teste.md#ct-e79), [CT-E80](casos-de-teste.md#ct-e80), [CT-E81](casos-de-teste.md#ct-e81), [CT-E92](casos-de-teste.md#ct-e92), [CT-U69](casos-de-teste.md#ct-u69) | Passou |
 | <a id="cn24"></a>CN24 | **Idioma da ferramenta** | Escolher o idioma ao criar a conta, trocar em Minha conta e manter o catálogo de textos em dia | a definir | [CT-U62](casos-de-teste.md#ct-u62), [CT-U63](casos-de-teste.md#ct-u63), [CT-U66](casos-de-teste.md#ct-u66), [CT-U67](casos-de-teste.md#ct-u67), [CT-U68](casos-de-teste.md#ct-u68), [CT-E67](casos-de-teste.md#ct-e67) | Passou |
 | <a id="cn25"></a>CN25 | **Cenários de demonstração** | Gerar respostas sintéticas coerentes com o perfil de cada cenário | a definir | [CT-U61](casos-de-teste.md#ct-u61) | Passou |
 | <a id="cn17"></a>CN17 | **Verificação manual com pessoas** | O que a automação não vê: leitor de tela real, celular real, zoom, espaçamento de texto, avaliação heurística e teste com usuários | a definir | [CT-M01](casos-de-teste.md#ct-m01), [CT-M02](casos-de-teste.md#ct-m02), [CT-M03](casos-de-teste.md#ct-m03), [CT-M04](casos-de-teste.md#ct-m04), [CT-M05](casos-de-teste.md#ct-m05), [CT-M06](casos-de-teste.md#ct-m06), [CT-M07](casos-de-teste.md#ct-m07), [CT-M08](casos-de-teste.md#ct-m08), [CT-M09](casos-de-teste.md#ct-m09), [CT-M10](casos-de-teste.md#ct-m10), [CT-M11](casos-de-teste.md#ct-m11), [CT-M12](casos-de-teste.md#ct-m12), [CT-M13](casos-de-teste.md#ct-m13), [CT-M14](casos-de-teste.md#ct-m14), [CT-M18](casos-de-teste.md#ct-m18), [CT-M19](casos-de-teste.md#ct-m19), [CT-M20](casos-de-teste.md#ct-m20), [CT-M21](casos-de-teste.md#ct-m21), [CT-M22](casos-de-teste.md#ct-m22), [CT-M23](casos-de-teste.md#ct-m23), [CT-M24](casos-de-teste.md#ct-m24), [CT-M25](casos-de-teste.md#ct-m25) | Manual, a fazer |
@@ -97,7 +97,7 @@ Cada caso é um `test(...)` do Playwright. O título no código é o que aparece
 | Teste | `tests/e2e/inicial.spec.ts` › "a raiz apresenta a ferramenta para quem não tem sessão e passa no axe" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -117,7 +117,7 @@ Resultado esperado: A URL continua em /. O h1 é "Estudos de experiência do usu
 | Teste | `tests/e2e/inicial.spec.ts` › "o primeiro Tab leva ao link de pular para o conteúdo" |
 | Pré-condições | Página inicial (/) aberta. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -136,7 +136,7 @@ Resultado esperado: O primeiro Tab foca "Pular para o conteúdo"; o Enter leva o
 | Teste | `tests/e2e/autenticacao.spec.ts` › "cadastra, sai e entra de novo usando só o teclado" |
 | Pré-condições | E-mail de teste novo. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -158,7 +158,7 @@ Resultado esperado: Depois do cadastro aparece "Seus estudos". Sair abre a janel
 | Teste | `tests/e2e/autenticacao.spec.ts` › "rota protegida sem sessão vai para Entrar e volta para ela depois do login" |
 | Pré-condições | Conta criada; cookies apagados. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -177,7 +177,7 @@ Resultado esperado: Primeiro a URL vira /entrar?voltar=%2Fconta; depois do login
 | Teste | `tests/e2e/autenticacao.spec.ts` › "participante nunca precisa de sessão" |
 | Pré-condições | Navegador sem cookie. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -195,7 +195,7 @@ Resultado esperado: A URL continua em /r/qualquer-estudo e a resposta não é o 
 | Teste | `tests/e2e/autenticacao.spec.ts` › "Entrar e Criar conta passam no axe, inclusive com erro" |
 | Pré-condições | Nenhuma. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -216,7 +216,7 @@ Resultado esperado: Zero violações nos quatro estados. O erro de login mostra 
 | Teste | `tests/e2e/autenticacao.spec.ts` › "o link do resumo de erros leva ao campo" |
 | Pré-condições | Nenhuma. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -235,7 +235,7 @@ Resultado esperado: O foco vai para o campo Senha, que mantém o que a pessoa di
 | Teste | `tests/e2e/autenticacao.spec.ts` › "Mostrar senha alterna a visibilidade e anuncia o estado" |
 | Pré-condições | Página /entrar aberta. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -253,7 +253,7 @@ Resultado esperado: O campo passa a type=text e o botão de aria-pressed=false p
 | Teste | `tests/e2e/conta.spec.ts` › "Minha conta salva os dados, anuncia o resultado e passa no axe" |
 | Pré-condições | Pesquisador logado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -274,7 +274,7 @@ Resultado esperado: O link Minha conta fica com aria-current=page, e o painel le
 | Teste | `tests/e2e/conta.spec.ts` › "trocar a senha encerra a sessão aberta em outro navegador" |
 | Pré-condições | A mesma conta logada em dois navegadores. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -295,7 +295,7 @@ Resultado esperado: Senha atual errada mostra "A senha atual não confere…". C
 | Teste | `tests/e2e/conta.spec.ts` › "excluir a conta exige digitar o e-mail e apaga o acesso" |
 | Pré-condições | Pesquisador logado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -317,7 +317,7 @@ Resultado esperado: Abre a janela "Excluir sua conta?" com o aviso do que vai ju
 | Teste | `tests/e2e/estudos.spec.ts` › "lista vazia mostra o estado vazio e passa no axe" |
 | Pré-condições | Pesquisador recém-cadastrado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -335,7 +335,7 @@ Resultado esperado: Aparece "Você ainda não tem estudos." e o axe não acha vi
 | Teste | `tests/e2e/estudos.spec.ts` › "o produto sugere o nome da primeira versão e o foco acompanha adicionar e remover" |
 | Pré-condições | Pesquisador logado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -356,7 +356,7 @@ Resultado esperado: A Versão 1 recebe "Portal do aluno" com a nota "Sugerido a 
 | Teste | `tests/e2e/estudos.spec.ts` › "criar estudo com campos faltando mostra o resumo e passa no axe" |
 | Pré-condições | Pesquisador logado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -376,7 +376,7 @@ Resultado esperado: O resumo "Corrija 4 campos para continuar" recebe o foco, ap
 | Teste | `tests/e2e/estudos.spec.ts` › "abre, encerra e reabre a coleta, e o link público acompanha" |
 | Pré-condições | Estudo criado em rascunho; uma aba de participante. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -397,7 +397,7 @@ Resultado esperado: Rascunho: "Este estudo ainda não está aberto". Aberto: "Co
 | Teste | `tests/e2e/estudos.spec.ts` › "Copiar link anuncia o resultado e funciona pelo teclado" |
 | Pré-condições | Estudo aberto. Só no Chromium (permissão de área de transferência). |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -416,7 +416,7 @@ Resultado esperado: Aparece "Link copiado." e a área de transferência tem um e
 | Teste | `tests/e2e/estudos.spec.ts` › "a lista mostra o estudo numa tabela com o título como link" |
 | Pré-condições | Um estudo criado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -434,7 +434,7 @@ Resultado esperado: A tabela tem caption, cabeçalho Respostas, o título como l
 | Teste | `tests/e2e/estudos.spec.ts` › "editar salva as mudanças e avisa" |
 | Pré-condições | Um estudo criado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -453,7 +453,7 @@ Resultado esperado: Aparece "Alterações salvas." e o título novo é o h1 da p
 | Teste | `tests/e2e/estudos.spec.ts` › "excluir pede o título e apaga o estudo" |
 | Pré-condições | Um estudo com 2 versões. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -473,7 +473,7 @@ Resultado esperado: O campo recebe o foco e a tela diz "Excluir apaga o estudo e
 | Teste | `tests/e2e/estudos.spec.ts` › "outro pesquisador não vê o estudo pelo endereço" |
 | Pré-condições | Estudo criado pela conta A; conta B logada em outro navegador. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -491,7 +491,7 @@ Resultado esperado: A resposta é 404, igual à de um estudo inexistente.
 | Teste | `tests/e2e/questionario.spec.ts` › "fluxo completo do participante, com axe em todas as etapas" |
 | Pré-condições | Estudo aberto. No projeto celular, janela de 390 px. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -513,7 +513,7 @@ Resultado esperado: Cada etapa tem título próprio (Consentimento, Questionári
 | Teste | `tests/e2e/questionario.spec.ts` › "fluxo completo só com teclado, com o foco sempre visível" |
 | Pré-condições | Estudo aberto. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -534,7 +534,7 @@ Resultado esperado: Em cada item o elemento focado está na tela e acima do roda
 | Teste | `tests/e2e/questionario.spec.ts` › "envio incompleto leva o foco ao resumo e os links levam aos itens" |
 | Pré-condições | Participação iniciada. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -553,7 +553,7 @@ Resultado esperado: O resumo "Faltam 2 itens: 7 e 19" recebe o foco, o título d
 | Teste | `tests/e2e/questionario.spec.ts` › "cada item é um grupo com legenda e 7 rádios com posição e polo" |
 | Pré-condições | Participação iniciada. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -571,7 +571,7 @@ Resultado esperado: Grupo "Item 4 de 26: De Fácil aprendizagem ou De difícil a
 | Teste | `tests/e2e/questionario.spec.ts` › "em 320 px (zoom de 400%) nenhuma etapa rola na horizontal" |
 | Pré-condições | Estudo aberto; janela de 320 × 640. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -592,7 +592,7 @@ Resultado esperado: Em todas as etapas a largura do documento não passa da jane
 | Teste | `tests/e2e/questionario.spec.ts` › "recarregar a página recupera as respostas marcadas" |
 | Pré-condições | Participação iniciada. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -611,7 +611,7 @@ Resultado esperado: Aparece "Recuperamos as respostas que você já tinha marcad
 | Teste | `tests/e2e/questionario.spec.ts` › "sair sem enviar confirma numa janela e não grava nada" |
 | Pré-condições | Participação iniciada com um item marcado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -633,7 +633,7 @@ Resultado esperado: Abre a janela "Sair sem enviar? Nada do que você marcou ser
 | Teste | `tests/e2e/questionario.spec.ts` › "não quero participar sai sem gravar e o link respondido não aceita outro envio" |
 | Pré-condições | Estudo aberto. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -653,7 +653,7 @@ Resultado esperado: A recusa mostra "Você saiu do estudo". Depois de responder,
 | Teste | `tests/e2e/resultados.spec.ts` › "mostra os números do módulo UEQ e guarda versão e modo na URL" |
 | Pré-condições | Estudo com a fixture basico na versão 1 (20) e inconsistente na versão 2 (15). |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -676,7 +676,7 @@ Resultado esperado: Atratividade da versão 1: 0,73, IC de 0,33 a 1,14, alfa 0,9
 | Teste | `tests/e2e/resultados.spec.ts` › "com uma resposta só avisa que não há intervalo de confiança" |
 | Pré-condições | Estudo com 1 resposta. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -694,7 +694,7 @@ Resultado esperado: Aparece "Amostra insuficiente para intervalo de confiança."
 | Teste | `tests/e2e/resultados.spec.ts` › "em 320 px o painel não rola na horizontal, nos dois modos" |
 | Pré-condições | Estudo com 5 respostas em cada versão; janela de 320 × 640. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -713,7 +713,7 @@ Resultado esperado: Nos dois modos a largura do documento não passa da janela.
 | Teste | `tests/e2e/resultados.spec.ts` › "gráficos com daltonismo simulado e alto contraste" |
 | Pré-condições | Estudo com 8 respostas em cada versão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -734,7 +734,7 @@ Resultado esperado: As quatro capturas ficam anexadas ao relatório para confer�
 | Teste | `tests/e2e/respostas.spec.ts` › "a fixture inconsistente sai com as 4 suspeitas da equipe e dá para tirá-las da análise" |
 | Pré-condições | Estudo com a fixture inconsistente (15). |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -755,7 +755,7 @@ Resultado esperado: A URL ganha suspeitas=1 e aparece "Mostrando 4 de 15.", com 
 | Teste | `tests/e2e/respostas.spec.ts` › "incluir e excluir uma participação avisa e nunca apaga" |
 | Pré-condições | Estudo com 3 respostas. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -774,7 +774,7 @@ Resultado esperado: Ao desmarcar: "…saiu da análise. Nada foi apagado" e "3 r
 | Teste | `tests/e2e/respostas.spec.ts` › "ver escalas mostra a amplitude de cada escala e destaca as inconsistentes" |
 | Pré-condições | Estudo com a linha 1 da fixture inconsistente. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -792,7 +792,7 @@ Resultado esperado: O botão passa de aria-expanded=false para true e vira Ocult
 | Teste | `tests/e2e/respostas.spec.ts` › "em 320 px a página de respostas não rola na horizontal" |
 | Pré-condições | Estudo com 3 respostas; janela de 320 × 640. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -810,7 +810,7 @@ Resultado esperado: A largura do documento não passa da janela.
 | Teste | `tests/e2e/exportacao.spec.ts` › "baixa as 4 exportações com nome datado, BOM e o formato de cada uma" |
 | Pré-condições | Estudo com basico (20) e inconsistente (15). |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -828,7 +828,7 @@ Resultado esperado: Nomes ueq_avaliacao-do-checkout-da-loja-virtual_<tipo>_<aaaa
 | Teste | `tests/e2e/exportacao.spec.ts` › "sem sessão ou de outro pesquisador, a exportação não sai" |
 | Pré-condições | Estudo com 2 respostas; uma segunda conta. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -848,7 +848,7 @@ Resultado esperado: Sem cookie: 307 para /entrar. Outra conta: 404. Tipo inexist
 | Teste | `tests/e2e/painel-pdf.spec.ts` › "baixa o painel em PDF com nome datado, da versão escolhida" |
 | Pré-condições | Estudo com basico e inconsistente. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -866,7 +866,7 @@ Resultado esperado: O arquivo se chama ueq_avaliacao-do-checkout-da-loja-virtual
 | Teste | `tests/e2e/painel-pdf.spec.ts` › "a página de impressão tem cabeçalho com título, n e data, e no papel some a navegação" |
 | Pré-condições | Estudo com a fixture basico. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -885,7 +885,7 @@ Resultado esperado: O h1 é o título do estudo, "n na análise" é "20 particip
 | Teste | `tests/e2e/painel-pdf.spec.ts` › "sem sessão o PDF não sai" |
 | Pré-condições | Estudo criado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -903,7 +903,7 @@ Resultado esperado: 307 para /entrar.
 | Teste | `tests/e2e/importacao.spec.ts` › "importa a fixture basico numa versão, com prévia, e as respostas aparecem como importadas" |
 | Pré-condições | Estudo aberto com 2 versões. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -924,7 +924,7 @@ Resultado esperado: A aba Respostas continua com aria-current. O título "20 res
 | Teste | `tests/e2e/importacao.spec.ts` › "arquivo com erro mostra o problema de cada linha e não importa nada" |
 | Pré-condições | Estudo aberto. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -945,7 +945,7 @@ Resultado esperado: Primeiro o resumo "Corrija 1 campo" recebe o foco com link p
 | Teste | `tests/e2e/importacao.spec.ts` › "em 320 px a prévia da importação não rola na horizontal" |
 | Pré-condições | Estudo aberto; janela de 320 × 800. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -963,7 +963,7 @@ Resultado esperado: A largura do documento não passa da janela.
 | Teste | `tests/e2e/idiomas.spec.ts` › "estudo em espanhol: o link abre no idioma do estudo, mesmo com o navegador em português" |
 | Pré-condições | Estudo aberto, escrito em espanhol; navegador do participante em pt-BR. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -985,7 +985,7 @@ Resultado esperado: lang=es, títulos e botões em espanhol, instrução e termo
 | Teste | `tests/e2e/idiomas.spec.ts` › "em árabe pelo seletor: página da direita para a esquerda, escala na ordem oficial" |
 | Pré-condições | Estudo aberto; navegador em pt-BR. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1008,7 +1008,7 @@ Resultado esperado: Escolher não muda a página (lang continua pt-BR); Aplicar 
 | Teste | `tests/e2e/documentacao.spec.ts` › "sem conta, a documentação abre com a barra pública, as seções e as sub-abas, e passa no axe" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1029,7 +1029,7 @@ Resultado esperado: A barra mostra Documentação (com aria-current) e Entrar, e
 | Teste | `tests/e2e/documentacao.spec.ts` › "quem entrou chega à documentação pela barra do pesquisador e continua com ela" |
 | Pré-condições | Pesquisador logado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1047,7 +1047,7 @@ Resultado esperado: A URL vira /documentacao, o link Documentação fica com ari
 | Teste | `tests/e2e/documentacao.spec.ts` › "os links entre documentos levam à âncora dentro da ferramenta e a planilha baixa sem conta" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Pulado (celular e desktop), até o documento ser publicado |
+| Resultado em 13/11/2026 | Pulado (celular e desktop), até o documento ser publicado |
 
 Passos:
 
@@ -1067,7 +1067,7 @@ Resultado esperado: A URL leva à âncora do outro documento dentro da ferrament
 | Teste | `tests/e2e/documentacao.spec.ts` › "em 320 px a documentação não rola na horizontal" |
 | Pré-condições | Janela de 320 × 640. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1085,7 +1085,7 @@ Resultado esperado: Nas três páginas a largura do documento não passa da jane
 | Teste | `tests/e2e/documentacao.spec.ts` › "endereço fora do catálogo dá 404 e os arquivos só saem da lista" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1105,7 +1105,7 @@ Resultado esperado: A página dá 404; os três pedidos de arquivo dão 404; req
 | Teste | `tests/e2e/questionario.spec.ts` › "o link do participante só mostra o formulário e o seletor de idioma, sem caminho para a ferramenta" |
 | Pré-condições | Estudo aberto. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1126,7 +1126,7 @@ Resultado esperado: Em cada etapa (consentimento, questionário, dados opcionais
 | Teste | `tests/e2e/barra.spec.ts` › "a barra fica fixa no topo ao rolar, com e sem conta" |
 | Pré-condições | Uma página longa (a página inicial). |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1145,7 +1145,7 @@ Resultado esperado: Nos dois casos a página rolou mais de 1000 px e a barra est
 | Teste | `tests/e2e/barra.spec.ts` › "o foco e as âncoras nunca ficam embaixo da barra fixa" |
 | Pré-condições | Nenhuma. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1164,7 +1164,7 @@ Resultado esperado: A âncora começa abaixo da barra, e cada elemento que receb
 | Teste | `tests/e2e/barra.spec.ts` › "no celular os links ficam no menu, que fecha com Esc e devolve o foco" |
 | Pré-condições | Janela de 390 × 844. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1185,7 +1185,7 @@ Resultado esperado: Fechado: aria-expanded=false, botão Entrar escondido e barr
 | Teste | `tests/e2e/barra.spec.ts` › "no computador o botão Menu não aparece e os links ficam na barra" |
 | Pré-condições | Janela de 1280 × 800. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1203,7 +1203,7 @@ Resultado esperado: O botão Menu não aparece e o botão Entrar está visível 
 | Teste | `tests/e2e/documentacao.spec.ts` › "clicar no diagrama abre em tela cheia, com zoom, arrasto, Voltar e Esc" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1226,7 +1226,7 @@ Resultado esperado: A janela com o título do diagrama ocupa toda a largura, Vol
 | Teste | `tests/e2e/inicial.spec.ts` › "Entrar abre a janela por cima da página, sem rolar, e Esc fecha devolvendo o foco" |
 | Pré-condições | Página inicial (/) sem sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1247,7 +1247,7 @@ Resultado esperado: Abre a janela "Entrar" com o foco no E-mail, e a URL continu
 | Teste | `tests/e2e/inicial.spec.ts` › "fechar a janela em /entrar volta para a página inicial" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1266,7 +1266,7 @@ Resultado esperado: A janela some e a URL vira /.
 | Teste | `tests/e2e/inicial.spec.ts` › "quem entrou vê a página inicial com a barra do pesquisador e o caminho para os estudos" |
 | Pré-condições | Pesquisador logado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1285,7 +1285,7 @@ Resultado esperado: A barra tem o botão Sair. "Ver seus estudos" leva a /estudo
 | Teste | `tests/e2e/inicial.spec.ts` › "o navegador recebe o ícone do site" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1304,7 +1304,7 @@ Resultado esperado: O link aponta para /icon.svg; o SVG sai com 200 e image/svg+
 | Teste | `tests/e2e/documentacao.spec.ts` › "documento em produção mostra o aviso e a ficha, sem texto, arquivo nem downloads" |
 | Pré-condições | Navegador sem cookie de sessão; Requisitos ainda em produção. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1324,7 +1324,7 @@ Resultado esperado: A visão geral mostra "A documentação está sendo escrita 
 | Teste | `tests/e2e/equipe.spec.ts` › "convite por e-mail chega no sino, o leitor só vê e o dono é avisado" |
 | Pré-condições | Duas contas, cada uma no seu navegador; o dono tem um estudo. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1345,7 +1345,7 @@ Resultado esperado: E-mail sem conta mostra "Não há conta com esse e-mail". O 
 | Teste | `tests/e2e/equipe.spec.ts` › "o sino também funciona pelo teclado" |
 | Pré-condições | Pesquisador logado, sem avisos. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1364,7 +1364,7 @@ Resultado esperado: Enter deixa aria-expanded=true e mostra "Nada novo". Esc dei
 | Teste | `tests/e2e/equipe.spec.ts` › "toda página do pesquisador tem o (?) com a ajuda dela" |
 | Pré-condições | Pesquisador logado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1384,7 +1384,7 @@ Resultado esperado: A janela abre com o título da página, sem violações, e E
 | Teste | `tests/e2e/equipe.spec.ts` › "o tour abre só no primeiro acesso, avança pelo clique na ação e pode ser pulado" |
 | Pré-condições | E-mail de teste novo. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1405,7 +1405,7 @@ Resultado esperado: Aparece "Boas-vindas à Ferramenta UEQ". O tour cria "Exempl
 | Teste | `tests/e2e/idioma-interface.spec.ts` › "o idioma escolhido ao criar a conta vale para a ferramenta e pode ser trocado em Minha conta" |
 | Pré-condições | Uma tradução de "Minha conta" para alemão gravada direto no banco, como a API gravaria. Roda só no desktop. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou no desktop; pulado no celular, onde a barra fica recolhida |
+| Resultado em 13/11/2026 | Passou no desktop; pulado no celular, onde a barra fica recolhida |
 
 Passos:
 
@@ -1426,7 +1426,7 @@ Resultado esperado: O que foi digitado continua depois da troca. A barra mostra 
 | Teste | `tests/e2e/idiomas.spec.ts` › "o idioma também troca no meio do questionário, sem perder o que já foi marcado" |
 | Pré-condições | Estudo aberto. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1446,7 +1446,7 @@ Resultado esperado: Continua em /questionario, com lang=en. O item 1 agora é "a
 | Teste | `tests/e2e/inicial.spec.ts` › "a página inicial explica o UEQ, lista os estudos do método e dá os créditos" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1466,7 +1466,7 @@ Resultado esperado: A URL termina em #inicio-estudos. Cada estudo leva ao DOI, e
 | Teste | `tests/e2e/inicial.spec.ts` › "quem entrou volta à página inicial pelo logotipo" |
 | Pré-condições | Pesquisador logado, em /conta. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1484,7 +1484,7 @@ Resultado esperado: A URL é / e aparece o link "Ver seus estudos".
 | Teste | `tests/e2e/questionario.spec.ts` › "sem coleta de dados demográficos, o envio leva direto ao agradecimento" |
 | Pré-condições | Estudo aberto com a coleta demográfica desligada. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1504,7 +1504,7 @@ Resultado esperado: A lista de etapas tem 2 itens e aparece "Etapa 2 de 2 · Que
 | Teste | `tests/e2e/privacidade.spec.ts` › "os dados demográficos aparecem em Resultados, numa sub-aba própria" |
 | Pré-condições | Estudo aberto com a coleta ligada e uma resposta. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1524,7 +1524,7 @@ Resultado esperado: O gráfico de Faixa etária tem o aria-label "25 a 34 anos, 
 | Teste | `tests/e2e/privacidade.spec.ts` › "toda resposta sai com os cabeçalhos de segurança" |
 | Pré-condições | Nenhuma. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1542,7 +1542,7 @@ Resultado esperado: CSP com frame-ancestors 'none', HSTS de 2 anos, nosniff, X-F
 | Teste | `tests/e2e/privacidade.spec.ts` › "a política de privacidade é pública e acessível" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1560,7 +1560,7 @@ Resultado esperado: O h1 é "Política de privacidade" e aparece "Seus direitos 
 | Teste | `tests/e2e/privacidade.spec.ts` › "a política leva cada seção pelo índice e não rola na horizontal em 320 px" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1579,7 +1579,7 @@ Resultado esperado: A URL termina em #contato, com a seção à vista. Em 320 px
 | Teste | `tests/e2e/privacidade.spec.ts` › "da página inicial, a política volta ao rodapé de onde a pessoa saiu" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1598,7 +1598,7 @@ Resultado esperado: A URL termina em /#rodape, com o rodapé à vista.
 | Teste | `tests/e2e/privacidade.spec.ts` › "de Minha conta e da ajuda, a política volta para a mesma tela" |
 | Pré-condições | Pesquisador logado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1619,7 +1619,7 @@ Resultado esperado: Logado, a ficha mostra "Baixar meus dados". Os dois Voltar l
 | Teste | `tests/e2e/privacidade.spec.ts` › "das janelas de acesso, a política abre em outra aba, sem perder o que foi digitado, e voltar tenta fechar a aba" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1640,7 +1640,7 @@ Resultado esperado: A janela de Entrar também tem o link. A aba nova mostra a p
 | Teste | `tests/e2e/privacidade.spec.ts` › "a política não aceita voltar para outro site" |
 | Pré-condições | Nenhuma. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1658,7 +1658,7 @@ Resultado esperado: Nos quatro casos, o link é "Voltar para a página inicial" 
 | Teste | `tests/e2e/privacidade.spec.ts` › "depois de 5 senhas erradas o e-mail espera" |
 | Pré-condições | Um e-mail de teste. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1677,7 +1677,7 @@ Resultado esperado: Cada erro mostra "senha não conferem", e o foco vai ao resu
 | Teste | `tests/e2e/privacidade.spec.ts` › "Baixar meus dados entrega um JSON com a conta e sem a senha" |
 | Pré-condições | Pesquisador logado. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1695,7 +1695,7 @@ Resultado esperado: O arquivo se chama meus-dados-ferramenta-ueq-AAAA-MM-DD.json
 | Teste | `tests/e2e/questionario.spec.ts` › "a política de privacidade abre pelo termo, dentro do link do participante, e volta para ele" |
 | Pré-condições | Estudo aberto. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1716,7 +1716,7 @@ Resultado esperado: A URL termina em /privacidade, com o h1 "Política de privac
 | Teste | `tests/e2e/questionario.spec.ts` › "sem tradução automática, a política avisa no idioma da pessoa e sai marcada como português" |
 | Pré-condições | Estudo aberto, escrito em inglês; sem tradução da política no banco. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1736,7 +1736,7 @@ Resultado esperado: Aparece "This policy has not been translated into your langu
 | Teste | `tests/e2e/documentacao.spec.ts` › "documento longo abre como índice, e cada seção em página própria com o diagrama à vista" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1757,7 +1757,7 @@ Resultado esperado: O índice "Neste documento" tem 8 itens, sem nenhum diagrama
 | Teste | `tests/e2e/documentacao.spec.ts` › "Voltar leva à página de onde a pessoa veio e, sem histórico, à página de cima" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1778,7 +1778,7 @@ Resultado esperado: O link leva a /documentacao/arquitetura/implantacao. O prime
 | Teste | `tests/e2e/documentacao.spec.ts` › "seção com muitas subseções vira índice, e o link de uma tabela leva à página da linha" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1799,7 +1799,7 @@ Resultado esperado: Cada caso tem página própria, sem violações. O fragmento
 | Teste | `tests/e2e/documentacao.spec.ts` › "documento curto continua inteiro, com o índice da página na ficha" |
 | Pré-condições | Navegador sem cookie de sessão. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1817,7 +1817,7 @@ Resultado esperado: As seções aparecem na mesma página, sem o índice "Neste 
 | Teste | `tests/e2e/estudos.spec.ts` › "enquanto cria o estudo o botão mostra que está processando, ignora novos cliques e no fim confirma" |
 | Pré-condições | Pesquisador logado; o teste atrasa os envios em 1,2 s. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1838,7 +1838,7 @@ Resultado esperado: O botão diz "Criando o estudo…", com aria-busy e aria-dis
 | Teste | `tests/e2e/estudos.spec.ts` › "a confirmação pode ser fechada e continua à vista depois de rolar a página" |
 | Pré-condições | Pesquisador logado; janela de 800 × 400 px. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1859,7 +1859,7 @@ Resultado esperado: A confirmação continua à vista depois de rolar e some ao 
 | Teste | `tests/e2e/autenticacao.spec.ts` › "criar a conta e entrar confirmam na tela" |
 | Pré-condições | E-mail de teste novo. |
 | Requisitos | a definir |
-| Resultado em 06/11/2026 | Passou (celular e desktop) |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
@@ -1869,17 +1869,80 @@ Passos:
 
 Resultado esperado: "Conta criada com sucesso.", "Você saiu da sua conta." e "Você entrou na sua conta." aparecem em role=status, e o endereço fica limpo.
 
+### CT-E91
+
+**O termo informa tudo o que a LGPD e a Resolução CNS 510/2016 pedem, e a pessoa pode guardar uma via.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN05 · Participação no estudo](#cn05) |
+| Teste | `tests/e2e/questionario.spec.ts` › "o termo diz o tempo, como desistir, o que acontece depois de enviar, riscos, benefícios e quem responde, e tem uma via para guardar" |
+| Pré-condições | Estudo aberto com dados opcionais, criado por um pesquisador de teste. |
+| Requisitos | a definir |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir o link do participante.
+2. Ler o termo e rodar o axe.
+3. Abrir “Guardar uma via deste termo” e rodar o axe.
+4. Voltar, escolher a idade e concordar.
+
+Resultado esperado: O subtítulo traz a instituição. O termo diz "De 4 a 6 minutos, sem limite de tempo", fala dos dados opcionais, de “Sair sem enviar”, de que não há como retirar as respostas depois de enviar, da guarda enquanto durar a pesquisa, dos riscos, dos benefícios e do contato do responsável. A via tem "Imprimir ou salvar em PDF" e nenhum link para fora do estudo. O questionário mostra o tempo. Zero violações.
+
+### CT-E92
+
+**Sem a idade, ou com menos de 18 anos sem a autorização do responsável, nada é gravado.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN23 · Proteção de dados](#cn23) |
+| Teste | `tests/e2e/questionario.spec.ts` › "quem tem menos de 18 anos só participa com a autorização do responsável, e sem idade nada é gravado" |
+| Pré-condições | Estudo aberto com dados opcionais. |
+| Requisitos | a definir |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Concordar sem escolher a idade.
+2. Escolher "Menos de 18 anos" e concordar sem a autorização.
+3. Confirmar a autorização e concordar.
+4. Responder, enviar e pular os dados opcionais.
+
+Resultado esperado: Cada erro aparece em role=alert, com o foco no campo certo, e a autorização só aparece para "Menos de 18 anos". Com ela, o questionário abre, os dados opcionais têm "Menos de 18 anos" e a participação fica gravada como de menor de idade. Zero violações.
+
+### CT-E93
+
+**O formulário exige quem responde pela pesquisa e sugere o resto.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN03 · Gestão de estudos](#cn03) |
+| Teste | `tests/e2e/estudos.spec.ts` › "o estudo nasce com o responsável da conta e exige nome, contato e instituição, que vão para o termo" |
+| Pré-condições | Pesquisador logado. |
+| Requisitos | a definir |
+| Resultado em 13/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir Criar estudo.
+2. Apagar o nome do responsável, escrever um e-mail inválido e deixar a instituição vazia.
+3. Tentar criar.
+4. Preencher os três campos e criar.
+
+Resultado esperado: O formulário já vem com o nome e o e-mail da conta e com sugestões de riscos e benefícios. Os três erros aparecem no resumo e nos campos. A prévia mostra "Ana Souza · PPGIa · PUCPR", e a ficha do estudo mostra o responsável e o contato.
+
 ## Casos de unidade
 
 Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções conta os testes reais: um caso parametrizado roda uma vez por idioma ou por par de cores.
 
 ### CN08 · Cálculo UEQ
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u01"></a>CT-U01 | `recodificar.test.ts` | `recodificar` | Com positivo à direita, 1 vira -3, 4 vira 0 e 7 vira 3 | 1 | a definir | Passou |
 | <a id="ct-u02"></a>CT-U02 | `recodificar.test.ts` | `recodificar` | Com positivo à esquerda, 1 vira 3, 4 vira 0 e 7 vira -3 | 1 | a definir | Passou |
-| <a id="ct-u03"></a>CT-U03 | `recodificar.test.ts` | `recodificar` | Recusa 0, 8, 3,5 e NaN, que não existem na escala de 1 a 7 | 4 | a definir | Passou (4 de 4) |
+| <a id="ct-u03"></a>CT-U03 | `recodificar.test.ts` | `recodificar` | Recusa 0, 8, 3,5 e NaN, que não existem na escala de 1 a 7 | 6 | a definir | Passou (6 de 6) |
 | <a id="ct-u04"></a>CT-U04 | `recodificar.test.ts` | `recodificarParticipante` | Transforma o ponto do meio em 0 nos 26 itens | 1 | a definir | Passou |
 | <a id="ct-u05"></a>CT-U05 | `recodificar.test.ts` | `recodificarParticipante` | Aplica a polaridade de cada item: 7 em tudo dá +3 nos itens '+' e -3 nos itens '-' | 1 | a definir | Passou |
 | <a id="ct-u06"></a>CT-U06 | `recodificar.test.ts` | `recodificarParticipante` | Recusa participante sem as 26 respostas | 1 | a definir | Passou |
@@ -1892,8 +1955,8 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 | <a id="ct-u13"></a>CT-U13 | `escalas.test.ts` | `faixaInterpretacao` | -0,8 e 0,8 são neutros; acima de 0,8 positiva, abaixo de -0,8 negativa | 2 | a definir | Passou (2 de 2) |
 | <a id="ct-u14"></a>CT-U14 | `escalas.test.ts` | `resultadoPorEscala` | Bordas n = 0, n = 1 e todos iguais, e média, dp, IC e alfa com dois participantes | 4 | a definir | Passou (4 de 4) |
 | <a id="ct-u15"></a>CT-U15 | `escalas.test.ts` | `resultadoPorItem` | Os 26 itens em ordem com média recodificada e distribuição de 1 a 7 | 1 | a definir | Passou |
-| <a id="ct-u16"></a>CT-U16 | `benchmark.test.ts` | `classificarBenchmark` | Uma média em cada uma das 5 faixas: excelente, bom, acima da média, abaixo da média e ruim | 5 | a definir | Passou (5 de 5) |
-| <a id="ct-u17"></a>CT-U17 | `benchmark.test.ts` | `classificarBenchmark` | Média igual ao limite fica na faixa de baixo; usa os limites da escala pedida; null sem média | 3 | a definir | Passou (3 de 3) |
+| <a id="ct-u16"></a>CT-U16 | `benchmark.test.ts` | `classificarBenchmark` | Uma média em cada uma das 5 faixas: excelente, bom, acima da média, abaixo da média e ruim | 8 | a definir | Passou (8 de 8) |
+| <a id="ct-u17"></a>CT-U17 | `benchmark.test.ts` | `classificarBenchmark` | Média igual ao limite fica na faixa de baixo; usa os limites da escala pedida; null sem média | 8 | a definir | Passou (8 de 8) |
 | <a id="ct-u18"></a>CT-U18 | `analisar-estudo.test.ts` | `analisarEstudo` | Estatísticas só com as participações incluídas na análise | 1 | a definir | Passou |
 | <a id="ct-u20"></a>CT-U20 | `analisar-estudo.test.ts` | `analisarEstudo` | Classifica no benchmark e calcula pragmática e hedônica pela média das escalas | 1 | a definir | Passou |
 | <a id="ct-u21"></a>CT-U21 | `analisar-estudo.test.ts` | `analisarEstudo` | Sinaliza alfa abaixo do mínimo do protocolo | 1 | a definir | Passou |
@@ -1901,31 +1964,31 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 
 ### CN09 · Respostas suspeitas
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u19"></a>CT-U19 | `analisar-estudo.test.ts` | `analisarEstudo` | Avalia a suspeita de todas as participações, inclusive as excluídas | 1 | a definir | Passou |
 | <a id="ct-u23"></a>CT-U23 | `inconsistencia.test.ts` | `amplitudePorEscala` | Zero para respostas consistentes; reproduz o exemplo de perspicuidade do handbook (distância 5) | 2 | a definir | Passou (2 de 2) |
 | <a id="ct-u24"></a>CT-U24 | `inconsistencia.test.ts` | `respostasIguais` | Conta a posição mais repetida | 1 | a definir | Passou |
-| <a id="ct-u25"></a>CT-U25 | `inconsistencia.test.ts` | `marcarSuspeitos` | Suspeito com 3 escalas inconsistentes, não com 2; amplitude igual a 3 não é inconsistência | 3 | a definir | Passou (3 de 3) |
-| <a id="ct-u26"></a>CT-U26 | `inconsistencia.test.ts` | `marcarSuspeitos` | Suspeito com mais de 15 respostas iguais, não com exatamente 15 | 2 | a definir | Passou (2 de 2) |
-| <a id="ct-u27"></a>CT-U27 | `inconsistencia.test.ts` | `marcarSuspeitos` | Aponta os dois motivos quando as duas regras valem; lê os limiares da configuração | 2 | a definir | Passou (2 de 2) |
+| <a id="ct-u25"></a>CT-U25 | `inconsistencia.test.ts` | `marcarSuspeitos` | Suspeito com 3 escalas inconsistentes, não com 2; amplitude igual a 3 não é inconsistência | 7 | a definir | Passou (7 de 7) |
+| <a id="ct-u26"></a>CT-U26 | `inconsistencia.test.ts` | `marcarSuspeitos` | Suspeito com mais de 15 respostas iguais, não com exatamente 15 | 7 | a definir | Passou (7 de 7) |
+| <a id="ct-u27"></a>CT-U27 | `inconsistencia.test.ts` | `marcarSuspeitos` | Aponta os dois motivos quando as duas regras valem; lê os limiares da configuração | 7 | a definir | Passou (7 de 7) |
 | <a id="ct-u28"></a>CT-U28 | `fixtures.test.ts` | `fixtures conforme os LEIA-ME` | basico sem suspeitos; inconsistente marca exatamente as linhas 1, 6, 9 e 13; todos-1 e todos-7 caem na regra das respostas iguais | 3 | a definir | Passou (3 de 3) |
 
 ### CN15 · Validação contra a planilha oficial
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u29"></a>CT-U29 | `fixtures.test.ts` | `fixture … contra a planilha oficial` | Para cada fixture (basico, inconsistente, extremos/n1, n2, todos-1, todos-7): média, dp, n, IC95, alfa, benchmark, pragmática, hedônica, itens e suspeitas iguais aos da planilha, com tolerância de 1e-6 | 6 | a definir | Pulado: aguarda dados da equipe |
 
 ### CN05 · Participação no estudo
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u30"></a>CT-U30 | `balanceamento.test.ts` | `versaoComMenosRespostas` | Escolhe a versão com menos respostas concluídas; no empate, a de menor ordem; com uma versão, ela; sem versões, null | 4 | a definir | Passou (4 de 4) |
 
 ### CN11 · Exportação em CSV
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u31"></a>CT-U31 | `csv.test.ts` | `campoCsv` | Texto simples fica como está; ponto e vírgula e quebra de linha vão entre aspas; aspas internas são dobradas; ausente fica vazio | 5 | a definir | Passou (5 de 5) |
 | <a id="ct-u32"></a>CT-U32 | `csv.test.ts` | `documentoCsv` | Começa com BOM, usa ; e termina cada linha com CRLF; sai sem BOM quando pedido | 2 | a definir | Passou (2 de 2) |
@@ -1937,27 +2000,27 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 
 ### CN07 · Idiomas
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u36"></a>CT-U36 | `exportacoes.test.ts` | `idioma nas exportações` | Diz em que idioma a pessoa respondeu e se a tradução é aprovada; importada sai com a origem e sem idioma | 2 | a definir | Passou (2 de 2) |
-| <a id="ct-u45"></a>CT-U45 | `idiomas.test.ts` | `os 37 idiomas do pacote oficial` | Os 37 idiomas estão completos e cada um tem os 26 pares em ordem, preenchidos e com termos diferentes | 38 | a definir | Passou (38 de 38) |
+| <a id="ct-u45"></a>CT-U45 | `idiomas.test.ts` | `os 37 idiomas do pacote oficial` | Os 37 idiomas estão completos e cada um tem os 26 pares em ordem, preenchidos e com termos diferentes | 41 | a definir | Passou (41 de 41) |
 | <a id="ct-u46"></a>CT-U46 | `idiomas.test.ts` | `os 37 idiomas do pacote oficial` | O português é exatamente o de data/ueq-itens-ptbr.json, que alimenta o banco | 1 | a definir | Passou |
-| <a id="ct-u47"></a>CT-U47 | `idiomas.test.ts` | `os 37 idiomas do pacote oficial` | Marca os 9 idiomas sem tradução aprovada e os 3 da direita para a esquerda; toda correção guarda o par original e o motivo | 2 | a definir | Passou (2 de 2) |
+| <a id="ct-u47"></a>CT-U47 | `idiomas.test.ts` | `os 37 idiomas do pacote oficial` | Marca os 9 idiomas sem tradução aprovada e os 3 da direita para a esquerda; toda correção guarda o par original e o motivo | 41 | a definir | Passou (41 de 41) |
 | <a id="ct-u48"></a>CT-U48 | `idiomas.test.ts` | `textos das telas` | Em cada idioma, nenhum texto vazio, os mesmos {marcadores} do português e o nome acessível de cada círculo com posição e polo | 38 | a definir | Passou (38 de 38) |
 | <a id="ct-u49"></a>CT-U49 | `idiomas.test.ts` | `plural e lista` | Plural na forma do idioma (com queda em other) e listas juntadas como o idioma junta | 2 | a definir | Passou (2 de 2) |
 | <a id="ct-u50"></a>CT-U50 | `idiomas.test.ts` | `negociarIdioma` | Escolhe o primeiro dos 37 pela preferência do navegador, aceita códigos antigos, cai no português e dá o lang de cada idioma | 3 | a definir | Passou (3 de 3) |
 
 ### CN13 · Importação por CSV
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
-| <a id="ct-u39"></a>CT-U39 | `importacao.test.ts` | `lerCsvDeRespostas` | Lê a fixture basico como o módulo UEQ e aceita de volta a exportação da planilha oficial | 2 | a definir | Passou (2 de 2) |
-| <a id="ct-u40"></a>CT-U40 | `importacao.test.ts` | `lerCsvDeRespostas` | Aceita vírgula, tabulação, BOM, aspas e separador sobrando; ignora linhas em branco mantendo o número real de cada linha | 2 | a definir | Passou (2 de 2) |
-| <a id="ct-u41"></a>CT-U41 | `importacao.test.ts` | `lerCsvDeRespostas` | Aponta por linha o número errado de valores e os valores fora da escala; recusa arquivo com linhas demais | 2 | a definir | Passou (2 de 2) |
+| <a id="ct-u39"></a>CT-U39 | `importacao.test.ts` | `lerCsvDeRespostas` | Lê a fixture basico como o módulo UEQ e aceita de volta a exportação da planilha oficial | 6 | a definir | Passou (6 de 6) |
+| <a id="ct-u40"></a>CT-U40 | `importacao.test.ts` | `lerCsvDeRespostas` | Aceita vírgula, tabulação, BOM, aspas e separador sobrando; ignora linhas em branco mantendo o número real de cada linha | 6 | a definir | Passou (6 de 6) |
+| <a id="ct-u41"></a>CT-U41 | `importacao.test.ts` | `lerCsvDeRespostas` | Aponta por linha o número errado de valores e os valores fora da escala; recusa arquivo com linhas demais | 6 | a definir | Passou (6 de 6) |
 
 ### CN10 · Painel de resultados
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u42"></a>CT-U42 | `leitura-rapida.test.ts` | `leituraDeUmaVersao` | Reproduz a frase do protótipo r6; junta escalas da mesma faixa e cita as negativas; null sem média | 3 | a definir | Passou (3 de 3) |
 | <a id="ct-u43"></a>CT-U43 | `leitura-rapida.test.ts` | `leituraDaComparacao` | Aponta as duas maiores diferenças e a quem favorecem; diz quando as versões ficam próximas; com três versões conta as escalas em que cada uma lidera | 3 | a definir | Passou (3 de 3) |
@@ -1965,20 +2028,20 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 
 ### CN14 · Cores e contraste
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
-| <a id="ct-u51"></a>CT-U51 | `contraste.test.ts` | `contraste dos tokens de cor` | Cada par de texto do tema atinge 4,5:1 | 30 | a definir | Passou (30 de 30) |
-| <a id="ct-u52"></a>CT-U52 | `contraste.test.ts` | `contraste dos tokens de cor` | Cada borda de campo, foco e marcador de gráfico atinge 3:1 contra os fundos e as faixas do benchmark | 27 | a definir | Passou (27 de 27) |
+| <a id="ct-u51"></a>CT-U51 | `contraste.test.ts` | `contraste dos tokens de cor` | Cada par de texto do tema atinge 4,5:1 | 57 | a definir | Passou (57 de 57) |
+| <a id="ct-u52"></a>CT-U52 | `contraste.test.ts` | `contraste dos tokens de cor` | Cada borda de campo, foco e marcador de gráfico atinge 3:1 contra os fundos e as faixas do benchmark | 57 | a definir | Passou (57 de 57) |
 
 ### CN16 · UEQ-S
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u53"></a>CT-U53 | `ueq-s.test.ts` | `UEQ-S` | Os 8 itens do UEQ-S apontam pares do UEQ com escala e polaridade certas, na ordem; os limites do benchmark estão em ordem | 2 | a definir | Pulado: aguarda dados da equipe |
 
 ### CN18 · Documentação na ferramenta
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u54"></a>CT-U54 | `documentacao.test.ts` | `catálogo da documentação` | Todo documento e download do catálogo existe; cada documento tem um endereço só; todo .md de docs/documentacao está no catálogo; endereço fora do catálogo não vira documento | 3 | a definir | Passou (3 de 3) |
 | <a id="ct-u55"></a>CT-U55 | `documentacao.test.ts` | `diagramas` | Cada diagrama Mermaid dos documentos tem o SVG gerado e o arquivo-fonte igual ao do documento, e não sobra SVG sem uso | 3 | a definir | Passou (3 de 3) |
@@ -1989,25 +2052,26 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 
 ### CN10 · Painel de resultados: perfil dos participantes
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u60"></a>CT-U60 | `perfil-demografico.test.ts` | `perfilDemografico` | Conta cada opção, quem preferiu não responder e quem pulou; escala ordenada fica na ordem da escala; gênero vai da maior para a menor; sem participações, as parcelas ficam em zero | 4 | a definir | Passou (4 de 4) |
 
 ### CN21 · Equipe e notificações
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u59"></a>CT-U59 | `modelo-email.test.ts` | `modelo dos e-mails` | Monta o HTML com o idioma, o botão, o link reserva e o rodapé; escapa o que vem do pesquisador; vira da direita para a esquerda em árabe, hebraico e persa; tem a mesma mensagem em texto puro | 4 | a definir | Passou (4 de 4) |
 
 ### CN23 · Proteção de dados
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u58"></a>CT-U58 | `cripto.test.ts` | `criptografia de campo` | Cifra e decifra com IV novo a cada vez; texto alterado ou outra chave não decifram; Json cifrado volta igual e o formato antigo continua legível; chave de tamanho errado é recusada; sem chave, guarda como veio | 6 | a definir | Passou (6 de 6) |
+| <a id="ct-u69"></a>CT-U69 | `termo.test.ts` | `condicoesDoTermo` e `lerIdade` | Lista as linhas do termo na ordem da tela; com dados opcionais, avisa e aumenta o tempo; com comitê de ética, mostra o comitê; em todos os idiomas, cita o botão de sair com o nome que ele tem; a idade só segue para maiores ou para menores com a autorização | 40 | a definir | Passou (40 de 40) |
 
 ### CN24 · Idioma da ferramenta
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u62"></a>CT-U62 | `catalogo.test.ts` | `catálogo da interface` | O catálogo está em dia com os t() e m() do código, só tem texto de tela, cada texto sabe de que arquivo vem, e nenhum é vazio | 4 | a definir | Passou (4 de 4) |
 | <a id="ct-u63"></a>CT-U63 | `catalogo.test.ts` | `tradutor` | Devolve o original sem tradução e interpola os marcadores; a chave muda com o idioma de origem, menos no português; marcadores desconhecidos ficam como estão | 3 | a definir | Passou (3 de 3) |
@@ -2017,7 +2081,7 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 
 ### CN25 · Cenários de demonstração
 
-| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 06/11/2026 |
+| ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 13/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u61"></a>CT-U61 | `respostas-sinteticas.test.ts` | `respostas sintéticas dos cenários de demonstração` | Dá 26 valores de 1 a 7; quem respondeu com atenção nunca sai suspeito, e aleatória e iguais sempre saem; a média de cada escala fica perto do perfil; a mesma semente gera as mesmas respostas | 4 | a definir | Passou (4 de 4) |
 

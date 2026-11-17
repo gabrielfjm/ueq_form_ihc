@@ -64,6 +64,10 @@ export default async function PaginaQuestionario({ params }: Propriedades) {
       >
         {/* docs/ihc.md §3.4: instrução oficial do UEQ, do pacote de idiomas (data/ueq-instrucoes.json), num quadro
             à parte para não virar um bloco de texto solto antes dos itens */}
+        <p className={estilos.tempo}>
+          <strong>{textos.consentimento.rotulos.tempo}:</strong>{" "}
+          {estudo.coletarDemografia ? textos.consentimento.tempoComDados : textos.consentimento.tempo}
+        </p>
         <section aria-labelledby="titulo-instrucao" className={estilos.instrucao}>
           <h2 id="titulo-instrucao" className={estilos.instrucaoTitulo}>
             {instrucao.titulo}

@@ -15,6 +15,7 @@ type Propriedades = {
   hoje: Date;
   produto: string;
   objetivo?: string;
+  responsavel: { nome: string; email: string; instituicao: string };
   criadoEm: Date;
   atualizadoEm: Date;
 };
@@ -36,7 +37,7 @@ function ReguaFicha({ status, inicio, fim, hoje }: Pick<Propriedades, "status" |
 // Ficha lateral dos protótipos r4b e r5
 export async function FichaEstudo(propriedades: Propriedades) {
   const t = await tradutor();
-  const { status, respostas, detalheRespostas, inicio, fim, hoje, produto, objetivo, criadoEm, atualizadoEm } = propriedades;
+  const { status, respostas, detalheRespostas, inicio, fim, hoje, produto, objetivo, responsavel, criadoEm, atualizadoEm } = propriedades;
   return (
     <aside aria-labelledby="titulo-ficha" className={estilos.ficha}>
       <h2 id="titulo-ficha" className={estilos.fichaTitulo}>
@@ -71,6 +72,13 @@ export async function FichaEstudo(propriedades: Propriedades) {
             <dd className={estilos.detalhe}>{t(objetivo)}</dd>
           </div>
         )}
+        <div>
+          <dt>{t("Responsável")}</dt>
+          <dd>
+            {responsavel.nome} · {responsavel.instituicao}
+            <span className={estilos.detalhe}>{responsavel.email}</span>
+          </dd>
+        </div>
         <div>
           <dt>{t("Instrumento")}</dt>
           <dd>{t("UEQ completo · 26 itens · {length} idiomas", { length: IDIOMAS.length })}</dd>

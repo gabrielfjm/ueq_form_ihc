@@ -36,11 +36,48 @@ export type TextosParticipante = {
     encerrada: string;
   };
   consentimento: {
+    // Vem antes da instituição que o pesquisador informou
     subtitulo: string;
     termoTitulo: string;
     // Vem depois do objetivo escrito pelo pesquisador
     termoTexto: string;
-    condicoes: [[string, string], [string, string], [string, string], [string, string]];
+    // Os títulos das linhas do termo (src/lib/termo.ts)
+    rotulos: {
+      tempo: string;
+      dadosOpcionais: string;
+      participacao: string;
+      depoisDeEnviar: string;
+      anonimato: string;
+      usoDosDados: string;
+      riscos: string;
+      beneficios: string;
+      responsavel: string;
+      comite: string;
+    };
+    tempo: string;
+    // Quando o estudo tem a etapa de dados opcionais
+    tempoComDados: string;
+    dadosOpcionais: string;
+    // {sair}: o nome do botão "Sair sem enviar", para a citação nunca divergir dele
+    participacao: string;
+    depoisDeEnviar: string;
+    anonimato: string;
+    usoDosDados: string;
+    // {email}
+    contato: string;
+    // LGPD, art. 14: menores de 18 anos só com a autorização do responsável
+    idade: {
+      legenda: string;
+      maior: string;
+      menor: string;
+      autorizacao: string;
+      ajudaMenor: string;
+      erroIdade: string;
+      erroAutorizacao: string;
+    };
+    // O link para a página com o termo inteiro, para guardar uma via
+    via: string;
+    imprimir: string;
     concordo: string;
     naoQuero: string;
     // O link para a política de privacidade, no fim do termo
@@ -84,7 +121,7 @@ export type TextosParticipante = {
     titulo: string;
     descricao: string;
     // Na mesma ordem de PERGUNTAS_DEMOGRAFIA (src/lib/demografia.ts)
-    faixaEtaria: Pergunta<[string, string, string, string, string]>;
+    faixaEtaria: Pergunta<[string, string, string, string, string, string]>;
     genero: Pergunta<T3>;
     escolaridade: Pergunta<[string, string, string, string]>;
     familiaridadeComProduto: Pergunta<T3>;

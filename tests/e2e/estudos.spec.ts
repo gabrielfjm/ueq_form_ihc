@@ -38,7 +38,7 @@ test("criar estudo com campos faltando mostra o resumo e passa no axe", async ({
   await page.goto("/estudos/novo");
   await verificarAcessibilidade(page);
   await page.getByRole("main").getByRole("button", { name: "Criar estudo" }).click();
-  await expect(page.getByRole("alert").filter({ hasText: "Corrija 4 campos para continuar" })).toBeFocused();
+  await expect(page.getByRole("alert").filter({ hasText: "Corrija 5 campos para continuar" })).toBeFocused();
   await expect(page.getByText("Dê um título ao estudo.")).toBeVisible();
   await expect(page.getByLabel("Versão 1")).toHaveAttribute("aria-invalid", "true");
   await verificarAcessibilidade(page);
@@ -143,6 +143,7 @@ test("enquanto cria o estudo o botão mostra que está processando, ignora novos
   await page.getByLabel("Título do estudo").fill(titulo);
   await page.getByLabel("Produto avaliado").fill("Produto");
   await page.getByLabel("Objetivo").fill("Objetivo do estudo");
+  await page.getByLabel("Instituição").fill("PPGIa · PUCPR");
   await atrasarEnvios(page);
 
   const criar = page.getByRole("main").getByRole("button", { name: "Criar estudo" });
@@ -170,6 +171,7 @@ test("a confirmação pode ser fechada e continua à vista depois de rolar a pá
   await page.getByLabel("Título do estudo").fill("Confirmação à vista");
   await page.getByLabel("Produto avaliado").fill("Produto");
   await page.getByLabel("Objetivo").fill("Objetivo do estudo");
+  await page.getByLabel("Instituição").fill("PPGIa · PUCPR");
   await page.getByRole("main").getByRole("button", { name: "Criar estudo" }).click();
   const confirmacao = page.getByRole("status").getByText("Estudo criado com sucesso.");
   await expect(confirmacao).toBeVisible();
@@ -183,3 +185,35 @@ test("a confirmação pode ser fechada e continua à vista depois de rolar a pá
   await page.reload();
   await expect(confirmacao).toHaveCount(0);
 });
+
+test("o estudo nasce com o responsável da conta e exige nome, contato e instituição, que vão para o termo", async ({ page }) => {
+  await page.goto("/estudos/novo");
+  await expect(page.getByLabel("Nome do responsável")).not.toHaveValue("");
+  await expect(page.getByLabel("E-mail de contato")).not.toHaveValue("");
+  await expect(page.getByLabel("Riscos para o participante")).toHaveValue(/Os riscos são mínimos/);
+  await expect(page.getByLabel("Benefícios", { exact: true })).toHaveValue(/Não há benefício direto/);
+
+  await page.getByLabel("Título do estudo").fill("Sem responsável");
+  await page.getByLabel("Produto avaliado").fill("Produto");
+  await page.getByLabel("Objetivo").fill("Objetivo do estudo");
+  await page.getByLabel("Nome do responsável").fill("");
+  await page.getByLabel("E-mail de contato").fill("sem-arroba");
+  await page.getByRole("main").getByRole("button", { name: "Criar estudo" }).click();
+  const resumo = page.getByRole("alert");
+  await expect(resumo.getByRole("link", { name: "Nome do responsável" })).toBeVisible();
+  await expect(resumo.getByRole("link", { name: "E-mail de contato" })).toBeVisible();
+  await expect(resumo.getByRole("link", { name: "Instituição" })).toBeVisible();
+  await expect(page.getByText("Informe quem responde pela pesquisa.")).toBeVisible();
+  await expect(page.getByText("Informe a instituição da pesquisa.")).toBeVisible();
+
+  await page.getByLabel("Nome do responsável").fill("Ana Souza");
+  await page.getByLabel("E-mail de contato").fill("ana@exemplo.com");
+  await page.getByLabel("Instituição").fill("PPGIa · PUCPR");
+  await expect(page.getByRole("complementary", { name: "Prévia para o participante" }).getByText("Ana Souza · PPGIa · PUCPR")).toBeVisible();
+  await page.getByRole("main").getByRole("button", { name: "Criar estudo" }).click();
+  await expect(page.getByRole("status")).toHaveText(/Estudo criado com sucesso/);
+  const ficha = page.getByRole("complementary", { name: "Ficha do estudo" });
+  await expect(ficha.getByText("Ana Souza · PPGIa · PUCPR")).toBeVisible();
+  await expect(ficha.getByText("ana@exemplo.com")).toBeVisible();
+});
+

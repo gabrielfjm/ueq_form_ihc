@@ -5,7 +5,7 @@ import { JANELA_MINUTOS, MAXIMO_TENTATIVAS } from "@/lib/tentativas";
 import { m, type Traduzir } from "@/traducao/nucleo";
 import estilos from "./privacidade.module.css";
 
-const ATUALIZADA_EM = m("1º de novembro de 2026");
+const ATUALIZADA_EM = m("13 de novembro de 2026");
 const MARCACOES = [17, 64.6, 112.2, 159.8, 207.4, 255, 302.6];
 
 type Linha = readonly [rotulo: string, texto: ReactNode];
@@ -32,7 +32,7 @@ export function Politica({ t, voltar, comLinkDaConta, aviso, ficha }: Propriedad
       linhas: [
         [t("A ferramenta"), t("Um projeto acadêmico da disciplina Fundamentos da IHC do PPGIa da PUCPR, feito por Gabriel Meira, Jean Weiss e Luiza Pedralli.")],
         [t("Dados das contas"), t("A equipe é a controladora desses dados.")],
-        [t("Respostas de um estudo"), t("O controlador dos dados é o pesquisador responsável pelo estudo; a ferramenta só trata os dados em nome dele.")],
+        [t("Respostas de um estudo"), t("O controlador dos dados é o pesquisador responsável pelo estudo, com nome e contato no termo de consentimento; a ferramenta só trata os dados em nome dele.")],
       ],
     },
     {
@@ -40,10 +40,12 @@ export function Politica({ t, voltar, comLinkDaConta, aviso, ficha }: Propriedad
       titulo: t("Se você respondeu um questionário"),
       linhas: [
         [t("O que não guardamos"), t("Nada que identifique você: nem nome, nem e-mail, nem endereço IP, nem localização. A ferramenta não usa cookies de rastreamento ou de publicidade.")],
-        [t("O que fica gravado"), t("As 26 respostas do questionário, a versão do produto que você avaliou, o idioma, a data e, só se o pesquisador ligou essa etapa e você quis responder, a faixa etária, o gênero, a escolaridade e se você já usava o produto. Todas essas perguntas têm “Prefiro não responder” e podem ser puladas.")],
+        [t("O que fica gravado"), t("As 26 respostas do questionário, a versão do produto que você avaliou, o idioma, a data, se você declarou ter menos de 18 anos com a autorização do responsável e, só se o pesquisador ligou essa etapa e você quis responder, a faixa etária, o gênero, a escolaridade e se você já usava o produto. Todas essas perguntas têm “Prefiro não responder” e podem ser puladas.")],
         [t("Base legal"), t("O seu consentimento, dado na primeira tela (art. 7º, I), para pesquisa acadêmica (art. 7º, IV).")],
         [t("Desistir"), t("Até enviar, é só fechar a página ou usar “Sair sem enviar”: nada do que você marcou é gravado. Participações começadas e não enviadas são apagadas em até 2 dias.")],
-        [t("Depois de enviar"), t("Como nada liga as respostas a você, não temos como encontrá-las para mostrar ou apagar. Fale com o pesquisador que enviou o link.")],
+        [t("Por quanto tempo"), t("Enquanto o pesquisador estiver realizando a pesquisa. Quando ele exclui o estudo, todas as respostas são apagadas.")],
+        [t("Menores de 18 anos"), t("Só participam com a autorização do pai, da mãe ou do responsável legal, confirmada na primeira tela (art. 14).")],
+        [t("Depois de enviar"), t("Como nada liga as respostas a você, não temos como encontrá-las para mostrar ou apagar. Fale com o pesquisador responsável, cujo contato está no termo de consentimento.")],
       ],
     },
     {
@@ -85,7 +87,7 @@ export function Politica({ t, voltar, comLinkDaConta, aviso, ficha }: Propriedad
       titulo: t("Dúvidas e pedidos"),
       linhas: [
         [t("Pesquisadores"), <>{t("Os pesquisadores fazem tudo direto na página Minha conta.")}{comLinkDaConta && <>{" "}<Link href="/conta">{t("Abrir Minha conta")}</Link></>}</>],
-        [t("Participantes"), t("Os participantes devem falar com o pesquisador que enviou o link do estudo, que é quem responde pela pesquisa.")],
+        [t("Participantes"), t("Os participantes devem falar com o pesquisador responsável pelo estudo, cujo nome e contato estão no termo de consentimento.")],
       ],
     },
   ];

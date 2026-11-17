@@ -33,6 +33,12 @@ export const estudoPublico = cache(async (slug: string) => {
       status: true,
       coletarDemografia: true,
       idioma: true,
+      responsavelNome: true,
+      responsavelEmail: true,
+      instituicao: true,
+      riscos: true,
+      beneficios: true,
+      comiteEtica: true,
       versoes: {
         select: {
           id: true,
@@ -73,14 +79,20 @@ export const textosDoEstudo = cache(async (slug: string) => {
   const estudo = await estudoPublico(slug);
   const idioma = await idiomaDoParticipante(slug);
   const origem = ehIdioma(estudo.idioma) ? estudo.idioma : IDIOMA_PADRAO;
-  const originais = [estudo.titulo, estudo.produtoAvaliado, estudo.objetivo];
-  const [titulo = estudo.titulo, produtoAvaliado = estudo.produtoAvaliado, objetivo = estudo.objetivo] = await traduzirTextosLivres(
-    originais,
-    origem,
-    idioma,
-  );
-  const traduzido = idioma !== origem && [titulo, produtoAvaliado, objetivo].some((texto, indice) => texto !== originais[indice]);
-  return { titulo, produtoAvaliado, objetivo, lang: infoIdioma(traduzido ? idioma : origem).lang };
+  // Riscos, benefícios e comitê de ética também são escritos pelo pesquisador e aparecem no termo
+  const originais = [estudo.titulo, estudo.produtoAvaliado, estudo.objetivo, estudo.riscos, estudo.beneficios, estudo.comiteEtica ?? ""];
+  const traducoes = await traduzirTextosLivres(originais, origem, idioma);
+  const [titulo, produtoAvaliado, objetivo, riscos, beneficios, comiteEtica] = originais.map((original, indice) => traducoes[indice] ?? original);
+  const traduzido = idioma !== origem && traducoes.some((texto, indice) => texto !== originais[indice]);
+  return {
+    titulo: titulo!,
+    produtoAvaliado: produtoAvaliado!,
+    objetivo: objetivo!,
+    riscos: riscos!,
+    beneficios: beneficios!,
+    comiteEtica: comiteEtica || null,
+    lang: infoIdioma(traduzido ? idioma : origem).lang,
+  };
 });
 
 export async function guardarIdioma(slug: string, codigo: CodigoIdioma) {

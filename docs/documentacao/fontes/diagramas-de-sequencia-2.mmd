@@ -18,12 +18,15 @@ sequenceDiagram
         Pag-->>Nav: termo de consentimento no idioma negociado
     end
 
-    Part->>Nav: Concordo e quero participar
-    Nav->>Acao: consentir(slug)
+    Part->>Nav: escolhe a idade e Concordo e quero participar
+    Nav->>Acao: consentir(slug, idade e autorização)
+    alt sem idade, ou menos de 18 anos sem a autorização do responsável
+        Acao-->>Nav: volta ao termo com o erro, e nada é gravado
+    end
     Acao->>Lib: versaoComMenosRespostas(versões)
     Lib-->>Acao: versão com menos respostas concluídas
     Acao->>BD: apaga participações abandonadas há mais de 2 dias
-    Acao->>BD: cria Participacao (versão, consentiuEm, idioma)
+    Acao->>BD: cria Participacao (versão, consentiuEm, idioma, menorDeIdade)
     Acao-->>Nav: cookie ueq_participacao no caminho /r/<slug> e redireciona ao questionário
 
     Nav->>Pag: GET /r/<slug>/questionario

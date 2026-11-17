@@ -153,12 +153,13 @@ Como as telas vão ficar em produção, em [docs/prototipos/alta-fidelidade/](do
 ### Participante
 
 <p>
-<img src="docs/prototipos/alta-fidelidade/p1-consentimento.png" alt="Consentimento: faixa com o seletor de idioma, as etapas, a fileira de sete marcações e o título, termo com tempo, participação, anonimato e uso dos dados, botão Concordo e quero participar" width="200">
+<img src="docs/prototipos/alta-fidelidade/p1-consentimento.png" alt="Consentimento: faixa com o seletor de idioma, as etapas e o título com a instituição; termo com tempo, dados opcionais, participação, depois de enviar, anonimato, uso dos dados, riscos, benefícios e responsável; links para a política e para guardar uma via; a pergunta de idade e o botão Concordo" width="200">
 <img src="docs/prototipos/alta-fidelidade/p2-questionario-celular.png" alt="Questionário no celular: faixa com idioma e etapa, instrução oficial num quadro, cada item numerado com os dois termos acima de sete círculos e uma barra azul nos respondidos, rodapé com 8 de 26 respondidos e Sair sem enviar" width="200">
 <img src="docs/prototipos/alta-fidelidade/p3-questionario-item-faltando.png" alt="Envio com itens faltando: resumo em vermelho com o número de cada item e um link para ele" width="200">
 <img src="docs/prototipos/alta-fidelidade/p4-dados-opcionais.png" alt="Dados opcionais: faixa com a etapa, perguntas com cada opção numa linha clicável e a escolhida em destaque, todas com Prefiro não responder, botões Continuar e Pular esta etapa" width="200">
 <img src="docs/prototipos/alta-fidelidade/p5-fim.png" alt="Fim: etapas concluídas, sete marcações preenchidas e o agradecimento num quadro" width="200">
 <img src="docs/prototipos/alta-fidelidade/p9-politica-de-privacidade.png" alt="Política de privacidade no link do participante, no celular: Voltar, resumo, índice e as seções em linhas, sem barra e sem ícones" width="180">
+<img src="docs/prototipos/alta-fidelidade/p10-via-do-termo.png" alt="Via do termo: o termo de consentimento inteiro, com o título do estudo, o botão Imprimir ou salvar em PDF e Voltar" width="200">
 <img src="docs/prototipos/alta-fidelidade/p6-link-fechado.png" alt="Link fechado: aviso num quadro de que a coleta do estudo foi encerrada" width="200">
 </p>
 
@@ -176,7 +177,7 @@ Entrar e criar conta, com o painel lateral sobre o instrumento:
 
 Lista de estudos, criação com prévia do termo e estudo em rascunho:
 
-<img src="docs/prototipos/alta-fidelidade/r3-estudos.png" alt="Seus estudos: tabela com status em ponto colorido e régua do período de coleta" width="400"> <img src="docs/prototipos/alta-fidelidade/r4-criar-estudo.png" alt="Criar estudo: seções numeradas e prévia do termo para o participante ao lado" width="400">
+<img src="docs/prototipos/alta-fidelidade/r3-estudos.png" alt="Seus estudos: tabela com status em ponto colorido e régua do período de coleta" width="400"> <img src="docs/prototipos/alta-fidelidade/r4-criar-estudo.png" alt="Criar estudo: seções numeradas, com responsável pela pesquisa e riscos e benefícios, e prévia do termo para o participante ao lado" width="400">
 
 <img src="docs/prototipos/alta-fidelidade/r4b-estudo-em-rascunho.png" alt="Estudo em rascunho: estado vazio com Abrir coleta, lista Antes de abrir confira e ficha do estudo" width="400">
 

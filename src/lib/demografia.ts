@@ -6,7 +6,7 @@ export const PERGUNTAS_DEMOGRAFIA = [
   {
     campo: "faixaEtaria",
     titulo: m("Faixa etária"),
-    opcoes: [m("18 a 24 anos"), m("25 a 34 anos"), m("35 a 44 anos"), m("45 a 59 anos"), m("60 anos ou mais")],
+    opcoes: [m("Menos de 18 anos"), m("18 a 24 anos"), m("25 a 34 anos"), m("35 a 44 anos"), m("45 a 59 anos"), m("60 anos ou mais")],
   },
   { campo: "genero", titulo: m("Gênero"), opcoes: [m("Mulher"), m("Homem"), m("Outro")] },
   {

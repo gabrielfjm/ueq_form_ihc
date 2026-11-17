@@ -16,6 +16,7 @@ export async function criarEstudo(page: Page, titulo = TITULO_ESTUDO, { demograf
   await page.getByLabel("Título do estudo").fill(titulo);
   await page.getByLabel("Produto avaliado").fill("Checkout da loja virtual");
   await page.getByLabel("Objetivo").fill("Queremos entender como as pessoas percebem o novo checkout da loja.");
+  await page.getByLabel("Instituição").fill("PPGIa · PUCPR");
   await page.getByRole("button", { name: "Adicionar versão" }).click();
   await page.getByLabel("Versão 2").fill("Checkout em uma página");
   // Os fluxos do participante passam pela etapa "Dados opcionais", que nasce desligada
@@ -77,3 +78,19 @@ export async function inserirRespostas(link: string, conjuntos: { versao: number
   }
   await banco.$disconnect();
 }
+
+// O que ficou gravado sobre a idade nas participações concluídas do estudo do link
+export async function menoresDeIdade(link: string): Promise<boolean[]> {
+  const banco = new PrismaClient({ adapter: new PrismaPg(process.env.DATABASE_URL ?? "") });
+  try {
+    const slug = link.split("/r/")[1] ?? "";
+    const participacoes = await banco.participacao.findMany({
+      where: { versao: { estudo: { slugPublico: slug } }, concluidaEm: { not: null } },
+      select: { menorDeIdade: true },
+    });
+    return participacoes.map((participacao) => participacao.menorDeIdade);
+  } finally {
+    await banco.$disconnect();
+  }
+}
+

@@ -43,6 +43,12 @@ export default async function PaginaEditarEstudo({ params }: Propriedades) {
           titulo: estudo.titulo,
           produtoAvaliado: estudo.produtoAvaliado,
           objetivo: estudo.objetivo,
+          responsavelNome: estudo.responsavelNome,
+          responsavelEmail: estudo.responsavelEmail,
+          instituicao: estudo.instituicao,
+          riscos: estudo.riscos,
+          beneficios: estudo.beneficios,
+          comiteEtica: estudo.comiteEtica ?? "",
           dataInicio: diaParaCampo(estudo.dataInicio),
           dataFim: diaParaCampo(estudo.dataFim),
           versoes: estudo.versoes.map((versao) => ({
