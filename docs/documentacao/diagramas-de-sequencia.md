@@ -148,7 +148,7 @@ sequenceDiagram
     Nav-->>Part: Respostas registradas
 ```
 
-**Ferramenta do diagrama:** Mermaid 12.2.0 (`sequenceDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [diagramas-de-sequencia-2.mmd](fontes/diagramas-de-sequencia-2.mmd). **Versão representada:** Ferramenta UEQ de 06/11/2026.
+**Ferramenta do diagrama:** Mermaid 12.2.0 (`sequenceDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [diagramas-de-sequencia-2.mmd](fontes/diagramas-de-sequencia-2.mmd). **Versão representada:** Ferramenta UEQ de 17/11/2026.
 
 ## 3. Ver resultados
 

@@ -183,9 +183,9 @@ Comparação entre versões: mesmo gráfico de escalas, com um marcador por vers
 ### Estados vazios
 Sem ilustração. Uma frase direta e a ação. Ex.: "Nenhuma resposta ainda. Compartilhe o link do estudo para começar a coleta." + link copiável num campo com fundo `--fundo-painel` e botão "Copiar link".
 
-## Exceções em aberto
+## Exceções
 
-A página inicial foge de duas regras da seção "Proibido": a faixa do topo tem um gradiente radial suave, e figuras e cartões têm raio de 6 a 8 px (`inicio.module.css`). O contador do sino tem raio de 10 px, que é o formato do número. A equipe ainda precisa decidir se a regra muda ou se a página volta à regra.
+A página inicial foge de duas regras da seção "Proibido": a faixa do topo tem um gradiente radial suave, e figuras e cartões têm raio de 6 a 8 px (`inicio.module.css`). A exceção é de propósito e fica restrita a ela: a página inicial apresenta o UEQ a quem ainda não conhece a ferramenta, e as telas de trabalho seguem a regra. O contador do sino tem raio de 10 px, que é o formato do número.
 
 ## Tom de voz
 

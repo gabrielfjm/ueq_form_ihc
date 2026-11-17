@@ -124,52 +124,67 @@ A documentação segue o mesmo princípio de carga: documento longo abre como í
 
 ## 5. Checklist WCAG 2.2 AA (critérios mais relevantes aqui)
 
-A checklist fica desmarcada até a revisão final, em que cada critério é marcado com a evidência (teste, captura ou trecho de código). O axe-core já cobre parte dela em todas as telas, mas não substitui essa conferência.
+A tabela diz como a ferramenta atende a cada critério e o que comprova. O axe-core roda em toda tela e em cada estado de erro dos testes de ponta a ponta; o que ele não alcança está nos casos manuais ([checklist manual](checklist-manual.md)).
 
-Perceptível
-- [ ] 1.1.1 Gráficos e ícones com alternativa em texto
-- [ ] 1.3.1 Estrutura semântica: fieldset/legend, th com scope, listas, títulos
-- [ ] 1.3.2 Ordem de leitura do DOM igual à ordem visual
-- [ ] 1.3.5 `autocomplete` nos campos de dados pessoais
-- [ ] 1.4.1 Nada comunicado só por cor
-- [ ] 1.4.3 Texto ≥ 4.5:1 (≥ 3:1 se ≥ 24 px ou 18.66 px bold)
-- [ ] 1.4.4 Zoom de 200% sem perda
-- [ ] 1.4.10 Refluxo em 320 px
-- [ ] 1.4.11 Bordas de campo, círculos do questionário, foco e marcadores de gráfico ≥ 3:1
-- [ ] 1.4.12 Layout aguenta espaçamento de texto aumentado (line-height 1.5, letter-spacing 0.12em)
-- [ ] 1.4.13 Conteúdo em hover/foco dispensável, persistente e hoverable
+### Perceptível
 
-Operável
-- [ ] 2.1.1 / 2.1.2 Tudo por teclado, sem armadilha
-- [ ] 2.2.1 Sem limite de tempo
-- [ ] 2.4.1 Link de pular conteúdo
-- [ ] 2.4.2 Título de página único e descritivo
-- [ ] 2.4.3 Ordem de foco lógica (após erro, foco no resumo de erros)
-- [ ] 2.4.6 Títulos e rótulos descritivos
-- [ ] 2.4.7 Foco visível
-- [ ] 2.4.11 Foco nunca coberto pelo rodapé fixo ou por cabeçalho fixo
-- [ ] 2.5.3 Nome acessível contém o texto visível do botão
-- [ ] 2.5.8 Alvos ≥ 24×24 px (nosso padrão é 44 px no questionário)
+| Critério | Como a ferramenta atende | Evidência |
+|---|---|---|
+| 1.1.1 Gráficos e ícones com alternativa em texto | Todo gráfico tem descrição e uma tabela visível com os mesmos números; ícones decorativos ficam fora da árvore de acessibilidade | [CT-E29](documentacao/casos-de-teste.md#ct-e29), [CT-M05](documentacao/casos-de-teste.md#ct-m05) |
+| 1.3.1 Estrutura semântica | Cada item do questionário é um `fieldset` com `legend`; tabelas com `th` e `scope`; títulos em ordem | [CT-E24](documentacao/casos-de-teste.md#ct-e24), [CT-E21](documentacao/casos-de-teste.md#ct-e21) e o axe-core em toda tela |
+| 1.3.2 Ordem de leitura igual à ordem visual | O DOM segue a ordem da tela, também da direita para a esquerda | [CT-E22](documentacao/casos-de-teste.md#ct-e22), [CT-E46](documentacao/casos-de-teste.md#ct-e46), [CT-M07](documentacao/casos-de-teste.md#ct-m07) |
+| 1.3.5 `autocomplete` nos dados pessoais | Nome, e-mail e senha têm `autocomplete` em Criar conta, Entrar, Minha conta e no formulário do estudo | axe-core em [CT-E06](documentacao/casos-de-teste.md#ct-e06), [CT-E09](documentacao/casos-de-teste.md#ct-e09) |
+| 1.4.1 Nada comunicado só por cor | Status, faixas e versões têm texto, forma ou padrão além da cor | [CT-E32](documentacao/casos-de-teste.md#ct-e32), [CT-M09](documentacao/casos-de-teste.md#ct-m09) |
+| 1.4.3 Contraste de texto ≥ 4,5:1 | Cada par de cor de texto do tema é medido | [CT-U51](documentacao/casos-de-teste.md#ct-u51) |
+| 1.4.4 Zoom de 200% sem perda | As telas usam unidades relativas e reflowam | [CT-M08](documentacao/casos-de-teste.md#ct-m08) |
+| 1.4.10 Refluxo em 320 px | Nenhuma tela rola na horizontal em 320 px | [CT-E25](documentacao/casos-de-teste.md#ct-e25), [CT-E31](documentacao/casos-de-teste.md#ct-e31), [CT-E36](documentacao/casos-de-teste.md#ct-e36), [CT-E44](documentacao/casos-de-teste.md#ct-e44), [CT-E50](documentacao/casos-de-teste.md#ct-e50), [CT-E75](documentacao/casos-de-teste.md#ct-e75) |
+| 1.4.11 Contraste de elementos ≥ 3:1 | Bordas de campo, círculos, foco e marcadores de gráfico são medidos contra os fundos | [CT-U52](documentacao/casos-de-teste.md#ct-u52) |
+| 1.4.12 Espaçamento de texto | O layout aguenta line-height 1,5 e letter-spacing 0,12em | [CT-M11](documentacao/casos-de-teste.md#ct-m11) |
+| 1.4.13 Conteúdo em hover ou foco | As explicações dos termos abrem por clique (`details`), não por hover | [CT-M07](documentacao/casos-de-teste.md#ct-m07) |
 
-Compreensível
-- [ ] 3.1.1 `lang` do idioma em que a tela está
-- [ ] 3.2.1 / 3.2.2 Foco e entrada não mudam contexto sozinhos
-- [ ] 3.2.3 / 3.2.4 Navegação e componentes consistentes
-- [ ] 3.3.1 / 3.3.3 Erro identificado em texto, com sugestão
-- [ ] 3.3.2 Rótulos visíveis
-- [ ] 3.3.4 Ações destrutivas confirmadas ou reversíveis
-- [ ] 3.3.7 Não pedir a mesma informação duas vezes
-- [ ] 3.3.8 Login sem teste cognitivo, colar senha permitido
+### Operável
 
-Robusto
-- [ ] 4.1.2 Componentes nativos sempre que existirem. ARIA só onde o HTML não resolve
-- [ ] 4.1.3 Mensagens de status em `role="status"` ou `aria-live`
+| Critério | Como a ferramenta atende | Evidência |
+|---|---|---|
+| 2.1.1 e 2.1.2 Teclado, sem armadilha | Todo fluxo funciona só com teclado; janelas prendem o foco e devolvem ao fechar | [CT-E03](documentacao/casos-de-teste.md#ct-e03), [CT-E22](documentacao/casos-de-teste.md#ct-e22), [CT-E55](documentacao/casos-de-teste.md#ct-e55), [CT-E58](documentacao/casos-de-teste.md#ct-e58), [CT-E64](documentacao/casos-de-teste.md#ct-e64), [CT-M07](documentacao/casos-de-teste.md#ct-m07) |
+| 2.2.1 Sem limite de tempo | Nenhuma tela tem tempo; o questionário guarda o que foi marcado se a página recarregar | [CT-E26](documentacao/casos-de-teste.md#ct-e26) |
+| 2.4.1 Pular conteúdo | "Pular para o conteúdo" é o primeiro elemento focável | [CT-E02](documentacao/casos-de-teste.md#ct-e02) |
+| 2.4.2 Título de página | Cada página tem título próprio, do específico para o geral | [CT-E47](documentacao/casos-de-teste.md#ct-e47), [CT-E84](documentacao/casos-de-teste.md#ct-e84) |
+| 2.4.3 Ordem de foco | Depois de um erro, o foco vai ao resumo, e cada link do resumo leva ao campo | [CT-E07](documentacao/casos-de-teste.md#ct-e07), [CT-E23](documentacao/casos-de-teste.md#ct-e23) |
+| 2.4.6 Títulos e rótulos descritivos | Rótulos dizem o que pedem; títulos dizem o que a seção contém | axe-core em toda tela e [CT-M13](documentacao/casos-de-teste.md#ct-m13) |
+| 2.4.7 Foco visível | Anel de foco com contraste de 3:1 em todo elemento | [CT-E22](documentacao/casos-de-teste.md#ct-e22), [CT-U52](documentacao/casos-de-teste.md#ct-u52) |
+| 2.4.11 Foco não coberto | Barra superior e rodapé fixos nunca escondem o foco nem as âncoras | [CT-E54](documentacao/casos-de-teste.md#ct-e54) |
+| 2.5.3 Nome contém o texto visível | O nome acessível de cada botão começa pelo texto que aparece nele | axe-core em toda tela |
+| 2.5.8 Alvos ≥ 24 × 24 px | Cada círculo do questionário tem 44 × 44 px | [CT-M12](documentacao/casos-de-teste.md#ct-m12) |
 
-Extra (além do AA, baratos e coerentes com IHC)
-- [ ] `prefers-reduced-motion` respeitado
-- [ ] `forced-colors: active` (alto contraste do Windows) testado: círculos, foco e gráficos continuam visíveis
-- [ ] `prefers-color-scheme: dark` com tema escuro equivalente (opcional, não padrão)
-- [ ] Linguagem simples no questionário (frases curtas, voz ativa, sem jargão)
+### Compreensível
+
+| Critério | Como a ferramenta atende | Evidência |
+|---|---|---|
+| 3.1.1 Idioma da página | `lang` e `dir` acompanham o idioma escolhido, também nos textos do estudo sem tradução | [CT-E45](documentacao/casos-de-teste.md#ct-e45), [CT-E46](documentacao/casos-de-teste.md#ct-e46), [CT-U48](documentacao/casos-de-teste.md#ct-u48) |
+| 3.2.1 e 3.2.2 Sem mudança de contexto sozinha | Trocar o idioma só vale depois de "Aplicar"; nenhum campo envia ao mudar | [CT-E46](documentacao/casos-de-teste.md#ct-e46), [CT-E68](documentacao/casos-de-teste.md#ct-e68) |
+| 3.2.3 e 3.2.4 Navegação consistente | A mesma barra e os mesmos componentes em todas as telas | [CT-E53](documentacao/casos-de-teste.md#ct-e53), [CT-M18](documentacao/casos-de-teste.md#ct-m18) |
+| 3.3.1 e 3.3.3 Erro em texto, com sugestão | Cada erro diz o que aconteceu e o que fazer, no resumo e no campo | [CT-E06](documentacao/casos-de-teste.md#ct-e06), [CT-E14](documentacao/casos-de-teste.md#ct-e14), [CT-E23](documentacao/casos-de-teste.md#ct-e23), [CT-E43](documentacao/casos-de-teste.md#ct-e43) |
+| 3.3.2 Rótulos visíveis | Todo campo tem rótulo visível acima dele | axe-core em toda tela |
+| 3.3.4 Ações destrutivas confirmadas ou reversíveis | Sair e excluir pedem confirmação; tirar da análise é reversível | [CT-E11](documentacao/casos-de-teste.md#ct-e11), [CT-E19](documentacao/casos-de-teste.md#ct-e19), [CT-E27](documentacao/casos-de-teste.md#ct-e27), [CT-E34](documentacao/casos-de-teste.md#ct-e34) |
+| 3.3.7 Não pedir a mesma informação duas vezes | O estudo novo vem com o responsável da conta e do último estudo | [CT-E93](documentacao/casos-de-teste.md#ct-e93) |
+| 3.3.8 Login sem teste cognitivo | Sem captcha; colar a senha funciona e Mostrar senha alterna a visibilidade | [CT-E08](documentacao/casos-de-teste.md#ct-e08) |
+
+### Robusto
+
+| Critério | Como a ferramenta atende | Evidência |
+|---|---|---|
+| 4.1.2 Componentes nativos | Rádios, botões, `details` e `dialog` nativos; ARIA só onde o HTML não resolve | [CT-E24](documentacao/casos-de-teste.md#ct-e24), [CT-E57](documentacao/casos-de-teste.md#ct-e57) |
+| 4.1.3 Mensagens de status | Confirmações em `role="status"`, anunciadas sem mover o foco | [CT-E09](documentacao/casos-de-teste.md#ct-e09), [CT-E16](documentacao/casos-de-teste.md#ct-e16), [CT-M06](documentacao/casos-de-teste.md#ct-m06) |
+
+### Além do AA
+
+| Critério | Como a ferramenta atende | Evidência |
+|---|---|---|
+| `prefers-reduced-motion` | As transições somem quando o sistema pede menos movimento | `src/app/globals.css` |
+| `forced-colors` (alto contraste do Windows) | Círculos, foco e gráficos continuam visíveis | [CT-E32](documentacao/casos-de-teste.md#ct-e32), [CT-M10](documentacao/casos-de-teste.md#ct-m10) |
+| Tema escuro | Não tem: a identidade visual é de instrumento de laboratório, em fundo claro ([Identidade visual](design.md)) | — |
+| Linguagem simples no questionário | Frases curtas, voz ativa, sem jargão | [CT-M13](documentacao/casos-de-teste.md#ct-m13), [CT-M14](documentacao/casos-de-teste.md#ct-m14) |
 
 ## 6. Como verificar (automação não basta)
 

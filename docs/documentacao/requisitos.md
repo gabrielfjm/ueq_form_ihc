@@ -20,7 +20,7 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 - **Pendente:** ainda falta alguma parte.
 - **Removido:** saiu do escopo. O ID continua reservado.
 
-**Sprint** é a sprint em que o requisito foi entregue (tabela abaixo). "A confirmar" marca o que entrou na `main` depois de 30/10/2026, com a data da mudança no banco; a sprint e o PR ainda vão ser conferidos.
+**Sprint** é a sprint em que o requisito foi entregue (tabela abaixo). Cada sprint é um ou mais pull requests integrados na `main`.
 
 **Como verificar** cita os [casos de teste](casos-de-teste.md) que provam o requisito, quando existem, e diz o que fazer na ferramenta para conferir. Para rodar a ferramenta, use a conta de teste `pesquisador@exemplo.com` (senha `senha-de-teste`) e o Estudo de exemplo.
 
@@ -41,6 +41,15 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 | Sprint 10 · Extensões | #14 | 30/10/2026 | Importação por CSV, painel em PDF, estrutura do UEQ-S |
 | Sprint de documentação | #15, #16 | 30/10/2026 | Aba Documentação, licença MIT, barra fixa, diagramas em tela cheia |
 | Página inicial e janelas | #17 | 30/10/2026 | Página inicial, Entrar em janela, confirmação de sair e de excluir, ícone |
+| Implantação | #18, #19, #20 | 30/10 e 31/10/2026 | Casos de teste atualizados e publicação na Vercel, com migrations e seed no build |
+| Equipe e ajuda | #21 | 01/11/2026 | Estudos em equipe, notificações, tour guiado, ajuda em cada página, coleta demográfica opcional e Administração |
+| LGPD | #22, #23 | 01/11/2026 | Criptografia, política de privacidade, Baixar meus dados, limite de tentativas, cabeçalhos de segurança e perfil dos participantes |
+| Idiomas da ferramenta | #24 a #27 | 02/11/2026 | Ferramenta nos 37 idiomas, idioma do estudo, tradução dos textos do estudo e nova página inicial |
+| Participante e e-mails | #28, #29 | 03/11/2026 | Telas do participante mais acolhedoras e e-mails com a identidade visual |
+| Privacidade e documentação em páginas | #30 a #34 | 06/11/2026 | Política no padrão da ferramenta, documentos de arquitetura e testes, documentação em páginas e confirmação de toda ação |
+| Qualidade da tradução | #35 a #39 | 06/11 e 07/11/2026 | Tradução da interface com glossário, contexto da tela e revisão automática |
+| Termo de consentimento | #40, #41 | 17/11/2026 | Termo completo, menores de 18 anos, seletor de idioma na barra e Next.js 16.4.6 |
+| Documentação final | #42, #43 | 17/11/2026 | Requisitos, matriz de rastreabilidade, personas, histórias, casos de uso, diagrama de classes e verificação do cálculo |
 | Sprint 09 · Revisão final | pendente |  | Revisão geral e conferência com a planilha oficial |
 
 ## Requisitos funcionais
@@ -55,10 +64,10 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 | <a id="rf04"></a>RF04 | **Editar dados da conta** | O pesquisador muda nome e e-mail em Minha conta; um e-mail que já é de outra conta é recusado. | Importante | Sprint 03 · Autenticação | Entregue | [CT-E09](casos-de-teste.md#ct-e09). Minha conta › Dados cadastrais: mude o nome e salve. |
 | <a id="rf05"></a>RF05 | **Trocar a senha** | O pesquisador troca a senha informando a atual, e a troca encerra as sessões abertas em outros navegadores. | Importante | Sprint 03 · Autenticação | Entregue | [CT-E10](casos-de-teste.md#ct-e10). Minha conta › Senha. |
 | <a id="rf06"></a>RF06 | **Excluir a conta** | O pesquisador exclui a conta digitando o e-mail, e a exclusão apaga junto os estudos e as respostas dele. | Importante | Sprint 03 · Autenticação | Entregue | [CT-E11](casos-de-teste.md#ct-e11). Minha conta › Excluir conta, com uma conta criada só para o teste. |
-| <a id="rf07"></a>RF07 | **Baixar meus dados** | O pesquisador baixa, em Minha conta, um arquivo JSON com tudo o que a ferramenta guarda sobre a conta dele. | Importante | A confirmar (31/10/2026) | Entregue | Minha conta › Baixar meus dados: o arquivo .json baixa e traz os dados da conta. |
-| <a id="rf08"></a>RF08 | **Escolher o idioma da ferramenta** | O pesquisador escolhe o idioma da interface ao criar a conta e troca em Minha conta › Idioma ou pelo seletor de idioma da barra, entre os 37 idiomas do UEQ; sem conta, o seletor da barra também troca o idioma. | Desejável | A confirmar (02/11/2026) | Entregue | [CT-E94](casos-de-teste.md#ct-e94), [CT-E95](casos-de-teste.md#ct-e95). Clique em PT na barra, escolha outro idioma e confira o menu traduzido; o mesmo vale em Minha conta › Idioma. |
-| <a id="rf09"></a>RF09 | **Tour guiado no primeiro acesso** | Quem entra pela primeira vez faz um tour pelas próprias ações, e pode pular, fechar ou rever o tour depois pela ajuda. | Desejável | A confirmar (31/10/2026) | Entregue | Crie uma conta nova e entre: o tour começa sozinho. |
-| <a id="rf10"></a>RF10 | **Ajuda em toda página** | Toda página do pesquisador tem um botão de ajuda (?) no cabeçalho, que explica a própria página. | Desejável | A confirmar (31/10/2026) | Entregue | Em qualquer página do pesquisador, clique em (?). |
+| <a id="rf07"></a>RF07 | **Baixar meus dados** | O pesquisador baixa, em Minha conta, um arquivo JSON com tudo o que a ferramenta guarda sobre a conta dele. | Importante | LGPD | Entregue | [CT-E81](casos-de-teste.md#ct-e81). Minha conta › Baixar meus dados: o arquivo .json baixa e traz os dados da conta. |
+| <a id="rf08"></a>RF08 | **Escolher o idioma da ferramenta** | O pesquisador escolhe o idioma da interface ao criar a conta e troca em Minha conta › Idioma ou pelo seletor de idioma da barra, entre os 37 idiomas do UEQ; sem conta, o seletor da barra também troca o idioma. | Desejável | Idiomas da ferramenta | Entregue | [CT-E94](casos-de-teste.md#ct-e94), [CT-E95](casos-de-teste.md#ct-e95). Clique em PT na barra, escolha outro idioma e confira o menu traduzido; o mesmo vale em Minha conta › Idioma. |
+| <a id="rf09"></a>RF09 | **Tour guiado no primeiro acesso** | Quem entra pela primeira vez faz um tour pelas próprias ações, e pode pular, fechar ou rever o tour depois pela ajuda. | Desejável | Equipe e ajuda | Entregue | [CT-E66](casos-de-teste.md#ct-e66), [CT-M22](casos-de-teste.md#ct-m22). Crie uma conta nova e entre: o tour começa sozinho. |
+| <a id="rf10"></a>RF10 | **Ajuda em toda página** | Toda página do pesquisador tem um botão de ajuda (?) no cabeçalho, que explica a própria página. | Desejável | Equipe e ajuda | Entregue | [CT-E65](casos-de-teste.md#ct-e65). Em qualquer página do pesquisador, clique em (?). |
 | <a id="rf11"></a>RF11 | **Página inicial** | A página inicial explica o UEQ (escalas, leitura dos resultados e benchmark) e dá os créditos; Entrar e Criar conta abrem numa janela sobre ela. | Importante | Página inicial e janelas | Entregue | [CT-E01](casos-de-teste.md#ct-e01), [CT-E58](casos-de-teste.md#ct-e58), [CT-E59](casos-de-teste.md#ct-e59), [CT-E60](casos-de-teste.md#ct-e60). Abra http://localhost:3000 sem estar logado e clique em Entrar. |
 
 ### Estudos
@@ -71,17 +80,17 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 | <a id="rf15"></a>RF15 | **Abrir, encerrar e reabrir a coleta** | O pesquisador abre, encerra e reabre a coleta; o link só aceita respostas com a coleta aberta e, nos outros casos, mostra um aviso. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E15](casos-de-teste.md#ct-e15). Página do estudo: Abrir coleta, Encerrar coleta e Reabrir, abrindo o link a cada passo. |
 | <a id="rf16"></a>RF16 | **Copiar o link público** | Cada estudo tem um link público curto e não sequencial, que o pesquisador copia com um botão. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E16](casos-de-teste.md#ct-e16). Página do estudo › Copiar link. |
 | <a id="rf17"></a>RF17 | **Excluir estudo** | O pesquisador exclui um estudo digitando o título; o aviso diz quantas respostas vão junto, e versões, participações e respostas são apagadas. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E19](casos-de-teste.md#ct-e19). Página do estudo › Excluir estudo. |
-| <a id="rf18"></a>RF18 | **Ligar a coleta de dados demográficos** | O pesquisador decide, em cada estudo, se o link mostra a etapa de dados demográficos; ela vem desligada. | Importante | A confirmar (01/11/2026) | Entregue | Criar estudo: ligue os dados demográficos e abra o link: a etapa Dados opcionais aparece. |
-| <a id="rf19"></a>RF19 | **Escolher o idioma do estudo** | O pesquisador escolhe o idioma em que o estudo é escrito e em que o link abre; estudos novos nascem no idioma da conta. | Desejável | A confirmar (02/11/2026) | Entregue | Criar estudo: troque o idioma e abra o link. |
+| <a id="rf18"></a>RF18 | **Ligar a coleta de dados demográficos** | O pesquisador decide, em cada estudo, se o link mostra a etapa de dados demográficos; ela vem desligada. | Importante | Equipe e ajuda | Entregue | [CT-E71](casos-de-teste.md#ct-e71). Criar estudo: ligue os dados demográficos e abra o link: a etapa Dados opcionais aparece. |
+| <a id="rf19"></a>RF19 | **Escolher o idioma do estudo** | O pesquisador escolhe o idioma em que o estudo é escrito e em que o link abre; estudos novos nascem no idioma da conta. | Desejável | Idiomas da ferramenta | Entregue | [CT-E45](casos-de-teste.md#ct-e45). Criar estudo: troque o idioma e abra o link. |
 
 ### Equipe e notificações
 
 | ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
 |---|---|---|---|---|---|---|
-| <a id="rf20"></a>RF20 | **Compartilhar estudo** | O dono convida uma conta cadastrada, pelo e-mail, como Editor (mexe no estudo) ou Leitor (vê e exporta); só o dono convida e exclui o estudo. | Desejável | A confirmar (31/10/2026) | Entregue | Página do estudo › Compartilhar: convide a conta de outra pessoa da equipe como Leitor. |
-| <a id="rf21"></a>RF21 | **Aceitar ou recusar convite** | Quem é convidado aceita ou recusa o convite, e o estudo só aparece na lista dele depois de aceito. | Desejável | A confirmar (31/10/2026) | Entregue | Com a conta convidada, abra o sino e aceite o convite. |
-| <a id="rf22"></a>RF22 | **Sino de notificações** | O sino avisa sobre convites, respostas novas (agrupadas enquanto não lidas) e mudanças feitas pelos parceiros. | Desejável | A confirmar (31/10/2026) | Entregue | Responda o link de um estudo seu e abra o sino. |
-| <a id="rf23"></a>RF23 | **Notificações por e-mail** | Cada notificação também vai por e-mail, no idioma de quem recebe, quando o envio está configurado; o pesquisador desliga em Minha conta. | Desejável | A confirmar (31/10/2026) | Entregue | Minha conta › Notificações por e-mail (o envio depende das variáveis SMTP do .env). |
+| <a id="rf20"></a>RF20 | **Compartilhar estudo** | O dono convida uma conta cadastrada, pelo e-mail, como Editor (mexe no estudo) ou Leitor (vê e exporta); só o dono convida e exclui o estudo. | Desejável | Equipe e ajuda | Entregue | [CT-E63](casos-de-teste.md#ct-e63). Página do estudo › Compartilhar: convide a conta de outra pessoa da equipe como Leitor. |
+| <a id="rf21"></a>RF21 | **Aceitar ou recusar convite** | Quem é convidado aceita ou recusa o convite, e o estudo só aparece na lista dele depois de aceito. | Desejável | Equipe e ajuda | Entregue | [CT-E63](casos-de-teste.md#ct-e63). Com a conta convidada, abra o sino e aceite o convite. |
+| <a id="rf22"></a>RF22 | **Sino de notificações** | O sino avisa sobre convites, respostas novas (agrupadas enquanto não lidas) e mudanças feitas pelos parceiros. | Desejável | Equipe e ajuda | Entregue | [CT-E63](casos-de-teste.md#ct-e63), [CT-E64](casos-de-teste.md#ct-e64), [CT-M21](casos-de-teste.md#ct-m21). Responda o link de um estudo seu e abra o sino. |
+| <a id="rf23"></a>RF23 | **Notificações por e-mail** | Cada notificação também vai por e-mail, no idioma de quem recebe, quando o envio está configurado; o pesquisador desliga em Minha conta. | Desejável | Equipe e ajuda | Entregue | [CT-U59](casos-de-teste.md#ct-u59). Minha conta › Notificações por e-mail (o envio depende das variáveis SMTP do .env). |
 
 ### Questionário do participante
 
@@ -98,7 +107,7 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 | <a id="rf32"></a>RF32 | **Dados demográficos opcionais** | Quando o estudo coleta, o participante responde faixa etária, gênero, escolaridade e familiaridade em faixas fechadas, todas com Prefiro não responder, e pode pular a etapa inteira. | Importante | Sprint 05 · Questionário | Entregue | [CT-E21](casos-de-teste.md#ct-e21). Num estudo com dados demográficos ligados, responda uma pergunta e pule as outras. |
 | <a id="rf33"></a>RF33 | **Concluir e não responder de novo** | Depois do envio, o participante vê o agradecimento, e o mesmo navegador não envia outra resposta para o estudo. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E21](casos-de-teste.md#ct-e21), [CT-E28](casos-de-teste.md#ct-e28). Termine o questionário e abra o link de novo no mesmo navegador. |
 | <a id="rf34"></a>RF34 | **Responder em 37 idiomas** | O link abre no idioma do estudo ou do navegador, o participante troca no seletor entre os 37 idiomas oficiais do UEQ, e os idiomas da direita para a esquerda viram a página. | Importante | Sprint de idiomas | Entregue | [CT-E45](casos-de-teste.md#ct-e45), [CT-E46](casos-de-teste.md#ct-e46), [CT-U45](casos-de-teste.md#ct-u45), [CT-U50](casos-de-teste.md#ct-u50). No consentimento, troque o idioma para árabe ou japonês e responda. |
-| <a id="rf35"></a>RF35 | **Traduzir os textos do estudo** | Título, produto e objetivo escritos pelo pesquisador aparecem traduzidos para o idioma do participante. | Desejável | A confirmar (02/11/2026) | Entregue | Abra o link em outro idioma e confira o título e o objetivo (depende da ANTHROPIC_API_KEY no .env). |
+| <a id="rf35"></a>RF35 | **Traduzir os textos do estudo** | Título, produto e objetivo escritos pelo pesquisador aparecem traduzidos para o idioma do participante. | Desejável | Idiomas da ferramenta | Entregue | [CT-U63](casos-de-teste.md#ct-u63). Abra o link em outro idioma e confira o título e o objetivo (depende da ANTHROPIC_API_KEY no .env). |
 
 ### Cálculo do UEQ
 
@@ -123,7 +132,7 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 | <a id="rf47"></a>RF47 | **Comparar versões** | Com mais de uma versão, o pesquisador compara as versões lado a lado no mesmo gráfico, com marcadores de formas diferentes e uma leitura das maiores diferenças. | Essencial | Sprint 06 · Resultados | Entregue | [CT-E29](casos-de-teste.md#ct-e29), [CT-U43](casos-de-teste.md#ct-u43). Aba Resultados › Comparar versões. |
 | <a id="rf48"></a>RF48 | **Guardar a visão no endereço** | A versão escolhida e o modo (uma versão ou comparação) ficam no endereço da página, para voltar, recarregar e compartilhar. | Importante | Sprint 06 · Resultados | Entregue | [CT-E29](casos-de-teste.md#ct-e29). Escolha Comparar versões e recarregue a página. |
 | <a id="rf49"></a>RF49 | **Explicar os termos** | Cada termo técnico (escalas, IC95, alfa de Cronbach, benchmark) tem uma explicação curta que abre perto de onde aparece. | Importante | Sprint 06 · Resultados | Entregue | Aba Resultados: abra O que é Perspicuidade? |
-| <a id="rf50"></a>RF50 | **Ver os dados demográficos** | Quando o estudo coleta, uma aba mostra cada pergunta demográfica num gráfico com a tabela dos números, com filtro por versão. | Desejável | A confirmar (01/11/2026) | Entregue | Num estudo com dados demográficos, aba Resultados › Dados demográficos. |
+| <a id="rf50"></a>RF50 | **Ver os dados demográficos** | Quando o estudo coleta, uma aba mostra cada pergunta demográfica num gráfico com a tabela dos números, com filtro por versão. | Desejável | LGPD | Entregue | [CT-E72](casos-de-teste.md#ct-e72), [CT-U60](casos-de-teste.md#ct-u60). Num estudo com dados demográficos, aba Resultados › Dados demográficos. |
 
 ### Respostas e suspeitas
 
@@ -159,9 +168,9 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 
 | ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
 |---|---|---|---|---|---|---|
-| <a id="rf66"></a>RF66 | **Gerenciar contas** | O superusuário abre a página Administração, vê as contas e cria uma conta para outra pessoa; quem não é superusuário não acessa. | Desejável | A confirmar (31/10/2026) | Entregue | Com uma conta de administrador, menu Administração › Contas. |
-| <a id="rf67"></a>RF67 | **Cenários de demonstração** | O superusuário cria estudos de demonstração com respostas inventadas, para apresentar a ferramenta. | Desejável | A confirmar (31/10/2026) | Entregue | Administração › Cenários. |
-| <a id="rf68"></a>RF68 | **Situação da proteção de dados e das traduções** | O superusuário vê se a criptografia de campo está ligada e quanto de cada idioma já está traduzido. | Desejável | A confirmar (31/10/2026) | Entregue | Administração › Proteção de dados e Administração › Idiomas. |
+| <a id="rf66"></a>RF66 | **Gerenciar contas** | O superusuário abre a página Administração, vê as contas e cria uma conta para outra pessoa; quem não é superusuário não acessa. | Desejável | Equipe e ajuda | Entregue | Com uma conta de administrador, menu Administração › Contas. |
+| <a id="rf67"></a>RF67 | **Cenários de demonstração** | O superusuário cria estudos de demonstração com respostas inventadas, para apresentar a ferramenta. | Desejável | Equipe e ajuda | Entregue | [CT-U61](casos-de-teste.md#ct-u61). Administração › Cenários. |
+| <a id="rf68"></a>RF68 | **Situação da proteção de dados e das traduções** | O superusuário vê se a criptografia de campo está ligada e quanto de cada idioma já está traduzido. | Desejável | Idiomas da ferramenta | Entregue | Administração › Proteção de dados e Administração › Idiomas. |
 
 ## Requisitos não funcionais
 
@@ -191,13 +200,13 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 | ID | Requisito | Descrição | Prioridade | Sprint | Status | Como verificar |
 |---|---|---|---|---|---|---|
 | <a id="rnf12"></a>RNF12 | **Anonimato do participante** | A ferramenta não coleta nada que identifique o participante: nome, e-mail, IP, navegador detalhado ou cookie de rastreamento. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E21](casos-de-teste.md#ct-e21). Confira no modelo do banco que a participação não tem esses campos. |
-| <a id="rnf13"></a>RNF13 | **Coleta mínima** | Os dados demográficos vêm desligados em cada estudo, e participações começadas e não enviadas são apagadas em até 2 dias. | Importante | A confirmar (01/11/2026) | Entregue | Crie um estudo e confira que os dados demográficos começam desligados. |
-| <a id="rnf14"></a>RNF14 | **Criptografia dos dados demográficos** | Os dados demográficos são gravados cifrados com AES-256-GCM, com a chave fora do banco. | Importante | A confirmar (01/11/2026) | Entregue | Administração › Proteção de dados mostra se a criptografia está ligada. |
+| <a id="rnf13"></a>RNF13 | **Coleta mínima** | Os dados demográficos vêm desligados em cada estudo, e participações começadas e não enviadas são apagadas em até 2 dias. | Importante | LGPD | Entregue | Crie um estudo e confira que os dados demográficos começam desligados. |
+| <a id="rnf14"></a>RNF14 | **Criptografia dos dados demográficos** | Os dados demográficos são gravados cifrados com AES-256-GCM, com a chave fora do banco. | Importante | LGPD | Entregue | [CT-U58](casos-de-teste.md#ct-u58). Administração › Proteção de dados mostra se a criptografia está ligada. |
 | <a id="rnf15"></a>RNF15 | **Senha e sessão protegidas** | As senhas ficam guardadas com bcrypt, a sessão usa cookie httpOnly, Secure e SameSite=Lax, e o banco guarda só o hash da sessão. | Essencial | Sprint 03 · Autenticação | Entregue | [CT-E10](casos-de-teste.md#ct-e10). No DevTools › Application › Cookies, confira as marcas do cookie de sessão. |
-| <a id="rnf16"></a>RNF16 | **Limite de tentativas de login** | Depois de 5 senhas erradas para o mesmo e-mail em 15 minutos, a ferramenta bloqueia novas tentativas por um tempo. | Importante | A confirmar (01/11/2026) | Entregue | Erre a senha 6 vezes seguidas com a mesma conta. |
+| <a id="rnf16"></a>RNF16 | **Limite de tentativas de login** | Depois de 5 senhas erradas para o mesmo e-mail em 15 minutos, a ferramenta bloqueia novas tentativas por um tempo. | Importante | LGPD | Entregue | [CT-E80](casos-de-teste.md#ct-e80). Erre a senha 6 vezes seguidas com a mesma conta. |
 | <a id="rnf17"></a>RNF17 | **Acesso só aos próprios estudos** | Cada pesquisador só vê, altera e exporta os próprios estudos e os compartilhados com ele; nem o administrador vê os estudos dos outros. | Essencial | Sprint 04 · Estudos | Entregue | [CT-E20](casos-de-teste.md#ct-e20), [CT-E38](casos-de-teste.md#ct-e38), [CT-E41](casos-de-teste.md#ct-e41). Com outra conta, abra o endereço de um estudo que não é dela. |
-| <a id="rnf18"></a>RNF18 | **Proteções do navegador** | A ferramenta usa HTTPS com HSTS e envia Content Security Policy e os demais cabeçalhos de segurança. | Importante | A confirmar (31/10/2026) | Entregue | Na versão publicada, DevTools › Network › cabeçalhos da resposta. |
-| <a id="rnf19"></a>RNF19 | **Política de privacidade** | Uma política de privacidade pública explica o que é guardado, para quê e como é protegido, conforme a LGPD. | Importante | A confirmar (31/10/2026) | Entregue | Abra http://localhost:3000/privacidade. |
+| <a id="rnf18"></a>RNF18 | **Proteções do navegador** | A ferramenta usa HTTPS com HSTS e envia Content Security Policy e os demais cabeçalhos de segurança. | Importante | LGPD | Entregue | [CT-E73](casos-de-teste.md#ct-e73). Na versão publicada, DevTools › Network › cabeçalhos da resposta. |
+| <a id="rnf19"></a>RNF19 | **Política de privacidade** | Uma política de privacidade pública explica o que é guardado, para quê e como é protegido, conforme a LGPD. | Importante | LGPD | Entregue | [CT-E74](casos-de-teste.md#ct-e74), [CT-E75](casos-de-teste.md#ct-e75), [CT-E76](casos-de-teste.md#ct-e76), [CT-E77](casos-de-teste.md#ct-e77), [CT-E78](casos-de-teste.md#ct-e78), [CT-E79](casos-de-teste.md#ct-e79), [CT-E82](casos-de-teste.md#ct-e82), [CT-E83](casos-de-teste.md#ct-e83), [CT-M23](casos-de-teste.md#ct-m23), [CT-M25](casos-de-teste.md#ct-m25). Abra http://localhost:3000/privacidade. |
 
 ### Usabilidade
 

@@ -36,7 +36,9 @@ test("sem conta, a documentação abre com a barra pública, as seções e as su
   await expect(documentos.getByRole("link", { name: "Casos de uso" })).toHaveAttribute("aria-current", "page");
 
   if (publicado("casos-de-uso")) {
-    // O diagrama é uma imagem com texto alternativo, que carrega de verdade, também sem sessão
+    // Documento longo abre como índice; a página do diagrama mostra a imagem com texto alternativo, que
+    // carrega de verdade, também sem sessão
+    await page.getByRole("region", { name: "Neste documento" }).getByRole("link", { name: /^Diagrama 1/ }).click();
     const diagrama = page.getByRole("img", { name: /^Diagrama: / }).first();
     await diagrama.scrollIntoViewIfNeeded();
     await expect.poll(() => diagrama.evaluate((imagem: HTMLImageElement) => imagem.naturalWidth)).toBeGreaterThan(0);
@@ -45,6 +47,8 @@ test("sem conta, a documentação abre com a barra pública, as seções e as su
   }
   await verificarAcessibilidade(page);
 
+  // As sub-abas ficam na abertura do documento
+  await page.goto("/documentacao/casos-de-uso");
   await documentos.getByRole("link", { name: "Diagrama de classes" }).click();
   await expect(page.getByRole("heading", { level: 1, name: "Diagrama de classes" })).toBeVisible();
 });
@@ -90,10 +94,15 @@ test("documento em produção mostra o aviso e a ficha, sem texto, arquivo nem d
 test("os links entre documentos levam à âncora dentro da ferramenta e a planilha baixa sem conta", async ({ page }) => {
   test.skip(!publicado("matriz-de-rastreabilidade") || !publicado("requisitos"), "documentos ainda em produção");
   await page.goto("/documentacao/matriz-de-rastreabilidade");
+  await page.getByRole("region", { name: "Neste documento" }).getByRole("link", { name: "Requisitos funcionais" }).click();
+  await page.getByRole("region", { name: "Nesta seção" }).getByRole("link", { name: "Acesso e conta" }).click();
   await page.getByRole("link", { name: "RF01", exact: true }).first().click();
-  await expect(page).toHaveURL(/\/documentacao\/requisitos#rf01$/);
+  // Requisitos é longo: a âncora leva à página da seção em que o requisito está
+  await expect(page).toHaveURL(/\/documentacao\/requisitos\/requisitos-funcionais\/acesso-e-conta#rf01$/);
   await expect(page.locator("#rf01")).toBeInViewport();
 
+  // O arquivo no GitHub e os downloads ficam na ficha da abertura do documento
+  await page.goto("/documentacao/requisitos");
   const ficha = page.getByRole("complementary", { name: "Sobre este documento" });
   await expect(ficha.getByRole("link", { name: "Ver no GitHub" })).toHaveAttribute(
     "href",

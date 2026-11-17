@@ -1,0 +1,95 @@
+﻿Requisito;Nome;Tipo;Área;Histórias;Casos de uso;Personas;Casos de teste;Sprint;Status;Código
+RF01;Criar conta;Funcional;Acesso e conta;HU01;UC01;PE01;CT-E03, CT-E06, CT-E07, CT-E08, CT-E90;Sprint 03 · Autenticação;Entregue;(publico)/_acesso/FormularioCadastro.tsx, (publico)/_acesso/acoes.ts, src/lib/validacao-conta.ts
+RF02;Entrar e sair;Funcional;Acesso e conta;HU01;UC02;PE01;CT-E03, CT-E06, CT-E08, CT-E58, CT-E90;Sprint 03 · Autenticação;Entregue;(publico)/_acesso/FormularioEntrar.tsx, (publico)/_acesso/acoes.ts, src/lib/sessao.ts
+RF03;Proteger a área do pesquisador;Funcional;Acesso e conta;HU22;UC02;PE02;CT-E04;Sprint 03 · Autenticação;Entregue;src/proxy.ts, src/lib/sessao.ts
+RF04;Editar dados da conta;Funcional;Acesso e conta;HU17;UC03;PE01;CT-E09;Sprint 03 · Autenticação;Entregue;(pesquisador)/conta/FormularioDados.tsx, (pesquisador)/conta/acoes.ts
+RF05;Trocar a senha;Funcional;Acesso e conta;HU22;UC03;PE02;CT-E10;Sprint 03 · Autenticação;Entregue;(pesquisador)/conta/FormularioSenha.tsx, (pesquisador)/conta/acoes.ts
+RF06;Excluir a conta;Funcional;Acesso e conta;HU17;UC03;PE01;CT-E11;Sprint 03 · Autenticação;Entregue;(pesquisador)/conta/ExcluirConta.tsx, (pesquisador)/conta/acoes.ts
+RF07;Baixar meus dados;Funcional;Acesso e conta;HU17;UC03;PE01;CT-E81;LGPD;Entregue;src/app/api/conta/dados/route.ts
+RF08;Escolher o idioma da ferramenta;Funcional;Acesso e conta;HU26;UC01, UC03;PE03;CT-E67, CT-E94, CT-E95, CT-U62, CT-U63, CT-U66, CT-U67, CT-U68;Idiomas da ferramenta;Entregue;(pesquisador)/SeletorIdioma.tsx, (pesquisador)/conta/idioma/, src/traducao/
+RF09;Tour guiado no primeiro acesso;Funcional;Acesso e conta;HU02;UC04;PE01;CT-E66, CT-M22;Equipe e ajuda;Entregue;src/componentes/tutorial/
+RF10;Ajuda em toda página;Funcional;Acesso e conta;HU02;UC04;PE01;CT-E65;Equipe e ajuda;Entregue;src/componentes/ajuda/BotaoAjuda.tsx, src/lib/ajuda.ts
+RF11;Página inicial;Funcional;Acesso e conta;HU01;UC02;PE01;CT-E01, CT-E58, CT-E59, CT-E60, CT-E61, CT-E69, CT-E70;Página inicial e janelas;Entregue;(publico)/PaginaInicial.tsx, (publico)/conteudo.ts, (publico)/_acesso/Acesso.tsx
+RF12;Listar os estudos;Funcional;Estudos;HU07;UC05;PE01;CT-E12, CT-E17;Sprint 04 · Estudos;Entregue;(pesquisador)/estudos/page.tsx, src/lib/estudos.ts
+RF13;Criar estudo;Funcional;Estudos;HU03, HU04;UC06;PE01;CT-E13, CT-E14, CT-E93, CT-M14;Sprint 04 · Estudos;Entregue;(pesquisador)/estudos/formulario/, (pesquisador)/estudos/acoes.ts, src/lib/validacao-estudo.ts
+RF14;Editar estudo;Funcional;Estudos;HU15;UC07;PE01;CT-E18;Sprint 04 · Estudos;Entregue;(pesquisador)/estudos/[id]/editar/, (pesquisador)/estudos/acoes.ts
+RF15;Abrir, encerrar e reabrir a coleta;Funcional;Estudos;HU06, HU14;UC08;PE01;CT-E15;Sprint 04 · Estudos;Entregue;(pesquisador)/estudos/[id]/BotaoColeta.tsx, src/lib/status-estudo.ts, src/app/r/[slug]/page.tsx
+RF16;Copiar o link público;Funcional;Estudos;HU06;UC09;PE01;CT-E16;Sprint 04 · Estudos;Entregue;(pesquisador)/estudos/[id]/LinkPublico.tsx, src/lib/estudos.ts
+RF17;Excluir estudo;Funcional;Estudos;HU16;UC10;PE01;CT-E19;Sprint 04 · Estudos;Entregue;(pesquisador)/estudos/[id]/AcoesEstudo.tsx, (pesquisador)/estudos/acoes.ts
+RF18;Ligar a coleta de dados demográficos;Funcional;Estudos;HU05;UC06;PE01;CT-E71;Equipe e ajuda;Entregue;(pesquisador)/estudos/formulario/FormularioEstudo.tsx, src/app/r/[slug]/sobre-voce/
+RF19;Escolher o idioma do estudo;Funcional;Estudos;HU03, HU27;UC06;PE01, PE03;CT-E45;Idiomas da ferramenta;Entregue;(pesquisador)/estudos/formulario/FormularioEstudo.tsx, src/idiomas/index.ts
+RF20;Compartilhar estudo;Funcional;Equipe e notificações;HU20;UC11;PE02;CT-E63;Equipe e ajuda;Entregue;(pesquisador)/estudos/[id]/Compartilhar.tsx, (pesquisador)/estudos/[id]/acoes-compartilhar.ts
+RF21;Aceitar ou recusar convite;Funcional;Equipe e notificações;HU20;UC12;PE02;CT-E63;Equipe e ajuda;Entregue;(pesquisador)/SinoNotificacoes.tsx, (pesquisador)/notificacoes/acoes.ts
+RF22;Sino de notificações;Funcional;Equipe e notificações;HU07, HU21;UC13;PE01, PE02;CT-E63, CT-E64, CT-M21;Equipe e ajuda;Entregue;(pesquisador)/SinoNotificacoes.tsx, src/lib/notificacoes.ts
+RF23;Notificações por e-mail;Funcional;Equipe e notificações;HU21;UC03, UC13;PE02;CT-U59;Equipe e ajuda;Entregue;src/lib/email.ts, src/lib/modelo-email.ts, (pesquisador)/conta/PreferenciaEmail.tsx
+RF24;Responder sem conta;Funcional;Questionário do participante;HU29;UC14;PE04;CT-E05, CT-E21, CT-E52, CT-M14;Sprint 05 · Questionário;Entregue;src/app/r/[slug]/, src/proxy.ts
+RF25;Consentimento;Funcional;Questionário do participante;HU04, HU28, HU37;UC14;PE01, PE04, PE07;CT-E21, CT-E28, CT-E82, CT-E91, CT-E92, CT-U69, CT-M25;Sprint 05 · Questionário;Entregue;src/app/r/[slug]/Termo.tsx, src/app/r/[slug]/termo/, src/lib/termo.ts
+RF26;Distribuir participantes entre as versões;Funcional;Questionário do participante;HU10;UC14;PE01;CT-U30;Sprint 05 · Questionário;Entregue;src/lib/balanceamento.ts
+RF27;Responder os 26 itens;Funcional;Questionário do participante;HU29, HU35;UC14;PE04, PE05;CT-E21, CT-E24, CT-M02, CT-M17;Sprint 05 · Questionário;Entregue;src/componentes/ItemDiferencial.tsx, src/app/r/[slug]/questionario/FormularioQuestionario.tsx
+RF28;Acompanhar o progresso;Funcional;Questionário do participante;HU29;UC14;PE04;CT-E22, CT-M03;Sprint 05 · Questionário;Entregue;src/app/r/[slug]/questionario/RodapeProgresso.tsx
+RF29;Avisar os itens que faltam;Funcional;Questionário do participante;HU30;UC14;PE04;CT-E23, CT-M04;Sprint 05 · Questionário;Entregue;src/app/r/[slug]/questionario/FormularioQuestionario.tsx, src/componentes/formulario/ResumoErros.tsx
+RF30;Recuperar as respostas marcadas;Funcional;Questionário do participante;HU31;UC14;PE04;CT-E26, CT-E68;Sprint 05 · Questionário;Entregue;src/app/r/[slug]/questionario/useRascunho.ts
+RF31;Sair sem enviar;Funcional;Questionário do participante;HU32;UC17;PE04;CT-E27;Sprint 05 · Questionário;Entregue;src/app/r/[slug]/questionario/FormularioQuestionario.tsx, src/app/r/[slug]/saiu/
+RF32;Dados demográficos opcionais;Funcional;Questionário do participante;HU33;UC16;PE04;CT-E21, CT-E71;Sprint 05 · Questionário;Entregue;src/app/r/[slug]/sobre-voce/, src/lib/demografia.ts
+RF33;Concluir e não responder de novo;Funcional;Questionário do participante;HU34;UC14;PE04;CT-E21, CT-E28;Sprint 05 · Questionário;Entregue;src/app/r/[slug]/acoes.ts, src/app/r/[slug]/fim/, src/lib/participacao.ts
+RF34;Responder em 37 idiomas;Funcional;Questionário do participante;HU27, HU36;UC15;PE03, PE06;CT-E45, CT-E46, CT-E68, CT-E83, CT-U45, CT-U47, CT-U48, CT-U49, CT-U50, CT-M24;Sprint de idiomas;Entregue;src/idiomas/, src/app/r/[slug]/SeletorIdioma.tsx
+RF35;Traduzir os textos do estudo;Funcional;Questionário do participante;HU27;UC15;PE03;CT-U63;Idiomas da ferramenta;Entregue;src/traducao/servidor.ts, src/traducao/claude.ts
+RF36;Recodificar as respostas;Funcional;Cálculo do UEQ;HU18;UC19;PE02;CT-U01, CT-U02, CT-U03, CT-U04, CT-U05, CT-U06;Sprint 02 · Cálculo;Entregue;src/ueq/recodificar.ts
+RF37;Estatísticas por escala;Funcional;Cálculo do UEQ;HU18, HU24;UC19;PE02;CT-U07, CT-U08, CT-U09, CT-U10, CT-U11, CT-U12, CT-U14, CT-U21;Sprint 02 · Cálculo;Entregue;src/ueq/estatistica.ts, src/ueq/escalas.ts
+RF38;Interpretar as médias;Funcional;Cálculo do UEQ;HU08, HU24;UC19;PE01, PE02;CT-U13;Sprint 02 · Cálculo;Entregue;src/ueq/escalas.ts
+RF39;Qualidade pragmática e hedônica;Funcional;Cálculo do UEQ;HU24;UC19;PE02;CT-U20;Sprint 02 · Cálculo;Entregue;src/ueq/index.ts, src/ueq/itens.ts
+RF40;Classificar no benchmark;Funcional;Cálculo do UEQ;HU24;UC19;PE02;CT-U16, CT-U17, CT-U20;Sprint 02 · Cálculo;Entregue;src/ueq/benchmark.ts, data/benchmark.json
+RF41;Média por item;Funcional;Cálculo do UEQ;HU09;UC19;PE01;CT-U15;Sprint 02 · Cálculo;Entregue;src/ueq/escalas.ts
+RF42;Calcular só com quem está na análise;Funcional;Cálculo do UEQ;HU12;UC19;PE01;CT-U18, CT-U19, CT-U22;Sprint 02 · Cálculo;Entregue;src/ueq/index.ts, src/lib/resultados.ts
+RF43;Painel de resultados;Funcional;Resultados;HU08;UC18;PE01;CT-E29, CT-M14;Sprint 06 · Resultados;Entregue;(pesquisador)/estudos/[id]/resultados/, src/graficos/EscalasComBenchmark.tsx
+RF44;Leitura rápida;Funcional;Resultados;HU08;UC18;PE01;CT-U42;Sprint 06 · Resultados;Entregue;src/lib/leitura-rapida.ts
+RF45;Avisos de alfa baixo e amostra pequena;Funcional;Resultados;HU08;UC18;PE01;CT-E30, CT-U21;Sprint 06 · Resultados;Entregue;(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx, src/componentes/Avisos.tsx
+RF46;Gráfico por item;Funcional;Resultados;HU09;UC18;PE01;CT-E29;Sprint 06 · Resultados;Entregue;src/graficos/MediasPorItem.tsx
+RF47;Comparar versões;Funcional;Resultados;HU10;UC20;PE01;CT-E29, CT-U43;Sprint 06 · Resultados;Entregue;(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx, src/lib/leitura-rapida.ts
+RF48;Guardar a visão no endereço;Funcional;Resultados;HU10;UC18;PE01;CT-E29;Sprint 06 · Resultados;Entregue;(pesquisador)/estudos/[id]/resultados/ControlesResultados.tsx
+RF49;Explicar os termos;Funcional;Resultados;HU08;UC18;PE01;;Sprint 06 · Resultados;Entregue;(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx
+RF50;Ver os dados demográficos;Funcional;Resultados;HU13;UC21;PE01;CT-E72, CT-U60;LGPD;Entregue;(pesquisador)/estudos/[id]/resultados/demograficos/, src/graficos/Demografia.tsx, src/lib/perfil-demografico.ts
+RF51;Marcar respostas suspeitas;Funcional;Respostas e suspeitas;HU12;UC24;PE01;CT-E33, CT-U19, CT-U23, CT-U24, CT-U25, CT-U26, CT-U27, CT-U28;Sprint 07 · Suspeitas;Entregue;src/ueq/inconsistencia.ts, data/protocolo.json
+RF52;Tabela de participações;Funcional;Respostas e suspeitas;HU12;UC23;PE01;CT-E33, CT-E36, CT-U36;Sprint 07 · Suspeitas;Entregue;(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx, src/lib/participacoes.ts
+RF53;Ver as escalas de um participante;Funcional;Respostas e suspeitas;HU12;UC23;PE01;CT-E35;Sprint 07 · Suspeitas;Entregue;(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx
+RF54;Tirar e devolver respostas da análise;Funcional;Respostas e suspeitas;HU12;UC23;PE01;CT-E33, CT-E34;Sprint 07 · Suspeitas;Entregue;(pesquisador)/estudos/[id]/respostas/acoes.ts
+RF55;Recalcular as suspeitas;Funcional;Respostas e suspeitas;HU39;UC32;PE08;CT-M16;Sprint 07 · Suspeitas;Entregue;prisma/recalcular-suspeitas.ts
+RF56;Exportar respostas brutas;Funcional;Exportação e importação;HU23;UC25;PE02;CT-E37, CT-U31, CT-U32, CT-U35;Sprint 08 · Exportação;Entregue;src/lib/exportacoes.ts, src/app/api/estudos/[id]/exportar/[tipo]/route.ts
+RF57;Exportar respostas recodificadas;Funcional;Exportação e importação;HU23;UC25;PE02;CT-E37, CT-U32, CT-U37;Sprint 08 · Exportação;Entregue;src/lib/exportacoes.ts, src/app/api/estudos/[id]/exportar/[tipo]/route.ts
+RF58;Exportar resultados por escala;Funcional;Exportação e importação;HU11;UC25;PE01;CT-E37, CT-U32, CT-U33, CT-U38;Sprint 08 · Exportação;Entregue;src/lib/exportacoes.ts, src/app/api/estudos/[id]/exportar/[tipo]/route.ts
+RF59;Exportar no formato da planilha oficial;Funcional;Exportação e importação;HU18;UC25;PE02;CT-E37, CT-U32, CT-U34;Sprint 08 · Exportação;Entregue;src/lib/exportacoes.ts, src/app/api/estudos/[id]/exportar/[tipo]/route.ts
+RF60;Exportar o painel em PDF;Funcional;Exportação e importação;HU11;UC22;PE01;CT-E39, CT-E40, CT-E41;Sprint 10 · Extensões;Entregue;src/app/api/estudos/[id]/painel-pdf/route.ts, (pesquisador)/estudos/[id]/resultados/impressao/
+RF61;Importar respostas por CSV;Funcional;Exportação e importação;HU19;UC26;PE02;CT-E42, CT-E43, CT-E44, CT-U36, CT-U39, CT-U40, CT-U41;Sprint 10 · Extensões;Entregue;(pesquisador)/estudos/[id]/respostas/importar/, src/lib/importacao.ts
+RF62;Aplicar o UEQ-S;Funcional;Exportação e importação;HU25;UC27;PE02;CT-U53;Sprint 10 · Extensões;Pendente;data/ueq-s-itens-ptbr.json, data/benchmark-ueq-s.json
+RF63;Aba Documentação;Funcional;Documentação;HU44;UC28;PE08;CT-E47, CT-E48, CT-E50, CT-E62, CT-E84, CT-E85, CT-E87, CT-U54, CT-U55, CT-U57, CT-U64;Sprint de documentação;Entregue;(publico)/documentacao/, src/lib/documentacao/
+RF64;Diagramas em tela cheia;Funcional;Documentação;HU44;UC28;PE08;CT-E57, CT-U55;Sprint de documentação;Entregue;(publico)/documentacao/ArtigoDocumento.tsx
+RF65;Links e downloads da documentação;Funcional;Documentação;HU44;UC28;PE08;CT-E49, CT-E51, CT-E86, CT-U54, CT-U56, CT-U65;Sprint de documentação;Entregue;src/lib/documentacao/markdown.ts, src/app/api/documentacao/[...caminho]/route.ts
+RF66;Gerenciar contas;Funcional;Administração;HU41;UC29;PE08;;Equipe e ajuda;Entregue;(pesquisador)/administracao/contas/, src/lib/administracao.ts
+RF67;Cenários de demonstração;Funcional;Administração;HU42;UC30;PE08;CT-U61;Equipe e ajuda;Entregue;(pesquisador)/administracao/cenarios/, src/lib/cenarios/
+RF68;Situação da proteção de dados e das traduções;Funcional;Administração;HU43;UC31;PE08;;Idiomas da ferramenta;Entregue;(pesquisador)/administracao/protecao/, (pesquisador)/administracao/idiomas/
+RNF01;WCAG 2.2 AA;Não funcional;Acessibilidade;HU35;;PE05;CT-E01, CT-E06, CT-E12, CT-E14, CT-E21, CT-E47, CT-E74, CT-M11, CT-M13, CT-M18;Sprint 00 · Setup;Entregue;tests/e2e/acessibilidade.ts
+RNF02;320 px e zoom de 400%;Não funcional;Acessibilidade;HU29;;PE04;CT-E25, CT-E31, CT-E36, CT-E44, CT-E50, CT-E75, CT-M08;Sprint 05 · Questionário;Entregue;src/styles/tokens.css, src/app/globals.css
+RNF03;Uso só com teclado;Não funcional;Acessibilidade;HU35;;PE05;CT-E02, CT-E03, CT-E22, CT-E53, CT-E54, CT-E55, CT-E64, CT-M07;Sprint 05 · Questionário;Entregue;(pesquisador)/BarraFixa.tsx, src/app/globals.css
+RNF04;Leitor de tela;Não funcional;Acessibilidade;HU35;;PE05;CT-E24, CT-U48, CT-M01, CT-M02, CT-M03, CT-M04, CT-M05, CT-M06, CT-M20, CT-M21, CT-M22, CT-M23;Sprint 05 · Questionário;Entregue;src/componentes/ItemDiferencial.tsx, src/componentes/formulario/MensagemStatus.tsx
+RNF05;Área de toque;Não funcional;Acessibilidade;HU29;;PE04;CT-M12;Sprint 05 · Questionário;Entregue;src/componentes/ItemDiferencial.tsx
+RNF06;Contraste;Não funcional;Acessibilidade;HU29;;PE04;CT-U51, CT-U52, CT-M10;Sprint 00 · Setup;Entregue;src/styles/tokens.css
+RNF07;Informação além da cor;Não funcional;Acessibilidade;HU08;;PE01;CT-E32, CT-U52, CT-M09, CT-M10;Sprint 06 · Resultados;Entregue;src/graficos/
+RNF08;Gráficos com texto equivalente;Não funcional;Acessibilidade;HU08;;PE01;CT-E29, CT-M05;Sprint 06 · Resultados;Entregue;src/graficos/
+RNF09;Questionário sem viés de interface;Não funcional;Fidelidade ao instrumento;HU18;;PE02;CT-E24;Sprint 05 · Questionário;Entregue;src/componentes/ItemDiferencial.tsx
+RNF10;Termos oficiais;Não funcional;Fidelidade ao instrumento;HU36;UC33;PE06;CT-U45, CT-U46, CT-U47, CT-M17;Sprint de idiomas;Entregue;data/ueq-itens-ptbr.json, data/ueq-idiomas.json, prisma/seed.ts
+RNF11;Cálculo igual ao da planilha oficial;Não funcional;Fidelidade ao instrumento;HU18;;PE02;CT-U29, CT-M15;Sprint 09 · Revisão final;Pendente;src/ueq/__tests__/fixtures.test.ts, data/fixtures/
+RNF12;Anonimato do participante;Não funcional;Segurança e privacidade;HU33;;PE04;CT-E21;Sprint 05 · Questionário;Entregue;prisma/schema.prisma, src/lib/participacao.ts
+RNF13;Coleta mínima;Não funcional;Segurança e privacidade;HU05;;PE01;;LGPD;Entregue;prisma/schema.prisma, src/app/r/[slug]/acoes.ts
+RNF14;Criptografia dos dados demográficos;Não funcional;Segurança e privacidade;HU05, HU43;;PE01, PE08;CT-U58;LGPD;Entregue;src/lib/cripto.ts, prisma/cifrar-dados.ts
+RNF15;Senha e sessão protegidas;Não funcional;Segurança e privacidade;HU22;;PE02;CT-E10;Sprint 03 · Autenticação;Entregue;src/lib/senhas.ts, src/lib/sessao.ts, src/lib/cookie-sessao.ts
+RNF16;Limite de tentativas de login;Não funcional;Segurança e privacidade;HU22;;PE02;CT-E80;LGPD;Entregue;src/lib/tentativas.ts
+RNF17;Acesso só aos próprios estudos;Não funcional;Segurança e privacidade;HU20, HU41;;PE02, PE08;CT-E20, CT-E38, CT-E41;Sprint 04 · Estudos;Entregue;src/lib/estudos.ts
+RNF18;Proteções do navegador;Não funcional;Segurança e privacidade;HU22;;PE02;CT-E73;LGPD;Entregue;next.config.ts
+RNF19;Política de privacidade;Não funcional;Segurança e privacidade;HU17, HU28;;PE01, PE04;CT-E74, CT-E75, CT-E76, CT-E77, CT-E78, CT-E79, CT-E82, CT-E83, CT-M23, CT-M25;LGPD;Entregue;(publico)/privacidade/, src/app/r/[slug]/privacidade/
+RNF20;Retorno de cada ação;Não funcional;Usabilidade;HU06;;PE01;CT-E09, CT-E15, CT-E16, CT-E88, CT-E89, CT-E90, CT-M06, CT-M13;Sprint 04 · Estudos;Entregue;src/componentes/formulario/MensagemStatus.tsx, src/componentes/formulario/BotaoEnvio.tsx
+RNF21;Confirmação antes de perder dados;Não funcional;Usabilidade;HU16, HU32;;PE01, PE04;CT-E11, CT-E19, CT-E27, CT-M13, CT-M20;Sprint 04 · Estudos;Entregue;src/componentes/janela/Confirmacao.tsx
+RNF22;Padrão brasileiro de números e datas;Não funcional;Usabilidade;HU11, HU23;;PE01, PE02;CT-U33, CT-U44;Sprint 06 · Resultados;Entregue;src/idiomas/formatar.ts, src/lib/csv.ts
+RNF23;Computador e celular;Não funcional;Plataforma e manutenção;HU29;;PE04;CT-E53, CT-E55, CT-E56, CT-M12;Sprint 00 · Setup;Entregue;playwright.config.ts
+RNF24;Aplicação web com código aberto;Não funcional;Plataforma e manutenção;HU38;;PE08;CT-M19;Sprint 00 · Setup;Entregue;LICENSE, README.md
+RNF25;Cálculo isolado e testado;Não funcional;Plataforma e manutenção;HU40;;PE08;CT-U01, CT-U02, CT-U07, CT-U12, CT-U14, CT-U22;Sprint 02 · Cálculo;Entregue;src/ueq/
+RNF26;Verificações antes de integrar;Não funcional;Plataforma e manutenção;HU40;;PE08;;Sprint 00 · Setup;Entregue;package.json

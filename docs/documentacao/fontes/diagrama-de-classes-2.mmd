@@ -1,0 +1,133 @@
+classDiagram
+    direction TB
+
+    class index {
+        <<módulo>>
+        +analisarEstudo(participacoes, itens, config) AnaliseEstudo
+    }
+    class recodificar {
+        <<módulo>>
+        +recodificar(valor, polaridade) number
+        +recodificarParticipante(valores, itens) number[]
+    }
+    class estatistica {
+        <<módulo>>
+        +media(valores) number?
+        +desvioPadraoAmostral(valores) number?
+        +intervaloConfianca95(media, dp, n, z) Intervalo?
+        +correlacao(x, y) number?
+        +alfaCronbach(colunas) number?
+    }
+    class escalas {
+        <<módulo>>
+        +escoresPorParticipante(valores, itens) Record~Escala, number~
+        +faixaInterpretacao(media, faixaNeutra) FaixaInterpretacao
+        +resultadoPorEscala(respostas, itens, parametros) ResultadoEscala[]
+        +resultadoPorItem(respostas, itens, z) ResultadoItem[]
+    }
+    class inconsistencia {
+        <<módulo>>
+        +amplitudePorEscala(valores, itens) Record~Escala, number~
+        +respostasIguais(valores) number
+        +avaliarSuspeita(valores, itens, parametros) AvaliacaoSuspeita
+        +marcarSuspeitos(respostas, itens, parametros) AvaliacaoSuspeita[]
+    }
+    class benchmark {
+        <<módulo>>
+        +classificarBenchmark(escala, media, tabela) FaixaBenchmark?
+    }
+    class itens {
+        <<módulo>>
+        +ESCALAS
+        +GRUPOS
+        +numerosPorEscala(itens) Record~Escala, number[]~
+    }
+
+    class ItemUEQ {
+        +number numero
+        +Escala escala
+        +Polaridade polaridade
+    }
+    class ParticipacaoParaAnalise {
+        +number[] valores
+        +boolean incluidaNaAnalise
+    }
+    class ConfigAnalise {
+        +protocolo
+        +TabelaBenchmark benchmark
+    }
+    class ParametrosInconsistencia {
+        +number amplitudeMaxima
+        +number escalasParaSuspeita
+        +number respostasIguaisMaximas
+    }
+    class AnaliseEstudo {
+        +number n
+        +number nExcluidas
+        +ResultadoEscalaAnalisada[] escalas
+        +grupos pragmatica e hedonica
+        +ResultadoItem[] itens
+        +AvaliacaoSuspeita[] participantes
+    }
+    class ResultadoEscala {
+        +Escala escala
+        +number n
+        +number? media
+        +number? dp
+        +Intervalo? ic
+        +number? alfa
+        +FaixaInterpretacao? faixaInterpretacao
+    }
+    class ResultadoEscalaAnalisada {
+        +FaixaBenchmark? benchmark
+        +boolean alfaAbaixoDoMinimo
+    }
+    class ResultadoItem {
+        +number numero
+        +Escala escala
+        +number n
+        +number? media
+        +number? dp
+        +Intervalo? ic
+        +number[] distribuicao
+    }
+    class AvaliacaoSuspeita {
+        +Record~Escala, number~ amplitudes
+        +Escala[] escalasInconsistentes
+        +number respostasIguais
+        +MotivoSuspeita[] motivos
+        +boolean suspeita
+    }
+    class Intervalo {
+        +number inferior
+        +number superior
+    }
+    class LimitesBenchmark {
+        +number excelente
+        +number bom
+        +number acimaDaMedia
+        +number abaixoDaMedia
+    }
+
+    ResultadoEscala <|-- ResultadoEscalaAnalisada
+    ConfigAnalise *-- ParametrosInconsistencia
+    ConfigAnalise *-- "6" LimitesBenchmark
+    AnaliseEstudo *-- "6" ResultadoEscalaAnalisada
+    AnaliseEstudo *-- "26" ResultadoItem
+    AnaliseEstudo *-- "0..*" AvaliacaoSuspeita
+    ResultadoEscala o-- Intervalo
+    ResultadoItem o-- Intervalo
+
+    index ..> ParticipacaoParaAnalise : recebe
+    index ..> ItemUEQ : recebe
+    index ..> ConfigAnalise : recebe
+    index ..> AnaliseEstudo : devolve
+    index ..> escalas : usa
+    index ..> inconsistencia : usa
+    index ..> benchmark : usa
+    index ..> itens : usa
+    escalas ..> recodificar : usa
+    escalas ..> estatistica : usa
+    escalas ..> itens : usa
+    inconsistencia ..> recodificar : usa
+    inconsistencia ..> itens : usa
