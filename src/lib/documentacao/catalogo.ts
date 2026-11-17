@@ -17,12 +17,19 @@ export type Documento = {
 
 export type Secao = { slug: string; titulo: string; documentos: readonly Documento[] };
 
-// Documentos que já podem aparecer na ferramenta. A equipe está escrevendo a documentação: enquanto o
-// arquivo não entra nesta lista, a aba mostra "Em produção" no lugar dele, sem o texto, os diagramas e os
-// downloads, e o arquivo nem precisa existir ainda. Para publicar um documento pronto, acrescente aqui o
-// caminho do arquivo (o mesmo de `arquivo`)
+// Documentos publicados na ferramenta. Um documento novo entra no catálogo antes de ficar pronto: enquanto
+// o arquivo não está nesta lista, a aba mostra "Em produção" no lugar dele, sem o texto, os diagramas e os
+// downloads, e o arquivo nem precisa existir ainda. Para publicar, acrescente aqui o caminho do arquivo
+// (o mesmo de `arquivo`)
 const PRONTOS: ReadonlySet<string> = new Set<string>([
+  "docs/documentacao/README.md",
   "docs/documentacao/requisitos.md",
+  "docs/documentacao/matriz-rastreabilidade.md",
+  "docs/documentacao/personas.md",
+  "docs/documentacao/historias-de-usuario.md",
+  "docs/documentacao/casos-de-uso.md",
+  "docs/documentacao/diagrama-de-classes.md",
+  "docs/documentacao/verificacao-do-calculo.md",
   "docs/documentacao/arquitetura.md",
   "docs/documentacao/diagramas-de-sequencia.md",
   "docs/documentacao/modelo-logico.md",
@@ -135,6 +142,7 @@ export const SECOES: readonly Secao[] = [
         oQueE: "Os casos de uso da ferramenta em diagramas UML, com a especificação dos principais.",
         paraQueServe: "Ver quem faz o quê na ferramenta e quais requisitos cada caso de uso exerce.",
         quemDeveLer: "Quem avalia o projeto e quem vai mudar um fluxo.",
+        downloads: fontesMermaid("casos-de-uso", 5),
       },
       {
         slug: "diagrama-de-classes",
@@ -144,6 +152,7 @@ export const SECOES: readonly Secao[] = [
         oQueE: "A estrutura dos dados (Prisma) e dos tipos e funções do cálculo (src/ueq), em UML.",
         paraQueServe: "Entender o que é guardado, como as entidades se ligam e o que apagar um estudo leva junto.",
         quemDeveLer: "Quem mexe no banco ou no cálculo.",
+        downloads: fontesMermaid("diagrama-de-classes", 2),
       },
       {
         slug: "modelo-logico",
@@ -202,8 +211,8 @@ export const SECOES: readonly Secao[] = [
         arquivo: "docs/documentacao/verificacao-do-calculo.md",
         rotulo: "Verificação do cálculo",
         descricao: "O cálculo da ferramenta conferido à mão, com os dados do estudo de exemplo.",
-        oQueE: "As médias, desvios, intervalos de confiança, alfa, benchmark e suspeitas do estudo de exemplo calculados à mão e comparados com o painel.",
-        paraQueServe: "Mostrar que os números da ferramenta conferem com o handbook e a planilha oficial do UEQ.",
+        oQueE: "As médias, desvios, intervalos de confiança, alfa, benchmark, suspeitas e exportações do estudo de exemplo calculados à mão e comparados com a ferramenta.",
+        paraQueServe: "Mostrar, conta por conta, que os números da ferramenta seguem as fórmulas do protocolo do UEQ.",
         quemDeveLer: "Quem avalia o projeto e quem interpreta os resultados de um estudo.",
       },
       {
