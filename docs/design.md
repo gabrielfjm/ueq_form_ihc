@@ -86,7 +86,7 @@ Escala (rem): 0.8125 · 0.9375 · 1.0625 · 1.25 · 1.625 · 2.25. Corpo em 1.06
 
 - Conteúdo alinhado à esquerda, largura máxima de leitura ~72ch, painéis de dados até 1120px
 - Grid de 8px. Espaço vertical generoso entre seções (48 a 64px), apertado dentro de tabelas
-- Navegação do pesquisador: barra superior fina com nome da ferramenta à esquerda e links com ícone e texto: Estudos, Criar estudo, Documentação, Administração (só para quem é administrador), Minha conta, o sino de notificações e Sair. Sem sidebar. Quem não entrou (página inicial e documentação) vê a mesma barra só com Documentação e Entrar (`log-in`); Criar conta (`user-plus`) fica na página inicial e dentro da janela de Entrar. O link do participante não tem barra nenhuma
+- Navegação do pesquisador: barra superior fina com nome da ferramenta à esquerda e links com ícone e texto: Estudos, Criar estudo, Documentação, Administração (só para quem é administrador), Minha conta, o sino de notificações, o seletor de idioma e Sair. Sem sidebar. Quem não entrou (página inicial e documentação) vê a mesma barra só com Documentação, o seletor de idioma e Entrar (`log-in`); Criar conta (`user-plus`) fica na página inicial e dentro da janela de Entrar. O link do participante não tem barra nenhuma
 - A barra fica fixa no topo durante toda a rolagem, no computador e no celular. Até 56rem de largura os links ficam atrás de um botão Menu (`menu`, e `x` quando aberto, sempre com o texto "Menu"), para a barra fixa ocupar uma linha só; o menu abre os links em coluna logo abaixo e fecha com Esc ou ao trocar de página. Em 320 px a fileira de marcações do logotipo sai da barra para o nome e o Menu caberem
 - Tabelas são cidadãs de primeira classe: cabeçalho em negrito, linhas separadas por régua de 1px, números alinhados à direita
 - Botão primário: fundo `--tinta`, texto `--fundo`, raio 2px, altura 40px. Secundário: borda 1px `--tinta`, fundo transparente. Ação destrutiva: texto `--alerta` sublinhado, que abre uma janela de confirmação (ver "Janelas")
@@ -119,9 +119,10 @@ Escala (rem): 0.8125 · 0.9375 · 1.0625 · 1.25 · 1.625 · 2.25. Corpo em 1.06
 - Toda ação concluída confirma na tela (protótipo r40): quadro em `--destaque-fundo` com borda `--destaque`, em `role="status"`, de preferência dizendo o resultado ("Estudo criado com sucesso."). Ele acompanha a rolagem, logo abaixo da barra, e fica até a pessoa fechar. Erro de uma ação usa `--alerta-fundo`, borda `--alerta` e outro ícone, para não parecer confirmação
 - O aviso que veio pelo endereço (`?aviso=`) sai dele depois de mostrado: recarregar não confirma de novo
 
-## Sino e tour
+## Sino, idioma e tour
 
-- Sino (protótipo r26): fica entre Minha conta e Sair. As não lidas aparecem num contador `--alerta` com o número em texto. Abre os avisos mais recentes e leva à página Notificações (r27), onde os convites têm Aceitar e Recusar ali mesmo
+- Sino (protótipo r26): fica entre Minha conta e o seletor de idioma. As não lidas aparecem num contador `--alerta` com o número em texto. Abre os avisos mais recentes e leva à página Notificações (r27), onde os convites têm Aceitar e Recusar ali mesmo
+- Seletor de idioma (protótipo r41): atalho para Minha conta › Idioma, entre o sino e Sair (sem login, entre Documentação e Entrar). No computador mostra o ícone `languages` e a sigla do idioma atual ("PT"), e o nome completo fica para o leitor de tela; no menu do celular aparece "Idioma: Português". Abre por baixo como o sino, sem ser modal, com os 37 idiomas pelo próprio nome em três colunas e o atual marcado com `check`. Só o clique troca (WCAG 3.2.2), e a página continua a mesma, já no idioma novo
 - Tour guiado (protótipos r28 e r29): começa com uma janela de boas-vindas no primeiro acesso. Cada passo destaca um elemento real da tela e um cartão ao lado explica. Em parte dos passos, a pessoa faz a própria ação para seguir. Dá para pular ou fechar a qualquer momento, e rever pela ajuda
 
 ## E-mails

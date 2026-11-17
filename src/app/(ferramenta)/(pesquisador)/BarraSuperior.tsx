@@ -9,10 +9,11 @@ import { BarraFixa } from "./BarraFixa";
 import { Confirmacao } from "@/componentes/janela/Confirmacao";
 import { Logotipo } from "@/componentes/Logotipo";
 import { sair } from "./acoes";
+import { SeletorIdioma } from "./SeletorIdioma";
 import { SinoNotificacoes } from "./SinoNotificacoes";
 import estilos from "./pesquisador.module.css";
 import { useT } from "@/traducao/cliente";
-import { m } from "@/traducao/nucleo";
+import { m, type OpcaoIdioma } from "@/traducao/nucleo";
 
 type ItemNavegacao = {
   href: Route;
@@ -43,9 +44,10 @@ type Propriedades = {
   // notificações não lidas quando a página carregou; o sino atualiza sozinho depois
   naoLidas: number;
   administrador: boolean;
+  idiomas: OpcaoIdioma[];
 };
 
-export function BarraSuperior({ naoLidas, administrador }: Propriedades) {
+export function BarraSuperior({ naoLidas, administrador, idiomas }: Propriedades) {
   const t = useT();
   const caminho = usePathname();
   // Administração (só para o superusuário) entra antes de Minha conta; o sino vem logo depois dela
@@ -87,6 +89,7 @@ export function BarraSuperior({ naoLidas, administrador }: Propriedades) {
           </Link>
         ))}
         <SinoNotificacoes naoLidasIniciais={naoLidas} />
+        <SeletorIdioma idiomas={idiomas} comConta />
         {/* Sair muda estado no servidor, por isso é botão e não link. Pede confirmação antes (protótipo r20):
             quem clica sem querer no celular, com o menu aberto, não perde a sessão */}
         <button

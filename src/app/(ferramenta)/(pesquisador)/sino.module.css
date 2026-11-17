@@ -1,4 +1,4 @@
-/* Sino de notificações da barra superior e a lista que abre por baixo dele */
+﻿/* Sino de notificações da barra superior e a lista que abre por baixo dele */
 
 .caixa {
   position: relative;
@@ -176,7 +176,7 @@
   text-align: center;
 }
 
-@media (max-width: 68rem) {
+@media (max-width: 70rem) {
   .caixa {
     flex-direction: column;
   }

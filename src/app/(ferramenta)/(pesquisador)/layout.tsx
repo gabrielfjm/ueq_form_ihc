@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Tutorial } from "@/componentes/tutorial/Tutorial";
+import { opcoesDeIdioma } from "@/idiomas";
 import { banco } from "@/lib/banco";
 import { pesquisadorDaSessao } from "@/lib/sessao";
 import { BarraSuperior } from "./BarraSuperior";
@@ -14,7 +15,7 @@ export default async function LayoutPesquisador({ children }: { children: ReactN
     : 0;
   return (
     <>
-      <BarraSuperior naoLidas={naoLidas} administrador={pesquisador?.administrador ?? false} />
+      <BarraSuperior naoLidas={naoLidas} administrador={pesquisador?.administrador ?? false} idiomas={opcoesDeIdioma()} />
       <main id="conteudo" tabIndex={-1}>
         {children}
       </main>

@@ -31,7 +31,7 @@ Depois, abra http://localhost:3000.
 - **Conta de pesquisador pronta:** `pesquisador@exemplo.com`, senha `senha-de-teste`. Ela já tem o "Estudo de exemplo", com 35 respostas em 2 versões, 4 delas suspeitas.
 - **Link do participante desse estudo:** http://localhost:3000/r/exemplo. Cada navegador responde uma vez. Para responder de novo, use uma janela anônima.
 - **Para ver outro idioma no questionário:** troque no seletor "Idioma" do consentimento.
-- **Para ver a ferramenta em outro idioma:** Minha conta › Idioma. Sem `ANTHROPIC_API_KEY`, a interface continua em português.
+- **Para ver a ferramenta em outro idioma:** o seletor de idioma da barra ("PT"), ou Minha conta › Idioma. Sem `ANTHROPIC_API_KEY`, a interface continua em português.
 
 ## As telas, na ordem de uso
 
@@ -63,6 +63,7 @@ Para cada tela, faça a tarefa e compare com o protótipo em `docs/prototipos/al
 | 15c | Sino e notificações | sino na barra, depois "Ver todas as notificações" | r26, r27 | Encontre o convite e o aviso de respostas novas |
 | 15d | Ajuda da página | botão (?) no cabeçalho de cada página | r30 | Abra em duas páginas e diga se a explicação ajuda |
 | 16 | Minha conta | menu "Minha conta" | r9, r35 para o idioma | Mude o nome e baixe os seus dados |
+| 16d | Idioma pela barra | seletor "PT" na barra, com e sem login | r41 | Troque para outro idioma e volte para o português sem sair da página |
 | 16a | Administração | menu "Administração", só para conta administradora | r24, r24b, r24c, r34 | Crie uma conta e veja a cobertura dos idiomas |
 | 16b | Documentação | menu "Documentação", com e sem login | r10 a r15, r23, r36 a r38 | Abra um documento, entre numa seção, amplie um diagrama, siga um link para outro documento e use Voltar |
 | 16c | Sair e exclusões | "Sair"; excluir estudo; excluir conta | r20, r21, r22 | Cancele e confirme, usando também o Esc |

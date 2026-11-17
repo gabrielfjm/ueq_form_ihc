@@ -423,7 +423,7 @@
   {
    "texto": "Aguarde…",
    "cliente": true,
-   "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/SeletorIdioma.tsx"
   },
   {
    "texto": "Ainda não tem conta?",
@@ -2188,12 +2188,12 @@
   {
    "texto": "Idioma",
    "cliente": true,
-   "origem": "app/(ferramenta)/(pesquisador)/conta/idioma/page.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/SeletorIdioma.tsx"
   },
   {
    "texto": "Idioma da ferramenta",
    "cliente": true,
-   "origem": "app/(ferramenta)/(publico)/_acesso/FormularioCadastro.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/SeletorIdioma.tsx"
   },
   {
    "texto": "Idioma da ferramenta e o padrão dos estudos que você cria.",
@@ -2214,6 +2214,11 @@
    "texto": "Idioma · Minha conta · Ferramenta UEQ",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/conta/idioma/page.tsx"
+  },
+  {
+   "texto": "Idioma: {idioma}",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SeletorIdioma.tsx"
   },
   {
    "texto": "Idiomas",
@@ -2912,8 +2917,8 @@
   },
   {
    "texto": "O idioma da ferramenta e o idioma padrão dos estudos que você cria. Quem responde pode trocar o idioma do questionário a qualquer momento.",
-   "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/conta/idioma/page.tsx"
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/SeletorIdioma.tsx"
   },
   {
    "texto": "O idioma da ferramenta inteira, dos avisos e dos e-mails que você recebe. Também é o idioma em que seus estudos novos nascem; cada estudo pode ter outro, no formulário.",
