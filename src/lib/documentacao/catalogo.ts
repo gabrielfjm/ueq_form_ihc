@@ -22,6 +22,7 @@ export type Secao = { slug: string; titulo: string; documentos: readonly Documen
 // downloads, e o arquivo nem precisa existir ainda. Para publicar um documento pronto, acrescente aqui o
 // caminho do arquivo (o mesmo de `arquivo`)
 const PRONTOS: ReadonlySet<string> = new Set<string>([
+  "docs/documentacao/requisitos.md",
   "docs/documentacao/arquitetura.md",
   "docs/documentacao/diagramas-de-sequencia.md",
   "docs/documentacao/modelo-logico.md",
