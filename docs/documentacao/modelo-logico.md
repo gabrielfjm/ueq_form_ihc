@@ -1,6 +1,6 @@
 # Modelo lógico do banco de dados
 
-O banco da Ferramenta UEQ é um **PostgreSQL 16** com 11 tabelas e 7 tipos enumerados. O modelo é declarado em [`prisma/schema.prisma`](../../prisma/schema.prisma) e aplicado pelas 9 migrations de [`prisma/migrations/`](../../prisma/migrations/). Os nomes abaixo são os do banco. No código, os mesmos campos aparecem em camelCase (`slug_publico` é `slugPublico`).
+O banco da Ferramenta UEQ é um **PostgreSQL 16** com 11 tabelas e 7 tipos enumerados. O modelo é declarado em [`prisma/schema.prisma`](../../prisma/schema.prisma) e aplicado pelas 16 migrations de [`prisma/migrations/`](../../prisma/migrations/): 10 mudam a estrutura, e as outras 6 só gravam textos traduzidos na tabela `traducao`. Os nomes abaixo são os do banco. No código, os mesmos campos aparecem em camelCase (`slug_publico` é `slugPublico`).
 
 As colunas, as chaves e as regras de exclusão deste documento foram lidas do catálogo do próprio PostgreSQL (`information_schema` e `pg_constraint`) em 13/11/2026, com todas as migrations aplicadas.
 
@@ -129,7 +129,7 @@ erDiagram
     }
 ```
 
-**Ferramenta do diagrama:** Mermaid 12.2.0 (`erDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [modelo-logico-1.mmd](fontes/modelo-logico-1.mmd). **Versão representada:** Ferramenta UEQ de 06/11/2026.
+**Ferramenta do diagrama:** Mermaid 12.2.0 (`erDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [modelo-logico-1.mmd](fontes/modelo-logico-1.mmd). **Versão representada:** Ferramenta UEQ de 17/11/2026.
 
 Duas tabelas ficam soltas de propósito: `tentativa_acesso` não aponta para a conta, porque guarda só o hash do e-mail, e `traducao` é um cache sem dono.
 

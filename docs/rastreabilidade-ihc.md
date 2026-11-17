@@ -9,7 +9,7 @@ Cada linha é uma decisão de interface da ferramenta. A tabela diz:
 A tabela serve para três coisas:
 
 - o relatório e a apresentação;
-- a revisão final, onde o revisor confere cada linha na tela;
+- a revisão da ferramenta, em que quem revisa confere cada linha na tela ([roteiro da revisão](roteiro-revisao.md));
 - quem mexer no código, para não desfazer uma decisão sem saber por quê.
 
 **Princípios citados:**
@@ -167,7 +167,7 @@ A tabela serve para três coisas:
 
 ## O que nenhum teste automático cobre
 
-Estes pontos ficam para a revisão manual (`docs/checklist-manual.md` e `docs/roteiro-revisao.md`):
+Estes pontos são conferidos à mão, nos casos de teste manuais ([checklist manual](checklist-manual.md) e [roteiro da revisão](roteiro-revisao.md)):
 
 - uso real com leitor de tela (NVDA, VoiceOver, TalkBack) do começo ao fim;
 - zoom de 200% e 400% num celular real, e o polegar nos círculos;
@@ -176,4 +176,4 @@ Estes pontos ficam para a revisão manual (`docs/checklist-manual.md` e `docs/ro
 - o tour guiado e o sino com leitor de tela;
 - a compreensão do painel por quem não conhece o UEQ.
 
-As telas sem protótipo também ficam para essa revisão: o seletor de idioma, Importar respostas e o painel em PDF.
+As telas sem protótipo de alta fidelidade (o seletor de idioma, Importar respostas e o painel em PDF) usam os mesmos componentes das outras e são conferidas pelo mesmo roteiro.

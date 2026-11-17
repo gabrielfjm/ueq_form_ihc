@@ -1,6 +1,6 @@
 # Checklist manual de usabilidade e acessibilidade
 
-Para a equipe rodar com as próprias mãos antes da entrega. Marque, anote o problema e quem corrige.
+O que a automação não alcança, para conferir com as próprias mãos antes de cada entrega. Cada bloco corresponde aos [casos de teste manuais](documentacao/casos-de-teste.md#casos-manuais). A cada rodada, marque o item numa cópia desta lista, anote o problema e quem corrige.
 
 ## Leitor de tela
 NVDA + Firefox no Windows, VoiceOver + Safari no iPhone (ou TalkBack + Chrome no Android).

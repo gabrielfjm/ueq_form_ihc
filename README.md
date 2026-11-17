@@ -18,17 +18,20 @@ Código aberto sob a [licença MIT](LICENSE).
 
 ## Documentação
 
-A documentação da ferramenta está sendo escrita pela equipe, em [docs/documentacao/](docs/documentacao/) e em [docs/](docs/); os arquivos aparecem lá à medida que cada um fica pronto. Dentro da própria ferramenta, na aba **Documentação**, pública (http://localhost:3000/documentacao), cada documento aparece como "Em produção" até ser publicado (lista `PRONTOS` em `src/lib/documentacao/catalogo.ts`). O conjunto: requisitos com a sprint em que cada um foi entregue, planilha de requisitos, matriz de rastreabilidade, personas, histórias de usuário, casos de uso, casos e cenários de teste, diagramas de classes e de sequência e a arquitetura no modelo C4.
+A documentação completa está em [docs/documentacao/](docs/documentacao/) e em [docs/](docs/), e aparece também dentro da própria ferramenta, na aba **Documentação**, aberta a qualquer pessoa, sem login (https://ferramenta-ueq.vercel.app/documentacao). Comece pela [visão geral](docs/documentacao/README.md), que diz o que há em cada documento e por onde começar.
 
 | Arquivo | Conteúdo |
 |---|---|
-| [docs/documentacao/](docs/documentacao/) | Arquitetura C4, diagramas de sequência, modelo lógico e casos de teste, com os arquivos-fonte dos diagramas em `fontes/`; requisitos, rastreabilidade, personas, histórias, casos de uso, diagrama de classes e verificação do cálculo em produção |
+| [docs/documentacao/](docs/documentacao/) | Requisitos e planilha de requisitos, matriz de rastreabilidade, personas, histórias de usuário, casos de uso, diagrama de classes, modelo lógico do banco, diagramas de sequência, arquitetura C4, casos de teste e verificação do cálculo, com os arquivos-fonte dos diagramas em `fontes/` |
 | [docs/ueq-protocolo.md](docs/ueq-protocolo.md) | Itens, escalas, polaridade e todas as fórmulas do cálculo |
 | [docs/ihc.md](docs/ihc.md) | Requisitos de usabilidade e acessibilidade, cada um ligado ao princípio da literatura que o justifica |
+| [docs/rastreabilidade-ihc.md](docs/rastreabilidade-ihc.md) | Cada decisão de interface, o princípio, o código e o teste que prova |
+| [docs/idiomas.md](docs/idiomas.md) | Os 37 idiomas do questionário e de onde vem cada texto |
 | [docs/design.md](docs/design.md) | Identidade visual |
 | [docs/codigo.md](docs/codigo.md) | Convenções de código, testes e commits |
-| [docs/checklist-manual.md](docs/checklist-manual.md) | Verificações que a equipe faz à mão: leitor de tela, zoom, celular real, daltonismo |
-| [data/LEIA-ME.md](data/LEIA-ME.md) | Dados oficiais do UEQ que a equipe precisa preencher a partir das fontes originais |
+| [docs/checklist-manual.md](docs/checklist-manual.md) | Verificações à mão: leitor de tela, zoom, celular real, daltonismo |
+| [docs/roteiro-revisao.md](docs/roteiro-revisao.md) | Roteiro para quem revisa a ferramenta |
+| [data/LEIA-ME.md](data/LEIA-ME.md) | Dados oficiais do UEQ em `data/` e de onde cada um foi copiado |
 
 A meta de acessibilidade é WCAG 2.2 nível AA, base da ABNT NBR 17225:2025.
 
