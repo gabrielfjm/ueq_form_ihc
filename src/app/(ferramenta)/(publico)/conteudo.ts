@@ -24,10 +24,10 @@ export const COMPARACAO_UEQ_E_UEQ_S = [
 ] as const;
 
 export const PASSOS = [
-  [m("Crie o estudo"), m("Título, objetivo, período e as versões do produto que serão comparadas.")],
+  [m("Crie o estudo"), m("Título, objetivo, o questionário (UEQ completo ou UEQ-S) e as versões do produto que serão comparadas.")],
   [m("Envie o link"), m("Os participantes respondem sem conta, pelo celular ou computador.")],
   [m("Acompanhe a coleta"), m("Médias, intervalos de confiança, alfa e benchmark por escala, e as respostas suspeitas.")],
-  [m("Exporte os dados"), m("CSV no formato da UEQ Data Analysis Tool, para conferir os cálculos.")],
+  [m("Exporte os dados"), m("A planilha oficial do UEQ ou do UEQ-S já preenchida, CSV e o painel em PDF.")],
 ] as const;
 
 // Créditos do método: quem criou o UEQ e quem construiu as peças que a ferramenta usa (benchmark, versão

@@ -82,7 +82,7 @@ Como funciona:
    - A tradução anda em três etapas, para os lotes não escolherem palavras diferentes para a mesma coisa: primeiro o glossário do idioma (`src/traducao/rodadas.ts`), guardado na tabela; depois os rótulos curtos; por fim os textos longos, que recebem a tradução dos botões que citam.
    - Cada texto vai com o arquivo que o usa e com as instruções sobre o sentido dos termos, para "baixar" não virar "dar baixa".
    - O glossário traz uma frase-modelo que fixa o tratamento formal do idioma, e a revisão trata qualquer outro tratamento como erro.
-   - O nome "Ferramenta UEQ" viaja como marcador e sai igual em todos os idiomas.
+   - O nome "Ferramenta UEQ" viaja como marcador e a tradução guarda o nome em português. Na hora de mostrar, o tradutor troca o nome pelo do idioma da interface (UEQ Tool, Herramienta UEQ, UEQ-Tool, Outil UEQ, UEQ ツール...), que fica em `NOME_DA_FERRAMENTA`, em `src/traducao/nucleo.ts`. Frase ainda sem tradução continua inteira em português, com o nome em português.
    - Uma segunda leitura compara original e tradução e corrige o que mudou de sentido.
    - Tradução com `{marcadores}` diferentes do original é descartada: o texto fica em português.
    - Isso reduz os erros, mas não substitui a revisão por falante nativo.

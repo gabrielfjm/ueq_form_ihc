@@ -1,0 +1,1713 @@
+{
+  "fonte": "UEQS_Items.pdf (\"Items of the short version of the User Experience Questionnaire (UEQ)\", pacote oficial do UEQ-S em ueq-online.org), com os 8 itens do UEQ-S nos 37 idiomas. Conferido página a página como imagem em 18/11/2026. Em 31 idiomas os pares são os mesmos do UEQ completo do idioma (data/ueq-idiomas.json), com o negativo à esquerda; em 6 (it, hr, el, tr, fa, zh) a lista do UEQ-S usa outras palavras em alguns pares, marcados em diferentesDoUeq. Os erros da lista oficial estão em correcoes.",
+  "idiomas": [
+    {
+      "codigo": "pt",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "Obstrutivo",
+          "termoDireito": "Condutor"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "Complicado",
+          "termoDireito": "Fácil"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "Ineficiente",
+          "termoDireito": "Eficiente"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "Confuso",
+          "termoDireito": "Evidente"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "Aborrecido",
+          "termoDireito": "Excitante"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "Desinteressante",
+          "termoDireito": "Interessante"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "Convencional",
+          "termoDireito": "Original"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "Comum",
+          "termoDireito": "Vanguardista"
+        }
+      ]
+    },
+    {
+      "codigo": "en",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "obstructive",
+          "termoDireito": "supportive"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "complicated",
+          "termoDireito": "easy"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "inefficient",
+          "termoDireito": "efficient"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "confusing",
+          "termoDireito": "clear"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "boring",
+          "termoDireito": "exciting"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "not interesting",
+          "termoDireito": "interesting"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "conventional",
+          "termoDireito": "inventive"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "usual",
+          "termoDireito": "leading edge"
+        }
+      ]
+    },
+    {
+      "codigo": "es",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "obstructivo",
+          "termoDireito": "impulsor de apoyo"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "complicado",
+          "termoDireito": "fácil"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "ineficiente",
+          "termoDireito": "eficiente"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "confuso",
+          "termoDireito": "claro"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "aburrido",
+          "termoDireito": "emocionante"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "no interesante",
+          "termoDireito": "interesante"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "convencional",
+          "termoDireito": "original"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "convencional",
+          "termoDireito": "novedoso"
+        }
+      ],
+      "correcoes": [
+        "Item 2: a lista oficial escreve \"facil\", sem acento; fica \"fácil\", como no UEQ completo."
+      ]
+    },
+    {
+      "codigo": "de",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "behindernd",
+          "termoDireito": "unterstützend"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "kompliziert",
+          "termoDireito": "einfach"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "ineffizient",
+          "termoDireito": "effizient"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "verwirrend",
+          "termoDireito": "übersichtlich"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "langweilig",
+          "termoDireito": "spannend"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "uninteressant",
+          "termoDireito": "interessant"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "konventionell",
+          "termoDireito": "originell"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "herkömmlich",
+          "termoDireito": "neuartig"
+        }
+      ]
+    },
+    {
+      "codigo": "fr",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "Rigide",
+          "termoDireito": "Facilitant"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "Compliqué",
+          "termoDireito": "Simple"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "Inefficace",
+          "termoDireito": "Efficace"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "Déroutant",
+          "termoDireito": "Clair"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "Ennuyeux",
+          "termoDireito": "Captivant"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "Inintéressant",
+          "termoDireito": "Intéressant"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "Conventionnel",
+          "termoDireito": "Original"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "Habituel",
+          "termoDireito": "Avant-gardiste"
+        }
+      ]
+    },
+    {
+      "codigo": "it",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "ostruttiva",
+          "termoDireito": "di supporto"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "complicato",
+          "termoDireito": "facile"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "inefficiente",
+          "termoDireito": "efficiente"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "confuso",
+          "termoDireito": "chiaro"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "noioso",
+          "termoDireito": "appassionante"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "non interessante",
+          "termoDireito": "interessante"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "convenzionale",
+          "termoDireito": "originale"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "usuale",
+          "termoDireito": "moderno"
+        }
+      ],
+      "diferentesDoUeq": [
+        1
+      ]
+    },
+    {
+      "codigo": "nl",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "belemmerend",
+          "termoDireito": "ondersteunend"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "complex",
+          "termoDireito": "eenvoudig"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "inefficiënt",
+          "termoDireito": "efficiënt"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "verwarrend",
+          "termoDireito": "overzichtelijk"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "vervelend",
+          "termoDireito": "spannend"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "oninteressant",
+          "termoDireito": "interessant"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "conventioneel",
+          "termoDireito": "origineel"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "gebruikelijk",
+          "termoDireito": "nieuw"
+        }
+      ]
+    },
+    {
+      "codigo": "da",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "hindrende",
+          "termoDireito": "understøttende"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "indviklede",
+          "termoDireito": "nemme"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "ineffektivt",
+          "termoDireito": "ydedygtigt"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "forvirrende",
+          "termoDireito": "tydelige"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "kedelige",
+          "termoDireito": "spændende"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "uinteressante",
+          "termoDireito": "interessante"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "traditionsbunden",
+          "termoDireito": "opfindsom"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "sædvanlig",
+          "termoDireito": "avanceret"
+        }
+      ],
+      "correcoes": [
+        "Item 1: a lista oficial traz \"hindren\", cortado; fica \"hindrende\", como no UEQ completo."
+      ]
+    },
+    {
+      "codigo": "sv",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "Hindrande",
+          "termoDireito": "Stödjande"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "Komplicerad",
+          "termoDireito": "Enkel"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "Ineffektiv",
+          "termoDireito": "Effektiv"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "Förvirrande",
+          "termoDireito": "Tydlig"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "Tråkig",
+          "termoDireito": "Spännande"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "Ointressant",
+          "termoDireito": "Intressant"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "Fantasilös",
+          "termoDireito": "Uppfinningsrik"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "Bakåtsträvande",
+          "termoDireito": "I framkant"
+        }
+      ]
+    },
+    {
+      "codigo": "nb",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "hindrende",
+          "termoDireito": "støttende"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "komplisert",
+          "termoDireito": "lett"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "ineffektivt",
+          "termoDireito": "effektivt"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "forvirrende",
+          "termoDireito": "tydelig"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "kjedelig",
+          "termoDireito": "spennende"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "uinteressant",
+          "termoDireito": "interessant"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "tradisjonell",
+          "termoDireito": "oppfinnsom"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "vanlig",
+          "termoDireito": "ledende"
+        }
+      ]
+    },
+    {
+      "codigo": "fi",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "haittaava",
+          "termoDireito": "auttava"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "monimutkainen",
+          "termoDireito": "yksinkertainen"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "tehoton",
+          "termoDireito": "tehokas"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "sekava",
+          "termoDireito": "selkeä"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "pitkästyttävä",
+          "termoDireito": "jännittävä"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "epäkiinnostava",
+          "termoDireito": "kiinnostava"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "tavanomainen",
+          "termoDireito": "omaperäinen"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "tavallinen",
+          "termoDireito": "uudenlainen"
+        }
+      ]
+    },
+    {
+      "codigo": "et",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "takistav",
+          "termoDireito": "abistav"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "keeruline",
+          "termoDireito": "lihtne"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "ebaefektiivne",
+          "termoDireito": "efektiivne"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "ebamäärane",
+          "termoDireito": "selge"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "igav",
+          "termoDireito": "põnev"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "ebahuvitav",
+          "termoDireito": "huvitav"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "konservatiivne",
+          "termoDireito": "leidlik"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "tavaline",
+          "termoDireito": "uuenduslik"
+        }
+      ]
+    },
+    {
+      "codigo": "pl",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "przeszkadzający",
+          "termoDireito": "wspierający"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "skomplikowany",
+          "termoDireito": "łatwy"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "nieefektywny",
+          "termoDireito": "efektywny"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "zagmatwany",
+          "termoDireito": "przejrzysty"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "nudny",
+          "termoDireito": "ekscytujący"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "nieinteresujący",
+          "termoDireito": "interesujący"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "konwencjonalny",
+          "termoDireito": "pomysłowy"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "zwykły",
+          "termoDireito": "skrajny"
+        }
+      ]
+    },
+    {
+      "codigo": "cs",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "bránící",
+          "termoDireito": "podporující"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "složitý",
+          "termoDireito": "jednoduchý"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "neefektivní",
+          "termoDireito": "efektivní"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "matoucí",
+          "termoDireito": "jasný"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "nudný",
+          "termoDireito": "vzrušující"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "nezajímavý",
+          "termoDireito": "zajímavý"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "obvyklý",
+          "termoDireito": "vynalézavý"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "tradiční",
+          "termoDireito": "moderní"
+        }
+      ]
+    },
+    {
+      "codigo": "sk",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "obmedzujúci",
+          "termoDireito": "podporujúci"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "zložitý",
+          "termoDireito": "jednoduchý"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "neefektívny",
+          "termoDireito": "efektívny"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "mätúci",
+          "termoDireito": "jasný"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "nudný",
+          "termoDireito": "vzrušujúci"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "nezaujímavý",
+          "termoDireito": "zaujímavý"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "tradičný",
+          "termoDireito": "moderný"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "bežný",
+          "termoDireito": "špičkový"
+        }
+      ]
+    },
+    {
+      "codigo": "sl",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "se ne da upravljati",
+          "termoDireito": "se z lahkoto upravlja"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "kompliciran",
+          "termoDireito": "enostaven"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "ni učinkovit",
+          "termoDireito": "učinkovit"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "ustvarja zmedo",
+          "termoDireito": "pregleden"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "dolgočasen",
+          "termoDireito": "napet"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "nezanimiv",
+          "termoDireito": "zanimiv"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "star",
+          "termoDireito": "nov"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "zastarel",
+          "termoDireito": "modern"
+        }
+      ]
+    },
+    {
+      "codigo": "hr",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "ometajuće",
+          "termoDireito": "korisne"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "komplicirani",
+          "termoDireito": "jednostavni"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "neučinkovit",
+          "termoDireito": "učinkovit"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "zbunjujući",
+          "termoDireito": "jasni"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "dosadni",
+          "termoDireito": "uzbudljivi"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "nezanimljivi",
+          "termoDireito": "zanimljivi"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "konvencionalna",
+          "termoDireito": "inventivna"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "uobičajena",
+          "termoDireito": "predvodnička"
+        }
+      ],
+      "diferentesDoUeq": [
+        1,
+        2,
+        4,
+        5,
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "codigo": "bs",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "ometajući",
+          "termoDireito": "od pomoći"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "složeni",
+          "termoDireito": "jednostavni"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "neefikasan",
+          "termoDireito": "efikasan"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "zbunjujući",
+          "termoDireito": "jasni"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "dosadni",
+          "termoDireito": "uzbudljivi"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "nezanimljivi",
+          "termoDireito": "zanimljivi"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "uobičajeni",
+          "termoDireito": "domišljati"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "svakodnevni",
+          "termoDireito": "vrhunski"
+        }
+      ]
+    },
+    {
+      "codigo": "hu",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "hátráltatók",
+          "termoDireito": "támogatók"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "bonyolult",
+          "termoDireito": "könnyű"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "nem hatékony",
+          "termoDireito": "hatékony"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "nehezen értelmezhető",
+          "termoDireito": "világos"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "unalmas",
+          "termoDireito": "izgalmas"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "nem érdekes",
+          "termoDireito": "érdekes"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "szokványos",
+          "termoDireito": "ötletes"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "átlagos",
+          "termoDireito": "élvonalban lévő"
+        }
+      ]
+    },
+    {
+      "codigo": "bg",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "възпрепятстващ",
+          "termoDireito": "помагащ"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "сложен",
+          "termoDireito": "лесен"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "неефикасен",
+          "termoDireito": "ефикасен"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "объркващ",
+          "termoDireito": "ясен"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "скучен",
+          "termoDireito": "вълнуващ"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "безинтересен",
+          "termoDireito": "интересен"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "конвенционален",
+          "termoDireito": "идеен"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "обикновен",
+          "termoDireito": "иновативен"
+        }
+      ]
+    },
+    {
+      "codigo": "ru",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "мешающий",
+          "termoDireito": "помогающий"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "сложный",
+          "termoDireito": "простой"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "неэффективный",
+          "termoDireito": "эффективный"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "запутанный",
+          "termoDireito": "наглядный"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "скучный",
+          "termoDireito": "захватывающий"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "неинтересный",
+          "termoDireito": "интересный"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "консервативный",
+          "termoDireito": "изобретательный"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "обыденный",
+          "termoDireito": "передовой"
+        }
+      ]
+    },
+    {
+      "codigo": "el",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "παρελκυστικό",
+          "termoDireito": "υποστηρικτικό"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "περίπλοκο",
+          "termoDireito": "εύκολο"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "ανεπαρκές",
+          "termoDireito": "επαρκές"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "μπερδεμένο",
+          "termoDireito": "σαφές"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "βαρετό",
+          "termoDireito": "συναρπαστικό"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "αδιάφορο",
+          "termoDireito": "ενδιαφέρον"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "συμβατικό",
+          "termoDireito": "εφευρετικό"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "συνηθισμένο",
+          "termoDireito": "πρωτοπόρο"
+        }
+      ],
+      "diferentesDoUeq": [
+        1,
+        2,
+        3,
+        4,
+        7,
+        8
+      ]
+    },
+    {
+      "codigo": "tr",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "engelleyici",
+          "termoDireito": "destekleyici"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "karmaşık",
+          "termoDireito": "sade"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "verimsiz",
+          "termoDireito": "verimli"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "kafa karıştırıcı",
+          "termoDireito": "açık"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "sıkıcı",
+          "termoDireito": "heyecan verici"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "ilginç olmayan",
+          "termoDireito": "ilginç"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "geleneksel",
+          "termoDireito": "özgün"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "alışıldık",
+          "termoDireito": "eşi görülmedik"
+        }
+      ],
+      "diferentesDoUeq": [
+        6
+      ]
+    },
+    {
+      "codigo": "ar",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "عائقة",
+          "termoDireito": "داعمة"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "معقَّد",
+          "termoDireito": "سهل"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "غير فعَّال",
+          "termoDireito": "فعَّال"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "مُربك",
+          "termoDireito": "واضح"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "ممل",
+          "termoDireito": "مثير"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "غير مثير للاهتمام",
+          "termoDireito": "مثير للاهتمام"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "تقليدية",
+          "termoDireito": "مستحدثة"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "اعتيادية",
+          "termoDireito": "استشرافية"
+        }
+      ]
+    },
+    {
+      "codigo": "he",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "מכשילות",
+          "termoDireito": "תומכות"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "מסובכים",
+          "termoDireito": "קלים"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "לא יעיל",
+          "termoDireito": "יעיל"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "מבלבלים",
+          "termoDireito": "ברורים"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "משעממים",
+          "termoDireito": "מלהיבים"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "לא מעניינים",
+          "termoDireito": "מעניינים"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "שגרתיים",
+          "termoDireito": "פורצי דרך"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "רגילים",
+          "termoDireito": "בחזית החדשנות"
+        }
+      ]
+    },
+    {
+      "codigo": "fa",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "مختل کننده",
+          "termoDireito": "پشتیبان"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "پیچیده",
+          "termoDireito": "آسان"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "عدم کفایت",
+          "termoDireito": "کافی"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "گیج کننده/مبهم",
+          "termoDireito": "واضح"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "خسته کننده",
+          "termoDireito": "جذاب"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "عدم جذابیت",
+          "termoDireito": "جذاب"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "مرسوم/سنتی",
+          "termoDireito": "نوآوری/مبتکر"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "معمولی",
+          "termoDireito": "پیشرو در فناوری"
+        }
+      ],
+      "diferentesDoUeq": [
+        3,
+        5
+      ]
+    },
+    {
+      "codigo": "hi",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "प्रतिरोधी",
+          "termoDireito": "सहायक"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "जटिल",
+          "termoDireito": "आसान"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "अक्षम",
+          "termoDireito": "कुशल"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "भ्रमित",
+          "termoDireito": "स्पष्ट"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "उबाऊ",
+          "termoDireito": "दिलचस्प"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "दिलचस्प नहीं",
+          "termoDireito": "दिलचस्प"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "परम्परागत",
+          "termoDireito": "आविष्कारशील"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "हमेशा की तरह",
+          "termoDireito": "अग्रणी धार"
+        }
+      ]
+    },
+    {
+      "codigo": "mr",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "अडवणूक करणारा",
+          "termoDireito": "आधार देणारा"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "बिकट",
+          "termoDireito": "सोपे"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "अकार्यक्षम",
+          "termoDireito": "कार्यक्षम"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "गोंधळात टाकणारे",
+          "termoDireito": "स्पष्ट"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "कंटाळवाणा",
+          "termoDireito": "बाहेर पडत आहे"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "मनोरंजक नाही",
+          "termoDireito": "मनोरंजक"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "पारंपारिक",
+          "termoDireito": "शोधक"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "नेहमीच्या",
+          "termoDireito": "पुढचे टोक"
+        }
+      ]
+    },
+    {
+      "codigo": "bn",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "প্রতিবন্ধক",
+          "termoDireito": "সহায়ক"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "জটিল",
+          "termoDireito": "সহজ"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "অকার্যকর",
+          "termoDireito": "কার্যকর"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "বিভ্রান্তিকর",
+          "termoDireito": "স্পষ্ট"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "একঘেয়ে",
+          "termoDireito": "উত্তেজনাপূর্ণ"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "আকর্ষণীয়নয়",
+          "termoDireito": "মজাদার"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "গতানুগতিক",
+          "termoDireito": "উদ্ভাবক"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "সাধারণ",
+          "termoDireito": "নেতৃস্থানীয়"
+        }
+      ]
+    },
+    {
+      "codigo": "ta",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "தடை செய்யும்",
+          "termoDireito": "ஆதரவு"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "சிக்கலான",
+          "termoDireito": "சுலபம்"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "திறனற்ற",
+          "termoDireito": "திறன்"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "குழப்பமான",
+          "termoDireito": "தெளிவு"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "சலிப்பான",
+          "termoDireito": "ஆர்வமான"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "சுவாரஸ்யம் இல்லை",
+          "termoDireito": "சுவாரஸ்யம்"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "வழக்கமான",
+          "termoDireito": "கண்டுபிடிப்பு"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "சாதாரணமான",
+          "termoDireito": "முன்னணி விளிம்பு"
+        }
+      ],
+      "correcoes": [
+        "Item 6: a lista oficial repete \"சுவாரஸ்யம்\" dos dois lados; fica o par do UEQ completo, com \"சுவாரஸ்யம் இல்லை\" à esquerda."
+      ]
+    },
+    {
+      "codigo": "kn",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "ಪ್ರತಿರೋಧಿಸುವ",
+          "termoDireito": "ಬೆಂಬಲಿಸುವ"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "ಕ್ಲಿಷ್ಟಕರ",
+          "termoDireito": "ಸುಲಭ"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "ದಕ್ಷವಲ್ಲದ",
+          "termoDireito": "ದಕ್ಷತೆ"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "ಅಸ್ಪಷ್ಟತೆ",
+          "termoDireito": "ಸ್ಪಷ್ಟತೆ"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "ನೀರಸವಾದ",
+          "termoDireito": "ಉತ್ಸಾಹದಾಯಕ"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "ಕುತೂಹಲವಲ್ಲದ",
+          "termoDireito": "ಕುತೂಹಲಕರ"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "ಸಾಂಪ್ರದಾಯಿಕ",
+          "termoDireito": "ಹೊಸದಾಗಿ ಕಂಡುಹಿಡಿದಂತಹ"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "ಸಾಮಾನ್ಯ",
+          "termoDireito": "ಅಸಾಮಾನ್ಯ"
+        }
+      ],
+      "correcoes": [
+        "A lista oficial repete o termo da esquerda nas duas colunas dos 8 itens; ficam os pares do UEQ completo em canarês, com o negativo à esquerda."
+      ]
+    },
+    {
+      "codigo": "th",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "ขัดขวาง",
+          "termoDireito": "สนับสนุน"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "ซับซ้อน",
+          "termoDireito": "เรียบง่าย"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "ไร้ประสิทธิภาพ",
+          "termoDireito": "มีประสิทธิภาพ"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "สับสน",
+          "termoDireito": "ชัดเจน"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "น่าเบื่อ",
+          "termoDireito": "น่าตื่นเต้น"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "ไม่น่าสนใจ",
+          "termoDireito": "น่าสนใจ"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "ตามแบบแผน",
+          "termoDireito": "ช่างประดิษฐ์"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "ดูทั่วไป",
+          "termoDireito": "ดูชั้นนำ"
+        }
+      ]
+    },
+    {
+      "codigo": "ms",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "menghalang",
+          "termoDireito": "menyokong"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "menyulitkan",
+          "termoDireito": "mudah"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "tidak berkesan",
+          "termoDireito": "berkesan"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "mengelirukan",
+          "termoDireito": "jelas"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "membosankan",
+          "termoDireito": "menyeronokkan"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "tidak menarik minat",
+          "termoDireito": "menarik minat"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "berdasarkan kebiasaan",
+          "termoDireito": "terdapat rekaan baharu"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "biasa",
+          "termoDireito": "mempunyai kelebihan"
+        }
+      ]
+    },
+    {
+      "codigo": "id",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "menghalangi",
+          "termoDireito": "mendukung"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "rumit",
+          "termoDireito": "sederhana"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "tidak efisien",
+          "termoDireito": "efisien"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "membingungkan",
+          "termoDireito": "jelas"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "membosankan",
+          "termoDireito": "mengasyikkan"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "tidak menarik",
+          "termoDireito": "menarik"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "konvensional",
+          "termoDireito": "berdaya cipta"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "lazim",
+          "termoDireito": "terdepan"
+        }
+      ]
+    },
+    {
+      "codigo": "zh",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "碍手碍脚的",
+          "termoDireito": "能提供辅助的"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "复杂的",
+          "termoDireito": "简单的"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "低效的",
+          "termoDireito": "高效的"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "令人眼花缭乱的",
+          "termoDireito": "一目了然的"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "乏味的",
+          "termoDireito": "带劲的"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "无趣的",
+          "termoDireito": "有趣的"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "常规的",
+          "termoDireito": "独创的"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "传统的",
+          "termoDireito": "新颖的"
+        }
+      ],
+      "diferentesDoUeq": [
+        1,
+        7
+      ]
+    },
+    {
+      "codigo": "ja",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "妨げになる",
+          "termoDireito": "助けられる"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "複雑",
+          "termoDireito": "簡単"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "効率が悪い",
+          "termoDireito": "効率が良い"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "ごちゃごちゃしている",
+          "termoDireito": "すっきりしている"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "退屈だ",
+          "termoDireito": "エキサイティングだ"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "おもしろくない",
+          "termoDireito": "おもしろい"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "従来どおり",
+          "termoDireito": "独特だ"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "普通",
+          "termoDireito": "斬新的"
+        }
+      ]
+    },
+    {
+      "codigo": "ko",
+      "itens": [
+        {
+          "ordem": 1,
+          "termoEsquerdo": "어려움",
+          "termoDireito": "쉬움"
+        },
+        {
+          "ordem": 2,
+          "termoEsquerdo": "복잡함",
+          "termoDireito": "간단함"
+        },
+        {
+          "ordem": 3,
+          "termoEsquerdo": "비효율적",
+          "termoDireito": "효율적"
+        },
+        {
+          "ordem": 4,
+          "termoEsquerdo": "명백하지 않음",
+          "termoDireito": "명백함"
+        },
+        {
+          "ordem": 5,
+          "termoEsquerdo": "지루함",
+          "termoDireito": "흥미로움"
+        },
+        {
+          "ordem": 6,
+          "termoEsquerdo": "재미없음",
+          "termoDireito": "재미있음"
+        },
+        {
+          "ordem": 7,
+          "termoEsquerdo": "상투적",
+          "termoDireito": "독창적"
+        },
+        {
+          "ordem": 8,
+          "termoEsquerdo": "통상적",
+          "termoDireito": "모더니즘적"
+        }
+      ]
+    }
+  ]
+}

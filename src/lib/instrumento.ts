@@ -1,3 +1,4 @@
+import idiomasUeqS from "../../data/ueq-s-idiomas.json";
 import definicaoUeqS from "../../data/ueq-s-itens-ptbr.json";
 import itensUeq from "../../data/ueq-itens-ptbr.json";
 import { m } from "@/traducao/nucleo";
@@ -20,19 +21,19 @@ export const NOME_INSTRUMENTO: Record<Instrumento, string> = {
 
 export const ehUeqS = (instrumento: Instrumento) => instrumento === "UEQ_S";
 
-// Pares do UEQ-S num idioma a partir dos 26 pares do UEQ nesse idioma: o handbook (p. 12) diz que o UEQ-S
-// existe em todos os idiomas do UEQ por ser um subconjunto dele, com o termo negativo sempre à esquerda
-export function termosDoUeqS<T extends { numero: number; termoEsquerdo: string; termoDireito: string }>(
-  termosUeq: readonly T[],
-): { numero: number; termoEsquerdo: string; termoDireito: string }[] {
-  const porNumero = new Map(termosUeq.map((par) => [par.numero, par]));
-  return ITENS_UEQ_S.map((item) => {
-    const par = porNumero.get(item.numeroNoUeq);
-    if (!par) throw new RangeError(`Faltam os termos do item ${item.numeroNoUeq} do UEQ.`);
-    return {
-      numero: item.ordem,
-      termoEsquerdo: item.ladoTrocado ? par.termoDireito : par.termoEsquerdo,
-      termoDireito: item.ladoTrocado ? par.termoEsquerdo : par.termoDireito,
-    };
-  });
+export type ParUeqS = { numero: number; termoEsquerdo: string; termoDireito: string };
+
+// Os 8 pares do UEQ-S em cada idioma, da lista oficial UEQS_Items.pdf (data/ueq-s-idiomas.json). Em 31 idiomas são
+// os mesmos do UEQ completo, com o negativo à esquerda; em 6 a lista do UEQ-S usa outras palavras em alguns pares
+const PARES_UEQ_S = new Map(
+  idiomasUeqS.idiomas.map((idioma) => [
+    idioma.codigo,
+    idioma.itens.map((item): ParUeqS => ({ numero: item.ordem, termoEsquerdo: item.termoEsquerdo, termoDireito: item.termoDireito })),
+  ]),
+);
+
+export function termosDoUeqS(codigo: string): ParUeqS[] {
+  const pares = PARES_UEQ_S.get(codigo) ?? PARES_UEQ_S.get("pt");
+  if (!pares) throw new RangeError(`data/ueq-s-idiomas.json não tem o idioma ${codigo}.`);
+  return pares;
 }

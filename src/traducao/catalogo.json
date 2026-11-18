@@ -51,7 +51,17 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
+   "texto": ". De lá vêm os questionários nos 37 idiomas, o handbook, o benchmark e as planilhas oficiais de análise, de Martin Schrepp, que a ferramenta usa e exporta. A Ferramenta UEQ não é um produto oficial do UEQ nem tem vínculo com os autores.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
+  },
+  {
    "texto": ". Esta ferramenta não é oficial nem ligada aos autores do método.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
+  },
+  {
+   "texto": ". O UEQ-S é de Martin Schrepp, Andreas Hinderks e Jörg Thomaschewski (2017).",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
@@ -294,6 +304,11 @@
    "texto": "A planilha oficial calcula até {maximo} participantes, e esta seleção tem {quantidade}. Escolha uma versão no topo do painel ou use as respostas brutas.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
+   "texto": "A planilha oficial do UEQ ou do UEQ-S já preenchida, CSV e o painel em PDF.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "A prévia acompanha o que você digita. O texto fixo do termo vem da própria ferramenta.",
@@ -782,11 +797,6 @@
   },
   {
    "texto": "COTA, M. P.; THOMASCHEWSKI, J.; SCHREPP, M.; GONÇALVES, R. Efficient measurement of the user experience: a Portuguese version. Procedia Computer Science, v. 27, p. 491-498, 2014.",
-   "cliente": true,
-   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
-  },
-  {
-   "texto": "CSV no formato da UEQ Data Analysis Tool, para conferir os cálculos.",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
@@ -2227,7 +2237,7 @@
   },
   {
    "texto": "Ferramenta UEQ",
-   "cliente": false,
+   "cliente": true,
    "origem": "app/(ferramenta)/layout.tsx"
   },
   {
@@ -2259,6 +2269,11 @@
    "texto": "Fonte dos limiares",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
+  },
+  {
+   "texto": "Fonte: Handbook do UEQ, a lista oficial dos itens do UEQ-S em cada idioma e a planilha oficial de análise do UEQ-S, em",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Formato do arquivo",
@@ -2786,6 +2801,16 @@
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
+   "texto": "Método: UEQ-S, a versão curta do User Experience Questionnaire (Schrepp, Hinderks e Thomaschewski, 2017). Benchmark e cálculo da planilha oficial de análise do UEQ-S, em",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/partes.tsx"
+  },
+  {
+   "texto": "Método: User Experience Questionnaire (Laugwitz, Held e Schrepp, 2008). Benchmark de Schrepp, Hinderks e Thomaschewski (2017) e cálculo da planilha oficial de análise, em",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/partes.tsx"
+  },
+  {
    "texto": "Mínimo de {MINIMO_SENHA} caracteres. Pode colar.",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/_acesso/FormularioCadastro.tsx"
@@ -3044,6 +3069,11 @@
    "texto": "O UEQ completo tem 26 pares e mede as 6 escalas; é o recomendado na maioria dos estudos. O UEQ-S tem 8 desses pares, leva de 1 a 2 minutos e mede só a qualidade pragmática, a hedônica e uma nota geral; use quando o completo não cabe. A escolha muda o questionário, o painel e a planilha exportada, e trava na primeira resposta.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "O UEQ e o UEQ-S são gratuitos e mantidos pelos autores no site oficial",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "O UEQ tem duas formas. As duas usam os mesmos pares de palavras opostas e a mesma escala de 7 posições; a versão curta usa só 8 dos 26 pares.",
@@ -4456,7 +4486,7 @@
    "origem": "lib/ajuda.ts"
   },
   {
-   "texto": "Título, objetivo, período e as versões do produto que serão comparadas.",
+   "texto": "Título, objetivo, o questionário (UEQ completo ou UEQ-S) e as versões do produto que serão comparadas.",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },

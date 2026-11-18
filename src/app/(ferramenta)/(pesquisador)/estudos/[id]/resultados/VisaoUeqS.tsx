@@ -1,14 +1,14 @@
 import { EscalasComBenchmark, FORMA_UNICA, type LinhaEscala } from "@/graficos/EscalasComBenchmark";
 import graficos from "@/graficos/graficos.module.css";
 import { MediasPorItem } from "@/graficos/MediasPorItem";
-import { ehIdioma, termosDoIdioma } from "@/idiomas";
+import { ehIdioma } from "@/idiomas";
 import { termosDoUeqS } from "@/lib/instrumento";
 import { leituraDeUmaVersao } from "@/lib/leitura-rapida";
 import { GRUPOS_UEQ_S, NOME_BENCHMARK, NOME_ESCALA_UEQ_S } from "@/lib/nomes-ueq";
 import { formatarDecimal, juntarComE, plural } from "@/lib/texto";
 import type { AnaliseUeqS, EscalaUeqS, LimitesBenchmark } from "@/ueq";
 import { Explicacoes } from "./Explicacoes";
-import { CONSTRUTOS_UEQ_S, LegendaConstrutos, TituloSecao } from "./partes";
+import { CONSTRUTOS_UEQ_S, FonteDoMetodo, LegendaConstrutos, TituloSecao } from "./partes";
 import estilos from "./resultados.module.css";
 import { tradutor } from "@/traducao/servidor";
 
@@ -27,7 +27,7 @@ const AMOSTRA_PEQUENA_ALFA = 50;
 export async function VisaoUeqS({ analise, benchmark, faixaNeutra, rotuloSelecao }: Propriedades) {
   const t = await tradutor();
   // Os 8 pares na tradução oficial do UEQ no idioma da ferramenta, como no questionário do UEQ-S
-  const termos = termosDoUeqS(termosDoIdioma(ehIdioma(t.idioma) ? t.idioma : "pt"));
+  const termos = termosDoUeqS(ehIdioma(t.idioma) ? t.idioma : "pt");
   const escalas = analise.escalas.map((resultado) => ({ ...resultado, nome: t(NOME_ESCALA_UEQ_S[resultado.escala]) }));
   const alfaBaixo = escalas.filter((escala) => escala.alfaAbaixoDoMinimo);
   const itensDaEscala = (escala: EscalaUeqS) => analise.itens.filter((item) => item.escala === escala).map((item) => item.ordem);
@@ -188,6 +188,7 @@ export async function VisaoUeqS({ analise, benchmark, faixaNeutra, rotuloSelecao
           {t("Cada ponto é a média das respostas no par, do termo da esquerda (-3) ao da direita (+3). No UEQ-S o termo negativo fica sempre à esquerda.")}
         </p>
         <MediasPorItem grupos={grupos} />
+        <FonteDoMetodo instrumento="UEQ_S" />
       </section>
     </>
   );

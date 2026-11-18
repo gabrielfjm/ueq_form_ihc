@@ -6,7 +6,8 @@ import { readFileSync } from "node:fs";
 import { chaveDoTexto } from "../src/traducao/nucleo";
 
 type Catalogo = { textos: { texto: string }[] };
-const ler = (caminho: string) => JSON.parse(readFileSync(caminho, "utf8")) as Catalogo;
+// Aceita o arquivo com BOM, como sai do Out-File do PowerShell
+const ler = (caminho: string) => JSON.parse(readFileSync(caminho, "utf8").replace(/^﻿/, "")) as Catalogo;
 
 const anterior = new Set(ler(process.argv[2]!).textos.map((item) => item.texto));
 const atual = ler(new URL("../src/traducao/catalogo.json", import.meta.url).pathname.replace(/^\/([A-Z]:)/, "$1"));
