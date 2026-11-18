@@ -1,11 +1,12 @@
 import type { Metadata, Route } from "next";
 import Link from "next/link";
 import { estudoDoPesquisador } from "@/lib/estudos";
-import { analisarResultados } from "@/lib/resultados";
+import { analisarResultados, analisarResultadosUeqS } from "@/lib/resultados";
 import { exigirPesquisador } from "@/lib/sessao";
 import { plural } from "@/lib/texto";
 import estilos from "../resultados.module.css";
 import { LegendaVersoes, VisaoComparacao } from "../VisaoComparacao";
+import { VisaoUeqS } from "../VisaoUeqS";
 import { VisaoUmaVersao } from "../VisaoUmaVersao";
 import impressao from "./impressao.module.css";
 import { tradutor } from "@/traducao/servidor";
@@ -46,12 +47,14 @@ export default async function PaginaImpressao({ params, searchParams }: Propried
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   const busca = await searchParams;
-  const resultados = await analisarResultados(estudo.id, estudo.versoes);
+  // O UEQ-S tem o painel dele: num estudo do UEQ-S sempre; num do UEQ completo, quando vem da aba UEQ-S
+  const ueqS = estudo.instrumento === "UEQ_S" || texto(busca.instrumento) === "ueq-s";
+  const resultados = ueqS ? await analisarResultadosUeqS(estudo.id, estudo.versoes) : await analisarResultados(estudo.id, estudo.versoes);
 
   const variasVersoes = estudo.versoes.length > 1;
   const comparando = variasVersoes && texto(busca.modo) === "comparar";
   const versaoEscolhida = resultados.porVersao.find((versao) => versao.versaoId === texto(busca.versao));
-  const analise = versaoEscolhida?.analise ?? resultados.todas;
+  const n = comparando ? resultados.todas.n : (versaoEscolhida?.analise ?? resultados.todas).n;
   const ordemPorEscala = texto(busca.itens) === "escala";
   const selecao = comparando
     ? t("Comparação entre as versões")
@@ -60,17 +63,19 @@ export default async function PaginaImpressao({ params, searchParams }: Propried
       : variasVersoes
         ? t("Todas as versões")
         : t("Estudo completo");
-  const n = comparando ? resultados.todas.n : analise.n;
   // Na impressão não há o que alternar; o endereço só precisa existir para o componente
   const enderecoOrdem = (): Route => `/estudos/${estudo.id}/resultados` as Route;
+  const voltar = `/estudos/${estudo.id}/resultados${ueqS ? "/ueq-s" : ""}` as Route;
 
   return (
     <div className={`${estilos.conteudo} ${impressao.pagina}`}>
       <p className={impressao.voltar}>
-        <Link href={`/estudos/${estudo.id}/resultados` as Route}>{t("Voltar para os resultados")}</Link>
+        <Link href={voltar}>{t("Voltar para os resultados")}</Link>
       </p>
       <header className={impressao.cabecalho}>
-        <p className={impressao.ferramenta}>{t("Ferramenta UEQ · Painel de resultados")}</p>
+        <p className={impressao.ferramenta}>
+          {ueqS ? t("Ferramenta UEQ · Painel de resultados do UEQ-S") : t("Ferramenta UEQ · Painel de resultados")}
+        </p>
         <h1 className={impressao.titulo}>{t(estudo.titulo)}</h1>
         <dl className={impressao.dados}>
           <div>
@@ -98,12 +103,24 @@ export default async function PaginaImpressao({ params, searchParams }: Propried
       {resultados.todas.n === 0 ? (
         <p>{t("Nenhuma resposta na análise ainda.")}</p>
       ) : comparando ? (
-        <VisaoComparacao versoes={resultados.porVersao} benchmark={resultados.benchmark} faixaNeutra={resultados.faixaNeutra} />
+        <VisaoComparacao
+          versoes={resultados.porVersao}
+          benchmark={resultados.benchmark}
+          faixaNeutra={resultados.faixaNeutra}
+          instrumento={ueqS ? "UEQ_S" : "UEQ"}
+        />
+      ) : ueqS ? (
+        <VisaoUeqS
+          analise={(versaoEscolhida?.analise ?? resultados.todas) as Awaited<ReturnType<typeof analisarResultadosUeqS>>["todas"]}
+          benchmark={resultados.benchmark as Awaited<ReturnType<typeof analisarResultadosUeqS>>["benchmark"]}
+          faixaNeutra={resultados.faixaNeutra}
+          rotuloSelecao={selecao}
+        />
       ) : (
         <VisaoUmaVersao
-          analise={analise}
-          itens={resultados.itens}
-          benchmark={resultados.benchmark}
+          analise={(versaoEscolhida?.analise ?? resultados.todas) as Awaited<ReturnType<typeof analisarResultados>>["todas"]}
+          itens={(resultados as Awaited<ReturnType<typeof analisarResultados>>).itens}
+          benchmark={resultados.benchmark as Awaited<ReturnType<typeof analisarResultados>>["benchmark"]}
           faixaNeutra={resultados.faixaNeutra}
           rotuloSelecao={selecao}
           ordemPorEscala={ordemPorEscala}

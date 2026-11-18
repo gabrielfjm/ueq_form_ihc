@@ -37,8 +37,10 @@ export default async function PaginaEditarEstudo({ params }: Propriedades) {
         idiomas={IDIOMAS.map(({ codigo, nome, lang, direcao }) => ({ codigo, nome, lang, direcao }))}
         modo="editar"
         estudoId={estudo.id}
+        instrumentoTravado={estudo.versoes.some((versao) => versao._count.participacoes > 0)}
         valores={{
           coletarDemografia: estudo.coletarDemografia,
+          instrumento: estudo.instrumento,
           idioma: estudo.idioma,
           titulo: estudo.titulo,
           produtoAvaliado: estudo.produtoAvaliado,

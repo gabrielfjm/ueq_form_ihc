@@ -18,7 +18,9 @@ import formulario from "@/componentes/formulario/formulario.module.css";
 import { MensagemStatus } from "@/componentes/formulario/MensagemStatus";
 import { REPOSITORIO } from "@/lib/documentacao/catalogo";
 import { BotaoAcesso } from "./_acesso/Acesso";
-import { AUTORES_DO_UEQ, ESCALAS_DO_UEQ, ESTUDOS_DO_UEQ, FAIXAS_DO_BENCHMARK, PASSOS } from "./conteudo";
+import { ehIdioma, termosDoIdioma } from "@/idiomas";
+import { ITENS_UEQ_S, termosDoUeqS } from "@/lib/instrumento";
+import { AUTORES_DO_UEQ, COMPARACAO_UEQ_E_UEQ_S, ESCALAS_DO_UEQ, ESTUDOS_DO_UEQ, FAIXAS_DO_BENCHMARK, PASSOS } from "./conteudo";
 import estilos from "./inicio.module.css";
 import { enderecoDaPrivacidade } from "./privacidade/origem";
 import { tradutor } from "@/traducao/servidor";
@@ -59,6 +61,7 @@ const EQUIPE = [
 
 const SECOES = [
   ["inicio-ueq", m("O que é o UEQ")],
+  ["ueq-e-ueq-s", m("UEQ ou UEQ-S")],
   ["inicio-leitura", m("Como ler os resultados")],
   ["inicio-como-funciona", m("Como funciona")],
   ["inicio-estudos", m("Estudos sobre o método")],
@@ -102,6 +105,8 @@ type Propriedades = {
 // de cor sozinha. A animação do item respeita "reduzir movimento" (globals.css)
 export async function PaginaInicial({ logado, aviso }: Propriedades) {
   const t = await tradutor();
+  // Os 8 pares do UEQ-S no idioma da página, com o termo negativo à esquerda, como o participante vê
+  const paresUeqS = termosDoUeqS(termosDoIdioma(ehIdioma(t.idioma) ? t.idioma : "pt"));
   return (
     <>
       <div className={estilos.faixa}>
@@ -228,8 +233,66 @@ export async function PaginaInicial({ logado, aviso }: Propriedades) {
           </div>
         </section>
 
+        {/* O que muda entre o questionário completo e a versão curta (Handbook UEQ, p. 11-13), para o pesquisador
+            escolher na criação do estudo sabendo o que perde e o que ganha */}
+        <section className={estilos.secao} aria-labelledby="ueq-e-ueq-s">
+          <Titulo id="ueq-e-ueq-s" numero={2}>
+            {t("UEQ ou UEQ-S")}
+          </Titulo>
+          <p className={estilos.paragrafo}>
+            {t("O UEQ-S é a versão curta do UEQ: 8 dos mesmos 26 pares, com a mesma escala de 7 posições. É mais rápido de responder, mas não separa as 6 escalas. Você escolhe um dos dois ao criar o estudo.")}
+          </p>
+          <div className={estilos.rolagemComparacao} tabIndex={0} role="region" aria-label={t("Diferenças entre o UEQ completo e o UEQ-S")}>
+            <table className={estilos.comparacao}>
+              <caption className="visualmente-oculto">{t("Diferenças entre o UEQ completo e o UEQ-S")}</caption>
+              <thead>
+                <tr>
+                  <td />
+                  <th scope="col">{t("UEQ completo")}</th>
+                  <th scope="col">{t("UEQ-S, versão curta")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {COMPARACAO_UEQ_E_UEQ_S.map(([aspecto, completo, curto]) => (
+                  <tr key={aspecto}>
+                    <th scope="row">{t(aspecto)}</th>
+                    <td>{t(completo)}</td>
+                    <td>{t(curto)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className={estilos.paresUeqS}>
+            <h3 className={estilos.subtitulo}>{t("Os 8 pares do UEQ-S")}</h3>
+            <p className={estilos.nota}>
+              {t("O termo negativo fica sempre à esquerda. Os 4 primeiros medem a qualidade pragmática; os 4 últimos, a hedônica.")}
+            </p>
+            <ol className={estilos.listaPares}>
+              {paresUeqS.map((par) => {
+                const item = ITENS_UEQ_S[par.numero - 1];
+                return (
+                  <li key={par.numero} className={estilos[item?.escala ?? "pragmatica"]}>
+                    <span className="visualmente-oculto">
+                      {t("Item {numero}: de {esquerdo} a {direito}", { numero: par.numero, esquerdo: par.termoEsquerdo, direito: par.termoDireito })}
+                    </span>
+                    <span className={estilos.parNumero} aria-hidden="true">{par.numero}</span>
+                    <span aria-hidden="true">
+                      {par.termoEsquerdo} ↔ {par.termoDireito}
+                    </span>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+          <p className={estilos.nota}>
+            {t("Depois da primeira resposta a escolha trava, para o estudo não misturar os dois questionários.")}{" "}
+            {t("Num estudo do UEQ completo, os resultados também mostram o UEQ-S, numa aba própria, calculado com os 8 pares dele.")}
+          </p>
+        </section>
+
         <section className={estilos.secao} aria-labelledby="inicio-leitura">
-          <Titulo id="inicio-leitura" numero={2}>
+          <Titulo id="inicio-leitura" numero={3}>
             {t("Como ler os resultados")}
           </Titulo>
           <div className={estilos.leitura}>
@@ -267,7 +330,7 @@ export async function PaginaInicial({ logado, aviso }: Propriedades) {
         </section>
 
         <section className={estilos.secao} aria-labelledby="inicio-como-funciona">
-          <Titulo id="inicio-como-funciona" numero={3}>
+          <Titulo id="inicio-como-funciona" numero={4}>
             {t("Como funciona")}
           </Titulo>
           <ol className={estilos.passos}>
@@ -296,7 +359,7 @@ export async function PaginaInicial({ logado, aviso }: Propriedades) {
         </section>
 
         <section className={estilos.secao} aria-labelledby="inicio-estudos">
-          <Titulo id="inicio-estudos" numero={4}>
+          <Titulo id="inicio-estudos" numero={5}>
             {t("Estudos sobre o método")}
           </Titulo>
           <ol className={estilos.referencias}>
@@ -319,7 +382,7 @@ export async function PaginaInicial({ logado, aviso }: Propriedades) {
         </section>
 
         <section className={estilos.secao} aria-labelledby="inicio-creditos">
-          <Titulo id="inicio-creditos" numero={5}>
+          <Titulo id="inicio-creditos" numero={6}>
             {t("Créditos")}
           </Titulo>
           <div className={estilos.creditos}>

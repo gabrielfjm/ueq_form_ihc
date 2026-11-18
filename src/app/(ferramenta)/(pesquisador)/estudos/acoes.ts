@@ -57,6 +57,14 @@ export async function salvarEstudo(
   const removidas = atual.versoes.filter((versao) => !mantidas.has(versao.id));
 
   // prompts/04-estudos.md: versão que já tem respostas não pode sair (o formulário já esconde o botão)
+  // O questionário não muda depois da primeira resposta: o estudo misturaria respostas do UEQ e do UEQ-S
+  const totalDeRespostas = atual.versoes.reduce((soma, versao) => soma + versao._count.participacoes, 0);
+  if (totalDeRespostas > 0 && estudo.instrumento !== atual.instrumento) {
+    return {
+      envio,
+      erros: { instrumento: { mensagem: t("O estudo já tem respostas, então o questionário não pode mais mudar. Para usar o outro, crie um estudo novo.") } },
+    };
+  }
   const comRespostas = removidas.find((versao) => versao._count.participacoes > 0);
   if (comRespostas) {
     return { envio, erroGeral: t("A versão \"{nome}\" já tem respostas e não pode ser removida.", { nome: comRespostas.nome }) };

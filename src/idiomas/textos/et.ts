@@ -27,6 +27,7 @@ export const et: TextosParticipante = {
     subtitulo: "Kasutajakogemuse uuring",
     termoTitulo: "Nõusolekuvorm",
     termoTexto: "Hindad oma muljet tootest 26 vastandsõnapaari abil.",
+    termoTextoCurto: "Hindad oma muljet tootest 8 vastandsõnapaari abil.",
     rotulos: {
       tempo: "Aeg",
       dadosOpcionais: "Vabatahtlikud andmed",
@@ -41,6 +42,8 @@ export const et: TextosParticipante = {
     },
     tempo: "3–5 minutit, ajapiiranguta.",
     tempoComDados: "4–6 minutit, ajapiiranguta.",
+    tempoCurto: "1–2 minutit, ajapiiranguta.",
+    tempoCurtoComDados: "2–3 minutit, ajapiiranguta.",
     dadosOpcionais: "Lõpus on vabatahtlikud küsimused vanuserühma, soo, hariduse ja toote kasutamise kohta. Võid need kõik vahele jätta.",
     participacao: "Vabatahtlik. Kuni saatmiseni võid igal ajal ilma põhjenduseta loobuda: kasuta nuppu „{sair}“ või sulge leht ja midagi sinu märgitust ei salvestata.",
     depoisDeEnviar: "Kuna vastused on anonüümsed, ei saa neid pärast saatmist üles leida ega tagasi võtta.",

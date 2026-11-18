@@ -24,6 +24,8 @@ export type LinhaParticipacao = {
   iguais: number;
   suspeita: boolean;
   motivo: string | null;
+  // UEQ-S: marcou a posição do meio nos 8 itens
+  todasNoMeio: boolean;
   incluidaNaAnalise: boolean;
   escalas: { nome: string; amplitude: number; inconsistente: boolean }[];
 };
@@ -33,12 +35,14 @@ type Propriedades = {
   linhas: LinhaParticipacao[];
   total: number;
   soSuspeitas: boolean;
+  // 26 no UEQ, 8 no UEQ-S
+  totalItens: number;
   limiteIguais: number;
   // Leitor vê a tabela, mas não tira nem devolve respostas da análise
   somenteLeitura: boolean;
 };
 
-export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limiteIguais, somenteLeitura }: Propriedades) {
+export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, totalItens, limiteIguais, somenteLeitura }: Propriedades) {
   const t = useT();
   const anunciar = useAnunciar();
   const router = useRouter();
@@ -184,7 +188,9 @@ export function TabelaParticipacoes({ estudoId, linhas, total, soSuspeitas, limi
                         ))}
                       </ul>
                       <p className={estilos.iguais}>
-                        {t("A mesma posição foi marcada em {iguais} dos 26 itens{v}", { iguais: linha.iguais, v: linha.iguais > limiteIguais ? `, acima do limite de ${limiteIguais}.` : "." })}
+                        {totalItens === 26
+                          ? t("A mesma posição foi marcada em {iguais} dos 26 itens{v}", { iguais: linha.iguais, v: linha.iguais > limiteIguais ? `, acima do limite de ${limiteIguais}.` : "." })
+                          : t("A mesma posição foi marcada em {iguais} dos 8 itens{v}", { iguais: linha.iguais, v: linha.todasNoMeio ? t(", todas na posição do meio.") : "." })}
                       </p>
                     </td>
                   </tr>

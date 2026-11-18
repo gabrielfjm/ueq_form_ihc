@@ -27,6 +27,7 @@ export const cs: TextosParticipante = {
     subtitulo: "Výzkum uživatelského zážitku",
     termoTitulo: "Informovaný souhlas",
     termoTexto: "Svůj dojem z produktu vyjádříte u 26 dvojic protikladných slov.",
+    termoTextoCurto: "Svůj dojem z produktu vyjádříte u 8 dvojic protikladných slov.",
     rotulos: {
       tempo: "Čas",
       dadosOpcionais: "Nepovinné údaje",
@@ -41,6 +42,8 @@ export const cs: TextosParticipante = {
     },
     tempo: "3 až 5 minut, bez časového limitu.",
     tempoComDados: "4 až 6 minut, bez časového limitu.",
+    tempoCurto: "1 až 2 minuty, bez časového limitu.",
+    tempoCurtoComDados: "2 až 3 minuty, bez časového limitu.",
     dadosOpcionais: "Na konci jsou nepovinné otázky na věkovou skupinu, pohlaví, vzdělání a používání produktu. Všechny můžete přeskočit.",
     participacao: "Dobrovolná. Až do odeslání můžete kdykoli bez udání důvodu skončit: použijte „{sair}“ nebo zavřete stránku a nic z toho, co jste označili, se neuloží.",
     depoisDeEnviar: "Protože jsou odpovědi anonymní, po odeslání je nelze dohledat a stáhnout.",

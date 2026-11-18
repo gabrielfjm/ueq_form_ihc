@@ -27,6 +27,7 @@ export const fr: TextosParticipante = {
     subtitulo: "Recherche sur l’expérience utilisateur",
     termoTitulo: "Formulaire de consentement",
     termoTexto: "Vous allez indiquer votre impression du produit sur 26 paires de mots opposés.",
+    termoTextoCurto: "Vous allez indiquer votre impression du produit sur 8 paires de mots opposés.",
     rotulos: {
       tempo: "Durée",
       dadosOpcionais: "Données facultatives",
@@ -41,6 +42,8 @@ export const fr: TextosParticipante = {
     },
     tempo: "De 3 à 5 minutes, sans limite de temps.",
     tempoComDados: "De 4 à 6 minutes, sans limite de temps.",
+    tempoCurto: "De 1 à 2 minutes, sans limite de temps.",
+    tempoCurtoComDados: "De 2 à 3 minutes, sans limite de temps.",
     dadosOpcionais: "À la fin, des questions facultatives portent sur la tranche d’âge, le genre, le niveau d’études et l’usage du produit. Vous pouvez toutes les passer.",
     participacao: "Volontaire. Jusqu’à l’envoi, vous pouvez abandonner à tout moment, sans donner de raison : utilisez « {sair} » ou fermez la page, et rien de ce que vous avez coché ne sera enregistré.",
     depoisDeEnviar: "Comme les réponses sont anonymes, une fois envoyées, il est impossible de les retrouver pour les retirer.",

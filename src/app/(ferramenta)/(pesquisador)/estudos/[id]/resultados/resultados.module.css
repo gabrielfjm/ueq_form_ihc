@@ -223,6 +223,11 @@
   background: var(--alerta-fundo);
 }
 
+/* Aba do UEQ-S num estudo do UEQ completo: de onde vêm os números, com a borda do destaque */
+.avisoUeqS {
+  border-left: 3px solid var(--destaque);
+}
+
 .avisoAlerta strong {
   color: var(--alerta);
 }

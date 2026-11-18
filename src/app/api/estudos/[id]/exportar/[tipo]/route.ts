@@ -1,6 +1,13 @@
 import { banco } from "@/lib/banco";
 import { filtroDeAcesso } from "@/lib/estudos";
-import { gerarExportacao, nomeDoArquivo, TIPO_DE_CONTEUDO, TIPOS_EXPORTACAO, type TipoExportacao } from "@/lib/exportar-estudo";
+import {
+  exportacaoDisponivel,
+  gerarExportacao,
+  nomeDoArquivo,
+  TIPO_DE_CONTEUDO,
+  TIPOS_EXPORTACAO,
+  type TipoExportacao,
+} from "@/lib/exportar-estudo";
 import { MAXIMO_PARTICIPANTES } from "@/lib/planilha-oficial";
 import { idiomaDaInterface } from "@/traducao/servidor";
 import { pesquisadorDaSessao } from "@/lib/sessao";
@@ -18,21 +25,25 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
 
   const estudo = await banco.estudo.findFirst({
     where: { id, ...filtroDeAcesso(pesquisador) },
-    select: { id: true, titulo: true, versoes: { orderBy: { ordem: "asc" }, select: { id: true, nome: true } } },
+    select: { id: true, titulo: true, instrumento: true, versoes: { orderBy: { ordem: "asc" }, select: { id: true, nome: true } } },
   });
   // Estudo sem acesso responde igual a estudo inexistente: não revela que o id existe
   if (!estudo) return new Response("Estudo não encontrado.", { status: 404 });
+  if (!exportacaoDisponivel(tipo, estudo.instrumento)) {
+    return new Response("Este estudo usa o UEQ-S: a planilha oficial dele é a planilha-oficial-ueq-s.", { status: 404 });
+  }
+  const planilha = tipo === "planilha-oficial" || tipo === "planilha-oficial-ueq-s";
 
   // ?versao=… vem do painel: a planilha oficial sai só com a versão que a pessoa está vendo. A planilha
   // tem as próprias traduções dos rótulos; vai no idioma da interface
   const versaoPedida = new URL(request.url).searchParams.get("versao");
-  const versao = tipo === "planilha-oficial" ? estudo.versoes.find((v) => v.id === versaoPedida) : undefined;
+  const versao = planilha ? estudo.versoes.find((v) => v.id === versaoPedida) : undefined;
 
   let conteudo: string | Uint8Array;
   try {
     conteudo = await gerarExportacao(estudo, tipo, { versaoId: versao?.id, idioma: await idiomaDaInterface() });
   } catch (erro) {
-    if (tipo === "planilha-oficial" && erro instanceof Error && erro.message.startsWith("A planilha oficial calcula")) {
+    if (planilha && erro instanceof Error && erro.message.startsWith("A planilha oficial calcula")) {
       return new Response(
         `A planilha oficial calcula até ${MAXIMO_PARTICIPANTES} participantes. Exporte uma versão de cada vez ou use as respostas brutas.`,
         { status: 422, headers: { "Content-Type": "text/plain; charset=utf-8" } },

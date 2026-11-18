@@ -27,6 +27,7 @@ export const nl: TextosParticipante = {
     subtitulo: "Onderzoek naar gebruikerservaring",
     termoTitulo: "Toestemmingsverklaring",
     termoTexto: "U geeft uw indruk van het product aan met 26 paren tegengestelde woorden.",
+    termoTextoCurto: "U geeft uw indruk van het product aan met 8 paren tegengestelde woorden.",
     rotulos: {
       tempo: "Tijd",
       dadosOpcionais: "Optionele gegevens",
@@ -41,6 +42,8 @@ export const nl: TextosParticipante = {
     },
     tempo: "3 tot 5 minuten, zonder tijdslimiet.",
     tempoComDados: "4 tot 6 minuten, zonder tijdslimiet.",
+    tempoCurto: "1 tot 2 minuten, zonder tijdslimiet.",
+    tempoCurtoComDados: "2 tot 3 minuten, zonder tijdslimiet.",
     dadosOpcionais: "Aan het eind volgen optionele vragen over leeftijdsgroep, gender, opleiding en gebruik van het product. U kunt ze allemaal overslaan.",
     participacao: "Vrijwillig. Tot het verzenden kunt u op elk moment stoppen, zonder opgaaf van reden: gebruik ‘{sair}’ of sluit de pagina, en niets van wat u hebt aangevinkt wordt opgeslagen.",
     depoisDeEnviar: "Omdat de antwoorden anoniem zijn, kunnen ze na het verzenden niet meer worden teruggevonden om ze in te trekken.",

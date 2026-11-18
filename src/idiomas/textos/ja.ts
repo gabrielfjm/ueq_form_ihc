@@ -27,6 +27,7 @@ export const ja: TextosParticipante = {
     subtitulo: "ユーザーエクスペリエンス調査",
     termoTitulo: "同意書",
     termoTexto: "26 組の反対の意味をもつ言葉で、製品の印象を答えていただきます。",
+    termoTextoCurto: "8 組の反対の意味をもつ言葉で、製品の印象を答えていただきます。",
     rotulos: {
       tempo: "所要時間",
       dadosOpcionais: "任意の情報",
@@ -41,6 +42,8 @@ export const ja: TextosParticipante = {
     },
     tempo: "3〜5 分。時間制限はありません。",
     tempoComDados: "4〜6 分。時間制限はありません。",
+    tempoCurto: "1〜2 分。時間制限はありません。",
+    tempoCurtoComDados: "2〜3 分。時間制限はありません。",
     dadosOpcionais: "最後に、年齢層、性別、学歴、製品の利用状況についての任意の質問があります。すべて飛ばすことができます。",
     participacao: "任意です。送信するまでは、理由を述べずにいつでも中止できます。「{sair}」を選ぶかページを閉じれば、選んだ内容は保存されません。",
     depoisDeEnviar: "回答は匿名のため、送信後に回答を特定して取り下げることはできません。",

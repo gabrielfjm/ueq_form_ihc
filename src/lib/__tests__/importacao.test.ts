@@ -44,6 +44,14 @@ describe("lerCsvDeRespostas", () => {
     ]);
   });
 
+  it("num estudo do UEQ-S, lê 8 valores por linha e recusa as linhas com 26", () => {
+    const texto = readFileSync(join(raizFixtures, "..", "fixtures-ueq-s", "bordas", "respostas.csv"), "utf8");
+    const { linhas, erros } = lerCsvDeRespostas(texto, 8);
+    expect(erros).toEqual([]);
+    expect(linhas.map((l) => l.valores)).toEqual(lerRespostas("../fixtures-ueq-s/bordas"));
+    expect(lerCsvDeRespostas(linha(vinteESeis()), 8).erros).toEqual([{ linha: 1, mensagem: "Tem 26 valores; são 8, um por item." }]);
+  });
+
   it("recusa arquivo com linhas demais", () => {
     const texto = Array(LIMITE_LINHAS + 1).fill(linha(vinteESeis())).join("\n");
     const { linhas, erros } = lerCsvDeRespostas(texto);

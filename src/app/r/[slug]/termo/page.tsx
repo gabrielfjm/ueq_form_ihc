@@ -43,6 +43,7 @@ export default async function PaginaViaDoTermo({ params }: Propriedades) {
           textos={textos.consentimento}
           objetivo={doEstudo.objetivo}
           langDoEstudo={doEstudo.lang}
+          instrumento={estudo.instrumento}
           condicoes={condicoesDoTermo(textos, { ...estudo, ...doEstudo })}
         />
         <div className={estilos.acoesVia}>

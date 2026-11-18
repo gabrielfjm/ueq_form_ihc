@@ -8,11 +8,10 @@ import { banco } from "@/lib/banco";
 import { estudoDoPesquisador } from "@/lib/estudos";
 import { notificarAlteracao } from "@/lib/notificacoes";
 import { plural } from "@/lib/texto";
+import { gravacaoDoInstrumento } from "@/lib/gravacao";
 import { LIMITE_BYTES, lerCsvDeRespostas, type ErroImportacao } from "@/lib/importacao";
-import { itensDoQuestionario } from "@/lib/itens-ueq";
-import { PARAMETROS_SUSPEITA } from "@/lib/participacoes";
+import { QUANTIDADE_DE_ITENS } from "@/lib/instrumento";
 import { exigirPesquisador } from "@/lib/sessao";
-import { avaliarSuspeita } from "@/ueq";
 import { tradutor } from "@/traducao/servidor";
 
 // 4 colunas por resposta: 5000 por INSERT dão 20 mil parâmetros, abaixo dos 65535 do Postgres
@@ -37,7 +36,7 @@ async function versaoDoEstudo(estudoId: string, versaoId: unknown) {
   const estudo = await estudoDoPesquisador(estudoId, pesquisador, "editar");
   // Com uma versão só não há o que escolher; com várias, a versão tem que ser deste estudo
   const versao = estudo.versoes.length === 1 ? estudo.versoes[0] : estudo.versoes.find((v) => v.id === versaoId);
-  return versao ?? null;
+  return versao ? { ...versao, instrumento: estudo.instrumento } : null;
 }
 
 // Passo 1: lê o arquivo e devolve a prévia das 5 primeiras linhas e os erros, sem gravar nada
@@ -56,7 +55,8 @@ export async function previsualizarImportacao(estudoId: string, dados: FormData)
   }
 
   const texto = await arquivo.text();
-  const { linhas, erros } = lerCsvDeRespostas(texto);
+  // 26 valores por linha num estudo do UEQ, 8 num do UEQ-S: o formato da aba Data de cada planilha oficial
+  const { linhas, erros } = lerCsvDeRespostas(texto, QUANTIDADE_DE_ITENS[versao.instrumento]);
   if (linhas.length === 0 && erros.length === 0) return { erro: { campo: "arquivo", mensagem: t("O arquivo não tem nenhuma linha de respostas.") } };
   return {
     previa: {
@@ -76,27 +76,27 @@ export async function confirmarImportacao(estudoId: string, versaoId: string, te
   const t = await tradutor();
   const versao = await versaoDoEstudo(estudoId, versaoId);
   if (!versao) return { erro: t("Essa versão não está neste estudo. Recarregue a página.") };
-  const { linhas, erros } = lerCsvDeRespostas(texto);
+  const { linhas, erros } = lerCsvDeRespostas(texto, QUANTIDADE_DE_ITENS[versao.instrumento]);
   if (erros.length > 0 || linhas.length === 0) return { erro: t("O arquivo tem erros. Corrija e envie de novo.") };
 
-  const itens = await itensDoQuestionario();
+  const gravar = await gravacaoDoInstrumento(versao.instrumento);
   const agora = Date.now();
   // Cada linha fica 1 ms depois da anterior, para as listas e as exportações (que ordenam pela conclusão)
   // manterem a ordem do arquivo. Inserção em lote, como em src/lib/cenarios: uma consulta por linha estourava o
   // tempo da transação com arquivos de centenas de linhas
   const participacoes = linhas.map(({ valores }, posicao) => ({
     id: randomUUID(),
-    valores,
+    ...gravar(valores),
     concluidaEm: new Date(agora + posicao),
   }));
-  const respostas = participacoes.flatMap(({ id, valores }) =>
-    itens.map((item) => ({ participacaoId: id, itemId: item.id, valor: valores[item.numero - 1] ?? 0 })),
+  const respostas = participacoes.flatMap(({ id, respostas: daParticipacao }) =>
+    daParticipacao.map((resposta) => ({ participacaoId: id, ...resposta })),
   );
   // Tudo numa transação: ou entram todas as linhas, ou nenhuma
   await banco.$transaction(
     async (transacao) => {
       await transacao.participacao.createMany({
-        data: participacoes.map(({ id, valores, concluidaEm }) => ({
+        data: participacoes.map(({ id, suspeita, concluidaEm }) => ({
           id,
           versaoId: versao.id,
           consentiuEm: concluidaEm,
@@ -104,7 +104,7 @@ export async function confirmarImportacao(estudoId: string, versaoId: string, te
           origem: "IMPORTADA" as const,
           idioma: null,
           // A mesma regra de suspeita das respostas pelo link (docs/ueq-protocolo.md, seção 7)
-          suspeita: avaliarSuspeita(valores, itens, PARAMETROS_SUSPEITA).suspeita,
+          suspeita,
         })),
       });
       // Em blocos, para cada INSERT ficar abaixo do limite de parâmetros do Postgres

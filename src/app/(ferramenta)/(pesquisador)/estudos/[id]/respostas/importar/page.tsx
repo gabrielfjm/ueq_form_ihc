@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { contagemDeRespostas, estudoDoPesquisador } from "@/lib/estudos";
+import { QUANTIDADE_DE_ITENS } from "@/lib/instrumento";
 import { exigirPesquisador } from "@/lib/sessao";
 import { FaixaEstudo, resumoDoEstudo } from "../../FaixaEstudo";
 import { FormularioImportacao } from "./FormularioImportacao";
@@ -33,7 +34,11 @@ export default async function PaginaImportar({ params }: Propriedades) {
             {t("Para trazer respostas coletadas fora da ferramenta, em papel ou em outro formulário. O formato é o da aba Data da planilha oficial, o mesmo da exportação “Formato da planilha oficial”.")}
           </p>
         </header>
-        <FormularioImportacao estudoId={estudo.id} versoes={estudo.versoes.map(({ id, nome }) => ({ id, nome }))} />
+        <FormularioImportacao
+          estudoId={estudo.id}
+          versoes={estudo.versoes.map(({ id, nome }) => ({ id, nome }))}
+          totalItens={QUANTIDADE_DE_ITENS[estudo.instrumento]}
+        />
       </div>
     </>
   );

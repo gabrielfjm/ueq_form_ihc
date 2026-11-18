@@ -1,7 +1,7 @@
-import { recodificarParticipante, type AnaliseEstudo, type ItemUEQ } from "@/ueq";
+import { recodificar, recodificarParticipante, valoresDoUeqS, type AnaliseEstudo, type AnaliseUeqS, type ItemUEQ, type ItemUeqS } from "@/ueq";
 import { decimalCsv, documentoCsv, type ValorCsv } from "./csv";
 import type { Demografia } from "./demografia";
-import { NOME_BENCHMARK, NOME_ESCALA } from "./nomes-ueq";
+import { NOME_BENCHMARK, NOME_ESCALA, NOME_ESCALA_UEQ_S } from "./nomes-ueq";
 
 // Funções puras: recebem os dados já lidos e devolvem o texto do arquivo (prompts/08-exportacao.md)
 
@@ -18,15 +18,16 @@ export type ParticipacaoExportada = {
   // Declarou ter menos de 18 anos, com a autorização do responsável; null nas importadas
   menorDeIdade: boolean | null;
   demografia: Demografia | null;
-  // os 26 valores de 1 a 7, na ordem oficial
+  // os valores de 1 a 7 do questionário que a pessoa respondeu: os 26 do UEQ na ordem oficial, ou os 8 do
+  // UEQ-S na ordem e nos lados dele
   valores: number[];
 };
 
-const COLUNAS_ITENS = Array.from({ length: 26 }, (_, posicao) => `item${String(posicao + 1).padStart(2, "0")}`);
+const colunasItens = (total: number) => Array.from({ length: total }, (_, posicao) => `item${String(posicao + 1).padStart(2, "0")}`);
 
 const simNao = (valor: boolean) => (valor ? "sim" : "não");
 
-function cabecalhoRespostas(): string[] {
+function cabecalhoRespostas(totalItens: number): string[] {
   return [
     "id_participacao",
     "versao",
@@ -41,7 +42,7 @@ function cabecalhoRespostas(): string[] {
     "genero",
     "escolaridade",
     "familiaridade_com_produto",
-    ...COLUNAS_ITENS,
+    ...colunasItens(totalItens),
   ];
 }
 
@@ -65,16 +66,25 @@ function linhaRespostas(participacao: ParticipacaoExportada, valores: readonly n
   ];
 }
 
-// docs/ueq-protocolo.md, seção 9.1: todas as participações, com a coluna de inclusão na análise
-export function exportarBrutas(participacoes: readonly ParticipacaoExportada[]): string {
-  return documentoCsv([cabecalhoRespostas(), ...participacoes.map((p) => linhaRespostas(p, p.valores))]);
+// docs/ueq-protocolo.md, seção 9.1: todas as participações, com a coluna de inclusão na análise.
+// item01 a item26 no UEQ; item01 a item08 no UEQ-S, na numeração dele
+export function exportarBrutas(participacoes: readonly ParticipacaoExportada[], totalItens = 26): string {
+  return documentoCsv([cabecalhoRespostas(totalItens), ...participacoes.map((p) => linhaRespostas(p, p.valores))]);
 }
 
 // Seção 9.2: mesmo formato, de -3 a +3 com a polaridade já corrigida
 export function exportarRecodificadas(participacoes: readonly ParticipacaoExportada[], itens: readonly ItemUEQ[]): string {
   return documentoCsv([
-    cabecalhoRespostas(),
+    cabecalhoRespostas(26),
     ...participacoes.map((p) => linhaRespostas(p, recodificarParticipante(p.valores, itens))),
+  ]);
+}
+
+// O mesmo para o UEQ-S: no UEQ-S o termo positivo está sempre à direita, então é x - 4 em todos os itens
+export function exportarRecodificadasUeqS(participacoes: readonly ParticipacaoExportada[], itens: readonly ItemUeqS[]): string {
+  return documentoCsv([
+    cabecalhoRespostas(itens.length),
+    ...participacoes.map((p) => linhaRespostas(p, p.valores.map((valor, posicao) => recodificar(valor, itens[posicao]!.polaridade)))),
   ]);
 }
 
@@ -107,6 +117,32 @@ export function exportarResultados(analises: readonly { versao: string; analise:
     ]),
   );
   return documentoCsv([cabecalho, ...linhas]);
+}
+
+// Seção 9.3 para o UEQ-S: pragmática, hedônica e geral, na ordem da planilha oficial dele. A geral não tem alfa
+export function exportarResultadosUeqS(analises: readonly { versao: string; analise: AnaliseUeqS }[]): string {
+  const cabecalho = ["versao", "escala", "n", "media", "dp", "ic95_inferior", "ic95_superior", "alfa", "faixa_interpretacao", "faixa_benchmark"];
+  const linhas = analises.flatMap(({ versao, analise }) =>
+    analise.escalas.map((escala) => [
+      versao,
+      NOME_ESCALA_UEQ_S[escala.escala],
+      escala.n,
+      decimalCsv(escala.media),
+      decimalCsv(escala.dp),
+      decimalCsv(escala.ic?.inferior),
+      decimalCsv(escala.ic?.superior),
+      decimalCsv(escala.alfa),
+      escala.faixaInterpretacao ?? "",
+      escala.benchmark ? NOME_BENCHMARK[escala.benchmark] : "",
+    ]),
+  );
+  return documentoCsv([cabecalho, ...linhas]);
+}
+
+// Seção 9.4 para o UEQ-S de um estudo do UEQ completo: os 8 itens equivalentes de cada participação na análise,
+// já na ordem e nos lados do UEQ-S, para Data!A4 da planilha oficial dele
+export function linhasDaPlanilhaUeqS(participacoes: readonly ParticipacaoExportada[], itens: readonly ItemUeqS[]): number[][] {
+  return participacoes.filter((p) => p.incluidaNaAnalise).map((p) => valoresDoUeqS(p.valores, itens));
 }
 
 // Seção 9.4: os 26 valores de cada participação na análise, na ordem em que vão para Data!A4 da

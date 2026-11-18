@@ -27,6 +27,7 @@ export const he: TextosParticipante = {
     subtitulo: "מחקר חוויית משתמש",
     termoTitulo: "טופס הסכמה",
     termoTexto: "תציין את הרושם שלך מהמוצר ב-26 זוגות של מילים מנוגדות.",
+    termoTextoCurto: "תציין את הרושם שלך מהמוצר ב-8 זוגות של מילים מנוגדות.",
     rotulos: {
       tempo: "זמן",
       dadosOpcionais: "פרטים רשות",
@@ -41,6 +42,8 @@ export const he: TextosParticipante = {
     },
     tempo: "3 עד 5 דקות, ללא הגבלת זמן.",
     tempoComDados: "4 עד 6 דקות, ללא הגבלת זמן.",
+    tempoCurto: "1 עד 2 דקות, ללא הגבלת זמן.",
+    tempoCurtoComDados: "2 עד 3 דקות, ללא הגבלת זמן.",
     dadosOpcionais: "בסוף יש שאלות רשות על קבוצת גיל, מגדר, השכלה ושימוש במוצר. אפשר לדלג על כולן.",
     participacao: "מרצון. עד השליחה אפשר להפסיק בכל רגע בלי לתת סיבה: באמצעות ״{sair}״ או סגירת הדף, ושום דבר ממה שסימנת לא יישמר.",
     depoisDeEnviar: "מכיוון שהתשובות אנונימיות, אחרי השליחה אי אפשר למצוא אותן כדי לבטל אותן.",

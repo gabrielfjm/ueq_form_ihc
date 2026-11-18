@@ -2,19 +2,28 @@ import { Fragment } from "react";
 import { EscalasComBenchmark, FiguraMarcador, FORMA_UNICA, FORMAS, type LinhaEscala } from "@/graficos/EscalasComBenchmark";
 import graficos from "@/graficos/graficos.module.css";
 import { leituraDaComparacao } from "@/lib/leitura-rapida";
-import { CONSTRUTO, NOME_CONSTRUTO, NOME_ESCALA } from "@/lib/nomes-ueq";
-import type { AnalisePorVersao } from "@/lib/resultados";
+import type { Instrumento } from "@/lib/instrumento";
+import { CONSTRUTO, GRUPOS_UEQ_S, NOME_CONSTRUTO, NOME_ESCALA, NOME_ESCALA_UEQ_S, type Construto } from "@/lib/nomes-ueq";
 import { formatarDecimal } from "@/lib/texto";
-import { ESCALAS, type TabelaBenchmark } from "@/ueq";
-import { LegendaConstrutos, TituloSecao } from "./partes";
+import { ESCALAS, ESCALAS_UEQ_S, type Intervalo, type LimitesBenchmark } from "@/ueq";
+import { CONSTRUTOS_UEQ_S, LegendaConstrutos, TituloSecao } from "./partes";
 import estilos from "./resultados.module.css";
 import { tradutor } from "@/traducao/servidor";
 import { m } from "@/traducao/nucleo";
 
+// Serve às duas análises: as escalas vêm na ordem da planilha de cada instrumento
+type VersaoComparada = { versaoId: string; nome: string; analise: { escalas: { media: number | null; ic: Intervalo | null }[] } };
+
 type Propriedades = {
-  versoes: AnalisePorVersao[];
-  benchmark: TabelaBenchmark;
+  versoes: VersaoComparada[];
+  benchmark: Record<string, LimitesBenchmark>;
   faixaNeutra: { inferior: number; superior: number };
+  instrumento?: Instrumento;
+};
+
+const ESCALAS_DA_COMPARACAO: Record<Instrumento, { chave: string; nome: string; construto: Construto }[]> = {
+  UEQ: ESCALAS.map((escala) => ({ chave: escala, nome: NOME_ESCALA[escala], construto: CONSTRUTO[escala] })),
+  UEQ_S: ESCALAS_UEQ_S.map((escala) => ({ chave: escala, nome: NOME_ESCALA_UEQ_S[escala], construto: escala })),
 };
 
 const formaDa = (indice: number) => FORMAS[indice % FORMAS.length] ?? { ...FORMA_UNICA, nome: m("círculo cheio") };
@@ -39,19 +48,21 @@ export async function LegendaVersoes({ versoes }: { versoes: { nome: string; n: 
 }
 
 // Protótipo r7: médias lado a lado, um marcador por versão. Sem teste estatístico (fora do escopo)
-export async function VisaoComparacao({ versoes, benchmark, faixaNeutra }: Propriedades) {
+export async function VisaoComparacao({ versoes, benchmark, faixaNeutra, instrumento = "UEQ" }: Propriedades) {
   const t = await tradutor();
-  const media = (versao: AnalisePorVersao, posicao: number) => versao.analise.escalas[posicao]?.media ?? null;
+  const media = (versao: VersaoComparada, posicao: number) => versao.analise.escalas[posicao]?.media ?? null;
   const duas = versoes.length === 2;
+  const escalas = ESCALAS_DA_COMPARACAO[instrumento];
+  const ueqS = instrumento === "UEQ_S";
 
-  const linhas: LinhaEscala[] = ESCALAS.map((escala, posicao) => {
+  const linhas: LinhaEscala[] = escalas.map(({ chave: escala, nome, construto }, posicao) => {
     const primeira = versoes[0] ? media(versoes[0], posicao) : null;
     const segunda = versoes[1] ? media(versoes[1], posicao) : null;
     return {
       chave: escala,
-      nome: t(NOME_ESCALA[escala]),
-      construto: CONSTRUTO[escala],
-      limites: benchmark[escala],
+      nome: t(nome),
+      construto,
+      limites: benchmark[escala]!,
       faixaNeutra,
       marcadores: versoes.map((versao, indice) => ({ media: media(versao, posicao), ic: null, forma: formaDa(indice) })),
       valor: (
@@ -74,16 +85,16 @@ export async function VisaoComparacao({ versoes, benchmark, faixaNeutra }: Propr
 
   const descricao = [
     duas ? t("Médias por escala nas duas versões.") : t("Médias por escala nas {n} versões.", { n: versoes.length }),
-    ...ESCALAS.map(
-      (escala, posicao) =>
-        `${t(NOME_ESCALA[escala])}: ${versoes.map((versao) => `${versao.nome} ${formatarDecimal(media(versao, posicao))}`).join(", ")}.`,
+    ...escalas.map(
+      ({ nome }, posicao) =>
+        `${t(nome)}: ${versoes.map((versao) => `${versao.nome} ${formatarDecimal(media(versao, posicao))}`).join(", ")}.`,
     ),
   ].join(" ");
 
   const leitura = leituraDaComparacao(
     t,
-    ESCALAS.map((escala) => t(NOME_ESCALA[escala])),
-    versoes.map((versao) => ({ nome: versao.nome, medias: ESCALAS.map((_, posicao) => media(versao, posicao)) })),
+    escalas.map(({ nome }) => t(nome)),
+    versoes.map((versao) => ({ nome: versao.nome, medias: escalas.map((_, posicao) => media(versao, posicao)) })),
   );
 
   return (
@@ -102,8 +113,8 @@ export async function VisaoComparacao({ versoes, benchmark, faixaNeutra }: Propr
         <EscalasComBenchmark
           linhas={linhas}
           descricao={descricao}
-          nomesGrupos={NOME_CONSTRUTO}
-          legenda={<LegendaConstrutos comIntervalo={false} />}
+          nomesGrupos={ueqS ? GRUPOS_UEQ_S : NOME_CONSTRUTO}
+          legenda={<LegendaConstrutos comIntervalo={false} construtos={ueqS ? CONSTRUTOS_UEQ_S : undefined} />}
         />
         <p className={estilos.aviso}>
           {t("A comparação mostra as médias lado a lado, sem teste estatístico. Para afirmar que uma versão é melhor, rode um teste adequado sobre os dados exportados.")}
@@ -129,11 +140,11 @@ export async function VisaoComparacao({ versoes, benchmark, faixaNeutra }: Propr
               </tr>
             </thead>
             <tbody>
-              {ESCALAS.map((escala, posicao) => {
+              {escalas.map(({ chave: escala, nome }, posicao) => {
                 const [a, b] = versoes.map((versao) => media(versao, posicao));
                 return (
                   <tr key={escala}>
-                    <th scope="row">{t(NOME_ESCALA[escala])}</th>
+                    <th scope="row">{t(nome)}</th>
                     {versoes.map((versao) => {
                       const ic = versao.analise.escalas[posicao]?.ic;
                       return (

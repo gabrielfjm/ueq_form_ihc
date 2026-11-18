@@ -81,6 +81,7 @@ export default async function PaginaEstudo({ params, searchParams }: Propriedade
               : t("todas na análise")
       }
       responsavel={{ nome: estudo.responsavelNome, email: estudo.responsavelEmail, instituicao: estudo.instituicao }}
+      instrumento={estudo.instrumento}
       inicio={estudo.dataInicio}
       fim={estudo.dataFim}
       hoje={hojeEmBrasilia()}

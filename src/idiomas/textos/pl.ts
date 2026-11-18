@@ -27,6 +27,7 @@ export const pl: TextosParticipante = {
     subtitulo: "Badanie doświadczeń użytkowników",
     termoTitulo: "Formularz zgody",
     termoTexto: "Ocenisz swoje wrażenie z produktu za pomocą 26 par przeciwstawnych słów.",
+    termoTextoCurto: "Ocenisz swoje wrażenie z produktu za pomocą 8 par przeciwstawnych słów.",
     rotulos: {
       tempo: "Czas",
       dadosOpcionais: "Dane opcjonalne",
@@ -41,6 +42,8 @@ export const pl: TextosParticipante = {
     },
     tempo: "Od 3 do 5 minut, bez limitu czasu.",
     tempoComDados: "Od 4 do 6 minut, bez limitu czasu.",
+    tempoCurto: "Od 1 do 2 minut, bez limitu czasu.",
+    tempoCurtoComDados: "Od 2 do 3 minut, bez limitu czasu.",
     dadosOpcionais: "Na końcu są pytania opcjonalne o grupę wiekową, płeć, wykształcenie i korzystanie z produktu. Możesz pominąć wszystkie.",
     participacao: "Dobrowolny. Do momentu wysłania możesz zrezygnować w dowolnej chwili bez podawania powodu: użyj „{sair}” albo zamknij stronę, a nic z tego, co zaznaczysz, nie zostanie zapisane.",
     depoisDeEnviar: "Ponieważ odpowiedzi są anonimowe, po wysłaniu nie da się ich odnaleźć, aby je wycofać.",

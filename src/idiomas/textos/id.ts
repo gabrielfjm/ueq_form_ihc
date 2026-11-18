@@ -27,6 +27,7 @@ export const id: TextosParticipante = {
     subtitulo: "Penelitian pengalaman pengguna",
     termoTitulo: "Formulir persetujuan",
     termoTexto: "Anda akan menyampaikan kesan Anda tentang produk melalui 26 pasang kata yang berlawanan.",
+    termoTextoCurto: "Anda akan menyampaikan kesan Anda tentang produk melalui 8 pasang kata yang berlawanan.",
     rotulos: {
       tempo: "Waktu",
       dadosOpcionais: "Data opsional",
@@ -41,6 +42,8 @@ export const id: TextosParticipante = {
     },
     tempo: "3 sampai 5 menit, tanpa batas waktu.",
     tempoComDados: "4 sampai 6 menit, tanpa batas waktu.",
+    tempoCurto: "1 sampai 2 menit, tanpa batas waktu.",
+    tempoCurtoComDados: "2 sampai 3 menit, tanpa batas waktu.",
     dadosOpcionais: "Di akhir ada pertanyaan opsional tentang kelompok usia, gender, pendidikan, dan penggunaan produk. Anda boleh melewati semuanya.",
     participacao: "Sukarela. Sebelum mengirim, Anda dapat berhenti kapan saja tanpa memberi alasan: gunakan “{sair}” atau tutup halaman, dan tidak ada yang Anda tandai yang akan disimpan.",
     depoisDeEnviar: "Karena respons bersifat anonim, setelah dikirim respons tidak dapat ditemukan untuk ditarik kembali.",

@@ -2,7 +2,9 @@ import type { Metadata, Route } from "next";
 import { redirect } from "next/navigation";
 import { formatar } from "@/idiomas/formatar";
 import { infoIdioma, instrucaoDoIdioma, termosDoIdioma, textosDoIdioma } from "@/idiomas";
+import { termosDoUeqS } from "@/lib/instrumento";
 import { itensDoQuestionario } from "@/lib/itens-ueq";
+import { tempoDoQuestionario } from "@/lib/termo";
 import { estudoPublico, textosDoEstudo, idiomaDoParticipante, participacaoAtual } from "@/lib/participacao";
 import participante from "../participante.module.css";
 import { SeletorIdioma } from "../SeletorIdioma";
@@ -32,8 +34,12 @@ export default async function PaginaQuestionario({ params }: Propriedades) {
   const instrucao = instrucaoDoIdioma(idioma.codigo);
   // docs/ihc.md §3.3: ordem e polaridade oficiais, nunca reorganizadas pela interface. Os números vêm do banco
   // (é contra eles que o envio é validado) e os termos, do pacote oficial de idiomas (data/ueq-idiomas.json)
+  // O UEQ-S são 8 desses pares, na ordem dele e com o termo negativo sempre à esquerda (src/lib/instrumento.ts)
   const termos = new Map(termosDoIdioma(idioma.codigo).map((par) => [par.numero, par]));
-  const itens = (await itensDoQuestionario()).map(({ numero }) => termos.get(numero)!);
+  const itens =
+    estudo.instrumento === "UEQ_S"
+      ? termosDoUeqS(termosDoIdioma(idioma.codigo))
+      : (await itensDoQuestionario()).map(({ numero }) => termos.get(numero)!);
 
   return (
     <div className={estilos.pagina}>
@@ -66,7 +72,7 @@ export default async function PaginaQuestionario({ params }: Propriedades) {
             à parte para não virar um bloco de texto solto antes dos itens */}
         <p className={estilos.tempo}>
           <strong>{textos.consentimento.rotulos.tempo}:</strong>{" "}
-          {estudo.coletarDemografia ? textos.consentimento.tempoComDados : textos.consentimento.tempo}
+          {tempoDoQuestionario(textos, estudo)}
         </p>
         <section aria-labelledby="titulo-instrucao" className={estilos.instrucao}>
           <h2 id="titulo-instrucao" className={estilos.instrucaoTitulo}>

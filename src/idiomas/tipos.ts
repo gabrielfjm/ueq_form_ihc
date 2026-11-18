@@ -41,6 +41,8 @@ export type TextosParticipante = {
     termoTitulo: string;
     // Vem depois do objetivo escrito pelo pesquisador
     termoTexto: string;
+    // O mesmo no UEQ-S, a versão curta de 8 pares
+    termoTextoCurto: string;
     // Os títulos das linhas do termo (src/lib/termo.ts)
     rotulos: {
       tempo: string;
@@ -57,6 +59,9 @@ export type TextosParticipante = {
     tempo: string;
     // Quando o estudo tem a etapa de dados opcionais
     tempoComDados: string;
+    // Tempo do UEQ-S, sem e com a etapa de dados opcionais
+    tempoCurto: string;
+    tempoCurtoComDados: string;
     dadosOpcionais: string;
     // {sair}: o nome do botão "Sair sem enviar", para a citação nunca divergir dele
     participacao: string;

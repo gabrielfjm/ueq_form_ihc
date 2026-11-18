@@ -19,6 +19,7 @@ export type CampoEstudo =
   | "comiteEtica"
   | "dataInicio"
   | "dataFim"
+  | "instrumento"
   | `versao-${number}`;
 
 // Sugestões para um estudo novo: o pesquisador ajusta ao que o estudo dele de fato pede
@@ -45,6 +46,8 @@ const dadosEstudo = z
     dataInicio: z.string().regex(DIA, m("Informe a data de início.")),
     dataFim: z.string().regex(DIA, m("Informe a data de fim.")),
     coletarDemografia: z.boolean(),
+    // UEQ-S (RF62): escolhido na criação; a ação recusa a troca depois da primeira resposta
+    instrumento: z.enum(["UEQ", "UEQ_S"], { error: m("Escolha o questionário: UEQ completo ou UEQ-S.") }),
     // Conferido contra os 37 idiomas na ação (o módulo de idiomas não vai para o navegador)
     idioma: z.string(),
     versoes: z
@@ -89,6 +92,7 @@ export function lerFormularioEstudo(dados: FormData) {
     dataInicio: textoDoCampo(dados, "dataInicio"),
     dataFim: textoDoCampo(dados, "dataFim"),
     coletarDemografia: dados.get("coletarDemografia") === "sim",
+    instrumento: textoDoCampo(dados, "instrumento"),
     idioma: textoDoCampo(dados, "idioma"),
     versoes: nomes.map((nome, posicao) => ({ id: ids[posicao] ?? "", nome })),
   });

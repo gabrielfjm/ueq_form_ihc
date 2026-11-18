@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs";
 import { z } from "zod";
 import { Escala, Polaridade, PrismaClient } from "../src/generated/prisma/client";
 import { MINIMO_SENHA } from "../src/lib/validacao-conta";
-import { criarEstudoExemplo } from "./estudo-exemplo";
+import { criarEstudoExemplo, criarEstudoExemploUeqS } from "./estudo-exemplo";
 
 const escalaPorNome = {
   atratividade: Escala.ATRATIVIDADE,
@@ -112,6 +112,8 @@ if (emailTeste && senhaTeste) {
   console.log(`Pesquisador de teste pronto: ${emailTeste}.`);
   const respostas = await criarEstudoExemplo(prisma, pesquisador.id);
   console.log(`Estudo de exemplo pronto, com ${respostas} respostas das fixtures basico e inconsistente (link /r/exemplo).`);
+  const respostasUeqS = await criarEstudoExemploUeqS(prisma, pesquisador.id);
+  console.log(`Estudo de exemplo do UEQ-S pronto, com ${respostasUeqS} respostas de data/fixtures-ueq-s (link /r/exemplo-curto).`);
 } else {
   console.log("Sem PESQUISADOR_TESTE_EMAIL e PESQUISADOR_TESTE_SENHA no .env: pesquisador de teste não criado.");
 }

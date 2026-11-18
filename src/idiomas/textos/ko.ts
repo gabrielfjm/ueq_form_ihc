@@ -27,6 +27,7 @@ export const ko: TextosParticipante = {
     subtitulo: "사용자 경험 연구",
     termoTitulo: "연구 참여 동의서",
     termoTexto: "서로 반대되는 단어 26쌍으로 제품에 대한 인상을 평가하게 됩니다.",
+    termoTextoCurto: "서로 반대되는 단어 8쌍으로 제품에 대한 인상을 평가하게 됩니다.",
     rotulos: {
       tempo: "소요 시간",
       dadosOpcionais: "선택 정보",
@@ -41,6 +42,8 @@ export const ko: TextosParticipante = {
     },
     tempo: "3~5분, 시간 제한 없음.",
     tempoComDados: "4~6분, 시간 제한 없음.",
+    tempoCurto: "1~2분, 시간 제한 없음.",
+    tempoCurtoComDados: "2~3분, 시간 제한 없음.",
     dadosOpcionais: "마지막에 연령대, 성별, 학력, 제품 사용에 관한 선택 질문이 있습니다. 모두 건너뛸 수 있습니다.",
     participacao: "자발적입니다. 보내기 전까지는 이유를 밝히지 않고 언제든지 그만둘 수 있습니다. ‘{sair}’를 누르거나 페이지를 닫으면 표시한 내용은 저장되지 않습니다.",
     depoisDeEnviar: "응답은 익명이므로 보낸 후에는 찾아서 철회할 수 없습니다.",

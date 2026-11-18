@@ -8,7 +8,7 @@
   {
    "texto": " Com menos de 50 respostas o alfa oscila bastante; trate como indício, não como conclusão.",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "(abre em nova aba)",
@@ -23,12 +23,12 @@
   {
    "texto": "* Alfa abaixo de 0,7.",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": ", abaixo de 0,7",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": ", compartilhados com {quantidade}",
@@ -36,9 +36,14 @@
    "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
+   "texto": ", todas na posição do meio.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
+  },
+  {
    "texto": ", {faixa} no benchmark",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": ". Confira as {v}: cada coluna é um item, de 1 a 7. As respostas entram marcadas como importadas, na análise e com a mesma regra de suspeita das respostas pelo link.",
@@ -81,6 +86,11 @@
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
+   "texto": "26 pares de palavras · de 3 a 5 minutos",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
    "texto": "26 pares de palavras, 6 escalas e um link para os participantes.",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/_acesso/Paineis.tsx"
@@ -106,6 +116,16 @@
    "origem": "lib/demografia.ts"
   },
   {
+   "texto": "8 pares de palavras · de 1 a 2 minutos",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
+   "texto": "8, tirados dos 26",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
    "texto": "A UEQ Data Analysis Tool V15 já preenchida com {quantidade} da versão {nome} que estão na análise. Abra no Excel e clique em Habilitar edição: a planilha recalcula sozinha, com os gráficos, o benchmark e as suspeitas dela.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
@@ -114,6 +134,21 @@
    "texto": "A UEQ Data Analysis Tool V15 já preenchida com {quantidade} que estão na análise. Abra no Excel e clique em Habilitar edição: a planilha recalcula sozinha, com os gráficos, o benchmark e as suspeitas dela.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
+   "texto": "A UEQ-S Data Analysis Tool V15 já preenchida com {quantidade} da versão {nome} que estão na análise. Abra no Excel e clique em Habilitar edição: a planilha recalcula sozinha, com os gráficos, o benchmark e as suspeitas dela.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
+   "texto": "A UEQ-S Data Analysis Tool V15 já preenchida com {quantidade} que estão na análise. Abra no Excel e clique em Habilitar edição: a planilha recalcula sozinha, com os gráficos, o benchmark e as suspeitas dela.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
+   "texto": "A aba UEQ-S mostra a avaliação da versão curta: qualidade pragmática, hedônica e geral, com o benchmark e a planilha oficial dela. Num estudo do UEQ-S é o painel inteiro; num do UEQ completo, ela usa os 8 pares do UEQ-S que os participantes também responderam.",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "A base de comparação que diz se um resultado é excelente, bom, acima ou abaixo da média, ou ruim.",
@@ -236,7 +271,17 @@
    "origem": "lib/leitura-rapida.ts"
   },
   {
+   "texto": "A mesma comparação com a base oficial, em cinco faixas, de Excelente (entre os 10% melhores) a Ruim (entre os 25% piores). A planilha oficial do UEQ-S avisa que ainda não há dados suficientes da versão curta: os limites vêm dos mesmos 8 itens dentro do UEQ completo e são uma aproximação, para ler com cuidado.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
+  },
+  {
    "texto": "A mesma posição foi marcada em {iguais} dos 26 itens{v}",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
+  },
+  {
+   "texto": "A mesma posição foi marcada em {iguais} dos 8 itens{v}",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
@@ -441,6 +486,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/SeletorIdioma.tsx"
   },
   {
+   "texto": "Ainda não há dados suficientes da versão curta: os limites do UEQ-S vêm dos mesmos 8 itens dentro do UEQ completo. Use as faixas como uma primeira estimativa.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
+  },
+  {
    "texto": "Ainda não tem conta?",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/_acesso/FormularioEntrar.tsx"
@@ -463,7 +513,7 @@
   {
    "texto": "Alfa",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Algumas vezes",
@@ -478,7 +528,7 @@
   {
    "texto": "Amostra insuficiente para intervalo de confiança.",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Amplitude acima de",
@@ -556,6 +606,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
+   "texto": "Aproximado: os limites ainda vêm dos mesmos 8 itens dentro do UEQ completo",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
    "texto": "Aqui ficam os seus estudos e os que a equipe compartilhou com você. Separamos um estudo com respostas para o tour. Clique no título dele para abrir.",
    "cliente": true,
    "origem": "componentes/tutorial/passos.ts"
@@ -576,9 +631,19 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
   {
+   "texto": "As 2 escalas inconsistentes, ou a posição do meio ({meio}) nos 8 itens",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
+  },
+  {
    "texto": "As 26 respostas do questionário, a versão do produto que você avaliou, o idioma, a data, se você declarou ter menos de 18 anos com a autorização do responsável e, só se o pesquisador ligou essa etapa e você quis responder, a faixa etária, o gênero, a escolaridade e se você já usava o produto. Todas essas perguntas têm “Prefiro não responder” e podem ser puladas.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
+  },
+  {
+   "texto": "As 6 escalas e, a partir delas, as qualidades pragmática e hedônica",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "As datas de início e fim são só referência para a equipe: quem decide se o link aceita respostas é o botão de abrir e encerrar a coleta.",
@@ -599,6 +664,11 @@
    "texto": "As médias das 6 escalas aparecem assim que chegar a primeira resposta.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
+  },
+  {
+   "texto": "As médias, os intervalos de confiança, o alfa e o benchmark da qualidade pragmática, da hedônica e da geral aparecem aqui assim que chegar a primeira resposta.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ueq-s/page.tsx"
   },
   {
    "texto": "As médias, os intervalos de confiança, o alfa e o benchmark das 6 escalas aparecem aqui assim que chegar a primeira resposta.",
@@ -682,8 +752,13 @@
   },
   {
    "texto": "Benchmark",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
+  },
+  {
+   "texto": "Benchmark aproximado.",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Benefícios",
@@ -774,6 +849,11 @@
    "texto": "Cada ponto é a média das respostas no par, do termo da esquerda (-3) ao da direita (+3). A ordem e os lados são os do questionário.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+  },
+  {
+   "texto": "Cada ponto é a média das respostas no par, do termo da esquerda (-3) ao da direita (+3). No UEQ-S o termo negativo fica sempre à esquerda.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Cancelar",
@@ -878,7 +958,7 @@
   {
    "texto": "Com menos de 2 respostas na análise não há desvio-padrão nem IC95, e o gráfico mostra só a média. Espere mais respostas antes de interpretar.",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Começa em {dias}.",
@@ -909,6 +989,11 @@
    "texto": "Como leitor, você pode ver o painel de resultados e as respostas, e exportar os dados.",
    "cliente": false,
    "origem": "lib/email.ts"
+  },
+  {
+   "texto": "Como ler a escala geral?",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "Como ler os resultados",
@@ -1283,7 +1368,7 @@
   {
    "texto": "DP",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Da conta mais antiga para a mais nova",
@@ -1361,6 +1446,26 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
+   "texto": "De 1 a 2 minutos",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
+   "texto": "De 1 a 2 minutos · voluntária e anônima",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
+  },
+  {
+   "texto": "De 2 a 3 minutos · voluntária e anônima",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
+  },
+  {
+   "texto": "De 3 a 5 minutos",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
    "texto": "De 3 a 5 minutos · voluntária e anônima",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
@@ -1379,6 +1484,11 @@
    "texto": "De {nome} · você é {v}",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/page.tsx"
+  },
+  {
+   "texto": "Depois da primeira resposta a escolha trava, para o estudo não misturar os dois questionários.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Depois de enviar",
@@ -1469,6 +1579,11 @@
    "texto": "Diferença =",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoComparacao.tsx"
+  },
+  {
+   "texto": "Diferenças entre o UEQ completo e o UEQ-S",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Diga qual produto será avaliado.",
@@ -1773,10 +1888,15 @@
   {
    "texto": "Escalas",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Escalas do UEQ",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/AbasResultados.tsx"
+  },
+  {
+   "texto": "Escalas do UEQ-S",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/AbasResultados.tsx"
   },
@@ -1814,6 +1934,11 @@
    "texto": "Escolha o idioma",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/conta/idioma/page.tsx"
+  },
+  {
+   "texto": "Escolha o questionário: UEQ completo ou UEQ-S.",
+   "cliente": true,
+   "origem": "lib/validacao-estudo.ts"
   },
   {
    "texto": "Escolha um arquivo CSV com as respostas.",
@@ -1924,6 +2049,11 @@
    "texto": "Estudo de {nome} · {v}",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
+  },
+  {
+   "texto": "Estudo do UEQ-S",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Estudo excluído.",
@@ -2111,6 +2241,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
+   "texto": "Ferramenta UEQ · Painel de resultados do UEQ-S",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
+  },
+  {
    "texto": "Ficha do estudo",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
@@ -2151,6 +2286,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
   },
   {
+   "texto": "Geral",
+   "cliente": true,
+   "origem": "lib/nomes-ueq.ts"
+  },
+  {
    "texto": "Gráficos dos dados demográficos",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/demograficos/page.tsx"
@@ -2188,7 +2328,7 @@
   {
    "texto": "IC de {inferior} a {superior}",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "IC95",
@@ -2341,6 +2481,21 @@
    "origem": "graficos/MediasPorItem.tsx"
   },
   {
+   "texto": "Item {numero}: de {esquerdo} a {direito}",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
+  },
+  {
+   "texto": "Itens 1 a 4",
+   "cliente": true,
+   "origem": "lib/nomes-ueq.ts"
+  },
+  {
+   "texto": "Itens 5 a 8",
+   "cliente": true,
+   "origem": "lib/nomes-ueq.ts"
+  },
+  {
    "texto": "Jean Weiss",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
@@ -2408,7 +2563,7 @@
   {
    "texto": "Leitura",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Leitura rápida",
@@ -2481,9 +2636,19 @@
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
+   "texto": "Mede as 6 escalas (Atratividade, Perspicuidade, Eficiência, Confiabilidade, Estimulação e Novidade) e, a partir delas, as qualidades pragmática e hedônica. É o recomendado para a maioria dos estudos, como depois de um teste de usabilidade.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
    "texto": "Mede se os itens de uma escala andaram juntos neste grupo de participantes. Abaixo de 0,7 é sinal de que a escala pode ter sido entendida de jeitos diferentes. Com menos de 50 respostas o alfa oscila bastante, então trate um valor baixo como indício, não como conclusão.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
+  },
+  {
+   "texto": "Mede só a qualidade pragmática, a qualidade hedônica e uma nota geral, sem as 6 escalas. Serve para quando o completo não cabe: pouco tempo, o UEQ dentro de um questionário maior ou a mesma pessoa avaliando vários produtos seguidos.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Menores de 18 anos",
@@ -2502,6 +2667,11 @@
   },
   {
    "texto": "Mesmo formato, com valores de -3 a +3 e a polaridade já corrigida.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
+   "texto": "Mesmo formato, com valores de -3 a +3. No UEQ-S o termo positivo está sempre à direita.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
@@ -2568,7 +2738,7 @@
   {
    "texto": "Média",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Média e IC95 de cada escala, por versão",
@@ -2579,6 +2749,11 @@
    "texto": "Médias das seis escalas do UEQ com intervalo de confiança de 95% e faixas do benchmark.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+  },
+  {
+   "texto": "Médias das três escalas do UEQ-S com intervalo de confiança de 95% e faixas do benchmark.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Médias por escala nas duas versões.",
@@ -2593,7 +2768,7 @@
   {
    "texto": "Médias por item",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Médias por versão",
@@ -2619,6 +2794,11 @@
    "texto": "Na análise",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
+  },
+  {
+   "texto": "Na maioria dos estudos, como depois de um teste de usabilidade",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Nada foi importado. Corrija estas linhas no arquivo e envie de novo; as outras estão certas.",
@@ -2801,6 +2981,11 @@
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
+   "texto": "Num estudo do UEQ completo, os resultados também mostram o UEQ-S, numa aba própria, calculado com os 8 pares dele.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
    "texto": "Nunca tinha usado",
    "cliente": true,
    "origem": "lib/demografia.ts"
@@ -2854,6 +3039,31 @@
    "texto": "Não respondeu",
    "cliente": true,
    "origem": "lib/perfil-demografico.ts"
+  },
+  {
+   "texto": "O UEQ completo tem 26 pares e mede as 6 escalas; é o recomendado na maioria dos estudos. O UEQ-S tem 8 desses pares, leva de 1 a 2 minutos e mede só a qualidade pragmática, a hedônica e uma nota geral; use quando o completo não cabe. A escolha muda o questionário, o painel e a planilha exportada, e trava na primeira resposta.",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "O UEQ tem duas formas. As duas usam os mesmos pares de palavras opostas e a mesma escala de 7 posições; a versão curta usa só 8 dos 26 pares.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
+   "texto": "O UEQ-S a partir do UEQ completo.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ueq-s/page.tsx"
+  },
+  {
+   "texto": "O UEQ-S são 8 dos 26 pares: 11, 13, 20 e 21 (qualidade pragmática) e 6, 7, 10 e 15 (qualidade hedônica). Esta aba usa as respostas que os participantes deram a esses pares, do mesmo jeito que os autores montaram o UEQ-S e o benchmark dele. Para as 6 escalas, volte à aba Escalas do UEQ.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ueq-s/page.tsx"
+  },
+  {
+   "texto": "O UEQ-S é a versão curta do UEQ: 8 dos mesmos 26 pares, com a mesma escala de 7 posições. É mais rápido de responder, mas não separa as 6 escalas. Você escolhe um dos dois ao criar o estudo.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "O arquivo não tem nenhuma linha de respostas.",
@@ -2921,6 +3131,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/editar/page.tsx"
   },
   {
+   "texto": "O estudo já tem respostas, então o questionário não pode mais mudar. Para usar o outro, crie um estudo novo.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/acoes.ts"
+  },
+  {
    "texto": "O formulário que define o que vai ser avaliado e quem vai responder o quê.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
@@ -2971,6 +3186,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/PreviaParticipante.tsx"
   },
   {
+   "texto": "O oficial, com 21.175 pessoas de 468 estudos",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
    "texto": "O painel do UEQ: médias das seis escalas, comparação com o benchmark, itens e exportações.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
@@ -3016,9 +3236,24 @@
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
+   "texto": "O que mede",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
+   "texto": "O que muda com a escolha:",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
    "texto": "O que não guardamos",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
+  },
+  {
+   "texto": "O que são qualidade pragmática e hedônica?",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "O que tem na tabela",
@@ -3051,6 +3286,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
+   "texto": "O que é o benchmark do UEQ-S?",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
+  },
+  {
    "texto": "O que é o benchmark?",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
@@ -3079,6 +3319,11 @@
    "texto": "O sino na barra do topo, entre Minha conta e Sair, mostra quantas novidades você ainda não viu: convites (que você aceita ou recusa ali mesmo), respostas que chegaram e mudanças que outras pessoas fizeram nos seus estudos.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "O termo negativo fica sempre à esquerda. Os 4 primeiros medem a qualidade pragmática; os 4 últimos, a hedônica.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "O texto não é igual ao título do estudo. Nada foi excluído.",
@@ -3126,6 +3371,16 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
+   "texto": "Os 8 itens",
+   "cliente": true,
+   "origem": "lib/nomes-ueq.ts"
+  },
+  {
+   "texto": "Os 8 pares do UEQ-S",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
+  },
+  {
    "texto": "Os dados demográficos são gravados cifrados com AES-256-GCM, com a chave guardada fora do banco: quem tivesse uma cópia do banco não conseguiria lê-los.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
@@ -3133,12 +3388,12 @@
   {
    "texto": "Os itens de {escalas} não andaram juntos neste grupo: a escala pode ter sido entendida de jeitos diferentes. Confira os itens {itens} em “Médias por item” antes de tirar conclusões sobre essa escala.",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Os itens de {escalas} não andaram juntos neste grupo: as escalas podem ter sido entendidas de jeitos diferentes. Confira os itens {itens} em “Médias por item” antes de tirar conclusões sobre essas escalas.",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Os links públicos param de funcionar. Não dá para desfazer.",
@@ -3256,6 +3511,11 @@
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
+   "texto": "Pares de palavras",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
    "texto": "Partes dos resultados",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/AbasResultados.tsx"
@@ -3351,6 +3611,21 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
+   "texto": "Planilha oficial do UEQ-S (XLSX)",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
+   "texto": "Planilha oficial do UEQ-S e data/protocolo-ueq-s.json",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
+  },
+  {
+   "texto": "Planilha oficial exportada",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
    "texto": "Pode fazer o download dos próprios dados ou apagá-los quando quiser.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
@@ -3389,6 +3664,11 @@
    "texto": "Positiva",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
+  },
+  {
+   "texto": "Pragmática é se o produto ajuda a fazer o que a pessoa precisa: os itens 1 a 4 (apoio, facilidade, eficiência e clareza). Hedônica é se usar é agradável e interessante: os itens 5 a 8 (empolgante, interessante, original e inovador). O UEQ-S não separa as 6 escalas do UEQ completo.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },
   {
    "texto": "Prefiro não responder",
@@ -3521,9 +3801,19 @@
    "origem": "lib/ajuda.ts"
   },
   {
+   "texto": "Quando o completo não cabe: pouco tempo, o UEQ dentro de um questionário maior, ou a mesma pessoa avaliando vários produtos seguidos",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
    "texto": "Quando o estudo coleta dados demográficos, a sub-aba “Dados demográficos” mostra cada pergunta no gráfico que combina com ela: faixa etária em colunas, gênero e escolaridade em barras e familiaridade numa barra dividida. “Ver os números” abre a tabela de cada gráfico.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "Quando usar",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
    "texto": "Quem cuida dos dados",
@@ -3554,6 +3844,21 @@
    "texto": "Quem vê o quê",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
+  },
+  {
+   "texto": "Questionário",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
+   "texto": "Questionário do estudo",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
+   "texto": "Questionário: UEQ ou UEQ-S",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Rascunho",
@@ -3686,6 +3991,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AbasEstudo.tsx"
   },
   {
+   "texto": "Resultados do UEQ-S por escala (CSV)",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
    "texto": "Resultados mostra o painel com as seis escalas e o benchmark; Respostas lista cada participação e as suspeitas.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
@@ -3693,7 +4003,7 @@
   {
    "texto": "Resultados por escala",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Resultados por escala (CSV)",
@@ -3824,6 +4134,11 @@
    "texto": "Se o estudo foi aprovado por um comitê de ética, informe o nome do comitê, o número do parecer ou CAAE e o contato.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
+   "texto": "Se o estudo usa o UEQ-S, o CSV tem 8 colunas, na ordem do UEQ-S, como na aba Data da planilha oficial do UEQ-S.",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Se o produto é criativo e inovador.",
@@ -3996,14 +4311,24 @@
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
+   "texto": "Só qualidade pragmática, qualidade hedônica e uma nota geral",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
    "texto": "Teclado, leitor de tela e zoom de 400% (WCAG 2.2 AA).",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
+   "texto": "Tempo para responder",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
    "texto": "Texto gerado a partir das médias e das faixas de interpretação. Os números estão no gráfico e na tabela logo abaixo.",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "Tirar administrador",
@@ -4136,14 +4461,54 @@
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
+   "texto": "UEQ Data Analysis Tool",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
+   "texto": "UEQ completo",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
    "texto": "UEQ completo · 26 itens · {length} idiomas",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
   },
   {
+   "texto": "UEQ ou UEQ-S",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
+  },
+  {
    "texto": "UEQ © Laugwitz, Held e Schrepp ·",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
+  },
+  {
+   "texto": "UEQ-S",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/AbasResultados.tsx"
+  },
+  {
+   "texto": "UEQ-S Data Analysis Tool",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
+   "texto": "UEQ-S · {titulo} · Ferramenta UEQ",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/ueq-s/page.tsx"
+  },
+  {
+   "texto": "UEQ-S, versão curta",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
+   "texto": "UEQ-S, versão curta · 8 itens · {length} idiomas",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
   },
   {
    "texto": "Um CSV com 26 colunas (uma por item, na ordem oficial) e uma linha por participante, com valores de 1 a 7, como na aba Data da planilha do UEQ.",
@@ -4176,12 +4541,22 @@
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
+   "texto": "Uma linha por participação, os 8 valores de 1 a 7 na ordem do UEQ-S, com colunas de inclusão na análise e suspeita.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
    "texto": "Uma linha por participação, valores de 1 a 7, com colunas de inclusão na análise e suspeita. Para arquivar ou analisar em outro programa.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Uma pessoa por linha, com os 26 valores de 1 a 7 na ordem oficial e sem cabeçalho. Separados por ponto e vírgula, vírgula ou tabulação. Até 5000 linhas.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
+  },
+  {
+   "texto": "Uma pessoa por linha, com os 8 valores de 1 a 7 na ordem do UEQ-S e sem cabeçalho, como na aba Data da planilha oficial do UEQ-S. Separados por ponto e vírgula, vírgula ou tabulação. Até 5000 linhas.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/FormularioImportacao.tsx"
   },
@@ -4264,6 +4639,11 @@
    "texto": "Veja quem tem conta, torne alguém administrador e crie a conta de quem vai testar ou avaliar a ferramenta. No primeiro acesso a pessoa faz o tour e pode trocar a senha em Minha conta.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "Ver a diferença entre o UEQ e o UEQ-S",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "Ver convites",
@@ -4743,12 +5123,22 @@
   {
    "texto": "n",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "n na análise",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
+  },
+  {
+   "texto": "n, média, DP, IC95, alfa e faixas da qualidade pragmática, da hedônica e da geral, por versão, só com as participações na análise.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
+   "texto": "n, média, DP, IC95, alfa e faixas da qualidade pragmática, da hedônica e da geral, por versão. As respostas brutas saem na aba do UEQ.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "n, média, DP, IC95, alfa e faixas de cada escala e versão, só com as participações na análise. Para as tabelas do relatório.",
@@ -4834,6 +5224,11 @@
    "texto": "o link não aceita mais respostas",
    "cliente": true,
    "origem": "lib/status-estudo.ts"
+  },
+  {
+   "texto": "o questionário que o participante responde, o tempo informado no termo, o painel de resultados e a planilha oficial que você exporta. O UEQ-S não tem as 6 escalas: só qualidade pragmática, qualidade hedônica e uma nota geral.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
    "texto": "ontem",
@@ -4988,17 +5383,17 @@
   {
    "texto": "sem intervalo de confiança",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "sem leitura",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "sem média",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "somando todos os estudos",
@@ -5029,6 +5424,11 @@
    "texto": "todas na análise",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
+  },
+  {
+   "texto": "todas no meio",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
    "texto": "tradução não aprovada",
@@ -5094,6 +5494,11 @@
    "texto": "{escala} ({diferenca} a favor de {versao})",
    "cliente": false,
    "origem": "lib/leitura-rapida.ts"
+  },
+  {
+   "texto": "{escala} · {itens}",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "{foraDaAnalise} participações fora da análise.",
@@ -5238,7 +5643,7 @@
   {
    "texto": "{nome}: média {media}, {ic}, {leitura}{benchmark}.",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "{n} na análise",
@@ -5308,7 +5713,7 @@
   {
    "texto": "{rotuloSelecao}, {quantidade} na análise",
    "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
   },
   {
    "texto": "{rotulo}: em produção.",
@@ -5352,6 +5757,11 @@
   },
   {
    "texto": "É a leitura padrão do handbook do UEQ: médias entre -0,8 e +0,8 indicam avaliação neutra, acima de +0,8 positiva e abaixo de -0,8 negativa. Médias acima de +2 ou abaixo de -2 são raras, porque as pessoas tendem a evitar os extremos da escala.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
+  },
+  {
+   "texto": "É a média dos 8 itens. O handbook pede cuidado: ela não é um indicador único de experiência, porque o peso da qualidade pragmática e da hedônica muda de um produto para outro. Leia sempre junto com as duas.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/Explicacoes.tsx"
   },

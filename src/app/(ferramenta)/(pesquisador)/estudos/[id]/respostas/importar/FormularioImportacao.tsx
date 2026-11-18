@@ -12,19 +12,20 @@ import estilos from "./importar.module.css";
 import { useT } from "@/traducao/cliente";
 import { m } from "@/traducao/nucleo";
 
-type Propriedades = { estudoId: string; versoes: { id: string; nome: string }[] };
+// totalItens: 26 num estudo do UEQ, 8 num do UEQ-S (a aba Data de cada planilha oficial)
+type Propriedades = { estudoId: string; versoes: { id: string; nome: string }[]; totalItens: number };
 
 const CAMPOS = [
   { nome: "versao", rotulo: m("Versão"), id: "importar-versao" },
   { nome: "arquivo", rotulo: m("Arquivo CSV"), id: "importar-arquivo" },
 ] as const;
 
-const COLUNAS = Array.from({ length: 26 }, (_, posicao) => posicao + 1);
 
 // Dois passos, como pede uma ação que grava muitas linhas de uma vez: ver antes, confirmar depois
 // (Nielsen 5, prevenção de erros; Shneiderman 4, diálogo com fechamento)
-export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
+export function FormularioImportacao({ estudoId, versoes, totalItens }: Propriedades) {
   const t = useT();
+  const colunas = Array.from({ length: totalItens }, (_, posicao) => posicao + 1);
   const [previa, setPrevia] = useState<Previa | null>(null);
   const [erro, setErro] = useState<ResultadoPrevia["erro"]>();
   const [erroGravar, setErroGravar] = useState("");
@@ -106,7 +107,9 @@ export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
             {t("Arquivo CSV")}
           </label>
           <p id="importar-arquivo-ajuda" className={formulario.ajuda}>
-            {t("Uma pessoa por linha, com os 26 valores de 1 a 7 na ordem oficial e sem cabeçalho. Separados por ponto e vírgula, vírgula ou tabulação. Até 5000 linhas.")}
+            {totalItens === 26
+              ? t("Uma pessoa por linha, com os 26 valores de 1 a 7 na ordem oficial e sem cabeçalho. Separados por ponto e vírgula, vírgula ou tabulação. Até 5000 linhas.")
+              : t("Uma pessoa por linha, com os 8 valores de 1 a 7 na ordem do UEQ-S e sem cabeçalho, como na aba Data da planilha oficial do UEQ-S. Separados por ponto e vírgula, vírgula ou tabulação. Até 5000 linhas.")}
           </p>
           {erro?.campo === "arquivo" && (
             <p id="importar-arquivo-erro" className={formulario.erro}>
@@ -180,7 +183,7 @@ export function FormularioImportacao({ estudoId, versoes }: Propriedades) {
               <thead>
                 <tr>
                   <th scope="col">{t("Linha")}</th>
-                  {COLUNAS.map((numero) => (
+                  {colunas.map((numero) => (
                     <th key={numero} scope="col" className={estilos.numero}>
                       <span className="visualmente-oculto">{t("Item")}{" "}</span>
                       {numero}

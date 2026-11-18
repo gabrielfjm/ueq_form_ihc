@@ -27,6 +27,7 @@ export const zh: TextosParticipante = {
     subtitulo: "用户体验研究",
     termoTitulo: "知情同意书",
     termoTexto: "你将通过 26 对意义相反的词语，表达你对该产品的印象。",
+    termoTextoCurto: "你将通过 8 对意义相反的词语，表达你对该产品的印象。",
     rotulos: {
       tempo: "用时",
       dadosOpcionais: "选填信息",
@@ -41,6 +42,8 @@ export const zh: TextosParticipante = {
     },
     tempo: "3 至 5 分钟，不限时间。",
     tempoComDados: "4 至 6 分钟，不限时间。",
+    tempoCurto: "1 至 2 分钟，不限时间。",
+    tempoCurtoComDados: "2 至 3 分钟，不限时间。",
     dadosOpcionais: "最后有关于年龄段、性别、受教育程度和产品使用情况的选填问题，均可跳过。",
     participacao: "自愿参与。提交前你可以随时退出，无需说明理由：点击“{sair}”或关闭页面，已勾选的内容都不会被保存。",
     depoisDeEnviar: "由于回答是匿名的，提交后无法找到并撤回。",

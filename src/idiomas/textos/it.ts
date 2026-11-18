@@ -27,6 +27,7 @@ export const it: TextosParticipante = {
     subtitulo: "Ricerca sull’esperienza utente",
     termoTitulo: "Modulo di consenso",
     termoTexto: "Indicherai la tua impressione sul prodotto con 26 coppie di parole opposte.",
+    termoTextoCurto: "Indicherai la tua impressione sul prodotto con 8 coppie di parole opposte.",
     rotulos: {
       tempo: "Durata",
       dadosOpcionais: "Dati facoltativi",
@@ -41,6 +42,8 @@ export const it: TextosParticipante = {
     },
     tempo: "Da 3 a 5 minuti, senza limiti di tempo.",
     tempoComDados: "Da 4 a 6 minuti, senza limiti di tempo.",
+    tempoCurto: "Da 1 a 2 minuti, senza limiti di tempo.",
+    tempoCurtoComDados: "Da 2 a 3 minuti, senza limiti di tempo.",
     dadosOpcionais: "Alla fine ci sono domande facoltative su fascia d’età, genere, titolo di studio e uso del prodotto. Puoi saltarle tutte.",
     participacao: "Volontaria. Fino all’invio puoi rinunciare in qualsiasi momento, senza dare spiegazioni: usa «{sair}» o chiudi la pagina, e nulla di ciò che hai segnato verrà salvato.",
     depoisDeEnviar: "Poiché le risposte sono anonime, una volta inviate non è possibile ritrovarle per ritirarle.",

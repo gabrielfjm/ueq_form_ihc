@@ -47,6 +47,11 @@ export const AJUDA = {
           m("Título e produto aparecem para você; o objetivo também aparece para o participante, na tela de consentimento. Escreva em linguagem simples."),
       },
       {
+        titulo: m("Questionário: UEQ ou UEQ-S"),
+        texto:
+          m("O UEQ completo tem 26 pares e mede as 6 escalas; é o recomendado na maioria dos estudos. O UEQ-S tem 8 desses pares, leva de 1 a 2 minutos e mede só a qualidade pragmática, a hedônica e uma nota geral; use quando o completo não cabe. A escolha muda o questionário, o painel e a planilha exportada, e trava na primeira resposta."),
+      },
+      {
         titulo: m("Idioma do questionário"),
         texto:
           m("O link abre no idioma escolhido, e o participante pode trocar para qualquer um dos 37 idiomas do UEQ. Os 26 pares de palavras usam a tradução oficial; título, produto e objetivo são traduzidos automaticamente."),
@@ -131,6 +136,11 @@ export const AJUDA = {
           m("Em estudos com mais de uma versão, o modo de comparação põe as médias das versões lado a lado, escala por escala, com a diferença entre elas. Olhe os intervalos de confiança antes de concluir que uma versão é melhor."),
       },
       {
+        titulo: m("UEQ-S"),
+        texto:
+          m("A aba UEQ-S mostra a avaliação da versão curta: qualidade pragmática, hedônica e geral, com o benchmark e a planilha oficial dela. Num estudo do UEQ-S é o painel inteiro; num do UEQ completo, ela usa os 8 pares do UEQ-S que os participantes também responderam."),
+      },
+      {
         titulo: m("Exportar"),
         texto:
           m("No fim da página você baixa os dados em CSV (no formato da planilha oficial do UEQ) e o painel em PDF, para o relatório."),
@@ -171,6 +181,10 @@ export const AJUDA = {
         titulo: m("Formato do arquivo"),
         texto:
           m("Um CSV com 26 colunas (uma por item, na ordem oficial) e uma linha por participante, com valores de 1 a 7, como na aba Data da planilha do UEQ."),
+      },
+      {
+        titulo: m("Estudo do UEQ-S"),
+        texto: m("Se o estudo usa o UEQ-S, o CSV tem 8 colunas, na ordem do UEQ-S, como na aba Data da planilha oficial do UEQ-S."),
       },
       {
         titulo: m("Conferência antes de gravar"),

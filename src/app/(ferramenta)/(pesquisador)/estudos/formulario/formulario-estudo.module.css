@@ -188,3 +188,70 @@
 .lgpd p {
   margin: 0;
 }
+
+/* Escolha do questionário: dois cartões lado a lado, cada um com o que mede e quanto tempo leva */
+.instrumentos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.instrumento {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  /* contorno de controle: 3:1 com o fundo (WCAG 1.4.11) */
+  border: 1px solid var(--borda-campo);
+  border-radius: var(--raio);
+  background: var(--fundo);
+  cursor: pointer;
+}
+
+.instrumento:has(input:checked) {
+  border-color: var(--destaque);
+  box-shadow: inset 0 0 0 1px var(--destaque);
+}
+
+.instrumento:has(input:focus-visible) {
+  outline: 2px solid var(--destaque);
+  outline-offset: 2px;
+}
+
+.instrumentos:disabled .instrumento {
+  cursor: not-allowed;
+  opacity: 0.75;
+}
+
+.instrumento input {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin: 2px 0 0;
+  accent-color: var(--destaque);
+}
+
+.instrumentoCorpo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.instrumentoNome {
+  font-weight: 700;
+}
+
+.instrumentoResumo {
+  font-size: var(--texto-sm);
+  font-variant-numeric: tabular-nums;
+  color: var(--destaque);
+}
+
+.instrumentoTexto {
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}

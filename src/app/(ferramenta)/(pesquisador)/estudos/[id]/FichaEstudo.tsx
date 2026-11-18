@@ -18,6 +18,7 @@ type Propriedades = {
   responsavel: { nome: string; email: string; instituicao: string };
   criadoEm: Date;
   atualizadoEm: Date;
+  instrumento: "UEQ" | "UEQ_S";
 };
 
 function ReguaFicha({ status, inicio, fim, hoje }: Pick<Propriedades, "status" | "inicio" | "fim" | "hoje">) {
@@ -37,7 +38,7 @@ function ReguaFicha({ status, inicio, fim, hoje }: Pick<Propriedades, "status" |
 // Ficha lateral dos protótipos r4b e r5
 export async function FichaEstudo(propriedades: Propriedades) {
   const t = await tradutor();
-  const { status, respostas, detalheRespostas, inicio, fim, hoje, produto, objetivo, responsavel, criadoEm, atualizadoEm } = propriedades;
+  const { status, respostas, detalheRespostas, inicio, fim, hoje, produto, objetivo, responsavel, criadoEm, atualizadoEm, instrumento } = propriedades;
   return (
     <aside aria-labelledby="titulo-ficha" className={estilos.ficha}>
       <h2 id="titulo-ficha" className={estilos.fichaTitulo}>
@@ -81,7 +82,11 @@ export async function FichaEstudo(propriedades: Propriedades) {
         </div>
         <div>
           <dt>{t("Instrumento")}</dt>
-          <dd>{t("UEQ completo · 26 itens · {length} idiomas", { length: IDIOMAS.length })}</dd>
+          <dd>
+            {instrumento === "UEQ_S"
+              ? t("UEQ-S, versão curta · 8 itens · {length} idiomas", { length: IDIOMAS.length })
+              : t("UEQ completo · 26 itens · {length} idiomas", { length: IDIOMAS.length })}
+          </dd>
         </div>
         <div>
           <dt>{t("Criado em")}</dt>

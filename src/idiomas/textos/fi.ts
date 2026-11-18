@@ -27,6 +27,7 @@ export const fi: TextosParticipante = {
     subtitulo: "Käyttäjäkokemustutkimus",
     termoTitulo: "Suostumuslomake",
     termoTexto: "Arvioit vaikutelmaasi tuotteesta 26 vastakohtaparin avulla.",
+    termoTextoCurto: "Arvioit vaikutelmaasi tuotteesta 8 vastakohtaparin avulla.",
     rotulos: {
       tempo: "Aika",
       dadosOpcionais: "Vapaaehtoiset tiedot",
@@ -41,6 +42,8 @@ export const fi: TextosParticipante = {
     },
     tempo: "3–5 minuuttia, ei aikarajaa.",
     tempoComDados: "4–6 minuuttia, ei aikarajaa.",
+    tempoCurto: "1–2 minuuttia, ei aikarajaa.",
+    tempoCurtoComDados: "2–3 minuuttia, ei aikarajaa.",
     dadosOpcionais: "Lopussa on vapaaehtoisia kysymyksiä ikäryhmästä, sukupuolesta, koulutuksesta ja tuotteen käytöstä. Voit ohittaa ne kaikki.",
     participacao: "Vapaaehtoista. Ennen lähettämistä voit keskeyttää milloin tahansa syytä kertomatta: valitse ”{sair}” tai sulje sivu, eikä mitään valitsemaasi tallenneta.",
     depoisDeEnviar: "Koska vastaukset ovat nimettömiä, niitä ei lähettämisen jälkeen voi löytää ja perua.",

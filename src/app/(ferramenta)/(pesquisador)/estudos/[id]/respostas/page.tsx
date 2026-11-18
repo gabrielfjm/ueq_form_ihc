@@ -3,12 +3,18 @@ import type { Metadata, Route } from "next";
 import Link from "next/link";
 import { Avisos } from "@/componentes/Avisos";
 import { contagemDeRespostas, estudoDoPesquisador } from "@/lib/estudos";
-import { NOME_ESCALA } from "@/lib/nomes-ueq";
+import { QUANTIDADE_DE_ITENS } from "@/lib/instrumento";
+import { NOME_ESCALA, NOME_ESCALA_UEQ_S } from "@/lib/nomes-ueq";
 import { juntarComE } from "@/lib/texto";
-import { PARAMETROS_SUSPEITA, participacoesAvaliadas } from "@/lib/participacoes";
+import {
+  PARAMETROS_SUSPEITA,
+  PARAMETROS_SUSPEITA_UEQ_S,
+  participacoesAvaliadas,
+  type ParticipacaoAvaliada,
+} from "@/lib/participacoes";
 import { exigirPesquisador } from "@/lib/sessao";
 import { formatarDiaHora, plural } from "@/lib/texto";
-import { ESCALAS, type MotivoSuspeita } from "@/ueq";
+import { ESCALAS, type MotivoSuspeita, type MotivoSuspeitaUeqS } from "@/ueq";
 import { FaixaEstudo, resumoDoEstudo } from "../FaixaEstudo";
 import estilos from "./respostas.module.css";
 import { TabelaParticipacoes } from "./TabelaParticipacoes";
@@ -27,7 +33,29 @@ export async function generateMetadata({ params }: Propriedades): Promise<Metada
   return { title: t("Respostas · {titulo} · Ferramenta UEQ", { titulo: estudo.titulo }) };
 }
 
-const MOTIVO: Record<MotivoSuspeita, string> = { amplitude: m("amplitude"), respostasIguais: m("respostas iguais") };
+const MOTIVO: Record<MotivoSuspeita | MotivoSuspeitaUeqS, string> = {
+  amplitude: m("amplitude"),
+  respostasIguais: m("respostas iguais"),
+  todasNoMeio: m("todas no meio"),
+};
+
+// As escalas que a regra de amplitude olha: as 6 do UEQ, ou as 2 do UEQ-S (a geral não entra)
+function escalasDaParticipacao(participacao: ParticipacaoAvaliada) {
+  if (participacao.instrumento === "UEQ_S") {
+    const { amplitudes, escalasInconsistentes } = participacao.avaliacao;
+    return (["pragmatica", "hedonica"] as const).map((escala) => ({
+      nome: NOME_ESCALA_UEQ_S[escala],
+      amplitude: amplitudes[escala],
+      inconsistente: escalasInconsistentes.includes(escala),
+    }));
+  }
+  const { amplitudes, escalasInconsistentes } = participacao.avaliacao;
+  return ESCALAS.map((escala) => ({
+    nome: NOME_ESCALA[escala],
+    amplitude: amplitudes[escala],
+    inconsistente: escalasInconsistentes.includes(escala),
+  }));
+}
 
 export default async function PaginaRespostas({ params, searchParams }: Propriedades) {
   const t = await tradutor();
@@ -42,7 +70,8 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
       ? t("{quantidade}. Elas aparecem na lista com a marca “importada de CSV”.", { quantidade: plural(quantasImportadas, t("resposta importada"), t("respostas importadas")) })
       : null;
   const linkImportar = `/estudos/${estudo.id}/respostas/importar` as Route;
-  const [respostas, participacoes] = await Promise.all([contagemDeRespostas(estudo.id), participacoesAvaliadas(estudo.id)]);
+  const [respostas, participacoes] = await Promise.all([contagemDeRespostas(estudo.id), participacoesAvaliadas(estudo.id, estudo.instrumento)]);
+  const ueqS = estudo.instrumento === "UEQ_S";
   const fora = participacoes.filter((participacao) => !participacao.incluidaNaAnalise).length;
 
   const linhas = participacoes
@@ -57,13 +86,16 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
       inconsistentes: participacao.avaliacao.escalasInconsistentes.length,
       iguais: participacao.avaliacao.respostasIguais,
       suspeita: participacao.suspeita,
-      motivo: participacao.avaliacao.motivos.length > 0 ? juntarComE(participacao.avaliacao.motivos.map((motivo) => t(MOTIVO[motivo])), t.lang) : null,
+      todasNoMeio: participacao.instrumento === "UEQ_S" && participacao.avaliacao.motivos.includes("todasNoMeio"),
+      motivo:
+        participacao.avaliacao.motivos.length > 0
+          ? juntarComE(
+              (participacao.avaliacao.motivos as (MotivoSuspeita | MotivoSuspeitaUeqS)[]).map((motivo) => t(MOTIVO[motivo])),
+              t.lang,
+            )
+          : null,
       incluidaNaAnalise: participacao.incluidaNaAnalise,
-      escalas: ESCALAS.map((escala) => ({
-        nome: t(NOME_ESCALA[escala]),
-        amplitude: participacao.avaliacao.amplitudes[escala],
-        inconsistente: participacao.avaliacao.escalasInconsistentes.includes(escala),
-      })),
+      escalas: escalasDaParticipacao(participacao).map((escala) => ({ ...escala, nome: t(escala.nome) })),
     }));
 
   return (
@@ -123,6 +155,7 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
                     linhas={linhas}
                     total={participacoes.length}
                     soSuspeitas={soSuspeitas}
+                    totalItens={QUANTIDADE_DE_ITENS[estudo.instrumento]}
                     limiteIguais={PARAMETROS_SUSPEITA.respostasIguaisMaximas}
                   />
                 </section>
@@ -140,16 +173,29 @@ export default async function PaginaRespostas({ params, searchParams }: Propried
                         {t("Amplitude acima de")}{" "}<span className={estilos.numero}>{PARAMETROS_SUSPEITA.amplitudeMaxima}</span>
                       </dd>
                     </div>
-                    <div>
-                      <dt>{t("Participação suspeita")}</dt>
-                      <dd>
-                        <span className={estilos.numero}>{PARAMETROS_SUSPEITA.escalasParaSuspeita}</span>{" "}{t("ou mais escalas inconsistentes, ou a mesma posição em mais de")}{" "}
-                        <span className={estilos.numero}>{PARAMETROS_SUSPEITA.respostasIguaisMaximas}</span>{" "}{t("dos 26 itens")}
-                      </dd>
-                    </div>
+                    {/* Planilha oficial do UEQ-S, aba Inconsistencies: as 2 escalas, e a segunda regra só para quem marcou
+                        o meio nos 8 itens, porque com tão poucos itens repetir a mesma posição é comum */}
+                    {ueqS ? (
+                      <div>
+                        <dt>{t("Participação suspeita")}</dt>
+                        <dd>
+                          {t("As 2 escalas inconsistentes, ou a posição do meio ({meio}) nos 8 itens", { meio: PARAMETROS_SUSPEITA_UEQ_S.categoriaDoMeio })}
+                        </dd>
+                      </div>
+                    ) : (
+                      <div>
+                        <dt>{t("Participação suspeita")}</dt>
+                        <dd>
+                          <span className={estilos.numero}>{PARAMETROS_SUSPEITA.escalasParaSuspeita}</span>{" "}{t("ou mais escalas inconsistentes, ou a mesma posição em mais de")}{" "}
+                          <span className={estilos.numero}>{PARAMETROS_SUSPEITA.respostasIguaisMaximas}</span>{" "}{t("dos 26 itens")}
+                        </dd>
+                      </div>
+                    )}
                     <div>
                       <dt>{t("Fonte dos limiares")}</dt>
-                      <dd className={estilos.numero}>{t("Handbook UEQ e data/protocolo.json")}</dd>
+                      <dd className={estilos.numero}>
+                        {ueqS ? t("Planilha oficial do UEQ-S e data/protocolo-ueq-s.json") : t("Handbook UEQ e data/protocolo.json")}
+                      </dd>
                     </div>
                     <div>
                       <dt>{t("Excluir da análise")}</dt>

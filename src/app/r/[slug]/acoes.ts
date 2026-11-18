@@ -2,12 +2,12 @@
 
 import type { Route } from "next";
 import { redirect } from "next/navigation";
-import protocolo from "../../../../data/protocolo.json";
 import { versaoComMenosRespostas } from "@/lib/balanceamento";
 import { banco } from "@/lib/banco";
 import { cifrarJson } from "@/lib/cripto";
 import { lerDemografia } from "@/lib/demografia";
-import { itensDoQuestionario } from "@/lib/itens-ueq";
+import { gravacaoDoInstrumento } from "@/lib/gravacao";
+import { QUANTIDADE_DE_ITENS } from "@/lib/instrumento";
 import { ehIdioma } from "@/idiomas";
 import {
   esquecerParticipacao,
@@ -20,7 +20,6 @@ import {
 } from "@/lib/participacao";
 import { notificarResposta } from "@/lib/notificacoes";
 import { lerIdade } from "@/lib/termo";
-import { avaliarSuspeita } from "@/ueq";
 
 const rota = (slug: string, etapa = "") => `/r/${slug}${etapa}` as Route;
 
@@ -73,22 +72,22 @@ export async function enviarRespostas(slug: string, valores: Record<number, numb
   if (!participacao) return { erro: "sem-participacao" };
   if (participacao.concluidaEm) redirect(rota(slug, estudo.coletarDemografia ? "/sobre-voce" : "/fim"));
 
-  const itens = await itensDoQuestionario();
+  // Os números vêm do questionário: 1 a 26 no UEQ, 1 a 8 no UEQ-S (na ordem dele)
+  const numeros = Array.from({ length: QUANTIDADE_DE_ITENS[estudo.instrumento] }, (_, posicao) => posicao + 1);
   const valorValido = (numero: number) => {
     const valor = valores[numero];
     return typeof valor === "number" && Number.isInteger(valor) && valor >= 1 && valor <= 7;
   };
   // A validação do navegador é conforto; a regra vale aqui (docs/ihc.md §4.1)
-  const faltando = itens.filter((item) => !valorValido(item.numero)).map((item) => item.numero);
+  const faltando = numeros.filter((numero) => !valorValido(numero));
   if (faltando.length > 0) return { faltando };
 
-  const respostas = itens.map((item) => valores[item.numero] ?? 0);
-  const { suspeita } = avaliarSuspeita(respostas, itens, protocolo.inconsistencia);
+  const { respostas, suspeita } = (await gravacaoDoInstrumento(estudo.instrumento))(numeros.map((numero) => valores[numero] ?? 0));
 
-  // As 26 respostas e a conclusão entram juntas; se algo falhar, nada fica pela metade
+  // As respostas e a conclusão entram juntas; se algo falhar, nada fica pela metade
   await banco.$transaction([
     banco.resposta.createMany({
-      data: itens.map((item) => ({ participacaoId: participacao.id, itemId: item.id, valor: valores[item.numero] ?? 0 })),
+      data: respostas.map((resposta) => ({ participacaoId: participacao.id, ...resposta })),
     }),
     banco.participacao.update({ where: { id: participacao.id }, data: { concluidaEm: new Date(), suspeita } }),
   ]);
