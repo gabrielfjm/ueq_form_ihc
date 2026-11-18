@@ -1,6 +1,6 @@
 # Requisitos
 
-A Ferramenta UEQ tem **68 requisitos funcionais** (RF), o que ela faz, e **26 requisitos não funcionais** (RNF), como ela tem de ser. Deles, 67 RF e 25 RNF estão entregues; 2 estão pendentes. A mesma lista está em [requisitos.csv](requisitos.csv) e na [planilha de requisitos](planilha-requisitos.xlsx).
+A Ferramenta UEQ tem **68 requisitos funcionais** (RF), o que ela faz, e **26 requisitos não funcionais** (RNF), como ela tem de ser. Deles, 67 RF e 26 RNF estão entregues; 1 está pendente. A mesma lista está em [requisitos.csv](requisitos.csv) e na [planilha de requisitos](planilha-requisitos.xlsx).
 
 Atualizado em 17/11/2026.
 
@@ -50,7 +50,7 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 | Qualidade da tradução | #35 a #39 | 06/11 e 07/11/2026 | Tradução da interface com glossário, contexto da tela e revisão automática |
 | Termo de consentimento | #40, #41 | 17/11/2026 | Termo completo, menores de 18 anos, seletor de idioma na barra e Next.js 16.4.6 |
 | Documentação final | #42, #43 | 17/11/2026 | Requisitos, matriz de rastreabilidade, personas, histórias, casos de uso, diagrama de classes e verificação do cálculo |
-| Sprint 09 · Revisão final | pendente |  | Revisão geral e conferência com a planilha oficial |
+| Sprint 09 · Revisão final | #44 | 17/11/2026 | Conferência com a planilha oficial em 11 cenários e exportação na própria UEQ Data Analysis Tool |
 
 ## Requisitos funcionais
 
@@ -151,7 +151,7 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 | <a id="rf56"></a>RF56 | **Exportar respostas brutas** | O pesquisador baixa um CSV com as respostas de 1 a 7 de cada participação, com versão e dados demográficos. | Essencial | Sprint 08 · Exportação | Entregue | [CT-U35](casos-de-teste.md#ct-u35), [CT-E37](casos-de-teste.md#ct-e37). Aba Resultados › Exportar › respostas brutas. |
 | <a id="rf57"></a>RF57 | **Exportar respostas recodificadas** | O pesquisador baixa um CSV com as respostas já convertidas para -3 a +3. | Essencial | Sprint 08 · Exportação | Entregue | [CT-U37](casos-de-teste.md#ct-u37), [CT-E37](casos-de-teste.md#ct-e37). Aba Resultados › Exportar › respostas recodificadas. |
 | <a id="rf58"></a>RF58 | **Exportar resultados por escala** | O pesquisador baixa um CSV com uma linha por escala e versão, com as estatísticas do painel. | Essencial | Sprint 08 · Exportação | Entregue | [CT-U38](casos-de-teste.md#ct-u38), [CT-E37](casos-de-teste.md#ct-e37). Aba Resultados › Exportar › resultados por escala. |
-| <a id="rf59"></a>RF59 | **Exportar no formato da planilha oficial** | O pesquisador baixa um CSV com os 26 valores de cada participação na análise, pronto para colar na UEQ Data Analysis Tool. | Essencial | Sprint 08 · Exportação | Entregue | [CT-U34](casos-de-teste.md#ct-u34), [CT-E37](casos-de-teste.md#ct-e37). Aba Resultados › Exportar › compatível com a planilha oficial. |
+| <a id="rf59"></a>RF59 | **Exportar na planilha oficial do UEQ** | O pesquisador baixa a própria UEQ Data Analysis Tool V15 preenchida com as participações na análise (da versão escolhida no painel ou do estudo inteiro), que recalcula ao abrir no Excel. | Essencial | Sprint 09 · Revisão final | Entregue | [CT-U34](casos-de-teste.md#ct-u34), [CT-U70](casos-de-teste.md#ct-u70), [CT-E37](casos-de-teste.md#ct-e37), [CT-E96](casos-de-teste.md#ct-e96). Aba Resultados › Exportar › Planilha oficial do UEQ (XLSX); abrir no Excel e clicar em Habilitar edição. |
 | <a id="rf60"></a>RF60 | **Exportar o painel em PDF** | O pesquisador baixa o painel da versão escolhida em PDF, com título do estudo, n e data no cabeçalho. | Desejável | Sprint 10 · Extensões | Entregue | [CT-E39](casos-de-teste.md#ct-e39), [CT-E40](casos-de-teste.md#ct-e40). Aba Resultados › Painel em PDF. |
 | <a id="rf61"></a>RF61 | **Importar respostas por CSV** | O pesquisador importa respostas no formato da planilha oficial para uma versão, com prévia e erros apontados por linha, e as respostas importadas ficam marcadas assim. | Desejável | Sprint 10 · Extensões | Entregue | [CT-U39](casos-de-teste.md#ct-u39), [CT-U40](casos-de-teste.md#ct-u40), [CT-U41](casos-de-teste.md#ct-u41), [CT-E42](casos-de-teste.md#ct-e42), [CT-E43](casos-de-teste.md#ct-e43). Aba Respostas › Importar respostas de um CSV, com data/fixtures/basico/respostas.csv. |
 | <a id="rf62"></a>RF62 | **Aplicar o UEQ-S** | O pesquisador escolhe o UEQ-S (versão curta, 8 itens, escalas pragmática e hedônica) ao criar o estudo. | Desejável | Sprint 10 · Extensões | Pendente | [CT-U53](casos-de-teste.md#ct-u53). Pendente: a estrutura existe, mas os itens e o benchmark do UEQ-S ainda não foram preenchidos pela equipe (data/ueq-s-itens-ptbr.json). |
@@ -193,7 +193,7 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 |---|---|---|---|---|---|---|
 | <a id="rnf09"></a>RNF09 | **Questionário sem viés de interface** | As 7 posições têm o mesmo peso visual, sem número nem cor graduada, nenhuma vem marcada, e todos os itens têm o mesmo layout. | Essencial | Sprint 05 · Questionário | Entregue | [CT-E24](casos-de-teste.md#ct-e24). Confira os itens no computador e no celular. |
 | <a id="rnf10"></a>RNF10 | **Termos oficiais** | Os 26 pares de termos usam sempre a tradução oficial do pacote de idiomas do UEQ, nunca uma tradução automática. | Essencial | Sprint de idiomas | Entregue | [CT-U45](casos-de-teste.md#ct-u45), [CT-U46](casos-de-teste.md#ct-u46), [CT-U47](casos-de-teste.md#ct-u47). Compare os termos do questionário com o pacote oficial de idiomas do UEQ. |
-| <a id="rnf11"></a>RNF11 | **Cálculo igual ao da planilha oficial** | Todos os números da ferramenta batem com a UEQ Data Analysis Tool, com tolerância de 1e-6. | Essencial | Sprint 09 · Revisão final | Pendente | [CT-U29](casos-de-teste.md#ct-u29), [CT-M15](casos-de-teste.md#ct-m15). Pendente: falta a equipe preencher os esperado.json a partir da planilha oficial (data/fixtures/LEIA-ME.md). |
+| <a id="rnf11"></a>RNF11 | **Cálculo igual ao da planilha oficial** | Todos os números da ferramenta batem com a UEQ Data Analysis Tool, com tolerância de 1e-6. | Essencial | Sprint 09 · Revisão final | Entregue | [CT-U29](casos-de-teste.md#ct-u29), [CT-E96](casos-de-teste.md#ct-e96), [CT-M15](casos-de-teste.md#ct-m15). Os 11 cenários de data/fixtures batem com a planilha oficial recalculada no Excel ([verificação do cálculo](verificacao-do-calculo.md#comparação-com-a-planilha-oficial)). |
 
 ### Segurança e privacidade
 

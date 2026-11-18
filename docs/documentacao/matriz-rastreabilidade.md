@@ -108,7 +108,7 @@ Cada um dos 94 requisitos ligado a quem pediu ([personas](personas.md) e [histó
 | [RF56](requisitos.md#rf56) Exportar respostas brutas | [HU23](historias-de-usuario.md#hu23) | [UC25](casos-de-uso.md#uc25) | [PE02](personas.md#pe02) | [CT-E37](casos-de-teste.md#ct-e37), [CT-U31](casos-de-teste.md#ct-u31), [CT-U32](casos-de-teste.md#ct-u32), [CT-U35](casos-de-teste.md#ct-u35) | Sprint 08 · Exportação | `src/lib/exportacoes.ts`, `src/app/api/estudos/[id]/exportar/[tipo]/route.ts` |
 | [RF57](requisitos.md#rf57) Exportar respostas recodificadas | [HU23](historias-de-usuario.md#hu23) | [UC25](casos-de-uso.md#uc25) | [PE02](personas.md#pe02) | [CT-E37](casos-de-teste.md#ct-e37), [CT-U32](casos-de-teste.md#ct-u32), [CT-U37](casos-de-teste.md#ct-u37) | Sprint 08 · Exportação | `src/lib/exportacoes.ts`, `src/app/api/estudos/[id]/exportar/[tipo]/route.ts` |
 | [RF58](requisitos.md#rf58) Exportar resultados por escala | [HU11](historias-de-usuario.md#hu11) | [UC25](casos-de-uso.md#uc25) | [PE01](personas.md#pe01) | [CT-E37](casos-de-teste.md#ct-e37), [CT-U32](casos-de-teste.md#ct-u32), [CT-U33](casos-de-teste.md#ct-u33), [CT-U38](casos-de-teste.md#ct-u38) | Sprint 08 · Exportação | `src/lib/exportacoes.ts`, `src/app/api/estudos/[id]/exportar/[tipo]/route.ts` |
-| [RF59](requisitos.md#rf59) Exportar no formato da planilha oficial | [HU18](historias-de-usuario.md#hu18) | [UC25](casos-de-uso.md#uc25) | [PE02](personas.md#pe02) | [CT-E37](casos-de-teste.md#ct-e37), [CT-U32](casos-de-teste.md#ct-u32), [CT-U34](casos-de-teste.md#ct-u34) | Sprint 08 · Exportação | `src/lib/exportacoes.ts`, `src/app/api/estudos/[id]/exportar/[tipo]/route.ts` |
+| [RF59](requisitos.md#rf59) Exportar na planilha oficial do UEQ | [HU18](historias-de-usuario.md#hu18) | [UC25](casos-de-uso.md#uc25) | [PE02](personas.md#pe02) | [CT-E37](casos-de-teste.md#ct-e37), [CT-E96](casos-de-teste.md#ct-e96), [CT-U34](casos-de-teste.md#ct-u34), [CT-U70](casos-de-teste.md#ct-u70) | Sprint 09 · Revisão final | `src/lib/planilha-oficial.ts`, `src/lib/exportacoes.ts`, `src/app/api/estudos/[id]/exportar/[tipo]/route.ts`, `data/planilha-oficial/` |
 | [RF60](requisitos.md#rf60) Exportar o painel em PDF | [HU11](historias-de-usuario.md#hu11) | [UC22](casos-de-uso.md#uc22) | [PE01](personas.md#pe01) | [CT-E39](casos-de-teste.md#ct-e39), [CT-E40](casos-de-teste.md#ct-e40), [CT-E41](casos-de-teste.md#ct-e41) | Sprint 10 · Extensões | `src/app/api/estudos/[id]/painel-pdf/route.ts`, `(pesquisador)/estudos/[id]/resultados/impressao/` |
 | [RF61](requisitos.md#rf61) Importar respostas por CSV | [HU19](historias-de-usuario.md#hu19) | [UC26](casos-de-uso.md#uc26) | [PE02](personas.md#pe02) | [CT-E42](casos-de-teste.md#ct-e42), [CT-E43](casos-de-teste.md#ct-e43), [CT-E44](casos-de-teste.md#ct-e44), [CT-U36](casos-de-teste.md#ct-u36), [CT-U39](casos-de-teste.md#ct-u39), [CT-U40](casos-de-teste.md#ct-u40), [CT-U41](casos-de-teste.md#ct-u41) | Sprint 10 · Extensões | `(pesquisador)/estudos/[id]/respostas/importar/`, `src/lib/importacao.ts` |
 | [RF62](requisitos.md#rf62) Aplicar o UEQ-S | [HU25](historias-de-usuario.md#hu25) | [UC27](casos-de-uso.md#uc27) | [PE02](personas.md#pe02) | [CT-U53](casos-de-teste.md#ct-u53) | Sprint 10 · Extensões | `data/ueq-s-itens-ptbr.json`, `data/benchmark-ueq-s.json` |
@@ -150,7 +150,7 @@ Cada um dos 94 requisitos ligado a quem pediu ([personas](personas.md) e [histó
 |---|---|---|---|---|---|
 | [RNF09](requisitos.md#rnf09) Questionário sem viés de interface | [HU18](historias-de-usuario.md#hu18) | [PE02](personas.md#pe02) | [CT-E24](casos-de-teste.md#ct-e24) | Sprint 05 · Questionário | `src/componentes/ItemDiferencial.tsx` |
 | [RNF10](requisitos.md#rnf10) Termos oficiais | [HU36](historias-de-usuario.md#hu36) | [PE06](personas.md#pe06) | [CT-U45](casos-de-teste.md#ct-u45), [CT-U46](casos-de-teste.md#ct-u46), [CT-U47](casos-de-teste.md#ct-u47), [CT-M17](casos-de-teste.md#ct-m17) | Sprint de idiomas | `data/ueq-itens-ptbr.json`, `data/ueq-idiomas.json`, `prisma/seed.ts` |
-| [RNF11](requisitos.md#rnf11) Cálculo igual ao da planilha oficial | [HU18](historias-de-usuario.md#hu18) | [PE02](personas.md#pe02) | [CT-U29](casos-de-teste.md#ct-u29), [CT-M15](casos-de-teste.md#ct-m15) | Sprint 09 · Revisão final | `src/ueq/__tests__/fixtures.test.ts`, `data/fixtures/` |
+| [RNF11](requisitos.md#rnf11) Cálculo igual ao da planilha oficial | [HU18](historias-de-usuario.md#hu18) | [PE02](personas.md#pe02) | [CT-E96](casos-de-teste.md#ct-e96), [CT-M15](casos-de-teste.md#ct-m15), [CT-U29](casos-de-teste.md#ct-u29) | Sprint 09 · Revisão final | `src/ueq/__tests__/fixtures.test.ts`, `data/fixtures/`, `scripts/planilha-oficial.ps1` |
 
 ### Segurança e privacidade
 
@@ -195,7 +195,7 @@ Cada um dos 94 requisitos ligado a quem pediu ([personas](personas.md) e [histó
 | [RNF13](requisitos.md#rnf13) Coleta mínima | A coleta demográfica desligada é coberta pelo [CT-E71](casos-de-teste.md#ct-e71), mas a limpeza das participações abandonadas depende de esperar 2 dias | Crie um estudo e confira que os dados demográficos começam desligados. |
 | [RNF26](requisitos.md#rnf26) Verificações antes de integrar | É uma regra do processo de integração, não um comportamento da ferramenta | Terminal: pnpm lint && pnpm typecheck && pnpm test. |
 
-- **Pendentes:** [RF62](requisitos.md#rf62), [RNF11](requisitos.md#rnf11). Os casos de teste deles já existem e ficam pulados enquanto faltam os dados oficiais: os resultados da planilha oficial para o RNF11 e os itens e o benchmark do UEQ-S para o RF62.
+- **Pendente:** [RF62](requisitos.md#rf62). O caso de teste dele já existe e fica pulado enquanto faltam os itens e o benchmark oficiais do UEQ-S.
 
 ## Casos de uso
 
@@ -227,7 +227,7 @@ Os requisitos que cada caso de uso exerce. Os diagramas e as especificações es
 | [UC22](casos-de-uso.md#uc22) Exportar o painel em PDF | Pesquisador | [RF60](requisitos.md#rf60) |
 | [UC23](casos-de-uso.md#uc23) Revisar respostas suspeitas | Pesquisador | [RF52](requisitos.md#rf52), [RF53](requisitos.md#rf53), [RF54](requisitos.md#rf54) |
 | [UC24](casos-de-uso.md#uc24) Avaliar a suspeita da participação | (incluído) | [RF51](requisitos.md#rf51) |
-| [UC25](casos-de-uso.md#uc25) Exportar dados em CSV | Pesquisador | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RF58](requisitos.md#rf58), [RF59](requisitos.md#rf59) |
+| [UC25](casos-de-uso.md#uc25) Exportar dados | Pesquisador | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RF58](requisitos.md#rf58), [RF59](requisitos.md#rf59) |
 | [UC26](casos-de-uso.md#uc26) Importar respostas | Pesquisador | [RF61](requisitos.md#rf61) |
 | [UC27](casos-de-uso.md#uc27) Aplicar o UEQ-S | Pesquisador | [RF62](requisitos.md#rf62) |
 | [UC28](casos-de-uso.md#uc28) Consultar a documentação | Visitante, Pesquisador | [RF63](requisitos.md#rf63), [RF64](requisitos.md#rf64), [RF65](requisitos.md#rf65) |

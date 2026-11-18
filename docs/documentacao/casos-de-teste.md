@@ -1,6 +1,6 @@
 # Casos e cenários de teste
 
-Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **189 casos de teste**: 95 de ponta a ponta, 69 de unidade e 25 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
+Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **191 casos de teste**: 96 de ponta a ponta, 70 de unidade e 25 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
 
 A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). Cada cenário e cada caso citam os [requisitos](requisitos.md) que verificam; o caminho inverso, de cada requisito para os casos que o provam, está na [matriz de rastreabilidade](matriz-rastreabilidade.md).
 
@@ -8,13 +8,13 @@ A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). Cada cenário e
 
 | Nível | Ferramenta | Casos | Execuções | Passaram | Pulados | Falharam |
 |---|---|---|---|---|---|---|
-| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 95 | 190 | 187 | 3 | 0 |
-| Unidade | Vitest 5 | 69 | 346 | 338 | 8 | 0 |
-| Manual | Pessoas | 25 | — | — | — | — |
+| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 96 | 204 | 201 | 3 | 0 |
+| Unidade | Vitest 5 | 70 | 424 | 422 | 2 | 0 |
+| Manual | Pessoas e Excel | 25 | 1 | 1 | — | — |
 
-- **Ponta a ponta:** cada caso roda duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7). As execuções puladas são de propósito: [CT-E62](casos-de-teste.md#ct-e62) só roda quando há documento em produção, e hoje todos estão publicados; [CT-E67](casos-de-teste.md#ct-e67) roda só no desktop.
-- **Unidade:** alguns casos são parametrizados (um por idioma, um por par de cores), por isso há mais execuções que casos. As 8 puladas dependem de dados oficiais que ainda não estão em `data/`: os resultados da planilha oficial ([CT-U29](#ct-u29)) e o UEQ-S ([CT-U53](#ct-u53)).
-- **Manual:** os casos manuais não foram executados nesta rodada ([Limitações](#limitações)).
+- **Ponta a ponta:** cada caso roda duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7); o [CT-E96](#ct-e96) roda uma vez por cenário em cada um. Na primeira rodada da suíte inteira, 5 execuções de desktop pararam em passos de preparação (criar o estudo, enviar o questionário) enquanto o servidor de desenvolvimento recompilava; repetidas logo depois, as 5 passaram. As execuções puladas são de propósito: [CT-E62](casos-de-teste.md#ct-e62) só roda quando há documento em produção, e hoje todos estão publicados; [CT-E67](casos-de-teste.md#ct-e67) roda só no desktop.
+- **Unidade:** alguns casos são parametrizados (um por idioma, um por par de cores, um por cenário da planilha oficial), por isso há mais execuções que casos. As 2 puladas dependem dos itens e do benchmark oficiais do UEQ-S, que ainda não estão em `data/` ([CT-U53](#ct-u53)).
+- **Manual:** dos casos manuais, só o [CT-M15](#ct-m15) foi executado, com o Excel automatizado por `scripts/planilha-oficial.ps1`; os outros 24 não foram executados nesta rodada ([Limitações](#limitações)).
 - **Ambiente:** servidor de desenvolvimento e PostgreSQL local. A execução não exercita a produção na Vercel, a API do Claude nem o envio de e-mail.
 
 ## Estratégia
@@ -33,7 +33,7 @@ A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). Cada cenário e
 - **Projetos do Playwright:** `desktop` (Desktop Chrome) e `celular` (Pixel 7). Todo caso de ponta a ponta roda nos dois.
 - **Servidor:** o Playwright sobe `pnpm dev` em http://localhost:3000 ou reaproveita o que já estiver rodando. O banco é o PostgreSQL do `docker compose`.
 - **Isolamento:** cada caso cria o próprio pesquisador, com e-mail em `@e2e.exemplo.com`, e o próprio estudo. Por isso os casos rodam em paralelo (4 workers) sem depender um do outro. No fim, `tests/e2e/limpeza.ts` apaga só as contas desse domínio, nunca a conta de desenvolvimento.
-- **Massa de dados:** as fixtures de [data/fixtures/](../../data/fixtures/), no formato da planilha oficial: `basico` (20 participantes, nenhum suspeito), `inconsistente` (15, com as linhas 1, 6, 9 e 13 suspeitas) e `extremos` (todos 1, todos 7, n = 1 e n = 2). Os testes do painel gravam as fixtures direto no banco (`inserirRespostas` em `tests/e2e/preparacao.ts`), porque o fluxo do participante já tem os próprios casos.
+- **Massa de dados:** os 11 cenários de [data/fixtures/](../../data/fixtures/LEIA-ME.md), no formato da planilha oficial e com os resultados da planilha oficial em `esperado.json`: `basico` (20 participantes, nenhum suspeito), `inconsistente` (15, com as linhas 1, 6, 9 e 13 suspeitas), `extremos` (todos 1, todos 7, n = 1 e n = 2), `oficial-exemplo` (os 255 da própria planilha), `grande` (1000), `bordas` (os limites das regras de suspeita), `variancia-zero` e `negativo`. Os testes do painel gravam as fixtures direto no banco (`inserirRespostas` em `tests/e2e/preparacao.ts`), porque o fluxo do participante já tem os próprios casos.
 - **Tempo:** 15 s de espera por verificação e 60 s por teste (120 s nos que criam estudo e respostas), porque o servidor de desenvolvimento compila cada rota na primeira visita.
 
 ### Critérios
@@ -67,11 +67,11 @@ pnpm exec playwright show-report   # relatório com as capturas de daltonismo do
 | <a id="cn08"></a>CN08 | **Cálculo UEQ** | Conferir recodificação, estatística, escalas, alfa, benchmark e grupos em funções puras, com as bordas | [RF27](requisitos.md#rf27), [RF36](requisitos.md#rf36), [RF37](requisitos.md#rf37), [RF38](requisitos.md#rf38), [RF39](requisitos.md#rf39), [RF40](requisitos.md#rf40), [RF41](requisitos.md#rf41), [RF42](requisitos.md#rf42), [RF45](requisitos.md#rf45), [RNF10](requisitos.md#rnf10), [RNF25](requisitos.md#rnf25) | [CT-U01](casos-de-teste.md#ct-u01), [CT-U02](casos-de-teste.md#ct-u02), [CT-U03](casos-de-teste.md#ct-u03), [CT-U04](casos-de-teste.md#ct-u04), [CT-U05](casos-de-teste.md#ct-u05), [CT-U06](casos-de-teste.md#ct-u06), [CT-U07](casos-de-teste.md#ct-u07), [CT-U08](casos-de-teste.md#ct-u08), [CT-U09](casos-de-teste.md#ct-u09), [CT-U10](casos-de-teste.md#ct-u10), [CT-U11](casos-de-teste.md#ct-u11), [CT-U12](casos-de-teste.md#ct-u12), [CT-U13](casos-de-teste.md#ct-u13), [CT-U14](casos-de-teste.md#ct-u14), [CT-U15](casos-de-teste.md#ct-u15), [CT-U16](casos-de-teste.md#ct-u16), [CT-U17](casos-de-teste.md#ct-u17), [CT-U18](casos-de-teste.md#ct-u18), [CT-U20](casos-de-teste.md#ct-u20), [CT-U21](casos-de-teste.md#ct-u21), [CT-U22](casos-de-teste.md#ct-u22), [CT-M17](casos-de-teste.md#ct-m17) | Passou, com itens pendentes |
 | <a id="cn09"></a>CN09 | **Respostas suspeitas** | Detectar suspeitas pelas duas regras, revisá-las e tirá-las da análise sem apagar | [RF42](requisitos.md#rf42), [RF51](requisitos.md#rf51), [RF52](requisitos.md#rf52), [RF53](requisitos.md#rf53), [RF54](requisitos.md#rf54), [RF55](requisitos.md#rf55), [RNF02](requisitos.md#rnf02) | [CT-U19](casos-de-teste.md#ct-u19), [CT-U23](casos-de-teste.md#ct-u23), [CT-U24](casos-de-teste.md#ct-u24), [CT-U25](casos-de-teste.md#ct-u25), [CT-U26](casos-de-teste.md#ct-u26), [CT-U27](casos-de-teste.md#ct-u27), [CT-U28](casos-de-teste.md#ct-u28), [CT-E33](casos-de-teste.md#ct-e33), [CT-E34](casos-de-teste.md#ct-e34), [CT-E35](casos-de-teste.md#ct-e35), [CT-E36](casos-de-teste.md#ct-e36), [CT-M16](casos-de-teste.md#ct-m16) | Passou, com itens pendentes |
 | <a id="cn10"></a>CN10 | **Painel de resultados** | Mostrar os números do módulo UEQ, comparar versões, guardar a visão na URL e funcionar com daltonismo, alto contraste e 320 px | [RF43](requisitos.md#rf43), [RF44](requisitos.md#rf44), [RF45](requisitos.md#rf45), [RF46](requisitos.md#rf46), [RF47](requisitos.md#rf47), [RF48](requisitos.md#rf48), [RF50](requisitos.md#rf50), [RNF02](requisitos.md#rnf02), [RNF07](requisitos.md#rnf07), [RNF08](requisitos.md#rnf08), [RNF22](requisitos.md#rnf22) | [CT-U42](casos-de-teste.md#ct-u42), [CT-U43](casos-de-teste.md#ct-u43), [CT-U44](casos-de-teste.md#ct-u44), [CT-E29](casos-de-teste.md#ct-e29), [CT-E30](casos-de-teste.md#ct-e30), [CT-E31](casos-de-teste.md#ct-e31), [CT-E32](casos-de-teste.md#ct-e32), [CT-E72](casos-de-teste.md#ct-e72), [CT-U60](casos-de-teste.md#ct-u60) | Passou |
-| <a id="cn11"></a>CN11 | **Exportação em CSV** | Baixar os quatro arquivos com nome datado, BOM e o formato de cada um | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RF58](requisitos.md#rf58), [RF59](requisitos.md#rf59), [RNF22](requisitos.md#rnf22) | [CT-U31](casos-de-teste.md#ct-u31), [CT-U32](casos-de-teste.md#ct-u32), [CT-U33](casos-de-teste.md#ct-u33), [CT-U34](casos-de-teste.md#ct-u34), [CT-U35](casos-de-teste.md#ct-u35), [CT-U37](casos-de-teste.md#ct-u37), [CT-U38](casos-de-teste.md#ct-u38), [CT-E37](casos-de-teste.md#ct-e37) | Passou |
+| <a id="cn11"></a>CN11 | **Exportação em CSV** | Baixar os três CSV com nome datado, BOM e o formato de cada um, e a planilha oficial em XLSX | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RF58](requisitos.md#rf58), [RF59](requisitos.md#rf59), [RNF22](requisitos.md#rnf22) | [CT-U31](casos-de-teste.md#ct-u31), [CT-U32](casos-de-teste.md#ct-u32), [CT-U33](casos-de-teste.md#ct-u33), [CT-U34](casos-de-teste.md#ct-u34), [CT-U35](casos-de-teste.md#ct-u35), [CT-U37](casos-de-teste.md#ct-u37), [CT-U38](casos-de-teste.md#ct-u38), [CT-E37](casos-de-teste.md#ct-e37) | Passou |
 | <a id="cn12"></a>CN12 | **Painel em PDF** | Baixar o painel em PDF e conferir a página de impressão | [RF60](requisitos.md#rf60) | [CT-E39](casos-de-teste.md#ct-e39), [CT-E40](casos-de-teste.md#ct-e40) | Passou |
 | <a id="cn13"></a>CN13 | **Importação por CSV** | Importar respostas com prévia, recusar arquivo com erro e marcar as importadas | [RF61](requisitos.md#rf61), [RNF02](requisitos.md#rnf02) | [CT-U39](casos-de-teste.md#ct-u39), [CT-U40](casos-de-teste.md#ct-u40), [CT-U41](casos-de-teste.md#ct-u41), [CT-E42](casos-de-teste.md#ct-e42), [CT-E43](casos-de-teste.md#ct-e43), [CT-E44](casos-de-teste.md#ct-e44) | Passou |
 | <a id="cn14"></a>CN14 | **Cores e contraste** | Garantir o contraste de todos os pares de cor do tema | [RNF06](requisitos.md#rnf06), [RNF07](requisitos.md#rnf07) | [CT-U51](casos-de-teste.md#ct-u51), [CT-U52](casos-de-teste.md#ct-u52) | Passou |
-| <a id="cn15"></a>CN15 | **Validação contra a planilha oficial** | Comparar cada número da ferramenta com a UEQ Data Analysis Tool, com tolerância de 1e-6 | [RNF11](requisitos.md#rnf11) | [CT-U29](casos-de-teste.md#ct-u29), [CT-M15](casos-de-teste.md#ct-m15) | Pendente |
+| <a id="cn15"></a>CN15 | **Validação contra a planilha oficial** | Comparar cada número da ferramenta com a UEQ Data Analysis Tool, com tolerância de 1e-6, e conferir que a planilha exportada pela ferramenta é a oficial preenchida | [RF59](requisitos.md#rf59), [RNF11](requisitos.md#rnf11) | [CT-U29](casos-de-teste.md#ct-u29), [CT-U70](casos-de-teste.md#ct-u70), [CT-E96](casos-de-teste.md#ct-e96), [CT-M15](casos-de-teste.md#ct-m15) | Passou |
 | <a id="cn16"></a>CN16 | **UEQ-S** | Conferir os 8 itens e o benchmark do UEQ-S quando a equipe preencher os dados | [RF62](requisitos.md#rf62) | [CT-U53](casos-de-teste.md#ct-u53) | Pendente |
 | <a id="cn18"></a>CN18 | **Documentação na ferramenta** | Navegar pelas seções e documentos com e sem conta, seguir links e âncoras, ver os diagramas e baixar os arquivos, sem violações de acessibilidade | [RF63](requisitos.md#rf63), [RF64](requisitos.md#rf64), [RF65](requisitos.md#rf65), [RNF01](requisitos.md#rnf01), [RNF02](requisitos.md#rnf02) | [CT-U54](casos-de-teste.md#ct-u54), [CT-U55](casos-de-teste.md#ct-u55), [CT-U56](casos-de-teste.md#ct-u56), [CT-U57](casos-de-teste.md#ct-u57), [CT-E47](casos-de-teste.md#ct-e47), [CT-E48](casos-de-teste.md#ct-e48), [CT-E49](casos-de-teste.md#ct-e49), [CT-E50](casos-de-teste.md#ct-e50), [CT-E51](casos-de-teste.md#ct-e51), [CT-E57](casos-de-teste.md#ct-e57), [CT-E62](casos-de-teste.md#ct-e62), [CT-E84](casos-de-teste.md#ct-e84), [CT-E85](casos-de-teste.md#ct-e85), [CT-E86](casos-de-teste.md#ct-e86), [CT-E87](casos-de-teste.md#ct-e87), [CT-U64](casos-de-teste.md#ct-u64), [CT-U65](casos-de-teste.md#ct-u65) | Passou |
 | <a id="cn19"></a>CN19 | **Navegação e barra fixa** | Manter a barra superior à vista durante a rolagem, sem esconder o foco nem as âncoras, com menu no celular | [RNF03](requisitos.md#rnf03), [RNF23](requisitos.md#rnf23) | [CT-E53](casos-de-teste.md#ct-e53), [CT-E54](casos-de-teste.md#ct-e54), [CT-E55](casos-de-teste.md#ct-e55), [CT-E56](casos-de-teste.md#ct-e56) | Passou |
@@ -802,21 +802,21 @@ Resultado esperado: A largura do documento não passa da janela.
 
 ### CT-E37
 
-**Os quatro CSV saem com nome, codificação e conteúdo certos.**
+**Os três CSV e a planilha oficial saem com nome, codificação e conteúdo certos.**
 
 | Campo | Valor |
 |---|---|
 | Cenário | [CN11 · Exportação em CSV](#cn11) |
-| Teste | `tests/e2e/exportacao.spec.ts` › "baixa as 4 exportações com nome datado, BOM e o formato de cada uma" |
+| Teste | `tests/e2e/exportacao.spec.ts` › "baixa as 4 exportações com nome datado, BOM e o formato de cada uma, e a planilha oficial em .xlsx" |
 | Pré-condições | Estudo com basico (20) e inconsistente (15). |
 | Requisitos | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RF58](requisitos.md#rf58), [RF59](requisitos.md#rf59) |
 | Resultado em 17/11/2026 | Passou (celular e desktop) |
 
 Passos:
 
-1. Em Resultados, baixar Respostas brutas, Respostas recodificadas, Resultados por escala e Formato da planilha oficial.
+1. Em Resultados, baixar Respostas brutas, Respostas recodificadas, Resultados por escala e Planilha oficial do UEQ (XLSX), com "Todas as versões" selecionado.
 
-Resultado esperado: Nomes ueq_avaliacao-do-checkout-da-loja-virtual_<tipo>_<aaaa-mm-dd>.csv. Brutas: BOM, cabeçalho id_participacao;versao;… e 35 linhas. Recodificadas com BOM. Resultados: 18 linhas (todas + 2 versões × 6 escalas) com "Checkout da loja virtual;Atratividade;20;0,7333;". Planilha oficial sem BOM e começando exatamente com o respostas.csv da fixture basico.
+Resultado esperado: Nomes ueq_avaliacao-do-checkout-da-loja-virtual_<tipo>_<aaaa-mm-dd>.csv. Brutas: BOM, cabeçalho id_participacao;versao;… e 35 linhas. Recodificadas com BOM. Resultados: 18 linhas (todas + 2 versões × 6 escalas) com "Checkout da loja virtual;Atratividade;20;0,7333;". Planilha oficial: ueq_avaliacao-do-checkout-da-loja-virtual_planilha-oficial_<aaaa-mm-dd>.xlsx, com as 35 participações em Data!A4 e as 20 primeiras iguais ao respostas.csv da fixture basico, na ordem.
 
 ### CT-E38
 
@@ -1974,6 +1974,27 @@ Passos:
 
 Resultado esperado: O foco volta ao seletor, agora "Language: English", e continua em inglês depois de recarregar.
 
+### CT-E96
+
+**Em cada cenário de validação, o painel e a planilha exportada batem com a planilha oficial.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN15 · Validação contra a planilha oficial](#cn15) |
+| Teste | `tests/e2e/planilha-oficial.spec.ts` › "cenário …: o painel e a planilha exportada batem com a planilha oficial", um por cenário: oficial-exemplo, grande, inconsistente, bordas, variancia-zero, negativo e extremos/n2 |
+| Pré-condições | Estudo sem respostas. O esperado.json de cada cenário saiu da UEQ Data Analysis Tool V15 recalculada no Excel ([data/fixtures/LEIA-ME.md](../../data/fixtures/LEIA-ME.md)). |
+| Requisitos | [RF59](requisitos.md#rf59), [RF61](requisitos.md#rf61), [RNF11](requisitos.md#rnf11) |
+| Resultado em 17/11/2026 | Passou (celular e desktop, 7 cenários em cada) |
+
+Passos:
+
+1. Em Respostas › Importar respostas de um CSV, importar o respostas.csv do cenário na versão "Checkout da loja virtual".
+2. Em Resultados, escolher essa versão.
+3. Comparar a tabela Resultados por escala com o esperado.json.
+4. Baixar Planilha oficial do UEQ (XLSX).
+
+Resultado esperado: Em cada uma das 6 escalas, n, média, DP, IC95, alfa e benchmark iguais aos da planilha oficial, arredondados como o painel mostra ("—" onde a planilha dá erro). O arquivo se chama ueq_avaliacao-do-checkout-da-loja-virtual_planilha-oficial_checkout-da-loja-virtual_<aaaa-mm-dd>.xlsx, tem as respostas do arquivo importado em Data!A4, na mesma ordem, e pede ao Excel para recalcular ao abrir.
+
 ## Casos de unidade
 
 Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções conta os testes reais: um caso parametrizado roda uma vez por idioma ou por par de cores.
@@ -2020,7 +2041,8 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 
 | ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 17/11/2026 |
 |---|---|---|---|---|---|---|
-| <a id="ct-u29"></a>CT-U29 | `fixtures.test.ts` | `fixture … contra a planilha oficial` | Para cada fixture (basico, inconsistente, extremos/n1, n2, todos-1, todos-7): média, dp, n, IC95, alfa, benchmark, pragmática, hedônica, itens e suspeitas iguais aos da planilha, com tolerância de 1e-6 | 6 | [RNF11](requisitos.md#rnf11) | Pulado: aguarda dados da equipe |
+| <a id="ct-u29"></a>CT-U29 | `fixtures.test.ts` | `fixture … contra a planilha oficial` | Para cada um dos 11 cenários de data/fixtures: média, dp, n e IC95 de escalas e itens, alfa, benchmark, pragmática, hedônica, distribuição das respostas, escalas inconsistentes e respostas iguais por participante iguais aos da planilha, com tolerância de 1e-6; erro da planilha é null | 77 | [RNF11](requisitos.md#rnf11) | Passou (77 de 77) |
+| <a id="ct-u70"></a>CT-U70 | `planilha-oficial.test.ts` | `preencherPlanilhaOficial` | Põe as respostas em Data!A4 e tira os 255 participantes de exemplo; mantém as linhas 1 a 3; põe o idioma em Read_First!B5, com um nome da aba Items para cada um dos 37 idiomas; apaga os resultados gravados e pede recálculo ao abrir; não mexe em gráficos, estilos nem nas outras partes; sem participantes sai vazia; recusa mais de 1000 participantes e valores fora de 1 a 7 | 8 | [RF59](requisitos.md#rf59) | Passou (8 de 8) |
 
 ### CN05 · Participação no estudo
 
@@ -2033,9 +2055,9 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 | ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 17/11/2026 |
 |---|---|---|---|---|---|---|
 | <a id="ct-u31"></a>CT-U31 | `csv.test.ts` | `campoCsv` | Texto simples fica como está; ponto e vírgula e quebra de linha vão entre aspas; aspas internas são dobradas; ausente fica vazio | 5 | [RF56](requisitos.md#rf56) | Passou (5 de 5) |
-| <a id="ct-u32"></a>CT-U32 | `csv.test.ts` | `documentoCsv` | Começa com BOM, usa ; e termina cada linha com CRLF; sai sem BOM quando pedido | 2 | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RF58](requisitos.md#rf58), [RF59](requisitos.md#rf59) | Passou (2 de 2) |
+| <a id="ct-u32"></a>CT-U32 | `csv.test.ts` | `documentoCsv` | Começa com BOM, usa ; e termina cada linha com CRLF; sai sem BOM quando pedido | 2 | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RF58](requisitos.md#rf58) | Passou (2 de 2) |
 | <a id="ct-u33"></a>CT-U33 | `csv.test.ts` | `decimalCsv e slugDoTitulo` | Vírgula decimal e vazio para ausente; nome de arquivo sem acentos, espaços nem símbolos, e nunca vazio | 3 | [RF58](requisitos.md#rf58), [RNF22](requisitos.md#rnf22) | Passou (3 de 3) |
-| <a id="ct-u34"></a>CT-U34 | `exportacoes.test.ts` | `exportarPlanilhaOficial` | Da fixture basico sai idêntica ao respostas.csv original; deixa de fora quem está fora da análise | 2 | [RF59](requisitos.md#rf59) | Passou (2 de 2) |
+| <a id="ct-u34"></a>CT-U34 | `exportacoes.test.ts` | `linhasDaPlanilhaOficial` | Da fixture basico saem as mesmas linhas do respostas.csv original; deixa de fora quem está fora da análise | 2 | [RF59](requisitos.md#rf59) | Passou (2 de 2) |
 | <a id="ct-u35"></a>CT-U35 | `exportacoes.test.ts` | `exportarBrutas` | BOM, cabeçalho e 26 colunas de itens; versão e demografia protegidas contra ;, aspas e quebra de linha | 2 | [RF56](requisitos.md#rf56) | Passou (2 de 2) |
 | <a id="ct-u37"></a>CT-U37 | `exportacoes.test.ts` | `exportarRecodificadas` | Troca 1 a 7 por -3 a +3 com a polaridade corrigida | 1 | [RF57](requisitos.md#rf57) | Passou |
 | <a id="ct-u38"></a>CT-U38 | `exportacoes.test.ts` | `exportarResultados` | Uma linha por escala, com vírgula decimal | 1 | [RF58](requisitos.md#rf58) | Passou |
@@ -2056,7 +2078,7 @@ Cada caso reúne os testes de unidade de uma mesma regra. A coluna Execuções c
 
 | ID | Arquivo | Função ou grupo | Resultado esperado | Execuções | Requisitos | Resultado em 17/11/2026 |
 |---|---|---|---|---|---|---|
-| <a id="ct-u39"></a>CT-U39 | `importacao.test.ts` | `lerCsvDeRespostas` | Lê a fixture basico como o módulo UEQ e aceita de volta a exportação da planilha oficial | 6 | [RF61](requisitos.md#rf61) | Passou (6 de 6) |
+| <a id="ct-u39"></a>CT-U39 | `importacao.test.ts` | `lerCsvDeRespostas` | Lê a fixture basico como o módulo UEQ | 5 | [RF61](requisitos.md#rf61) | Passou (5 de 5) |
 | <a id="ct-u40"></a>CT-U40 | `importacao.test.ts` | `lerCsvDeRespostas` | Aceita vírgula, tabulação, BOM, aspas e separador sobrando; ignora linhas em branco mantendo o número real de cada linha | 6 | [RF61](requisitos.md#rf61) | Passou (6 de 6) |
 | <a id="ct-u41"></a>CT-U41 | `importacao.test.ts` | `lerCsvDeRespostas` | Aponta por linha o número errado de valores e os valores fora da escala; recusa arquivo com linhas demais | 6 | [RF61](requisitos.md#rf61) | Passou (6 de 6) |
 
@@ -2147,7 +2169,7 @@ Feitos por pessoas, sem automação. Os de CN17 seguem a [checklist manual](../c
 | <a id="ct-m12"></a>CT-M12 | CN17 | Celular real | Abrir o link pelo WhatsApp e responder com o polegar, sem toque acidental no círculo vizinho; o teclado virtual não cobre o campo nos dados opcionais | [RNF05](requisitos.md#rnf05), [RNF23](requisitos.md#rnf23) | Não executado |
 | <a id="ct-m13"></a>CT-M13 | CN17 | Avaliação heurística | Cada membro avalia sozinho com as 10 heurísticas de Nielsen (tela, heurística, severidade 0 a 4, sugestão) e depois a equipe consolida | [RNF01](requisitos.md#rnf01), [RNF20](requisitos.md#rnf20), [RNF21](requisitos.md#rnf21) | Não executado |
 | <a id="ct-m14"></a>CT-M14 | CN17 | Teste com usuários | 5 participantes respondem um estudo real; 2 a 3 pesquisadores criam estudo com 2 versões, abrem a coleta, interpretam o painel, tiram uma suspeita e exportam; registrar sucesso, tempo, erros e o UEQ da própria ferramenta | [RF13](requisitos.md#rf13), [RF24](requisitos.md#rf24), [RF43](requisitos.md#rf43) | Não executado |
-| <a id="ct-m15"></a>CT-M15 | CN15 | Planilha oficial | Colar cada data/fixtures/**/respostas.csv na UEQ Data Analysis Tool V15 e copiar os resultados para esperado.json (data/fixtures/LEIA-ME.md) | [RNF11](requisitos.md#rnf11) | Não executado |
+| <a id="ct-m15"></a>CT-M15 | CN15 | Planilha oficial | Colar cada data/fixtures/**/respostas.csv na UEQ Data Analysis Tool V15, recalcular e copiar os resultados para esperado.json; abrir no Excel a planilha exportada pela ferramenta e conferir que recalcula com os mesmos números (data/fixtures/LEIA-ME.md) | [RNF11](requisitos.md#rnf11) | Executado em 17/11/2026 com scripts/planilha-oficial.ps1 no Excel 16: 11 cenários, 6.543 valores iguais |
 | <a id="ct-m16"></a>CT-M16 | CN09 | Script | Mudar um limiar em data/protocolo.json, rodar pnpm suspeitas:recalcular e conferir a coluna suspeita | [RF55](requisitos.md#rf55) | Não executado |
 | <a id="ct-m17"></a>CT-M17 | CN08 | Seed | Rodar pnpm db:seed com um item inválido em data/ueq-itens-ptbr.json e conferir que o seed para dizendo qual item | [RF27](requisitos.md#rf27), [RNF10](requisitos.md#rnf10) | Não executado |
 | <a id="ct-m18"></a>CT-M18 | CN17 | Revisão visual | Comparar cada tela com o PNG correspondente em docs/prototipos/alta-fidelidade/, seguindo docs/roteiro-revisao.md | [RNF01](requisitos.md#rnf01) | Não executado |
@@ -2161,10 +2183,10 @@ Feitos por pessoas, sem automação. Os de CN17 seguem a [checklist manual](../c
 
 ## Limitações
 
-- **[CT-U29](#ct-u29) · validação contra a planilha oficial.** Seis testes ficam pulados enquanto as fixtures não têm os `esperado.json` com os números da UEQ Data Analysis Tool ([CT-M15](#ct-m15), passo a passo em [data/fixtures/LEIA-ME.md](../../data/fixtures/LEIA-ME.md)). As fórmulas foram conferidas à mão na [verificação do cálculo](verificacao-do-calculo.md), com o mesmo resultado da ferramenta.
 - **[CT-U53](#ct-u53) · UEQ-S.** Dois testes ficam pulados enquanto `data/` não tem os itens e o benchmark oficiais do UEQ-S ([RF62](requisitos.md#rf62)).
-- **Casos manuais.** Os 25 casos manuais não foram executados, inclusive o teste com usuários previsto em [Fundamentos de IHC §6](../ihc.md#6-como-verificar-automação-não-basta).
+- **Casos manuais.** Dos 25 casos manuais, 24 não foram executados, inclusive o teste com usuários previsto em [Fundamentos de IHC §6](../ihc.md#6-como-verificar-automação-não-basta).
 - **Administração.** As páginas de Administração (contas, idiomas, proteção de dados e cenários) ainda não têm caso de ponta a ponta. Só a geração de respostas dos cenários tem teste ([CT-U61](#ct-u61)).
 - **Serviços externos.** A chamada à API do Claude e o envio de e-mail não são exercitados nos testes: [CT-E67](#ct-e67) grava a tradução direto no banco, e [CT-U59](#ct-u59) confere só o conteúdo do e-mail.
 - **Painel em PDF em produção.** Os casos [CT-E39](#ct-e39) e [CT-E40](#ct-e40) rodam no ambiente local, com o Chromium do Playwright. O pacote usado na Vercel só é exercitado em produção.
+- **Planilha oficial fora do Excel.** A planilha exportada foi conferida no Microsoft Excel 16 para Windows. LibreOffice, Google Planilhas e Numbers não foram testados: a planilha pede recálculo ao abrir, mas cada programa decide se obedece.
 - **Requisitos sem caso de teste:** 5 dos 94 requisitos não têm caso de teste e são conferidos pelo passo Como verificar de cada um. A lista, com o motivo, está na [matriz de rastreabilidade](matriz-rastreabilidade.md#cobertura).

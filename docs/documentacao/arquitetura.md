@@ -64,7 +64,7 @@ Em tempo de execução, a ferramenta chama só dois sistemas externos, e os dois
 - **API do Claude:** sem `ANTHROPIC_API_KEY`, a interface fica em português e os textos dos estudos ficam no idioma original. Vão para a API os textos da interface e o título, o produto, o objetivo e os nomes de versão de cada estudo. Nenhuma resposta, nome, e-mail ou dado demográfico vai junto.
 - **Servidor de e-mail:** sem as variáveis `SMTP_*`, os avisos ficam só no sino, e quem convida recebe um link de e-mail pronto para enviar por conta própria.
 
-A planilha oficial e o site do UEQ entram por pessoas: a equipe copia os dados oficiais para `data/` (com a fonte em cada arquivo) e o pesquisador cola a exportação na planilha para conferir.
+A planilha oficial e o site do UEQ entram por pessoas: a equipe copia os dados oficiais para `data/` (com a fonte em cada arquivo). A exportação da planilha oficial parte de uma cópia sem alteração da UEQ Data Analysis Tool V15 em `data/planilha-oficial/`, e o pesquisador a abre no Excel para conferir os números.
 
 ## Nível 2 · Containers
 
