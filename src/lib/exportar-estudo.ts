@@ -1,12 +1,15 @@
 import "server-only";
-import { ehIdioma, IDIOMA_PADRAO, infoIdioma } from "@/idiomas";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
+import { ehIdioma, IDIOMA_PADRAO, infoIdioma, type CodigoIdioma } from "@/idiomas";
 import { banco } from "./banco";
 import { slugDoTitulo } from "./csv";
 import { decifrarJson } from "./cripto";
 import type { Demografia } from "./demografia";
-import { exportarBrutas, exportarPlanilhaOficial, exportarRecodificadas, exportarResultados, type ParticipacaoExportada } from "./exportacoes";
+import { exportarBrutas, exportarRecodificadas, exportarResultados, linhasDaPlanilhaOficial, type ParticipacaoExportada } from "./exportacoes";
 import { itensDoQuestionario } from "./itens-ueq";
 import { hojeEmBrasilia } from "./periodo";
+import { ARQUIVO_MODELO, preencherPlanilhaOficial } from "./planilha-oficial";
 import { analisarResultados } from "./resultados";
 
 export const TIPOS_EXPORTACAO = ["brutas", "recodificadas", "resultados", "planilha-oficial"] as const;
@@ -21,11 +24,11 @@ const DATA_HORA = new Intl.DateTimeFormat("sv-SE", {
   timeZone: "America/Sao_Paulo",
 });
 
-async function participacoesExportadas(estudoId: string): Promise<ParticipacaoExportada[]> {
+async function participacoesExportadas(estudoId: string, versaoId?: string): Promise<ParticipacaoExportada[]> {
   const [itens, participacoes] = await Promise.all([
     itensDoQuestionario(),
     banco.participacao.findMany({
-      where: { versao: { estudoId }, concluidaEm: { not: null } },
+      where: { versao: { estudoId, ...(versaoId ? { id: versaoId } : {}) }, concluidaEm: { not: null } },
       // Da mais antiga para a mais recente, como numa planilha que vai sendo preenchida
       orderBy: { concluidaEm: "asc" },
       select: {
@@ -63,16 +66,36 @@ async function participacoesExportadas(estudoId: string): Promise<ParticipacaoEx
   });
 }
 
-// docs/ihc.md §4.4: nome legível e datado, ueq_[slug-do-titulo]_[tipo]_[aaaa-mm-dd].csv
-export function nomeDoArquivo(titulo: string, tipo: TipoExportacao | "painel"): string {
-  const extensao = tipo === "painel" ? "pdf" : "csv";
-  return `ueq_${slugDoTitulo(titulo)}_${tipo}_${hojeEmBrasilia().toISOString().slice(0, 10)}.${extensao}`;
+// docs/ihc.md §4.4: nome legível e datado, ueq_[slug-do-titulo]_[tipo]_[aaaa-mm-dd].csv. A planilha oficial
+// de uma versão só leva o nome da versão depois do tipo
+export function nomeDoArquivo(titulo: string, tipo: TipoExportacao | "painel", versao?: string): string {
+  const extensao = tipo === "painel" ? "pdf" : tipo === "planilha-oficial" ? "xlsx" : "csv";
+  const daVersao = versao ? `_${slugDoTitulo(versao)}` : "";
+  return `ueq_${slugDoTitulo(titulo)}_${tipo}${daVersao}_${hojeEmBrasilia().toISOString().slice(0, 10)}.${extensao}`;
 }
+
+// Lido uma vez por servidor: preencherPlanilhaOficial reaproveita a preparação do mesmo arquivo
+let modeloDaPlanilha: Promise<Uint8Array> | undefined;
+function lerModeloDaPlanilha(): Promise<Uint8Array> {
+  modeloDaPlanilha ??= readFile(join(process.cwd(), ARQUIVO_MODELO)).catch((erro: unknown) => {
+    modeloDaPlanilha = undefined;
+    throw erro;
+  });
+  return modeloDaPlanilha;
+}
+
+export const TIPO_DE_CONTEUDO: Record<TipoExportacao, string> = {
+  brutas: "text/csv; charset=utf-8",
+  recodificadas: "text/csv; charset=utf-8",
+  resultados: "text/csv; charset=utf-8",
+  "planilha-oficial": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+};
 
 export async function gerarExportacao(
   estudo: { id: string; versoes: { id: string; nome: string }[] },
   tipo: TipoExportacao,
-): Promise<string> {
+  opcoes: { versaoId?: string; idioma?: CodigoIdioma } = {},
+): Promise<string | Uint8Array> {
   if (tipo === "resultados") {
     const resultados = await analisarResultados(estudo.id, estudo.versoes);
     return exportarResultados([
@@ -80,8 +103,14 @@ export async function gerarExportacao(
       ...resultados.porVersao.map((versao) => ({ versao: versao.nome, analise: versao.analise })),
     ]);
   }
+  if (tipo === "planilha-oficial") {
+    const [modelo, participacoes] = await Promise.all([
+      lerModeloDaPlanilha(),
+      participacoesExportadas(estudo.id, opcoes.versaoId),
+    ]);
+    return preencherPlanilhaOficial(modelo, linhasDaPlanilhaOficial(participacoes), opcoes.idioma ?? IDIOMA_PADRAO);
+  }
   const participacoes = await participacoesExportadas(estudo.id);
   if (tipo === "brutas") return exportarBrutas(participacoes);
-  if (tipo === "planilha-oficial") return exportarPlanilhaOficial(participacoes);
   return exportarRecodificadas(participacoes, await itensDoQuestionario());
 }

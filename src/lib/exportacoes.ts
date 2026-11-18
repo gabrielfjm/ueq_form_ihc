@@ -109,11 +109,8 @@ export function exportarResultados(analises: readonly { versao: string; analise:
   return documentoCsv([cabecalho, ...linhas]);
 }
 
-// Seção 9.4: só os 26 valores por linha, sem cabeçalho e sem BOM, no mesmo formato de data/fixtures.
-// Abre em colunas no Excel pt-BR; as linhas vão coladas em Data!A4 da UEQ Data Analysis Tool
-export function exportarPlanilhaOficial(participacoes: readonly ParticipacaoExportada[]): string {
-  return documentoCsv(
-    participacoes.filter((p) => p.incluidaNaAnalise).map((p) => p.valores),
-    { comBom: false },
-  );
+// Seção 9.4: os 26 valores de cada participação na análise, na ordem em que vão para Data!A4 da
+// UEQ Data Analysis Tool (src/lib/planilha-oficial.ts)
+export function linhasDaPlanilhaOficial(participacoes: readonly ParticipacaoExportada[]): number[][] {
+  return participacoes.filter((p) => p.incluidaNaAnalise).map((p) => [...p.valores]);
 }

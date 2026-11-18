@@ -1,5 +1,6 @@
 import { readFileSync } from "node:fs";
 import { expect, test, type Page } from "@playwright/test";
+import { strFromU8, unzipSync } from "fflate";
 import { cadastrarComTeclado, emailDeTeste } from "./contas";
 import { estudoAberto, inserirRespostas } from "./preparacao";
 
@@ -13,7 +14,7 @@ async function baixar(pagina: Page, nome: string) {
   return { nome: download.suggestedFilename(), conteudo: readFileSync(await download.path(), "utf8") };
 }
 
-test("baixa as 4 exportações com nome datado, BOM e o formato de cada uma", async ({ browser }, info) => {
+test("baixa as 4 exportações com nome datado, BOM e o formato de cada uma, e a planilha oficial em .xlsx", async ({ browser }, info) => {
   const estudo = await estudoAberto(browser, info);
   await inserirRespostas(estudo.link, [
     { versao: 1, pasta: "basico" },
@@ -37,11 +38,19 @@ test("baixa as 4 exportações com nome datado, BOM e o formato de cada uma", as
   expect(resultados.conteudo.trimEnd().split("\r\n")).toHaveLength(1 + 18);
   expect(resultados.conteudo).toContain("Checkout da loja virtual;Atratividade;20;0,7333;");
 
-  // A versão 1 é a fixture basico: as 20 primeiras linhas da planilha oficial são o respostas.csv original
-  const planilha = await baixar(pagina, "Formato da planilha oficial (CSV)");
-  expect(planilha.conteudo.startsWith(BOM)).toBe(false);
-  const basico = readFileSync("data/fixtures/basico/respostas.csv", "utf8");
-  expect(planilha.conteudo.startsWith(basico)).toBe(true);
+  // Em "Todas as versões", a planilha oficial leva as 35 participações: primeiro as 20 da fixture basico
+  const [download] = await Promise.all([
+    pagina.waitForEvent("download"),
+    pagina.getByRole("link", { name: "Planilha oficial do UEQ (XLSX)" }).click(),
+  ]);
+  expect(download.suggestedFilename()).toMatch(/^ueq_avaliacao-do-checkout-da-loja-virtual_planilha-oficial_\d{4}-\d{2}-\d{2}\.xlsx$/);
+  const dados = strFromU8(unzipSync(readFileSync(await download.path()))["xl/worksheets/sheet2.xml"]!);
+  const linhas = [...dados.matchAll(/<row r="(\d+)"[^>]*>(.*?)<\/row>/gs)]
+    .filter(([, numero]) => Number(numero) >= 4)
+    .map(([, , corpo]) => [...corpo!.matchAll(/<v>(\d+)<\/v>/g)].map((valor) => valor[1]).join(";"));
+  expect(linhas).toHaveLength(35);
+  const basico = readFileSync("data/fixtures/basico/respostas.csv", "utf8").trimEnd().split("\r\n");
+  expect(linhas.slice(0, 20)).toEqual(basico);
   await estudo.fechar();
 });
 

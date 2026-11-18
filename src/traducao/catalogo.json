@@ -106,6 +106,16 @@
    "origem": "lib/demografia.ts"
   },
   {
+   "texto": "A UEQ Data Analysis Tool V15 já preenchida com {quantidade} da versão {nome} que estão na análise. Abra no Excel e clique em Habilitar edição: a planilha recalcula sozinha, com os gráficos, o benchmark e as suspeitas dela.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
+   "texto": "A UEQ Data Analysis Tool V15 já preenchida com {quantidade} que estão na análise. Abra no Excel e clique em Habilitar edição: a planilha recalcula sozinha, com os gráficos, o benchmark e as suspeitas dela.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
+  },
+  {
    "texto": "A base de comparação que diz se um resultado é excelente, bom, acima ou abaixo da média, ou ruim.",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
@@ -234,6 +244,11 @@
    "texto": "A pessoa precisa ter conta na ferramenta. Ela aceita o convite em Convites.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
+  },
+  {
+   "texto": "A planilha oficial calcula até {maximo} participantes, e esta seleção tem {quantidade}. Escolha uma versão no topo do painel ou use as respostas brutas.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "A prévia acompanha o que você digita. O texto fixo do termo vem da própria ferramenta.",
@@ -2111,11 +2126,6 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/page.tsx"
   },
   {
-   "texto": "Formato da planilha oficial (CSV)",
-   "cliente": true,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
-  },
-  {
    "texto": "Formato do arquivo",
    "cliente": true,
    "origem": "lib/ajuda.ts"
@@ -2726,7 +2736,7 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
-   "texto": "Nome dos arquivos: {v}. Os arquivos trazem todas as versões do estudo.",
+   "texto": "Nome dos arquivos: {v}. Os CSV trazem todas as versões do estudo; a planilha oficial traz a seleção do painel.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
@@ -3334,6 +3344,11 @@
    "texto": "Pessoas com acesso",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
+  },
+  {
+   "texto": "Planilha oficial do UEQ (XLSX)",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Pode fazer o download dos próprios dados ou apagá-los quando quiser.",
@@ -3974,11 +3989,6 @@
    "texto": "Suspeita",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
-  },
-  {
-   "texto": "Só os 26 valores por linha, das participações na análise. Cole na aba de dados da UEQ Data Analysis Tool para conferir os cálculos.",
-   "cliente": true,
-   "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
    "texto": "Só participam com a autorização do pai, da mãe ou do responsável legal, confirmada na primeira tela (art. 14).",

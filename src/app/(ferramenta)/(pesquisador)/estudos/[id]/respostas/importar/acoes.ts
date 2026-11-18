@@ -1,5 +1,6 @@
 "use server";
 
+import { randomUUID } from "node:crypto";
 import type { Route } from "next";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -13,6 +14,9 @@ import { PARAMETROS_SUSPEITA } from "@/lib/participacoes";
 import { exigirPesquisador } from "@/lib/sessao";
 import { avaliarSuspeita } from "@/ueq";
 import { tradutor } from "@/traducao/servidor";
+
+// 4 colunas por resposta: 5000 por INSERT dão 20 mil parâmetros, abaixo dos 65535 do Postgres
+const RESPOSTAS_POR_LOTE = 5000;
 
 export type Previa = {
   versaoId: string;
@@ -76,26 +80,39 @@ export async function confirmarImportacao(estudoId: string, versaoId: string, te
   if (erros.length > 0 || linhas.length === 0) return { erro: t("O arquivo tem erros. Corrija e envie de novo.") };
 
   const itens = await itensDoQuestionario();
-  const agora = new Date();
+  const agora = Date.now();
+  // Cada linha fica 1 ms depois da anterior, para as listas e as exportações (que ordenam pela conclusão)
+  // manterem a ordem do arquivo. Inserção em lote, como em src/lib/cenarios: uma consulta por linha estourava o
+  // tempo da transação com arquivos de centenas de linhas
+  const participacoes = linhas.map(({ valores }, posicao) => ({
+    id: randomUUID(),
+    valores,
+    concluidaEm: new Date(agora + posicao),
+  }));
+  const respostas = participacoes.flatMap(({ id, valores }) =>
+    itens.map((item) => ({ participacaoId: id, itemId: item.id, valor: valores[item.numero - 1] ?? 0 })),
+  );
   // Tudo numa transação: ou entram todas as linhas, ou nenhuma
   await banco.$transaction(
-    linhas.map(({ valores }) =>
-      banco.participacao.create({
-        data: {
+    async (transacao) => {
+      await transacao.participacao.createMany({
+        data: participacoes.map(({ id, valores, concluidaEm }) => ({
+          id,
           versaoId: versao.id,
-          consentiuEm: agora,
-          concluidaEm: agora,
-          origem: "IMPORTADA",
+          consentiuEm: concluidaEm,
+          concluidaEm,
+          origem: "IMPORTADA" as const,
           idioma: null,
           // A mesma regra de suspeita das respostas pelo link (docs/ueq-protocolo.md, seção 7)
           suspeita: avaliarSuspeita(valores, itens, PARAMETROS_SUSPEITA).suspeita,
-          respostas: {
-            createMany: { data: itens.map((item) => ({ itemId: item.id, valor: valores[item.numero - 1] ?? 0 })) },
-          },
-        },
-        select: { id: true },
-      }),
-    ),
+        })),
+      });
+      // Em blocos, para cada INSERT ficar abaixo do limite de parâmetros do Postgres
+      for (let inicio = 0; inicio < respostas.length; inicio += RESPOSTAS_POR_LOTE) {
+        await transacao.resposta.createMany({ data: respostas.slice(inicio, inicio + RESPOSTAS_POR_LOTE) });
+      }
+    },
+    { timeout: 60_000 },
   );
   await notificarAlteracao(
     estudoId,
