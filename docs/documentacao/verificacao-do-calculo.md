@@ -4,7 +4,7 @@ Este documento confere, número por número, se a Ferramenta UEQ calcula o que o
 
 **Resultado:** todas as 336 comparações numéricas batem com a ferramenta. A maior diferença foi de 3,3 × 10⁻¹⁶, que é o erro de arredondamento do próprio computador. A interpretação, a faixa do benchmark, as escalas inconsistentes, as respostas iguais e a marca de suspeita de cada participante também são idênticas, e as exportações trazem os mesmos números.
 
-Depois, a ferramenta foi comparada com a própria planilha oficial do UEQ em 11 cenários, do participante único aos 1000 participantes: os 6.543 valores batem, e a planilha oficial que a ferramenta exporta recalcula no Excel com os mesmos resultados ([Comparação com a planilha oficial](#comparação-com-a-planilha-oficial)).
+Depois, a ferramenta foi comparada com a própria planilha oficial do UEQ em 11 cenários, do participante único aos 1000 participantes: os 6.543 valores batem, e a planilha oficial que a ferramenta exporta recalcula no Excel com os mesmos resultados ([Comparação com a planilha oficial](#comparação-com-a-planilha-oficial)). A versão curta, o UEQ-S, foi comparada do mesmo jeito com a planilha oficial dela, em 9 cenários: os 8.520 valores batem ([UEQ-S](#ueq-s)).
 
 Versão verificada: Ferramenta UEQ de 17/11/2026, com o módulo de cálculo de [`src/ueq/`](../../src/ueq/) e os parâmetros de [`data/protocolo.json`](../../data/protocolo.json) e [`data/benchmark.json`](../../data/benchmark.json).
 
@@ -229,6 +229,33 @@ A exportação "Planilha oficial do UEQ (XLSX)" foi conferida de três jeitos:
 1. **Arquivo por arquivo.** Um teste de unidade abre o `.xlsx` gerado e confere que a aba Data tem as respostas a partir da linha 4, que os 255 participantes de exemplo saíram, que o idioma está em `Read_First!B5` e que gráficos, estilos, imagens e as outras partes do arquivo são byte a byte iguais aos do arquivo oficial.
 2. **No Excel.** A planilha dos 11 cenários, gerada pela ferramenta, foi aberta no Excel sem colar nada e sem mandar recalcular. O Excel recalculou sozinho ao abrir, e os 6.543 valores ficaram idênticos aos da colagem à mão, com os rótulos em português ("Atractividade", "Desagradável").
 3. **Pela tela.** Um teste de ponta a ponta importa 7 cenários (`oficial-exemplo`, `grande`, `inconsistente`, `bordas`, `variancia-zero`, `negativo` e `extremos/n2`) pela tela Importar respostas, confere n, média, DP, IC95, alfa e benchmark de cada escala na tabela do painel com os números da planilha oficial e baixa a planilha da versão. Cinco desses arquivos, baixados da ferramenta rodando, foram abertos no Excel: zero diferenças.
+
+### UEQ-S
+
+A versão curta foi comparada do mesmo jeito com a *UEQ-S Data Analysis Tool V15* (`Short_UEQ_Data_Analysis_Tool_V15.xlsx`, do mesmo `Data_Analysis_Tools.zip`), pelo script `scripts/planilha-oficial-ueq-s.ps1`, em 9 cenários de [data/fixtures-ueq-s/](../../data/fixtures-ueq-s/LEIA-ME.md). Antes, o script rodou nos 13 participantes de exemplo da planilha e reproduziu os resultados gravados no arquivo oficial.
+
+Foram comparados média, dp, n e IC95 da qualidade pragmática, da hedônica e da geral e dos 8 itens, o alfa das duas escalas, a faixa do benchmark e, para cada participante, os três escores (aba DT), quantas escalas são inconsistentes, quantas respostas iguais ele deu e se marcou o meio nos 8 itens.
+
+| Cenário | Participantes | Suspeitas | Valores comparados | Erros da planilha (null na ferramenta) | Maior diferença |
+|---|---|---|---|---|---|
+| oficial-exemplo | 13 | 2 | 136 | 0 | 4,4 × 10⁻¹⁶ |
+| do-ueq-basico | 20 | 0 | 178 | 0 | 2,2 × 10⁻¹⁶ |
+| do-ueq-oficial-exemplo | 255 | 5 | 1.588 | 0 | 8,9 × 10⁻¹⁶ |
+| grande | 1000 | 30 | 6.058 | 0 | 6,0 × 10⁻¹⁵ |
+| bordas | 12 | 3 | 130 | 0 | 4,4 × 10⁻¹⁶ |
+| variancia-zero | 12 | 0 | 130 | 3 | 2,2 × 10⁻¹⁶ |
+| negativo | 18 | 0 | 166 | 0 | 4,4 × 10⁻¹⁶ |
+| n1 | 1 | 0 | 64 | 35 | 0 |
+| n2 | 2 | 0 | 70 | 0 | 4,4 × 10⁻¹⁶ |
+| **Total** | | | **8.520** | **38** | **6,0 × 10⁻¹⁵** |
+
+Os cenários `do-ueq-basico` e `do-ueq-oficial-exemplo` saem de cenários do UEQ completo: os 8 pares do UEQ-S de cada participante, com os lados dos itens 4 e 7 trocados. Eles provam a aba UEQ-S de um estudo do UEQ completo, que faz a mesma conversão. Os casos de borda também batem:
+
+- **As regras de suspeita do UEQ-S** (`bordas`). Amplitude 4 só numa escala não marca; nas duas, marca. Oito vezes o 4 marca ("Remove" na planilha); oito vezes o 7 não, porque a planilha só recomenda remover quem marcou o meio.
+- **Itens que se contradizem** (`negativo`). O alfa da qualidade hedônica dá -1,40 nas duas.
+- **Um item sem variação** (`variancia-zero`). Sem IC do item e sem alfa da pragmática, nas duas.
+
+A "Planilha oficial do UEQ-S (XLSX)" que a ferramenta exporta foi conferida como a do UEQ completo: um teste de unidade abre o arquivo e confere a aba Data e o idioma em `Read_First!B4`; os 9 arquivos gerados pela ferramenta foram abertos no Excel sem colar nada nem mandar recalcular, e os valores ficaram idênticos aos do `esperado.json`, com os rótulos em português ("Qualidade Pragmática", "Obstrutivo"); e um teste de ponta a ponta importa 5 cenários num estudo do UEQ-S, confere a tabela da aba UEQ-S e baixa a planilha.
 
 ## Como refazer
 

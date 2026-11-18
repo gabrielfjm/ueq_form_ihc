@@ -111,7 +111,7 @@ Cada um dos 94 requisitos ligado a quem pediu ([personas](personas.md) e [histó
 | [RF59](requisitos.md#rf59) Exportar na planilha oficial do UEQ | [HU18](historias-de-usuario.md#hu18) | [UC25](casos-de-uso.md#uc25) | [PE02](personas.md#pe02) | [CT-E37](casos-de-teste.md#ct-e37), [CT-E96](casos-de-teste.md#ct-e96), [CT-U34](casos-de-teste.md#ct-u34), [CT-U70](casos-de-teste.md#ct-u70) | Sprint 09 · Revisão final | `src/lib/planilha-oficial.ts`, `src/lib/exportacoes.ts`, `src/app/api/estudos/[id]/exportar/[tipo]/route.ts`, `data/planilha-oficial/` |
 | [RF60](requisitos.md#rf60) Exportar o painel em PDF | [HU11](historias-de-usuario.md#hu11) | [UC22](casos-de-uso.md#uc22) | [PE01](personas.md#pe01) | [CT-E39](casos-de-teste.md#ct-e39), [CT-E40](casos-de-teste.md#ct-e40), [CT-E41](casos-de-teste.md#ct-e41) | Sprint 10 · Extensões | `src/app/api/estudos/[id]/painel-pdf/route.ts`, `(pesquisador)/estudos/[id]/resultados/impressao/` |
 | [RF61](requisitos.md#rf61) Importar respostas por CSV | [HU19](historias-de-usuario.md#hu19) | [UC26](casos-de-uso.md#uc26) | [PE02](personas.md#pe02) | [CT-E42](casos-de-teste.md#ct-e42), [CT-E43](casos-de-teste.md#ct-e43), [CT-E44](casos-de-teste.md#ct-e44), [CT-U36](casos-de-teste.md#ct-u36), [CT-U39](casos-de-teste.md#ct-u39), [CT-U40](casos-de-teste.md#ct-u40), [CT-U41](casos-de-teste.md#ct-u41) | Sprint 10 · Extensões | `(pesquisador)/estudos/[id]/respostas/importar/`, `src/lib/importacao.ts` |
-| [RF62](requisitos.md#rf62) Aplicar o UEQ-S | [HU25](historias-de-usuario.md#hu25) | [UC27](casos-de-uso.md#uc27) | [PE02](personas.md#pe02) | [CT-U53](casos-de-teste.md#ct-u53) | Sprint 10 · Extensões | `data/ueq-s-itens-ptbr.json`, `data/benchmark-ueq-s.json` |
+| [RF62](requisitos.md#rf62) Aplicar o UEQ-S | [HU25](historias-de-usuario.md#hu25) | [UC27](casos-de-uso.md#uc27) | [PE02](personas.md#pe02) | [CT-U53](casos-de-teste.md#ct-u53), [CT-U71](casos-de-teste.md#ct-u71), [CT-U72](casos-de-teste.md#ct-u72), [CT-U73](casos-de-teste.md#ct-u73), [CT-U74](casos-de-teste.md#ct-u74), [CT-U75](casos-de-teste.md#ct-u75), [CT-U76](casos-de-teste.md#ct-u76), [CT-E97](casos-de-teste.md#ct-e97), [CT-E98](casos-de-teste.md#ct-e98), [CT-E99](casos-de-teste.md#ct-e99), [CT-E100](casos-de-teste.md#ct-e100), [CT-E101](casos-de-teste.md#ct-e101), [CT-M26](casos-de-teste.md#ct-m26) | UEQ-S | `src/ueq/ueq-s.ts`, `data/ueq-s-itens-ptbr.json`, `data/benchmark-ueq-s.json`, `data/protocolo-ueq-s.json`, `data/fixtures-ueq-s/` |
 
 ### Documentação
 
@@ -195,7 +195,7 @@ Cada um dos 94 requisitos ligado a quem pediu ([personas](personas.md) e [histó
 | [RNF13](requisitos.md#rnf13) Coleta mínima | A coleta demográfica desligada é coberta pelo [CT-E71](casos-de-teste.md#ct-e71), mas a limpeza das participações abandonadas depende de esperar 2 dias | Crie um estudo e confira que os dados demográficos começam desligados. |
 | [RNF26](requisitos.md#rnf26) Verificações antes de integrar | É uma regra do processo de integração, não um comportamento da ferramenta | Terminal: pnpm lint && pnpm typecheck && pnpm test. |
 
-- **Pendente:** [RF62](requisitos.md#rf62). O caso de teste dele já existe e fica pulado enquanto faltam os itens e o benchmark oficiais do UEQ-S.
+- **Pendente:** nenhum. O último, [RF62](requisitos.md#rf62) (UEQ-S), foi entregue em 18/11/2026.
 
 ## Casos de uso
 

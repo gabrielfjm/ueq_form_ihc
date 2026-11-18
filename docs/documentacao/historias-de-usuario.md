@@ -1,6 +1,6 @@
 # Histórias de usuário
 
-**44 histórias** dizem o que cada [persona](personas.md) quer fazer com a Ferramenta UEQ e como saber que deu certo. 43 estão entregues e 1 está pendente. A mesma lista está em [historias-de-usuario.csv](historias-de-usuario.csv) e na [planilha de requisitos](planilha-requisitos.xlsx).
+**44 histórias** dizem o que cada [persona](personas.md) quer fazer com a Ferramenta UEQ e como saber que deu certo. Todas as 44 estão entregues. A mesma lista está em [historias-de-usuario.csv](historias-de-usuario.csv) e na [planilha de requisitos](planilha-requisitos.xlsx).
 
 ## Como ler
 
@@ -34,7 +34,7 @@ A história está **entregue** quando todos os requisitos que ela cita estão en
 | [HU22](#hu22) | [PE02](personas.md#pe02) Ricardo | Proteger a conta num computador compartilhado | [RF03](requisitos.md#rf03), [RF05](requisitos.md#rf05), [RNF15](requisitos.md#rnf15), [RNF16](requisitos.md#rnf16), [RNF18](requisitos.md#rnf18) | Entregue |
 | [HU23](#hu23) | [PE02](personas.md#pe02) Ricardo | Exportar as respostas para outra análise | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RNF22](requisitos.md#rnf22) | Entregue |
 | [HU24](#hu24) | [PE02](personas.md#pe02) Ricardo | Saber a regra de cada número | [RF37](requisitos.md#rf37), [RF38](requisitos.md#rf38), [RF39](requisitos.md#rf39), [RF40](requisitos.md#rf40) | Entregue |
-| [HU25](#hu25) | [PE02](personas.md#pe02) Ricardo | Aplicar a versão curta em eventos | [RF62](requisitos.md#rf62) | Pendente |
+| [HU25](#hu25) | [PE02](personas.md#pe02) Ricardo | Aplicar a versão curta em eventos | [RF62](requisitos.md#rf62) | Entregue |
 | [HU26](#hu26) | [PE03](personas.md#pe03) Kenji | Usar a ferramenta em japonês | [RF08](requisitos.md#rf08) | Entregue |
 | [HU27](#hu27) | [PE03](personas.md#pe03) Kenji | Aplicar o estudo em japonês | [RF19](requisitos.md#rf19), [RF34](requisitos.md#rf34), [RF35](requisitos.md#rf35) | Entregue |
 | [HU28](#hu28) | [PE04](personas.md#pe04) Célia | Entender o convite antes de aceitar | [RF25](requisitos.md#rf25), [RNF19](requisitos.md#rnf19) | Entregue |
@@ -404,9 +404,11 @@ Como **Ricardo**, orientador ([PE02](personas.md#pe02)), **quero** aplicar o UEQ
 Critérios de aceitação:
 
 1. Escolho entre UEQ e UEQ-S ao criar o estudo.
-2. O painel mostra as escalas pragmática e hedônica com o benchmark do UEQ-S.
+2. O formulário explica o que muda entre os dois antes de eu escolher, e a escolha trava na primeira resposta.
+3. O participante responde os 8 pares do UEQ-S, com o tempo da versão curta no termo.
+4. Os resultados mostram, numa aba própria, a qualidade pragmática, a hedônica e a geral, com o benchmark do UEQ-S, e exportam a planilha oficial do UEQ-S preenchida.
 
-Requisitos: [RF62](requisitos.md#rf62). Status: Pendente.
+Requisitos: [RF62](requisitos.md#rf62). Status: Entregue.
 
 ### HU26
 
