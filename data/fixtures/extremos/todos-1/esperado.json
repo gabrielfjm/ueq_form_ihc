@@ -1,0 +1,57 @@
+{
+  "fonte": "UEQ Data Analysis Tool V15 (Data_Analysis_Tools.zip de ueq-online.org), recalculada no Microsoft Excel 16 em 17/11/2026 com o respostas.csv colado em Data!A4",
+  "escalas": {
+    "media": [0, 0, 0, 0, 0, 0],
+    "dp": [0, 0, 0, 0, 0, 0],
+    "n": 3,
+    "icInferior": [null, null, null, null, null, null],
+    "icSuperior": [null, null, null, null, null, null],
+    "alfa": [null, null, null, null, null, null],
+    "benchmark": ["Bad", "Bad", "Bad", "Bad", "Bad", "Bad"],
+    "variancia": [0, 0, 0, 0, 0, 0]
+  },
+  "grupos": {
+    "pragmatica": 0,
+    "hedonica": 0
+  },
+  "itens": {
+    "media": [-3, -3, 3, 3, 3, -3, -3, -3, 3, 3, -3, 3, -3, -3, -3, -3, 3, 3, 3, -3, 3, -3, 3, 3, 3, -3],
+    "dp": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+    "n": [3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+    "icInferior": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null],
+    "icSuperior": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null]
+  },
+  "participantes": {
+    "escalasInconsistentes": [6, 6, 6],
+    "respostasIguais": [26, 26, 26]
+  },
+  "distribuicao": [
+    [3, 0, 0, 0, 0, 0, 0],
+    [3, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3],
+    [0, 0, 0, 0, 0, 0, 3],
+    [0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0],
+    [3, 0, 0, 0, 0, 0, 0],
+    [3, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3],
+    [0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0],
+    [3, 0, 0, 0, 0, 0, 0],
+    [3, 0, 0, 0, 0, 0, 0],
+    [3, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3],
+    [0, 0, 0, 0, 0, 0, 3],
+    [0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0],
+    [0, 0, 0, 0, 0, 0, 3],
+    [0, 0, 0, 0, 0, 0, 3],
+    [0, 0, 0, 0, 0, 0, 3],
+    [3, 0, 0, 0, 0, 0, 0]
+  ],
+  "idiomaDaPlanilha": "English"
+}
