@@ -91,3 +91,26 @@ export type { AvaliacaoSuspeita, MotivoSuspeita, ParametrosInconsistencia } from
 export { ESCALAS, GRUPOS, numerosPorEscala } from "./itens";
 export type { Escala, ItemUEQ, Polaridade } from "./itens";
 export { recodificar, recodificarParticipante } from "./recodificar";
+export {
+  analisarUeqS,
+  avaliarSuspeitaUeqS,
+  escoresUeqS,
+  ESCALAS_UEQ_S,
+  montarItensUeqS,
+  valoresDoUeqS,
+  valoresParaOUeq,
+} from "./ueq-s";
+export type {
+  AnaliseUeqS,
+  AvaliacaoSuspeitaUeqS,
+  ConfigAnaliseUeqS,
+  DefinicaoItemUeqS,
+  EscalaUeqS,
+  GrupoUeqS,
+  ItemUeqS,
+  MotivoSuspeitaUeqS,
+  ParametrosInconsistenciaUeqS,
+  ParticipacaoUeqS,
+  ResultadoEscalaUeqS,
+  ResultadoItemUeqS,
+} from "./ueq-s";

@@ -1,10 +1,13 @@
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join, relative, sep } from "node:path";
 import { z } from "zod";
+import benchmarkUeqS from "../../../data/benchmark-ueq-s.json";
 import benchmark from "../../../data/benchmark.json";
+import protocoloUeqS from "../../../data/protocolo-ueq-s.json";
 import protocolo from "../../../data/protocolo.json";
 import type { ConfigAnalise } from "..";
 import { ESCALAS, type ItemUEQ } from "../itens";
+import { montarItensUeqS, type ConfigAnaliseUeqS, type ItemUeqS } from "../ueq-s";
 
 const raizDados = join(__dirname, "..", "..", "..", "data");
 export const raizFixtures = join(raizDados, "fixtures");
@@ -24,6 +27,29 @@ const arquivoItens = z.object({
 export function carregarItens(): ItemUEQ[] {
   return arquivoItens.parse(JSON.parse(readFileSync(join(raizDados, "ueq-itens-ptbr.json"), "utf8"))).itens;
 }
+
+const arquivoItensUeqS = z.object({
+  itens: z.array(
+    z.object({
+      ordem: z.int(),
+      numeroNoUeq: z.int(),
+      escala: z.enum(["pragmatica", "hedonica"]),
+      polaridade: z.enum(["+", "-"]),
+    }),
+  ),
+});
+
+export function carregarItensUeqS(): ItemUeqS[] {
+  const { itens } = arquivoItensUeqS.parse(JSON.parse(readFileSync(join(raizDados, "ueq-s-itens-ptbr.json"), "utf8")));
+  return montarItensUeqS(itens, carregarItens());
+}
+
+export const configOficialUeqS: ConfigAnaliseUeqS = {
+  protocolo: { ...protocolo, inconsistencia: protocoloUeqS.inconsistencia },
+  benchmark: benchmarkUeqS.escalas,
+};
+
+export const raizFixturesUeqS = join(raizDados, "fixtures-ueq-s");
 
 // Monta as 26 respostas de 1 a 7 a partir do valor recodificado (-3 a 3) que cada item deve ter
 export function montarRespostas(itens: readonly ItemUEQ[], recodificado: (item: ItemUEQ) => number): number[] {
