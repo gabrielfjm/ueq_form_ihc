@@ -1,14 +1,12 @@
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { analisarEstudo } from "@/ueq";
-import { carregarItens, configOficial, lerRespostas, raizFixtures } from "@/ueq/__tests__/carregar";
+import { carregarItens, configOficial, lerRespostas } from "@/ueq/__tests__/carregar";
 import { BOM } from "../csv";
 import {
   exportarBrutas,
-  exportarPlanilhaOficial,
   exportarRecodificadas,
   exportarResultados,
+  linhasDaPlanilhaOficial,
   type ParticipacaoExportada,
 } from "../exportacoes";
 
@@ -30,16 +28,14 @@ function participacoes(pasta: string): ParticipacaoExportada[] {
   }));
 }
 
-describe("exportarPlanilhaOficial", () => {
-  it("da fixture basico sai idêntica ao respostas.csv original", () => {
-    const original = readFileSync(join(raizFixtures, "basico", "respostas.csv"), "utf8");
-    expect(exportarPlanilhaOficial(participacoes("basico"))).toBe(original);
+describe("linhasDaPlanilhaOficial", () => {
+  it("da fixture basico sai com as mesmas linhas do respostas.csv original", () => {
+    expect(linhasDaPlanilhaOficial(participacoes("basico"))).toEqual(lerRespostas("basico"));
   });
 
   it("deixa de fora quem está fora da análise", () => {
     const [primeira, ...outras] = participacoes("basico");
-    const texto = exportarPlanilhaOficial([{ ...primeira!, incluidaNaAnalise: false }, ...outras]);
-    expect(texto.split("\r\n").filter(Boolean)).toHaveLength(19);
+    expect(linhasDaPlanilhaOficial([{ ...primeira!, incluidaNaAnalise: false }, ...outras])).toHaveLength(19);
   });
 });
 

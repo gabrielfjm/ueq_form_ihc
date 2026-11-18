@@ -124,17 +124,28 @@ Leitura, com maior estrito como na fórmula da planilha: `media > excelente` →
 1. **Respostas brutas** (CSV): uma linha por participação. Colunas: id da participação, versão, data, incluída (sim/não), suspeita (sim/não), origem, idioma, tradução aprovada, menor de idade (declarou menos de 18 anos com a autorização do responsável), demográficos, `item01` a `item26` com valores 1 a 7.
 2. **Respostas recodificadas** (CSV): mesmo formato, valores -3 a 3.
 3. **Resultados por escala** (CSV): versão, escala, n, média, dp, ic95 inferior, ic95 superior, alfa, faixa de interpretação, faixa do benchmark.
-4. **Compatível com a planilha oficial**: só os 26 valores 1 a 7 por linha, na ordem oficial, sem cabeçalho e sem colunas extras, só das participações na análise. Mesmo formato das fixtures: separador `;`, quebra de linha CRLF e **sem BOM**. (Fonte: planilha V15, aba Data.) Os dados começam em `Data!A4`, uma coluna por item de A a Z. O Excel em pt-BR abre o arquivo `;` já separado em colunas; daí é copiar as linhas e colar em `Data!A4` (passo a passo em `data/fixtures/LEIA-ME.md`). Um teste confere que a exportação da fixture `basico` sai idêntica ao `respostas.csv` original.
+4. **Planilha oficial preenchida** (XLSX): a própria *UEQ Data Analysis Tool V15* (`data/planilha-oficial/UEQ_Data_Analysis_Tool_V15.xlsx`, copiada sem alteração de `Data_Analysis_Tools.zip`), com os 26 valores de 1 a 7 de cada participação na análise a partir de `Data!A4`, uma coluna por item de A a Z, na ordem em que as participações foram concluídas. (Fonte: planilha V15, aba Data.) A exportação só escreve a entrada, como quem cola as respostas à mão:
+   - apaga os 255 participantes de exemplo que vêm na aba Data e escreve as respostas no lugar;
+   - põe em `Read_First!B5` o idioma da interface, entre os 37 que a planilha traduz, para os rótulos e os itens saírem nesse idioma;
+   - tira das outras abas os resultados gravados dos dados de exemplo e marca o arquivo para recalcular ao abrir (`fullCalcOnLoad`). No Excel, a planilha recalcula ao clicar em **Habilitar edição**.
 
-CSV em UTF-8 com BOM e separador `;` (abre direto no Excel em pt-BR). Números com vírgula decimal no CSV de resultados. A exportação compatível com a planilha segue o que a planilha exigir.
+   Fórmulas, gráficos, estilos e as outras abas ficam idênticos aos do arquivo oficial, e um teste confere isso byte a byte. Na tela de uma versão sai só aquela versão; em "Todas as versões" sai o estudo inteiro. A planilha calcula até 1000 participantes (o aviso da aba Data); acima disso o painel explica e oferece as respostas brutas.
+
+CSV em UTF-8 com BOM e separador `;` (abre direto no Excel em pt-BR). Números com vírgula decimal no CSV de resultados.
 
 ## 10. Validação contra a planilha oficial
 
-Em `data/fixtures/` ficam pelo menos três conjuntos:
-- `basico`: ~20 participantes com respostas variadas
-- `inconsistente`: inclui participantes que devem ser marcados como suspeitos
-- `extremos`: todos 1, todos 7, n = 1, n = 2
+Em `data/fixtures/` ficam 11 cenários, cada um com `respostas.csv` (formato da planilha) e `esperado.json` com os números da planilha oficial recalculada no Excel depois de colar as respostas em `Data!A4`. A lista dos cenários, as células lidas e o script que automatiza o Excel estão em [data/fixtures/LEIA-ME.md](../data/fixtures/LEIA-ME.md):
 
-Cada conjunto tem `respostas.csv` (formato da planilha) e `esperado.json` com os números copiados da planilha oficial depois de colar as respostas lá. Os testes do módulo `src/ueq/` comparam com tolerância de `1e-6`.
+- `basico`: 20 participantes com respostas variadas;
+- `inconsistente`: 15, com 4 suspeitos por amplitude e 2 casos de borda;
+- `extremos`: todos 1, todos 7, n = 1, n = 2;
+- `oficial-exemplo`: os 255 participantes de exemplo da própria planilha;
+- `grande`: 1000 participantes, o máximo da planilha;
+- `bordas`: amplitude exatamente 3, 15 e 16 respostas iguais, 26 vezes o 4;
+- `variancia-zero`: um item com a mesma resposta para todos (erro da planilha no alfa e no IC);
+- `negativo`: médias negativas, benchmark Ruim e alfa negativo.
 
-**Situação em 17/11/2026:** os `respostas.csv` existem, e as fórmulas deste documento foram refeitas à mão com as fixtures `basico` e `inconsistente` na [verificação do cálculo](documentacao/verificacao-do-calculo.md), com o mesmo resultado da ferramenta. Os `esperado.json` com os números da própria planilha oficial ainda não foram preenchidos, e por isso os 6 testes dessa comparação ficam pulados ([RNF11](documentacao/requisitos.md#rnf11)). O passo a passo está em `data/fixtures/LEIA-ME.md`.
+Os testes do módulo `src/ueq/` comparam média, dp, n e IC95 de escalas e itens, alfa, benchmark, qualidade pragmática e hedônica, escalas inconsistentes e respostas iguais por participante e a distribuição das respostas, com tolerância de `1e-6`. Erro da planilha tem de ser `null` na ferramenta.
+
+**Situação em 17/11/2026:** os 11 cenários batem com a planilha oficial. São 6.543 valores comparados, e a maior diferença é de 9,3 × 10⁻¹⁵, que é arredondamento de ponto flutuante. As 245 células em que a planilha dá erro são `null` na ferramenta ([RNF11](documentacao/requisitos.md#rnf11), [verificação do cálculo](documentacao/verificacao-do-calculo.md#comparação-com-a-planilha-oficial)).

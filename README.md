@@ -44,7 +44,7 @@ A meta de acessibilidade é WCAG 2.2 nível AA, base da ABNT NBR 17225:2025.
 
 **Pesquisador**
 - Estudos com uma ou mais versões (teste A/B), coleta aberta, encerrada e reaberta, e importação de respostas por CSV.
-- Painel com média, desvio-padrão, IC 95%, alfa de Cronbach e benchmark oficial por escala, comparação entre versões e exportação em CSV (inclusive no formato da *UEQ Data Analysis Tool*) e em PDF.
+- Painel com média, desvio-padrão, IC 95%, alfa de Cronbach e benchmark oficial por escala, comparação entre versões e exportação em CSV, na própria *UEQ Data Analysis Tool* preenchida (XLSX) e em PDF. Os números batem com a planilha oficial em 11 cenários de teste.
 - Respostas suspeitas pelas regras do Handbook do UEQ, com inclusão e exclusão da análise sem apagar nada.
 - Em Resultados, duas abas: as escalas do UEQ e, quando o estudo coleta, os **dados demográficos**, cada pergunta no gráfico que combina com ela (colunas para a faixa etária, barras para gênero e escolaridade, barra 100% para a familiaridade), com a tabela dos números e filtro por versão.
 - **Estudos em equipe**: “Compartilhar” convida uma conta cadastrada pelo e-mail, como Editor (mexe no estudo) ou Leitor (vê e exporta). Excluir o estudo e convidar pessoas fica só com o dono.

@@ -1,6 +1,6 @@
 # Histórias de usuário
 
-**44 histórias** dizem o que cada [persona](personas.md) quer fazer com a Ferramenta UEQ e como saber que deu certo. 42 estão entregues e 2 estão pendentes. A mesma lista está em [historias-de-usuario.csv](historias-de-usuario.csv) e na [planilha de requisitos](planilha-requisitos.xlsx).
+**44 histórias** dizem o que cada [persona](personas.md) quer fazer com a Ferramenta UEQ e como saber que deu certo. 43 estão entregues e 1 está pendente. A mesma lista está em [historias-de-usuario.csv](historias-de-usuario.csv) e na [planilha de requisitos](planilha-requisitos.xlsx).
 
 ## Como ler
 
@@ -27,7 +27,7 @@ A história está **entregue** quando todos os requisitos que ela cita estão en
 | [HU15](#hu15) | [PE01](personas.md#pe01) Marina | Corrigir o estudo depois de criado | [RF14](requisitos.md#rf14) | Entregue |
 | [HU16](#hu16) | [PE01](personas.md#pe01) Marina | Excluir um estudo de teste | [RF17](requisitos.md#rf17), [RNF21](requisitos.md#rnf21) | Entregue |
 | [HU17](#hu17) | [PE01](personas.md#pe01) Marina | Cuidar dos meus dados de conta | [RF04](requisitos.md#rf04), [RF06](requisitos.md#rf06), [RF07](requisitos.md#rf07), [RNF19](requisitos.md#rnf19) | Entregue |
-| [HU18](#hu18) | [PE02](personas.md#pe02) Ricardo | Conferir os números na planilha oficial | [RF36](requisitos.md#rf36), [RF37](requisitos.md#rf37), [RF59](requisitos.md#rf59), [RNF09](requisitos.md#rnf09), [RNF11](requisitos.md#rnf11) | Pendente |
+| [HU18](#hu18) | [PE02](personas.md#pe02) Ricardo | Conferir os números na planilha oficial | [RF36](requisitos.md#rf36), [RF37](requisitos.md#rf37), [RF59](requisitos.md#rf59), [RNF09](requisitos.md#rnf09), [RNF11](requisitos.md#rnf11) | Entregue |
 | [HU19](#hu19) | [PE02](personas.md#pe02) Ricardo | Juntar respostas coletadas em papel | [RF61](requisitos.md#rf61) | Entregue |
 | [HU20](#hu20) | [PE02](personas.md#pe02) Ricardo | Acompanhar o estudo da orientanda | [RF20](requisitos.md#rf20), [RF21](requisitos.md#rf21), [RNF17](requisitos.md#rnf17) | Entregue |
 | [HU21](#hu21) | [PE02](personas.md#pe02) Ricardo | Saber o que mudou nos estudos | [RF22](requisitos.md#rf22), [RF23](requisitos.md#rf23) | Entregue |
@@ -300,16 +300,16 @@ Requisitos: [RF04](requisitos.md#rf04), [RF06](requisitos.md#rf06), [RF07](requi
 
 **Conferir os números na planilha oficial**
 
-Como **Ricardo**, orientador ([PE02](personas.md#pe02)), **quero** exportar as respostas no formato da UEQ Data Analysis Tool, **para** conferir que a ferramenta calcula como a planilha antes de assinar um artigo.
+Como **Ricardo**, orientador ([PE02](personas.md#pe02)), **quero** exportar as respostas na própria UEQ Data Analysis Tool, **para** conferir que a ferramenta calcula como a planilha antes de assinar um artigo.
 
 Critérios de aceitação:
 
-1. O CSV tem os 26 valores de cada participante na análise, prontos para colar na aba Data.
+1. A planilha oficial sai preenchida com os 26 valores de cada participante na análise, a partir de Data!A4, e recalcula ao abrir no Excel.
 2. A recodificação e as estatísticas seguem as fórmulas do handbook e da planilha.
 3. O questionário não induz resposta: as 7 posições têm o mesmo peso visual.
 4. Os números batem com a planilha com tolerância de 1e-6.
 
-Requisitos: [RF36](requisitos.md#rf36), [RF37](requisitos.md#rf37), [RF59](requisitos.md#rf59), [RNF09](requisitos.md#rnf09), [RNF11](requisitos.md#rnf11). Status: Pendente.
+Requisitos: [RF36](requisitos.md#rf36), [RF37](requisitos.md#rf37), [RF59](requisitos.md#rf59), [RNF09](requisitos.md#rnf09), [RNF11](requisitos.md#rnf11). Status: Entregue.
 
 ### HU19
 

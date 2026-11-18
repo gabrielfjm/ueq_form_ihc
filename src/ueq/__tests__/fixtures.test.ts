@@ -23,11 +23,13 @@ const esperadoDaPlanilha = z.object({
     benchmark: z.array(z.enum(["Excellent", "Good", "Above average", "Below average", "Bad"])).length(ESCALAS.length),
   }),
   grupos: z.object({ pragmatica: numeroOuErro, hedonica: numeroOuErro }),
-  itens: z.object({ media: porItem, dp: porItem }),
+  itens: z.object({ media: porItem, dp: porItem, n: z.array(z.int()).length(26), icInferior: porItem, icSuperior: porItem }),
   participantes: z.object({
     escalasInconsistentes: z.array(z.int()),
     respostasIguais: z.array(z.int()),
   }),
+  // Answer_Distributions!C3:I28: quantas pessoas deram -3, -2, ..., 3 (já recodificado) em cada item
+  distribuicao: z.array(z.array(z.int()).length(7)).length(26),
 });
 
 const faixaDaPlanilha: Record<z.infer<typeof esperadoDaPlanilha>["escalas"]["benchmark"][number], FaixaBenchmark> = {
@@ -95,9 +97,22 @@ describe.each(pastasDeFixture())("fixture %s contra a planilha oficial", (pasta)
     ]);
   });
 
-  it("bate média e dp por item", () => {
+  it("bate média, dp, n e IC95 por item", () => {
     compararNumeros("itens.media", analise.itens.map((item) => item.media), esperado.itens.media);
     compararNumeros("itens.dp", analise.itens.map((item) => item.dp), esperado.itens.dp);
+    expect(analise.itens.map((item) => item.n)).toEqual(esperado.itens.n);
+    compararNumeros("itens.icInferior", analise.itens.map((item) => item.ic?.inferior), esperado.itens.icInferior);
+    compararNumeros("itens.icSuperior", analise.itens.map((item) => item.ic?.superior), esperado.itens.icSuperior);
+  });
+
+  it("bate a distribuição das respostas por item", () => {
+    // A ferramenta conta da esquerda (1) para a direita (7); a planilha conta do -3 ao 3 depois de recodificar,
+    // então nos itens de polaridade negativa a ordem se inverte
+    const recodificada = analise.itens.map((item) => {
+      const polaridade = itens.find((i) => i.numero === item.numero)?.polaridade;
+      return polaridade === "-" ? [...item.distribuicao].reverse() : item.distribuicao;
+    });
+    expect(recodificada).toEqual(esperado.distribuicao);
   });
 
   it("bate escalas inconsistentes e respostas iguais por participante", () => {

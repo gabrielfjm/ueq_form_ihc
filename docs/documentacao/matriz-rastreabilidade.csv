@@ -57,9 +57,9 @@ RF55;Recalcular as suspeitas;Funcional;Respostas e suspeitas;HU39;UC32;PE08;CT-M
 RF56;Exportar respostas brutas;Funcional;Exportação e importação;HU23;UC25;PE02;CT-E37, CT-U31, CT-U32, CT-U35;Sprint 08 · Exportação;Entregue;src/lib/exportacoes.ts, src/app/api/estudos/[id]/exportar/[tipo]/route.ts
 RF57;Exportar respostas recodificadas;Funcional;Exportação e importação;HU23;UC25;PE02;CT-E37, CT-U32, CT-U37;Sprint 08 · Exportação;Entregue;src/lib/exportacoes.ts, src/app/api/estudos/[id]/exportar/[tipo]/route.ts
 RF58;Exportar resultados por escala;Funcional;Exportação e importação;HU11;UC25;PE01;CT-E37, CT-U32, CT-U33, CT-U38;Sprint 08 · Exportação;Entregue;src/lib/exportacoes.ts, src/app/api/estudos/[id]/exportar/[tipo]/route.ts
-RF59;Exportar no formato da planilha oficial;Funcional;Exportação e importação;HU18;UC25;PE02;CT-E37, CT-U32, CT-U34;Sprint 08 · Exportação;Entregue;src/lib/exportacoes.ts, src/app/api/estudos/[id]/exportar/[tipo]/route.ts
+RF59;Exportar na planilha oficial do UEQ;Funcional;Exportação e importação;HU18;UC25;PE02;CT-E37, CT-E96, CT-U34, CT-U70;Sprint 09 · Revisão final;Entregue;src/lib/planilha-oficial.ts, src/lib/exportacoes.ts, src/app/api/estudos/[id]/exportar/[tipo]/route.ts, data/planilha-oficial/
 RF60;Exportar o painel em PDF;Funcional;Exportação e importação;HU11;UC22;PE01;CT-E39, CT-E40, CT-E41;Sprint 10 · Extensões;Entregue;src/app/api/estudos/[id]/painel-pdf/route.ts, (pesquisador)/estudos/[id]/resultados/impressao/
-RF61;Importar respostas por CSV;Funcional;Exportação e importação;HU19;UC26;PE02;CT-E42, CT-E43, CT-E44, CT-U36, CT-U39, CT-U40, CT-U41;Sprint 10 · Extensões;Entregue;(pesquisador)/estudos/[id]/respostas/importar/, src/lib/importacao.ts
+RF61;Importar respostas por CSV;Funcional;Exportação e importação;HU19;UC26;PE02;CT-E42, CT-E43, CT-E44, CT-E96, CT-U36, CT-U39, CT-U40, CT-U41;Sprint 10 · Extensões;Entregue;(pesquisador)/estudos/[id]/respostas/importar/, src/lib/importacao.ts
 RF62;Aplicar o UEQ-S;Funcional;Exportação e importação;HU25;UC27;PE02;CT-U53;Sprint 10 · Extensões;Pendente;data/ueq-s-itens-ptbr.json, data/benchmark-ueq-s.json
 RF63;Aba Documentação;Funcional;Documentação;HU44;UC28;PE08;CT-E47, CT-E48, CT-E50, CT-E62, CT-E84, CT-E85, CT-E87, CT-U54, CT-U55, CT-U57, CT-U64;Sprint de documentação;Entregue;(publico)/documentacao/, src/lib/documentacao/
 RF64;Diagramas em tela cheia;Funcional;Documentação;HU44;UC28;PE08;CT-E57, CT-U55;Sprint de documentação;Entregue;(publico)/documentacao/ArtigoDocumento.tsx
@@ -77,7 +77,7 @@ RNF07;Informação além da cor;Não funcional;Acessibilidade;HU08;;PE01;CT-E32,
 RNF08;Gráficos com texto equivalente;Não funcional;Acessibilidade;HU08;;PE01;CT-E29, CT-M05;Sprint 06 · Resultados;Entregue;src/graficos/
 RNF09;Questionário sem viés de interface;Não funcional;Fidelidade ao instrumento;HU18;;PE02;CT-E24;Sprint 05 · Questionário;Entregue;src/componentes/ItemDiferencial.tsx
 RNF10;Termos oficiais;Não funcional;Fidelidade ao instrumento;HU36;UC33;PE06;CT-U45, CT-U46, CT-U47, CT-M17;Sprint de idiomas;Entregue;data/ueq-itens-ptbr.json, data/ueq-idiomas.json, prisma/seed.ts
-RNF11;Cálculo igual ao da planilha oficial;Não funcional;Fidelidade ao instrumento;HU18;;PE02;CT-U29, CT-M15;Sprint 09 · Revisão final;Pendente;src/ueq/__tests__/fixtures.test.ts, data/fixtures/
+RNF11;Cálculo igual ao da planilha oficial;Não funcional;Fidelidade ao instrumento;HU18;;PE02;CT-E96, CT-M15, CT-U29;Sprint 09 · Revisão final;Entregue;src/ueq/__tests__/fixtures.test.ts, data/fixtures/, scripts/planilha-oficial.ps1
 RNF12;Anonimato do participante;Não funcional;Segurança e privacidade;HU33;;PE04;CT-E21;Sprint 05 · Questionário;Entregue;prisma/schema.prisma, src/lib/participacao.ts
 RNF13;Coleta mínima;Não funcional;Segurança e privacidade;HU05;;PE01;;LGPD;Entregue;prisma/schema.prisma, src/app/r/[slug]/acoes.ts
 RNF14;Criptografia dos dados demográficos;Não funcional;Segurança e privacidade;HU05, HU43;;PE01, PE08;CT-U58;LGPD;Entregue;src/lib/cripto.ts, prisma/cifrar-dados.ts

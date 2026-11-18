@@ -28,7 +28,7 @@ Atores secundários, que participam de um caso de uso sem iniciá-lo:
 |---|---|---|
 | Servidor de e-mail «sistema» | [UC11](#uc11) Compartilhar estudo, [UC13](#uc13) Acompanhar notificações | Entrega o convite e as notificações por e-mail, quando o envio está configurado |
 | API do Claude «sistema» | [UC03](#uc03) Gerenciar a conta, [UC15](#uc15) Escolher o idioma | Traduz a interface do pesquisador e o título, o produto e o objetivo do estudo. Nunca traduz o questionário |
-| Planilha oficial do UEQ «sistema» | [UC25](#uc25) Exportar dados em CSV, [UC26](#uc26) Importar respostas | Recebe as respostas no formato dela (UEQ Data Analysis Tool) e é a origem do CSV importado |
+| Planilha oficial do UEQ «sistema» | [UC25](#uc25) Exportar dados, [UC26](#uc26) Importar respostas | Recebe as respostas preenchidas nela mesma (UEQ Data Analysis Tool) e é a origem do CSV importado |
 | GitHub «sistema» | [UC28](#uc28) Consultar a documentação | Guarda o arquivo de cada documento, aberto pelo link Ver no GitHub |
 | ueq-online.org «sistema» | [UC33](#uc33) Carregar os itens oficiais | Fonte dos termos, das instruções e do benchmark oficiais copiados para `data/` |
 
@@ -111,7 +111,7 @@ flowchart LR
         uc21(["UC21 Ver os dados demográficos"])
         uc22(["UC22 Exportar o painel em PDF"])
         uc23(["UC23 Revisar respostas suspeitas"])
-        uc25(["UC25 Exportar dados em CSV"])
+        uc25(["UC25 Exportar dados"])
         uc26(["UC26 Importar respostas"])
         uc19(["UC19 Calcular a análise UEQ"])
         uc24(["UC24 Avaliar a suspeita<br/>da participação"])
@@ -260,7 +260,7 @@ O Administrador é um Pesquisador com permissão a mais, por isso também faz to
 | [UC22](#uc22) | Exportar o painel em PDF | Pesquisador | [RF60](requisitos.md#rf60) | estende UC18 |
 | [UC23](#uc23) | Revisar respostas suspeitas | Pesquisador | [RF52](requisitos.md#rf52), [RF53](requisitos.md#rf53), [RF54](requisitos.md#rf54) | inclui UC24 |
 | [UC24](#uc24) | Avaliar a suspeita da participação | — | [RF51](requisitos.md#rf51) | incluído por UC14, UC23, UC26, UC32 |
-| [UC25](#uc25) | Exportar dados em CSV | Pesquisador | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RF58](requisitos.md#rf58), [RF59](requisitos.md#rf59) | inclui UC19 |
+| [UC25](#uc25) | Exportar dados | Pesquisador | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RF58](requisitos.md#rf58), [RF59](requisitos.md#rf59) | inclui UC19 |
 | [UC26](#uc26) | Importar respostas | Pesquisador | [RF61](requisitos.md#rf61) | inclui UC24 |
 | [UC27](#uc27) | Aplicar o UEQ-S | Pesquisador | [RF62](requisitos.md#rf62) | pendente; estende UC06 |
 | [UC28](#uc28) | Consultar a documentação | Visitante ou Pesquisador | [RF63](requisitos.md#rf63), [RF64](requisitos.md#rf64), [RF65](requisitos.md#rf65) | — |
@@ -454,7 +454,7 @@ Fluxos alternativos:
 
 ### UC25
 
-**Exportar dados em CSV**
+**Exportar dados**
 
 | | |
 |---|---|
@@ -465,11 +465,12 @@ Fluxos alternativos:
 
 Fluxo principal:
 
-1. Na seção Exportar do painel, o pesquisador escolhe um dos quatro arquivos: respostas brutas, respostas recodificadas, resultados por escala ou formato da planilha oficial.
+1. Na seção Exportar do painel, o pesquisador escolhe um dos quatro arquivos: respostas brutas, respostas recodificadas, resultados por escala (os três em CSV) ou a planilha oficial do UEQ (XLSX).
 2. O sistema confere a sessão e o acesso ao estudo, monta o CSV (com BOM, `;` e vírgula decimal) e devolve como download, com o nome `ueq_<titulo>_<tipo>_<aaaa-mm-dd>.csv`.
-3. Para conferir os números, o pesquisador cola o arquivo no formato da planilha oficial na aba Data da UEQ Data Analysis Tool.
+3. Na planilha oficial, o sistema preenche a própria UEQ Data Analysis Tool V15 com as participações na análise da versão escolhida no painel (ou do estudo inteiro), a partir de Data!A4, no idioma da interface, e devolve `ueq_<titulo>_planilha-oficial[_<versao>]_<aaaa-mm-dd>.xlsx`.
+4. O pesquisador abre a planilha no Excel e clica em Habilitar edição: a planilha recalcula com as fórmulas dela, e ele confere os números com os do painel.
 
-Alternativo: **2a.** Sem sessão ou sem acesso ao estudo, nada sai.
+Alternativo: **2a.** Sem sessão ou sem acesso ao estudo, nada sai. **3a.** A seleção tem mais de 1000 participações, o máximo da planilha oficial: no lugar do link, o painel explica e sugere escolher uma versão ou usar as respostas brutas.
 
 ### UC26
 

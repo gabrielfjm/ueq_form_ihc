@@ -67,7 +67,7 @@ Para cada tela, faça a tarefa e compare com o protótipo em `docs/prototipos/al
 | 16a | Administração | menu "Administração", só para conta administradora | r24, r24b, r24c, r34 | Crie uma conta e veja a cobertura dos idiomas |
 | 16b | Documentação | menu "Documentação", com e sem login | r10 a r15, r23, r36 a r38 | Abra um documento, entre numa seção, amplie um diagrama, siga um link para outro documento e use Voltar |
 | 16c | Sair e exclusões | "Sair"; excluir estudo; excluir conta | r20, r21, r22 | Cancele e confirme, usando também o Esc |
-| 17 | Exportar | fim da aba "Resultados" | r6, seção 04 | Baixe o CSV da planilha oficial e o painel em PDF |
+| 17 | Exportar | fim da aba "Resultados" | r6, seção 04 | Baixe a planilha oficial do UEQ (XLSX), abra no Excel e compare com o painel; baixe o painel em PDF |
 | 18 | Importar respostas | aba "Respostas", "Importar respostas de um CSV" | sem protótipo | Importe `data/fixtures/basico/respostas.csv` numa versão |
 | 19 | Painel em PDF | "Painel em PDF" | sem protótipo | Abra o PDF e confira se dá para usar no relatório |
 | 20 | Seletor de idioma | topo do consentimento | sem protótipo | Escolha árabe ou japonês e responda o questionário |
@@ -110,7 +110,7 @@ Não precisa gastar tempo com:
 - conferir se nenhuma tela rola na horizontal em 320 px;
 - conferir se o fluxo inteiro funciona só com o teclado.
 
-Os testes de ponta a ponta já fazem isso em todas as telas, no desktop e no celular. Os cálculos do UEQ também são testados. A conferência final contra a planilha oficial é um passo separado: `data/fixtures/LEIA-ME.md`.
+Os testes de ponta a ponta já fazem isso em todas as telas, no desktop e no celular. Os cálculos do UEQ também são testados. A conferência contra a planilha oficial também é automática: 11 cenários em `data/fixtures/` com os números da UEQ Data Analysis Tool (`data/fixtures/LEIA-ME.md`).
 
 O que sobra para vocês é o que só uma pessoa avalia:
 

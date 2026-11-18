@@ -2,7 +2,9 @@
 
 Este documento confere, número por número, se a Ferramenta UEQ calcula o que o [Protocolo UEQ](../ueq-protocolo.md) manda calcular. A conferência usa o **Estudo de exemplo**, que o seed cria em toda instalação local, na conta de teste e com o link `/r/exemplo`, e refaz cada conta sem usar o código da ferramenta.
 
-**Resultado:** todas as 336 comparações numéricas batem com a ferramenta. A maior diferença foi de 3,3 × 10⁻¹⁶, que é o erro de arredondamento do próprio computador. A interpretação, a faixa do benchmark, as escalas inconsistentes, as respostas iguais e a marca de suspeita de cada participante também são idênticas, e as quatro exportações em CSV trazem os mesmos números.
+**Resultado:** todas as 336 comparações numéricas batem com a ferramenta. A maior diferença foi de 3,3 × 10⁻¹⁶, que é o erro de arredondamento do próprio computador. A interpretação, a faixa do benchmark, as escalas inconsistentes, as respostas iguais e a marca de suspeita de cada participante também são idênticas, e as exportações trazem os mesmos números.
+
+Depois, a ferramenta foi comparada com a própria planilha oficial do UEQ em 11 cenários, do participante único aos 1000 participantes: os 6.543 valores batem, e a planilha oficial que a ferramenta exporta recalcula no Excel com os mesmos resultados ([Comparação com a planilha oficial](#comparação-com-a-planilha-oficial)).
 
 Versão verificada: Ferramenta UEQ de 17/11/2026, com o módulo de cálculo de [`src/ueq/`](../../src/ueq/) e os parâmetros de [`data/protocolo.json`](../../data/protocolo.json) e [`data/benchmark.json`](../../data/benchmark.json).
 
@@ -13,7 +15,7 @@ Versão verificada: Ferramenta UEQ de 17/11/2026, com o módulo de cálculo de [
 3. **O que a ferramenta devolve.** As mesmas respostas foram passadas para `analisarEstudo`, a função que alimenta o painel, o PDF e as exportações, e para as quatro funções de exportação de [`src/lib/exportacoes.ts`](../../src/lib/exportacoes.ts).
 4. **A comparação.** Cada número da conta independente foi comparado com o da ferramenta, em quatro recortes: cada versão, a versão 2 sem as respostas suspeitas e as duas versões juntas.
 
-Esta verificação confere que a ferramenta segue o protocolo. A comparação com a planilha oficial do UEQ, que é o [RNF11](requisitos.md#rnf11), é outra conferência: ela compara o protocolo com a própria UEQ Data Analysis Tool ([data/fixtures/LEIA-ME.md](../../data/fixtures/LEIA-ME.md)).
+As seções até Exportações conferem que a ferramenta segue o protocolo. A [comparação com a planilha oficial](#comparação-com-a-planilha-oficial), que é o [RNF11](requisitos.md#rnf11), confere que o protocolo e a ferramenta dão os mesmos números que a própria UEQ Data Analysis Tool.
 
 ## Passo a passo: Perspicuidade do Checkout atual
 
@@ -183,14 +185,50 @@ No Checkout atual, nenhum participante passa de 3 em nenhuma regra: a maior quan
 
 ## Exportações
 
-As quatro exportações foram geradas pela ferramenta com as 35 participações e conferidas contra a conta independente:
+As exportações foram geradas pela ferramenta com as 35 participações e conferidas contra a conta independente:
 
 | Exportação | O que foi conferido | Resultado |
 |---|---|---|
 | Respostas brutas | BOM, 39 colunas (13 de dados da participação e 26 itens) e os valores de 1 a 7 de cada participante | Iguais às 35 linhas das fixtures |
 | Respostas recodificadas | Os 26 valores de -3 a +3 de cada participante | Iguais à recodificação feita à mão |
 | Resultados por escala | 18 linhas (6 escalas × as duas versões e o estudo inteiro), com n, média, dp, IC95, alfa e interpretação em 4 casas com vírgula decimal | Iguais às tabelas acima |
-| Formato da planilha oficial | Só os 26 valores por linha, sem cabeçalho e sem BOM, separados por `;` | Byte a byte igual às fixtures coladas uma depois da outra, pronto para colar em Data!A4 da UEQ Data Analysis Tool |
+| Planilha oficial do UEQ (XLSX) | As 35 linhas de 26 valores em Data!A4 da UEQ Data Analysis Tool V15, sem os dados de exemplo, e o resto do arquivo igual ao oficial | Iguais às fixtures, na ordem; recalculada no Excel, ver a seção seguinte |
+
+## Comparação com a planilha oficial
+
+Feita em 17/11/2026 com a *UEQ Data Analysis Tool V15* de `Data_Analysis_Tools.zip` (ueq-online.org), no Microsoft Excel 16. Para cada cenário de [data/fixtures/](../../data/fixtures/LEIA-ME.md), o script `scripts/planilha-oficial.ps1` colou o `respostas.csv` em `Data!A4` de uma cópia da planilha, mandou recalcular e leu as células de resultado com todas as casas. Antes, o mesmo script rodou nos dados de exemplo que vêm na planilha e reproduziu exatamente os resultados gravados no arquivo oficial.
+
+Foram comparados média, dp, n e IC95 das 6 escalas e dos 26 itens, alfa de Cronbach, faixa do benchmark, qualidade pragmática e hedônica, a distribuição das respostas de cada item e, para cada participante, quantas escalas são inconsistentes e quantas respostas iguais ele deu.
+
+| Cenário | Participantes | Suspeitas | Valores comparados | Erros da planilha (null na ferramenta) | Maior diferença |
+|---|---|---|---|---|---|
+| basico | 20 | 0 | 391 | 0 | 3,3 × 10⁻¹⁶ |
+| inconsistente | 15 | 4 | 381 | 0 | 4,4 × 10⁻¹⁶ |
+| extremos/n1 | 1 | 0 | 353 | 102 | 0 |
+| extremos/n2 | 2 | 0 | 355 | 0 | 8,9 × 10⁻¹⁶ |
+| extremos/todos-1 | 3 | 3 | 357 | 70 | 0 |
+| extremos/todos-7 | 3 | 3 | 357 | 70 | 0 |
+| oficial-exemplo | 255 | 18 | 861 | 0 | 2,9 × 10⁻¹⁵ |
+| grande | 1000 | 63 | 2.351 | 0 | 9,3 × 10⁻¹⁵ |
+| bordas | 12 | 3 | 375 | 0 | 5,6 × 10⁻¹⁶ |
+| variancia-zero | 12 | 0 | 375 | 3 | 4,4 × 10⁻¹⁶ |
+| negativo | 18 | 1 | 387 | 0 | 2,2 × 10⁻¹⁶ |
+| **Total** | | | **6.543** | **245** | **9,3 × 10⁻¹⁵** |
+
+Os textos (faixa do benchmark) e as contagens (n, distribuição, escalas inconsistentes, respostas iguais) são idênticos. Os números decimais diferem no máximo na 15ª casa, por causa da ordem das somas em ponto flutuante; o teste aceita até 1e-6. Os casos que pedem atenção também batem:
+
+- **Uma pessoa só ou todos iguais.** A planilha dá `#DIV/0!` no desvio-padrão, no IC e no alfa; a ferramenta devolve `null` e o painel mostra "—".
+- **Um item sem variação** (`variancia-zero`). A planilha não calcula a correlação desse item, e o alfa de Perspicuidade e o IC do item viram erro. A ferramenta faz o mesmo e calcula o alfa das outras cinco escalas normalmente.
+- **Itens que se contradizem** (`negativo`). A correlação média da Novidade fica perto de -1/3, e a fórmula do alfa padronizado, k × r̄ / (1 + (k - 1) × r̄), dá -42,78 nas duas.
+- **Os limites das regras de suspeita** (`bordas`). Amplitude exatamente 3 não conta e 4 conta; 15 respostas iguais não marcam e 16 marcam. A ferramenta e a planilha dão o mesmo para cada participante.
+
+### A planilha que a ferramenta exporta
+
+A exportação "Planilha oficial do UEQ (XLSX)" foi conferida de três jeitos:
+
+1. **Arquivo por arquivo.** Um teste de unidade abre o `.xlsx` gerado e confere que a aba Data tem as respostas a partir da linha 4, que os 255 participantes de exemplo saíram, que o idioma está em `Read_First!B5` e que gráficos, estilos, imagens e as outras partes do arquivo são byte a byte iguais aos do arquivo oficial.
+2. **No Excel.** A planilha dos 11 cenários, gerada pela ferramenta, foi aberta no Excel sem colar nada e sem mandar recalcular. O Excel recalculou sozinho ao abrir, e os 6.543 valores ficaram idênticos aos da colagem à mão, com os rótulos em português ("Atractividade", "Desagradável").
+3. **Pela tela.** Um teste de ponta a ponta importa 7 cenários (`oficial-exemplo`, `grande`, `inconsistente`, `bordas`, `variancia-zero`, `negativo` e `extremos/n2`) pela tela Importar respostas, confere n, média, DP, IC95, alfa e benchmark de cada escala na tabela do painel com os números da planilha oficial e baixa a planilha da versão. Cinco desses arquivos, baixados da ferramenta rodando, foram abertos no Excel: zero diferenças.
 
 ## Como refazer
 
@@ -200,3 +238,4 @@ Qualquer pessoa pode refazer esta conferência sem programar:
 2. Em Resultados › Exportar, baixe as respostas recodificadas e os resultados por escala.
 3. Numa planilha, calcule a média dos itens de cada escala por participante, e depois a média, o `DESVPAD` e a margem `1,959964 × DESVPAD / RAIZ(n)` de cada escala. Para o alfa, calcule `CORREL` de cada par de itens da escala, tire a média e aplique k × r̄ / (1 + (k - 1) × r̄).
 4. Compare com o arquivo de resultados por escala e com o painel.
+5. Para comparar com a planilha oficial, baixe "Planilha oficial do UEQ (XLSX)", abra no Excel e clique em Habilitar edição. As abas Results, Confidence_Intervals, Scale_Consistency, Benchmark e Inconsistencies mostram os números da própria planilha, calculados com as respostas do estudo.

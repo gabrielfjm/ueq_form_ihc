@@ -117,8 +117,17 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
             enderecoOrdem={enderecoOrdem}
           />
         )}
-        {/* As exportações saem do estudo inteiro; ficam no fim do modo "Uma versão", como no protótipo r6 */}
-        {respostas.total > 0 && !comparando && <SecaoExportar estudoId={estudo.id} titulo={estudo.titulo} numero={resultados.todas.n === 0 ? 1 : 4} consulta={consultaPainel} />}
+        {/* Os CSV saem do estudo inteiro e a planilha oficial, da versão escolhida; ficam no fim do modo "Uma versão", como no protótipo r6 */}
+        {respostas.total > 0 && !comparando && (
+          <SecaoExportar
+            estudoId={estudo.id}
+            titulo={estudo.titulo}
+            numero={resultados.todas.n === 0 ? 1 : 4}
+            consulta={consultaPainel}
+            versao={versaoEscolhida ? { id: versaoEscolhida.versaoId, nome: versaoEscolhida.nome } : undefined}
+            naPlanilha={analise.n}
+          />
+        )}
       </div>
     </>
   );

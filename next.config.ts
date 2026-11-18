@@ -43,6 +43,8 @@ const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
     "/documentacao{,/**}": ["./docs/**/*"],
     "/api/documentacao/**": ["./docs/**/*"],
+    // A exportação da planilha oficial preenche o .xlsx original do UEQ
+    "/api/estudos/*/exportar/*": ["./data/planilha-oficial/*"],
     // O rastreio automático deixa de fora arquivos que o Playwright carrega em tempo de execução, como browsers.json
     "/api/estudos/*/painel-pdf": [
       "./node_modules/.pnpm/playwright-core@*/node_modules/playwright-core/**/*",

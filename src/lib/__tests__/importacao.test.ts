@@ -2,7 +2,6 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { lerRespostas, raizFixtures } from "@/ueq/__tests__/carregar";
-import { exportarPlanilhaOficial } from "../exportacoes";
 import { lerCsvDeRespostas, LIMITE_LINHAS } from "../importacao";
 
 const linha = (valores: (string | number)[], separador = ";") => valores.join(separador);
@@ -14,24 +13,6 @@ describe("lerCsvDeRespostas", () => {
     const { linhas, erros } = lerCsvDeRespostas(texto);
     expect(erros).toEqual([]);
     expect(linhas.map((l) => l.valores)).toEqual(lerRespostas("basico"));
-  });
-
-  it("aceita de volta o que a exportação no formato da planilha oficial gera", () => {
-    const participacoes = lerRespostas("basico").map((valores, posicao) => ({
-      id: `p${posicao}`,
-      versao: "A",
-      concluidaEm: "",
-      incluidaNaAnalise: true,
-      suspeita: false,
-      origem: "link" as const,
-      idioma: "pt",
-      traducaoAprovada: true,
-      menorDeIdade: false,
-      demografia: null,
-      valores,
-    }));
-    const { linhas } = lerCsvDeRespostas(exportarPlanilhaOficial(participacoes));
-    expect(linhas).toHaveLength(20);
   });
 
   it("aceita vírgula, tabulação, BOM, aspas e um separador sobrando no fim", () => {
