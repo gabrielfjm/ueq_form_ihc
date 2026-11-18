@@ -15,6 +15,22 @@ export async function TituloSecao({ id, numero, children }: { id: string; numero
   );
 }
 
+// Crédito do método no fim de cada painel (e do PDF): os autores e o site oficial dos materiais
+export async function FonteDoMetodo({ instrumento }: { instrumento: "UEQ" | "UEQ_S" }) {
+  const t = await tradutor();
+  return (
+    <p className={estilos.fonteMetodo}>
+      {instrumento === "UEQ_S"
+        ? t("Método: UEQ-S, a versão curta do User Experience Questionnaire (Schrepp, Hinderks e Thomaschewski, 2017). Benchmark e cálculo da planilha oficial de análise do UEQ-S, em")
+        : t("Método: User Experience Questionnaire (Laugwitz, Held e Schrepp, 2008). Benchmark de Schrepp, Hinderks e Thomaschewski (2017) e cálculo da planilha oficial de análise, em")}{" "}
+      <a href="https://www.ueq-online.org/" rel="noopener" lang="en">
+        ueq-online.org
+      </a>
+      .
+    </p>
+  );
+}
+
 const CONSTRUTOS: Construto[] = ["atratividade", "pragmatica", "hedonica"];
 // UEQ-S: as duas qualidades e a escala geral
 export const CONSTRUTOS_UEQ_S: Construto[] = ["pragmatica", "hedonica", "geral"];

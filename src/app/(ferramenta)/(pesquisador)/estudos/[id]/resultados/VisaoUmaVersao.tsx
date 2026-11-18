@@ -9,7 +9,7 @@ import { CONSTRUTO, NOME_BENCHMARK, NOME_CONSTRUTO, NOME_ESCALA } from "@/lib/no
 import { formatarDecimal, juntarComE, plural } from "@/lib/texto";
 import { ESCALAS, numerosPorEscala, type AnaliseEstudo, type ItemUEQ, type TabelaBenchmark } from "@/ueq";
 import { Explicacoes } from "./Explicacoes";
-import { LegendaConstrutos, TituloSecao } from "./partes";
+import { FonteDoMetodo, LegendaConstrutos, TituloSecao } from "./partes";
 import estilos from "./resultados.module.css";
 import { tradutor } from "@/traducao/servidor";
 
@@ -212,6 +212,7 @@ export async function VisaoUmaVersao({ analise, itens: itensDoBanco, benchmark, 
           {t("Cada ponto é a média das respostas no par, do termo da esquerda (-3) ao da direita (+3). A ordem e os lados são os do questionário.")}
         </p>
         <MediasPorItem grupos={gruposItens} />
+        <FonteDoMetodo instrumento="UEQ" />
       </section>
     </>
   );

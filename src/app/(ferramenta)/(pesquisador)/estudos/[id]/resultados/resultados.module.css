@@ -223,6 +223,14 @@
   background: var(--alerta-fundo);
 }
 
+/* Crédito do método no fim do painel */
+.fonteMetodo {
+  margin: 0;
+  max-width: 80ch;
+  font-size: var(--texto-sm);
+  color: var(--tinta-suave);
+}
+
 /* Aba do UEQ-S num estudo do UEQ completo: de onde vêm os números, com a borda do destaque */
 .avisoUeqS {
   border-left: 3px solid var(--destaque);

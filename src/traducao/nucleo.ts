@@ -46,8 +46,28 @@ export function interpolar(texto: string, valores?: Valores): string {
   return texto.replace(/\{(\w+)\}/g, (inteiro, nome: string) => (nome in valores ? String(valores[nome]) : inteiro));
 }
 
+// O nome da ferramenta em cada idioma. As traduções guardam "Ferramenta UEQ" como está (a API recebe o nome
+// protegido por um marcador, src/traducao/claude.ts); a troca é feita aqui, na saída de t()
+const NOME_ORIGINAL = "Ferramenta UEQ";
+export const NOME_DA_FERRAMENTA: Record<string, string> = {
+  pt: NOME_ORIGINAL, en: "UEQ Tool", es: "Herramienta UEQ", de: "UEQ-Tool", fr: "Outil UEQ", it: "Strumento UEQ",
+  nl: "UEQ-tool", da: "UEQ-værktøj", sv: "UEQ-verktyg", nb: "UEQ-verktøy", fi: "UEQ-työkalu", et: "UEQ tööriist",
+  pl: "Narzędzie UEQ", cs: "Nástroj UEQ", sk: "Nástroj UEQ", sl: "Orodje UEQ", hr: "Alat UEQ", bs: "Alat UEQ",
+  hu: "UEQ-eszköz", bg: "Инструмент UEQ", ru: "Инструмент UEQ", el: "Εργαλείο UEQ", tr: "UEQ Aracı", ar: "أداة UEQ",
+  he: "כלי UEQ", fa: "ابزار UEQ", hi: "UEQ टूल", mr: "UEQ साधन", bn: "UEQ টুল", ta: "UEQ கருவி", kn: "UEQ ಸಾಧನ",
+  th: "เครื่องมือ UEQ", ms: "Alat UEQ", id: "Alat UEQ", zh: "UEQ 工具", ja: "UEQ ツール", ko: "UEQ 도구",
+};
+
+export const nomeDaFerramenta = (idioma: string) => NOME_DA_FERRAMENTA[idioma] ?? NOME_ORIGINAL;
+
 export function criarTradutor(idioma: string, dicionario: Dicionario, lang = idioma === "pt" ? "pt-BR" : idioma): Traduzir {
-  const traduzir = (texto: string, valores?: Valores) => interpolar(dicionario[chaveDoTexto(texto)] ?? texto, valores);
+  const nome = nomeDaFerramenta(idioma);
+  const traduzir = (texto: string, valores?: Valores) => {
+    const traducao = dicionario[chaveDoTexto(texto)];
+    const saida = interpolar(traducao ?? texto, valores);
+    // Só troca o nome em texto que saiu traduzido (ou no próprio nome): frase que ainda está em português fica inteira
+    return nome !== NOME_ORIGINAL && (traducao !== undefined || texto === NOME_ORIGINAL) ? saida.replaceAll(NOME_ORIGINAL, nome) : saida;
+  };
   return Object.assign(traduzir, { idioma, lang });
 }
 

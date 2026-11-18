@@ -18,7 +18,7 @@ import formulario from "@/componentes/formulario/formulario.module.css";
 import { MensagemStatus } from "@/componentes/formulario/MensagemStatus";
 import { REPOSITORIO } from "@/lib/documentacao/catalogo";
 import { BotaoAcesso } from "./_acesso/Acesso";
-import { ehIdioma, termosDoIdioma } from "@/idiomas";
+import { ehIdioma } from "@/idiomas";
 import { ITENS_UEQ_S, termosDoUeqS } from "@/lib/instrumento";
 import { AUTORES_DO_UEQ, COMPARACAO_UEQ_E_UEQ_S, ESCALAS_DO_UEQ, ESTUDOS_DO_UEQ, FAIXAS_DO_BENCHMARK, PASSOS } from "./conteudo";
 import estilos from "./inicio.module.css";
@@ -106,7 +106,7 @@ type Propriedades = {
 export async function PaginaInicial({ logado, aviso }: Propriedades) {
   const t = await tradutor();
   // Os 8 pares do UEQ-S no idioma da página, com o termo negativo à esquerda, como o participante vê
-  const paresUeqS = termosDoUeqS(termosDoIdioma(ehIdioma(t.idioma) ? t.idioma : "pt"));
+  const paresUeqS = termosDoUeqS(ehIdioma(t.idioma) ? t.idioma : "pt");
   return (
     <>
       <div className={estilos.faixa}>
@@ -289,6 +289,13 @@ export async function PaginaInicial({ logado, aviso }: Propriedades) {
             {t("Depois da primeira resposta a escolha trava, para o estudo não misturar os dois questionários.")}{" "}
             {t("Num estudo do UEQ completo, os resultados também mostram o UEQ-S, numa aba própria, calculado com os 8 pares dele.")}
           </p>
+          <p className={estilos.nota}>
+            {t("Fonte: Handbook do UEQ, a lista oficial dos itens do UEQ-S em cada idioma e a planilha oficial de análise do UEQ-S, em")}{" "}
+            <a href="https://www.ueq-online.org/" rel="noopener" lang="en">
+              ueq-online.org
+            </a>
+            {t(". O UEQ-S é de Martin Schrepp, Andreas Hinderks e Jörg Thomaschewski (2017).")}
+          </p>
         </section>
 
         <section className={estilos.secao} aria-labelledby="inicio-leitura">
@@ -396,6 +403,14 @@ export async function PaginaInicial({ logado, aviso }: Propriedades) {
                   </li>
                 ))}
               </ul>
+              {/* Os materiais oficiais são dos autores: a ferramenta usa e exporta, e deixa claro que não é oficial */}
+              <p className={estilos.textoSuave}>
+                {t("O UEQ e o UEQ-S são gratuitos e mantidos pelos autores no site oficial")}{" "}
+                <a href="https://www.ueq-online.org/" rel="noopener" lang="en">
+                  ueq-online.org
+                </a>
+                {t(". De lá vêm os questionários nos 37 idiomas, o handbook, o benchmark e as planilhas oficiais de análise, de Martin Schrepp, que a ferramenta usa e exporta. A Ferramenta UEQ não é um produto oficial do UEQ nem tem vínculo com os autores.")}
+              </p>
             </div>
             <div>
               <h3 className={estilos.subtitulo}>{t("Esta ferramenta")}</h3>

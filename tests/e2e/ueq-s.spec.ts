@@ -192,6 +192,10 @@ test("AA: em 320 px nada rola na horizontal, e a escolha do questionário funcio
   await expect(curto).toBeFocused();
   const contorno = await pagina.evaluate(() => getComputedStyle(document.activeElement!.closest("label")!).outlineStyle);
   expect(contorno).not.toBe("none");
+  // Leitor de tela: o rádio se chama só pelo nome do questionário, e o resto do cartão é a descrição
+  await expect(curto).toHaveAccessibleName("UEQ-S, versão curta");
+  await expect(curto).toHaveAccessibleDescription(/^8 pares de palavras · de 1 a 2 minutos Mede só a qualidade pragmática/);
+  await expect(pagina.getByRole("group", { name: "Questionário do estudo" })).toBeVisible();
 
   await pagina.setViewportSize({ width: 320, height: 640 });
   await semRolagem();
@@ -249,3 +253,18 @@ async function inserirRespostasUeqS(link: string) {
   }
   await banco.$disconnect();
 }
+
+// data/ueq-s-idiomas.json: em croata a lista oficial do UEQ-S (UEQS_Items.pdf) usa outras palavras que o UEQ completo
+test("em croata, o questionário do UEQ-S mostra os pares da lista oficial do UEQ-S", async ({ page, browser }, info) => {
+  const estudo = await estudoAberto(browser, info, { demografia: false, instrumento: "UEQ_S", idioma: "hr" });
+  await page.goto(estudo.link);
+  await page.locator('input[name="idade"][value="maior"]').check();
+  await page.locator('form:has(input[name="idade"]) button[type="submit"]').click();
+  await expect(page).toHaveURL(/\/questionario$/);
+  await expect(page.locator("#item-7")).toContainText("konvencionalna");
+  await expect(page.locator("#item-7")).toContainText("inventivna");
+  await expect(page.locator("#item-8")).toContainText("predvodnička");
+  await expect(page.getByRole("group", { name: /konvencionalna/ })).toHaveCount(1);
+  await verificarAcessibilidade(page);
+  await estudo.fechar();
+});

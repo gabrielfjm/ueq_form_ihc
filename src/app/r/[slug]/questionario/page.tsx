@@ -38,7 +38,7 @@ export default async function PaginaQuestionario({ params }: Propriedades) {
   const termos = new Map(termosDoIdioma(idioma.codigo).map((par) => [par.numero, par]));
   const itens =
     estudo.instrumento === "UEQ_S"
-      ? termosDoUeqS(termosDoIdioma(idioma.codigo))
+      ? termosDoUeqS(idioma.codigo)
       : (await itensDoQuestionario()).map(({ numero }) => termos.get(numero)!);
 
   return (

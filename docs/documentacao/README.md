@@ -22,7 +22,7 @@ Projeto da disciplina Fundamentos da Interação Humano-Computador, PPGIa · PUC
 | Modelagem | [Modelo lógico do banco](modelo-logico.md) | As 11 tabelas do PostgreSQL, com colunas, chaves e o que cada exclusão leva junto |
 | Modelagem | [Diagramas de sequência](diagramas-de-sequencia.md) | Oito fluxos do clique até o banco: entrar, responder, ver resultados, tirar da análise, PDF, importar, convidar e traduzir |
 | Arquitetura | [Arquitetura](arquitetura.md) | Modelo C4 (contexto, containers e componentes), segurança, decisões e implantação |
-| Testes | [Casos e cenários de teste](casos-de-teste.md) | Estratégia, 25 cenários e 189 casos (de ponta a ponta, de unidade e manuais), com os requisitos que cada um verifica e o resultado da última execução. Também em [casos-de-teste.csv](casos-de-teste.csv) |
+| Testes | [Casos e cenários de teste](casos-de-teste.md) | Estratégia, 25 cenários e 206 casos (de ponta a ponta, de unidade e manuais), com os requisitos que cada um verifica e o resultado da última execução. Também em [casos-de-teste.csv](casos-de-teste.csv) |
 | Testes | [Verificação do cálculo](verificacao-do-calculo.md) | O cálculo da ferramenta refeito à mão com o estudo de exemplo e comparado com a planilha oficial do UEQ em 11 cenários e com a do UEQ-S em 9: médias, desvio-padrão, IC95, alfa, benchmark, suspeitas e exportações |
 | Testes | [Checklist manual](../checklist-manual.md) | O que a equipe confere com as próprias mãos: leitor de tela, zoom, celular real, daltonismo |
 | Testes | [Roteiro da revisão](../roteiro-revisao.md) | O que abrir, o que fazer em cada tela e como anotar os problemas |

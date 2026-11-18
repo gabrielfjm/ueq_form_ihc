@@ -189,6 +189,12 @@ Página do estudo e resultados:
 
 <img src="docs/prototipos/alta-fidelidade/r5-pagina-do-estudo.png" alt="Página do estudo: link para participantes, coleta por versão, próximos passos, ações e ficha lateral" width="400"> <img src="docs/prototipos/alta-fidelidade/r6-resultados.png" alt="Resultados: leitura rápida, gráfico das seis escalas com benchmark e IC95, tabela, médias por item e exportação" width="400">
 
+UEQ-S, a versão curta: resultados do estudo do UEQ-S, a aba UEQ-S num estudo do UEQ completo e o questionário travado depois da primeira resposta:
+
+<img src="docs/prototipos/alta-fidelidade/r42-resultados-ueq-s.png" alt="Resultados do UEQ-S: leitura rápida, qualidade pragmática, hedônica e geral com o benchmark do UEQ-S e o aviso de que ele é aproximado, médias dos 8 itens e o crédito do método com o site oficial" width="400"> <img src="docs/prototipos/alta-fidelidade/r42b-ueq-s-no-ueq-completo.png" alt="Aba UEQ-S num estudo do UEQ completo: sub-abas Escalas do UEQ, UEQ-S e Dados demográficos, e o aviso de que o UEQ-S usa 8 dos 26 pares" width="400">
+
+<img src="docs/prototipos/alta-fidelidade/r42c-questionario-travado.png" alt="Editar estudo com respostas: a seção 02 Questionário com os dois cartões desligados, UEQ-S marcado, e a explicação de que o questionário não pode mais mudar" width="400"> <img src="docs/prototipos/alta-fidelidade/p11-questionario-ueq-s-celular.png" alt="Questionário do UEQ-S no celular: tempo de 1 a 2 minutos, a instrução oficial e os 8 pares com o termo negativo sempre à esquerda" width="200">
+
 Comparação entre versões, respostas suspeitas, minha conta e o seletor de idioma da barra:
 
 <img src="docs/prototipos/alta-fidelidade/r7-comparar-versoes.png" alt="Comparar versões: marcador cheio e vazado por escala, leitura rápida das diferenças e tabela" width="400"> <img src="docs/prototipos/alta-fidelidade/r8-respostas-e-suspeitas.png" alt="Respostas: faixa com as 34 participações, tabela com suspeitas e regra de suspeita ao lado" width="400">

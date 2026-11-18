@@ -207,11 +207,14 @@ export function FormularioEstudo(propriedades: Propriedades) {
                   value={opcao.valor}
                   checked={instrumento === opcao.valor}
                   onChange={() => setInstrumento(opcao.valor)}
+                  // Leitor de tela: o nome é só o do questionário; pares, tempo e o que mede vêm como descrição
+                  aria-labelledby={`instrumento-${opcao.valor}-nome`}
+                  aria-describedby={`instrumento-${opcao.valor}-resumo instrumento-${opcao.valor}-texto`}
                 />
                 <span className={estilos.instrumentoCorpo}>
-                  <span className={estilos.instrumentoNome}>{t(opcao.nome)}</span>
-                  <span className={estilos.instrumentoResumo}>{t(opcao.resumo)}</span>
-                  <span className={estilos.instrumentoTexto}>{t(opcao.texto)}</span>
+                  <span id={`instrumento-${opcao.valor}-nome`} className={estilos.instrumentoNome}>{t(opcao.nome)}</span>
+                  <span id={`instrumento-${opcao.valor}-resumo`} className={estilos.instrumentoResumo}>{t(opcao.resumo)}</span>
+                  <span id={`instrumento-${opcao.valor}-texto`} className={estilos.instrumentoTexto}>{t(opcao.texto)}</span>
                 </span>
               </label>
             ))}
