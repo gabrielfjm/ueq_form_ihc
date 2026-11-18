@@ -1,16 +1,38 @@
 import { deflateSync, strFromU8, strToU8, unzipSync } from "fflate";
 import type { CodigoIdioma } from "@/idiomas";
 
-// docs/ueq-protocolo.md, seção 9.4: a exportação é a própria UEQ Data Analysis Tool V15 (data/planilha-oficial/),
-// com as respostas em Data!A4 e o idioma em Read_First!B5. Tudo o que a planilha calcula continua nas fórmulas dela:
-// aqui só se escrevem os dados de entrada, como quem cola as respostas à mão
+// docs/ueq-protocolo.md, seção 9.4: a exportação é a própria planilha oficial de análise (data/planilha-oficial/),
+// com as respostas em Data!A4 e o idioma na aba Read_First. Tudo o que a planilha calcula continua nas fórmulas
+// dela: aqui só se escrevem os dados de entrada, como quem cola as respostas à mão
 
-export const ARQUIVO_MODELO = "data/planilha-oficial/UEQ_Data_Analysis_Tool_V15.xlsx";
+export type ModeloPlanilha = {
+  arquivo: string;
+  // quantos valores por participante (colunas A em diante da aba Data)
+  colunas: number;
+  // onde a aba Read_First guarda o idioma
+  celulaIdioma: string;
+};
+
+// UEQ Data Analysis Tool V15: os 26 itens em Data!A4:Z, o idioma em Read_First!B5
+export const PLANILHA_UEQ: ModeloPlanilha = {
+  arquivo: "data/planilha-oficial/UEQ_Data_Analysis_Tool_V15.xlsx",
+  colunas: 26,
+  celulaIdioma: "B5",
+};
+
+// UEQ-S Data Analysis Tool V15: os 8 itens do UEQ-S em Data!A4:H, o idioma em Read_First!B4
+export const PLANILHA_UEQ_S: ModeloPlanilha = {
+  arquivo: "data/planilha-oficial/Short_UEQ_Data_Analysis_Tool_V15.xlsx",
+  colunas: 8,
+  celulaIdioma: "B4",
+};
+
+export const ARQUIVO_MODELO = PLANILHA_UEQ.arquivo;
 
 // O aviso da aba Data diz até 1000 participantes; mais que isso pede ajustar as fórmulas da planilha
 export const MAXIMO_PARTICIPANTES = 1000;
 
-// Nome do idioma na lista da aba Items, que é o que Read_First!B5 aceita
+// Nome do idioma na lista da aba Items (a mesma nas duas planilhas), que é o que a aba Read_First aceita
 export const IDIOMA_NA_PLANILHA: Record<CodigoIdioma, string> = {
   pt: "Portuguese", en: "English", es: "Spanish", de: "German", fr: "French", it: "Italian", nl: "Dutch",
   da: "Danish", sv: "Swedish", nb: "Norwegian", fi: "Finnish", et: "Estonian", pl: "Polish", cs: "Czech",
@@ -47,7 +69,7 @@ function arquivoDaAba(arquivos: Record<string, Uint8Array>, nome: string): strin
 }
 
 // Troca as linhas de exemplo (da 4 para baixo) pelas respostas; as linhas 1 a 3 (aviso e números dos itens) ficam
-function escreverDados(xml: string, linhas: readonly (readonly number[])[]): string {
+function escreverDados(xml: string, linhas: readonly (readonly number[])[], colunas: number): string {
   const estilo = /<c r="A5" s="(\d+)"/.exec(xml)?.[1];
   const atributoEstilo = estilo ? ` s="${estilo}"` : "";
   const cabecalho = [...xml.matchAll(/<row r="(\d+)"[^>]*>.*?<\/row>/gs)]
@@ -58,23 +80,23 @@ function escreverDados(xml: string, linhas: readonly (readonly number[])[]): str
     .map((valores, posicao) => {
       const numero = PRIMEIRA_LINHA_DE_DADOS + posicao;
       const celulas = valores.map((valor, coluna) => `<c r="${COLUNAS[coluna]}${numero}"${atributoEstilo}><v>${valor}</v></c>`);
-      return `<row r="${numero}" spans="1:26">${celulas.join("")}</row>`;
+      return `<row r="${numero}" spans="1:${colunas}">${celulas.join("")}</row>`;
     })
     .join("");
   const ultima = linhas.length > 0 ? PRIMEIRA_LINHA_DE_DADOS + linhas.length - 1 : PRIMEIRA_LINHA_DE_DADOS - 1;
   return xml
     .replace(/<sheetData>.*<\/sheetData>/s, `<sheetData>${cabecalho}${dados}</sheetData>`)
-    .replace(/<dimension ref="[^"]*"\/>/, `<dimension ref="A1:Z${ultima}"/>`)
+    .replace(/<dimension ref="[^"]*"\/>/, `<dimension ref="A1:${COLUNAS[colunas - 1]}${ultima}"/>`)
     // A seleção do modelo aponta para uma célula de exemplo; volta para o início dos dados
     .replace(/<selection [^>]*\/>/, `<selection activeCell="A${PRIMEIRA_LINHA_DE_DADOS}" sqref="A${PRIMEIRA_LINHA_DE_DADOS}"/>`);
 }
 
-// Read_First!B5 guarda o idioma como índice de um texto compartilhado
-function escreverIdioma(xml: string, indice: number): string {
-  const celula = /<c r="B5"([^>]*?)(\/>|>.*?<\/c>)/s.exec(xml);
-  if (!celula) throw new Error("Modelo da planilha oficial sem a célula Read_First!B5");
+// A aba Read_First guarda o idioma como índice de um texto compartilhado
+function escreverIdioma(xml: string, indice: number, endereco: string): string {
+  const celula = new RegExp(`<c r="${endereco}"([^>]*?)(\/>|>.*?<\/c>)`, "s").exec(xml);
+  if (!celula) throw new Error(`Modelo da planilha oficial sem a célula Read_First!${endereco}`);
   const atributos = celula[1]!.replace(/\s+t="[^"]*"/, "");
-  return xml.replace(celula[0], `<c r="B5"${atributos} t="s"><v>${indice}</v></c>`);
+  return xml.replace(celula[0], `<c r="${endereco}"${atributos} t="s"><v>${indice}</v></c>`);
 }
 
 // Os resultados que vêm gravados no modelo são os dos dados de exemplo. Sem eles, quem abre a planilha não vê
@@ -229,13 +251,14 @@ export function preencherPlanilhaOficial(
   modelo: Uint8Array,
   linhas: readonly (readonly number[])[],
   idioma: CodigoIdioma,
+  formato: ModeloPlanilha = PLANILHA_UEQ,
 ): Uint8Array {
   if (linhas.length > MAXIMO_PARTICIPANTES) {
     throw new Error(`A planilha oficial calcula até ${MAXIMO_PARTICIPANTES} participantes; o estudo tem ${linhas.length}.`);
   }
   for (const valores of linhas) {
-    if (valores.length !== 26 || valores.some((valor) => !Number.isInteger(valor) || valor < 1 || valor > 7)) {
-      throw new Error("Cada participante precisa de 26 valores inteiros de 1 a 7.");
+    if (valores.length !== formato.colunas || valores.some((valor) => !Number.isInteger(valor) || valor < 1 || valor > 7)) {
+      throw new Error(`Cada participante precisa de ${formato.colunas} valores inteiros de 1 a 7.`);
     }
   }
 
@@ -251,8 +274,8 @@ export function preencherPlanilhaOficial(
       .replace(/uniqueCount="(\d+)"/, (_, n: string) => `uniqueCount="${Number(n) + 1}"`);
     textos = comprimir(TEXTOS_COMPARTILHADOS, strToU8(xml));
   }
-  const dados = comprimir(modeloPreparado.abaDados, strToU8(escreverDados(modeloPreparado.xmlDados, linhas)));
-  const leitura = comprimir(modeloPreparado.abaLeitura, strToU8(escreverIdioma(modeloPreparado.xmlLeitura, indice)));
+  const dados = comprimir(modeloPreparado.abaDados, strToU8(escreverDados(modeloPreparado.xmlDados, linhas, formato.colunas)));
+  const leitura = comprimir(modeloPreparado.abaLeitura, strToU8(escreverIdioma(modeloPreparado.xmlLeitura, indice, formato.celulaIdioma)));
 
   return montarZip(
     modeloPreparado.ordem.map((caminho) => {

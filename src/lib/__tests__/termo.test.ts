@@ -4,6 +4,7 @@ import { condicoesDoTermo, lerIdade, type DadosDoTermo } from "../termo";
 
 const estudo: DadosDoTermo = {
   coletarDemografia: false,
+  instrumento: "UEQ",
   riscos: "Riscos mínimos.",
   beneficios: "Nenhum benefício direto.",
   comiteEtica: null,
@@ -41,6 +42,24 @@ describe("condicoesDoTermo", () => {
     expect(condicoes[0]?.linhas).toEqual(["De 4 a 6 minutos, sem limite de tempo."]);
     expect(condicoes[1]?.rotulo).toBe("Dados opcionais");
     expect(condicoes.at(-1)).toEqual({ rotulo: "Comitê de ética", linhas: ["CEP PUCPR, CAAE 123"], doEstudo: true });
+  });
+
+  it("no UEQ-S, o tempo é o da versão curta, com e sem dados opcionais", () => {
+    const curto = { ...estudo, instrumento: "UEQ_S" as const };
+    expect(condicoesDoTermo(textosDoIdioma("pt"), curto)[0]?.linhas).toEqual(["De 1 a 2 minutos, sem limite de tempo."]);
+    expect(condicoesDoTermo(textosDoIdioma("pt"), { ...curto, coletarDemografia: true })[0]?.linhas).toEqual([
+      "De 2 a 3 minutos, sem limite de tempo.",
+    ]);
+  });
+
+  it.each(IDIOMAS.map((idioma) => idioma.codigo))("em %s, o texto do UEQ-S diz 8 pares onde o do UEQ diz 26", (codigo) => {
+    const { consentimento } = textosDoIdioma(codigo);
+    const numero = (n: number) => new Intl.NumberFormat(codigo === "bn" ? "bn" : codigo === "fa" ? "fa" : "en").format(n);
+    expect(consentimento.termoTexto).toContain(numero(26));
+    expect(consentimento.termoTextoCurto).toContain(numero(8));
+    expect(consentimento.termoTextoCurto).not.toContain(numero(26));
+    expect(consentimento.tempoCurto).not.toBe(consentimento.tempo);
+    expect(consentimento.tempoCurtoComDados).not.toBe(consentimento.tempoComDados);
   });
 
   it.each(IDIOMAS.map((idioma) => idioma.codigo))("em %s, cita o botão de sair com o nome que ele tem na tela", (codigo) => {

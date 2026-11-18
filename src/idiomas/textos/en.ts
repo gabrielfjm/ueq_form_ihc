@@ -27,6 +27,7 @@ export const en: TextosParticipante = {
     subtitulo: "User experience research",
     termoTitulo: "Consent form",
     termoTexto: "You will rate your impression of the product on 26 pairs of opposite words.",
+    termoTextoCurto: "You will rate your impression of the product on 8 pairs of opposite words.",
     rotulos: {
       tempo: "Time",
       dadosOpcionais: "Optional data",
@@ -41,6 +42,8 @@ export const en: TextosParticipante = {
     },
     tempo: "3 to 5 minutes, with no time limit.",
     tempoComDados: "4 to 6 minutes, with no time limit.",
+    tempoCurto: "1 to 2 minutes, with no time limit.",
+    tempoCurtoComDados: "2 to 3 minutes, with no time limit.",
     dadosOpcionais: "At the end there are optional questions about age group, gender, education and use of the product. You can skip all of them.",
     participacao: "Voluntary. Until you submit, you can quit at any time without giving a reason: use “{sair}” or close the page, and nothing you marked will be saved.",
     depoisDeEnviar: "Because the responses are anonymous, once submitted they cannot be found and withdrawn.",

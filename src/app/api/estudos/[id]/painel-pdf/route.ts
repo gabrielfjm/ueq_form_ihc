@@ -34,8 +34,8 @@ async function abrirNavegador() {
 // Baixar o Chromium e montar o painel pode passar dos 10 s padrão
 export const maxDuration = 60;
 
-// Só o que muda o painel passa adiante: versão, modo e ordem dos itens
-const PARAMETROS = ["versao", "modo", "itens"] as const;
+// Só o que muda o painel passa adiante: versão, modo, ordem dos itens e a aba do UEQ-S (instrumento=ueq-s)
+const PARAMETROS = ["versao", "modo", "itens", "instrumento"] as const;
 
 // prompts/10-extensoes.md: o painel em PDF, A4 com margens de 18 mm e gráficos em vetor
 export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
@@ -43,7 +43,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
   const pesquisador = await pesquisadorDaSessao();
   if (!pesquisador) return new Response("Entre na sua conta para exportar o painel do estudo.", { status: 401 });
 
-  const estudo = await banco.estudo.findFirst({ where: { id, ...filtroDeAcesso(pesquisador) }, select: { titulo: true } });
+  const estudo = await banco.estudo.findFirst({ where: { id, ...filtroDeAcesso(pesquisador) }, select: { titulo: true, instrumento: true } });
   // Estudo sem acesso responde igual a estudo inexistente: não revela que o id existe
   if (!estudo) return new Response("Estudo não encontrado.", { status: 404 });
 
@@ -81,7 +81,7 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
       headers: {
         "Content-Type": "application/pdf",
         // attachment: o navegador baixa o arquivo em vez de abrir em outra aba (docs/ihc.md §4.4)
-        "Content-Disposition": `attachment; filename="${nomeDoArquivo(estudo.titulo, "painel")}"`,
+        "Content-Disposition": `attachment; filename="${nomeDoArquivo(estudo.titulo, estudo.instrumento === "UEQ_S" || pedido.searchParams.get("instrumento") === "ueq-s" ? "painel-ueq-s" : "painel")}"`,
         "Cache-Control": "no-store",
       },
     });

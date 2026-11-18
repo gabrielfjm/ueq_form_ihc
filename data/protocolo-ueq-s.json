@@ -1,0 +1,8 @@
+{
+  "fonte": "UEQ Handbook versão 11 (12/09/2023), p. 7-8 e 12-13, e Short_UEQ_Data_Analysis_Tool_V15.xlsx, abas Results, Confidence_Intervals, Scale_Consistency e Inconsistencies. A faixa neutra, o z do IC e o alfa mínimo são os mesmos de protocolo.json. Na aba Inconsistencies, a resposta é suspeita quando as 2 escalas têm distância maior que 3 entre o melhor e o pior item, ou quando os 8 itens têm a categoria do meio (4).",
+  "inconsistencia": {
+    "amplitudeMaxima": 3,
+    "escalasParaSuspeita": 2,
+    "categoriaDoMeio": 4
+  }
+}

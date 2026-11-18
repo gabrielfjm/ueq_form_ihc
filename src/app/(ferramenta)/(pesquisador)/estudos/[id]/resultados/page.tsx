@@ -1,5 +1,6 @@
 import { Download } from "lucide-react";
 import type { Metadata, Route } from "next";
+import { redirect } from "next/navigation";
 import { nomeDoArquivo } from "@/lib/exportar-estudo";
 import { contagemDeRespostas, estudoDoPesquisador } from "@/lib/estudos";
 import { analisarResultados } from "@/lib/resultados";
@@ -32,6 +33,11 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
   const pesquisador = await exigirPesquisador();
   const estudo = await estudoDoPesquisador((await params).id, pesquisador);
   const busca = await searchParams;
+  // Estudo do UEQ-S não tem as 6 escalas: os resultados dele são a aba do UEQ-S, com a mesma seleção
+  if (estudo.instrumento === "UEQ_S") {
+    const consulta = new URLSearchParams(Object.entries(busca).filter((par): par is [string, string] => typeof par[1] === "string")).toString();
+    redirect(`/estudos/${estudo.id}/resultados/ueq-s${consulta ? `?${consulta}` : ""}` as Route);
+  }
   const [respostas, resultados] = await Promise.all([
     contagemDeRespostas(estudo.id),
     analisarResultados(estudo.id, estudo.versoes),
@@ -68,7 +74,7 @@ export default async function PaginaResultados({ params, searchParams }: Proprie
       <div className={estilos.conteudo}>
         {/* Sub-abas e controles ficam juntos no topo; o espaço grande do painel vem só depois deles */}
         <div className={estilos.topo}>
-          {estudo.coletarDemografia && <AbasResultados estudoId={estudo.id} atual="ueq" />}
+          <AbasResultados estudoId={estudo.id} atual="ueq" instrumento={estudo.instrumento} demografia={estudo.coletarDemografia} />
           <ControlesResultados
             estudoId={estudo.id}
             versoes={resultados.porVersao.map((versao) => ({ id: versao.versaoId, nome: versao.nome, naAnalise: versao.analise.n }))}

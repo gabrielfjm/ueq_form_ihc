@@ -22,6 +22,13 @@ enum Escala {
   NOVIDADE
 }
 
+// UEQ: o questionário completo, 26 itens. UEQ_S: a versão curta, 8 desses itens (data/ueq-s-itens-ptbr.json).
+// As respostas do UEQ-S ficam nos itens equivalentes do UEQ, na orientação de cada um (src/ueq/ueq-s.ts)
+enum Instrumento {
+  UEQ
+  UEQ_S
+}
+
 // docs/ueq-protocolo.md, seção 1: '+' = termo positivo à direita, '-' = à esquerda
 enum Polaridade {
   POSITIVA_DIREITA
@@ -99,6 +106,8 @@ model Estudo {
   // LGPD, princípio da necessidade: a etapa "Dados opcionais" só aparece se o pesquisador ligar. Mesmo
   // ligada, cada pergunta é opcional para o participante, que pode pular a etapa inteira
   coletarDemografia Boolean    @default(false) @map("coletar_demografia")
+  // Escolhido na criação; trava na primeira resposta, para o estudo não misturar os dois questionários
+  instrumento     Instrumento  @default(UEQ)
   // Idioma em que o estudo foi escrito e em que o link abre; o participante pode trocar, e título, produto
   // e objetivo são traduzidos para o idioma dele
   idioma          String       @default("pt")

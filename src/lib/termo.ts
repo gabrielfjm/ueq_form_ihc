@@ -6,6 +6,8 @@ import type { TextosParticipante } from "@/idiomas/tipos";
 
 export type DadosDoTermo = {
   coletarDemografia: boolean;
+  // O UEQ-S tem 8 pares e leva menos tempo
+  instrumento: "UEQ" | "UEQ_S";
   riscos: string;
   beneficios: string;
   comiteEtica: string | null;
@@ -17,11 +19,18 @@ export type DadosDoTermo = {
 // doEstudo: o texto foi escrito pelo pesquisador e leva o lang do estudo
 export type CondicaoDoTermo = { rotulo: string; linhas: string[]; doEstudo?: boolean };
 
+// Também no topo do questionário
+export function tempoDoQuestionario(textos: TextosParticipante, dados: Pick<DadosDoTermo, "coletarDemografia" | "instrumento">): string {
+  const termo = textos.consentimento;
+  if (dados.instrumento === "UEQ_S") return dados.coletarDemografia ? termo.tempoCurtoComDados : termo.tempoCurto;
+  return dados.coletarDemografia ? termo.tempoComDados : termo.tempo;
+}
+
 export function condicoesDoTermo(textos: TextosParticipante, dados: DadosDoTermo): CondicaoDoTermo[] {
   const termo = textos.consentimento;
   const { rotulos } = termo;
   return [
-    { rotulo: rotulos.tempo, linhas: [dados.coletarDemografia ? termo.tempoComDados : termo.tempo] },
+    { rotulo: rotulos.tempo, linhas: [tempoDoQuestionario(textos, dados)] },
     ...(dados.coletarDemografia ? [{ rotulo: rotulos.dadosOpcionais, linhas: [termo.dadosOpcionais] }] : []),
     { rotulo: rotulos.participacao, linhas: [formatar(termo.participacao, { sair: textos.questionario.sair })] },
     { rotulo: rotulos.depoisDeEnviar, linhas: [termo.depoisDeEnviar] },

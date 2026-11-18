@@ -32,11 +32,33 @@ const EXPLICACOES = [
   },
 ] as const;
 
-export async function Explicacoes() {
+// UEQ-S: o mesmo, com o que muda na versão curta (Handbook UEQ, p. 12-13, e a aba Benchmark da planilha dela)
+const EXPLICACOES_UEQ_S = [
+  {
+    pergunta: m("O que é o benchmark do UEQ-S?"),
+    resposta:
+      m("A mesma comparação com a base oficial, em cinco faixas, de Excelente (entre os 10% melhores) a Ruim (entre os 25% piores). A planilha oficial do UEQ-S avisa que ainda não há dados suficientes da versão curta: os limites vêm dos mesmos 8 itens dentro do UEQ completo e são uma aproximação, para ler com cuidado."),
+  },
+  EXPLICACOES[1],
+  {
+    pergunta: m("O que são qualidade pragmática e hedônica?"),
+    resposta:
+      m("Pragmática é se o produto ajuda a fazer o que a pessoa precisa: os itens 1 a 4 (apoio, facilidade, eficiência e clareza). Hedônica é se usar é agradável e interessante: os itens 5 a 8 (empolgante, interessante, original e inovador). O UEQ-S não separa as 6 escalas do UEQ completo."),
+  },
+  {
+    pergunta: m("Como ler a escala geral?"),
+    resposta:
+      m("É a média dos 8 itens. O handbook pede cuidado: ela não é um indicador único de experiência, porque o peso da qualidade pragmática e da hedônica muda de um produto para outro. Leia sempre junto com as duas."),
+  },
+  EXPLICACOES[3],
+  EXPLICACOES[4],
+] as const;
+
+export async function Explicacoes({ instrumento = "UEQ" }: { instrumento?: "UEQ" | "UEQ_S" }) {
   const t = await tradutor();
   return (
     <div className={estilos.explicacoes}>
-      {EXPLICACOES.map(({ pergunta, resposta }) => (
+      {(instrumento === "UEQ_S" ? EXPLICACOES_UEQ_S : EXPLICACOES).map(({ pergunta, resposta }) => (
         <details key={pergunta}>
           <summary>{t(pergunta)}</summary>
           <p>{t(resposta)}</p>

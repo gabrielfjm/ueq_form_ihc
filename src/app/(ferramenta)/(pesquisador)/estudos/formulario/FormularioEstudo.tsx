@@ -12,6 +12,7 @@ import { criarEstudo, salvarEstudo } from "../acoes";
 import estilos from "./formulario-estudo.module.css";
 import { idDoCampoVersao, ListaVersoes, type VersaoEditavel } from "./ListaVersoes";
 import { PreviaParticipante } from "./PreviaParticipante";
+import type { Instrumento } from "@/lib/instrumento";
 import { useT } from "@/traducao/cliente";
 import { m, type OpcaoIdioma } from "@/traducao/nucleo";
 import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
@@ -29,16 +30,19 @@ export type ValoresEstudo = {
   dataInicio: string;
   dataFim: string;
   coletarDemografia: boolean;
+  instrumento: Instrumento;
   idioma: string;
   versoes: Omit<VersaoEditavel, "chave">[];
 };
 
-type Propriedades = { valores: ValoresEstudo; idiomas: OpcaoIdioma[] } & ({ modo: "criar" } | { modo: "editar"; estudoId: string });
+// instrumentoTravado: o estudo já tem respostas, e o questionário não pode mais mudar
+type Propriedades = { valores: ValoresEstudo; idiomas: OpcaoIdioma[]; instrumentoTravado?: boolean } & ({ modo: "criar" } | { modo: "editar"; estudoId: string });
 
 const CAMPOS_FIXOS = [
   { nome: "titulo", rotulo: m("Título do estudo"), id: "estudo-titulo" },
   { nome: "produtoAvaliado", rotulo: m("Produto avaliado"), id: "estudo-produto" },
   { nome: "objetivo", rotulo: m("Objetivo"), id: "estudo-objetivo" },
+  { nome: "instrumento", rotulo: m("Questionário"), id: "estudo-instrumento-UEQ" },
   { nome: "responsavelNome", rotulo: m("Nome do responsável"), id: "estudo-responsavel" },
   { nome: "responsavelEmail", rotulo: m("E-mail de contato"), id: "estudo-contato" },
   { nome: "instituicao", rotulo: m("Instituição"), id: "estudo-instituicao" },
@@ -47,6 +51,22 @@ const CAMPOS_FIXOS = [
   { nome: "comiteEtica", rotulo: m("Comitê de ética (opcional)"), id: "estudo-comite" },
   { nome: "dataInicio", rotulo: m("Data de início"), id: "estudo-inicio" },
   { nome: "dataFim", rotulo: m("Data de fim"), id: "estudo-fim" },
+];
+
+// O que cada forma do UEQ mede e quanto tempo leva (Handbook UEQ, p. 11-13)
+const OPCOES_INSTRUMENTO: readonly { valor: Instrumento; nome: string; resumo: string; texto: string }[] = [
+  {
+    valor: "UEQ",
+    nome: m("UEQ completo"),
+    resumo: m("26 pares de palavras · de 3 a 5 minutos"),
+    texto: m("Mede as 6 escalas (Atratividade, Perspicuidade, Eficiência, Confiabilidade, Estimulação e Novidade) e, a partir delas, as qualidades pragmática e hedônica. É o recomendado para a maioria dos estudos, como depois de um teste de usabilidade."),
+  },
+  {
+    valor: "UEQ_S",
+    nome: m("UEQ-S, versão curta"),
+    resumo: m("8 pares de palavras · de 1 a 2 minutos"),
+    texto: m("Mede só a qualidade pragmática, a qualidade hedônica e uma nota geral, sem as 6 escalas. Serve para quando o completo não cabe: pouco tempo, o UEQ dentro de um questionário maior ou a mesma pessoa avaliando vários produtos seguidos."),
+  },
 ];
 
 export function FormularioEstudo(propriedades: Propriedades) {
@@ -61,6 +81,8 @@ export function FormularioEstudo(propriedades: Propriedades) {
   const [responsavel, setResponsavel] = useState(valores.responsavelNome);
   const [instituicao, setInstituicao] = useState(valores.instituicao);
   const [demografia, setDemografia] = useState(valores.coletarDemografia);
+  const [instrumento, setInstrumento] = useState<Instrumento>(valores.instrumento);
+  const travado = propriedades.instrumentoTravado ?? false;
   const [versoes, setVersoes] = useState<VersaoEditavel[]>(() =>
     (valores.versoes.length > 0 ? valores.versoes : [{ id: "", nome: "", respostas: 0 }]).map((versao, posicao) => ({
       ...versao,
@@ -160,10 +182,67 @@ export function FormularioEstudo(propriedades: Propriedades) {
           </div>
         </section>
 
+        {/* UEQ-S (RF62). Handbook UEQ, p. 12-13: a versão curta é para quando o completo não cabe; a escolha
+            explica o que cada um mede e o que muda no estudo (Nielsen 10), antes de o pesquisador decidir */}
+        <section aria-labelledby="secao-questionario" className={estilos.secao}>
+          <div className={estilos.secaoTitulo}>
+            <span className={estilos.secaoNumero}>02</span>
+            <h2 id="secao-questionario" className={estilos.secaoNome}>{t("Questionário")}</h2>
+          </div>
+          <p className={formulario.ajuda}>
+            {t("O UEQ tem duas formas. As duas usam os mesmos pares de palavras opostas e a mesma escala de 7 posições; a versão curta usa só 8 dos 26 pares.")}
+          </p>
+          <fieldset
+            className={estilos.instrumentos}
+            aria-describedby={estado.erros?.instrumento ? "estudo-instrumento-erro instrumento-impacto" : "instrumento-impacto"}
+            disabled={travado}
+          >
+            <legend className="visualmente-oculto">{t("Questionário do estudo")}</legend>
+            {OPCOES_INSTRUMENTO.map((opcao) => (
+              <label key={opcao.valor} className={estilos.instrumento}>
+                <input
+                  type="radio"
+                  id={`estudo-instrumento-${opcao.valor}`}
+                  name="instrumento"
+                  value={opcao.valor}
+                  checked={instrumento === opcao.valor}
+                  onChange={() => setInstrumento(opcao.valor)}
+                />
+                <span className={estilos.instrumentoCorpo}>
+                  <span className={estilos.instrumentoNome}>{t(opcao.nome)}</span>
+                  <span className={estilos.instrumentoResumo}>{t(opcao.resumo)}</span>
+                  <span className={estilos.instrumentoTexto}>{t(opcao.texto)}</span>
+                </span>
+              </label>
+            ))}
+          </fieldset>
+          {/* fieldset desligado não manda o valor: o atual vai escondido */}
+          {travado && <input type="hidden" name="instrumento" value={instrumento} />}
+          {estado.erros?.instrumento && (
+            <p id="estudo-instrumento-erro" className={formulario.erro}>
+              {t(estado.erros.instrumento.mensagem)}
+            </p>
+          )}
+          <div id="instrumento-impacto" className={estilos.lgpd}>
+            <p>
+              <strong>{t("O que muda com a escolha:")}</strong>{" "}{t("o questionário que o participante responde, o tempo informado no termo, o painel de resultados e a planilha oficial que você exporta. O UEQ-S não tem as 6 escalas: só qualidade pragmática, qualidade hedônica e uma nota geral.")}
+            </p>
+            <p>
+              {t("Num estudo do UEQ completo, os resultados também mostram o UEQ-S, numa aba própria, calculado com os 8 pares dele.")}
+            </p>
+            <p>
+              {travado
+                ? t("O estudo já tem respostas, então o questionário não pode mais mudar. Para usar o outro, crie um estudo novo.")
+                : t("Depois da primeira resposta a escolha trava, para o estudo não misturar os dois questionários.")}{" "}
+              <Link href={"/#ueq-e-ueq-s" as Route}>{t("Ver a diferença entre o UEQ e o UEQ-S")}</Link>
+            </p>
+          </div>
+        </section>
+
         {/* LGPD, art. 9º: o participante precisa saber quem responde pela pesquisa e como falar com essa pessoa */}
         <section aria-labelledby="secao-responsavel" className={estilos.secao}>
           <div className={estilos.secaoTitulo}>
-            <span className={estilos.secaoNumero}>02</span>
+            <span className={estilos.secaoNumero}>03</span>
             <h2 id="secao-responsavel" className={estilos.secaoNome}>{t("Responsável pela pesquisa")}</h2>
           </div>
           <p className={formulario.ajuda}>
@@ -202,7 +281,7 @@ export function FormularioEstudo(propriedades: Propriedades) {
         {/* Resolução CNS 510/2016: o termo informa riscos, benefícios e, quando houver, o comitê de ética */}
         <section aria-labelledby="secao-etica" className={estilos.secao}>
           <div className={estilos.secaoTitulo}>
-            <span className={estilos.secaoNumero}>03</span>
+            <span className={estilos.secaoNumero}>04</span>
             <h2 id="secao-etica" className={estilos.secaoNome}>{t("Riscos e benefícios")}</h2>
           </div>
           <p className={formulario.ajuda}>
@@ -237,7 +316,7 @@ export function FormularioEstudo(propriedades: Propriedades) {
 
         <section aria-labelledby="secao-periodo" className={estilos.secao}>
           <div className={estilos.secaoTitulo}>
-            <span className={estilos.secaoNumero}>04</span>
+            <span className={estilos.secaoNumero}>05</span>
             <h2 id="secao-periodo" className={estilos.secaoNome}>{t("Período da coleta")}</h2>
           </div>
           <div className={estilos.datas}>
@@ -251,7 +330,7 @@ export function FormularioEstudo(propriedades: Propriedades) {
 
         <section aria-labelledby="secao-versoes" className={estilos.secao}>
           <div className={estilos.secaoTitulo}>
-            <span className={estilos.secaoNumero}>05</span>
+            <span className={estilos.secaoNumero}>06</span>
             <h2 id="secao-versoes" className={estilos.secaoNome}>{t("Versões")}</h2>
           </div>
           <p className={formulario.ajuda}>
@@ -270,7 +349,7 @@ export function FormularioEstudo(propriedades: Propriedades) {
         {/* LGPD (Lei 13.709/2018), art. 6º, III: só coletar o que a pesquisa precisa. Por isso nasce desligado */}
         <section aria-labelledby="secao-demografia" className={estilos.secao}>
           <div className={estilos.secaoTitulo}>
-            <span className={estilos.secaoNumero}>06</span>
+            <span className={estilos.secaoNumero}>07</span>
             <h2 id="secao-demografia" className={estilos.secaoNome}>{t("Dados do participante")}</h2>
           </div>
           <label className={formulario.opcao}>
@@ -311,6 +390,7 @@ export function FormularioEstudo(propriedades: Propriedades) {
         titulo={titulo}
         objetivo={objetivo}
         etapas={demografia ? 3 : 2}
+        curto={instrumento === "UEQ_S"}
         responsavel={responsavel}
         instituicao={instituicao}
       />

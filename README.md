@@ -44,9 +44,10 @@ A meta de acessibilidade é WCAG 2.2 nível AA, base da ABNT NBR 17225:2025.
 
 **Pesquisador**
 - Estudos com uma ou mais versões (teste A/B), coleta aberta, encerrada e reaberta, e importação de respostas por CSV.
-- Painel com média, desvio-padrão, IC 95%, alfa de Cronbach e benchmark oficial por escala, comparação entre versões e exportação em CSV, na própria *UEQ Data Analysis Tool* preenchida (XLSX) e em PDF. Os números batem com a planilha oficial em 11 cenários de teste.
+- **UEQ ou UEQ-S**: ao criar o estudo, o pesquisador escolhe o questionário completo (26 pares, 6 escalas) ou a versão curta (8 pares, qualidade pragmática, hedônica e geral). O formulário e a página inicial explicam o que muda. A avaliação do UEQ-S fica numa aba própria dos resultados, também nos estudos do UEQ completo, com o benchmark e a planilha oficial do UEQ-S.
+- Painel com média, desvio-padrão, IC 95%, alfa de Cronbach e benchmark oficial por escala, comparação entre versões e exportação em CSV, na própria *UEQ Data Analysis Tool* preenchida (XLSX) e em PDF. Os números batem com a planilha oficial em 11 cenários de teste, e os do UEQ-S com a planilha oficial dele em 9.
 - Respostas suspeitas pelas regras do Handbook do UEQ, com inclusão e exclusão da análise sem apagar nada.
-- Em Resultados, duas abas: as escalas do UEQ e, quando o estudo coleta, os **dados demográficos**, cada pergunta no gráfico que combina com ela (colunas para a faixa etária, barras para gênero e escolaridade, barra 100% para a familiaridade), com a tabela dos números e filtro por versão.
+- Em Resultados, as abas das escalas do UEQ, do UEQ-S e, quando o estudo coleta, dos **dados demográficos**, cada pergunta no gráfico que combina com ela (colunas para a faixa etária, barras para gênero e escolaridade, barra 100% para a familiaridade), com a tabela dos números e filtro por versão.
 - **Estudos em equipe**: “Compartilhar” convida uma conta cadastrada pelo e-mail, como Editor (mexe no estudo) ou Leitor (vê e exporta). Excluir o estudo e convidar pessoas fica só com o dono.
 - **Sino de notificações**, entre Minha conta e Sair: convites (aceitar e recusar ali mesmo), respostas novas (agrupadas enquanto não lidas) e mudanças feitas pelos parceiros. Os avisos também vão por e-mail quando o envio está configurado.
 - **Tour guiado** no primeiro acesso: a pessoa clica nas próprias ações destacadas, pode pular ou fechar quando quiser, e pode rever depois pela ajuda.

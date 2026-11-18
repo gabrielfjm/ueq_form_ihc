@@ -40,6 +40,8 @@ export default async function PaginaCriarEstudo() {
         idiomas={IDIOMAS.map(({ codigo, nome, lang, direcao }) => ({ codigo, nome, lang, direcao }))}
         valores={{
           coletarDemografia: false,
+          // O completo é o recomendado pelo handbook; o pesquisador escolhe o UEQ-S quando ele não cabe
+          instrumento: "UEQ",
           // O questionário nasce no idioma da conta; o pesquisador troca no formulário
           idioma: pesquisador.idioma,
           titulo: "",

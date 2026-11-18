@@ -1,0 +1,130 @@
+{
+    "fonte":  "Short_UEQ_Data_Analysis_Tool_V15.xlsx (Data_Analysis_Tools.zip de ueq-online.org), recalculada no Microsoft Excel 16 em 17/11/2026 com o respostas.csv colado em Data!A4",
+    "escalas":  {
+                    "media":  [
+                                  1.5,
+                                  0,
+                                  0.75
+                              ],
+                    "dp":  [
+                               null,
+                               null,
+                               null
+                           ],
+                    "n":  1,
+                    "icInferior":  [
+                                       null,
+                                       null,
+                                       null
+                                   ],
+                    "icSuperior":  [
+                                       null,
+                                       null,
+                                       null
+                                   ],
+                    "alfa":  [
+                                 null,
+                                 null,
+                                 null
+                             ],
+                    "correlacaoMedia":  [
+                                            null,
+                                            null
+                                        ],
+                    "benchmark":  [
+                                      "Above average",
+                                      "Bad",
+                                      "Below average"
+                                  ],
+                    "variancia":  [
+                                      null,
+                                      null,
+                                      null
+                                  ]
+                },
+    "itens":  {
+                  "media":  [
+                                1,
+                                2,
+                                1,
+                                2,
+                                0,
+                                1,
+                                -1,
+                                0
+                            ],
+                  "variancia":  [
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null,
+                                    null
+                                ],
+                  "dp":  [
+                             null,
+                             null,
+                             null,
+                             null,
+                             null,
+                             null,
+                             null,
+                             null
+                         ],
+                  "n":  [
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1,
+                            1
+                        ],
+                  "icInferior":  [
+                                     null,
+                                     null,
+                                     null,
+                                     null,
+                                     null,
+                                     null,
+                                     null,
+                                     null
+                                 ],
+                  "icSuperior":  [
+                                     null,
+                                     null,
+                                     null,
+                                     null,
+                                     null,
+                                     null,
+                                     null,
+                                     null
+                                 ]
+              },
+    "participantes":  {
+                          "escores":  [
+                                          [
+                                              1.5,
+                                              0,
+                                              0.75
+                                          ]
+                                      ],
+                          "escalasInconsistentes":  [
+                                                        0
+                                                    ],
+                          "respostasIguais":  [
+                                                  3
+                                              ],
+                          "todasNoMeio":  [
+                                              false
+                                          ]
+                      },
+    "idioma":  "English",
+    "rotulos":  {
+                    "escala1":  "Pragmatic Quality",
+                    "item1Esquerda":  "obstructive"
+                }
+}

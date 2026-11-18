@@ -27,6 +27,7 @@ export const de: TextosParticipante = {
     subtitulo: "Studie zur User Experience",
     termoTitulo: "Einwilligungserklärung",
     termoTexto: "Sie bewerten Ihren Eindruck vom Produkt anhand von 26 Paaren gegensätzlicher Begriffe.",
+    termoTextoCurto: "Sie bewerten Ihren Eindruck vom Produkt anhand von 8 Paaren gegensätzlicher Begriffe.",
     rotulos: {
       tempo: "Dauer",
       dadosOpcionais: "Optionale Angaben",
@@ -41,6 +42,8 @@ export const de: TextosParticipante = {
     },
     tempo: "3 bis 5 Minuten, ohne Zeitlimit.",
     tempoComDados: "4 bis 6 Minuten, ohne Zeitlimit.",
+    tempoCurto: "1 bis 2 Minuten, ohne Zeitlimit.",
+    tempoCurtoComDados: "2 bis 3 Minuten, ohne Zeitlimit.",
     dadosOpcionais: "Am Ende folgen freiwillige Fragen zu Altersgruppe, Geschlecht, Bildungsabschluss und Nutzung des Produkts. Sie können alle überspringen.",
     participacao: "Freiwillig. Bis zum Absenden können Sie jederzeit ohne Angabe von Gründen abbrechen: Nutzen Sie „{sair}“ oder schließen Sie die Seite, und nichts von dem, was Sie angekreuzt haben, wird gespeichert.",
     depoisDeEnviar: "Da die Antworten anonym sind, lassen sie sich nach dem Absenden nicht mehr finden und zurückziehen.",

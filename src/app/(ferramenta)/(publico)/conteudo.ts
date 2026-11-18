@@ -12,6 +12,17 @@ export const ESCALAS_DO_UEQ = [
   { nome: m("Novidade"), grupo: m("Qualidade hedônica"), itens: 4, mede: m("Se o produto é criativo e inovador.") },
 ] as const;
 
+// UEQ ou UEQ-S, na página inicial: o que muda de um para o outro. Handbook UEQ, versão 11, p. 11-13, e a aba
+// Benchmark da planilha oficial do UEQ-S
+export const COMPARACAO_UEQ_E_UEQ_S = [
+  [m("Pares de palavras"), m("26"), m("8, tirados dos 26")],
+  [m("Tempo para responder"), m("De 3 a 5 minutos"), m("De 1 a 2 minutos")],
+  [m("O que mede"), m("As 6 escalas e, a partir delas, as qualidades pragmática e hedônica"), m("Só qualidade pragmática, qualidade hedônica e uma nota geral")],
+  [m("Quando usar"), m("Na maioria dos estudos, como depois de um teste de usabilidade"), m("Quando o completo não cabe: pouco tempo, o UEQ dentro de um questionário maior, ou a mesma pessoa avaliando vários produtos seguidos")],
+  [m("Benchmark"), m("O oficial, com 21.175 pessoas de 468 estudos"), m("Aproximado: os limites ainda vêm dos mesmos 8 itens dentro do UEQ completo")],
+  [m("Planilha oficial exportada"), m("UEQ Data Analysis Tool"), m("UEQ-S Data Analysis Tool")],
+] as const;
+
 export const PASSOS = [
   [m("Crie o estudo"), m("Título, objetivo, período e as versões do produto que serão comparadas.")],
   [m("Envie o link"), m("Os participantes respondem sem conta, pelo celular ou computador.")],

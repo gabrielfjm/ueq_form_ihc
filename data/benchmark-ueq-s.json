@@ -1,9 +1,24 @@
 {
-  "fonte": "",
-  "comoPreencher": "Preenchido pela equipe, não pelo Claude (prompts/10-extensoes.md). Copiar da ferramenta oficial de análise do UEQ-S (ueq-online.org), aba de benchmark, os 4 limites de cada escala no mesmo formato de benchmark.json: excelente, bom, acimaDaMedia e abaixoDaMedia, do maior para o menor. Preencha fonte com o nome do arquivo, a versão e a data. O teste src/ueq/__tests__/ueq-s.test.ts confere o formato assim que houver números.",
+  "fonte": "Short_UEQ_Data_Analysis_Tool_V15.xlsx (Data_Analysis_Tools.zip de ueq-online.org), aba Benchmark, tabela 'Benchmark borders' (linhas 31 a 34, quantis 0.25, 0.5, 0.75 e 0.9). A própria planilha avisa que, por falta de dados do UEQ-S, esses limites vêm do benchmark do UEQ completo (21175 pessoas de 468 estudos) e devem ser lidos com cuidado. Copiado em 17/11/2026 a pedido do Gabriel.",
+  "comoPreencher": "Copiar da ferramenta oficial de análise do UEQ-S (ueq-online.org), aba de benchmark, os 4 limites de cada escala no mesmo formato de benchmark.json: excelente, bom, acimaDaMedia e abaixoDaMedia, do maior para o menor. Preencha fonte com o nome do arquivo, a versão e a data. O teste src/ueq/__tests__/ueq-s.test.ts confere o formato assim que houver números.",
   "escalas": {
-    "pragmatica": { "excelente": null, "bom": null, "acimaDaMedia": null, "abaixoDaMedia": null },
-    "hedonica": { "excelente": null, "bom": null, "acimaDaMedia": null, "abaixoDaMedia": null },
-    "geral": { "excelente": null, "bom": null, "acimaDaMedia": null, "abaixoDaMedia": null }
+    "pragmatica": {
+      "excelente": 1.74,
+      "bom": 1.55,
+      "acimaDaMedia": 1.17,
+      "abaixoDaMedia": 0.72
+    },
+    "hedonica": {
+      "excelente": 1.59,
+      "bom": 1.2,
+      "acimaDaMedia": 0.85,
+      "abaixoDaMedia": 0.35
+    },
+    "geral": {
+      "excelente": 1.58,
+      "bom": 1.31,
+      "acimaDaMedia": 0.98,
+      "abaixoDaMedia": 0.59
+    }
   }
 }

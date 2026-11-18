@@ -82,6 +82,8 @@
 .atratividade { --cor: var(--atratividade); }
 .pragmatica { --cor: var(--pragmatica); }
 .hedonica { --cor: var(--hedonica); }
+/* UEQ-S: a escala geral junta os dois construtos; usa a cor neutra da Atratividade, que também é impressão geral */
+.geral { --cor: var(--atratividade); }
 
 .intervalo {
   stroke: var(--cor);

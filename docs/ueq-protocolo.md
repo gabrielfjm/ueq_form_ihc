@@ -149,3 +149,50 @@ Em `data/fixtures/` ficam 11 cenários, cada um com `respostas.csv` (formato da 
 Os testes do módulo `src/ueq/` comparam média, dp, n e IC95 de escalas e itens, alfa, benchmark, qualidade pragmática e hedônica, escalas inconsistentes e respostas iguais por participante e a distribuição das respostas, com tolerância de `1e-6`. Erro da planilha tem de ser `null` na ferramenta.
 
 **Situação em 17/11/2026:** os 11 cenários batem com a planilha oficial. São 6.543 valores comparados, e a maior diferença é de 9,3 × 10⁻¹⁵, que é arredondamento de ponto flutuante. As 245 células em que a planilha dá erro são `null` na ferramenta ([RNF11](documentacao/requisitos.md#rnf11), [verificação do cálculo](documentacao/verificacao-do-calculo.md#comparação-com-a-planilha-oficial)).
+
+## 11. UEQ-S, a versão curta
+
+(Fonte: Handbook UEQ versão 11, "Short version for special application scenarios", p. 11-13, e a *UEQ-S Data Analysis Tool V15*, `data/planilha-oficial/Short_UEQ_Data_Analysis_Tool_V15.xlsx`.)
+
+O estudo escolhe o questionário na criação: o UEQ completo ou o UEQ-S. A escolha trava na primeira resposta, para o estudo não misturar os dois. O handbook recomenda o UEQ-S só quando o completo não cabe (pouco tempo, o UEQ dentro de um questionário maior, a mesma pessoa avaliando vários produtos seguidos), porque ele não mede as 6 escalas.
+
+**Itens.** São 8 itens do próprio UEQ, nesta ordem ([`data/ueq-s-itens-ptbr.json`](../data/ueq-s-itens-ptbr.json)):
+
+| UEQ-S | Item do UEQ | Esquerda | Direita | Escala |
+|---|---|---|---|---|
+| 1 | 11 | Obstrutivo | Condutor | Qualidade pragmática |
+| 2 | 13 | Complicado | Fácil | Qualidade pragmática |
+| 3 | 20 | Ineficiente | Eficiente | Qualidade pragmática |
+| 4 | 21 | Confuso | Evidente | Qualidade pragmática |
+| 5 | 6 | Aborrecido | Excitante | Qualidade hedônica |
+| 6 | 7 | Desinteressante | Interessante | Qualidade hedônica |
+| 7 | 10 | Convencional | Original | Qualidade hedônica |
+| 8 | 15 | Comum | Vanguardista | Qualidade hedônica |
+
+No UEQ-S o termo negativo fica sempre à esquerda, então todos os itens têm polaridade `+` e a recodificação é x − 4. Os itens 4 e 7 aparecem com os lados trocados em relação ao UEQ: uma resposta x no UEQ-S é 8 − x no item equivalente do UEQ. Como o UEQ-S é um subconjunto do UEQ, ele existe nos mesmos 37 idiomas: os termos vêm do pacote oficial de idiomas do UEQ, com essa troca de lados.
+
+**Onde ficam as respostas.** Num estudo do UEQ-S, as 8 respostas são gravadas nos itens equivalentes do UEQ, já convertidas para a orientação de cada um. A análise do UEQ-S lê esses 8 itens e desfaz a conversão. Por isso a mesma análise serve aos dois tipos de estudo: num estudo do UEQ completo, a aba UEQ-S dos resultados usa os 8 pares que o participante também respondeu, do mesmo jeito que os autores montaram o UEQ-S e o benchmark dele.
+
+**Escalas.** Para cada participante (aba DT): qualidade pragmática = média dos itens 1 a 4; qualidade hedônica = média dos itens 5 a 8; geral = média dos 8. Média, dp, IC95, faixa de interpretação e benchmark seguem as seções 4, 5 e 8, com a mesma faixa neutra e o mesmo z. O handbook pede cuidado com a escala geral: ela não é um indicador único de experiência, porque o peso da pragmática e da hedônica muda de produto para produto.
+
+**Alfa.** Só da pragmática e da hedônica, com a fórmula da seção 6 para k = 4 (aba Scale_Consistency, `4·r̄ / (1 + 3·r̄)`). A planilha não calcula alfa da geral.
+
+**Benchmark.** Os limites da aba Benchmark da planilha do UEQ-S ([`data/benchmark-ueq-s.json`](../data/benchmark-ueq-s.json)):
+
+| Escala | Abaixo da média | Acima da média | Bom | Excelente |
+|---|---|---|---|---|
+| Qualidade pragmática | 0,72 | 1,17 | 1,55 | 1,74 |
+| Qualidade hedônica | 0,35 | 0,85 | 1,20 | 1,59 |
+| Geral | 0,59 | 0,98 | 1,31 | 1,58 |
+
+A própria planilha avisa que, por falta de dados do UEQ-S, esses limites vêm dos mesmos 8 itens dentro do benchmark do UEQ completo e são uma aproximação. O painel repete o aviso.
+
+**Respostas suspeitas.** As regras da aba Inconsistencies da planilha do UEQ-S ([`data/protocolo-ueq-s.json`](../data/protocolo-ueq-s.json)), diferentes das do UEQ completo:
+
+- uma escala é inconsistente quando a distância entre o melhor e o pior item dela passa de 3;
+- a resposta é suspeita quando as 2 escalas são inconsistentes;
+- a segunda regra só vale para quem marcou a posição do meio (4) nos 8 itens. Com tão poucos itens, repetir a mesma posição é comum, e a planilha só recomenda remover esse caso.
+
+**Exportações.** Num estudo do UEQ-S, as respostas brutas e recodificadas têm 8 colunas (`item01` a `item08`, na ordem do UEQ-S), os resultados por escala têm pragmática, hedônica e geral, e a planilha oficial exportada é a do UEQ-S, preenchida como na seção 9.4: as 8 respostas em `Data!A4:H` e o idioma em `Read_First!B4`. Num estudo do UEQ completo, a aba UEQ-S exporta os resultados do UEQ-S e a planilha do UEQ-S com os 8 itens equivalentes.
+
+**Validação.** Em `data/fixtures-ueq-s/` ficam 9 cenários com o `esperado.json` da planilha do UEQ-S recalculada no Excel ([data/fixtures-ueq-s/LEIA-ME.md](../data/fixtures-ueq-s/LEIA-ME.md)), dois deles tirados de cenários do UEQ completo. **Situação em 17/11/2026:** os 9 batem com a planilha. São 8.520 valores comparados, e a maior diferença é de 6,0 × 10⁻¹⁵. As 38 células em que a planilha dá erro são `null` na ferramenta ([RF62](documentacao/requisitos.md#rf62)).

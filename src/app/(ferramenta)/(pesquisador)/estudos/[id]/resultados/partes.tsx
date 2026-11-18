@@ -16,13 +16,15 @@ export async function TituloSecao({ id, numero, children }: { id: string; numero
 }
 
 const CONSTRUTOS: Construto[] = ["atratividade", "pragmatica", "hedonica"];
+// UEQ-S: as duas qualidades e a escala geral
+export const CONSTRUTOS_UEQ_S: Construto[] = ["pragmatica", "hedonica", "geral"];
 
 // Legenda do gráfico de escalas (protótipo r6): cor de cada construto e o que cada traço significa
-export async function LegendaConstrutos({ comIntervalo = true }: { comIntervalo?: boolean }) {
+export async function LegendaConstrutos({ comIntervalo = true, construtos = CONSTRUTOS }: { comIntervalo?: boolean; construtos?: Construto[] }) {
   const t = await tradutor();
   return (
     <>
-      {CONSTRUTOS.map((construto) => (
+      {construtos.map((construto) => (
         <span key={construto} className={graficos[construto]}>
           <span className={graficos.amostra} />
           {t(NOME_CONSTRUTO[construto])}

@@ -27,6 +27,7 @@ export const sl: TextosParticipante = {
     subtitulo: "Raziskava uporabniške izkušnje",
     termoTitulo: "Izjava o soglasju",
     termoTexto: "Svoj vtis o izdelku boste podali pri 26 parih nasprotnih besed.",
+    termoTextoCurto: "Svoj vtis o izdelku boste podali pri 8 parih nasprotnih besed.",
     rotulos: {
       tempo: "Čas",
       dadosOpcionais: "Neobvezni podatki",
@@ -41,6 +42,8 @@ export const sl: TextosParticipante = {
     },
     tempo: "Od 3 do 5 minut, brez časovne omejitve.",
     tempoComDados: "Od 4 do 6 minut, brez časovne omejitve.",
+    tempoCurto: "Od 1 do 2 minut, brez časovne omejitve.",
+    tempoCurtoComDados: "Od 2 do 3 minut, brez časovne omejitve.",
     dadosOpcionais: "Na koncu so neobvezna vprašanja o starostni skupini, spolu, izobrazbi in uporabi izdelka. Vsa lahko preskočite.",
     participacao: "Prostovoljno. Do oddaje lahko kadar koli odnehate brez pojasnila: uporabite »{sair}« ali zaprite stran in nič od tega, kar ste označili, ne bo shranjeno.",
     depoisDeEnviar: "Ker so odgovori anonimni, jih po oddaji ni mogoče najti in umakniti.",

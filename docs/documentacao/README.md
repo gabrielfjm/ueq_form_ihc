@@ -23,7 +23,7 @@ Projeto da disciplina Fundamentos da Interação Humano-Computador, PPGIa · PUC
 | Modelagem | [Diagramas de sequência](diagramas-de-sequencia.md) | Oito fluxos do clique até o banco: entrar, responder, ver resultados, tirar da análise, PDF, importar, convidar e traduzir |
 | Arquitetura | [Arquitetura](arquitetura.md) | Modelo C4 (contexto, containers e componentes), segurança, decisões e implantação |
 | Testes | [Casos e cenários de teste](casos-de-teste.md) | Estratégia, 25 cenários e 189 casos (de ponta a ponta, de unidade e manuais), com os requisitos que cada um verifica e o resultado da última execução. Também em [casos-de-teste.csv](casos-de-teste.csv) |
-| Testes | [Verificação do cálculo](verificacao-do-calculo.md) | O cálculo da ferramenta refeito à mão com o estudo de exemplo e comparado com a planilha oficial do UEQ em 11 cenários: médias, desvio-padrão, IC95, alfa, benchmark, suspeitas e exportações |
+| Testes | [Verificação do cálculo](verificacao-do-calculo.md) | O cálculo da ferramenta refeito à mão com o estudo de exemplo e comparado com a planilha oficial do UEQ em 11 cenários e com a do UEQ-S em 9: médias, desvio-padrão, IC95, alfa, benchmark, suspeitas e exportações |
 | Testes | [Checklist manual](../checklist-manual.md) | O que a equipe confere com as próprias mãos: leitor de tela, zoom, celular real, daltonismo |
 | Testes | [Roteiro da revisão](../roteiro-revisao.md) | O que abrir, o que fazer em cada tela e como anotar os problemas |
 | Especificação | [Protocolo UEQ](../ueq-protocolo.md) | Itens, escalas, polaridade e todas as fórmulas do cálculo, conferidas no handbook e na planilha oficial |
@@ -55,9 +55,9 @@ Os identificadores são fixos: um item que sai continua com o número reservado,
 
 ## Situação em 17/11/2026
 
-- **Requisitos:** 93 dos 94 entregues. O pendente é o [RF62](requisitos.md#rf62), Aplicar o UEQ-S, que tem a estrutura de dados e o teste mas ainda não tem os itens e o benchmark oficiais do UEQ-S em `data/`.
+- **Requisitos:** os 94 estão entregues. O último foi o [RF62](requisitos.md#rf62), Aplicar o UEQ-S, em 18/11/2026.
 - **Testes automáticos:** os resultados da última execução estão em [casos de teste](casos-de-teste.md#execução-de-17112026).
-- **Cálculo:** a [verificação do cálculo](verificacao-do-calculo.md) refez à mão todas as estatísticas do estudo de exemplo, e os 336 números bateram com a ferramenta. Na comparação com a própria planilha oficial, os 11 cenários de teste batem nos 6.543 valores, e a planilha que a ferramenta exporta recalcula no Excel com os mesmos números.
+- **Cálculo:** a [verificação do cálculo](verificacao-do-calculo.md) refez à mão todas as estatísticas do estudo de exemplo, e os 336 números bateram com a ferramenta. Na comparação com a própria planilha oficial, os 11 cenários de teste batem nos 6.543 valores, e os 9 do UEQ-S nos 8.520 valores da planilha oficial dele. As planilhas que a ferramenta exporta recalculam no Excel com os mesmos números.
 - **Em produção:** https://ferramenta-ueq.vercel.app.
 
 ## Como manter

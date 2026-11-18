@@ -27,6 +27,7 @@ export const da: TextosParticipante = {
     subtitulo: "Undersøgelse af brugeroplevelse",
     termoTitulo: "Samtykkeerklæring",
     termoTexto: "Du skal angive dit indtryk af produktet på 26 par modsatte ord.",
+    termoTextoCurto: "Du skal angive dit indtryk af produktet på 8 par modsatte ord.",
     rotulos: {
       tempo: "Tid",
       dadosOpcionais: "Frivillige oplysninger",
@@ -41,6 +42,8 @@ export const da: TextosParticipante = {
     },
     tempo: "3 til 5 minutter, uden tidsgrænse.",
     tempoComDados: "4 til 6 minutter, uden tidsgrænse.",
+    tempoCurto: "1 til 2 minutter, uden tidsgrænse.",
+    tempoCurtoComDados: "2 til 3 minutter, uden tidsgrænse.",
     dadosOpcionais: "Til sidst kommer frivillige spørgsmål om aldersgruppe, køn, uddannelse og brug af produktet. Du kan springe dem alle over.",
     participacao: "Frivillig. Indtil du sender, kan du stoppe når som helst uden at give en grund: brug »{sair}« eller luk siden, og intet af det, du har markeret, bliver gemt.",
     depoisDeEnviar: "Da svarene er anonyme, kan de ikke findes og trækkes tilbage, når de først er sendt.",

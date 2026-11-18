@@ -27,6 +27,7 @@ export const tr: TextosParticipante = {
     subtitulo: "Kullanıcı deneyimi araştırması",
     termoTitulo: "Bilgilendirilmiş onay",
     termoTexto: "Ürüne dair izleniminizi 26 zıt kelime çifti üzerinden belirteceksiniz.",
+    termoTextoCurto: "Ürüne dair izleniminizi 8 zıt kelime çifti üzerinden belirteceksiniz.",
     rotulos: {
       tempo: "Süre",
       dadosOpcionais: "İsteğe bağlı bilgiler",
@@ -41,6 +42,8 @@ export const tr: TextosParticipante = {
     },
     tempo: "3 ila 5 dakika, süre sınırı yok.",
     tempoComDados: "4 ila 6 dakika, süre sınırı yok.",
+    tempoCurto: "1 ila 2 dakika, süre sınırı yok.",
+    tempoCurtoComDados: "2 ila 3 dakika, süre sınırı yok.",
     dadosOpcionais: "Sonda yaş grubu, cinsiyet, eğitim durumu ve ürünün kullanımı hakkında isteğe bağlı sorular var. Hepsini atlayabilirsiniz.",
     participacao: "Gönüllüdür. Göndermeden önce istediğiniz an, gerekçe göstermeden bırakabilirsiniz: “{sair}” düğmesini kullanın veya sayfayı kapatın; işaretlediğiniz hiçbir şey kaydedilmez.",
     depoisDeEnviar: "Yanıtlar anonim olduğu için gönderildikten sonra bulunup geri çekilemez.",

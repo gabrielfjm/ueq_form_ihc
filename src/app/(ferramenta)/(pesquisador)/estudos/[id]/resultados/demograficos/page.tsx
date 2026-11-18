@@ -48,7 +48,7 @@ export default async function PaginaDemograficos({ params, searchParams }: Propr
       <div className={estilos.conteudo}>
         <div className={estilos.blocoDemografia}>
           <div className={estilos.topo}>
-            <AbasResultados estudoId={estudo.id} atual="demografia" />
+            <AbasResultados estudoId={estudo.id} atual="demografia" instrumento={estudo.instrumento} demografia />
             <div className={estilos.cabecalhoDemografia}>
               <p className={estilos.textoDemografia}>
                 {versaoEscolhida

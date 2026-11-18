@@ -1,6 +1,6 @@
 # Requisitos
 
-A Ferramenta UEQ tem **68 requisitos funcionais** (RF), o que ela faz, e **26 requisitos não funcionais** (RNF), como ela tem de ser. Deles, 67 RF e 26 RNF estão entregues; 1 está pendente. A mesma lista está em [requisitos.csv](requisitos.csv) e na [planilha de requisitos](planilha-requisitos.xlsx).
+A Ferramenta UEQ tem **68 requisitos funcionais** (RF), o que ela faz, e **26 requisitos não funcionais** (RNF), como ela tem de ser. Todos os 94 estão entregues. A mesma lista está em [requisitos.csv](requisitos.csv) e na [planilha de requisitos](planilha-requisitos.xlsx).
 
 Atualizado em 17/11/2026.
 
@@ -51,6 +51,7 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 | Termo de consentimento | #40, #41 | 17/11/2026 | Termo completo, menores de 18 anos, seletor de idioma na barra e Next.js 16.4.6 |
 | Documentação final | #42, #43 | 17/11/2026 | Requisitos, matriz de rastreabilidade, personas, histórias, casos de uso, diagrama de classes e verificação do cálculo |
 | Sprint 09 · Revisão final | #44 | 17/11/2026 | Conferência com a planilha oficial em 11 cenários e exportação na própria UEQ Data Analysis Tool |
+| UEQ-S | #45 | 18/11/2026 | O UEQ-S como questionário do estudo, a aba UEQ-S nos resultados, a comparação UEQ ou UEQ-S na página inicial e a conferência com a planilha oficial do UEQ-S em 9 cenários |
 
 ## Requisitos funcionais
 
@@ -154,7 +155,7 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 | <a id="rf59"></a>RF59 | **Exportar na planilha oficial do UEQ** | O pesquisador baixa a própria UEQ Data Analysis Tool V15 preenchida com as participações na análise (da versão escolhida no painel ou do estudo inteiro), que recalcula ao abrir no Excel. | Essencial | Sprint 09 · Revisão final | Entregue | [CT-U34](casos-de-teste.md#ct-u34), [CT-U70](casos-de-teste.md#ct-u70), [CT-E37](casos-de-teste.md#ct-e37), [CT-E96](casos-de-teste.md#ct-e96). Aba Resultados › Exportar › Planilha oficial do UEQ (XLSX); abrir no Excel e clicar em Habilitar edição. |
 | <a id="rf60"></a>RF60 | **Exportar o painel em PDF** | O pesquisador baixa o painel da versão escolhida em PDF, com título do estudo, n e data no cabeçalho. | Desejável | Sprint 10 · Extensões | Entregue | [CT-E39](casos-de-teste.md#ct-e39), [CT-E40](casos-de-teste.md#ct-e40). Aba Resultados › Painel em PDF. |
 | <a id="rf61"></a>RF61 | **Importar respostas por CSV** | O pesquisador importa respostas no formato da planilha oficial para uma versão, com prévia e erros apontados por linha, e as respostas importadas ficam marcadas assim. | Desejável | Sprint 10 · Extensões | Entregue | [CT-U39](casos-de-teste.md#ct-u39), [CT-U40](casos-de-teste.md#ct-u40), [CT-U41](casos-de-teste.md#ct-u41), [CT-E42](casos-de-teste.md#ct-e42), [CT-E43](casos-de-teste.md#ct-e43). Aba Respostas › Importar respostas de um CSV, com data/fixtures/basico/respostas.csv. |
-| <a id="rf62"></a>RF62 | **Aplicar o UEQ-S** | O pesquisador escolhe o UEQ-S (versão curta, 8 itens, escalas pragmática e hedônica) ao criar o estudo. | Desejável | Sprint 10 · Extensões | Pendente | [CT-U53](casos-de-teste.md#ct-u53). Pendente: a estrutura existe, mas os itens e o benchmark do UEQ-S ainda não foram preenchidos pela equipe (data/ueq-s-itens-ptbr.json). |
+| <a id="rf62"></a>RF62 | **Aplicar o UEQ-S** | O pesquisador escolhe, ao criar o estudo, entre o UEQ completo e o UEQ-S (versão curta, 8 itens, qualidade pragmática, hedônica e geral). A escolha trava na primeira resposta, e a avaliação do UEQ-S fica numa aba própria dos resultados, com o benchmark e a planilha oficial dele. | Desejável | UEQ-S | Entregue | [CT-U53](casos-de-teste.md#ct-u53), [CT-U71](casos-de-teste.md#ct-u71), [CT-U72](casos-de-teste.md#ct-u72), [CT-U73](casos-de-teste.md#ct-u73), [CT-U74](casos-de-teste.md#ct-u74), [CT-U75](casos-de-teste.md#ct-u75), [CT-U76](casos-de-teste.md#ct-u76), [CT-E97](casos-de-teste.md#ct-e97), [CT-E98](casos-de-teste.md#ct-e98), [CT-E99](casos-de-teste.md#ct-e99), [CT-E100](casos-de-teste.md#ct-e100), [CT-E101](casos-de-teste.md#ct-e101), [CT-M26](casos-de-teste.md#ct-m26). Crie um estudo e escolha UEQ-S, versão curta em Questionário; responda pelo link e abra Resultados › UEQ-S. O Estudo de exemplo do UEQ-S (/r/exemplo-curto) já tem respostas. Os 9 cenários de data/fixtures-ueq-s batem com a planilha oficial do UEQ-S recalculada no Excel. |
 
 ### Documentação
 
@@ -229,6 +230,6 @@ Cada requisito tem um ID fixo. Depois de criado, o ID não muda: se um requisito
 
 | Tipo | Essencial | Importante | Desejável | Entregue | Pendente | Removido | Total |
 |---|---|---|---|---|---|---|---|
-| Funcional | 31 | 20 | 17 | 67 | 1 | 0 | 68 |
-| Não funcional | 15 | 11 | 0 | 25 | 1 | 0 | 26 |
-| Total | 46 | 31 | 17 | 92 | 2 | 0 | 94 |
+| Funcional | 31 | 20 | 17 | 68 | 0 | 0 | 68 |
+| Não funcional | 15 | 11 | 0 | 26 | 0 | 0 | 26 |
+| Total | 46 | 31 | 17 | 94 | 0 | 0 | 94 |

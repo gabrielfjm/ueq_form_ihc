@@ -27,6 +27,7 @@ export const sv: TextosParticipante = {
     subtitulo: "Studie om användarupplevelse",
     termoTitulo: "Samtyckesformulär",
     termoTexto: "Du anger ditt intryck av produkten på 26 par motsatta ord.",
+    termoTextoCurto: "Du anger ditt intryck av produkten på 8 par motsatta ord.",
     rotulos: {
       tempo: "Tid",
       dadosOpcionais: "Frivilliga uppgifter",
@@ -41,6 +42,8 @@ export const sv: TextosParticipante = {
     },
     tempo: "3 till 5 minuter, utan tidsgräns.",
     tempoComDados: "4 till 6 minuter, utan tidsgräns.",
+    tempoCurto: "1 till 2 minuter, utan tidsgräns.",
+    tempoCurtoComDados: "2 till 3 minuter, utan tidsgräns.",
     dadosOpcionais: "I slutet finns frivilliga frågor om åldersgrupp, kön, utbildning och användning av produkten. Du kan hoppa över alla.",
     participacao: "Frivilligt. Fram till att du skickar kan du avbryta när som helst utan att ange skäl: använd ”{sair}” eller stäng sidan, så sparas inget av det du har markerat.",
     depoisDeEnviar: "Eftersom svaren är anonyma går de inte att hitta och dra tillbaka när de väl har skickats.",

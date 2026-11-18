@@ -27,6 +27,7 @@ export const hu: TextosParticipante = {
     subtitulo: "Felhasználói élmény kutatás",
     termoTitulo: "Beleegyező nyilatkozat",
     termoTexto: "A termékről alkotott benyomását 26 ellentétes szópáron fogja értékelni.",
+    termoTextoCurto: "A termékről alkotott benyomását 8 ellentétes szópáron fogja értékelni.",
     rotulos: {
       tempo: "Időtartam",
       dadosOpcionais: "Nem kötelező adatok",
@@ -41,6 +42,8 @@ export const hu: TextosParticipante = {
     },
     tempo: "3–5 perc, időkorlát nélkül.",
     tempoComDados: "4–6 perc, időkorlát nélkül.",
+    tempoCurto: "1–2 perc, időkorlát nélkül.",
+    tempoCurtoComDados: "2–3 perc, időkorlát nélkül.",
     dadosOpcionais: "A végén nem kötelező kérdések következnek a korcsoportról, a nemről, az iskolai végzettségről és a termék használatáról. Mindegyiket kihagyhatja.",
     participacao: "Önkéntes. A beküldésig bármikor, indoklás nélkül abbahagyhatja: használja a „{sair}” gombot, vagy zárja be az oldalt, és semmi sem kerül mentésre abból, amit bejelölt.",
     depoisDeEnviar: "Mivel a válaszok névtelenek, beküldés után nem lehet megtalálni és visszavonni őket.",

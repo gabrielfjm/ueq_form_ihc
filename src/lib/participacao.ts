@@ -32,6 +32,7 @@ export const estudoPublico = cache(async (slug: string) => {
       objetivo: true,
       status: true,
       coletarDemografia: true,
+      instrumento: true,
       idioma: true,
       responsavelNome: true,
       responsavelEmail: true,

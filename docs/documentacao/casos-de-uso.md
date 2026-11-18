@@ -7,8 +7,7 @@
 - a moldura é o limite do sistema;
 - a linha cheia liga o ator ao caso de uso de que ele participa;
 - a seta tracejada «include» aponta para um caso de uso que sempre acontece junto;
-- a seta tracejada «extend» sai de um caso de uso opcional e aponta para o caso de uso que ele estende;
-- o caso de uso com borda tracejada está pendente.
+- a seta tracejada «extend» sai de um caso de uso opcional e aponta para o caso de uso que ele estende.
 
 Logo abaixo de cada diagrama estão a ferramenta usada, o arquivo-fonte para baixar e a versão da ferramenta que ele representa. A ligação de cada caso de uso com os requisitos está na [lista](#lista) e na [matriz de rastreabilidade](matriz-rastreabilidade.md#casos-de-uso).
 
@@ -81,8 +80,6 @@ flowchart LR
     uc11 --- email
     uc13 --- email
 
-    classDef pendente stroke-dasharray: 5 5
-    class uc27 pendente
     subgraph secundarios[" "]
     email@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "«sistema»<br/>Servidor de e-mail", pos: "b", w: 40, h: 64, constraint: "on" }
     claude@{ img: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjY0Ij48ZyBmaWxsPSJub25lIiBzdHJva2U9IiMwRjE3MjAiIHN0cm9rZS13aWR0aD0iMi41IiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxjaXJjbGUgY3g9IjIwIiBjeT0iOSIgcj0iNyIvPjxwYXRoIGQ9Ik0yMCAxNnYyMk02IDI1aDI4TTIwIDM4IDkgNjBNMjAgMzhsMTEgMjIiLz48L2c+PC9zdmc+", label: "«sistema»<br/>API do Claude", pos: "b", w: 40, h: 64, constraint: "on" }
@@ -95,7 +92,7 @@ flowchart LR
 
 **Ferramenta do diagrama:** Mermaid 12.2.0 (`flowchart`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [casos-de-uso-1.mmd](fontes/casos-de-uso-1.mmd). **Versão representada:** Ferramenta UEQ de 17/11/2026.
 
-UC12 estende UC13 porque o convite chega como notificação: aceitar ou recusar é uma escolha opcional de quem abre o sino. UC27 está tracejado porque está pendente ([RF62](requisitos.md#rf62)).
+UC12 estende UC13 porque o convite chega como notificação: aceitar ou recusar é uma escolha opcional de quem abre o sino. UC27 estende UC06 porque escolher o UEQ-S é uma opção de quem cria o estudo; sem ela, o estudo usa o UEQ completo.
 
 ## Diagrama 2 · Resultados e respostas
 
@@ -262,7 +259,7 @@ O Administrador é um Pesquisador com permissão a mais, por isso também faz to
 | [UC24](#uc24) | Avaliar a suspeita da participação | — | [RF51](requisitos.md#rf51) | incluído por UC14, UC23, UC26, UC32 |
 | [UC25](#uc25) | Exportar dados | Pesquisador | [RF56](requisitos.md#rf56), [RF57](requisitos.md#rf57), [RF58](requisitos.md#rf58), [RF59](requisitos.md#rf59) | inclui UC19 |
 | [UC26](#uc26) | Importar respostas | Pesquisador | [RF61](requisitos.md#rf61) | inclui UC24 |
-| [UC27](#uc27) | Aplicar o UEQ-S | Pesquisador | [RF62](requisitos.md#rf62) | pendente; estende UC06 |
+| [UC27](#uc27) | Aplicar o UEQ-S | Pesquisador | [RF62](requisitos.md#rf62) | estende UC06 |
 | [UC28](#uc28) | Consultar a documentação | Visitante ou Pesquisador | [RF63](requisitos.md#rf63), [RF64](requisitos.md#rf64), [RF65](requisitos.md#rf65) | — |
 | [UC29](#uc29) | Gerenciar contas | Administrador | [RF66](requisitos.md#rf66) | — |
 | [UC30](#uc30) | Criar cenários de demonstração | Administrador | [RF67](requisitos.md#rf67) | — |
@@ -340,7 +337,7 @@ Fluxo principal:
 Fluxos alternativos:
 
 - **6a. Dados inválidos.** O sistema mostra o resumo de erros com um link para cada campo, leva o foco ao resumo e marca cada campo com a mensagem. Volta ao passo 3.
-- **3a. UEQ-S (UC27, pendente).** O pesquisador escolherá entre UEQ e UEQ-S.
+- **3a. UEQ-S (UC27).** Em Questionário, o pesquisador escolhe UEQ-S, versão curta. O formulário diz o que muda (questionário, tempo no termo, painel e planilha exportada) e que a escolha trava na primeira resposta.
 
 ### UC08
 
@@ -572,7 +569,7 @@ Avaliar a suspeita da participação. Com os 26 valores, o sistema calcula a amp
 
 #### UC27
 
-Aplicar o UEQ-S. Pendente. Ao criar o estudo, o pesquisador escolherá entre UEQ e UEQ-S (8 itens, escalas pragmática e hedônica); a escolha trava depois da primeira resposta.
+Aplicar o UEQ-S. Ao criar o estudo, o pesquisador escolhe entre o UEQ completo e o UEQ-S (8 itens: qualidade pragmática, hedônica e geral). O participante responde os 8 pares, com o termo negativo sempre à esquerda; as respostas ficam nos itens equivalentes do UEQ. Os resultados mostram o UEQ-S numa aba própria, com o benchmark e a planilha oficial dele. Alternativo: com o estudo já respondido, a edição mostra a escolha travada e o motivo, e o servidor recusa a troca.
 
 #### UC28
 

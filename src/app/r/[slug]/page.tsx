@@ -76,6 +76,7 @@ export default async function PaginaConsentimento({ params, searchParams }: Prop
           textos={consentimento}
           objetivo={doEstudo.objetivo}
           langDoEstudo={doEstudo.lang}
+          instrumento={estudo.instrumento}
           condicoes={condicoesDoTermo(textos, { ...estudo, ...doEstudo })}
         >
           {/* LGPD, art. 9º: quem vai consentir precisa poder ler o que acontece com os dados. As duas páginas

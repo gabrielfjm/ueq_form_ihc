@@ -28,6 +28,7 @@ export const pt: TextosParticipante = {
     subtitulo: "Pesquisa de experiência do usuário",
     termoTitulo: "Termo de consentimento",
     termoTexto: "Você vai indicar sua impressão sobre o produto em 26 pares de palavras opostas.",
+    termoTextoCurto: "Você vai indicar sua impressão sobre o produto em 8 pares de palavras opostas.",
     rotulos: {
       tempo: "Tempo",
       dadosOpcionais: "Dados opcionais",
@@ -42,6 +43,8 @@ export const pt: TextosParticipante = {
     },
     tempo: "De 3 a 5 minutos, sem limite de tempo.",
     tempoComDados: "De 4 a 6 minutos, sem limite de tempo.",
+    tempoCurto: "De 1 a 2 minutos, sem limite de tempo.",
+    tempoCurtoComDados: "De 2 a 3 minutos, sem limite de tempo.",
     dadosOpcionais: "No fim, há perguntas opcionais sobre faixa etária, gênero, escolaridade e uso do produto. Todas podem ser puladas.",
     participacao: "Voluntária. Até enviar, você pode desistir a qualquer momento, sem dar motivo: use “{sair}” ou feche a página, e nada do que marcou será gravado.",
     depoisDeEnviar: "Como as respostas são anônimas, depois de enviadas não há como encontrá-las para retirá-las.",
