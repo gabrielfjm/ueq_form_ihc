@@ -105,4 +105,4 @@ Vão para a API só os textos da interface e os textos do estudo. Nenhuma respos
 ## Fora do escopo
 
 - O painel de resultados não separa por idioma. Para comparar idiomas, use a coluna `idioma` das exportações.
-- Os documentos da aba Documentação ficam em português.
+- Os documentos da aba Documentação só estão traduzidos em inglês, espanhol, francês, alemão, italiano, chinês e japonês (tradução do Claude, sem a API e ainda sem revisão nativa, em `docs/traducoes/`). Nos outros idiomas da interface, aparecem em inglês, com um aviso. Os diagramas são em inglês em todos os idiomas.

@@ -105,4 +105,4 @@ A la API van solo los textos de la interfaz y los textos del estudio. Ninguna re
 ## Fuera del alcance
 
 - El panel de resultados no separa por idioma. Para comparar idiomas, use la columna `idioma` de las exportaciones.
-- Los documentos de la pestaña Documentación están en portugués.
+- Los documentos de la pestaña Documentación solo están traducidos al inglés, español, francés, alemán, italiano, chino y japonés (traducción de Claude, sin la API y todavía sin revisión nativa, en `docs/traducoes/`). En los demás idiomas de la interfaz aparecen en inglés, con un aviso. Los diagramas están en inglés en todos los idiomas.

@@ -105,4 +105,4 @@ Seuls les textes de l'interface et ceux de l'étude partent vers l'API. Aucune r
 ## Hors périmètre
 
 - Le tableau de bord des résultats ne sépare pas par langue. Pour comparer des langues, utilisez la colonne `idioma` des exports.
-- Les documents de l'onglet Documentation restent en portugais.
+- Les documents de l'onglet Documentation ne sont traduits qu'en anglais, espagnol, français, allemand, italien, chinois et japonais (traduction de Claude, sans l'API et pas encore relue par des locuteurs natifs, dans `docs/traducoes/`). Dans les autres langues de l'interface, ils apparaissent en anglais, avec un avertissement. Les diagrammes sont en anglais dans toutes les langues.

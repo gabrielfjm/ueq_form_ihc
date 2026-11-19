@@ -105,4 +105,4 @@ Only the interface texts and the study texts go to the API. No response, name, e
 ## Out of scope
 
 - The results dashboard does not break down by language. To compare languages, use the `idioma` column of the exports.
-- The documents in the Documentation tab stay in Portuguese.
+- The documents in the Documentation tab are only translated into English, Spanish, French, German, Italian, Chinese and Japanese (translated by Claude, without the API and not yet reviewed by native speakers, in `docs/traducoes/`). In the other interface languages, they appear in English, with a notice. The diagrams are in English in every language.
