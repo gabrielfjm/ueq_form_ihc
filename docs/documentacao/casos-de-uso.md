@@ -362,13 +362,13 @@ Fluxos alternativos:
 
 ```mermaid
 stateDiagram-v2
-    [*] --> RASCUNHO: create study
-    RASCUNHO --> ABERTO: open data collection
-    ABERTO --> ENCERRADO: close data collection
-    ENCERRADO --> ABERTO: reopen data collection
-    RASCUNHO --> [*]: delete
-    ABERTO --> [*]: delete
-    ENCERRADO --> [*]: delete
+    [*] --> DRAFT: create study
+    DRAFT --> OPEN: open data collection
+    OPEN --> CLOSED: close data collection
+    CLOSED --> OPEN: reopen data collection
+    DRAFT --> [*]: delete
+    OPEN --> [*]: delete
+    CLOSED --> [*]: delete
 ```
 
 **Ferramenta do diagrama:** Mermaid 12.2.0 (`stateDiagram-v2`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [casos-de-uso-5.mmd](fontes/casos-de-uso-5.mmd). **Versão representada:** Ferramenta UEQ de 17/11/2026.

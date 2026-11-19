@@ -38,7 +38,7 @@ sequenceDiagram
     participant Proxy as proxy
     participant Acao as Action entrar
     participant Tent as lib/tentativas
-    participant Sessao as lib/sessao
+    participant Session as lib/sessao
     participant BD as PostgreSQL
 
     Pesq->>Nav: opens /estudos/abc/resultados
@@ -54,22 +54,22 @@ sequenceDiagram
         Nav-->>Pesq: error summary with the focus
     else can try
         Acao->>BD: looks up the researcher by email
-        BD-->>Acao: researcher with senhaHash
-        Acao->>Acao: bcrypt.compare(senha, senhaHash)
+        BD-->>Acao: researcher with passwordHash
+        Acao->>Acao: bcrypt.compare(senha, passwordHash)
         alt email or password do not match
-            Acao->>Tent: registrarFalha(email)
+            Acao->>Tent: recordFailure(email)
             Acao-->>Nav: error "Email or password do not match…"
             Nav-->>Pesq: error summary with the focus
         else they match
-            Acao->>Tent: limparFalhas(email)
-            Acao->>Sessao: criarSessao(pesquisadorId)
-            Sessao->>Sessao: generates a random 32-byte token
-            Sessao->>BD: deletes expired sessions and creates Sessao with id = SHA-256(token)
-            Sessao-->>Nav: cookie "sessao" httpOnly, sameSite lax, 7 days
-            Acao-->>Nav: redirects to destinoInterno(voltar)
+            Acao->>Tent: clearFailures(email)
+            Acao->>Session: createSession(researcherId)
+            Session->>Session: generates a random 32-byte token
+            Session->>BD: deletes expired sessions and creates Session with id = SHA-256(token)
+            Session-->>Nav: cookie "session" httpOnly, sameSite lax, 7 days
+            Acao-->>Nav: redirects to internalDestination(voltar)
             Nav->>Proxy: GET /estudos/abc/resultados (with cookie)
             Proxy-->>Nav: continues
-            Note over Nav,BD: the page calls exigirPesquisador, which looks up the session by the token hash and checks its validity
+            Note over Nav,BD: the page calls requireResearcher, which looks up the session by the token hash and checks its validity
             Nav-->>Pesq: results dashboard
         end
     end
@@ -94,7 +94,7 @@ sequenceDiagram
 
     Part->>Nav: opens /r/<slug>
     Nav->>Pag: GET
-    Pag->>Lib: estudoPublico(slug) and idiomaDoParticipante() (the choice in the cookie or the study language)
+    Pag->>Lib: publicStudy(slug) and participantLanguage() (the choice in the cookie or the study language)
     Lib->>BD: study by slug, with versions and completed responses per version
     alt study in draft, closed or link already answered
         Pag-->>Nav: notice about the situation, without consent
@@ -103,14 +103,14 @@ sequenceDiagram
     end
 
     Part->>Nav: chooses the age and clicks I agree and want to take part
-    Nav->>Acao: consentir(slug, age and authorization)
+    Nav->>Acao: consent(slug, age and authorization)
     alt no age, or under 18 without the guardian's authorization
         Acao-->>Nav: back to the form with the error, and nothing is stored
     end
-    Acao->>Lib: versaoComMenosRespostas(versions)
+    Acao->>Lib: versionWithFewestResponses(versions)
     Lib-->>Acao: version with the fewest completed responses
     Acao->>BD: deletes participations abandoned for more than 2 days
-    Acao->>BD: creates Participacao (version, consentiuEm, language, menorDeIdade)
+    Acao->>BD: creates Participation (version, consentedAt, language, isMinor)
     Acao-->>Nav: cookie ueq_participacao on the path /r/<slug> and redirects to the questionnaire
 
     Nav->>Pag: GET /r/<slug>/questionario
@@ -123,23 +123,23 @@ sequenceDiagram
 
     Part->>Nav: Send answers
     Nav->>Nav: checks in the browser that all 26 are marked
-    Nav->>Acao: enviarRespostas(slug, valores)
+    Nav->>Acao: submitAnswers(slug, values)
     Acao->>Acao: checks the 26 values from 1 to 7 again on the server
     alt an item is missing
-        Acao-->>Nav: { faltando: [7, 19] }
+        Acao-->>Nav: { missing: [7, 19] }
         Nav-->>Part: summary "2 items left" with the focus and links to the items
     else complete
-        Acao->>Ueq: avaliarSuspeita(valores, itens, protocolo)
-        Ueq-->>Acao: { suspeita, motivos, amplitudes }
-        Acao->>BD: transaction: creates 26 Respostas and sets concluidaEm and suspeita
-        Acao->>BD: notifies the owner and the team in the bell (notificarResposta)
+        Acao->>Ueq: assessSuspicion(values, items, protocol)
+        Ueq-->>Acao: { suspicious, reasons, ranges }
+        Acao->>BD: transaction: creates 26 Responses and sets completedAt and suspicious
+        Acao->>BD: notifies the owner and the team in the bell (notifyResponse)
         Acao-->>Nav: cookie ueq_respondido (30 days)
     end
 
     opt the study collects demographic data
         Acao-->>Nav: redirects to /sobre-voce
         Part->>Nav: answers the optional data or skips the step
-        Nav->>Acao: salvarDemografia(slug, FormData)
+        Nav->>Acao: saveDemographics(slug, FormData)
         opt clicked Continue and answered something
             Acao->>BD: stores encrypted demographics (only options from the list)
         end
@@ -160,30 +160,30 @@ sequenceDiagram
     actor Pesq as Researcher
     participant Nav as Browser
     participant Pag as Results page
-    participant Sessao as lib/sessao
-    participant Estudos as lib/estudos
+    participant Session as lib/sessao
+    participant Studies as lib/estudos
     participant Res as lib/resultados
     participant Ueq as ueq
     participant BD as PostgreSQL
 
-    Pesq->>Nav: opens /estudos/abc/resultados?versao=v2
+    Pesq->>Nav: opens /estudos/abc/resultados?version=v2
     Nav->>Pag: GET with searchParams
-    Pag->>Sessao: exigirPesquisador()
-    Sessao->>BD: session by the token hash, still valid
-    BD-->>Sessao: researcher
-    Pag->>Estudos: estudoDoPesquisador(id, pessoa, "ver")
-    Estudos->>BD: study with this id, if the person is the owner or accepted the invitation
+    Pag->>Session: requireResearcher()
+    Session->>BD: session by the token hash, still valid
+    BD-->>Session: researcher
+    Pag->>Studies: researcherStudy(id, pessoa, "ver")
+    Studies->>BD: study with this id, if the person is the owner or accepted the invitation
     alt study does not exist or the person has no access
-        Estudos-->>Nav: 404, the same in both cases
+        Studies-->>Nav: 404, the same in both cases
     else the person has access
-        Pag->>Res: analisarResultados(estudoId, versions)
+        Pag->>Res: analyzeResults(studyId, versions)
         Res->>BD: items and completed participations, with responses
         Res->>Res: builds 26 values per participation and splits by version
-        Res->>Ueq: analisarEstudo(all, items, protocol and benchmark)
+        Res->>Ueq: analyzeStudy(all, items, protocol and benchmark)
         loop for each version
-            Res->>Ueq: analisarEstudo(of the version, items, config)
+            Res->>Ueq: analyzeStudy(of the version, items, config)
         end
-        Ueq-->>Res: AnaliseEstudo (scales, groups, items, participants)
+        Ueq-->>Res: StudyAnalysis (scales, groups, items, participants)
         Res-->>Pag: analysis of all and per version
         Pag->>Pag: quick reading, SVG chart with title and desc, tables
         Pag-->>Nav: dashboard HTML
@@ -204,21 +204,21 @@ sequenceDiagram
     autonumber
     actor Pesq as Researcher
     participant Nav as Browser
-    participant Acao as Action alterarInclusao
-    participant Sessao as lib/sessao
-    participant Estudos as lib/estudos
+    participant Acao as Action setInclusion
+    participant Session as lib/sessao
+    participant Studies as lib/estudos
     participant BD as PostgreSQL
 
     Pesq->>Nav: unchecks "In analysis" on a row of Responses
-    Nav->>Acao: alterarInclusao(estudoId, participacaoId, false)
-    Acao->>Sessao: exigirPesquisador()
-    Acao->>Estudos: estudoDoPesquisador(estudoId, pessoa, "editar")
+    Nav->>Acao: setInclusion(studyId, participationId, false)
+    Acao->>Session: requireResearcher()
+    Acao->>Studies: researcherStudy(studyId, pessoa, "editar")
     Acao->>BD: participation with this id, from this study and completed
     alt not found
         Acao-->>Nav: error "This participation is not in this study…"
     else found
-        Acao->>BD: incluidaNaAnalise = false
-        Acao->>BD: notifies the rest of the team in the bell (notificarAlteracao)
+        Acao->>BD: includedInAnalysis = false
+        Acao->>BD: notifies the rest of the team in the bell (notifyChange)
         Acao->>Acao: revalidatePath of the study (dashboard, responses, exports)
         Acao-->>Nav: "Participation from … left the analysis. Nothing was deleted…"
         Nav-->>Pesq: notice in role="status"
@@ -237,29 +237,29 @@ sequenceDiagram
     actor Pesq as Researcher
     participant Nav as Browser
     participant Rota as API route painel-pdf
-    participant Sessao as lib/sessao
+    participant Session as lib/sessao
     participant Chrome as Chromium (Playwright)
-    participant Imp as Page impressao
+    participant Imp as Print page
     participant BD as PostgreSQL
 
     Pesq->>Nav: Export dashboard as PDF
-    Nav->>Rota: GET /api/estudos/abc/painel-pdf?versao=v2
-    Rota->>Sessao: pesquisadorDaSessao()
+    Nav->>Rota: GET /api/estudos/abc/painel-pdf?version=v2
+    Rota->>Session: sessionResearcher()
     alt no session
         Rota-->>Nav: 401 "Log in to your account…"
     else with session
-        Rota->>BD: study with this id and filtroDeAcesso(pessoa)
+        Rota->>BD: study with this id and accessFilter(pessoa)
         alt study not found or no access
             Rota-->>Nav: 404 "Study not found."
         else the person has access
             Rota->>Chrome: launch() and session cookie for the internal origin
-            Chrome->>Imp: GET /estudos/abc/resultados/impressao?versao=v2
+            Chrome->>Imp: GET /estudos/abc/resultados/impressao?version=v2
             Note over Imp,BD: same query and same calculation as in diagram 3
             Imp-->>Chrome: HTML with print CSS (A4, 18 mm)
-            Chrome->>Chrome: waits for the fonts, emulates print media
+            Chrome->>Chrome: waits for the fonts, emulates print mean
             Chrome-->>Rota: PDF with vector charts
             Rota->>Chrome: close()
-            Rota-->>Nav: application/pdf, attachment, ueq_<titulo>_painel_<data>.pdf
+            Rota-->>Nav: application/pdf, attachment, ueq_<title>_painel_<data>.pdf
         end
     end
 ```
@@ -283,22 +283,22 @@ sequenceDiagram
     participant BD as PostgreSQL
 
     Pesq->>Nav: chooses the version and the file and clicks "View preview"
-    Nav->>Acao: previsualizarImportacao(estudoId, FormData)
+    Nav->>Acao: previewImport(studyId, FormData)
     Acao->>Acao: checks session, edit permission, version, extension and size (up to 500 KB)
-    Acao->>Imp: lerCsvDeRespostas(texto)
+    Acao->>Imp: readResponsesCsv(text)
     Imp-->>Acao: valid rows and errors per row
     Acao-->>Nav: preview of the first 5 rows, total and errors
     alt some row with an error
         Nav-->>Pesq: problem of each row, without a confirm button
     else whole file valid
         Pesq->>Nav: confirms
-        Nav->>Acao: confirmarImportacao(estudoId, versaoId, texto)
-        Acao->>Imp: lerCsvDeRespostas(texto) again
+        Nav->>Acao: confirmImport(studyId, versionId, text)
+        Acao->>Imp: readResponsesCsv(text) again
         loop for each row
-            Acao->>Ueq: avaliarSuspeita(valores, itens, protocolo)
+            Acao->>Ueq: assessSuspicion(values, items, protocol)
         end
-        Acao->>BD: transaction: one IMPORTADA Participacao, completed and without language, with 26 Respostas, per row
-        Acao->>BD: notifies the rest of the team in the bell (notificarAlteracao)
+        Acao->>BD: transaction: one IMPORTED Participation, completed and without language, with 26 Responses, per row
+        Acao->>BD: notifies the rest of the team in the bell (notifyChange)
         Acao-->>Nav: redirects to Responses with "N imported"
         Nav-->>Pesq: the rows appear marked "imported from CSV"
     end
@@ -318,23 +318,23 @@ sequenceDiagram
     actor Dono as Owner
     participant Nav as Browser
     participant Acao as Study and bell actions
-    participant Estudos as lib/estudos
+    participant Studies as lib/estudos
     participant Avisos as lib/notificacoes
     participant BD as PostgreSQL
     participant Smtp as Email server
     actor Conv as Invitee
 
     Dono->>Nav: Share, enters the email and the role
-    Nav->>Acao: convidar(estudoId, FormData)
-    Acao->>Estudos: estudoDoPesquisador(estudoId, pessoa, "gerenciar")
+    Nav->>Acao: invite(studyId, FormData)
+    Acao->>Studies: researcherStudy(studyId, pessoa, "gerenciar")
     Acao->>BD: looks up the account by email
     alt there is no account, it is the owner or already has access
         Acao-->>Nav: error on the field, saying what to do
     else can invite
-        Acao->>BD: creates or renews Colaboracao as PENDENTE
+        Acao->>BD: creates or renews Collaboration as PENDING
         Acao->>BD: deletes the old invitation from the bell, if any
-        Acao->>Avisos: notificar(convidado, tipo CONVITE)
-        Avisos->>BD: creates Notificacao in the invitee's language
+        Acao->>Avisos: notify(invitee, type INVITATION)
+        Avisos->>BD: creates Notification in the invitee's language
         alt email sending configured
             Acao-->>Nav: "Invitation sent to …, in the tool and by email."
             Avisos->>Smtp: after the response, sends the invitation email
@@ -346,8 +346,8 @@ sequenceDiagram
 
     Conv->>Nav: opens the bell and accepts or declines
     Nav->>Acao: responds to the invitation
-    Acao->>BD: Colaboracao ACEITO or RECUSADO, with respondidoEm
-    Note over Conv,BD: only with ACEITO does the study enter the person's filtroDeAcesso
+    Acao->>BD: Collaboration ACCEPTED or DECLINED, with respondedAt
+    Note over Conv,BD: only with ACCEPTED does the study enter the person's accessFilter
 ```
 
 **Diagram tool:** Mermaid 12.2.0 (`sequenceDiagram`), generated by `pnpm docs:diagramas`. **Source file:** [diagramas-de-sequencia-7.mmd](fontes/diagramas-de-sequencia-7.mmd). **Version represented:** UEQ Tool of 06 Nov 2026.
@@ -377,12 +377,12 @@ sequenceDiagram
         Trad->>Claude: translates the language glossary, if it does not exist yet
         Trad->>BD: stores the terms
         loop after the response, the labels and then the long texts, in batches of 60 grouped by screen, up to 6 at the same time
-            Trad->>Claude: traduzirLote(textos, telas, terms and quoted labels, pt, es)
+            Trad->>Claude: translateBatch(textos, telas, terms and quoted labels, pt, es)
             Claude-->>Trad: first translation
             Trad->>Claude: review, with original and translation side by side
             Claude-->>Trad: corrections of what changed meaning
             Note over Trad: a translation with placeholders different from the original is discarded
-            Trad->>BD: stores in Traducao, by language and text hash
+            Trad->>BD: stores in Translation, by language and text hash
         end
     else complete catalog or no API key
         Trad-->>Pag: t() with the available dictionary

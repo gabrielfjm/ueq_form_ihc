@@ -8,22 +8,22 @@ sequenceDiagram
     participant BD as PostgreSQL
 
     Pesq->>Nav: chooses the version and the file and clicks "View preview"
-    Nav->>Acao: previsualizarImportacao(estudoId, FormData)
+    Nav->>Acao: previewImport(studyId, FormData)
     Acao->>Acao: checks session, edit permission, version, extension and size (up to 500 KB)
-    Acao->>Imp: lerCsvDeRespostas(texto)
+    Acao->>Imp: readResponsesCsv(text)
     Imp-->>Acao: valid rows and errors per row
     Acao-->>Nav: preview of the first 5 rows, total and errors
     alt some row with an error
         Nav-->>Pesq: problem of each row, without a confirm button
     else whole file valid
         Pesq->>Nav: confirms
-        Nav->>Acao: confirmarImportacao(estudoId, versaoId, texto)
-        Acao->>Imp: lerCsvDeRespostas(texto) again
+        Nav->>Acao: confirmImport(studyId, versionId, text)
+        Acao->>Imp: readResponsesCsv(text) again
         loop for each row
-            Acao->>Ueq: avaliarSuspeita(valores, itens, protocolo)
+            Acao->>Ueq: assessSuspicion(values, items, protocol)
         end
-        Acao->>BD: transaction: one IMPORTADA Participacao, completed and without language, with 26 Respostas, per row
-        Acao->>BD: notifies the rest of the team in the bell (notificarAlteracao)
+        Acao->>BD: transaction: one IMPORTED Participation, completed and without language, with 26 Responses, per row
+        Acao->>BD: notifies the rest of the team in the bell (notifyChange)
         Acao-->>Nav: redirects to Responses with "N imported"
         Nav-->>Pesq: the rows appear marked "imported from CSV"
     end

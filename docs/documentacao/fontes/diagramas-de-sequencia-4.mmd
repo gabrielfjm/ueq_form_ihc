@@ -2,21 +2,21 @@ sequenceDiagram
     autonumber
     actor Pesq as Researcher
     participant Nav as Browser
-    participant Acao as Action alterarInclusao
-    participant Sessao as lib/sessao
-    participant Estudos as lib/estudos
+    participant Acao as Action setInclusion
+    participant Session as lib/sessao
+    participant Studies as lib/estudos
     participant BD as PostgreSQL
 
     Pesq->>Nav: unchecks "In analysis" on a row of Responses
-    Nav->>Acao: alterarInclusao(estudoId, participacaoId, false)
-    Acao->>Sessao: exigirPesquisador()
-    Acao->>Estudos: estudoDoPesquisador(estudoId, pessoa, "editar")
+    Nav->>Acao: setInclusion(studyId, participationId, false)
+    Acao->>Session: requireResearcher()
+    Acao->>Studies: researcherStudy(studyId, pessoa, "editar")
     Acao->>BD: participation with this id, from this study and completed
     alt not found
         Acao-->>Nav: error "This participation is not in this study…"
     else found
-        Acao->>BD: incluidaNaAnalise = false
-        Acao->>BD: notifies the rest of the team in the bell (notificarAlteracao)
+        Acao->>BD: includedInAnalysis = false
+        Acao->>BD: notifies the rest of the team in the bell (notifyChange)
         Acao->>Acao: revalidatePath of the study (dashboard, responses, exports)
         Acao-->>Nav: "Participation from … left the analysis. Nothing was deleted…"
         Nav-->>Pesq: notice in role="status"

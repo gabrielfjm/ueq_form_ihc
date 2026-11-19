@@ -18,12 +18,12 @@ sequenceDiagram
         Trad->>Claude: translates the language glossary, if it does not exist yet
         Trad->>BD: stores the terms
         loop after the response, the labels and then the long texts, in batches of 60 grouped by screen, up to 6 at the same time
-            Trad->>Claude: traduzirLote(textos, telas, terms and quoted labels, pt, es)
+            Trad->>Claude: translateBatch(textos, telas, terms and quoted labels, pt, es)
             Claude-->>Trad: first translation
             Trad->>Claude: review, with original and translation side by side
             Claude-->>Trad: corrections of what changed meaning
             Note over Trad: a translation with placeholders different from the original is discarded
-            Trad->>BD: stores in Traducao, by language and text hash
+            Trad->>BD: stores in Translation, by language and text hash
         end
     else complete catalog or no API key
         Trad-->>Pag: t() with the available dictionary

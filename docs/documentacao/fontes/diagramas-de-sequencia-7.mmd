@@ -3,23 +3,23 @@ sequenceDiagram
     actor Dono as Owner
     participant Nav as Browser
     participant Acao as Study and bell actions
-    participant Estudos as lib/estudos
+    participant Studies as lib/estudos
     participant Avisos as lib/notificacoes
     participant BD as PostgreSQL
     participant Smtp as Email server
     actor Conv as Invitee
 
     Dono->>Nav: Share, enters the email and the role
-    Nav->>Acao: convidar(estudoId, FormData)
-    Acao->>Estudos: estudoDoPesquisador(estudoId, pessoa, "gerenciar")
+    Nav->>Acao: invite(studyId, FormData)
+    Acao->>Studies: researcherStudy(studyId, pessoa, "gerenciar")
     Acao->>BD: looks up the account by email
     alt there is no account, it is the owner or already has access
         Acao-->>Nav: error on the field, saying what to do
     else can invite
-        Acao->>BD: creates or renews Colaboracao as PENDENTE
+        Acao->>BD: creates or renews Collaboration as PENDING
         Acao->>BD: deletes the old invitation from the bell, if any
-        Acao->>Avisos: notificar(convidado, tipo CONVITE)
-        Avisos->>BD: creates Notificacao in the invitee's language
+        Acao->>Avisos: notify(invitee, type INVITATION)
+        Avisos->>BD: creates Notification in the invitee's language
         alt email sending configured
             Acao-->>Nav: "Invitation sent to …, in the tool and by email."
             Avisos->>Smtp: after the response, sends the invitation email
@@ -31,5 +31,5 @@ sequenceDiagram
 
     Conv->>Nav: opens the bell and accepts or declines
     Nav->>Acao: responds to the invitation
-    Acao->>BD: Colaboracao ACEITO or RECUSADO, with respondidoEm
-    Note over Conv,BD: only with ACEITO does the study enter the person's filtroDeAcesso
+    Acao->>BD: Collaboration ACCEPTED or DECLINED, with respondedAt
+    Note over Conv,BD: only with ACCEPTED does the study enter the person's accessFilter

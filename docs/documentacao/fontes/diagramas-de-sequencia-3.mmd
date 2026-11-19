@@ -3,30 +3,30 @@ sequenceDiagram
     actor Pesq as Researcher
     participant Nav as Browser
     participant Pag as Results page
-    participant Sessao as lib/sessao
-    participant Estudos as lib/estudos
+    participant Session as lib/sessao
+    participant Studies as lib/estudos
     participant Res as lib/resultados
     participant Ueq as ueq
     participant BD as PostgreSQL
 
-    Pesq->>Nav: opens /estudos/abc/resultados?versao=v2
+    Pesq->>Nav: opens /estudos/abc/resultados?version=v2
     Nav->>Pag: GET with searchParams
-    Pag->>Sessao: exigirPesquisador()
-    Sessao->>BD: session by the token hash, still valid
-    BD-->>Sessao: researcher
-    Pag->>Estudos: estudoDoPesquisador(id, pessoa, "ver")
-    Estudos->>BD: study with this id, if the person is the owner or accepted the invitation
+    Pag->>Session: requireResearcher()
+    Session->>BD: session by the token hash, still valid
+    BD-->>Session: researcher
+    Pag->>Studies: researcherStudy(id, pessoa, "ver")
+    Studies->>BD: study with this id, if the person is the owner or accepted the invitation
     alt study does not exist or the person has no access
-        Estudos-->>Nav: 404, the same in both cases
+        Studies-->>Nav: 404, the same in both cases
     else the person has access
-        Pag->>Res: analisarResultados(estudoId, versions)
+        Pag->>Res: analyzeResults(studyId, versions)
         Res->>BD: items and completed participations, with responses
         Res->>Res: builds 26 values per participation and splits by version
-        Res->>Ueq: analisarEstudo(all, items, protocol and benchmark)
+        Res->>Ueq: analyzeStudy(all, items, protocol and benchmark)
         loop for each version
-            Res->>Ueq: analisarEstudo(of the version, items, config)
+            Res->>Ueq: analyzeStudy(of the version, items, config)
         end
-        Ueq-->>Res: AnaliseEstudo (scales, groups, items, participants)
+        Ueq-->>Res: StudyAnalysis (scales, groups, items, participants)
         Res-->>Pag: analysis of all and per version
         Pag->>Pag: quick reading, SVG chart with title and desc, tables
         Pag-->>Nav: dashboard HTML

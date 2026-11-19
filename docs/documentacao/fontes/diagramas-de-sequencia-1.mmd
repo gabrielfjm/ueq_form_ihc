@@ -5,7 +5,7 @@ sequenceDiagram
     participant Proxy as proxy
     participant Acao as Action entrar
     participant Tent as lib/tentativas
-    participant Sessao as lib/sessao
+    participant Session as lib/sessao
     participant BD as PostgreSQL
 
     Pesq->>Nav: opens /estudos/abc/resultados
@@ -21,22 +21,22 @@ sequenceDiagram
         Nav-->>Pesq: error summary with the focus
     else can try
         Acao->>BD: looks up the researcher by email
-        BD-->>Acao: researcher with senhaHash
-        Acao->>Acao: bcrypt.compare(senha, senhaHash)
+        BD-->>Acao: researcher with passwordHash
+        Acao->>Acao: bcrypt.compare(senha, passwordHash)
         alt email or password do not match
-            Acao->>Tent: registrarFalha(email)
+            Acao->>Tent: recordFailure(email)
             Acao-->>Nav: error "Email or password do not match…"
             Nav-->>Pesq: error summary with the focus
         else they match
-            Acao->>Tent: limparFalhas(email)
-            Acao->>Sessao: criarSessao(pesquisadorId)
-            Sessao->>Sessao: generates a random 32-byte token
-            Sessao->>BD: deletes expired sessions and creates Sessao with id = SHA-256(token)
-            Sessao-->>Nav: cookie "sessao" httpOnly, sameSite lax, 7 days
-            Acao-->>Nav: redirects to destinoInterno(voltar)
+            Acao->>Tent: clearFailures(email)
+            Acao->>Session: createSession(researcherId)
+            Session->>Session: generates a random 32-byte token
+            Session->>BD: deletes expired sessions and creates Session with id = SHA-256(token)
+            Session-->>Nav: cookie "session" httpOnly, sameSite lax, 7 days
+            Acao-->>Nav: redirects to internalDestination(voltar)
             Nav->>Proxy: GET /estudos/abc/resultados (with cookie)
             Proxy-->>Nav: continues
-            Note over Nav,BD: the page calls exigirPesquisador, which looks up the session by the token hash and checks its validity
+            Note over Nav,BD: the page calls requireResearcher, which looks up the session by the token hash and checks its validity
             Nav-->>Pesq: results dashboard
         end
     end
