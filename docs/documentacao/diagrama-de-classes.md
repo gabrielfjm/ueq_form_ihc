@@ -18,7 +18,7 @@ classDiagram
     class Pesquisador {
         +String id
         +String nome
-        +String email «único»
+        +String email «unique»
         +String senhaHash «bcrypt»
         +DateTime criadoEm
         +Boolean administrador
@@ -28,7 +28,7 @@ classDiagram
     }
 
     class Sessao {
-        +String id «SHA-256 do token»
+        +String id «SHA-256 of the token»
         +DateTime criadaEm
         +DateTime expiraEm
     }
@@ -41,7 +41,7 @@ classDiagram
         +StatusEstudo status
         +Date dataInicio
         +Date dataFim
-        +String slugPublico «único»
+        +String slugPublico «unique»
         +Boolean coletarDemografia
         +String idioma
         +String responsavelNome
@@ -65,7 +65,7 @@ classDiagram
     class Versao {
         +String id
         +String nome
-        +Int ordem «única no estudo»
+        +Int ordem «unique within the study»
     }
 
     class Participacao {
@@ -73,7 +73,7 @@ classDiagram
         +DateTime consentiuEm
         +DateTime criadaEm
         +DateTime? concluidaEm
-        +Json? demografia «cifrada»
+        +Json? demografia «encrypted»
         +Boolean suspeita
         +Boolean incluidaNaAnalise
         +String? idioma
@@ -83,12 +83,12 @@ classDiagram
 
     class Resposta {
         +String id
-        +Int valor «1 a 7»
+        +Int valor «1 to 7»
     }
 
     class Item {
         +Int id
-        +Int numero «1 a 26, único»
+        +Int numero «1 to 26, unique»
         +String termoEsquerdo
         +String termoDireito
         +Escala escala
@@ -107,7 +107,7 @@ classDiagram
 
     class TentativaAcesso {
         +String id
-        +String chave «hash do e-mail»
+        +String chave «email hash»
         +DateTime criadaEm
     }
 
@@ -162,18 +162,18 @@ classDiagram
         ALTERACAO
     }
 
-    Pesquisador "1" *-- "0..*" Sessao : abre
-    Pesquisador "1" *-- "0..*" Estudo : é dono de
-    Estudo "1" *-- "1..6" Versao : compara
-    Versao "1" *-- "0..*" Participacao : recebe
-    Participacao "1" *-- "0..26" Resposta : contém
-    Item "1" <-- "0..*" Resposta : responde
-    Estudo "1" *-- "0..*" Colaboracao : é compartilhado em
-    Pesquisador "1" *-- "0..*" Colaboracao : participa como
-    Pesquisador "0..1" o-- "0..*" Colaboracao : convidou
-    Pesquisador "1" *-- "0..*" Notificacao : recebe
-    Pesquisador "0..1" o-- "0..*" Notificacao : causou
-    Estudo "0..1" o-- "0..*" Notificacao : origina
+    Pesquisador "1" *-- "0..*" Sessao : opens
+    Pesquisador "1" *-- "0..*" Estudo : owns
+    Estudo "1" *-- "1..6" Versao : compares
+    Versao "1" *-- "0..*" Participacao : receives
+    Participacao "1" *-- "0..26" Resposta : contains
+    Item "1" <-- "0..*" Resposta : answers
+    Estudo "1" *-- "0..*" Colaboracao : is shared in
+    Pesquisador "1" *-- "0..*" Colaboracao : takes part as
+    Pesquisador "0..1" o-- "0..*" Colaboracao : invited
+    Pesquisador "1" *-- "0..*" Notificacao : receives
+    Pesquisador "0..1" o-- "0..*" Notificacao : caused
+    Estudo "0..1" o-- "0..*" Notificacao : originates
 
     Estudo ..> StatusEstudo
     Item ..> Escala
@@ -210,16 +210,16 @@ classDiagram
     direction TB
 
     class index {
-        <<módulo>>
+        <<module>>
         +analisarEstudo(participacoes, itens, config) AnaliseEstudo
     }
     class recodificar {
-        <<módulo>>
+        <<module>>
         +recodificar(valor, polaridade) number
         +recodificarParticipante(valores, itens) number[]
     }
     class estatistica {
-        <<módulo>>
+        <<module>>
         +media(valores) number?
         +desvioPadraoAmostral(valores) number?
         +intervaloConfianca95(media, dp, n, z) Intervalo?
@@ -227,25 +227,25 @@ classDiagram
         +alfaCronbach(colunas) number?
     }
     class escalas {
-        <<módulo>>
+        <<module>>
         +escoresPorParticipante(valores, itens) Record~Escala, number~
         +faixaInterpretacao(media, faixaNeutra) FaixaInterpretacao
         +resultadoPorEscala(respostas, itens, parametros) ResultadoEscala[]
         +resultadoPorItem(respostas, itens, z) ResultadoItem[]
     }
     class inconsistencia {
-        <<módulo>>
+        <<module>>
         +amplitudePorEscala(valores, itens) Record~Escala, number~
         +respostasIguais(valores) number
         +avaliarSuspeita(valores, itens, parametros) AvaliacaoSuspeita
         +marcarSuspeitos(respostas, itens, parametros) AvaliacaoSuspeita[]
     }
     class benchmark {
-        <<módulo>>
+        <<module>>
         +classificarBenchmark(escala, media, tabela) FaixaBenchmark?
     }
     class itens {
-        <<módulo>>
+        <<module>>
         +ESCALAS
         +GRUPOS
         +numerosPorEscala(itens) Record~Escala, number[]~
@@ -273,7 +273,7 @@ classDiagram
         +number n
         +number nExcluidas
         +ResultadoEscalaAnalisada[] escalas
-        +grupos pragmatica e hedonica
+        +grupos pragmatica and hedonica
         +ResultadoItem[] itens
         +AvaliacaoSuspeita[] participantes
     }
@@ -326,19 +326,19 @@ classDiagram
     ResultadoEscala o-- Intervalo
     ResultadoItem o-- Intervalo
 
-    index ..> ParticipacaoParaAnalise : recebe
-    index ..> ItemUEQ : recebe
-    index ..> ConfigAnalise : recebe
-    index ..> AnaliseEstudo : devolve
-    index ..> escalas : usa
-    index ..> inconsistencia : usa
-    index ..> benchmark : usa
-    index ..> itens : usa
-    escalas ..> recodificar : usa
-    escalas ..> estatistica : usa
-    escalas ..> itens : usa
-    inconsistencia ..> recodificar : usa
-    inconsistencia ..> itens : usa
+    index ..> ParticipacaoParaAnalise : receives
+    index ..> ItemUEQ : receives
+    index ..> ConfigAnalise : receives
+    index ..> AnaliseEstudo : returns
+    index ..> escalas : uses
+    index ..> inconsistencia : uses
+    index ..> benchmark : uses
+    index ..> itens : uses
+    escalas ..> recodificar : uses
+    escalas ..> estatistica : uses
+    escalas ..> itens : uses
+    inconsistencia ..> recodificar : uses
+    inconsistencia ..> itens : uses
 ```
 
 **Ferramenta do diagrama:** Mermaid 12.2.0 (`classDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [diagrama-de-classes-2.mmd](fontes/diagrama-de-classes-2.mmd). **Versão representada:** Ferramenta UEQ de 17/11/2026.

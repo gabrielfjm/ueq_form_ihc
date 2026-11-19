@@ -1,16 +1,16 @@
 erDiagram
-    pesquisador ||--o{ sessao : "abre"
-    pesquisador ||--o{ estudo : "é dono de"
-    pesquisador ||--o{ colaboracao : "é convidado em"
-    pesquisador |o--o{ colaboracao : "convidou"
-    pesquisador ||--o{ notificacao : "recebe"
-    pesquisador |o--o{ notificacao : "causou"
-    estudo ||--o{ colaboracao : "é compartilhado em"
-    estudo ||--|{ versao : "tem"
-    estudo |o--o{ notificacao : "origina"
-    versao ||--o{ participacao : "recebe"
-    participacao ||--o{ resposta : "tem"
-    item ||--o{ resposta : "é respondido em"
+    pesquisador ||--o{ sessao : "opens"
+    pesquisador ||--o{ estudo : "owns"
+    pesquisador ||--o{ colaboracao : "is invited in"
+    pesquisador |o--o{ colaboracao : "invited"
+    pesquisador ||--o{ notificacao : "receives"
+    pesquisador |o--o{ notificacao : "caused"
+    estudo ||--o{ colaboracao : "is shared in"
+    estudo ||--|{ versao : "has"
+    estudo |o--o{ notificacao : "originates"
+    versao ||--o{ participacao : "receives"
+    participacao ||--o{ resposta : "has"
+    item ||--o{ resposta : "is answered in"
 
     pesquisador {
         text id PK
@@ -19,12 +19,12 @@ erDiagram
         text senha_hash
         timestamp criado_em
         boolean administrador
-        timestamp tutorial_visto_em "pode ser nulo"
+        timestamp tutorial_visto_em "nullable"
         boolean notificacoes_por_email
         text idioma
     }
     sessao {
-        text id PK "SHA-256 do token"
+        text id PK "SHA-256 of the token"
         text pesquisador_id FK
         timestamp criada_em
         timestamp expira_em
@@ -46,7 +46,7 @@ erDiagram
         text instituicao
         text riscos
         text beneficios
-        text comite_etica "pode ser nulo"
+        text comite_etica "nullable"
         timestamp criado_em
         timestamp atualizado_em
     }
@@ -54,11 +54,11 @@ erDiagram
         text id PK
         text estudo_id FK
         text pesquisador_id FK
-        text convidado_por_id FK "pode ser nulo"
+        text convidado_por_id FK "nullable"
         PapelColaborador papel
         StatusConvite status
         timestamp criado_em
-        timestamp respondido_em "pode ser nulo"
+        timestamp respondido_em "nullable"
     }
     versao {
         text id PK
@@ -79,11 +79,11 @@ erDiagram
         text versao_id FK
         timestamp consentiu_em
         timestamp criada_em
-        timestamp concluida_em "pode ser nulo"
-        jsonb demografia "pode ser nulo, cifrada"
+        timestamp concluida_em "nullable"
+        jsonb demografia "nullable, encrypted"
         boolean suspeita
         boolean incluida_na_analise
-        text idioma "pode ser nulo"
+        text idioma "nullable"
         OrigemParticipacao origem
         boolean menor_de_idade
     }
@@ -91,24 +91,24 @@ erDiagram
         text id PK
         text participacao_id FK
         integer item_id FK
-        integer valor "CHECK de 1 a 7"
+        integer valor "CHECK from 1 to 7"
     }
     notificacao {
         text id PK
         text pesquisador_id FK
-        text autor_id FK "pode ser nulo"
-        text estudo_id FK "pode ser nulo"
-        text colaboracao_id "pode ser nulo, sem FK"
+        text autor_id FK "nullable"
+        text estudo_id FK "nullable"
+        text colaboracao_id "nullable, no FK"
         TipoNotificacao tipo
         text texto
         text link
         integer quantidade
         timestamp criada_em
-        timestamp lida_em "pode ser nulo"
+        timestamp lida_em "nullable"
     }
     tentativa_acesso {
         text id PK
-        text chave "SHA-256 do e-mail"
+        text chave "SHA-256 of the email"
         timestamp criada_em
     }
     traducao {

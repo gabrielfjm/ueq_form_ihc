@@ -1,35 +1,35 @@
 flowchart LR
-    navegador["Navegador<br/>[pesquisador ou participante]"]
+    navegador["Browser<br/>[researcher or participant]"]
 
-    subgraph vercel["Vercel · projeto ferramenta-ueq"]
+    subgraph vercel["Vercel · project ferramenta-ueq"]
         direction TB
-        funcoes["<b>Next.js 16</b><br/>[funções Node.js]<br/>ferramenta-ueq.vercel.app"]
-        build["<b>vercel-build</b><br/>generate, migrate deploy, seed,<br/>cifrar-dados e next build"]
+        funcoes["<b>Next.js 16</b><br/>[Node.js functions]<br/>ferramenta-ueq.vercel.app"]
+        build["<b>vercel-build</b><br/>generate, migrate deploy, seed,<br/>cifrar-dados and next build"]
     end
 
     subgraph neon["Neon · aws-sa-east-1 (São Paulo)"]
-        pgprod[("<b>PostgreSQL</b><br/>DATABASE_URL e<br/>DATABASE_URL_UNPOOLED")]
+        pgprod[("<b>PostgreSQL</b><br/>DATABASE_URL and<br/>DATABASE_URL_UNPOOLED")]
     end
 
     github["<b>GitHub</b><br/>branch main"]
-    claudeapi["<b>API do Claude</b>"]
-    smtpserv["<b>Servidor SMTP</b>"]
+    claudeapi["<b>Claude API</b>"]
+    smtpserv["<b>SMTP server</b>"]
 
-    subgraph maquina["Máquina do desenvolvedor"]
+    subgraph maquina["Developer machine"]
         direction TB
-        node["<b>Node.js 24 + pnpm 10</b><br/>pnpm dev · next dev na porta 3000"]
-        chromium["<b>Chromium do Playwright</b><br/>PDF e testes e2e"]
+        node["<b>Node.js 24 + pnpm 10</b><br/>pnpm dev · next dev on port 3000"]
+        chromium["<b>Playwright Chromium</b><br/>PDF and e2e tests"]
         subgraph docker["Docker"]
-            pg[("<b>postgres:16</b><br/>porta 5432")]
+            pg[("<b>postgres:16</b><br/>port 5432")]
         end
     end
 
     navegador -- "HTTPS" --> funcoes
-    github -- "cada merge publica" --> build
-    build -- "migrations e seed" --> pgprod
+    github -- "each merge deploys" --> build
+    build -- "migrations and seed" --> pgprod
     build --> funcoes
-    funcoes -- "SQL com TLS" --> pgprod
-    funcoes -. "se configurado" .-> claudeapi
-    funcoes -. "se configurado" .-> smtpserv
+    funcoes -- "SQL with TLS" --> pgprod
+    funcoes -. "if configured" .-> claudeapi
+    funcoes -. "if configured" .-> smtpserv
     node -- "DATABASE_URL" --> pg
     node --> chromium

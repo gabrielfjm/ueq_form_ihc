@@ -5,6 +5,7 @@ import { SECOES, VISAO_GERAL, enderecoDoDocumento, secaoDoDocumento, type Docume
 import { enderecoDaPagina, mapaDeAncoras, type AberturaDocumento } from "@/lib/documentacao/paginas";
 import estilos from "./documentacao.module.css";
 import { ArtigoDocumento } from "./ArtigoDocumento";
+import { AvisoDeIdioma, langDaVersao } from "./AvisoDeIdioma";
 import { EmProducao } from "./EmProducao";
 import { FichaDocumento } from "./FichaDocumento";
 import { ListaPaginas } from "./ListaPaginas";
@@ -37,6 +38,7 @@ export async function PaginaDocumento({ documento, abertura }: { documento: Docu
   const visaoGeral = documento === VISAO_GERAL;
   const renderizado = abertura?.renderizado ?? null;
   const dividido = abertura !== null && !abertura.estrutura.inteiro;
+  const lang = abertura ? langDaVersao(abertura.versao) : undefined;
   return (
     <>
       <RegistroDeVisita ancoras={mapaDeAncoras(documento)} />
@@ -49,7 +51,7 @@ export async function PaginaDocumento({ documento, abertura }: { documento: Docu
               <Link href="/documentacao">{t("Documentação")}</Link> <span aria-hidden="true">›</span> {t(atual.titulo)}
             </p>
           )}
-          <h1 className={estilos.titulo}>{visaoGeral ? t("Documentação") : (renderizado?.titulo ?? documento.rotulo)}</h1>
+          <h1 className={estilos.titulo} lang={visaoGeral ? undefined : lang}>{visaoGeral ? t("Documentação") : (renderizado?.titulo ?? documento.rotulo)}</h1>
           <p className={estilos.descricao}>{t(documento.descricao)}</p>
           <nav aria-label={t("Seções da documentação")} className={estilos.abas}>
             {SECOES.map((secao) => {
@@ -88,8 +90,9 @@ export async function PaginaDocumento({ documento, abertura }: { documento: Docu
         </div>
       )}
       <div className={estilos.conteudo}>
+        {abertura && <AvisoDeIdioma versao={abertura.versao} />}
         {dividido ? (
-          <div className={estilos.abertura}>
+          <div className={estilos.abertura} lang={lang}>
             {renderizado?.html.trim() &&
               (abertura.estrutura.abertura.length > INTRODUCAO_CURTA ? (
                 <details className={estilos.introducao}>
@@ -107,11 +110,16 @@ export async function PaginaDocumento({ documento, abertura }: { documento: Docu
             />
           </div>
         ) : renderizado ? (
-          <ArtigoDocumento className={texto.texto} html={renderizado.html} />
+          <ArtigoDocumento className={texto.texto} html={renderizado.html} lang={lang} />
         ) : (
           <EmProducao documento={documento} visaoGeral={visaoGeral} />
         )}
-        <FichaDocumento documento={documento} secoes={dividido ? [] : (renderizado?.secoes ?? [])} pronto={renderizado !== null} />
+        <FichaDocumento
+          documento={documento}
+          secoes={dividido ? [] : (renderizado?.secoes ?? [])}
+          pronto={renderizado !== null}
+          versao={abertura?.versao}
+        />
       </div>
     </>
   );

@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { basename, join } from "node:path";
 import { DOCUMENTOS, DOWNLOADS_PUBLICADOS, documentoPronto } from "@/lib/documentacao/catalogo";
 import { NOME_DIAGRAMA, PASTA_DIAGRAMAS, blocosMermaid, nomeDoDiagrama } from "@/lib/documentacao/diagramas";
+import { IDIOMAS_TRADUZIDOS, IDIOMA_SUBSTITUTO, arquivoTraduzido } from "@/lib/documentacao/idiomas";
 
 const TIPOS: Record<string, string> = {
   csv: "text/csv; charset=utf-8",
@@ -9,10 +10,11 @@ const TIPOS: Record<string, string> = {
   mmd: "text/plain; charset=utf-8",
 };
 
-// Diagramas dos documentos já publicados; os dos documentos em produção não saem
+// Diagramas dos documentos já publicados, no original e nas traduções (em inglês); os dos documentos em produção não saem
 async function diagramasPublicados(): Promise<Set<string>> {
-  const prontos = DOCUMENTOS.filter(documentoPronto);
-  const textos = await Promise.all(prontos.map((documento) => readFile(join(process.cwd(), documento.arquivo), "utf8")));
+  const prontos = DOCUMENTOS.filter(documentoPronto).map((documento) => documento.arquivo);
+  const arquivos = [...prontos, ...IDIOMAS_TRADUZIDOS.flatMap((idioma) => prontos.map((arquivo) => arquivoTraduzido(arquivo, idioma)))];
+  const textos = await Promise.all(arquivos.map((arquivo) => readFile(join(process.cwd(), arquivo), "utf8").catch(() => "")));
   return new Set(textos.flatMap((texto) => blocosMermaid(texto).map(nomeDoDiagrama)));
 }
 
@@ -41,9 +43,14 @@ export async function GET(_request: Request, { params }: { params: Promise<{ cam
     });
   }
 
-  const download = caminho.length === 1 ? DOWNLOADS_PUBLICADOS.find((candidato) => basename(candidato.arquivo) === caminho[0]) : undefined;
+  // /api/documentacao/requisitos.csv é o original; /api/documentacao/en/requisitos.csv, a versão em inglês das traduções
+  const emIngles = caminho.length === 2 && caminho[0] === IDIOMA_SUBSTITUTO;
+  const nome = emIngles ? caminho[1] : caminho.length === 1 ? caminho[0] : undefined;
+  const download = nome ? DOWNLOADS_PUBLICADOS.find((candidato) => basename(candidato.arquivo) === nome) : undefined;
   if (!download) return new Response("Arquivo da documentação não encontrado.", { status: 404 });
-  const conteudo = await readFile(join(process.cwd(), download.arquivo));
+  const arquivo = emIngles ? arquivoTraduzido(download.arquivo, IDIOMA_SUBSTITUTO) : download.arquivo;
+  const conteudo = await readFile(join(process.cwd(), arquivo)).catch(() => null);
+  if (!conteudo) return new Response("Arquivo da documentação não encontrado.", { status: 404 });
   const extensao = download.arquivo.split(".").pop() ?? "";
   return new Response(new Uint8Array(conteudo), {
     headers: {

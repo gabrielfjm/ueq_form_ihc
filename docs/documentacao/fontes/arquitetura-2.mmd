@@ -1,33 +1,33 @@
 flowchart TB
-    pesquisador["<b>Pesquisador</b><br/>[Pessoa]"]
-    participante["<b>Participante</b><br/>[Pessoa]"]
-    mantenedor["<b>Mantenedor</b><br/>[Pessoa]"]
-    claude["<b>API do Claude</b><br/>[Sistema externo]"]
-    smtp["<b>Servidor de e-mail</b><br/>[Sistema externo]"]
+    pesquisador["<b>Researcher</b><br/>[Person]"]
+    participante["<b>Participant</b><br/>[Person]"]
+    mantenedor["<b>Maintainer</b><br/>[Person]"]
+    claude["<b>Claude API</b><br/>[External system]"]
+    smtp["<b>Email server</b><br/>[External system]"]
 
-    subgraph fronteira["Ferramenta UEQ"]
+    subgraph fronteira["UEQ Tool"]
         direction TB
-        navegador["<b>Interface no navegador</b><br/>[Container · React 19, CSS Modules]<br/>HTML renderizado no servidor e Client Components<br/>só onde há interação: questionário, janelas,<br/>tour, filtros e formulários"]
-        app["<b>Aplicação web</b><br/>[Container · Next.js 16 App Router, Node.js 24]<br/>Server Components, Server Actions,<br/>Route Handlers e proxy de sessão.<br/>Contém o módulo de cálculo src/ueq"]
-        pdf["<b>Gerador de PDF</b><br/>[Container · Chromium sem tela via Playwright]<br/>Aberto sob demanda pela aplicação<br/>para imprimir o painel em A4"]
-        banco[("<b>Banco de dados</b><br/>[Container · PostgreSQL 16]<br/>Contas, sessões, estudos, versões, itens,<br/>participações, respostas, notificações<br/>e traduções")]
-        dados[/"<b>Dados oficiais</b><br/>[Container · arquivos JSON em data/]<br/>Itens, instruções e textos dos 37 idiomas,<br/>protocolo e benchmark, com a fonte"/]
-        scripts["<b>Scripts de manutenção</b><br/>[Container · Prisma CLI e tsx]<br/>migrate, seed dos itens, recálculo de<br/>suspeitas, cifragem, catálogo e diagramas"]
+        navegador["<b>Browser interface</b><br/>[Container · React 19, CSS Modules]<br/>HTML rendered on the server and Client Components<br/>only where there is interaction: questionnaire, dialogs,<br/>tour, filters and forms"]
+        app["<b>Web application</b><br/>[Container · Next.js 16 App Router, Node.js 24]<br/>Server Components, Server Actions,<br/>Route Handlers and session proxy.<br/>Contains the calculation module src/ueq"]
+        pdf["<b>PDF generator</b><br/>[Container · headless Chromium via Playwright]<br/>Opened on demand by the application<br/>to print the dashboard on A4"]
+        banco[("<b>Database</b><br/>[Container · PostgreSQL 16]<br/>Accounts, sessions, studies, versions, items,<br/>participations, responses, notifications<br/>and translations")]
+        dados[/"<b>Official data</b><br/>[Container · JSON files in data/]<br/>Items, instructions and texts of the 37 languages,<br/>protocol and benchmark, with the source"/]
+        scripts["<b>Maintenance scripts</b><br/>[Container · Prisma CLI and tsx]<br/>migrate, item seed, recalculation of<br/>suspicious responses, encryption, catalog and diagrams"]
     end
 
-    pesquisador -- "usa [HTTPS]" --> navegador
-    participante -- "usa [HTTPS]" --> navegador
-    mantenedor -- "roda [pnpm]" --> scripts
+    pesquisador -- "uses [HTTPS]" --> navegador
+    participante -- "uses [HTTPS]" --> navegador
+    mantenedor -- "runs [pnpm]" --> scripts
 
-    navegador -- "pede páginas e chama Server Actions<br/>[HTTPS, RSC]; baixa CSV, JSON e PDF [HTTPS GET]" --> app
-    app -- "lê e grava<br/>[SQL via Prisma Client e adapter pg]" --> banco
-    app -- "importa na compilação<br/>[import JSON]" --> dados
-    app -- "abre a página de impressão<br/>com a sessão de quem pediu [HTTP interno]" --> pdf
-    pdf -- "GET /estudos/id/resultados/impressao<br/>[HTTP, origem interna]" --> app
-    app -- "traduz em lotes<br/>[HTTPS, SDK da Anthropic]" --> claude
-    app -- "envia depois de responder<br/>[SMTP, Nodemailer]" --> smtp
-    scripts -- "aplica migrations, grava itens,<br/>atualiza suspeitas, cifra demografia [SQL]" --> banco
-    scripts -- "lê e valida com Zod" --> dados
+    navegador -- "requests pages and calls Server Actions<br/>[HTTPS, RSC]; downloads CSV, JSON and PDF [HTTPS GET]" --> app
+    app -- "reads and writes<br/>[SQL via Prisma Client and pg adapter]" --> banco
+    app -- "imports at build time<br/>[JSON import]" --> dados
+    app -- "opens the print page<br/>with the requester's session [internal HTTP]" --> pdf
+    pdf -- "GET /estudos/id/resultados/impressao<br/>[HTTP, internal origin]" --> app
+    app -- "translates in batches<br/>[HTTPS, Anthropic SDK]" --> claude
+    app -- "sends after responding<br/>[SMTP, Nodemailer]" --> smtp
+    scripts -- "applies migrations, writes items,<br/>updates suspicious flags, encrypts demographics [SQL]" --> banco
+    scripts -- "reads and validates with Zod" --> dados
 
     classDef pessoa fill:#0F1720,stroke:#0F1720,color:#FFFFFF
     classDef container fill:#0B6A78,stroke:#0F1720,color:#FFFFFF

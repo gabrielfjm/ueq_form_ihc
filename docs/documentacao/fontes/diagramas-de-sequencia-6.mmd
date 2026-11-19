@@ -1,29 +1,29 @@
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
-    participant Acao as Ações importar
+    actor Pesq as Researcher
+    participant Nav as Browser
+    participant Acao as Actions importar
     participant Imp as lib/importacao
     participant Ueq as ueq
     participant BD as PostgreSQL
 
-    Pesq->>Nav: escolhe a versão e o arquivo e clica em "Ver prévia"
+    Pesq->>Nav: chooses the version and the file and clicks "View preview"
     Nav->>Acao: previsualizarImportacao(estudoId, FormData)
-    Acao->>Acao: confere sessão, permissão de editar, versão, extensão e tamanho (até 500 KB)
+    Acao->>Acao: checks session, edit permission, version, extension and size (up to 500 KB)
     Acao->>Imp: lerCsvDeRespostas(texto)
-    Imp-->>Acao: linhas válidas e erros por linha
-    Acao-->>Nav: prévia das 5 primeiras linhas, total e erros
-    alt alguma linha com erro
-        Nav-->>Pesq: problema de cada linha, sem botão de confirmar
-    else arquivo inteiro válido
-        Pesq->>Nav: confirma
+    Imp-->>Acao: valid rows and errors per row
+    Acao-->>Nav: preview of the first 5 rows, total and errors
+    alt some row with an error
+        Nav-->>Pesq: problem of each row, without a confirm button
+    else whole file valid
+        Pesq->>Nav: confirms
         Nav->>Acao: confirmarImportacao(estudoId, versaoId, texto)
-        Acao->>Imp: lerCsvDeRespostas(texto) de novo
-        loop para cada linha
+        Acao->>Imp: lerCsvDeRespostas(texto) again
+        loop for each row
             Acao->>Ueq: avaliarSuspeita(valores, itens, protocolo)
         end
-        Acao->>BD: transação: uma Participacao IMPORTADA, concluída e sem idioma, com 26 Respostas, por linha
-        Acao->>BD: avisa o resto da equipe no sino (notificarAlteracao)
-        Acao-->>Nav: redireciona a Respostas com "N importadas"
-        Nav-->>Pesq: as linhas aparecem marcadas "importada de CSV"
+        Acao->>BD: transaction: one IMPORTADA Participacao, completed and without language, with 26 Respostas, per row
+        Acao->>BD: notifies the rest of the team in the bell (notificarAlteracao)
+        Acao-->>Nav: redirects to Responses with "N imported"
+        Nav-->>Pesq: the rows appear marked "imported from CSV"
     end

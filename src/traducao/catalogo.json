@@ -406,6 +406,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/BotaoColeta.tsx"
   },
   {
+   "texto": "Abrir em tamanho real",
+   "cliente": false,
+   "origem": "lib/documentacao/markdown.ts"
+  },
+  {
    "texto": "Abrir na ferramenta",
    "cliente": false,
    "origem": "lib/notificacoes.ts"
@@ -544,6 +549,11 @@
    "texto": "Amostra insuficiente para intervalo de confiança.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
+  },
+  {
+   "texto": "Ampliar em tela cheia: {legenda}",
+   "cliente": false,
+   "origem": "lib/documentacao/markdown.ts"
   },
   {
    "texto": "Amplitude acima de",
@@ -1571,6 +1581,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
+   "texto": "Diagrama",
+   "cliente": false,
+   "origem": "lib/documentacao/markdown.ts"
+  },
+  {
    "texto": "Diagrama ampliado. Use as setas para mover",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/documentacao/ArtigoDocumento.tsx"
@@ -2024,6 +2039,11 @@
    "texto": "Esta ferramenta",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
+  },
+  {
+   "texto": "Este documento ainda não foi traduzido para o seu idioma. Você está lendo a versão em inglês.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/AvisoDeIdioma.tsx"
   },
   {
    "texto": "Este painel, com a versão escolhida, em A4 e com os gráficos em vetor. Para anexar ao relatório ou imprimir.",
@@ -4346,6 +4366,16 @@
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
+   "texto": "Tabela",
+   "cliente": false,
+   "origem": "lib/documentacao/markdown.ts"
+  },
+  {
+   "texto": "Tabela: {titulo}",
+   "cliente": false,
+   "origem": "lib/documentacao/markdown.ts"
+  },
+  {
    "texto": "Teclado, leitor de tela e zoom de 400% (WCAG 2.2 AA).",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
@@ -4414,6 +4444,11 @@
    "texto": "Trabalhe em equipe",
    "cliente": true,
    "origem": "componentes/tutorial/passos.ts"
+  },
+  {
+   "texto": "Traduzido do original em português. Ainda falta a revisão de um falante nativo.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/AvisoDeIdioma.tsx"
   },
   {
    "texto": "Traduziram o UEQ para o português, com Thomaschewski e Schrepp. É a versão que o participante vê aqui.",
@@ -4694,6 +4729,11 @@
    "texto": "Ver no GitHub",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/documentacao/FichaDocumento.tsx"
+  },
+  {
+   "texto": "Ver o código do diagrama",
+   "cliente": false,
+   "origem": "lib/documentacao/markdown.ts"
   },
   {
    "texto": "Ver os números",

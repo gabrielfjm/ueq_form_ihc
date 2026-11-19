@@ -1,0 +1,372 @@
+# Class diagram
+
+Two diagrams describe the static structure of the UEQ Tool:
+
+1. **Domain model:** the 11 entities stored in PostgreSQL and the 7 enumerated types, as they appear in [`prisma/schema.prisma`](../../prisma/schema.prisma).
+2. **Calculation module:** the types and functions of [`src/ueq/`](../../src/ueq/), which turn responses into results without touching the database.
+
+The names are the ones in the code, without diacritics, as in `Versao` and `Participacao`. The types follow TypeScript: `?` marks a field that may be empty and `[]` marks a list. The database tables, columns, keys and deletion rules, field by field, are in the [logical data model](modelo-logico.md); this document shows the same entities as classes, with their associations and the multiplicity of each one.
+
+Right below each diagram are the tool used, the source file to download and the version of the tool it represents.
+
+## 1. Domain model
+
+```mermaid
+classDiagram
+    direction LR
+
+    class Pesquisador {
+        +String id
+        +String nome
+        +String email «unique»
+        +String senhaHash «bcrypt»
+        +DateTime criadoEm
+        +Boolean administrador
+        +DateTime? tutorialVistoEm
+        +Boolean notificacoesPorEmail
+        +String idioma
+    }
+
+    class Sessao {
+        +String id «SHA-256 of the token»
+        +DateTime criadaEm
+        +DateTime expiraEm
+    }
+
+    class Estudo {
+        +String id
+        +String titulo
+        +String produtoAvaliado
+        +String objetivo
+        +StatusEstudo status
+        +Date dataInicio
+        +Date dataFim
+        +String slugPublico «unique»
+        +Boolean coletarDemografia
+        +String idioma
+        +String responsavelNome
+        +String responsavelEmail
+        +String instituicao
+        +String riscos
+        +String beneficios
+        +String? comiteEtica
+        +DateTime criadoEm
+        +DateTime atualizadoEm
+    }
+
+    class Colaboracao {
+        +String id
+        +PapelColaborador papel
+        +StatusConvite status
+        +DateTime criadoEm
+        +DateTime? respondidoEm
+    }
+
+    class Versao {
+        +String id
+        +String nome
+        +Int ordem «unique within the study»
+    }
+
+    class Participacao {
+        +String id
+        +DateTime consentiuEm
+        +DateTime criadaEm
+        +DateTime? concluidaEm
+        +Json? demografia «encrypted»
+        +Boolean suspeita
+        +Boolean incluidaNaAnalise
+        +String? idioma
+        +OrigemParticipacao origem
+        +Boolean menorDeIdade
+    }
+
+    class Resposta {
+        +String id
+        +Int valor «1 to 7»
+    }
+
+    class Item {
+        +Int id
+        +Int numero «1 to 26, unique»
+        +String termoEsquerdo
+        +String termoDireito
+        +Escala escala
+        +Polaridade polaridade
+    }
+
+    class Notificacao {
+        +String id
+        +TipoNotificacao tipo
+        +String texto
+        +String link
+        +Int quantidade
+        +DateTime criadaEm
+        +DateTime? lidaEm
+    }
+
+    class TentativaAcesso {
+        +String id
+        +String chave «email hash»
+        +DateTime criadaEm
+    }
+
+    class Traducao {
+        +String id
+        +String idioma
+        +String hashOrigem
+        +String texto
+        +DateTime criadaEm
+    }
+
+    class StatusEstudo {
+        <<enumeration>>
+        RASCUNHO
+        ABERTO
+        ENCERRADO
+    }
+    class Escala {
+        <<enumeration>>
+        ATRATIVIDADE
+        PERSPICUIDADE
+        EFICIENCIA
+        CONFIABILIDADE
+        ESTIMULACAO
+        NOVIDADE
+    }
+    class Polaridade {
+        <<enumeration>>
+        POSITIVA_DIREITA
+        POSITIVA_ESQUERDA
+    }
+    class OrigemParticipacao {
+        <<enumeration>>
+        LINK
+        IMPORTADA
+    }
+    class PapelColaborador {
+        <<enumeration>>
+        EDITOR
+        LEITOR
+    }
+    class StatusConvite {
+        <<enumeration>>
+        PENDENTE
+        ACEITO
+        RECUSADO
+    }
+    class TipoNotificacao {
+        <<enumeration>>
+        CONVITE
+        RESPOSTA
+        ALTERACAO
+    }
+
+    Pesquisador "1" *-- "0..*" Sessao : opens
+    Pesquisador "1" *-- "0..*" Estudo : owns
+    Estudo "1" *-- "1..6" Versao : compares
+    Versao "1" *-- "0..*" Participacao : receives
+    Participacao "1" *-- "0..26" Resposta : contains
+    Item "1" <-- "0..*" Resposta : answers
+    Estudo "1" *-- "0..*" Colaboracao : is shared in
+    Pesquisador "1" *-- "0..*" Colaboracao : takes part as
+    Pesquisador "0..1" o-- "0..*" Colaboracao : invited
+    Pesquisador "1" *-- "0..*" Notificacao : receives
+    Pesquisador "0..1" o-- "0..*" Notificacao : caused
+    Estudo "0..1" o-- "0..*" Notificacao : originates
+
+    Estudo ..> StatusEstudo
+    Item ..> Escala
+    Item ..> Polaridade
+    Participacao ..> OrigemParticipacao
+    Colaboracao ..> PapelColaborador
+    Colaboracao ..> StatusConvite
+    Notificacao ..> TipoNotificacao
+```
+
+**Diagram tool:** Mermaid 12.2.0 (`classDiagram`), generated by `pnpm docs:diagramas`. **Source file:** [diagrama-de-classes-1.mmd](fontes/diagrama-de-classes-1.mmd). **Version represented:** UEQ Tool of 17 Nov 2026.
+
+### How to read it
+
+- **Composition (filled diamond)** is cascade deletion in the database. Deleting the researcher deletes their sessions, their studies, the collaborations they joined and the notifications they received ([RF06](requisitos.md#rf06)). Deleting the study deletes versions, participations, responses and collaborations ([RF17](requisitos.md#rf17)).
+- **Aggregation (hollow diamond)** is a reference that becomes empty when the other side is deleted: if the person who sent an invitation deletes their account, the collaboration remains, without the inviter's name; if the study or the author of a notification disappears, the notification remains in the bell of the person who received it.
+- **Item** belongs to no one: the 26 items are loaded by the seed from the official package ([RNF10](requisitos.md#rnf10)) and shared by all studies. A response points to the item; deleting the response does not delete the item.
+- **Versao** exists 1 to 6 times per study. The order is unique within the study and defines the order on screen and the tie-break when distributing participants ([RF26](requisitos.md#rf26)).
+- **Participacao** is created at consent, without responses, and only gets the 26 responses and `concluidaEm` on submission ([RF25](requisitos.md#rf25), [RF33](requisitos.md#rf33)). That is why the multiplicity is 0..26: zero while it is in progress, 26 once completed. One that is not completed within 2 days is deleted ([RNF13](requisitos.md#rnf13)).
+- **Resposta** stores the raw value from 1 (left pole) to 7 (right pole), with a `CHECK` in the database and uniqueness per participation and item. Recoding to -3 to +3 happens in the calculation, never in the database.
+- **Participacao.idioma** is the language code (`pt`, `es`, `ar`…); it is empty for imported participations, because the CSV does not state the language ([RF61](requisitos.md#rf61)). **Participacao.demografia** stores the four optional ranges, encrypted with AES-256-GCM when the key is configured ([RNF14](requisitos.md#rnf14)). **Participacao.menorDeIdade** records that the person confirmed the authorization of their parent or guardian ([RF25](requisitos.md#rf25)).
+- **Colaboracao** links a study to another account, as Editor or Viewer. There is at most one per study and person, and the study only appears for the invited person after it is ACEITO (accepted) ([RF20](requisitos.md#rf20), [RF21](requisitos.md#rf21)).
+- **Notificacao** is what the bell shows. Those of type RESPOSTA add up in `quantidade` while they are unread ([RF22](requisitos.md#rf22)).
+- **TentativaAcesso** and **Traducao** are not linked to any other entity. The first stores only the email hash of each failed login ([RNF16](requisitos.md#rnf16)); the second stores each text already translated by the API, keyed by the hash of the original and by the language ([RF08](requisitos.md#rf08), [RF35](requisitos.md#rf35)).
+- **Sessao.id** is the SHA-256 hash of the cookie token: whoever reads the database cannot build a valid cookie ([RNF15](requisitos.md#rnf15)).
+- Nothing in the model identifies the participant: there is no name, email, IP or user agent ([RNF12](requisitos.md#rnf12)).
+
+## 2. Calculation module
+
+The [`src/ueq/`](../../src/ueq/) module is made of pure functions: it does not import Prisma, React or Next ([RNF25](requisitos.md#rnf25)). In the diagram, each file appears as a class with the «module» stereotype and the functions it exports. The input and output types appear as ordinary classes.
+
+```mermaid
+classDiagram
+    direction TB
+
+    class index {
+        <<module>>
+        +analisarEstudo(participacoes, itens, config) AnaliseEstudo
+    }
+    class recodificar {
+        <<module>>
+        +recodificar(valor, polaridade) number
+        +recodificarParticipante(valores, itens) number[]
+    }
+    class estatistica {
+        <<module>>
+        +media(valores) number?
+        +desvioPadraoAmostral(valores) number?
+        +intervaloConfianca95(media, dp, n, z) Intervalo?
+        +correlacao(x, y) number?
+        +alfaCronbach(colunas) number?
+    }
+    class escalas {
+        <<module>>
+        +escoresPorParticipante(valores, itens) Record~Escala, number~
+        +faixaInterpretacao(media, faixaNeutra) FaixaInterpretacao
+        +resultadoPorEscala(respostas, itens, parametros) ResultadoEscala[]
+        +resultadoPorItem(respostas, itens, z) ResultadoItem[]
+    }
+    class inconsistencia {
+        <<module>>
+        +amplitudePorEscala(valores, itens) Record~Escala, number~
+        +respostasIguais(valores) number
+        +avaliarSuspeita(valores, itens, parametros) AvaliacaoSuspeita
+        +marcarSuspeitos(respostas, itens, parametros) AvaliacaoSuspeita[]
+    }
+    class benchmark {
+        <<module>>
+        +classificarBenchmark(escala, media, tabela) FaixaBenchmark?
+    }
+    class itens {
+        <<module>>
+        +ESCALAS
+        +GRUPOS
+        +numerosPorEscala(itens) Record~Escala, number[]~
+    }
+
+    class ItemUEQ {
+        +number numero
+        +Escala escala
+        +Polaridade polaridade
+    }
+    class ParticipacaoParaAnalise {
+        +number[] valores
+        +boolean incluidaNaAnalise
+    }
+    class ConfigAnalise {
+        +protocolo
+        +TabelaBenchmark benchmark
+    }
+    class ParametrosInconsistencia {
+        +number amplitudeMaxima
+        +number escalasParaSuspeita
+        +number respostasIguaisMaximas
+    }
+    class AnaliseEstudo {
+        +number n
+        +number nExcluidas
+        +ResultadoEscalaAnalisada[] escalas
+        +grupos pragmatica and hedonica
+        +ResultadoItem[] itens
+        +AvaliacaoSuspeita[] participantes
+    }
+    class ResultadoEscala {
+        +Escala escala
+        +number n
+        +number? media
+        +number? dp
+        +Intervalo? ic
+        +number? alfa
+        +FaixaInterpretacao? faixaInterpretacao
+    }
+    class ResultadoEscalaAnalisada {
+        +FaixaBenchmark? benchmark
+        +boolean alfaAbaixoDoMinimo
+    }
+    class ResultadoItem {
+        +number numero
+        +Escala escala
+        +number n
+        +number? media
+        +number? dp
+        +Intervalo? ic
+        +number[] distribuicao
+    }
+    class AvaliacaoSuspeita {
+        +Record~Escala, number~ amplitudes
+        +Escala[] escalasInconsistentes
+        +number respostasIguais
+        +MotivoSuspeita[] motivos
+        +boolean suspeita
+    }
+    class Intervalo {
+        +number inferior
+        +number superior
+    }
+    class LimitesBenchmark {
+        +number excelente
+        +number bom
+        +number acimaDaMedia
+        +number abaixoDaMedia
+    }
+
+    ResultadoEscala <|-- ResultadoEscalaAnalisada
+    ConfigAnalise *-- ParametrosInconsistencia
+    ConfigAnalise *-- "6" LimitesBenchmark
+    AnaliseEstudo *-- "6" ResultadoEscalaAnalisada
+    AnaliseEstudo *-- "26" ResultadoItem
+    AnaliseEstudo *-- "0..*" AvaliacaoSuspeita
+    ResultadoEscala o-- Intervalo
+    ResultadoItem o-- Intervalo
+
+    index ..> ParticipacaoParaAnalise : receives
+    index ..> ItemUEQ : receives
+    index ..> ConfigAnalise : receives
+    index ..> AnaliseEstudo : returns
+    index ..> escalas : uses
+    index ..> inconsistencia : uses
+    index ..> benchmark : uses
+    index ..> itens : uses
+    escalas ..> recodificar : uses
+    escalas ..> estatistica : uses
+    escalas ..> itens : uses
+    inconsistencia ..> recodificar : uses
+    inconsistencia ..> itens : uses
+```
+
+**Diagram tool:** Mermaid 12.2.0 (`classDiagram`), generated by `pnpm docs:diagramas`. **Source file:** [diagrama-de-classes-2.mmd](fontes/diagrama-de-classes-2.mmd). **Version represented:** UEQ Tool of 17 Nov 2026.
+
+### How to read it
+
+- **`analisarEstudo`** is the entry point. It receives the participations (26 values from 1 to 7 and whether they are in the analysis), the 26 items and the configuration. It computes the statistics only with those that are in the analysis and assesses suspicion for all of them ([RF36](requisitos.md#rf36) to [RF42](requisitos.md#rf42), [RF51](requisitos.md#rf51)).
+- **`ConfigAnalise`** has the same format as [`data/protocolo.json`](../../data/protocolo.json) and [`data/benchmark.json`](../../data/benchmark.json). The thresholds and ranges are not in the code: they change through a pull request, with the source of each number.
+- **Empty values** follow the official spreadsheet: without enough n, with a standard deviation of zero or with an item that does not vary, the function returns `null` where the spreadsheet shows `#NUM!` or `#DIV/0!`.
+- **`ResultadoEscalaAnalisada`** adds to the scale result the benchmark range and the flag for alpha below 0.7.
+- **`GRUPOS`** defines the Pragmatic Quality (Perspicuity, Efficiency and Dependability) and the Hedonic Quality (Stimulation and Novelty). Attractiveness is outside both groups ([RF39](requisitos.md#rf39)).
+- **`avaliarSuspeita`** is also used outside the dashboard: when the questionnaire is submitted, on import, on the Responses page, in the sample study and in the recalculation ([UC24](casos-de-uso.md#uc24)). `marcarSuspeitos` applies the same assessment to a list.
+
+Each formula was redone by hand, with the data of the sample study, in the [calculation verification](verificacao-do-calculo.md).
+
+### Who uses the module
+
+The module does not know where the data comes from. The files that query the database and call the module:
+
+| File | What it does |
+|---|---|
+| `src/lib/resultados.ts` | Fetches the completed participations, builds the input per version and calls `analisarEstudo` for the dashboard, the PDF and the results export |
+| `src/lib/participacoes.ts` | Calls `avaliarSuspeita` for each participation on the Responses page |
+| `src/lib/exportacoes.ts` | Uses `recodificarParticipante` in the coded export |
+| `src/app/r/[slug]/acoes.ts` | Calls `avaliarSuspeita` when the questionnaire is submitted |
+| `src/app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/importar/acoes.ts` | Calls `avaliarSuspeita` on each imported row |
+| `src/lib/cenarios/respostas-sinteticas.ts` | Calls `avaliarSuspeita` to check that the demonstration responses stay consistent with each scenario |
+| `prisma/recalcular-suspeitas.ts` | Calls `avaliarSuspeita` on all completed participations |
+| `prisma/estudo-exemplo.ts` | Calls `avaliarSuspeita` when saving the responses of the sample study |
+
+The complete path, from the database to the screen, is in the [results sequence diagram](diagramas-de-sequencia.md#3-ver-resultados).

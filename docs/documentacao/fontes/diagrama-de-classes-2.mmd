@@ -2,16 +2,16 @@ classDiagram
     direction TB
 
     class index {
-        <<módulo>>
+        <<module>>
         +analisarEstudo(participacoes, itens, config) AnaliseEstudo
     }
     class recodificar {
-        <<módulo>>
+        <<module>>
         +recodificar(valor, polaridade) number
         +recodificarParticipante(valores, itens) number[]
     }
     class estatistica {
-        <<módulo>>
+        <<module>>
         +media(valores) number?
         +desvioPadraoAmostral(valores) number?
         +intervaloConfianca95(media, dp, n, z) Intervalo?
@@ -19,25 +19,25 @@ classDiagram
         +alfaCronbach(colunas) number?
     }
     class escalas {
-        <<módulo>>
+        <<module>>
         +escoresPorParticipante(valores, itens) Record~Escala, number~
         +faixaInterpretacao(media, faixaNeutra) FaixaInterpretacao
         +resultadoPorEscala(respostas, itens, parametros) ResultadoEscala[]
         +resultadoPorItem(respostas, itens, z) ResultadoItem[]
     }
     class inconsistencia {
-        <<módulo>>
+        <<module>>
         +amplitudePorEscala(valores, itens) Record~Escala, number~
         +respostasIguais(valores) number
         +avaliarSuspeita(valores, itens, parametros) AvaliacaoSuspeita
         +marcarSuspeitos(respostas, itens, parametros) AvaliacaoSuspeita[]
     }
     class benchmark {
-        <<módulo>>
+        <<module>>
         +classificarBenchmark(escala, media, tabela) FaixaBenchmark?
     }
     class itens {
-        <<módulo>>
+        <<module>>
         +ESCALAS
         +GRUPOS
         +numerosPorEscala(itens) Record~Escala, number[]~
@@ -65,7 +65,7 @@ classDiagram
         +number n
         +number nExcluidas
         +ResultadoEscalaAnalisada[] escalas
-        +grupos pragmatica e hedonica
+        +grupos pragmatica and hedonica
         +ResultadoItem[] itens
         +AvaliacaoSuspeita[] participantes
     }
@@ -118,16 +118,16 @@ classDiagram
     ResultadoEscala o-- Intervalo
     ResultadoItem o-- Intervalo
 
-    index ..> ParticipacaoParaAnalise : recebe
-    index ..> ItemUEQ : recebe
-    index ..> ConfigAnalise : recebe
-    index ..> AnaliseEstudo : devolve
-    index ..> escalas : usa
-    index ..> inconsistencia : usa
-    index ..> benchmark : usa
-    index ..> itens : usa
-    escalas ..> recodificar : usa
-    escalas ..> estatistica : usa
-    escalas ..> itens : usa
-    inconsistencia ..> recodificar : usa
-    inconsistencia ..> itens : usa
+    index ..> ParticipacaoParaAnalise : receives
+    index ..> ItemUEQ : receives
+    index ..> ConfigAnalise : receives
+    index ..> AnaliseEstudo : returns
+    index ..> escalas : uses
+    index ..> inconsistencia : uses
+    index ..> benchmark : uses
+    index ..> itens : uses
+    escalas ..> recodificar : uses
+    escalas ..> estatistica : uses
+    escalas ..> itens : uses
+    inconsistencia ..> recodificar : uses
+    inconsistencia ..> itens : uses

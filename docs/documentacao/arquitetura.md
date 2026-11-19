@@ -24,30 +24,30 @@ A Ferramenta UEQ é uma aplicação web única em **Next.js 16 (App Router)** co
 
 ```mermaid
 flowchart TB
-    pesquisador["<b>Pesquisador</b><br/>[Pessoa]<br/>Cria estudos, acompanha a coleta,<br/>interpreta e exporta os resultados.<br/>Pode trabalhar em equipe"]
-    participante["<b>Participante</b><br/>[Pessoa]<br/>Responde o questionário pelo link,<br/>sem conta e de forma anônima"]
-    administrador["<b>Administrador</b><br/>[Pessoa]<br/>Um pesquisador que cria contas,<br/>acompanha idiomas e proteção de dados"]
-    mantenedor["<b>Mantenedor</b><br/>[Pessoa]<br/>Instala, carrega os itens oficiais<br/>e ajusta os parâmetros"]
+    pesquisador["<b>Researcher</b><br/>[Person]<br/>Creates studies, monitors data collection,<br/>interprets and exports the results.<br/>Can work in a team"]
+    participante["<b>Participant</b><br/>[Person]<br/>Answers the questionnaire through the link,<br/>without an account and anonymously"]
+    administrador["<b>Administrator</b><br/>[Person]<br/>A researcher who creates accounts,<br/>monitors languages and data protection"]
+    mantenedor["<b>Maintainer</b><br/>[Person]<br/>Installs, loads the official items<br/>and adjusts the parameters"]
 
-    ferramenta["<b>Ferramenta UEQ</b><br/>[Sistema de software]<br/>Conduz estudos com o User Experience<br/>Questionnaire, do cadastro à exportação"]
+    ferramenta["<b>UEQ Tool</b><br/>[Software system]<br/>Runs studies with the User Experience<br/>Questionnaire, from setup to export"]
 
-    claude["<b>API do Claude</b><br/>[Sistema externo · Anthropic]<br/>Traduz a interface e os textos dos estudos"]
-    smtp["<b>Servidor de e-mail</b><br/>[Sistema externo · SMTP]<br/>Entrega convites e avisos"]
-    planilha["<b>UEQ Data Analysis Tool</b><br/>[Sistema externo · planilha Excel V15]<br/>Ferramenta oficial de análise do UEQ"]
-    ueqonline["<b>ueq-online.org</b><br/>[Sistema externo]<br/>Handbook, pacote de idiomas<br/>e benchmark oficiais"]
-    canais["<b>Canais de mensagem</b><br/>[Sistema externo]<br/>WhatsApp, e-mail"]
+    claude["<b>Claude API</b><br/>[External system · Anthropic]<br/>Translates the interface and the study texts"]
+    smtp["<b>Email server</b><br/>[External system · SMTP]<br/>Delivers invitations and notices"]
+    planilha["<b>UEQ Data Analysis Tool</b><br/>[External system · Excel spreadsheet V15]<br/>Official UEQ analysis tool"]
+    ueqonline["<b>ueq-online.org</b><br/>[External system]<br/>Official Handbook, language pack<br/>and benchmark"]
+    canais["<b>Messaging channels</b><br/>[External system]<br/>WhatsApp, email"]
 
-    pesquisador -- "usa pelo navegador<br/>[HTTPS]" --> ferramenta
-    participante -- "responde pelo link /r/slug<br/>[HTTPS]" --> ferramenta
-    administrador -- "usa pelo navegador<br/>[HTTPS]" --> ferramenta
-    mantenedor -- "roda migrations, seed<br/>e recálculo [CLI]" --> ferramenta
-    ferramenta -- "pede traduções, sem respostas<br/>nem dados pessoais [HTTPS]" --> claude
-    ferramenta -- "envia convites e avisos<br/>[SMTP]" --> smtp
-    smtp -- "entrega o aviso" --> pesquisador
-    pesquisador -- "envia o link do estudo" --> canais
-    canais -- "entrega o link" --> participante
-    pesquisador -- "cola o CSV exportado<br/>para conferir os números" --> planilha
-    mantenedor -- "copia itens, instruções,<br/>limiares e benchmark para data/" --> ueqonline
+    pesquisador -- "uses through the browser<br/>[HTTPS]" --> ferramenta
+    participante -- "answers through the link /r/slug<br/>[HTTPS]" --> ferramenta
+    administrador -- "uses through the browser<br/>[HTTPS]" --> ferramenta
+    mantenedor -- "runs migrations, seed<br/>and recalculation [CLI]" --> ferramenta
+    ferramenta -- "requests translations, without responses<br/>or personal data [HTTPS]" --> claude
+    ferramenta -- "sends invitations and notices<br/>[SMTP]" --> smtp
+    smtp -- "delivers the notice" --> pesquisador
+    pesquisador -- "sends the study link" --> canais
+    canais -- "delivers the link" --> participante
+    pesquisador -- "pastes the exported CSV<br/>to check the numbers" --> planilha
+    mantenedor -- "copies items, instructions,<br/>thresholds and benchmark to data/" --> ueqonline
 
     classDef pessoa fill:#0F1720,stroke:#0F1720,color:#FFFFFF
     classDef sistema fill:#0B6A78,stroke:#0F1720,color:#FFFFFF
@@ -70,35 +70,35 @@ A planilha oficial e o site do UEQ entram por pessoas: a equipe copia os dados o
 
 ```mermaid
 flowchart TB
-    pesquisador["<b>Pesquisador</b><br/>[Pessoa]"]
-    participante["<b>Participante</b><br/>[Pessoa]"]
-    mantenedor["<b>Mantenedor</b><br/>[Pessoa]"]
-    claude["<b>API do Claude</b><br/>[Sistema externo]"]
-    smtp["<b>Servidor de e-mail</b><br/>[Sistema externo]"]
+    pesquisador["<b>Researcher</b><br/>[Person]"]
+    participante["<b>Participant</b><br/>[Person]"]
+    mantenedor["<b>Maintainer</b><br/>[Person]"]
+    claude["<b>Claude API</b><br/>[External system]"]
+    smtp["<b>Email server</b><br/>[External system]"]
 
-    subgraph fronteira["Ferramenta UEQ"]
+    subgraph fronteira["UEQ Tool"]
         direction TB
-        navegador["<b>Interface no navegador</b><br/>[Container · React 19, CSS Modules]<br/>HTML renderizado no servidor e Client Components<br/>só onde há interação: questionário, janelas,<br/>tour, filtros e formulários"]
-        app["<b>Aplicação web</b><br/>[Container · Next.js 16 App Router, Node.js 24]<br/>Server Components, Server Actions,<br/>Route Handlers e proxy de sessão.<br/>Contém o módulo de cálculo src/ueq"]
-        pdf["<b>Gerador de PDF</b><br/>[Container · Chromium sem tela via Playwright]<br/>Aberto sob demanda pela aplicação<br/>para imprimir o painel em A4"]
-        banco[("<b>Banco de dados</b><br/>[Container · PostgreSQL 16]<br/>Contas, sessões, estudos, versões, itens,<br/>participações, respostas, notificações<br/>e traduções")]
-        dados[/"<b>Dados oficiais</b><br/>[Container · arquivos JSON em data/]<br/>Itens, instruções e textos dos 37 idiomas,<br/>protocolo e benchmark, com a fonte"/]
-        scripts["<b>Scripts de manutenção</b><br/>[Container · Prisma CLI e tsx]<br/>migrate, seed dos itens, recálculo de<br/>suspeitas, cifragem, catálogo e diagramas"]
+        navegador["<b>Browser interface</b><br/>[Container · React 19, CSS Modules]<br/>HTML rendered on the server and Client Components<br/>only where there is interaction: questionnaire, dialogs,<br/>tour, filters and forms"]
+        app["<b>Web application</b><br/>[Container · Next.js 16 App Router, Node.js 24]<br/>Server Components, Server Actions,<br/>Route Handlers and session proxy.<br/>Contains the calculation module src/ueq"]
+        pdf["<b>PDF generator</b><br/>[Container · headless Chromium via Playwright]<br/>Opened on demand by the application<br/>to print the dashboard on A4"]
+        banco[("<b>Database</b><br/>[Container · PostgreSQL 16]<br/>Accounts, sessions, studies, versions, items,<br/>participations, responses, notifications<br/>and translations")]
+        dados[/"<b>Official data</b><br/>[Container · JSON files in data/]<br/>Items, instructions and texts of the 37 languages,<br/>protocol and benchmark, with the source"/]
+        scripts["<b>Maintenance scripts</b><br/>[Container · Prisma CLI and tsx]<br/>migrate, item seed, recalculation of<br/>suspicious responses, encryption, catalog and diagrams"]
     end
 
-    pesquisador -- "usa [HTTPS]" --> navegador
-    participante -- "usa [HTTPS]" --> navegador
-    mantenedor -- "roda [pnpm]" --> scripts
+    pesquisador -- "uses [HTTPS]" --> navegador
+    participante -- "uses [HTTPS]" --> navegador
+    mantenedor -- "runs [pnpm]" --> scripts
 
-    navegador -- "pede páginas e chama Server Actions<br/>[HTTPS, RSC]; baixa CSV, JSON e PDF [HTTPS GET]" --> app
-    app -- "lê e grava<br/>[SQL via Prisma Client e adapter pg]" --> banco
-    app -- "importa na compilação<br/>[import JSON]" --> dados
-    app -- "abre a página de impressão<br/>com a sessão de quem pediu [HTTP interno]" --> pdf
-    pdf -- "GET /estudos/id/resultados/impressao<br/>[HTTP, origem interna]" --> app
-    app -- "traduz em lotes<br/>[HTTPS, SDK da Anthropic]" --> claude
-    app -- "envia depois de responder<br/>[SMTP, Nodemailer]" --> smtp
-    scripts -- "aplica migrations, grava itens,<br/>atualiza suspeitas, cifra demografia [SQL]" --> banco
-    scripts -- "lê e valida com Zod" --> dados
+    navegador -- "requests pages and calls Server Actions<br/>[HTTPS, RSC]; downloads CSV, JSON and PDF [HTTPS GET]" --> app
+    app -- "reads and writes<br/>[SQL via Prisma Client and pg adapter]" --> banco
+    app -- "imports at build time<br/>[JSON import]" --> dados
+    app -- "opens the print page<br/>with the requester's session [internal HTTP]" --> pdf
+    pdf -- "GET /estudos/id/resultados/impressao<br/>[HTTP, internal origin]" --> app
+    app -- "translates in batches<br/>[HTTPS, Anthropic SDK]" --> claude
+    app -- "sends after responding<br/>[SMTP, Nodemailer]" --> smtp
+    scripts -- "applies migrations, writes items,<br/>updates suspicious flags, encrypts demographics [SQL]" --> banco
+    scripts -- "reads and validates with Zod" --> dados
 
     classDef pessoa fill:#0F1720,stroke:#0F1720,color:#FFFFFF
     classDef container fill:#0B6A78,stroke:#0F1720,color:#FFFFFF
@@ -126,42 +126,42 @@ flowchart TB
 
 ```mermaid
 flowchart TB
-    navegador["<b>Interface no navegador</b><br/>[Container]"]
-    pdf["<b>Gerador de PDF</b><br/>[Container]"]
+    navegador["<b>Browser interface</b><br/>[Container]"]
+    pdf["<b>PDF generator</b><br/>[Container]"]
     banco[("<b>PostgreSQL</b><br/>[Container]")]
     dados[/"<b>data/*.json</b><br/>[Container]"/]
-    docsMd[/"<b>docs/*.md</b><br/>[arquivos do repositório]"/]
-    claude["<b>API do Claude</b><br/>[Sistema externo]"]
-    smtp["<b>Servidor de e-mail</b><br/>[Sistema externo]"]
+    docsMd[/"<b>docs/*.md</b><br/>[repository files]"/]
+    claude["<b>Claude API</b><br/>[External system]"]
+    smtp["<b>Email server</b><br/>[External system]"]
 
-    subgraph app["Aplicação web · Next.js"]
+    subgraph app["Web application · Next.js"]
         direction TB
-        proxy["<b>Proxy de sessão</b><br/>[src/proxy.ts]<br/>Manda para Entrar quem não tem cookie,<br/>guardando a página pedida"]
+        proxy["<b>Session proxy</b><br/>[src/proxy.ts]<br/>Sends anyone without a cookie to Log in,<br/>keeping the requested page"]
 
-        subgraph rotas["Rotas"]
+        subgraph rotas["Routes"]
             direction LR
-            publico["<b>Páginas públicas</b><br/>[app/(ferramenta)/(publico)]<br/>Página inicial, janelas de Entrar e Criar conta,<br/>Documentação e Política de privacidade"]
-            areaPesq["<b>Área do pesquisador</b><br/>[app/(ferramenta)/(pesquisador)]<br/>Estudos, Resultados, Respostas, Importar,<br/>Notificações, Minha conta e Administração"]
-            areaPart["<b>Link do participante</b><br/>[app/r/[slug]]<br/>Layout raiz próprio com lang e dir;<br/>consentimento, política, questionário,<br/>dados opcionais, fim"]
-            api["<b>Rotas de download</b><br/>[app/api]<br/>exportar/[tipo], painel-pdf,<br/>conta/dados e documentacao"]
+            publico["<b>Public pages</b><br/>[app/(ferramenta)/(publico)]<br/>Home page, Log in and Create account dialogs,<br/>Documentation and Privacy policy"]
+            areaPesq["<b>Researcher area</b><br/>[app/(ferramenta)/(pesquisador)]<br/>Studies, Results, Responses, Import,<br/>Notifications, My account and Administration"]
+            areaPart["<b>Participant link</b><br/>[app/r/[slug]]<br/>Own root layout with lang and dir;<br/>consent, policy, questionnaire,<br/>optional data, end"]
+            api["<b>Download routes</b><br/>[app/api]<br/>exportar/[tipo], painel-pdf,<br/>conta/dados and documentacao"]
         end
 
-        subgraph servicos["Serviços · src/lib"]
+        subgraph servicos["Services · src/lib"]
             direction LR
-            sessao["<b>Sessão e conta</b><br/>sessao.ts, senhas.ts, tentativas.ts,<br/>validacao-conta.ts, administracao.ts"]
-            estudos["<b>Estudos</b><br/>estudos.ts, validacao-estudo.ts,<br/>status-estudo.ts, periodo.ts<br/>acesso (dono, editor, leitor), slug"]
-            participacao["<b>Participação</b><br/>participacao.ts, balanceamento.ts,<br/>demografia.ts, cripto.ts, itens-ueq.ts"]
-            resultados["<b>Resultados</b><br/>resultados.ts, participacoes.ts,<br/>leitura-rapida.ts, perfil-demografico.ts"]
-            arquivos["<b>Arquivos</b><br/>exportacoes.ts, exportar-estudo.ts,<br/>csv.ts, importacao.ts"]
-            avisos["<b>Avisos</b><br/>notificacoes.ts, email.ts,<br/>modelo-email.ts"]
-            banco_lib["<b>Acesso ao banco</b><br/>banco.ts + Prisma Client<br/>gerado em src/generated/prisma"]
+            sessao["<b>Session and account</b><br/>sessao.ts, senhas.ts, tentativas.ts,<br/>validacao-conta.ts, administracao.ts"]
+            estudos["<b>Studies</b><br/>estudos.ts, validacao-estudo.ts,<br/>status-estudo.ts, periodo.ts<br/>access (owner, editor, viewer), slug"]
+            participacao["<b>Participation</b><br/>participacao.ts, balanceamento.ts,<br/>demografia.ts, cripto.ts, itens-ueq.ts"]
+            resultados["<b>Results</b><br/>resultados.ts, participacoes.ts,<br/>leitura-rapida.ts, perfil-demografico.ts"]
+            arquivos["<b>Files</b><br/>exportacoes.ts, exportar-estudo.ts,<br/>csv.ts, importacao.ts"]
+            avisos["<b>Notices</b><br/>notificacoes.ts, email.ts,<br/>modelo-email.ts"]
+            banco_lib["<b>Database access</b><br/>banco.ts + Prisma Client<br/>generated in src/generated/prisma"]
         end
 
-        ueq["<b>Módulo de cálculo</b><br/>[src/ueq · funções puras]<br/>recodificação, estatística, escalas,<br/>alfa, benchmark, inconsistência"]
-        idiomas["<b>Idiomas do participante</b><br/>[src/idiomas]<br/>37 idiomas, negociação pelo navegador,<br/>textos tipados, plural e listas"]
-        traducao["<b>Tradução da interface</b><br/>[src/traducao]<br/>t() e m(), catálogo de textos,<br/>cache no banco e API do Claude"]
-        ui["<b>Componentes e gráficos</b><br/>[src/componentes, src/graficos]<br/>ItemDiferencial, formulários, janelas, tour,<br/>EscalasComBenchmark, MediasPorItem, Demografia"]
-        docsLib["<b>Leitor de documentos</b><br/>[src/lib/documentacao]<br/>catálogo, Markdown com marked,<br/>links e âncoras como no GitHub"]
+        ueq["<b>Calculation module</b><br/>[src/ueq · pure functions]<br/>recoding, statistics, scales,<br/>alpha, benchmark, inconsistency"]
+        idiomas["<b>Participant languages</b><br/>[src/idiomas]<br/>37 languages, negotiation via the browser,<br/>typed texts, plurals and lists"]
+        traducao["<b>Interface translation</b><br/>[src/traducao]<br/>t() and m(), text catalog,<br/>database cache and Claude API"]
+        ui["<b>Components and charts</b><br/>[src/componentes, src/graficos]<br/>ItemDiferencial, forms, dialogs, tour,<br/>EscalasComBenchmark, MediasPorItem, Demografia"]
+        docsLib["<b>Document reader</b><br/>[src/lib/documentacao]<br/>catalog, Markdown with marked,<br/>links and anchors as on GitHub"]
     end
 
     navegador --> proxy
@@ -189,8 +189,8 @@ flowchart TB
     api --> sessao
     api --> arquivos
     api --> docsLib
-    api -- "abre a impressão" --> pdf
-    docsLib -. ".md e SVG dos diagramas" .-> docsMd
+    api -- "opens the print page" --> pdf
+    docsLib -. ".md and SVG of the diagrams" .-> docsMd
 
     resultados --> ueq
     arquivos --> ueq
@@ -203,12 +203,12 @@ flowchart TB
     avisos --> banco_lib
     traducao --> banco_lib
     banco_lib -- "SQL" --> banco
-    traducao -- "traduz em lotes" --> claude
-    avisos -- "envia" --> smtp
+    traducao -- "translates in batches" --> claude
+    avisos -- "sends" --> smtp
 
-    resultados -. "protocolo e benchmark" .-> dados
-    idiomas -. "termos e instruções" .-> dados
-    areaPart -. "protocolo" .-> dados
+    resultados -. "protocol and benchmark" .-> dados
+    idiomas -. "terms and instructions" .-> dados
+    areaPart -. "protocol" .-> dados
 ```
 
 **Ferramenta do diagrama:** Mermaid 12.2.0 (`flowchart`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [arquitetura-3.mmd](fontes/arquitetura-3.mmd). **Versão representada:** Ferramenta UEQ de 06/11/2026.
@@ -262,38 +262,38 @@ O `matcher` de [`src/proxy.ts`](../../src/proxy.ts) exclui o que nunca exige ses
 
 ```mermaid
 flowchart LR
-    navegador["Navegador<br/>[pesquisador ou participante]"]
+    navegador["Browser<br/>[researcher or participant]"]
 
-    subgraph vercel["Vercel · projeto ferramenta-ueq"]
+    subgraph vercel["Vercel · project ferramenta-ueq"]
         direction TB
-        funcoes["<b>Next.js 16</b><br/>[funções Node.js]<br/>ferramenta-ueq.vercel.app"]
-        build["<b>vercel-build</b><br/>generate, migrate deploy, seed,<br/>cifrar-dados e next build"]
+        funcoes["<b>Next.js 16</b><br/>[Node.js functions]<br/>ferramenta-ueq.vercel.app"]
+        build["<b>vercel-build</b><br/>generate, migrate deploy, seed,<br/>cifrar-dados and next build"]
     end
 
     subgraph neon["Neon · aws-sa-east-1 (São Paulo)"]
-        pgprod[("<b>PostgreSQL</b><br/>DATABASE_URL e<br/>DATABASE_URL_UNPOOLED")]
+        pgprod[("<b>PostgreSQL</b><br/>DATABASE_URL and<br/>DATABASE_URL_UNPOOLED")]
     end
 
     github["<b>GitHub</b><br/>branch main"]
-    claudeapi["<b>API do Claude</b>"]
-    smtpserv["<b>Servidor SMTP</b>"]
+    claudeapi["<b>Claude API</b>"]
+    smtpserv["<b>SMTP server</b>"]
 
-    subgraph maquina["Máquina do desenvolvedor"]
+    subgraph maquina["Developer machine"]
         direction TB
-        node["<b>Node.js 24 + pnpm 10</b><br/>pnpm dev · next dev na porta 3000"]
-        chromium["<b>Chromium do Playwright</b><br/>PDF e testes e2e"]
+        node["<b>Node.js 24 + pnpm 10</b><br/>pnpm dev · next dev on port 3000"]
+        chromium["<b>Playwright Chromium</b><br/>PDF and e2e tests"]
         subgraph docker["Docker"]
-            pg[("<b>postgres:16</b><br/>porta 5432")]
+            pg[("<b>postgres:16</b><br/>port 5432")]
         end
     end
 
     navegador -- "HTTPS" --> funcoes
-    github -- "cada merge publica" --> build
-    build -- "migrations e seed" --> pgprod
+    github -- "each merge deploys" --> build
+    build -- "migrations and seed" --> pgprod
     build --> funcoes
-    funcoes -- "SQL com TLS" --> pgprod
-    funcoes -. "se configurado" .-> claudeapi
-    funcoes -. "se configurado" .-> smtpserv
+    funcoes -- "SQL with TLS" --> pgprod
+    funcoes -. "if configured" .-> claudeapi
+    funcoes -. "if configured" .-> smtpserv
     node -- "DATABASE_URL" --> pg
     node --> chromium
 ```

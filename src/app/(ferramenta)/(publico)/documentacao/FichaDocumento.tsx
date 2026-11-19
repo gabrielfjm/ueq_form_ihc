@@ -1,7 +1,10 @@
 import { Download, ExternalLink } from "lucide-react";
-import { posix } from "node:path";
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { REPOSITORIO, type Documento } from "@/lib/documentacao/catalogo";
-import type { Titulo } from "@/lib/documentacao/markdown";
+import { IDIOMA_ORIGINAL, IDIOMA_SUBSTITUTO, arquivoTraduzido } from "@/lib/documentacao/idiomas";
+import { enderecoDoDownload, type Titulo } from "@/lib/documentacao/markdown";
+import type { Versao } from "@/lib/documentacao/versoes";
 import estilos from "./documentacao.module.css";
 import { tradutor } from "@/traducao/servidor";
 
@@ -12,10 +15,17 @@ type Propriedades = {
   secoes: readonly Titulo[];
   // em produção, a ficha diz o que o documento vai ser, sem arquivo, downloads nem índice
   pronto: boolean;
+  // a versão que a pessoa lê: numa tradução, o arquivo e os downloads são os dela (os downloads, em inglês)
+  versao?: Versao;
 };
 
-export async function FichaDocumento({ documento, secoes, pronto }: Propriedades) {
+const existe = (arquivo: string) => existsSync(join(process.cwd(), arquivo));
+
+export async function FichaDocumento({ documento, secoes, pronto, versao }: Propriedades) {
   const t = await tradutor();
+  const arquivo = versao?.arquivo ?? documento.arquivo;
+  const traduzida = versao !== undefined && versao.idioma !== IDIOMA_ORIGINAL;
+  const emIngles = (caminho: string) => traduzida && existe(arquivoTraduzido(caminho, IDIOMA_SUBSTITUTO));
   return (
     <aside aria-labelledby="titulo-sobre" className={estilos.ficha}>
       <h2 id="titulo-sobre" className={estilos.fichaTitulo}>
@@ -46,9 +56,9 @@ export async function FichaDocumento({ documento, secoes, pronto }: Propriedades
         {pronto && (
           <div>
             <dt>{t("Arquivo")}</dt>
-            <dd className={estilos.arquivo}>{t(documento.arquivo)}</dd>
+            <dd className={estilos.arquivo}>{arquivo}</dd>
             <dd>
-              <a className={estilos.acao} href={`${REPOSITORIO}/blob/main/${documento.arquivo}`} rel="noreferrer">
+              <a className={estilos.acao} href={`${REPOSITORIO}/blob/main/${arquivo}`} rel="noreferrer">
                 <ExternalLink size={18} strokeWidth={1.5} aria-hidden="true" />
                 <span>{t("Ver no GitHub")}</span>
               </a>
@@ -60,7 +70,7 @@ export async function FichaDocumento({ documento, secoes, pronto }: Propriedades
             <dt>{t("Baixar")}</dt>
             {documento.downloads.map((download) => (
               <dd key={download.arquivo}>
-                <a className={estilos.acao} href={`/api/documentacao/${posix.basename(download.arquivo)}`} download>
+                <a className={estilos.acao} href={enderecoDoDownload(download.arquivo, emIngles(download.arquivo))} download>
                   <Download size={18} strokeWidth={1.5} aria-hidden="true" />
                   <span>{t(download.rotulo)}</span>
                 </a>
