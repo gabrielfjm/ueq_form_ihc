@@ -22,11 +22,15 @@
   display: flex;
 }
 
+/* Grid de uma coluna, não flex: no flex o conteúdo ficava esticado na altura da caixa e, quando rolava, passava
+   por cima do próprio padding, com os botões colados no fim da janela. No grid a linha cresce com o conteúdo, e
+   ainda estica até a altura da caixa quando o conteúdo é menor (Entrar e Criar conta) */
 .caixa {
   position: relative;
   flex: 1 1 auto;
   min-width: 0;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
   overflow-y: auto;
   overscroll-behavior: contain;
 }

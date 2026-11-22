@@ -40,13 +40,17 @@ export function Janela({
 }: Propriedades) {
   const t = useT();
   const janela = useRef<HTMLDialogElement>(null);
+  const caixa = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const elemento = janela.current;
     if (!elemento) return;
     if (aberta && !elemento.open) {
       elemento.showModal();
-      elemento.querySelector<HTMLElement>("[data-foco-inicial]")?.focus();
+      // O foco vai para o botão principal, que fica no fim, sem rolar até ele: a janela abre no começo do
+      // conteúdo, para a pessoa ler do título para baixo
+      elemento.querySelector<HTMLElement>("[data-foco-inicial]")?.focus({ preventScroll: true });
+      if (caixa.current) caixa.current.scrollTop = 0;
     } else if (!aberta && elemento.open) {
       elemento.close();
     }
@@ -67,7 +71,7 @@ export function Janela({
       onClose={aoFechar}
       onClick={aoClicar}
     >
-      <div className={estilos.caixa}>
+      <div ref={caixa} className={estilos.caixa}>
         {rotuloFechar && (
           <button type="button" className={estilos.fechar} aria-label={t(rotuloFechar)} onClick={() => janela.current?.close()}>
             <X size={20} strokeWidth={1.5} aria-hidden="true" />
