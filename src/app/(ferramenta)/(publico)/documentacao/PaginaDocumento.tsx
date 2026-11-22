@@ -1,7 +1,9 @@
 import { FileText, FlaskConical, Layers, LayoutDashboard, ListChecks, Shapes, Users, type LucideIcon } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
+import { BotaoAjuda } from "@/componentes/ajuda/BotaoAjuda";
 import { SECOES, VISAO_GERAL, enderecoDoDocumento, secaoDoDocumento, type Documento } from "@/lib/documentacao/catalogo";
+import { pesquisadorDaSessao } from "@/lib/sessao";
 import { enderecoDaPagina, mapaDeAncoras, type AberturaDocumento } from "@/lib/documentacao/paginas";
 import estilos from "./documentacao.module.css";
 import { ArtigoDocumento } from "./ArtigoDocumento";
@@ -34,6 +36,8 @@ const endereco = (documento: Documento) => enderecoDoDocumento(documento) as Rou
 // a abertura e a lista das seções, cada uma em página própria; documento curto é lido inteiro aqui
 export async function PaginaDocumento({ documento, abertura }: { documento: Documento; abertura: AberturaDocumento | null }) {
   const t = await tradutor();
+  // A documentação é pública: o tour (e o "Rever o tour guiado" da ajuda) só existe para quem entrou
+  const comTour = Boolean(await pesquisadorDaSessao());
   const atual = secaoDoDocumento(documento);
   const visaoGeral = documento === VISAO_GERAL;
   const renderizado = abertura?.renderizado ?? null;
@@ -51,9 +55,12 @@ export async function PaginaDocumento({ documento, abertura }: { documento: Docu
               <Link href="/documentacao">{t("Documentação")}</Link> <span aria-hidden="true">›</span> {t(atual.titulo)}
             </p>
           )}
-          <h1 className={estilos.titulo} lang={visaoGeral ? undefined : lang}>{visaoGeral ? t("Documentação") : (renderizado?.titulo ?? documento.rotulo)}</h1>
+          <div className={estilos.linhaTitulo}>
+            <h1 className={estilos.titulo} lang={visaoGeral ? undefined : lang}>{visaoGeral ? t("Documentação") : (renderizado?.titulo ?? documento.rotulo)}</h1>
+            <BotaoAjuda pagina="documentacao" comTour={comTour} />
+          </div>
           <p className={estilos.descricao}>{t(documento.descricao)}</p>
-          <nav aria-label={t("Seções da documentação")} className={estilos.abas}>
+          <nav aria-label={t("Seções da documentação")} className={estilos.abas} data-tutorial="secoes-documentacao">
             {SECOES.map((secao) => {
               const Icone = ICONES[secao.slug] ?? FileText;
               const primeiro = secao.documentos[0];

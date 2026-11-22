@@ -26,6 +26,13 @@
   font-size: var(--texto-sm);
 }
 
+/* Título com o botão (?) da ajuda ao lado, como nas páginas do pesquisador */
+.linhaTitulo {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
 .titulo {
   margin: 0;
   font-size: 2.75rem;

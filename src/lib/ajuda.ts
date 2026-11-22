@@ -252,6 +252,32 @@ export const AJUDA = {
       },
     ],
   },
+  documentacao: {
+    titulo: m("Documentação"),
+    resumo: m("Como a ferramenta foi pensada e construída: requisitos, usuários, modelagem, arquitetura, testes e especificação. É pública, como o código."),
+    secoes: [
+      {
+        titulo: m("Seções e documentos"),
+        texto:
+          m("As abas no topo separam as seções, e abaixo delas ficam os documentos. Documento longo abre com a lista das partes, cada uma em página própria, e no fim de cada parte você segue para a anterior ou a próxima."),
+      },
+      {
+        titulo: m("Diagramas"),
+        texto:
+          m("Clique num diagrama para ampliá-lo em tela cheia, com zoom. Os diagramas são em inglês em todos os idiomas."),
+      },
+      {
+        titulo: m("Sobre este documento"),
+        texto:
+          m("A ficha ao lado de cada documento diz o que ele é, para que serve e quem deve ler. Dali você baixa as planilhas e abre o arquivo no GitHub."),
+      },
+      {
+        titulo: m("Idiomas"),
+        texto:
+          m("O original é em português, com tradução em inglês. Nos outros idiomas, a documentação aparece em inglês. Para traduzi-la, faça um fork no GitHub e abra um pull request."),
+      },
+    ],
+  },
   administracao: {
     titulo: m("Administração"),
     resumo: m("O painel do superusuário. Cada cartão abre a página da ação."),

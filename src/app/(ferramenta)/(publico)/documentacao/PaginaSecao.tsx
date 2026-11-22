@@ -1,7 +1,9 @@
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import type { Route } from "next";
 import Link from "next/link";
+import { BotaoAjuda } from "@/componentes/ajuda/BotaoAjuda";
 import { enderecoDoDocumento, secaoDoDocumento, type Documento } from "@/lib/documentacao/catalogo";
+import { pesquisadorDaSessao } from "@/lib/sessao";
 import { enderecoDaPagina, type PaginaLida } from "@/lib/documentacao/paginas";
 import { tradutor } from "@/traducao/servidor";
 import { ArtigoDocumento } from "./ArtigoDocumento";
@@ -15,6 +17,7 @@ import texto from "./texto.module.css";
 // em destaque, e Anterior e Próxima no fim. Menos rolagem e o caminho de volta sempre à mão (Nielsen 3 e 7)
 export async function PaginaSecao({ documento, lida }: { documento: Documento; lida: PaginaLida }) {
   const t = await tradutor();
+  const comTour = Boolean(await pesquisadorDaSessao());
   const area = secaoDoDocumento(documento);
   const { pagina, secao, parte, partes, html, posicao, total, anterior, proxima, pai, tituloDocumento, versao } = lida;
   const lang = langDaVersao(versao);
@@ -39,6 +42,7 @@ export async function PaginaSecao({ documento, lida }: { documento: Documento; l
           <div className={estilos.faixaPaginaTitulo}>
             <h1 className={estilos.tituloPagina} lang={lang}>{pagina.titulo}</h1>
             <p className={estilos.posicao}>{t("{posicao} de {total}", { posicao, total })}</p>
+            <BotaoAjuda pagina="documentacao" comTour={comTour} />
           </div>
         </div>
       </div>
