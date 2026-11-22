@@ -30,7 +30,7 @@ export function Politica({ t, voltar, comLinkDaConta, aviso, ficha }: Propriedad
       id: "quem",
       titulo: t("Quem cuida dos dados"),
       linhas: [
-        [t("A ferramenta"), t("Um projeto acadêmico da disciplina Fundamentos da IHC do PPGIa da PUCPR, feito por Gabriel Meira, Jean Weiss e Luiza Pedralli.")],
+        [t("A ferramenta"), t("Um projeto acadêmico da disciplina Fundamentos da IHC do PPGIa da PUCPR, feito por Gabriel Felipe Jess Meira, Jean Pscheidt Weiss e Luiza Fonseca Pedralli.")],
         [t("Dados das contas"), t("A equipe é a controladora desses dados.")],
         [t("Respostas de um estudo"), t("O controlador dos dados é o pesquisador responsável pelo estudo, com nome e contato no termo de consentimento; a ferramenta só trata os dados em nome dele.")],
       ],

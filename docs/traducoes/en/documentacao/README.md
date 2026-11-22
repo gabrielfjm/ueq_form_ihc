@@ -6,7 +6,7 @@ Everything is in open formats and displays directly on GitHub: Markdown, CSV and
 
 The code and this documentation are under the [MIT license](../../LICENSE). The official UEQ material in `data/` belongs to the authors of the questionnaire (see the License section of the [README](../../README.md#licença)).
 
-Project for the course Fundamentals of Human-Computer Interaction, PPGIa · PUCPR · 2026. Team: Gabriel Meira, Jean Weiss and Luiza Pedralli.
+Project for the course Fundamentals of Human-Computer Interaction, PPGIa · PUCPR · 2026. Team: Gabriel Felipe Jess Meira, Jean Pscheidt Weiss and Luiza Fonseca Pedralli.
 
 ## Contents
 

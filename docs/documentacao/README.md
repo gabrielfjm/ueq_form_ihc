@@ -6,7 +6,7 @@ Tudo está em formatos abertos e aparece direto no GitHub: Markdown, CSV e diagr
 
 O código e esta documentação estão sob a [licença MIT](../../LICENSE). O material oficial do UEQ em `data/` pertence aos autores do questionário (ver a seção Licença do [README](../../README.md#licença)).
 
-Projeto da disciplina Fundamentos da Interação Humano-Computador, PPGIa · PUCPR · 2026. Equipe: Gabriel Meira, Jean Weiss e Luiza Pedralli.
+Projeto da disciplina Fundamentos da Interação Humano-Computador, PPGIa · PUCPR · 2026. Equipe: Gabriel Felipe Jess Meira, Jean Pscheidt Weiss e Luiza Fonseca Pedralli.
 
 ## Conteúdo
 
