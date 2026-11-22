@@ -20,6 +20,8 @@ Código aberto sob a [licença MIT](LICENSE).
 
 A documentação completa está em [docs/documentacao/](docs/documentacao/) e em [docs/](docs/), e aparece também dentro da própria ferramenta, na aba **Documentação**, aberta a qualquer pessoa, sem login (https://ferramenta-ueq.vercel.app/documentacao). Comece pela [visão geral](docs/documentacao/README.md), que diz o que há em cada documento e por onde começar.
 
+Para quem vai usar a ferramenta, o **[manual de uso em PDF](docs/manual/manual-da-ferramenta-ueq.pdf)** explica cada tela de ponta a ponta, com prints: criar um estudo, aplicar o questionário, ler os resultados, exportar, trabalhar em equipe e a ajuda de cada página. Para regerar depois de mudar a ferramenta, rode `pnpm start` e, em outro terminal, `pnpm manual:prints` e `pnpm manual:pdf`. O texto fica em [docs/manual/manual.html](docs/manual/manual.html).
+
 | Arquivo | Conteúdo |
 |---|---|
 | [docs/documentacao/](docs/documentacao/) | Requisitos e planilha de requisitos, matriz de rastreabilidade, personas, histórias de usuário, casos de uso, diagrama de classes, modelo lógico do banco, diagramas de sequência, arquitetura C4, casos de teste e verificação do cálculo, com os arquivos-fonte dos diagramas em `fontes/` |

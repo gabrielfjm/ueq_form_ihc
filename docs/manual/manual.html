@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Ferramenta UEQ · Manual de uso</title>
+<!-- Fonte do manual: o PDF sai de pnpm manual:pdf (scripts/manual/gerar-pdf.ts). Os prints saem de pnpm manual:prints -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&display=block" rel="stylesheet">
+<style>
+  @page { size: A4; margin: 18mm 18mm 20mm; }
+  @page capa { margin: 0; }
+  :root {
+    --tinta: #0F1720; --tinta-suave: #46525E; --destaque: #0B6A78; --destaque-fundo: #E6F2F4;
+    --faixa: #F3F5F7; --linha: #D5DBE1;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; font-family: "Atkinson Hyperlegible Next", Verdana, sans-serif; font-size: 10.5pt; line-height: 1.5; color: var(--tinta); background: #fff; }
+  h1, h2, h3 { line-height: 1.2; margin: 0; }
+  p { margin: 0 0 8px; }
+  ul { margin: 0 0 8px; padding-left: 18px; }
+  li { margin-bottom: 3px; }
+  strong { font-weight: 700; }
+  a { color: var(--destaque); }
+
+  .capa { page: capa; height: 297mm; display: flex; flex-direction: column; justify-content: space-between; padding: 30mm 22mm 24mm; background: var(--faixa); break-after: page; }
+  .marca { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 14pt; }
+  .bolinhas { display: flex; gap: 4px; }
+  .bolinhas span { width: 11px; height: 11px; border: 1.5px solid var(--tinta); border-radius: 50%; }
+  .bolinhas span.cheia { background: var(--destaque); border-color: var(--destaque); }
+  .capa h1 { font-size: 40pt; margin: 0 0 14px; }
+  .capa .subtitulo { font-size: 15pt; color: var(--tinta-suave); max-width: 135mm; }
+  .capa .rodape { border-top: 1px solid var(--linha); padding-top: 14px; font-size: 10pt; color: var(--tinta-suave); display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .capa .rodape strong { color: var(--tinta); display: block; }
+
+  .sumario { break-after: page; }
+  .sumario h2 { font-size: 20pt; margin-bottom: 16px; }
+  .sumario ol { list-style: none; padding: 0; margin: 0; columns: 2; column-gap: 12mm; }
+  .sumario li { padding: 6px 0; border-bottom: 1px solid var(--linha); break-inside: avoid; }
+  .sumario li span { display: inline-block; width: 26px; color: var(--destaque); font-weight: 700; }
+  .sumario .nota { margin-top: 18px; padding: 12px 14px; background: var(--faixa); border-left: 3px solid var(--destaque); font-size: 10pt; }
+
+  section { break-before: page; }
+  section.junto { break-before: auto; margin-top: 10mm; }
+  .numero { color: var(--destaque); font-weight: 700; font-size: 10pt; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 4px; }
+  h2 { font-size: 19pt; margin-bottom: 10px; }
+  h3 { font-size: 12pt; margin: 14px 0 6px; }
+  .lead { font-size: 11.5pt; color: var(--tinta-suave); margin-bottom: 12px; }
+
+  figure { margin: 10px 0 14px; max-width: 132mm; break-inside: avoid; }
+  .dois figure, .lado figure { max-width: none; }
+  figure img { width: 100%; display: block; border: 1px solid var(--linha); border-radius: 6px; }
+  figcaption { font-size: 9pt; color: var(--tinta-suave); margin-top: 5px; }
+  .lado { display: grid; grid-template-columns: 58mm 1fr; gap: 8mm; align-items: start; break-inside: avoid; }
+  .lado figure { margin: 0; }
+  .dois { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm; break-inside: avoid; }
+  .dois figure { margin: 0; }
+
+  .dica { margin: 10px 0; padding: 10px 14px; background: var(--destaque-fundo); border-radius: 6px; font-size: 10pt; break-inside: avoid; }
+  .dica strong { color: var(--destaque); }
+  table { width: 100%; border-collapse: collapse; font-size: 9.5pt; margin: 6px 0 12px; break-inside: avoid; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--linha); vertical-align: top; }
+  th { font-weight: 700; background: var(--faixa); }
+</style>
+</head>
+<body>
+
+<div class="capa">
+  <div class="marca"><div class="bolinhas"><span></span><span></span><span></span><span></span><span class="cheia"></span><span></span><span></span></div>Ferramenta UEQ</div>
+  <div>
+    <h1>Manual de uso</h1>
+    <p class="subtitulo">Como criar um estudo com o User Experience Questionnaire, aplicar o questionário e ler os resultados, de ponta a ponta.</p>
+  </div>
+  <div class="rodape">
+    <div><strong>Endereço</strong>ferramenta-ueq.vercel.app<br>Código aberto (MIT): github.com/gabrielfjm/ueq_form_ihc</div>
+    <div><strong>Equipe</strong>Gabriel Felipe Jess Meira, Jean Pscheidt Weiss e Luiza Fonseca Pedralli<br>Fundamentos da IHC · PPGIa · PUCPR · novembro de 2026</div>
+  </div>
+</div>
+
+<div class="sumario">
+  <h2>Sumário</h2>
+  <ol>
+    <li><span>1</span>A ferramenta e o UEQ</li>
+    <li><span>2</span>Criar conta e primeiro acesso</li>
+    <li><span>3</span>Seus estudos</li>
+    <li><span>4</span>Criar um estudo</li>
+    <li><span>5</span>Abrir a coleta e enviar o link</li>
+    <li><span>6</span>Trabalhar em equipe</li>
+    <li><span>7</span>O que o participante vê</li>
+    <li><span>8</span>Visão geral do estudo</li>
+    <li><span>9</span>Resultados</li>
+    <li><span>10</span>UEQ-S e dados demográficos</li>
+    <li><span>11</span>Exportar</li>
+    <li><span>12</span>Respostas e respostas suspeitas</li>
+    <li><span>13</span>Importar respostas</li>
+    <li><span>14</span>Notificações</li>
+    <li><span>15</span>Minha conta e idioma</li>
+    <li><span>16</span>Ajuda e tour guiado</li>
+    <li><span>17</span>Documentação</li>
+    <li><span>A</span>Anexo: estudos de demonstração</li>
+  </ol>
+  <p class="nota">Os prints deste manual foram feitos com dados inventados, por uma pesquisadora fictícia (Ana Ribeiro). Os endereços aparecem como <strong>localhost</strong> porque as telas foram capturadas numa cópia local. Na ferramenta publicada, o link dos participantes começa com <strong>ferramenta-ueq.vercel.app/r/</strong>.</p>
+</div>
+
+<section>
+  <p class="numero">Capítulo 1</p>
+  <h2>A ferramenta e o UEQ</h2>
+  <p class="lead">A Ferramenta UEQ conduz estudos com o User Experience Questionnaire (UEQ), do cadastro do estudo à exportação dos dados, sem planilha no meio do caminho.</p>
+  <p>No UEQ, cada participante marca 26 pares de palavras opostas numa escala de 7 pontos. A ferramenta calcula as seis escalas (Atratividade, Perspicuidade, Eficiência, Confiabilidade, Estimulação e Novidade) e compara o produto com o benchmark oficial. Também aplica a versão curta, o UEQ-S, com 8 pares.</p>
+  <figure><img src="prints/01-inicio.jpg" alt="Página inicial da Ferramenta UEQ"><figcaption>Página inicial. Qualquer pessoa pode ler sobre o método, ver como funciona e abrir a documentação. Para criar estudos, use "Criar conta".</figcaption></figure>
+  <p>O questionário está nos 37 idiomas oficiais do UEQ, sempre com os termos oficiais. A interface do pesquisador também está nesses idiomas.</p>
+  <figure><img src="prints/02-creditos.jpg" alt="Créditos da página inicial"><figcaption>Créditos: os autores do método UEQ e a equipe que fez a ferramenta. A ferramenta não é um produto oficial do UEQ.</figcaption></figure>
+</section>
+
+<section>
+  <p class="numero">Capítulo 2</p>
+  <h2>Criar conta e primeiro acesso</h2>
+  <p class="lead">A conta pede nome, e-mail, senha (mínimo de 8 caracteres) e o idioma da ferramenta.</p>
+  <figure><img src="prints/03-criar-conta.jpg" alt="Janela Criar conta"><figcaption>Criar conta. Ao lado, o resumo do caminho de um estudo em quatro passos. Quem já tem conta usa "Entrar".</figcaption></figure>
+  <p>No primeiro acesso aparecem as boas-vindas do tour guiado. O tour leva cerca de um minuto e mostra o link da coleta, o trabalho em equipe, o painel, as respostas suspeitas, a documentação, as notificações e a ajuda. Você mesmo clica nas ações destacadas. Dá para pular agora e rever depois pelo botão (?) de qualquer página.</p>
+  <figure><img src="prints/04-boas-vindas.jpg" alt="Boas-vindas do tour guiado"><figcaption>Boas-vindas do primeiro acesso: "Começar o tour" ou "Pular tutorial".</figcaption></figure>
+</section>
+
+<section>
+  <p class="numero">Capítulo 3</p>
+  <h2>Seus estudos</h2>
+  <p class="lead">A lista mostra os seus estudos e os que outras pessoas compartilharam com você, do atualizado mais recentemente ao mais antigo.</p>
+  <figure><img src="prints/07-estudos.jpg" alt="Lista de estudos"><figcaption>Seus estudos. Cada linha traz o status, o período da coleta, o número de versões, as respostas e a data da última resposta.</figcaption></figure>
+  <table>
+    <tr><th>Status</th><th>O que significa</th></tr>
+    <tr><td>Rascunho</td><td>O estudo ainda não recebe respostas. Quem abrir o link vê um aviso de que o estudo não está aberto.</td></tr>
+    <tr><td>Aberto</td><td>A coleta está aceitando respostas pelo link.</td></tr>
+    <tr><td>Encerrado</td><td>A coleta terminou. Os resultados e as exportações continuam disponíveis.</td></tr>
+  </table>
+  <p>A régua do período mostra onde o dia de hoje cai dentro da coleta. A coluna Respostas conta só quem terminou o questionário.</p>
+</section>
+
+<section>
+  <p class="numero">Capítulo 4</p>
+  <h2>Criar um estudo</h2>
+  <p class="lead">"Criar estudo", na barra do topo, abre um formulário em etapas. À direita, a prévia mostra o que o participante vai ver.</p>
+  <figure><img src="prints/08a-criar-estudo-topo.jpg" alt="Formulário Criar estudo, parte de cima"><figcaption>Sobre o estudo: título, produto avaliado, objetivo e idioma do questionário. O produto e o objetivo aparecem para o participante no termo de consentimento.</figcaption></figure>
+  <ul>
+    <li><strong>Questionário:</strong> UEQ completo (26 pares) ou UEQ-S, a versão curta (8 pares).</li>
+    <li><strong>Responsável pela pesquisa:</strong> nome, contato e instituição aparecem no termo de consentimento, como contato do estudo.</li>
+    <li><strong>Período da coleta:</strong> as datas servem de referência no painel. A coleta só começa quando você clica em "Abrir coleta".</li>
+  </ul>
+  <figure><img src="prints/08-criar-estudo.jpg" alt="Versões e dados do participante"><figcaption>Versões e dados do participante. Com mais de uma versão, a ferramenta distribui as pessoas para equilibrar as respostas, e o painel compara as versões.</figcaption></figure>
+  <ul>
+    <li><strong>Versões:</strong> use uma versão para avaliar um produto, ou duas ou mais para comparar (por exemplo, o fluxo atual e um redesenho).</li>
+    <li><strong>Dados demográficos:</strong> ligados, o participante vê no fim uma etapa opcional com faixa etária, gênero, escolaridade e familiaridade com o produto. Todas as perguntas têm "Prefiro não responder". Ligue só se o objetivo do estudo precisar desses dados (LGPD).</li>
+  </ul>
+  <div class="dica"><strong>Dica.</strong> O estudo nasce em rascunho. Confira tudo com calma antes de abrir a coleta: depois que chegam respostas, mudanças no questionário deixariam os dados incomparáveis.</div>
+</section>
+
+<section>
+  <p class="numero">Capítulo 5</p>
+  <h2>Abrir a coleta e enviar o link</h2>
+  <p class="lead">Na página do estudo, "Abrir coleta" libera o link para os participantes.</p>
+  <figure><img src="prints/09-estudo-rascunho.jpg" alt="Estudo em rascunho"><figcaption>Estudo em rascunho, ainda sem respostas. A ficha à direita resume respostas, período e produto.</figcaption></figure>
+  <p>O link é o mesmo para todas as versões: a ferramenta encaminha cada pessoa para a versão com menos respostas. Para parar a coleta, use "Encerrar coleta" na mesma página. Quem abrir o link verá que a coleta foi encerrada, os resultados continuam disponíveis e a coleta pode ser reaberta.</p>
+  <figure><img src="prints/10-estudo-aberto.jpg" alt="Estudo aberto com o link para participantes"><figcaption>Coleta aberta. "Copiar link" copia o endereço que você envia por e-mail ou mensagem. Quem abrir verá o termo de consentimento antes do questionário.</figcaption></figure>
+</section>
+
+<section>
+  <p class="numero">Capítulo 6</p>
+  <h2>Trabalhar em equipe</h2>
+  <p class="lead">"Compartilhar", no alto de cada estudo, convida outras pessoas pelo e-mail da conta delas.</p>
+  <figure><img src="prints/11-compartilhar.jpg" alt="Janela Compartilhar"><figcaption>Compartilhar. A pessoa precisa ter conta na ferramenta. O convite chega no sino e por e-mail, e ela aceita ou recusa.</figcaption></figure>
+  <table>
+    <tr><th>Papel</th><th>O que pode fazer</th></tr>
+    <tr><td>Dono</td><td>Tudo, inclusive convidar pessoas e excluir o estudo.</td></tr>
+    <tr><td>Editor</td><td>Editar o estudo, abrir e encerrar a coleta, importar respostas e tirar respostas da análise.</td></tr>
+    <tr><td>Leitor</td><td>Ver o painel e as respostas e exportar, sem mudar nada.</td></tr>
+  </table>
+  <p>Estudos compartilhados aparecem em "Seus estudos", na seção "Compartilhados com você", com o nome do dono e o seu papel.</p>
+</section>
+
+<section>
+  <p class="numero">Capítulo 7</p>
+  <h2>O que o participante vê</h2>
+  <p class="lead">A participação tem três etapas: consentimento, questionário e dados opcionais. Não pede nome nem e-mail, e nada identifica a pessoa.</p>
+  <figure><img src="prints/12-termo.jpg" alt="Termo de consentimento"><figcaption>Termo de consentimento, com o tempo estimado, o que é opcional e como desistir. No alto, a pessoa pode trocar o idioma do questionário.</figcaption></figure>
+  <figure><img src="prints/13-questionario.jpg" alt="Questionário com os pares de palavras"><figcaption>O questionário. Cada linha é um par de palavras opostas, e a pessoa marca um dos sete círculos. A barra de baixo mostra o progresso e oferece "Sair sem enviar".</figcaption></figure>
+  <p>Se a pessoa tentar enviar com itens em branco, a ferramenta lista os que faltam, com links para cada um. Se ela fechar a página sem querer, as marcações são recuperadas ao voltar.</p>
+</section>
+
+<section class="junto">
+  <div class="dois">
+    <figure><img src="prints/14-dados-opcionais.jpg" alt="Dados opcionais"><figcaption>Dados opcionais, quando o estudo coleta. A etapa pode ser pulada.</figcaption></figure>
+    <figure><img src="prints/15-fim.jpg" alt="Respostas registradas"><figcaption>Fim. As respostas foram gravadas de forma anônima.</figcaption></figure>
+  </div>
+  <div class="lado" style="margin-top: 10mm">
+    <figure><img src="prints/16-questionario-celular.jpg" alt="Questionário no celular"><figcaption>No celular.</figcaption></figure>
+    <div>
+      <h3>No celular e com acessibilidade</h3>
+      <p>O questionário funciona no celular, no computador, só com o teclado e com leitor de tela, e aceita zoom de até 400%. Segue a WCAG 2.2 nível AA.</p>
+      <p>O tempo médio de resposta é de 4 a 6 minutos para o UEQ completo, sem limite de tempo.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <p class="numero">Capítulo 8</p>
+  <h2>Visão geral do estudo</h2>
+  <p class="lead">Cada estudo tem três abas: Visão geral, Resultados e Respostas.</p>
+  <figure><img src="prints/17-visao-geral.jpg" alt="Visão geral de um estudo com respostas"><figcaption>Visão geral de um estudo aberto com duas versões. Abaixo do título, o resumo: respostas, suspeitas e quantas estão na análise.</figcaption></figure>
+  <ul>
+    <li><strong>Link para participantes:</strong> o endereço da coleta, com "Copiar link".</li>
+    <li><strong>Coleta por versão:</strong> quantas respostas cada versão já recebeu.</li>
+    <li><strong>Ficha do estudo:</strong> respostas, período, produto e objetivo. Pela Visão geral você também usa "Editar estudo" e "Encerrar coleta".</li>
+  </ul>
+</section>
+
+<section>
+  <p class="numero">Capítulo 9</p>
+  <h2>Resultados</h2>
+  <p class="lead">O painel do UEQ: a leitura rápida, as médias das seis escalas, a comparação com o benchmark, os itens e a consistência.</p>
+  <figure><img src="prints/18-resultados.jpg" alt="Painel de resultados"><figcaption>Resultados. No alto, a versão analisada ("Uma versão" ou "Comparar versões"). A leitura rápida resume o painel em uma frase, ao lado das notas de Atratividade e das qualidades pragmática e hedônica.</figcaption></figure>
+  <figure><img src="prints/19-escalas.jpg" alt="Escalas com benchmark"><figcaption>Escalas. Cada barra é a média de uma escala, de −3 a +3, com o intervalo de confiança de 95%. As faixas ao fundo comparam o produto com o benchmark do UEQ.</figcaption></figure>
+  <table>
+    <tr><th>Como ler</th><th></th></tr>
+    <tr><td>Média acima de +0,8</td><td>Avaliação positiva</td></tr>
+    <tr><td>Entre −0,8 e +0,8</td><td>Faixa neutra</td></tr>
+    <tr><td>Abaixo de −0,8</td><td>Avaliação negativa</td></tr>
+    <tr><td>Benchmark</td><td>Excelente, Bom, Acima da média, Abaixo da média ou Ruim, em relação a centenas de produtos avaliados com o UEQ</td></tr>
+  </table>
+  <div class="dica"><strong>Poucas respostas?</strong> Com poucas respostas o intervalo de confiança fica largo, e a ferramenta avisa quando ainda é cedo para concluir. Os links "O que é o benchmark?", "O que é o IC95?" e os das escalas explicam cada conceito no próprio painel.</div>
+  <p>Em estudos com mais de uma versão, "Comparar versões" põe as médias lado a lado, escala por escala, com a diferença entre elas.</p>
+</section>
+
+<section>
+  <p class="numero">Capítulo 10</p>
+  <h2>UEQ-S e dados demográficos</h2>
+  <p>As respostas importadas de CSV não têm a etapa de dados opcionais e por isso não entram nestes gráficos.</p>
+  <figure><img src="prints/20-ueq-s.jpg" alt="Aba UEQ-S"><figcaption>A aba UEQ-S mostra a avaliação da versão curta: qualidade pragmática, hedônica e geral, com o benchmark e a planilha oficial dela. Num estudo do UEQ completo, ela usa os 8 pares do UEQ-S que os participantes também responderam.</figcaption></figure>
+  <figure><img src="prints/21-demografia.jpg" alt="Aba Dados demográficos"><figcaption>Dados demográficos. Cada pergunta aparece no gráfico que combina com ela: faixa etária em colunas, gênero e escolaridade em barras e familiaridade numa barra dividida. "Ver os números" abre a tabela de cada gráfico.</figcaption></figure>
+</section>
+
+<section>
+  <p class="numero">Capítulo 11</p>
+  <h2>Exportar</h2>
+  <p class="lead">No fim da página de Resultados ficam os arquivos para o relatório e para outras análises.</p>
+  <figure><img src="prints/22-exportar.jpg" alt="Seção Exportar"><figcaption>Exportar. O nome dos arquivos leva o título do estudo e a data.</figcaption></figure>
+  <table>
+    <tr><th>Arquivo</th><th>O que traz</th></tr>
+    <tr><td>Painel em PDF</td><td>O painel da versão escolhida, em A4 e com os gráficos em vetor, para anexar ao relatório ou imprimir.</td></tr>
+    <tr><td>Respostas brutas (CSV)</td><td>Uma linha por participação, valores de 1 a 7, com colunas de inclusão na análise e de suspeita.</td></tr>
+    <tr><td>Respostas recodificadas (CSV)</td><td>O mesmo formato, com valores de −3 a +3 e a polaridade já corrigida.</td></tr>
+    <tr><td>Resultados por escala (CSV)</td><td>n, média, desvio padrão, IC95, alfa de Cronbach e faixas de cada escala e versão.</td></tr>
+    <tr><td>Planilha oficial do UEQ (XLSX)</td><td>A UEQ Data Analysis Tool V15 já preenchida com as participações que estão na análise. Abra no Excel e clique em "Habilitar edição": a planilha recalcula sozinha, com os gráficos, o benchmark e as suspeitas dela.</td></tr>
+  </table>
+  <div class="dica"><strong>Conferido com a planilha oficial.</strong> Os cálculos da ferramenta foram validados contra a planilha oficial do UEQ, com os mesmos dados, para o UEQ completo e para o UEQ-S.</div>
+</section>
+
+<section>
+  <p class="numero">Capítulo 12</p>
+  <h2>Respostas e respostas suspeitas</h2>
+  <p class="lead">A aba Respostas lista cada participação e marca as que parecem descuidadas.</p>
+  <figure><img src="prints/23-respostas.jpg" alt="Lista de respostas"><figcaption>Respostas. O panorama mostra cada participação como um ponto: cheio na análise, vazado fora dela. Na tabela, a coluna "Na análise" decide se a resposta entra no cálculo.</figcaption></figure>
+  <p>Uma resposta vira <strong>suspeita</strong> quando a pessoa respondeu de forma contraditória em 3 ou mais escalas (pares que deveriam concordar e não concordam), ou quando marcou a mesma posição em mais de 15 dos 26 itens. O critério é o do handbook do UEQ.</p>
+  <ul>
+    <li><strong>Mostrar só suspeitas</strong> filtra a tabela.</li>
+    <li><strong>Tirar suspeitas da análise</strong> desmarca todas de uma vez.</li>
+    <li>Você também pode marcar ou desmarcar uma por uma. Nada é apagado: a resposta só sai do cálculo, e volta quando você quiser.</li>
+  </ul>
+  <p>"Ver escalas", em cada linha, mostra as respostas daquela participação por escala, para você decidir com os dados à vista.</p>
+</section>
+
+<section>
+  <p class="numero">Capítulo 13</p>
+  <h2>Importar respostas</h2>
+  <p class="lead">Para trazer respostas coletadas fora da ferramenta, em papel ou em outro formulário.</p>
+  <figure><img src="prints/24-importar.jpg" alt="Importar respostas de um CSV"><figcaption>Importar respostas de um CSV, em Respostas. Escolha a versão, o arquivo e clique em "Ver prévia" antes de confirmar.</figcaption></figure>
+  <ul>
+    <li>Uma pessoa por linha, com os 26 valores de 1 a 7 na ordem oficial do UEQ e sem cabeçalho.</li>
+    <li>Valores separados por ponto e vírgula, vírgula ou tabulação. Até 5000 linhas por arquivo.</li>
+    <li>O formato é o da aba Data da planilha oficial, o mesmo da exportação "Formato da planilha oficial".</li>
+  </ul>
+  <p>As respostas importadas passam pela mesma verificação de suspeitas e entram no painel e nas exportações como as demais.</p>
+</section>
+
+<section>
+  <p class="numero">Capítulo 14</p>
+  <h2>Notificações</h2>
+  <p class="lead">O sino, na barra do topo, mostra quantas novidades você ainda não viu.</p>
+  <p>Avisam sobre convites, respostas novas (dez respostas numa manhã viram um aviso só) e mudanças feitas por outras pessoas da equipe, como editar o estudo, abrir ou encerrar a coleta, importar respostas ou tirar respostas da análise. O que você mesmo faz não gera aviso. Cada aviso também vai por e-mail, o que dá para desligar em Minha conta.</p>
+  <figure><img src="prints/25-sino.jpg" alt="Sino de notificações aberto"><figcaption>O sino aberto. Convites para estudos são aceitos ou recusados ali mesmo.</figcaption></figure>
+  <figure><img src="prints/26-notificacoes.jpg" alt="Página Notificações"><figcaption>"Ver todas as notificações" abre o histórico completo.</figcaption></figure>
+</section>
+
+<section>
+  <p class="numero">Capítulo 15</p>
+  <h2>Minha conta e idioma</h2>
+  <p>Excluir a conta apaga a conta, os seus estudos e as respostas coletadas, e não dá para desfazer. Os participantes nunca veem o nome nem o e-mail da sua conta: o termo de consentimento mostra o responsável pela pesquisa que você escreveu no estudo.</p>
+  <figure><img src="prints/27-conta.jpg" alt="Minha conta"><figcaption>Minha conta: dados cadastrais, senha, idioma, notificações por e-mail, o resumo da conta e a exclusão da conta.</figcaption></figure>
+  <figure><img src="prints/28-idioma.jpg" alt="Seletor de idioma"><figcaption>O seletor de idioma, na barra do topo, troca a interface entre os 37 idiomas. Ele também define o idioma padrão dos estudos que você criar.</figcaption></figure>
+</section>
+
+<section>
+  <p class="numero">Capítulo 16</p>
+  <h2>Ajuda e tour guiado</h2>
+  <p class="lead">Toda página tem o botão (?) ao lado do título, que explica para que ela serve e o que dá para fazer nela.</p>
+  <figure><img src="prints/31-ajuda.jpg" alt="Ajuda da página de resultados"><figcaption>A ajuda da página de Resultados. "Rever o tour guiado" começa o tour de novo, e o link da política de privacidade fica no fim.</figcaption></figure>
+  <figure><img src="prints/32-tour.jpg" alt="Primeiro passo do tour guiado"><figcaption>O tour guiado escurece a página e destaca uma parte dela. Você clica na ação destacada para seguir, ou usa "Fazer por mim". "Pular tutorial", o x ou Esc encerram o tour.</figcaption></figure>
+</section>
+
+<section>
+  <p class="numero">Capítulo 17</p>
+  <h2>Documentação</h2>
+  <p class="lead">A aba Documentação mostra como a ferramenta foi pensada e construída. É pública, como o código.</p>
+  <p>O original é em português, com tradução em inglês. Nos outros idiomas a documentação aparece em inglês. Quem quiser traduzi-la para outro idioma pode fazer um fork do repositório no GitHub e abrir um pull request.</p>
+  <figure><img src="prints/29-documentacao.jpg" alt="Documentação"><figcaption>Documentação: visão geral, requisitos, usuários, modelagem, arquitetura, testes e especificação.</figcaption></figure>
+  <figure><img src="prints/30-documento.jpg" alt="Documento de requisitos"><figcaption>Um documento. A ficha "Sobre este documento" diz o que ele é, para que serve e quem deve ler, com os arquivos para baixar e o link do GitHub.</figcaption></figure>
+</section>
+
+<section>
+  <p class="numero">Anexo A</p>
+  <h2>Estudos de demonstração</h2>
+  <p class="lead">Só para administradores da ferramenta, em Administração.</p>
+  <figure><img src="prints/06-cenarios.jpg" alt="Cenários de demonstração"><figcaption>Cenários de demonstração: cria três estudos com dados inventados para mostrar a ferramenta funcionando, com o dono e as pessoas escolhidas.</figcaption></figure>
+  <p>Os três estudos são uma comparação A/B com a coleta aberta e respostas suspeitas, um estudo encerrado com respostas importadas e um rascunho com 3 versões. São os mesmos dados usados nos prints deste manual. A Administração também cria contas para quem vai testar a ferramenta e mostra a situação da proteção de dados e da tradução de cada idioma. O administrador não vê os estudos nem as respostas de ninguém.</p>
+</section>
+
+</body>
+</html>

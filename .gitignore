@@ -17,3 +17,6 @@ test-results/
 
 # configuração local do editor
 .vscode/
+
+# prints do manual: saem de pnpm manual:prints e entram no PDF
+/docs/manual/prints/
