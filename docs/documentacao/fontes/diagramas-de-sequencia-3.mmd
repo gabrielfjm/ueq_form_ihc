@@ -1,36 +1,36 @@
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
-    participant Pag as Página resultados
-    participant Sessao as lib/sessao
-    participant Estudos as lib/estudos
+    actor Pesq as Researcher
+    participant Nav as Browser
+    participant Pag as Results page
+    participant Session as lib/sessao
+    participant Studies as lib/estudos
     participant Res as lib/resultados
     participant Ueq as ueq
     participant BD as PostgreSQL
 
-    Pesq->>Nav: abre /estudos/abc/resultados?versao=v2
-    Nav->>Pag: GET com searchParams
-    Pag->>Sessao: exigirPesquisador()
-    Sessao->>BD: sessão pelo hash do token, ainda válida
-    BD-->>Sessao: pesquisador
-    Pag->>Estudos: estudoDoPesquisador(id, pessoa, "ver")
-    Estudos->>BD: estudo com esse id, se a pessoa é dona ou aceitou o convite
-    alt estudo não existe ou a pessoa não tem acesso
-        Estudos-->>Nav: 404, igual nos dois casos
-    else a pessoa tem acesso
-        Pag->>Res: analisarResultados(estudoId, versões)
-        Res->>BD: itens e participações concluídas, com respostas
-        Res->>Res: monta 26 valores por participação e separa por versão
-        Res->>Ueq: analisarEstudo(todas, itens, protocolo e benchmark)
-        loop para cada versão
-            Res->>Ueq: analisarEstudo(da versão, itens, config)
+    Pesq->>Nav: opens /estudos/abc/resultados?version=v2
+    Nav->>Pag: GET with searchParams
+    Pag->>Session: requireResearcher()
+    Session->>BD: session by the token hash, still valid
+    BD-->>Session: researcher
+    Pag->>Studies: researcherStudy(id, pessoa, "ver")
+    Studies->>BD: study with this id, if the person is the owner or accepted the invitation
+    alt study does not exist or the person has no access
+        Studies-->>Nav: 404, the same in both cases
+    else the person has access
+        Pag->>Res: analyzeResults(studyId, versions)
+        Res->>BD: items and completed participations, with responses
+        Res->>Res: builds 26 values per participation and splits by version
+        Res->>Ueq: analyzeStudy(all, items, protocol and benchmark)
+        loop for each version
+            Res->>Ueq: analyzeStudy(of the version, items, config)
         end
-        Ueq-->>Res: AnaliseEstudo (escalas, grupos, itens, participantes)
-        Res-->>Pag: análise de todas e por versão
-        Pag->>Pag: leitura rápida, gráfico SVG com title e desc, tabelas
-        Pag-->>Nav: HTML do painel
-        Nav-->>Pesq: painel da versão v2
+        Ueq-->>Res: StudyAnalysis (scales, groups, items, participants)
+        Res-->>Pag: analysis of all and per version
+        Pag->>Pag: quick reading, SVG chart with title and desc, tables
+        Pag-->>Nav: dashboard HTML
+        Nav-->>Pesq: dashboard of version v2
     end
-    Pesq->>Nav: escolhe "Comparar versões"
-    Nav->>Pag: GET ?modo=comparar (a URL guarda a visão)
+    Pesq->>Nav: chooses "Compare versions"
+    Nav->>Pag: GET ?modo=comparar (the URL keeps the view)

@@ -105,4 +105,4 @@ Vão para a API só os textos da interface e os textos do estudo. Nenhuma respos
 ## Fora do escopo
 
 - O painel de resultados não separa por idioma. Para comparar idiomas, use a coluna `idioma` das exportações.
-- Os documentos da aba Documentação ficam em português.
+- Os documentos da aba Documentação existem em português (o original) e em inglês (tradução do Claude, sem a API e ainda sem revisão nativa, em `docs/traducoes/en/`). Nos outros 35 idiomas da interface, aparecem em inglês, com um aviso que convida a traduzir a documentação por fork e pull request no GitHub (o passo a passo está em `docs/traducoes/LEIA-ME.md`). Os diagramas são em inglês em todos os idiomas.

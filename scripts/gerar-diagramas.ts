@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { chromium } from "playwright";
 import { DOCUMENTOS, PASTA_FONTES, caminhoDaFonte } from "../src/lib/documentacao/catalogo";
 import { NOME_DIAGRAMA, PASTA_DIAGRAMAS, blocosMermaid, nomeDoDiagrama } from "../src/lib/documentacao/diagramas";
+import { IDIOMAS_TRADUZIDOS, arquivoTraduzido } from "../src/lib/documentacao/idiomas";
 
 // pnpm docs:diagramas: gera um SVG por diagrama Mermaid dos documentos do catálogo e apaga os que
 // nenhum documento usa mais. Rode depois de mudar um diagrama num .md
@@ -19,6 +20,13 @@ for (const documento of DOCUMENTOS.filter(({ arquivo }) => existsSync(arquivo)))
     // Todo diagrama publica o arquivo-fonte para baixar. A pasta guarda também fontes de outras ferramentas, então nada é apagado
     writeFileSync(caminhoDaFonte(documento, posicao), `${codigo.replace(/\r\n/g, "\n").trim()}\n`);
   });
+  // Os diagramas são em inglês em todos os idiomas, inclusive no original, e as traduções os copiam sem mudar
+  // (pnpm docs:conferir confere). Um diagrama de tradução fora do original ainda ganha SVG, para não quebrar a página
+  for (const idioma of IDIOMAS_TRADUZIDOS) {
+    const traduzido = arquivoTraduzido(documento.arquivo, idioma);
+    if (!existsSync(traduzido)) continue;
+    for (const codigo of blocosMermaid(readFileSync(traduzido, "utf8"))) diagramas.set(nomeDoDiagrama(codigo), codigo);
+  }
 }
 
 mkdirSync(PASTA_DIAGRAMAS, { recursive: true });

@@ -1,8 +1,8 @@
 stateDiagram-v2
-    [*] --> RASCUNHO: criar estudo
-    RASCUNHO --> ABERTO: abrir coleta
-    ABERTO --> ENCERRADO: encerrar coleta
-    ENCERRADO --> ABERTO: reabrir coleta
-    RASCUNHO --> [*]: excluir
-    ABERTO --> [*]: excluir
-    ENCERRADO --> [*]: excluir
+    [*] --> DRAFT: create study
+    DRAFT --> OPEN: open data collection
+    OPEN --> CLOSED: close data collection
+    CLOSED --> OPEN: reopen data collection
+    DRAFT --> [*]: delete
+    OPEN --> [*]: delete
+    CLOSED --> [*]: delete

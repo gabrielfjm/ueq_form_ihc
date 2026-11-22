@@ -1,23 +1,23 @@
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
-    participant Acao as Ação alterarInclusao
-    participant Sessao as lib/sessao
-    participant Estudos as lib/estudos
+    actor Pesq as Researcher
+    participant Nav as Browser
+    participant Acao as Action setInclusion
+    participant Session as lib/sessao
+    participant Studies as lib/estudos
     participant BD as PostgreSQL
 
-    Pesq->>Nav: desmarca "Na análise" numa linha de Respostas
-    Nav->>Acao: alterarInclusao(estudoId, participacaoId, false)
-    Acao->>Sessao: exigirPesquisador()
-    Acao->>Estudos: estudoDoPesquisador(estudoId, pessoa, "editar")
-    Acao->>BD: participação com esse id, deste estudo e concluída
-    alt não encontrada
-        Acao-->>Nav: erro "Essa participação não está neste estudo…"
-    else encontrada
-        Acao->>BD: incluidaNaAnalise = false
-        Acao->>BD: avisa o resto da equipe no sino (notificarAlteracao)
-        Acao->>Acao: revalidatePath do estudo (painel, respostas, exportações)
-        Acao-->>Nav: "Participação de … saiu da análise. Nada foi apagado…"
-        Nav-->>Pesq: aviso em role="status"
+    Pesq->>Nav: unchecks "In analysis" on a row of Responses
+    Nav->>Acao: setInclusion(studyId, participationId, false)
+    Acao->>Session: requireResearcher()
+    Acao->>Studies: researcherStudy(studyId, pessoa, "editar")
+    Acao->>BD: participation with this id, from this study and completed
+    alt not found
+        Acao-->>Nav: error "This participation is not in this study…"
+    else found
+        Acao->>BD: includedInAnalysis = false
+        Acao->>BD: notifies the rest of the team in the bell (notifyChange)
+        Acao->>Acao: revalidatePath of the study (dashboard, responses, exports)
+        Acao-->>Nav: "Participation from … left the analysis. Nothing was deleted…"
+        Nav-->>Pesq: notice in role="status"
     end

@@ -1,5 +1,5 @@
 import { Marked, type Token } from "marked";
-import { slugDoTitulo } from "./markdown";
+import { ancoraMarcada, slugDoTitulo } from "./markdown";
 
 // Documento longo não é lido de uma vez: a abertura vira um índice e cada seção abre em página própria.
 // A divisão usa os tokens do marked, para um "## " dentro de um bloco de código não virar seção
@@ -67,6 +67,8 @@ export function dividirDocumento(markdown: string, tamanhoMinimo = TAMANHO_DOCUM
   const tokens = new Marked({ gfm: true }).lexer(markdown);
   const usadas = new Map<string, number>();
   const ancoraDoTitulo = (texto: string) => {
+    const marcada = ancoraMarcada(texto);
+    if (marcada) return marcada;
     const base = slugDoTitulo(texto);
     const vezes = usadas.get(base) ?? 0;
     usadas.set(base, vezes + 1);

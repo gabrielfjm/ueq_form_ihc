@@ -1,24 +1,35 @@
-import { existsSync, readFileSync, statSync } from "node:fs";
-import { join } from "node:path";
-import { VISAO_GERAL, documentoPronto, enderecoDoDocumento, type Documento } from "./catalogo";
+import { VISAO_GERAL, enderecoDoDocumento, type Documento } from "./catalogo";
 import { dividirDocumento, type Estrutura, type Pagina, type SecaoDocumento } from "./estrutura";
-import { renderizarMarkdown, type DocumentoRenderizado } from "./markdown";
+import { IDIOMA_ORIGINAL } from "./idiomas";
+import { renderizarMarkdown, type DocumentoRenderizado, type OpcoesRenderizacao } from "./markdown";
+import { versaoDoDocumento, type Versao } from "./versoes";
 
-const cache = new Map<string, { modificado: number; estrutura: Estrutura }>();
+const cache = new Map<string, { texto: string; estrutura: Estrutura }>();
 
-// Cada link de uma página pergunta a estrutura do documento de destino: ela só é refeita se o arquivo mudou
-export function estruturaDe(documento: Documento): Estrutura | null {
-  if (!documentoPronto(documento)) return null;
-  const caminho = join(process.cwd(), documento.arquivo);
-  if (!existsSync(caminho)) return null;
-  const modificado = statSync(caminho).mtimeMs;
-  const guardada = cache.get(documento.arquivo);
-  if (guardada?.modificado === modificado) return guardada.estrutura;
-  const dividida = dividirDocumento(readFileSync(caminho, "utf8"));
-  // A visão geral fica em /documentacao, sem o nome do documento no endereço: é o índice e fica inteira
-  const estrutura = documento === VISAO_GERAL ? { ...dividida, inteiro: true } : dividida;
-  cache.set(documento.arquivo, { modificado, estrutura });
+// Em que idioma a pessoa lê e como os rótulos do HTML saem (o t() da página)
+export type Leitura = { idioma?: string; t?: OpcoesRenderizacao["t"] };
+
+function estruturaDaVersao(documento: Documento, versao: Versao): Estrutura {
+  const chave = `${documento.arquivo}:${versao.idioma}`;
+  const guardada = cache.get(chave);
+  if (guardada?.texto === versao.texto) return guardada.estrutura;
+  const dividida = dividirDocumento(versao.texto);
+  // A visão geral fica em /documentacao, sem o nome do documento no endereço: é o índice e fica inteira.
+  // Numa tradução, ler inteiro ou em páginas segue o original: o japonês tem menos caracteres que o português,
+  // e os endereços das páginas têm de ser os mesmos em todos os idiomas
+  const inteiro =
+    documento === VISAO_GERAL || (versao.idioma === IDIOMA_ORIGINAL ? dividida.inteiro : (estruturaDe(documento)?.inteiro ?? dividida.inteiro));
+  const estrutura = { ...dividida, inteiro };
+  cache.set(chave, { texto: versao.texto, estrutura });
   return estrutura;
+}
+
+// Cada link de uma página pergunta a estrutura do documento de destino: ela só é refeita se o arquivo mudou.
+// Os endereços e as âncoras são os mesmos em todos os idiomas, então quem só quer saber onde fica uma âncora
+// pergunta a do original
+export function estruturaDe(documento: Documento, idioma: string = IDIOMA_ORIGINAL): Estrutura | null {
+  const versao = versaoDoDocumento(documento, idioma);
+  return versao ? estruturaDaVersao(documento, versao) : null;
 }
 
 export function enderecoDaPagina(documento: Documento, secao: string, parte?: string): string {
@@ -40,20 +51,23 @@ export function rotaDaAncora(documento: Documento, ancora?: string): string {
 export type AberturaDocumento = {
   estrutura: Estrutura;
   renderizado: DocumentoRenderizado;
+  versao: Versao;
 };
 
+function opcoesDaVersao(documento: Documento, versao: Versao, enderecoAtual: string, leitura: Leitura): OpcoesRenderizacao {
+  return { rota: rotaDaAncora, enderecoAtual, documento, t: leitura.t, arquivosEmIngles: versao.idioma !== IDIOMA_ORIGINAL };
+}
+
 // O que a página do documento mostra: inteiro, ou só a abertura, com as seções como índice
-export function aberturaDoDocumento(documento: Documento): AberturaDocumento | null {
-  const estrutura = estruturaDe(documento);
-  if (!estrutura) return null;
-  const endereco = enderecoDoDocumento(documento);
-  const opcoes = { rota: rotaDaAncora, enderecoAtual: endereco, documento };
-  if (estrutura.inteiro) {
-    const inteiro = readFileSync(join(process.cwd(), documento.arquivo), "utf8");
-    return { estrutura, renderizado: renderizarMarkdown(inteiro, documento.arquivo, opcoes) };
-  }
+export function aberturaDoDocumento(documento: Documento, leitura: Leitura = {}): AberturaDocumento | null {
+  const versao = versaoDoDocumento(documento, leitura.idioma);
+  if (!versao) return null;
+  const estrutura = estruturaDaVersao(documento, versao);
+  const opcoes = opcoesDaVersao(documento, versao, enderecoDoDocumento(documento), leitura);
+  // Os links relativos da tradução são os do original: resolvem a partir do caminho do original
+  if (estrutura.inteiro) return { estrutura, versao, renderizado: renderizarMarkdown(versao.texto, documento.arquivo, opcoes) };
   const renderizado = renderizarMarkdown(estrutura.abertura, documento.arquivo, { ...opcoes, semTitulo: true });
-  return { estrutura, renderizado: { ...renderizado, titulo: estrutura.titulo } };
+  return { estrutura, versao, renderizado: { ...renderizado, titulo: estrutura.titulo } };
 }
 
 export type Vizinha = { titulo: string; endereco: string };
@@ -72,11 +86,14 @@ export type PaginaLida = {
   // Para onde o Voltar leva quando não há histórico: a seção da parte, ou a abertura do documento
   pai: Vizinha;
   tituloDocumento: string;
+  versao: Versao;
 };
 
-export function lerPagina(documento: Documento, slugSecao: string, slugParte?: string): PaginaLida | null {
-  const estrutura = estruturaDe(documento);
-  if (!estrutura || estrutura.inteiro) return null;
+export function lerPagina(documento: Documento, slugSecao: string, slugParte?: string, leitura: Leitura = {}): PaginaLida | null {
+  const versao = versaoDoDocumento(documento, leitura.idioma);
+  if (!versao) return null;
+  const estrutura = estruturaDaVersao(documento, versao);
+  if (estrutura.inteiro) return null;
   const indiceSecao = estrutura.secoes.findIndex((candidata) => candidata.slug === slugSecao);
   const secao = estrutura.secoes[indiceSecao];
   if (!secao) return null;
@@ -92,9 +109,7 @@ export function lerPagina(documento: Documento, slugSecao: string, slugParte?: s
   const enderecoAtual = endereco(pagina);
 
   const { html } = renderizarMarkdown(pagina.markdown, documento.arquivo, {
-    rota: rotaDaAncora,
-    enderecoAtual,
-    documento,
+    ...opcoesDaVersao(documento, versao, enderecoAtual, leitura),
     semTitulo: true,
     deslocamento: slugParte ? 2 : 1,
     tituloInicial: pagina.titulo,
@@ -114,6 +129,7 @@ export function lerPagina(documento: Documento, slugSecao: string, slugParte?: s
       ? { titulo: secao.titulo, endereco: enderecoDaPagina(documento, secao.slug) }
       : { titulo: estrutura.titulo || documento.rotulo, endereco: enderecoDoDocumento(documento) },
     tituloDocumento: estrutura.titulo || documento.rotulo,
+    versao,
   };
 }
 

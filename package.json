@@ -18,6 +18,7 @@
     "db:seed": "prisma db seed",
     "suspeitas:recalcular": "tsx prisma/recalcular-suspeitas.ts",
     "docs:diagramas": "tsx scripts/gerar-diagramas.ts",
+    "docs:conferir": "tsx scripts/conferir-traducoes.ts",
     "dados:cifrar": "tsx prisma/cifrar-dados.ts",
     "i18n:catalogo": "tsx scripts/catalogo-traducao.ts"
   },

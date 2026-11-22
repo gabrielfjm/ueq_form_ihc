@@ -6,6 +6,7 @@ import { NOME_DIAGRAMA, PASTA_DIAGRAMAS, blocosMermaid, nomeDoDiagrama } from ".
 import { destinoDoLink, renderizarMarkdown, slugDoTitulo } from "../documentacao/markdown";
 import { dividirDocumento } from "../documentacao/estrutura";
 import { estruturaDe, lerPagina, rotaDaAncora } from "../documentacao/paginas";
+import { IDIOMAS_TRADUZIDOS, arquivoTraduzido } from "../documentacao/idiomas";
 
 const ler = (arquivo: string) => readFileSync(arquivo, "utf8");
 
@@ -38,7 +39,8 @@ describe("catálogo da documentação", () => {
 });
 
 describe("diagramas", () => {
-  const usados = new Set(EXISTENTES.flatMap((documento) => blocosMermaid(ler(documento.arquivo)).map(nomeDoDiagrama)));
+  const traducoes = IDIOMAS_TRADUZIDOS.flatMap((idioma) => EXISTENTES.map(({ arquivo }) => arquivoTraduzido(arquivo, idioma))).filter(existsSync);
+  const usados = new Set([...EXISTENTES.map(({ arquivo }) => arquivo), ...traducoes].flatMap((arquivo) => blocosMermaid(ler(arquivo)).map(nomeDoDiagrama)));
 
   it("cada diagrama dos documentos tem o SVG gerado (senão: pnpm docs:diagramas)", () => {
     for (const nome of usados) expect(existsSync(posix.join(PASTA_DIAGRAMAS, nome)), `${nome}: rode pnpm docs:diagramas`).toBe(true);

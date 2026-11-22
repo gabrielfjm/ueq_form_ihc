@@ -1,30 +1,30 @@
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
-    participant Rota as Rota de API painel-pdf
-    participant Sessao as lib/sessao
+    actor Pesq as Researcher
+    participant Nav as Browser
+    participant Rota as API route painel-pdf
+    participant Session as lib/sessao
     participant Chrome as Chromium (Playwright)
-    participant Imp as Página impressao
+    participant Imp as Print page
     participant BD as PostgreSQL
 
-    Pesq->>Nav: Exportar painel em PDF
-    Nav->>Rota: GET /api/estudos/abc/painel-pdf?versao=v2
-    Rota->>Sessao: pesquisadorDaSessao()
-    alt sem sessão
-        Rota-->>Nav: 401 "Entre na sua conta…"
-    else com sessão
-        Rota->>BD: estudo com esse id e filtroDeAcesso(pessoa)
-        alt estudo não encontrado ou sem acesso
-            Rota-->>Nav: 404 "Estudo não encontrado."
-        else a pessoa tem acesso
-            Rota->>Chrome: launch() e cookie de sessão para a origem interna
-            Chrome->>Imp: GET /estudos/abc/resultados/impressao?versao=v2
-            Note over Imp,BD: mesma consulta e mesmo cálculo do diagrama 3
-            Imp-->>Chrome: HTML com CSS de impressão (A4, 18 mm)
-            Chrome->>Chrome: espera as fontes, emula mídia print
-            Chrome-->>Rota: PDF com gráficos em vetor
+    Pesq->>Nav: Export dashboard as PDF
+    Nav->>Rota: GET /api/estudos/abc/painel-pdf?version=v2
+    Rota->>Session: sessionResearcher()
+    alt no session
+        Rota-->>Nav: 401 "Log in to your account…"
+    else with session
+        Rota->>BD: study with this id and accessFilter(pessoa)
+        alt study not found or no access
+            Rota-->>Nav: 404 "Study not found."
+        else the person has access
+            Rota->>Chrome: launch() and session cookie for the internal origin
+            Chrome->>Imp: GET /estudos/abc/resultados/impressao?version=v2
+            Note over Imp,BD: same query and same calculation as in diagram 3
+            Imp-->>Chrome: HTML with print CSS (A4, 18 mm)
+            Chrome->>Chrome: waits for the fonts, emulates print mean
+            Chrome-->>Rota: PDF with vector charts
             Rota->>Chrome: close()
-            Rota-->>Nav: application/pdf, attachment, ueq_<titulo>_painel_<data>.pdf
+            Rota-->>Nav: application/pdf, attachment, ueq_<title>_painel_<data>.pdf
         end
     end

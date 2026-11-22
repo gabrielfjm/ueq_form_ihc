@@ -1,28 +1,28 @@
 flowchart TB
-    pesquisador["<b>Pesquisador</b><br/>[Pessoa]<br/>Cria estudos, acompanha a coleta,<br/>interpreta e exporta os resultados.<br/>Pode trabalhar em equipe"]
-    participante["<b>Participante</b><br/>[Pessoa]<br/>Responde o questionário pelo link,<br/>sem conta e de forma anônima"]
-    administrador["<b>Administrador</b><br/>[Pessoa]<br/>Um pesquisador que cria contas,<br/>acompanha idiomas e proteção de dados"]
-    mantenedor["<b>Mantenedor</b><br/>[Pessoa]<br/>Instala, carrega os itens oficiais<br/>e ajusta os parâmetros"]
+    pesquisador["<b>Researcher</b><br/>[Person]<br/>Creates studies, monitors data collection,<br/>interprets and exports the results.<br/>Can work in a team"]
+    participante["<b>Participant</b><br/>[Person]<br/>Answers the questionnaire through the link,<br/>without an account and anonymously"]
+    administrador["<b>Administrator</b><br/>[Person]<br/>A researcher who creates accounts,<br/>monitors languages and data protection"]
+    mantenedor["<b>Maintainer</b><br/>[Person]<br/>Installs, loads the official items<br/>and adjusts the parameters"]
 
-    ferramenta["<b>Ferramenta UEQ</b><br/>[Sistema de software]<br/>Conduz estudos com o User Experience<br/>Questionnaire, do cadastro à exportação"]
+    ferramenta["<b>UEQ Tool</b><br/>[Software system]<br/>Runs studies with the User Experience<br/>Questionnaire, from setup to export"]
 
-    claude["<b>API do Claude</b><br/>[Sistema externo · Anthropic]<br/>Traduz a interface e os textos dos estudos"]
-    smtp["<b>Servidor de e-mail</b><br/>[Sistema externo · SMTP]<br/>Entrega convites e avisos"]
-    planilha["<b>UEQ Data Analysis Tool</b><br/>[Sistema externo · planilha Excel V15]<br/>Ferramenta oficial de análise do UEQ"]
-    ueqonline["<b>ueq-online.org</b><br/>[Sistema externo]<br/>Handbook, pacote de idiomas<br/>e benchmark oficiais"]
-    canais["<b>Canais de mensagem</b><br/>[Sistema externo]<br/>WhatsApp, e-mail"]
+    claude["<b>Claude API</b><br/>[External system · Anthropic]<br/>Translates the interface and the study texts"]
+    smtp["<b>Email server</b><br/>[External system · SMTP]<br/>Delivers invitations and notices"]
+    planilha["<b>UEQ Data Analysis Tool</b><br/>[External system · Excel spreadsheet V15]<br/>Official UEQ analysis tool"]
+    ueqonline["<b>ueq-online.org</b><br/>[External system]<br/>Official Handbook, language pack<br/>and benchmark"]
+    canais["<b>Messaging channels</b><br/>[External system]<br/>WhatsApp, email"]
 
-    pesquisador -- "usa pelo navegador<br/>[HTTPS]" --> ferramenta
-    participante -- "responde pelo link /r/slug<br/>[HTTPS]" --> ferramenta
-    administrador -- "usa pelo navegador<br/>[HTTPS]" --> ferramenta
-    mantenedor -- "roda migrations, seed<br/>e recálculo [CLI]" --> ferramenta
-    ferramenta -- "pede traduções, sem respostas<br/>nem dados pessoais [HTTPS]" --> claude
-    ferramenta -- "envia convites e avisos<br/>[SMTP]" --> smtp
-    smtp -- "entrega o aviso" --> pesquisador
-    pesquisador -- "envia o link do estudo" --> canais
-    canais -- "entrega o link" --> participante
-    pesquisador -- "cola o CSV exportado<br/>para conferir os números" --> planilha
-    mantenedor -- "copia itens, instruções,<br/>limiares e benchmark para data/" --> ueqonline
+    pesquisador -- "uses through the browser<br/>[HTTPS]" --> ferramenta
+    participante -- "answers through the link /r/slug<br/>[HTTPS]" --> ferramenta
+    administrador -- "uses through the browser<br/>[HTTPS]" --> ferramenta
+    mantenedor -- "runs migrations, seed<br/>and recalculation [CLI]" --> ferramenta
+    ferramenta -- "requests translations, without responses<br/>or personal data [HTTPS]" --> claude
+    ferramenta -- "sends invitations and notices<br/>[SMTP]" --> smtp
+    smtp -- "delivers the notice" --> pesquisador
+    pesquisador -- "sends the study link" --> canais
+    canais -- "delivers the link" --> participante
+    pesquisador -- "pastes the exported CSV<br/>to check the numbers" --> planilha
+    mantenedor -- "copies items, instructions,<br/>thresholds and benchmark to data/" --> ueqonline
 
     classDef pessoa fill:#0F1720,stroke:#0F1720,color:#FFFFFF
     classDef sistema fill:#0B6A78,stroke:#0F1720,color:#FFFFFF

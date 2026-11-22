@@ -6,126 +6,128 @@ As colunas, as chaves e as regras de exclusão deste documento foram lidas do ca
 
 ## Diagrama
 
+O diagrama usa os nomes em inglês. As tabelas abaixo trazem os nomes reais do banco, em português: `researcher` é `pesquisador`, `study` é `estudo`, `version` é `versao`, `participation` é `participacao` e `response` é `resposta`.
+
 ```mermaid
 erDiagram
-    pesquisador ||--o{ sessao : "abre"
-    pesquisador ||--o{ estudo : "é dono de"
-    pesquisador ||--o{ colaboracao : "é convidado em"
-    pesquisador |o--o{ colaboracao : "convidou"
-    pesquisador ||--o{ notificacao : "recebe"
-    pesquisador |o--o{ notificacao : "causou"
-    estudo ||--o{ colaboracao : "é compartilhado em"
-    estudo ||--|{ versao : "tem"
-    estudo |o--o{ notificacao : "origina"
-    versao ||--o{ participacao : "recebe"
-    participacao ||--o{ resposta : "tem"
-    item ||--o{ resposta : "é respondido em"
+    researcher ||--o{ session : "opens"
+    researcher ||--o{ study : "owns"
+    researcher ||--o{ collaboration : "is invited in"
+    researcher |o--o{ collaboration : "invited"
+    researcher ||--o{ notification : "receives"
+    researcher |o--o{ notification : "caused"
+    study ||--o{ collaboration : "is shared in"
+    study ||--|{ version : "has"
+    study |o--o{ notification : "originates"
+    version ||--o{ participation : "receives"
+    participation ||--o{ response : "has"
+    item ||--o{ response : "is answered in"
 
-    pesquisador {
+    researcher {
         text id PK
-        text nome
+        text name
         text email UK
-        text senha_hash
-        timestamp criado_em
-        boolean administrador
-        timestamp tutorial_visto_em "pode ser nulo"
-        boolean notificacoes_por_email
-        text idioma
+        text password_hash
+        timestamp created_at
+        boolean isAdmin
+        timestamp tour_seen_at "nullable"
+        boolean email_notifications
+        text language
     }
-    sessao {
-        text id PK "SHA-256 do token"
-        text pesquisador_id FK
-        timestamp criada_em
-        timestamp expira_em
+    session {
+        text id PK "SHA-256 of the token"
+        text researcher_id FK
+        timestamp created_at
+        timestamp expires_at
     }
-    estudo {
+    study {
         text id PK
-        text pesquisador_id FK
-        text titulo
-        text produto_avaliado
-        text objetivo
-        StatusEstudo status
-        date data_inicio
-        date data_fim
-        text slug_publico UK
-        boolean coletar_demografia
-        text idioma
-        text responsavel_nome
-        text responsavel_email
-        text instituicao
-        text riscos
-        text beneficios
-        text comite_etica "pode ser nulo"
-        timestamp criado_em
-        timestamp atualizado_em
+        text researcher_id FK
+        text title
+        text evaluated_product
+        text objective
+        StudyStatus status
+        date start_date
+        date end_date
+        text public_slug UK
+        boolean collect_demographics
+        text language
+        text responsible_name
+        text responsible_email
+        text institution
+        text risks
+        text benefits
+        text ethics_committee "nullable"
+        timestamp created_at
+        timestamp updated_at
     }
-    colaboracao {
+    collaboration {
         text id PK
-        text estudo_id FK
-        text pesquisador_id FK
-        text convidado_por_id FK "pode ser nulo"
-        PapelColaborador papel
-        StatusConvite status
-        timestamp criado_em
-        timestamp respondido_em "pode ser nulo"
+        text study_id FK
+        text researcher_id FK
+        text invited_by_id FK "nullable"
+        CollaboratorRole role
+        InvitationStatus status
+        timestamp created_at
+        timestamp responded_at "nullable"
     }
-    versao {
+    version {
         text id PK
-        text estudo_id FK
-        text nome
-        integer ordem
+        text study_id FK
+        text name
+        integer order
     }
     item {
         integer id PK
-        integer numero UK
-        text termo_esquerdo
-        text termo_direito
-        Escala escala
-        Polaridade polaridade
+        integer number UK
+        text left_term
+        text right_term
+        Scale scale
+        Polarity polarity
     }
-    participacao {
+    participation {
         text id PK
-        text versao_id FK
-        timestamp consentiu_em
-        timestamp criada_em
-        timestamp concluida_em "pode ser nulo"
-        jsonb demografia "pode ser nulo, cifrada"
-        boolean suspeita
-        boolean incluida_na_analise
-        text idioma "pode ser nulo"
-        OrigemParticipacao origem
-        boolean menor_de_idade
+        text version_id FK
+        timestamp consented_at
+        timestamp created_at
+        timestamp completed_at "nullable"
+        jsonb demographics "nullable, encrypted"
+        boolean suspicious
+        boolean included_in_analysis
+        text language "nullable"
+        ParticipationSource source
+        boolean is_minor
     }
-    resposta {
+    response {
         text id PK
-        text participacao_id FK
+        text participation_id FK
         integer item_id FK
-        integer valor "CHECK de 1 a 7"
+        integer value "CHECK from 1 to 7"
     }
-    notificacao {
+    notification {
         text id PK
-        text pesquisador_id FK
-        text autor_id FK "pode ser nulo"
-        text estudo_id FK "pode ser nulo"
-        text colaboracao_id "pode ser nulo, sem FK"
-        TipoNotificacao tipo
-        text texto
+        text researcher_id FK
+        text author_id FK "nullable"
+        text study_id FK "nullable"
+        text collaboration_id "nullable, no FK"
+        NotificationType type
+        text text
         text link
-        integer quantidade
-        timestamp criada_em
-        timestamp lida_em "pode ser nulo"
+        integer count
+        timestamp created_at
+        timestamp read_at "nullable"
     }
-    tentativa_acesso {
+    login_attempt {
         text id PK
-        text chave "SHA-256 do e-mail"
-        timestamp criada_em
+        text key "SHA-256 of the email"
+        timestamp created_at
     }
-    traducao {
+    translation {
         text id PK
-        text idioma
-        text hash_origem
-        text texto
-        timestamp criada_em
+        text language
+        text source_hash
+        text text
+        timestamp created_at
     }
 ```
 

@@ -1,64 +1,64 @@
 sequenceDiagram
     autonumber
-    actor Part as Participante
-    participant Nav as Navegador
-    participant Pag as Páginas /r/[slug]
-    participant Acao as Ações /r/[slug]
-    participant Lib as lib/participacao e lib/balanceamento
+    actor Part as Participant
+    participant Nav as Browser
+    participant Pag as Pages /r/[slug]
+    participant Acao as Actions /r/[slug]
+    participant Lib as lib/participacao and lib/balanceamento
     participant Ueq as ueq
     participant BD as PostgreSQL
 
-    Part->>Nav: abre /r/<slug>
+    Part->>Nav: opens /r/<slug>
     Nav->>Pag: GET
-    Pag->>Lib: estudoPublico(slug) e idiomaDoParticipante() (a escolha no cookie ou o idioma do estudo)
-    Lib->>BD: estudo pelo slug, com versões e respostas concluídas por versão
-    alt estudo em rascunho, encerrado ou link já respondido
-        Pag-->>Nav: aviso da situação, sem consentimento
-    else estudo aberto
-        Pag-->>Nav: termo de consentimento no idioma negociado
+    Pag->>Lib: publicStudy(slug) and participantLanguage() (the choice in the cookie or the study language)
+    Lib->>BD: study by slug, with versions and completed responses per version
+    alt study in draft, closed or link already answered
+        Pag-->>Nav: notice about the situation, without consent
+    else study open
+        Pag-->>Nav: consent form in the negotiated language
     end
 
-    Part->>Nav: escolhe a idade e Concordo e quero participar
-    Nav->>Acao: consentir(slug, idade e autorização)
-    alt sem idade, ou menos de 18 anos sem a autorização do responsável
-        Acao-->>Nav: volta ao termo com o erro, e nada é gravado
+    Part->>Nav: chooses the age and clicks I agree and want to take part
+    Nav->>Acao: consent(slug, age and authorization)
+    alt no age, or under 18 without the guardian's authorization
+        Acao-->>Nav: back to the form with the error, and nothing is stored
     end
-    Acao->>Lib: versaoComMenosRespostas(versões)
-    Lib-->>Acao: versão com menos respostas concluídas
-    Acao->>BD: apaga participações abandonadas há mais de 2 dias
-    Acao->>BD: cria Participacao (versão, consentiuEm, idioma, menorDeIdade)
-    Acao-->>Nav: cookie ueq_participacao no caminho /r/<slug> e redireciona ao questionário
+    Acao->>Lib: versionWithFewestResponses(versions)
+    Lib-->>Acao: version with the fewest completed responses
+    Acao->>BD: deletes participations abandoned for more than 2 days
+    Acao->>BD: creates Participation (version, consentedAt, language, isMinor)
+    Acao-->>Nav: cookie ueq_participacao on the path /r/<slug> and redirects to the questionnaire
 
     Nav->>Pag: GET /r/<slug>/questionario
-    Pag->>BD: 26 itens (ordem e polaridade oficiais)
-    Pag-->>Nav: instrução oficial e 26 itens, nenhum marcado
-    loop a cada marcação
-        Part->>Nav: marca uma posição
-        Nav->>Nav: atualiza o progresso e guarda o rascunho no sessionStorage
+    Pag->>BD: 26 items (official order and polarity)
+    Pag-->>Nav: official instruction and 26 items, none marked
+    loop on each mark
+        Part->>Nav: marks a position
+        Nav->>Nav: updates the progress and keeps the draft in sessionStorage
     end
 
-    Part->>Nav: Enviar respostas
-    Nav->>Nav: confere no navegador se os 26 estão marcados
-    Nav->>Acao: enviarRespostas(slug, valores)
-    Acao->>Acao: confere os 26 valores de 1 a 7 de novo no servidor
-    alt falta algum item
-        Acao-->>Nav: { faltando: [7, 19] }
-        Nav-->>Part: resumo "Faltam 2 itens" com o foco e links para os itens
-    else completo
-        Acao->>Ueq: avaliarSuspeita(valores, itens, protocolo)
-        Ueq-->>Acao: { suspeita, motivos, amplitudes }
-        Acao->>BD: transação: cria 26 Respostas e marca concluidaEm e suspeita
-        Acao->>BD: avisa dono e equipe no sino (notificarResposta)
-        Acao-->>Nav: cookie ueq_respondido (30 dias)
+    Part->>Nav: Send answers
+    Nav->>Nav: checks in the browser that all 26 are marked
+    Nav->>Acao: submitAnswers(slug, values)
+    Acao->>Acao: checks the 26 values from 1 to 7 again on the server
+    alt an item is missing
+        Acao-->>Nav: { missing: [7, 19] }
+        Nav-->>Part: summary "2 items left" with the focus and links to the items
+    else complete
+        Acao->>Ueq: assessSuspicion(values, items, protocol)
+        Ueq-->>Acao: { suspicious, reasons, ranges }
+        Acao->>BD: transaction: creates 26 Responses and sets completedAt and suspicious
+        Acao->>BD: notifies the owner and the team in the bell (notifyResponse)
+        Acao-->>Nav: cookie ueq_respondido (30 days)
     end
 
-    opt o estudo coleta dados demográficos
-        Acao-->>Nav: redireciona a /sobre-voce
-        Part->>Nav: responde os dados opcionais ou pula a etapa
-        Nav->>Acao: salvarDemografia(slug, FormData)
-        opt clicou em Continuar e respondeu algo
-            Acao->>BD: grava demografia cifrada (só opções da lista)
+    opt the study collects demographic data
+        Acao-->>Nav: redirects to /sobre-voce
+        Part->>Nav: answers the optional data or skips the step
+        Nav->>Acao: saveDemographics(slug, FormData)
+        opt clicked Continue and answered something
+            Acao->>BD: stores encrypted demographics (only options from the list)
         end
     end
-    Acao-->>Nav: apaga o cookie ueq_participacao e redireciona a /fim
-    Nav-->>Part: Respostas registradas
+    Acao-->>Nav: deletes the cookie ueq_participacao and redirects to /fim
+    Nav-->>Part: Responses recorded

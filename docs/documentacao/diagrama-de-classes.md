@@ -5,7 +5,7 @@ Dois diagramas descrevem a estrutura estática da Ferramenta UEQ:
 1. **Modelo de domínio:** as 11 entidades guardadas no PostgreSQL e os 7 tipos enumerados, como estão em [`prisma/schema.prisma`](../../prisma/schema.prisma).
 2. **Módulo de cálculo:** os tipos e as funções de [`src/ueq/`](../../src/ueq/), que transformam respostas em resultados sem tocar no banco.
 
-Os nomes são os do código, sem acento, como em `Versao` e `Participacao`. Os tipos seguem o TypeScript: `?` marca campo que pode ser vazio e `[]` marca lista. As tabelas, colunas, chaves e regras de exclusão do banco, campo a campo, estão no [modelo lógico](modelo-logico.md); este documento mostra as mesmas entidades como classes, com as associações e a multiplicidade de cada uma.
+Os diagramas estão em inglês, em todos os idiomas da documentação. No código e nas explicações abaixo, os nomes são os do código, em português e sem acento: Researcher é `Pesquisador`, Study é `Estudo`, Version é `Versao`, Participation é `Participacao` e Response é `Resposta`. Os tipos seguem o TypeScript: `?` marca campo que pode ser vazio e `[]` marca lista. As tabelas, colunas, chaves e regras de exclusão do banco, campo a campo, estão no [modelo lógico](modelo-logico.md); este documento mostra as mesmas entidades como classes, com as associações e a multiplicidade de cada uma.
 
 Logo abaixo de cada diagrama estão a ferramenta usada, o arquivo-fonte para baixar e a versão da ferramenta que ele representa.
 
@@ -15,173 +15,173 @@ Logo abaixo de cada diagrama estão a ferramenta usada, o arquivo-fonte para bai
 classDiagram
     direction LR
 
-    class Pesquisador {
+    class Researcher {
         +String id
-        +String nome
-        +String email «único»
-        +String senhaHash «bcrypt»
-        +DateTime criadoEm
-        +Boolean administrador
-        +DateTime? tutorialVistoEm
-        +Boolean notificacoesPorEmail
-        +String idioma
+        +String name
+        +String email «unique»
+        +String passwordHash «bcrypt»
+        +DateTime createdAt
+        +Boolean isAdmin
+        +DateTime? tourSeenAt
+        +Boolean emailNotifications
+        +String language
     }
 
-    class Sessao {
-        +String id «SHA-256 do token»
-        +DateTime criadaEm
-        +DateTime expiraEm
+    class Session {
+        +String id «SHA-256 of the token»
+        +DateTime createdAt
+        +DateTime expiresAt
     }
 
-    class Estudo {
+    class Study {
         +String id
-        +String titulo
-        +String produtoAvaliado
-        +String objetivo
-        +StatusEstudo status
-        +Date dataInicio
-        +Date dataFim
-        +String slugPublico «único»
-        +Boolean coletarDemografia
-        +String idioma
-        +String responsavelNome
-        +String responsavelEmail
-        +String instituicao
-        +String riscos
-        +String beneficios
-        +String? comiteEtica
-        +DateTime criadoEm
-        +DateTime atualizadoEm
+        +String title
+        +String evaluatedProduct
+        +String objective
+        +StudyStatus status
+        +Date startDate
+        +Date endDate
+        +String publicSlug «unique»
+        +Boolean collectDemographics
+        +String language
+        +String responsibleName
+        +String responsibleEmail
+        +String institution
+        +String risks
+        +String benefits
+        +String? ethicsCommittee
+        +DateTime createdAt
+        +DateTime updatedAt
     }
 
-    class Colaboracao {
+    class Collaboration {
         +String id
-        +PapelColaborador papel
-        +StatusConvite status
-        +DateTime criadoEm
-        +DateTime? respondidoEm
+        +CollaboratorRole role
+        +InvitationStatus status
+        +DateTime createdAt
+        +DateTime? respondedAt
     }
 
-    class Versao {
+    class Version {
         +String id
-        +String nome
-        +Int ordem «única no estudo»
+        +String name
+        +Int order «unique within the study»
     }
 
-    class Participacao {
+    class Participation {
         +String id
-        +DateTime consentiuEm
-        +DateTime criadaEm
-        +DateTime? concluidaEm
-        +Json? demografia «cifrada»
-        +Boolean suspeita
-        +Boolean incluidaNaAnalise
-        +String? idioma
-        +OrigemParticipacao origem
-        +Boolean menorDeIdade
+        +DateTime consentedAt
+        +DateTime createdAt
+        +DateTime? completedAt
+        +Json? demographics «encrypted»
+        +Boolean suspicious
+        +Boolean includedInAnalysis
+        +String? language
+        +ParticipationSource source
+        +Boolean isMinor
     }
 
-    class Resposta {
+    class Response {
         +String id
-        +Int valor «1 a 7»
+        +Int value «1 to 7»
     }
 
     class Item {
         +Int id
-        +Int numero «1 a 26, único»
-        +String termoEsquerdo
-        +String termoDireito
-        +Escala escala
-        +Polaridade polaridade
+        +Int number «1 to 26, unique»
+        +String leftTerm
+        +String rightTerm
+        +Scale scale
+        +Polarity polarity
     }
 
-    class Notificacao {
+    class Notification {
         +String id
-        +TipoNotificacao tipo
-        +String texto
+        +NotificationType type
+        +String text
         +String link
-        +Int quantidade
-        +DateTime criadaEm
-        +DateTime? lidaEm
+        +Int count
+        +DateTime createdAt
+        +DateTime? readAt
     }
 
-    class TentativaAcesso {
+    class LoginAttempt {
         +String id
-        +String chave «hash do e-mail»
-        +DateTime criadaEm
+        +String key «email hash»
+        +DateTime createdAt
     }
 
-    class Traducao {
+    class Translation {
         +String id
-        +String idioma
-        +String hashOrigem
-        +String texto
-        +DateTime criadaEm
+        +String language
+        +String sourceHash
+        +String text
+        +DateTime createdAt
     }
 
-    class StatusEstudo {
+    class StudyStatus {
         <<enumeration>>
-        RASCUNHO
-        ABERTO
-        ENCERRADO
+        DRAFT
+        OPEN
+        CLOSED
     }
-    class Escala {
+    class Scale {
         <<enumeration>>
-        ATRATIVIDADE
-        PERSPICUIDADE
-        EFICIENCIA
-        CONFIABILIDADE
-        ESTIMULACAO
-        NOVIDADE
+        ATTRACTIVENESS
+        PERSPICUITY
+        EFFICIENCY
+        DEPENDABILITY
+        STIMULATION
+        NOVELTY
     }
-    class Polaridade {
+    class Polarity {
         <<enumeration>>
-        POSITIVA_DIREITA
-        POSITIVA_ESQUERDA
+        POSITIVE_RIGHT
+        POSITIVE_LEFT
     }
-    class OrigemParticipacao {
+    class ParticipationSource {
         <<enumeration>>
         LINK
-        IMPORTADA
+        IMPORTED
     }
-    class PapelColaborador {
+    class CollaboratorRole {
         <<enumeration>>
         EDITOR
-        LEITOR
+        VIEWER
     }
-    class StatusConvite {
+    class InvitationStatus {
         <<enumeration>>
-        PENDENTE
-        ACEITO
-        RECUSADO
+        PENDING
+        ACCEPTED
+        DECLINED
     }
-    class TipoNotificacao {
+    class NotificationType {
         <<enumeration>>
-        CONVITE
-        RESPOSTA
-        ALTERACAO
+        INVITATION
+        RESPONSE
+        CHANGE
     }
 
-    Pesquisador "1" *-- "0..*" Sessao : abre
-    Pesquisador "1" *-- "0..*" Estudo : é dono de
-    Estudo "1" *-- "1..6" Versao : compara
-    Versao "1" *-- "0..*" Participacao : recebe
-    Participacao "1" *-- "0..26" Resposta : contém
-    Item "1" <-- "0..*" Resposta : responde
-    Estudo "1" *-- "0..*" Colaboracao : é compartilhado em
-    Pesquisador "1" *-- "0..*" Colaboracao : participa como
-    Pesquisador "0..1" o-- "0..*" Colaboracao : convidou
-    Pesquisador "1" *-- "0..*" Notificacao : recebe
-    Pesquisador "0..1" o-- "0..*" Notificacao : causou
-    Estudo "0..1" o-- "0..*" Notificacao : origina
+    Researcher "1" *-- "0..*" Session : opens
+    Researcher "1" *-- "0..*" Study : owns
+    Study "1" *-- "1..6" Version : compares
+    Version "1" *-- "0..*" Participation : receives
+    Participation "1" *-- "0..26" Response : contains
+    Item "1" <-- "0..*" Response : answers
+    Study "1" *-- "0..*" Collaboration : is shared in
+    Researcher "1" *-- "0..*" Collaboration : takes part as
+    Researcher "0..1" o-- "0..*" Collaboration : invited
+    Researcher "1" *-- "0..*" Notification : receives
+    Researcher "0..1" o-- "0..*" Notification : caused
+    Study "0..1" o-- "0..*" Notification : originates
 
-    Estudo ..> StatusEstudo
-    Item ..> Escala
-    Item ..> Polaridade
-    Participacao ..> OrigemParticipacao
-    Colaboracao ..> PapelColaborador
-    Colaboracao ..> StatusConvite
-    Notificacao ..> TipoNotificacao
+    Study ..> StudyStatus
+    Item ..> Scale
+    Item ..> Polarity
+    Participation ..> ParticipationSource
+    Collaboration ..> CollaboratorRole
+    Collaboration ..> InvitationStatus
+    Notification ..> NotificationType
 ```
 
 **Ferramenta do diagrama:** Mermaid 12.2.0 (`classDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [diagrama-de-classes-1.mmd](fontes/diagrama-de-classes-1.mmd). **Versão representada:** Ferramenta UEQ de 17/11/2026.
@@ -210,135 +210,135 @@ classDiagram
     direction TB
 
     class index {
-        <<módulo>>
-        +analisarEstudo(participacoes, itens, config) AnaliseEstudo
+        <<module>>
+        +analyzeStudy(participations, items, config) StudyAnalysis
     }
-    class recodificar {
-        <<módulo>>
-        +recodificar(valor, polaridade) number
-        +recodificarParticipante(valores, itens) number[]
+    class recode {
+        <<module>>
+        +recode(value, polarity) number
+        +recodeParticipant(values, items) number[]
     }
-    class estatistica {
-        <<módulo>>
-        +media(valores) number?
-        +desvioPadraoAmostral(valores) number?
-        +intervaloConfianca95(media, dp, n, z) Intervalo?
-        +correlacao(x, y) number?
-        +alfaCronbach(colunas) number?
+    class statistics {
+        <<module>>
+        +mean(values) number?
+        +sampleStdDev(values) number?
+        +confidenceInterval95(mean, sd, n, z) Interval?
+        +correlation(x, y) number?
+        +cronbachAlpha(columns) number?
     }
-    class escalas {
-        <<módulo>>
-        +escoresPorParticipante(valores, itens) Record~Escala, number~
-        +faixaInterpretacao(media, faixaNeutra) FaixaInterpretacao
-        +resultadoPorEscala(respostas, itens, parametros) ResultadoEscala[]
-        +resultadoPorItem(respostas, itens, z) ResultadoItem[]
+    class scales {
+        <<module>>
+        +scoresPerParticipant(values, items) Record~Scale, number~
+        +interpretationBand(mean, neutralBand) InterpretationBand
+        +resultByScale(responses, items, parameters) ScaleResult[]
+        +resultByItem(responses, items, z) ItemResult[]
     }
-    class inconsistencia {
-        <<módulo>>
-        +amplitudePorEscala(valores, itens) Record~Escala, number~
-        +respostasIguais(valores) number
-        +avaliarSuspeita(valores, itens, parametros) AvaliacaoSuspeita
-        +marcarSuspeitos(respostas, itens, parametros) AvaliacaoSuspeita[]
+    class inconsistency {
+        <<module>>
+        +rangeByScale(values, items) Record~Scale, number~
+        +identicalAnswers(values) number
+        +assessSuspicion(values, items, parameters) SuspicionAssessment
+        +flagSuspicious(responses, items, parameters) SuspicionAssessment[]
     }
     class benchmark {
-        <<módulo>>
-        +classificarBenchmark(escala, media, tabela) FaixaBenchmark?
+        <<module>>
+        +classifyBenchmark(scale, mean, table) BenchmarkBand?
     }
-    class itens {
-        <<módulo>>
-        +ESCALAS
-        +GRUPOS
-        +numerosPorEscala(itens) Record~Escala, number[]~
-    }
-
-    class ItemUEQ {
-        +number numero
-        +Escala escala
-        +Polaridade polaridade
-    }
-    class ParticipacaoParaAnalise {
-        +number[] valores
-        +boolean incluidaNaAnalise
-    }
-    class ConfigAnalise {
-        +protocolo
-        +TabelaBenchmark benchmark
-    }
-    class ParametrosInconsistencia {
-        +number amplitudeMaxima
-        +number escalasParaSuspeita
-        +number respostasIguaisMaximas
-    }
-    class AnaliseEstudo {
-        +number n
-        +number nExcluidas
-        +ResultadoEscalaAnalisada[] escalas
-        +grupos pragmatica e hedonica
-        +ResultadoItem[] itens
-        +AvaliacaoSuspeita[] participantes
-    }
-    class ResultadoEscala {
-        +Escala escala
-        +number n
-        +number? media
-        +number? dp
-        +Intervalo? ic
-        +number? alfa
-        +FaixaInterpretacao? faixaInterpretacao
-    }
-    class ResultadoEscalaAnalisada {
-        +FaixaBenchmark? benchmark
-        +boolean alfaAbaixoDoMinimo
-    }
-    class ResultadoItem {
-        +number numero
-        +Escala escala
-        +number n
-        +number? media
-        +number? dp
-        +Intervalo? ic
-        +number[] distribuicao
-    }
-    class AvaliacaoSuspeita {
-        +Record~Escala, number~ amplitudes
-        +Escala[] escalasInconsistentes
-        +number respostasIguais
-        +MotivoSuspeita[] motivos
-        +boolean suspeita
-    }
-    class Intervalo {
-        +number inferior
-        +number superior
-    }
-    class LimitesBenchmark {
-        +number excelente
-        +number bom
-        +number acimaDaMedia
-        +number abaixoDaMedia
+    class items {
+        <<module>>
+        +SCALES
+        +GROUPS
+        +numbersByScale(items) Record~Scale, number[]~
     }
 
-    ResultadoEscala <|-- ResultadoEscalaAnalisada
-    ConfigAnalise *-- ParametrosInconsistencia
-    ConfigAnalise *-- "6" LimitesBenchmark
-    AnaliseEstudo *-- "6" ResultadoEscalaAnalisada
-    AnaliseEstudo *-- "26" ResultadoItem
-    AnaliseEstudo *-- "0..*" AvaliacaoSuspeita
-    ResultadoEscala o-- Intervalo
-    ResultadoItem o-- Intervalo
+    class UEQItem {
+        +number number
+        +Scale scale
+        +Polarity polarity
+    }
+    class ParticipationForAnalysis {
+        +number[] values
+        +boolean includedInAnalysis
+    }
+    class AnalysisConfig {
+        +protocol
+        +BenchmarkTable benchmark
+    }
+    class InconsistencyParameters {
+        +number maxRange
+        +number scalesForSuspicion
+        +number maxIdenticalAnswers
+    }
+    class StudyAnalysis {
+        +number n
+        +number nExcluded
+        +AnalyzedScaleResult[] scales
+        +groups pragmatic and hedonic
+        +ItemResult[] items
+        +SuspicionAssessment[] participants
+    }
+    class ScaleResult {
+        +Scale scale
+        +number n
+        +number? mean
+        +number? sd
+        +Interval? ci
+        +number? alpha
+        +InterpretationBand? interpretationBand
+    }
+    class AnalyzedScaleResult {
+        +BenchmarkBand? benchmark
+        +boolean alphaBelowMinimum
+    }
+    class ItemResult {
+        +number number
+        +Scale scale
+        +number n
+        +number? mean
+        +number? sd
+        +Interval? ci
+        +number[] distribution
+    }
+    class SuspicionAssessment {
+        +Record~Scale, number~ ranges
+        +Scale[] inconsistentScales
+        +number identicalAnswers
+        +SuspicionReason[] reasons
+        +boolean suspicious
+    }
+    class Interval {
+        +number lower
+        +number upper
+    }
+    class BenchmarkLimits {
+        +number excellent
+        +number good
+        +number aboveAverage
+        +number belowAverage
+    }
 
-    index ..> ParticipacaoParaAnalise : recebe
-    index ..> ItemUEQ : recebe
-    index ..> ConfigAnalise : recebe
-    index ..> AnaliseEstudo : devolve
-    index ..> escalas : usa
-    index ..> inconsistencia : usa
-    index ..> benchmark : usa
-    index ..> itens : usa
-    escalas ..> recodificar : usa
-    escalas ..> estatistica : usa
-    escalas ..> itens : usa
-    inconsistencia ..> recodificar : usa
-    inconsistencia ..> itens : usa
+    ScaleResult <|-- AnalyzedScaleResult
+    AnalysisConfig *-- InconsistencyParameters
+    AnalysisConfig *-- "6" BenchmarkLimits
+    StudyAnalysis *-- "6" AnalyzedScaleResult
+    StudyAnalysis *-- "26" ItemResult
+    StudyAnalysis *-- "0..*" SuspicionAssessment
+    ScaleResult o-- Interval
+    ItemResult o-- Interval
+
+    index ..> ParticipationForAnalysis : receives
+    index ..> UEQItem : receives
+    index ..> AnalysisConfig : receives
+    index ..> StudyAnalysis : returns
+    index ..> scales : uses
+    index ..> inconsistency : uses
+    index ..> benchmark : uses
+    index ..> items : uses
+    scales ..> recode : uses
+    scales ..> statistics : uses
+    scales ..> items : uses
+    inconsistency ..> recode : uses
+    inconsistency ..> items : uses
 ```
 
 **Ferramenta do diagrama:** Mermaid 12.2.0 (`classDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [diagrama-de-classes-2.mmd](fontes/diagrama-de-classes-2.mmd). **Versão representada:** Ferramenta UEQ de 17/11/2026.

@@ -1,170 +1,170 @@
 classDiagram
     direction LR
 
-    class Pesquisador {
+    class Researcher {
         +String id
-        +String nome
-        +String email «único»
-        +String senhaHash «bcrypt»
-        +DateTime criadoEm
-        +Boolean administrador
-        +DateTime? tutorialVistoEm
-        +Boolean notificacoesPorEmail
-        +String idioma
+        +String name
+        +String email «unique»
+        +String passwordHash «bcrypt»
+        +DateTime createdAt
+        +Boolean isAdmin
+        +DateTime? tourSeenAt
+        +Boolean emailNotifications
+        +String language
     }
 
-    class Sessao {
-        +String id «SHA-256 do token»
-        +DateTime criadaEm
-        +DateTime expiraEm
+    class Session {
+        +String id «SHA-256 of the token»
+        +DateTime createdAt
+        +DateTime expiresAt
     }
 
-    class Estudo {
+    class Study {
         +String id
-        +String titulo
-        +String produtoAvaliado
-        +String objetivo
-        +StatusEstudo status
-        +Date dataInicio
-        +Date dataFim
-        +String slugPublico «único»
-        +Boolean coletarDemografia
-        +String idioma
-        +String responsavelNome
-        +String responsavelEmail
-        +String instituicao
-        +String riscos
-        +String beneficios
-        +String? comiteEtica
-        +DateTime criadoEm
-        +DateTime atualizadoEm
+        +String title
+        +String evaluatedProduct
+        +String objective
+        +StudyStatus status
+        +Date startDate
+        +Date endDate
+        +String publicSlug «unique»
+        +Boolean collectDemographics
+        +String language
+        +String responsibleName
+        +String responsibleEmail
+        +String institution
+        +String risks
+        +String benefits
+        +String? ethicsCommittee
+        +DateTime createdAt
+        +DateTime updatedAt
     }
 
-    class Colaboracao {
+    class Collaboration {
         +String id
-        +PapelColaborador papel
-        +StatusConvite status
-        +DateTime criadoEm
-        +DateTime? respondidoEm
+        +CollaboratorRole role
+        +InvitationStatus status
+        +DateTime createdAt
+        +DateTime? respondedAt
     }
 
-    class Versao {
+    class Version {
         +String id
-        +String nome
-        +Int ordem «única no estudo»
+        +String name
+        +Int order «unique within the study»
     }
 
-    class Participacao {
+    class Participation {
         +String id
-        +DateTime consentiuEm
-        +DateTime criadaEm
-        +DateTime? concluidaEm
-        +Json? demografia «cifrada»
-        +Boolean suspeita
-        +Boolean incluidaNaAnalise
-        +String? idioma
-        +OrigemParticipacao origem
-        +Boolean menorDeIdade
+        +DateTime consentedAt
+        +DateTime createdAt
+        +DateTime? completedAt
+        +Json? demographics «encrypted»
+        +Boolean suspicious
+        +Boolean includedInAnalysis
+        +String? language
+        +ParticipationSource source
+        +Boolean isMinor
     }
 
-    class Resposta {
+    class Response {
         +String id
-        +Int valor «1 a 7»
+        +Int value «1 to 7»
     }
 
     class Item {
         +Int id
-        +Int numero «1 a 26, único»
-        +String termoEsquerdo
-        +String termoDireito
-        +Escala escala
-        +Polaridade polaridade
+        +Int number «1 to 26, unique»
+        +String leftTerm
+        +String rightTerm
+        +Scale scale
+        +Polarity polarity
     }
 
-    class Notificacao {
+    class Notification {
         +String id
-        +TipoNotificacao tipo
-        +String texto
+        +NotificationType type
+        +String text
         +String link
-        +Int quantidade
-        +DateTime criadaEm
-        +DateTime? lidaEm
+        +Int count
+        +DateTime createdAt
+        +DateTime? readAt
     }
 
-    class TentativaAcesso {
+    class LoginAttempt {
         +String id
-        +String chave «hash do e-mail»
-        +DateTime criadaEm
+        +String key «email hash»
+        +DateTime createdAt
     }
 
-    class Traducao {
+    class Translation {
         +String id
-        +String idioma
-        +String hashOrigem
-        +String texto
-        +DateTime criadaEm
+        +String language
+        +String sourceHash
+        +String text
+        +DateTime createdAt
     }
 
-    class StatusEstudo {
+    class StudyStatus {
         <<enumeration>>
-        RASCUNHO
-        ABERTO
-        ENCERRADO
+        DRAFT
+        OPEN
+        CLOSED
     }
-    class Escala {
+    class Scale {
         <<enumeration>>
-        ATRATIVIDADE
-        PERSPICUIDADE
-        EFICIENCIA
-        CONFIABILIDADE
-        ESTIMULACAO
-        NOVIDADE
+        ATTRACTIVENESS
+        PERSPICUITY
+        EFFICIENCY
+        DEPENDABILITY
+        STIMULATION
+        NOVELTY
     }
-    class Polaridade {
+    class Polarity {
         <<enumeration>>
-        POSITIVA_DIREITA
-        POSITIVA_ESQUERDA
+        POSITIVE_RIGHT
+        POSITIVE_LEFT
     }
-    class OrigemParticipacao {
+    class ParticipationSource {
         <<enumeration>>
         LINK
-        IMPORTADA
+        IMPORTED
     }
-    class PapelColaborador {
+    class CollaboratorRole {
         <<enumeration>>
         EDITOR
-        LEITOR
+        VIEWER
     }
-    class StatusConvite {
+    class InvitationStatus {
         <<enumeration>>
-        PENDENTE
-        ACEITO
-        RECUSADO
+        PENDING
+        ACCEPTED
+        DECLINED
     }
-    class TipoNotificacao {
+    class NotificationType {
         <<enumeration>>
-        CONVITE
-        RESPOSTA
-        ALTERACAO
+        INVITATION
+        RESPONSE
+        CHANGE
     }
 
-    Pesquisador "1" *-- "0..*" Sessao : abre
-    Pesquisador "1" *-- "0..*" Estudo : é dono de
-    Estudo "1" *-- "1..6" Versao : compara
-    Versao "1" *-- "0..*" Participacao : recebe
-    Participacao "1" *-- "0..26" Resposta : contém
-    Item "1" <-- "0..*" Resposta : responde
-    Estudo "1" *-- "0..*" Colaboracao : é compartilhado em
-    Pesquisador "1" *-- "0..*" Colaboracao : participa como
-    Pesquisador "0..1" o-- "0..*" Colaboracao : convidou
-    Pesquisador "1" *-- "0..*" Notificacao : recebe
-    Pesquisador "0..1" o-- "0..*" Notificacao : causou
-    Estudo "0..1" o-- "0..*" Notificacao : origina
+    Researcher "1" *-- "0..*" Session : opens
+    Researcher "1" *-- "0..*" Study : owns
+    Study "1" *-- "1..6" Version : compares
+    Version "1" *-- "0..*" Participation : receives
+    Participation "1" *-- "0..26" Response : contains
+    Item "1" <-- "0..*" Response : answers
+    Study "1" *-- "0..*" Collaboration : is shared in
+    Researcher "1" *-- "0..*" Collaboration : takes part as
+    Researcher "0..1" o-- "0..*" Collaboration : invited
+    Researcher "1" *-- "0..*" Notification : receives
+    Researcher "0..1" o-- "0..*" Notification : caused
+    Study "0..1" o-- "0..*" Notification : originates
 
-    Estudo ..> StatusEstudo
-    Item ..> Escala
-    Item ..> Polaridade
-    Participacao ..> OrigemParticipacao
-    Colaboracao ..> PapelColaborador
-    Colaboracao ..> StatusConvite
-    Notificacao ..> TipoNotificacao
+    Study ..> StudyStatus
+    Item ..> Scale
+    Item ..> Polarity
+    Participation ..> ParticipationSource
+    Collaboration ..> CollaboratorRole
+    Collaboration ..> InvitationStatus
+    Notification ..> NotificationType

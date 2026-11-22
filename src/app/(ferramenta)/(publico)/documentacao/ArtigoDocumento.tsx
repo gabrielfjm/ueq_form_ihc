@@ -18,7 +18,7 @@ const PASSO = 25;
 // do diagrama rola. O zoom vai de 50% a 400% (botões, Ctrl + roda do mouse, ou + - 0, que só valem com
 // a tela cheia aberta: WCAG 2.1.4). Com zoom, dá para arrastar o diagrama com o mouse, deslizar o dedo
 // ou usar as setas na área
-export function ArtigoDocumento({ html, className }: { html: string; className?: string }) {
+export function ArtigoDocumento({ html, className, lang }: { html: string; className?: string; lang?: string }) {
   const t = useT();
   const janela = useRef<HTMLDialogElement>(null);
   const area = useRef<HTMLDivElement>(null);
@@ -114,7 +114,7 @@ export function ArtigoDocumento({ html, className }: { html: string; className?:
   return (
     <>
       {/* HTML gerado dos .md do próprio repositório (src/lib/documentacao/markdown.ts) */}
-      <article className={className} onClick={aoClicar} dangerouslySetInnerHTML={{ __html: html }} />
+      <article className={className} lang={lang} onClick={aoClicar} dangerouslySetInnerHTML={{ __html: html }} />
       <dialog ref={janela} className={estilos.janela} aria-labelledby="titulo-ampliado" onClose={aoFechar} onKeyDown={aoTeclar}>
         <div className={estilos.barra}>
           <button type="button" className={estilos.botao} onClick={() => janela.current?.close()} autoFocus>

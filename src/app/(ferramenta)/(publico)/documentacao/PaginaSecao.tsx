@@ -5,6 +5,7 @@ import { enderecoDoDocumento, secaoDoDocumento, type Documento } from "@/lib/doc
 import { enderecoDaPagina, type PaginaLida } from "@/lib/documentacao/paginas";
 import { tradutor } from "@/traducao/servidor";
 import { ArtigoDocumento } from "./ArtigoDocumento";
+import { AvisoDeIdioma, langDaVersao } from "./AvisoDeIdioma";
 import { ListaPaginas } from "./ListaPaginas";
 import estilos from "./documentacao.module.css";
 import { RegistroDeVisita, VoltarDocumento } from "./NavegacaoDocumento";
@@ -15,7 +16,8 @@ import texto from "./texto.module.css";
 export async function PaginaSecao({ documento, lida }: { documento: Documento; lida: PaginaLida }) {
   const t = await tradutor();
   const area = secaoDoDocumento(documento);
-  const { pagina, secao, parte, partes, html, posicao, total, anterior, proxima, pai, tituloDocumento } = lida;
+  const { pagina, secao, parte, partes, html, posicao, total, anterior, proxima, pai, tituloDocumento, versao } = lida;
+  const lang = langDaVersao(versao);
   return (
     <>
       <RegistroDeVisita />
@@ -35,13 +37,14 @@ export async function PaginaSecao({ documento, lida }: { documento: Documento; l
             </p>
           </div>
           <div className={estilos.faixaPaginaTitulo}>
-            <h1 className={estilos.tituloPagina}>{pagina.titulo}</h1>
+            <h1 className={estilos.tituloPagina} lang={lang}>{pagina.titulo}</h1>
             <p className={estilos.posicao}>{t("{posicao} de {total}", { posicao, total })}</p>
           </div>
         </div>
       </div>
       <div className={estilos.corpoPagina}>
-        {html.trim() && <ArtigoDocumento className={`${texto.texto} ${texto.destaque}`} html={html} />}
+        <AvisoDeIdioma versao={versao} />
+        {html.trim() && <ArtigoDocumento className={`${texto.texto} ${texto.destaque}`} html={html} lang={lang} />}
         {partes.length > 0 && (
           <ListaPaginas
             t={t}

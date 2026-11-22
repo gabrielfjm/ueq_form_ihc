@@ -4,6 +4,7 @@ import { documentoPeloSlug } from "@/lib/documentacao/catalogo";
 import { lerPagina } from "@/lib/documentacao/paginas";
 import { tradutor } from "@/traducao/servidor";
 import { PaginaSecao } from "../../PaginaSecao";
+import { leituraAtual } from "../../leitura";
 
 type Propriedades = { params: Promise<{ documento: string; secao: string }> };
 
@@ -11,7 +12,7 @@ type Propriedades = { params: Promise<{ documento: string; secao: string }> };
 async function lerDaRota(params: Propriedades["params"]) {
   const { documento: slug, secao } = await params;
   const documento = documentoPeloSlug(slug);
-  const lida = documento ? lerPagina(documento, secao) : null;
+  const lida = documento ? lerPagina(documento, secao, undefined, await leituraAtual()) : null;
   if (!documento || !lida) notFound();
   return { documento, lida };
 }

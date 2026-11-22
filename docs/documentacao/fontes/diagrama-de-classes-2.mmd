@@ -2,132 +2,132 @@ classDiagram
     direction TB
 
     class index {
-        <<módulo>>
-        +analisarEstudo(participacoes, itens, config) AnaliseEstudo
+        <<module>>
+        +analyzeStudy(participations, items, config) StudyAnalysis
     }
-    class recodificar {
-        <<módulo>>
-        +recodificar(valor, polaridade) number
-        +recodificarParticipante(valores, itens) number[]
+    class recode {
+        <<module>>
+        +recode(value, polarity) number
+        +recodeParticipant(values, items) number[]
     }
-    class estatistica {
-        <<módulo>>
-        +media(valores) number?
-        +desvioPadraoAmostral(valores) number?
-        +intervaloConfianca95(media, dp, n, z) Intervalo?
-        +correlacao(x, y) number?
-        +alfaCronbach(colunas) number?
+    class statistics {
+        <<module>>
+        +mean(values) number?
+        +sampleStdDev(values) number?
+        +confidenceInterval95(mean, sd, n, z) Interval?
+        +correlation(x, y) number?
+        +cronbachAlpha(columns) number?
     }
-    class escalas {
-        <<módulo>>
-        +escoresPorParticipante(valores, itens) Record~Escala, number~
-        +faixaInterpretacao(media, faixaNeutra) FaixaInterpretacao
-        +resultadoPorEscala(respostas, itens, parametros) ResultadoEscala[]
-        +resultadoPorItem(respostas, itens, z) ResultadoItem[]
+    class scales {
+        <<module>>
+        +scoresPerParticipant(values, items) Record~Scale, number~
+        +interpretationBand(mean, neutralBand) InterpretationBand
+        +resultByScale(responses, items, parameters) ScaleResult[]
+        +resultByItem(responses, items, z) ItemResult[]
     }
-    class inconsistencia {
-        <<módulo>>
-        +amplitudePorEscala(valores, itens) Record~Escala, number~
-        +respostasIguais(valores) number
-        +avaliarSuspeita(valores, itens, parametros) AvaliacaoSuspeita
-        +marcarSuspeitos(respostas, itens, parametros) AvaliacaoSuspeita[]
+    class inconsistency {
+        <<module>>
+        +rangeByScale(values, items) Record~Scale, number~
+        +identicalAnswers(values) number
+        +assessSuspicion(values, items, parameters) SuspicionAssessment
+        +flagSuspicious(responses, items, parameters) SuspicionAssessment[]
     }
     class benchmark {
-        <<módulo>>
-        +classificarBenchmark(escala, media, tabela) FaixaBenchmark?
+        <<module>>
+        +classifyBenchmark(scale, mean, table) BenchmarkBand?
     }
-    class itens {
-        <<módulo>>
-        +ESCALAS
-        +GRUPOS
-        +numerosPorEscala(itens) Record~Escala, number[]~
-    }
-
-    class ItemUEQ {
-        +number numero
-        +Escala escala
-        +Polaridade polaridade
-    }
-    class ParticipacaoParaAnalise {
-        +number[] valores
-        +boolean incluidaNaAnalise
-    }
-    class ConfigAnalise {
-        +protocolo
-        +TabelaBenchmark benchmark
-    }
-    class ParametrosInconsistencia {
-        +number amplitudeMaxima
-        +number escalasParaSuspeita
-        +number respostasIguaisMaximas
-    }
-    class AnaliseEstudo {
-        +number n
-        +number nExcluidas
-        +ResultadoEscalaAnalisada[] escalas
-        +grupos pragmatica e hedonica
-        +ResultadoItem[] itens
-        +AvaliacaoSuspeita[] participantes
-    }
-    class ResultadoEscala {
-        +Escala escala
-        +number n
-        +number? media
-        +number? dp
-        +Intervalo? ic
-        +number? alfa
-        +FaixaInterpretacao? faixaInterpretacao
-    }
-    class ResultadoEscalaAnalisada {
-        +FaixaBenchmark? benchmark
-        +boolean alfaAbaixoDoMinimo
-    }
-    class ResultadoItem {
-        +number numero
-        +Escala escala
-        +number n
-        +number? media
-        +number? dp
-        +Intervalo? ic
-        +number[] distribuicao
-    }
-    class AvaliacaoSuspeita {
-        +Record~Escala, number~ amplitudes
-        +Escala[] escalasInconsistentes
-        +number respostasIguais
-        +MotivoSuspeita[] motivos
-        +boolean suspeita
-    }
-    class Intervalo {
-        +number inferior
-        +number superior
-    }
-    class LimitesBenchmark {
-        +number excelente
-        +number bom
-        +number acimaDaMedia
-        +number abaixoDaMedia
+    class items {
+        <<module>>
+        +SCALES
+        +GROUPS
+        +numbersByScale(items) Record~Scale, number[]~
     }
 
-    ResultadoEscala <|-- ResultadoEscalaAnalisada
-    ConfigAnalise *-- ParametrosInconsistencia
-    ConfigAnalise *-- "6" LimitesBenchmark
-    AnaliseEstudo *-- "6" ResultadoEscalaAnalisada
-    AnaliseEstudo *-- "26" ResultadoItem
-    AnaliseEstudo *-- "0..*" AvaliacaoSuspeita
-    ResultadoEscala o-- Intervalo
-    ResultadoItem o-- Intervalo
+    class UEQItem {
+        +number number
+        +Scale scale
+        +Polarity polarity
+    }
+    class ParticipationForAnalysis {
+        +number[] values
+        +boolean includedInAnalysis
+    }
+    class AnalysisConfig {
+        +protocol
+        +BenchmarkTable benchmark
+    }
+    class InconsistencyParameters {
+        +number maxRange
+        +number scalesForSuspicion
+        +number maxIdenticalAnswers
+    }
+    class StudyAnalysis {
+        +number n
+        +number nExcluded
+        +AnalyzedScaleResult[] scales
+        +groups pragmatic and hedonic
+        +ItemResult[] items
+        +SuspicionAssessment[] participants
+    }
+    class ScaleResult {
+        +Scale scale
+        +number n
+        +number? mean
+        +number? sd
+        +Interval? ci
+        +number? alpha
+        +InterpretationBand? interpretationBand
+    }
+    class AnalyzedScaleResult {
+        +BenchmarkBand? benchmark
+        +boolean alphaBelowMinimum
+    }
+    class ItemResult {
+        +number number
+        +Scale scale
+        +number n
+        +number? mean
+        +number? sd
+        +Interval? ci
+        +number[] distribution
+    }
+    class SuspicionAssessment {
+        +Record~Scale, number~ ranges
+        +Scale[] inconsistentScales
+        +number identicalAnswers
+        +SuspicionReason[] reasons
+        +boolean suspicious
+    }
+    class Interval {
+        +number lower
+        +number upper
+    }
+    class BenchmarkLimits {
+        +number excellent
+        +number good
+        +number aboveAverage
+        +number belowAverage
+    }
 
-    index ..> ParticipacaoParaAnalise : recebe
-    index ..> ItemUEQ : recebe
-    index ..> ConfigAnalise : recebe
-    index ..> AnaliseEstudo : devolve
-    index ..> escalas : usa
-    index ..> inconsistencia : usa
-    index ..> benchmark : usa
-    index ..> itens : usa
-    escalas ..> recodificar : usa
-    escalas ..> estatistica : usa
-    escalas ..> itens : usa
-    inconsistencia ..> recodificar : usa
-    inconsistencia ..> itens : usa
+    ScaleResult <|-- AnalyzedScaleResult
+    AnalysisConfig *-- InconsistencyParameters
+    AnalysisConfig *-- "6" BenchmarkLimits
+    StudyAnalysis *-- "6" AnalyzedScaleResult
+    StudyAnalysis *-- "26" ItemResult
+    StudyAnalysis *-- "0..*" SuspicionAssessment
+    ScaleResult o-- Interval
+    ItemResult o-- Interval
+
+    index ..> ParticipationForAnalysis : receives
+    index ..> UEQItem : receives
+    index ..> AnalysisConfig : receives
+    index ..> StudyAnalysis : returns
+    index ..> scales : uses
+    index ..> inconsistency : uses
+    index ..> benchmark : uses
+    index ..> items : uses
+    scales ..> recode : uses
+    scales ..> statistics : uses
+    scales ..> items : uses
+    inconsistency ..> recode : uses
+    inconsistency ..> items : uses

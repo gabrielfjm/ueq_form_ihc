@@ -33,44 +33,44 @@ O proxy só confere se existe o cookie. Quem garante que a sessão vale é a con
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
+    actor Pesq as Researcher
+    participant Nav as Browser
     participant Proxy as proxy
-    participant Acao as Ação entrar
+    participant Acao as Action entrar
     participant Tent as lib/tentativas
-    participant Sessao as lib/sessao
+    participant Session as lib/sessao
     participant BD as PostgreSQL
 
-    Pesq->>Nav: abre /estudos/abc/resultados
-    Nav->>Proxy: GET /estudos/abc/resultados (sem cookie)
-    Proxy-->>Nav: redireciona para /entrar?voltar=/estudos/abc/resultados
-    Pesq->>Nav: digita e-mail e senha e clica em Entrar
+    Pesq->>Nav: opens /estudos/abc/resultados
+    Nav->>Proxy: GET /estudos/abc/resultados (without cookie)
+    Proxy-->>Nav: redirects to /entrar?voltar=/estudos/abc/resultados
+    Pesq->>Nav: types email and password and clicks Log in
     Nav->>Acao: entrar(FormData)
-    Acao->>Acao: valida os campos com Zod
+    Acao->>Acao: validates the fields with Zod
     Acao->>Tent: bloqueado(email)
-    Tent->>BD: conta falhas de SHA-256(email) nos últimos 15 minutos
-    alt 5 falhas ou mais
-        Acao-->>Nav: erro "Muitas tentativas com este e-mail…"
-        Nav-->>Pesq: resumo de erros com o foco
-    else pode tentar
-        Acao->>BD: busca o pesquisador pelo e-mail
-        BD-->>Acao: pesquisador com senhaHash
-        Acao->>Acao: bcrypt.compare(senha, senhaHash)
-        alt e-mail ou senha não conferem
-            Acao->>Tent: registrarFalha(email)
-            Acao-->>Nav: erro "E-mail ou senha não conferem…"
-            Nav-->>Pesq: resumo de erros com o foco
-        else conferem
-            Acao->>Tent: limparFalhas(email)
-            Acao->>Sessao: criarSessao(pesquisadorId)
-            Sessao->>Sessao: gera token aleatório de 32 bytes
-            Sessao->>BD: apaga sessões vencidas e cria Sessao com id = SHA-256(token)
-            Sessao-->>Nav: cookie "sessao" httpOnly, sameSite lax, 7 dias
-            Acao-->>Nav: redireciona para destinoInterno(voltar)
-            Nav->>Proxy: GET /estudos/abc/resultados (com cookie)
-            Proxy-->>Nav: segue
-            Note over Nav,BD: a página chama exigirPesquisador, que procura a sessão pelo hash do token e confere a validade
-            Nav-->>Pesq: painel de resultados
+    Tent->>BD: counts failures of SHA-256(email) in the last 15 minutes
+    alt 5 or more failures
+        Acao-->>Nav: error "Too many attempts with this email…"
+        Nav-->>Pesq: error summary with the focus
+    else can try
+        Acao->>BD: looks up the researcher by email
+        BD-->>Acao: researcher with passwordHash
+        Acao->>Acao: bcrypt.compare(senha, passwordHash)
+        alt email or password do not match
+            Acao->>Tent: recordFailure(email)
+            Acao-->>Nav: error "Email or password do not match…"
+            Nav-->>Pesq: error summary with the focus
+        else they match
+            Acao->>Tent: clearFailures(email)
+            Acao->>Session: createSession(researcherId)
+            Session->>Session: generates a random 32-byte token
+            Session->>BD: deletes expired sessions and creates Session with id = SHA-256(token)
+            Session-->>Nav: cookie "session" httpOnly, sameSite lax, 7 days
+            Acao-->>Nav: redirects to internalDestination(voltar)
+            Nav->>Proxy: GET /estudos/abc/resultados (with cookie)
+            Proxy-->>Nav: continues
+            Note over Nav,BD: the page calls requireResearcher, which looks up the session by the token hash and checks its validity
+            Nav-->>Pesq: results dashboard
         end
     end
 ```
@@ -84,68 +84,68 @@ Nada sobre a pessoa é gravado antes do consentimento, e nenhuma resposta é gra
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Part as Participante
-    participant Nav as Navegador
-    participant Pag as Páginas /r/[slug]
-    participant Acao as Ações /r/[slug]
-    participant Lib as lib/participacao e lib/balanceamento
+    actor Part as Participant
+    participant Nav as Browser
+    participant Pag as Pages /r/[slug]
+    participant Acao as Actions /r/[slug]
+    participant Lib as lib/participacao and lib/balanceamento
     participant Ueq as ueq
     participant BD as PostgreSQL
 
-    Part->>Nav: abre /r/<slug>
+    Part->>Nav: opens /r/<slug>
     Nav->>Pag: GET
-    Pag->>Lib: estudoPublico(slug) e idiomaDoParticipante() (a escolha no cookie ou o idioma do estudo)
-    Lib->>BD: estudo pelo slug, com versões e respostas concluídas por versão
-    alt estudo em rascunho, encerrado ou link já respondido
-        Pag-->>Nav: aviso da situação, sem consentimento
-    else estudo aberto
-        Pag-->>Nav: termo de consentimento no idioma negociado
+    Pag->>Lib: publicStudy(slug) and participantLanguage() (the choice in the cookie or the study language)
+    Lib->>BD: study by slug, with versions and completed responses per version
+    alt study in draft, closed or link already answered
+        Pag-->>Nav: notice about the situation, without consent
+    else study open
+        Pag-->>Nav: consent form in the negotiated language
     end
 
-    Part->>Nav: escolhe a idade e Concordo e quero participar
-    Nav->>Acao: consentir(slug, idade e autorização)
-    alt sem idade, ou menos de 18 anos sem a autorização do responsável
-        Acao-->>Nav: volta ao termo com o erro, e nada é gravado
+    Part->>Nav: chooses the age and clicks I agree and want to take part
+    Nav->>Acao: consent(slug, age and authorization)
+    alt no age, or under 18 without the guardian's authorization
+        Acao-->>Nav: back to the form with the error, and nothing is stored
     end
-    Acao->>Lib: versaoComMenosRespostas(versões)
-    Lib-->>Acao: versão com menos respostas concluídas
-    Acao->>BD: apaga participações abandonadas há mais de 2 dias
-    Acao->>BD: cria Participacao (versão, consentiuEm, idioma, menorDeIdade)
-    Acao-->>Nav: cookie ueq_participacao no caminho /r/<slug> e redireciona ao questionário
+    Acao->>Lib: versionWithFewestResponses(versions)
+    Lib-->>Acao: version with the fewest completed responses
+    Acao->>BD: deletes participations abandoned for more than 2 days
+    Acao->>BD: creates Participation (version, consentedAt, language, isMinor)
+    Acao-->>Nav: cookie ueq_participacao on the path /r/<slug> and redirects to the questionnaire
 
     Nav->>Pag: GET /r/<slug>/questionario
-    Pag->>BD: 26 itens (ordem e polaridade oficiais)
-    Pag-->>Nav: instrução oficial e 26 itens, nenhum marcado
-    loop a cada marcação
-        Part->>Nav: marca uma posição
-        Nav->>Nav: atualiza o progresso e guarda o rascunho no sessionStorage
+    Pag->>BD: 26 items (official order and polarity)
+    Pag-->>Nav: official instruction and 26 items, none marked
+    loop on each mark
+        Part->>Nav: marks a position
+        Nav->>Nav: updates the progress and keeps the draft in sessionStorage
     end
 
-    Part->>Nav: Enviar respostas
-    Nav->>Nav: confere no navegador se os 26 estão marcados
-    Nav->>Acao: enviarRespostas(slug, valores)
-    Acao->>Acao: confere os 26 valores de 1 a 7 de novo no servidor
-    alt falta algum item
-        Acao-->>Nav: { faltando: [7, 19] }
-        Nav-->>Part: resumo "Faltam 2 itens" com o foco e links para os itens
-    else completo
-        Acao->>Ueq: avaliarSuspeita(valores, itens, protocolo)
-        Ueq-->>Acao: { suspeita, motivos, amplitudes }
-        Acao->>BD: transação: cria 26 Respostas e marca concluidaEm e suspeita
-        Acao->>BD: avisa dono e equipe no sino (notificarResposta)
-        Acao-->>Nav: cookie ueq_respondido (30 dias)
+    Part->>Nav: Send answers
+    Nav->>Nav: checks in the browser that all 26 are marked
+    Nav->>Acao: submitAnswers(slug, values)
+    Acao->>Acao: checks the 26 values from 1 to 7 again on the server
+    alt an item is missing
+        Acao-->>Nav: { missing: [7, 19] }
+        Nav-->>Part: summary "2 items left" with the focus and links to the items
+    else complete
+        Acao->>Ueq: assessSuspicion(values, items, protocol)
+        Ueq-->>Acao: { suspicious, reasons, ranges }
+        Acao->>BD: transaction: creates 26 Responses and sets completedAt and suspicious
+        Acao->>BD: notifies the owner and the team in the bell (notifyResponse)
+        Acao-->>Nav: cookie ueq_respondido (30 days)
     end
 
-    opt o estudo coleta dados demográficos
-        Acao-->>Nav: redireciona a /sobre-voce
-        Part->>Nav: responde os dados opcionais ou pula a etapa
-        Nav->>Acao: salvarDemografia(slug, FormData)
-        opt clicou em Continuar e respondeu algo
-            Acao->>BD: grava demografia cifrada (só opções da lista)
+    opt the study collects demographic data
+        Acao-->>Nav: redirects to /sobre-voce
+        Part->>Nav: answers the optional data or skips the step
+        Nav->>Acao: saveDemographics(slug, FormData)
+        opt clicked Continue and answered something
+            Acao->>BD: stores encrypted demographics (only options from the list)
         end
     end
-    Acao-->>Nav: apaga o cookie ueq_participacao e redireciona a /fim
-    Nav-->>Part: Respostas registradas
+    Acao-->>Nav: deletes the cookie ueq_participacao and redirects to /fim
+    Nav-->>Part: Responses recorded
 ```
 
 **Ferramenta do diagrama:** Mermaid 12.2.0 (`sequenceDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [diagramas-de-sequencia-2.mmd](fontes/diagramas-de-sequencia-2.mmd). **Versão representada:** Ferramenta UEQ de 17/11/2026.
@@ -157,40 +157,40 @@ Todo cálculo estatístico acontece em `src/ueq`. A página só busca, organiza 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
-    participant Pag as Página resultados
-    participant Sessao as lib/sessao
-    participant Estudos as lib/estudos
+    actor Pesq as Researcher
+    participant Nav as Browser
+    participant Pag as Results page
+    participant Session as lib/sessao
+    participant Studies as lib/estudos
     participant Res as lib/resultados
     participant Ueq as ueq
     participant BD as PostgreSQL
 
-    Pesq->>Nav: abre /estudos/abc/resultados?versao=v2
-    Nav->>Pag: GET com searchParams
-    Pag->>Sessao: exigirPesquisador()
-    Sessao->>BD: sessão pelo hash do token, ainda válida
-    BD-->>Sessao: pesquisador
-    Pag->>Estudos: estudoDoPesquisador(id, pessoa, "ver")
-    Estudos->>BD: estudo com esse id, se a pessoa é dona ou aceitou o convite
-    alt estudo não existe ou a pessoa não tem acesso
-        Estudos-->>Nav: 404, igual nos dois casos
-    else a pessoa tem acesso
-        Pag->>Res: analisarResultados(estudoId, versões)
-        Res->>BD: itens e participações concluídas, com respostas
-        Res->>Res: monta 26 valores por participação e separa por versão
-        Res->>Ueq: analisarEstudo(todas, itens, protocolo e benchmark)
-        loop para cada versão
-            Res->>Ueq: analisarEstudo(da versão, itens, config)
+    Pesq->>Nav: opens /estudos/abc/resultados?version=v2
+    Nav->>Pag: GET with searchParams
+    Pag->>Session: requireResearcher()
+    Session->>BD: session by the token hash, still valid
+    BD-->>Session: researcher
+    Pag->>Studies: researcherStudy(id, pessoa, "ver")
+    Studies->>BD: study with this id, if the person is the owner or accepted the invitation
+    alt study does not exist or the person has no access
+        Studies-->>Nav: 404, the same in both cases
+    else the person has access
+        Pag->>Res: analyzeResults(studyId, versions)
+        Res->>BD: items and completed participations, with responses
+        Res->>Res: builds 26 values per participation and splits by version
+        Res->>Ueq: analyzeStudy(all, items, protocol and benchmark)
+        loop for each version
+            Res->>Ueq: analyzeStudy(of the version, items, config)
         end
-        Ueq-->>Res: AnaliseEstudo (escalas, grupos, itens, participantes)
-        Res-->>Pag: análise de todas e por versão
-        Pag->>Pag: leitura rápida, gráfico SVG com title e desc, tabelas
-        Pag-->>Nav: HTML do painel
-        Nav-->>Pesq: painel da versão v2
+        Ueq-->>Res: StudyAnalysis (scales, groups, items, participants)
+        Res-->>Pag: analysis of all and per version
+        Pag->>Pag: quick reading, SVG chart with title and desc, tables
+        Pag-->>Nav: dashboard HTML
+        Nav-->>Pesq: dashboard of version v2
     end
-    Pesq->>Nav: escolhe "Comparar versões"
-    Nav->>Pag: GET ?modo=comparar (a URL guarda a visão)
+    Pesq->>Nav: chooses "Compare versions"
+    Nav->>Pag: GET ?modo=comparar (the URL keeps the view)
 ```
 
 **Ferramenta do diagrama:** Mermaid 12.2.0 (`sequenceDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [diagramas-de-sequencia-3.mmd](fontes/diagramas-de-sequencia-3.mmd). **Versão representada:** Ferramenta UEQ de 06/11/2026.
@@ -202,26 +202,26 @@ Excluir da análise só muda um campo. Nada é apagado, e a mudança aparece no 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
-    participant Acao as Ação alterarInclusao
-    participant Sessao as lib/sessao
-    participant Estudos as lib/estudos
+    actor Pesq as Researcher
+    participant Nav as Browser
+    participant Acao as Action setInclusion
+    participant Session as lib/sessao
+    participant Studies as lib/estudos
     participant BD as PostgreSQL
 
-    Pesq->>Nav: desmarca "Na análise" numa linha de Respostas
-    Nav->>Acao: alterarInclusao(estudoId, participacaoId, false)
-    Acao->>Sessao: exigirPesquisador()
-    Acao->>Estudos: estudoDoPesquisador(estudoId, pessoa, "editar")
-    Acao->>BD: participação com esse id, deste estudo e concluída
-    alt não encontrada
-        Acao-->>Nav: erro "Essa participação não está neste estudo…"
-    else encontrada
-        Acao->>BD: incluidaNaAnalise = false
-        Acao->>BD: avisa o resto da equipe no sino (notificarAlteracao)
-        Acao->>Acao: revalidatePath do estudo (painel, respostas, exportações)
-        Acao-->>Nav: "Participação de … saiu da análise. Nada foi apagado…"
-        Nav-->>Pesq: aviso em role="status"
+    Pesq->>Nav: unchecks "In analysis" on a row of Responses
+    Nav->>Acao: setInclusion(studyId, participationId, false)
+    Acao->>Session: requireResearcher()
+    Acao->>Studies: researcherStudy(studyId, pessoa, "editar")
+    Acao->>BD: participation with this id, from this study and completed
+    alt not found
+        Acao-->>Nav: error "This participation is not in this study…"
+    else found
+        Acao->>BD: includedInAnalysis = false
+        Acao->>BD: notifies the rest of the team in the bell (notifyChange)
+        Acao->>Acao: revalidatePath of the study (dashboard, responses, exports)
+        Acao-->>Nav: "Participation from … left the analysis. Nothing was deleted…"
+        Nav-->>Pesq: notice in role="status"
     end
 ```
 
@@ -234,32 +234,32 @@ O servidor abre a página de impressão num Chromium sem tela, com a sessão de 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
-    participant Rota as Rota de API painel-pdf
-    participant Sessao as lib/sessao
+    actor Pesq as Researcher
+    participant Nav as Browser
+    participant Rota as API route painel-pdf
+    participant Session as lib/sessao
     participant Chrome as Chromium (Playwright)
-    participant Imp as Página impressao
+    participant Imp as Print page
     participant BD as PostgreSQL
 
-    Pesq->>Nav: Exportar painel em PDF
-    Nav->>Rota: GET /api/estudos/abc/painel-pdf?versao=v2
-    Rota->>Sessao: pesquisadorDaSessao()
-    alt sem sessão
-        Rota-->>Nav: 401 "Entre na sua conta…"
-    else com sessão
-        Rota->>BD: estudo com esse id e filtroDeAcesso(pessoa)
-        alt estudo não encontrado ou sem acesso
-            Rota-->>Nav: 404 "Estudo não encontrado."
-        else a pessoa tem acesso
-            Rota->>Chrome: launch() e cookie de sessão para a origem interna
-            Chrome->>Imp: GET /estudos/abc/resultados/impressao?versao=v2
-            Note over Imp,BD: mesma consulta e mesmo cálculo do diagrama 3
-            Imp-->>Chrome: HTML com CSS de impressão (A4, 18 mm)
-            Chrome->>Chrome: espera as fontes, emula mídia print
-            Chrome-->>Rota: PDF com gráficos em vetor
+    Pesq->>Nav: Export dashboard as PDF
+    Nav->>Rota: GET /api/estudos/abc/painel-pdf?version=v2
+    Rota->>Session: sessionResearcher()
+    alt no session
+        Rota-->>Nav: 401 "Log in to your account…"
+    else with session
+        Rota->>BD: study with this id and accessFilter(pessoa)
+        alt study not found or no access
+            Rota-->>Nav: 404 "Study not found."
+        else the person has access
+            Rota->>Chrome: launch() and session cookie for the internal origin
+            Chrome->>Imp: GET /estudos/abc/resultados/impressao?version=v2
+            Note over Imp,BD: same query and same calculation as in diagram 3
+            Imp-->>Chrome: HTML with print CSS (A4, 18 mm)
+            Chrome->>Chrome: waits for the fonts, emulates print mean
+            Chrome-->>Rota: PDF with vector charts
             Rota->>Chrome: close()
-            Rota-->>Nav: application/pdf, attachment, ueq_<titulo>_painel_<data>.pdf
+            Rota-->>Nav: application/pdf, attachment, ueq_<title>_painel_<data>.pdf
         end
     end
 ```
@@ -275,32 +275,32 @@ Dois passos: a prévia lê sem gravar; a confirmação grava tudo numa transaç�
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
-    participant Acao as Ações importar
+    actor Pesq as Researcher
+    participant Nav as Browser
+    participant Acao as Actions importar
     participant Imp as lib/importacao
     participant Ueq as ueq
     participant BD as PostgreSQL
 
-    Pesq->>Nav: escolhe a versão e o arquivo e clica em "Ver prévia"
-    Nav->>Acao: previsualizarImportacao(estudoId, FormData)
-    Acao->>Acao: confere sessão, permissão de editar, versão, extensão e tamanho (até 500 KB)
-    Acao->>Imp: lerCsvDeRespostas(texto)
-    Imp-->>Acao: linhas válidas e erros por linha
-    Acao-->>Nav: prévia das 5 primeiras linhas, total e erros
-    alt alguma linha com erro
-        Nav-->>Pesq: problema de cada linha, sem botão de confirmar
-    else arquivo inteiro válido
-        Pesq->>Nav: confirma
-        Nav->>Acao: confirmarImportacao(estudoId, versaoId, texto)
-        Acao->>Imp: lerCsvDeRespostas(texto) de novo
-        loop para cada linha
-            Acao->>Ueq: avaliarSuspeita(valores, itens, protocolo)
+    Pesq->>Nav: chooses the version and the file and clicks "View preview"
+    Nav->>Acao: previewImport(studyId, FormData)
+    Acao->>Acao: checks session, edit permission, version, extension and size (up to 500 KB)
+    Acao->>Imp: readResponsesCsv(text)
+    Imp-->>Acao: valid rows and errors per row
+    Acao-->>Nav: preview of the first 5 rows, total and errors
+    alt some row with an error
+        Nav-->>Pesq: problem of each row, without a confirm button
+    else whole file valid
+        Pesq->>Nav: confirms
+        Nav->>Acao: confirmImport(studyId, versionId, text)
+        Acao->>Imp: readResponsesCsv(text) again
+        loop for each row
+            Acao->>Ueq: assessSuspicion(values, items, protocol)
         end
-        Acao->>BD: transação: uma Participacao IMPORTADA, concluída e sem idioma, com 26 Respostas, por linha
-        Acao->>BD: avisa o resto da equipe no sino (notificarAlteracao)
-        Acao-->>Nav: redireciona a Respostas com "N importadas"
-        Nav-->>Pesq: as linhas aparecem marcadas "importada de CSV"
+        Acao->>BD: transaction: one IMPORTED Participation, completed and without language, with 26 Responses, per row
+        Acao->>BD: notifies the rest of the team in the bell (notifyChange)
+        Acao-->>Nav: redirects to Responses with "N imported"
+        Nav-->>Pesq: the rows appear marked "imported from CSV"
     end
 ```
 
@@ -315,39 +315,39 @@ Só o dono convida. A pessoa precisa já ter conta, e o estudo só aparece para 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Dono
-    participant Nav as Navegador
-    participant Acao as Ações do estudo e do sino
-    participant Estudos as lib/estudos
+    actor Dono as Owner
+    participant Nav as Browser
+    participant Acao as Study and bell actions
+    participant Studies as lib/estudos
     participant Avisos as lib/notificacoes
     participant BD as PostgreSQL
-    participant Smtp as Servidor de e-mail
-    actor Conv as Convidado
+    participant Smtp as Email server
+    actor Conv as Invitee
 
-    Dono->>Nav: Compartilhar, informa o e-mail e o papel
-    Nav->>Acao: convidar(estudoId, FormData)
-    Acao->>Estudos: estudoDoPesquisador(estudoId, pessoa, "gerenciar")
-    Acao->>BD: procura a conta pelo e-mail
-    alt não há conta, é o dono ou já tem acesso
-        Acao-->>Nav: erro no campo, dizendo o que fazer
-    else pode convidar
-        Acao->>BD: cria ou renova Colaboracao como PENDENTE
-        Acao->>BD: apaga o convite antigo do sino, se houver
-        Acao->>Avisos: notificar(convidado, tipo CONVITE)
-        Avisos->>BD: cria Notificacao no idioma do convidado
-        alt envio de e-mail configurado
-            Acao-->>Nav: "Convite enviado para …, na ferramenta e por e-mail."
-            Avisos->>Smtp: depois da resposta, envia o e-mail do convite
-            Smtp-->>Conv: e-mail com o link
-        else sem envio configurado
-            Acao-->>Nav: aviso e link de e-mail pronto para quem convidou
+    Dono->>Nav: Share, enters the email and the role
+    Nav->>Acao: invite(studyId, FormData)
+    Acao->>Studies: researcherStudy(studyId, pessoa, "gerenciar")
+    Acao->>BD: looks up the account by email
+    alt there is no account, it is the owner or already has access
+        Acao-->>Nav: error on the field, saying what to do
+    else can invite
+        Acao->>BD: creates or renews Collaboration as PENDING
+        Acao->>BD: deletes the old invitation from the bell, if any
+        Acao->>Avisos: notify(invitee, type INVITATION)
+        Avisos->>BD: creates Notification in the invitee's language
+        alt email sending configured
+            Acao-->>Nav: "Invitation sent to …, in the tool and by email."
+            Avisos->>Smtp: after the response, sends the invitation email
+            Smtp-->>Conv: email with the link
+        else no sending configured
+            Acao-->>Nav: notice and ready-made email link for the inviter
         end
     end
 
-    Conv->>Nav: abre o sino e aceita ou recusa
-    Nav->>Acao: responde ao convite
-    Acao->>BD: Colaboracao ACEITO ou RECUSADO, com respondidoEm
-    Note over Conv,BD: só com ACEITO o estudo entra no filtroDeAcesso da pessoa
+    Conv->>Nav: opens the bell and accepts or declines
+    Nav->>Acao: responds to the invitation
+    Acao->>BD: Collaboration ACCEPTED or DECLINED, with respondedAt
+    Note over Conv,BD: only with ACCEPTED does the study enter the person's accessFilter
 ```
 
 **Ferramenta do diagrama:** Mermaid 12.2.0 (`sequenceDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [diagramas-de-sequencia-7.mmd](fontes/diagramas-de-sequencia-7.mmd). **Versão representada:** Ferramenta UEQ de 06/11/2026.
@@ -359,36 +359,36 @@ A tela nunca espera a tradução da interface. O que ainda não foi traduzido sa
 ```mermaid
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
-    participant Pag as Página
+    actor Pesq as Researcher
+    participant Nav as Browser
+    participant Pag as Page
     participant Trad as traducao/servidor
     participant BD as PostgreSQL
-    participant Claude as API do Claude
+    participant Claude as Claude API
 
-    Pesq->>Nav: abre uma tela com a conta em espanhol
+    Pesq->>Nav: opens a screen with the account in Spanish
     Nav->>Pag: GET
     Pag->>Trad: tradutor()
-    Trad->>BD: traduções do catálogo em espanhol
-    BD-->>Trad: as que já existem
-    alt faltam traduções e há ANTHROPIC_API_KEY
-        Trad-->>Pag: t() com o que existe, e o resto em português
+    Trad->>BD: catalog translations in Spanish
+    BD-->>Trad: the ones that already exist
+    alt translations are missing and there is ANTHROPIC_API_KEY
+        Trad-->>Pag: t() with what exists, and the rest in Portuguese
         Pag-->>Nav: HTML
-        Trad->>Claude: traduz o glossário do idioma, se ainda não existe
-        Trad->>BD: guarda os termos
-        loop depois da resposta, os rótulos e então os textos longos, em lotes de 60 agrupados por tela, até 6 ao mesmo tempo
-            Trad->>Claude: traduzirLote(textos, telas, termos e rótulos citados, pt, es)
-            Claude-->>Trad: primeira tradução
-            Trad->>Claude: revisão, com original e tradução lado a lado
-            Claude-->>Trad: correções do que mudou de sentido
-            Note over Trad: tradução com marcadores diferentes do original é descartada
-            Trad->>BD: guarda em Traducao, por idioma e hash do texto
+        Trad->>Claude: translates the language glossary, if it does not exist yet
+        Trad->>BD: stores the terms
+        loop after the response, the labels and then the long texts, in batches of 60 grouped by screen, up to 6 at the same time
+            Trad->>Claude: translateBatch(textos, telas, terms and quoted labels, pt, es)
+            Claude-->>Trad: first translation
+            Trad->>Claude: review, with original and translation side by side
+            Claude-->>Trad: corrections of what changed meaning
+            Note over Trad: a translation with placeholders different from the original is discarded
+            Trad->>BD: stores in Translation, by language and text hash
         end
-    else catálogo completo ou sem chave da API
-        Trad-->>Pag: t() com o dicionário disponível
+    else complete catalog or no API key
+        Trad-->>Pag: t() with the available dictionary
         Pag-->>Nav: HTML
     end
-    Note over Pag,Nav: se a maior parte ainda está em português, o html lang fica pt-BR, para o leitor de tela pronunciar certo
+    Note over Pag,Nav: if most of it is still in Portuguese, html lang stays pt-BR, so the screen reader pronounces it correctly
 ```
 
 **Ferramenta do diagrama:** Mermaid 12.2.0 (`sequenceDiagram`), gerado por `pnpm docs:diagramas`. **Arquivo-fonte:** [diagramas-de-sequencia-8.mmd](fontes/diagramas-de-sequencia-8.mmd). **Versão representada:** Ferramenta UEQ de 06/11/2026.

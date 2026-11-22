@@ -1,32 +1,32 @@
 sequenceDiagram
     autonumber
-    actor Pesq as Pesquisador
-    participant Nav as Navegador
-    participant Pag as Página
+    actor Pesq as Researcher
+    participant Nav as Browser
+    participant Pag as Page
     participant Trad as traducao/servidor
     participant BD as PostgreSQL
-    participant Claude as API do Claude
+    participant Claude as Claude API
 
-    Pesq->>Nav: abre uma tela com a conta em espanhol
+    Pesq->>Nav: opens a screen with the account in Spanish
     Nav->>Pag: GET
     Pag->>Trad: tradutor()
-    Trad->>BD: traduções do catálogo em espanhol
-    BD-->>Trad: as que já existem
-    alt faltam traduções e há ANTHROPIC_API_KEY
-        Trad-->>Pag: t() com o que existe, e o resto em português
+    Trad->>BD: catalog translations in Spanish
+    BD-->>Trad: the ones that already exist
+    alt translations are missing and there is ANTHROPIC_API_KEY
+        Trad-->>Pag: t() with what exists, and the rest in Portuguese
         Pag-->>Nav: HTML
-        Trad->>Claude: traduz o glossário do idioma, se ainda não existe
-        Trad->>BD: guarda os termos
-        loop depois da resposta, os rótulos e então os textos longos, em lotes de 60 agrupados por tela, até 6 ao mesmo tempo
-            Trad->>Claude: traduzirLote(textos, telas, termos e rótulos citados, pt, es)
-            Claude-->>Trad: primeira tradução
-            Trad->>Claude: revisão, com original e tradução lado a lado
-            Claude-->>Trad: correções do que mudou de sentido
-            Note over Trad: tradução com marcadores diferentes do original é descartada
-            Trad->>BD: guarda em Traducao, por idioma e hash do texto
+        Trad->>Claude: translates the language glossary, if it does not exist yet
+        Trad->>BD: stores the terms
+        loop after the response, the labels and then the long texts, in batches of 60 grouped by screen, up to 6 at the same time
+            Trad->>Claude: translateBatch(textos, telas, terms and quoted labels, pt, es)
+            Claude-->>Trad: first translation
+            Trad->>Claude: review, with original and translation side by side
+            Claude-->>Trad: corrections of what changed meaning
+            Note over Trad: a translation with placeholders different from the original is discarded
+            Trad->>BD: stores in Translation, by language and text hash
         end
-    else catálogo completo ou sem chave da API
-        Trad-->>Pag: t() com o dicionário disponível
+    else complete catalog or no API key
+        Trad-->>Pag: t() with the available dictionary
         Pag-->>Nav: HTML
     end
-    Note over Pag,Nav: se a maior parte ainda está em português, o html lang fica pt-BR, para o leitor de tela pronunciar certo
+    Note over Pag,Nav: if most of it is still in Portuguese, html lang stays pt-BR, so the screen reader pronounces it correctly
