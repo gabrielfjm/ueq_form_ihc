@@ -201,6 +201,11 @@
    "origem": "app/(ferramenta)/(publico)/documentacao/EmProducao.tsx"
   },
   {
+   "texto": "A documentação não está disponível no seu idioma, então você está lendo a versão em inglês. A ferramenta é de código aberto: se quiser traduzi-la do inglês para o seu idioma, faça um fork no GitHub e abra um pull request quando terminar, para a equipe revisar e publicar.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(publico)/documentacao/AvisoDeIdioma.tsx"
+  },
+  {
    "texto": "A equipe",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
@@ -2039,11 +2044,6 @@
    "texto": "Esta ferramenta",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
-  },
-  {
-   "texto": "Este documento ainda não foi traduzido para o seu idioma. Você está lendo a versão em inglês.",
-   "cliente": false,
-   "origem": "app/(ferramenta)/(publico)/documentacao/AvisoDeIdioma.tsx"
   },
   {
    "texto": "Este painel, com a versão escolhida, em A4 e com os gráficos em vetor. Para anexar ao relatório ou imprimir.",

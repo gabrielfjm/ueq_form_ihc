@@ -105,4 +105,4 @@ Only the interface texts and the study texts go to the API. No response, name, e
 ## Out of scope
 
 - The results dashboard does not break down by language. To compare languages, use the `idioma` column of the exports.
-- The documents in the Documentation tab are only translated into English, Spanish, French, German, Italian, Chinese and Japanese (translated by Claude, without the API and not yet reviewed by native speakers, in `docs/traducoes/`). In the other interface languages, they appear in English, with a notice. The diagrams are in English in every language.
+- The documents in the Documentation tab exist in Portuguese (the original) and in English (translated by Claude, without the API and not yet reviewed by a native speaker, in `docs/traducoes/en/`). In the other 35 interface languages, they appear in English, with a notice that invites people to translate the documentation through a fork and a pull request on GitHub (the steps are in `docs/traducoes/LEIA-ME.md`). The diagrams are in English in every language.

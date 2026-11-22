@@ -1,10 +1,11 @@
 // Em que idiomas a documentação existe. O original é o português, em docs/; cada tradução espelha a mesma
 // árvore em docs/traducoes/<idioma>/ (docs/documentacao/requisitos.md → docs/traducoes/en/documentacao/requisitos.md).
-// Os diagramas e os arquivos para baixar das traduções ficam em inglês. Um idioma da interface sem tradução
-// da documentação lê a versão em inglês, com um aviso
+// A única tradução é a inglesa (decisão do Gabriel em 22/11/2026): os outros idiomas da interface leem a
+// versão em inglês, com um aviso que convida a traduzir por fork e pull request no GitHub. Os diagramas e os
+// arquivos para baixar ficam em inglês. Uma tradução nova entra aqui quando a pasta dela estiver completa
 export const IDIOMA_ORIGINAL = "pt";
 export const IDIOMA_SUBSTITUTO = "en";
-export const IDIOMAS_TRADUZIDOS = ["en", "es", "fr", "de", "it", "zh", "ja"] as const;
+export const IDIOMAS_TRADUZIDOS = ["en"] as const;
 export type IdiomaTraduzido = (typeof IDIOMAS_TRADUZIDOS)[number];
 
 export const PASTA_TRADUCOES = "docs/traducoes";

@@ -7,20 +7,33 @@ vira `docs/traducoes/en/ihc.md`. A aba Documentação da ferramenta mostra a ver
 | Pasta | Idioma |
 |---|---|
 | `en/` | Inglês, completo, com os arquivos para baixar (CSV e planilha) |
-| `es/` | Espanhol |
-| `fr/` | Francês |
-| `de/` | Alemão |
-| `it/` | Italiano |
-| `zh/` | Chinês (simplificado) |
-| `ja/` | Japonês |
 
-As traduções além do inglês estão sendo feitas documento por documento; `pnpm docs:conferir` lista o que falta.
-Enquanto um documento não tem tradução no idioma da interface, a ferramenta mostra a versão em inglês, com um
-aviso no alto da página. Os outros 29 idiomas da interface leem sempre a versão em inglês. A lista fica em
+Só existem o original em português e a tradução em inglês (decisão do Gabriel em 22/11/2026). A interface em
+português mostra o original. Os outros 35 idiomas da interface leem a versão em inglês, com um aviso no alto da
+página que convida a pessoa a traduzir a documentação para o idioma dela. A lista fica em
 `src/lib/documentacao/idiomas.ts` (`IDIOMAS_TRADUZIDOS`).
 
-As traduções foram escritas pelo Claude a partir do original em português, sem API de tradução, a pedido do
-Gabriel em 18/11/2026. Ainda precisam da revisão de um falante nativo.
+A tradução em inglês foi escrita pelo Claude a partir do original em português, sem API de tradução, a pedido do
+Gabriel em 18/11/2026. Ainda precisa da revisão de um falante nativo. As traduções para espanhol, francês e
+alemão chegaram a ser feitas na branch `feat/documentacao-traduzida` e foram retiradas antes do merge; estão no
+histórico do git, se alguém quiser partir delas.
+
+## Como contribuir com uma tradução
+
+A ferramenta é de código aberto. Para traduzir a documentação para outro idioma:
+
+1. Faça um fork de [github.com/gabrielfjm/ueq_form_ihc](https://github.com/gabrielfjm/ueq_form_ihc).
+2. Copie `docs/traducoes/en/` para `docs/traducoes/<código>/`, com o código do idioma em `src/idiomas/`
+   (por exemplo `es`, `ko`, `zh`), e traduza do inglês cada arquivo `.md`, seguindo as regras abaixo.
+3. Ponha o código em `IDIOMAS_TRADUZIDOS` e rode `pnpm docs:conferir <código>` até não sobrar problema.
+4. Abra um pull request. A equipe revisa, faz o merge e a tradução passa a aparecer para quem usa a interface
+   naquele idioma.
+
+**In English:** the tool is open source. To translate the documentation, fork the repository, copy
+`docs/traducoes/en/` to `docs/traducoes/<code>/` (the language code used in `src/idiomas/`), translate each
+`.md` file from English following the rules below (same headings, links, anchors, tables and code; diagrams stay
+in English), add the code to `IDIOMAS_TRADUZIDOS` in `src/lib/documentacao/idiomas.ts`, run
+`pnpm docs:conferir <code>` and open a pull request. The team will review and merge it.
 
 ## Regras
 
@@ -46,10 +59,12 @@ tradução tem o mesmo esqueleto do português, e `pnpm docs:conferir` confere i
     espanhol, francês, alemão e italiano. Os dígitos não mudam.
 12. **Tratamento:** formal, como a interface (usted, vous, Sie, Lei, 您, です・ます).
 
-Mudou um documento em português? Mude as sete traduções no mesmo commit e rode `pnpm docs:conferir`. Mudou um
-diagrama? Escreva-o em inglês no original, copie o bloco para as sete traduções e rode `pnpm docs:diagramas`.
+Mudou um documento em português? Mude as traduções no mesmo commit e rode `pnpm docs:conferir`. Mudou um
+diagrama? Escreva-o em inglês no original, copie o bloco para as traduções e rode `pnpm docs:diagramas`.
 
 ## Glossário
+
+As colunas além do inglês ficaram das traduções retiradas e servem de ponto de partida para quem traduzir.
 
 | Português | en | es | fr | de | it | zh | ja |
 |---|---|---|---|---|---|---|---|

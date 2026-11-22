@@ -68,12 +68,13 @@ describe("versão do documento", () => {
   const requisitos = documentoPeloSlug("requisitos");
   if (!requisitos) throw new Error("requisitos sumiu do catálogo");
 
-  it("o português lê o original; os idiomas traduzidos, a tradução; os outros, o inglês com aviso", () => {
+  it("o português lê o original; o inglês, a tradução; os outros, o inglês com aviso", () => {
     expect(versaoDoDocumento(requisitos, "pt")).toMatchObject({ idioma: "pt", arquivo: requisitos.arquivo, substituta: false });
     expect(versaoDoDocumento(requisitos, "en")).toMatchObject({ idioma: "en", substituta: false });
     expect(versaoDoDocumento(requisitos, "ko")).toMatchObject({ idioma: "en", arquivo: "docs/traducoes/en/documentacao/requisitos.md", substituta: true });
     expect(idiomaDaDocumentacao("ko")).toBe("en");
-    expect(idiomaDaDocumentacao("ja")).toBe("ja");
+    expect(idiomaDaDocumentacao("ja")).toBe("en");
+    expect(versaoDoDocumento(requisitos, "es")).toMatchObject({ idioma: "en", substituta: true });
   });
 
   it("os endereços das páginas e as âncoras são os mesmos em todos os idiomas", () => {
