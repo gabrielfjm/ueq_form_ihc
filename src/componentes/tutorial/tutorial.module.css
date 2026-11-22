@@ -41,6 +41,10 @@
   transform: translateX(-50%);
   z-index: 41;
   width: min(380px, calc(100vw - 32px));
+  /* Em tela baixa ou com zoom de 200%, o cartão rola por dentro em vez de sair pelo topo */
+  max-height: calc(100dvh - 48px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
   display: flex;
   flex-direction: column;
   gap: 10px;
