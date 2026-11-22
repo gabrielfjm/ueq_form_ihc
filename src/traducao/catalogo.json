@@ -196,6 +196,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
   },
   {
+   "texto": "A documentação",
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
+  },
+  {
    "texto": "A documentação está sendo escrita pela equipe.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/documentacao/EmProducao.tsx"
@@ -257,6 +262,11 @@
   },
   {
    "texto": "A ferramenta é traduzida para os 37 idiomas do UEQ pela API do Claude. Cada idioma é traduzido sozinho na primeira visita de quem o usa; “Traduzir agora” adianta isso. Sem a chave ANTHROPIC_API_KEY, tudo fica em português.",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "A ficha ao lado de cada documento diz o que ele é, para que serve e quem deve ler. Dali você baixa as planilhas e abre o arquivo no GitHub.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
   },
@@ -676,6 +686,11 @@
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
+   "texto": "As abas no topo separam as seções, e abaixo delas ficam os documentos. Documento longo abre com a lista das partes, cada uma em página própria, e no fim de cada parte você segue para a anterior ou a próxima.",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
+  },
+  {
    "texto": "As datas de início e fim são só referência para a equipe: quem decide se o link aceita respostas é o botão de abrir e encerrar a coleta.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
@@ -916,6 +931,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/ListaVersoes.tsx"
   },
   {
+   "texto": "Clique em Documentação, na barra do topo, para ver como a ferramenta foi pensada e construída.",
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
+  },
+  {
    "texto": "Clique na aba Respostas para ver cada participação.",
    "cliente": true,
    "origem": "componentes/tutorial/passos.ts"
@@ -929,6 +949,11 @@
    "texto": "Clique na área destacada para continuar",
    "cliente": true,
    "origem": "componentes/tutorial/Tutorial.tsx"
+  },
+  {
+   "texto": "Clique num diagrama para ampliá-lo em tela cheia, com zoom. Os diagramas são em inglês em todos os idiomas.",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Coleta aberta. O link já aceita respostas.",
@@ -999,6 +1024,11 @@
    "texto": "Comitê de ética (opcional)",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
+  },
+  {
+   "texto": "Como a ferramenta foi pensada e construída: requisitos, usuários, modelagem, arquitetura, testes e especificação. É pública, como o código.",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Como editor, você pode editar o estudo, abrir e encerrar a coleta e revisar as respostas.",
@@ -1599,6 +1629,11 @@
    "texto": "Diagrama: {legenda}. A descrição está no texto da seção.",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/documentacao/ArtigoDocumento.tsx"
+  },
+  {
+   "texto": "Diagramas",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
   },
   {
    "texto": "Diferença",
@@ -3241,6 +3276,11 @@
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
+   "texto": "O original é em português, com tradução em inglês. Nos outros idiomas, a documentação aparece em inglês. Para traduzi-la, faça um fork no GitHub e abra um pull request.",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
+  },
+  {
    "texto": "O painel do UEQ: médias das seis escalas, comparação com o benchmark, itens e exportações.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
@@ -3966,6 +4006,11 @@
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
+   "texto": "Requisitos, usuários, modelagem, arquitetura, testes e especificação, com os diagramas. A documentação é pública, como o código.",
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
+  },
+  {
    "texto": "Responsável",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FichaEstudo.tsx"
@@ -4311,6 +4356,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/AbasEstudo.tsx"
   },
   {
+   "texto": "Seções e documentos",
+   "cliente": true,
+   "origem": "lib/ajuda.ts"
+  },
+  {
    "texto": "Sino de notificações",
    "cliente": true,
    "origem": "lib/ajuda.ts"
@@ -4327,7 +4377,7 @@
   },
   {
    "texto": "Sobre este documento",
-   "cliente": false,
+   "cliente": true,
    "origem": "app/(ferramenta)/(publico)/documentacao/FichaDocumento.tsx"
   },
   {
@@ -4509,6 +4559,11 @@
    "texto": "Tudo pode ser mudado a qualquer momento, inclusive ligar ou desligar a coleta de dados demográficos (vale para as próximas respostas). Só não dá para remover uma versão que já tem respostas, para não perder dados.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "Tudo sobre a ferramenta",
+   "cliente": true,
+   "origem": "componentes/tutorial/passos.ts"
   },
   {
    "texto": "Título do estudo",

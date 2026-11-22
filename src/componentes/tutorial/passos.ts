@@ -80,6 +80,21 @@ export const PASSOS: readonly Passo[] = [
   },
   {
     pagina: (id) => `${estudo(id)}/respostas`,
+    alvo: () => '[data-tutorial="navegacao-documentacao"]',
+    titulo: m("A documentação"),
+    texto: m("Clique em Documentação, na barra do topo, para ver como a ferramenta foi pensada e construída."),
+    modo: "clique",
+  },
+  {
+    pagina: () => "/documentacao",
+    alvo: () => '[data-tutorial="secoes-documentacao"]',
+    titulo: m("Tudo sobre a ferramenta"),
+    texto:
+      m("Requisitos, usuários, modelagem, arquitetura, testes e especificação, com os diagramas. A documentação é pública, como o código."),
+    modo: "proximo",
+  },
+  {
+    pagina: () => "/documentacao",
     alvo: () => '[data-tutorial="notificacoes"]',
     titulo: m("O sino de notificações"),
     texto:
@@ -87,7 +102,7 @@ export const PASSOS: readonly Passo[] = [
     modo: "proximo",
   },
   {
-    pagina: (id) => `${estudo(id)}/respostas`,
+    pagina: () => "/documentacao",
     alvo: () => '[data-tutorial="ajuda"]',
     titulo: m("Ajuda em toda página"),
     texto: m("Ficou com dúvida? Toda página tem este botão (?) que explica o que dá para fazer nela. Clique nele para terminar o tour."),

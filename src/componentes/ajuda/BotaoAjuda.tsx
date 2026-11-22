@@ -14,8 +14,9 @@ import estilos from "./ajuda.module.css";
 import { useT } from "@/traducao/cliente";
 
 // O (?) do cabeçalho de cada página: explica para que serve a página e o que dá para fazer nela
-// (Nielsen 10). Daqui também dá para rever o tour guiado a qualquer momento
-export function BotaoAjuda({ pagina }: { pagina: ChaveAjuda }) {
+// (Nielsen 10). Daqui também dá para rever o tour guiado a qualquer momento. Na documentação, que é pública,
+// quem não entrou não tem tour (comTour falso)
+export function BotaoAjuda({ pagina, comTour = true }: { pagina: ChaveAjuda; comTour?: boolean }) {
   const t = useT();
   const caminho = usePathname();
   const [aberta, setAberta] = useState(false);
@@ -60,17 +61,19 @@ export function BotaoAjuda({ pagina }: { pagina: ChaveAjuda }) {
             </p>
           </div>
           <div className={janela.acoes}>
-            <button
-              type="button"
-              className={`${formulario.botao} ${formulario.secundario}`}
-              onClick={() => {
-                setAberta(false);
-                iniciarTour();
-              }}
-            >
-              <Compass size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
-              <span>{t("Rever o tour guiado")}</span>
-            </button>
+            {comTour && (
+              <button
+                type="button"
+                className={`${formulario.botao} ${formulario.secundario}`}
+                onClick={() => {
+                  setAberta(false);
+                  iniciarTour();
+                }}
+              >
+                <Compass size={18} strokeWidth={1.5} aria-hidden="true" className={formulario.icone} />
+                <span>{t("Rever o tour guiado")}</span>
+              </button>
+            )}
             <button
               type="button"
               className={`${formulario.botao} ${formulario.primario}`}
