@@ -98,7 +98,7 @@ test("a página inicial explica o UEQ, lista os estudos do método e dá os cré
   const creditos = page.getByRole("region", { name: "Créditos" });
   await expect(creditos.getByText("Bettina Laugwitz, Theo Held e Martin Schrepp")).toBeVisible();
   await expect(creditos.getByText("Fundamentos da Interação Humano-Computador")).toBeVisible();
-  for (const nome of ["Gabriel Meira", "Jean Weiss", "Luiza Pedralli"]) {
+  for (const nome of ["Gabriel Felipe Jess Meira", "Jean Pscheidt Weiss", "Luiza Fonseca Pedralli"]) {
     await expect(creditos.getByText(nome, { exact: true })).toBeVisible();
   }
   await verificarAcessibilidade(page);

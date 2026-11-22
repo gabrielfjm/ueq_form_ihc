@@ -12,7 +12,7 @@ A página inicial explica o UEQ (escalas, como ler os resultados e o benchmark),
 
 Projeto da disciplina Fundamentos da Interação Humano-Computador, PPGIa · PUCPR · 2026.
 
-Equipe: Gabriel Meira, Jean Weiss e Luiza Pedralli.
+Equipe: Gabriel Felipe Jess Meira, Jean Pscheidt Weiss e Luiza Fonseca Pedralli.
 
 Código aberto sob a [licença MIT](LICENSE).
 
@@ -302,7 +302,7 @@ Documentação: visão geral e documento com sub-abas:
 
 O UEQ foi criado por Bettina Laugwitz, Theo Held e Martin Schrepp (Laugwitz, Held e Schrepp, 2008). O benchmark, a versão curta (UEQ-S) e o guia de aplicação são de Martin Schrepp, Andreas Hinderks e Jörg Thomaschewski (2014, 2017). A versão em português é de Manuel Pérez Cota, Jörg Thomaschewski, Martin Schrepp e Ramiro Gonçalves (2014). Todo o material oficial está em [ueq-online.org](https://www.ueq-online.org). Esta ferramenta não é oficial nem ligada aos autores do método.
 
-A ferramenta foi feita por Gabriel Meira, Jean Weiss e Luiza Pedralli como projeto da disciplina Fundamentos da Interação Humano-Computador do Programa de Pós-Graduação em Informática (PPGIa) da PUCPR, em 2026.
+A ferramenta foi feita por Gabriel Felipe Jess Meira, Jean Pscheidt Weiss e Luiza Fonseca Pedralli como projeto da disciplina Fundamentos da Interação Humano-Computador do Programa de Pós-Graduação em Informática (PPGIa) da PUCPR, em 2026.
 
 ## Licença
 

@@ -2346,11 +2346,6 @@
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
-   "texto": "Gabriel Meira",
-   "cliente": true,
-   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
-  },
-  {
    "texto": "Gerado em",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/impressao/page.tsx"
@@ -2566,11 +2561,6 @@
    "origem": "lib/nomes-ueq.ts"
   },
   {
-   "texto": "Jean Weiss",
-   "cliente": true,
-   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
-  },
-  {
    "texto": "Já aceitos: os estudos aparecem direto",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/administracao/cenarios/Cenarios.tsx"
@@ -2679,11 +2669,6 @@
    "texto": "Link para participantes",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/VisaoColeta.tsx"
-  },
-  {
-   "texto": "Luiza Pedralli",
-   "cliente": true,
-   "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
    "texto": "Mais publicações em",
@@ -4636,7 +4621,7 @@
    "origem": "lib/ajuda.ts"
   },
   {
-   "texto": "Um projeto acadêmico da disciplina Fundamentos da IHC do PPGIa da PUCPR, feito por Gabriel Meira, Jean Weiss e Luiza Pedralli.",
+   "texto": "Um projeto acadêmico da disciplina Fundamentos da IHC do PPGIa da PUCPR, feito por Gabriel Felipe Jess Meira, Jean Pscheidt Weiss e Luiza Fonseca Pedralli.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },

@@ -53,10 +53,11 @@ const DESTAQUES: readonly [LucideIcon, string, string][] = [
   [ShieldCheck, m("Dados protegidos"), m("Nada identifica o participante; dados sensíveis cifrados (LGPD).")],
 ];
 
+// Os nomes da equipe são nomes próprios: aparecem como são em todos os idiomas, sem passar pelo tradutor
 const EQUIPE = [
-  [m("Gabriel Meira"), m("Desenvolvimento, protótipos, arquitetura, protocolo do UEQ e casos de teste")],
-  [m("Jean Weiss"), m("Casos de uso, diagrama de classes e verificação do cálculo")],
-  [m("Luiza Pedralli"), m("Requisitos, rastreabilidade, personas e histórias de usuário")],
+  ["Gabriel Felipe Jess Meira", m("Desenvolvimento, protótipos, arquitetura, protocolo do UEQ e casos de teste")],
+  ["Jean Pscheidt Weiss", m("Casos de uso, diagrama de classes e verificação do cálculo")],
+  ["Luiza Fonseca Pedralli", m("Requisitos, rastreabilidade, personas e histórias de usuário")],
 ] as const;
 
 const SECOES = [
@@ -420,7 +421,7 @@ export async function PaginaInicial({ logado, aviso }: Propriedades) {
               <ul className={estilos.pessoas}>
                 {EQUIPE.map(([nome, papel]) => (
                   <li key={nome}>
-                    <strong>{t(nome)}</strong>
+                    <strong>{nome}</strong>
                     <span className={estilos.textoSuave}>{t(papel)}</span>
                   </li>
                 ))}
