@@ -58,7 +58,7 @@ export function EnvioDeEmail({ contasComEmail }: { contasComEmail: number }) {
         focarConfirmar
       >
         <p className={janela.texto}>
-          {t("{contas} recebem o e-mail “A Ferramenta UEQ tem uma nova versão no ar”, cada uma no idioma escolhido em Minha conta. E-mail enviado não volta.", {
+          {t("O e-mail “A Ferramenta UEQ tem uma nova versão no ar” vai para {contas}, cada uma no idioma escolhido em Minha conta. E-mail enviado não volta.", {
             contas: plural(contasComEmail, t("conta"), t("contas")),
           })}
         </p>

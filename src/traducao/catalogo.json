@@ -3291,6 +3291,11 @@
    "origem": "lib/ajuda.ts"
   },
   {
+   "texto": "O e-mail “A Ferramenta UEQ tem uma nova versão no ar” vai para {contas}, cada uma no idioma escolhido em Minha conta. E-mail enviado não volta.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/EnvioDeEmail.tsx"
+  },
+  {
    "texto": "O envio de e-mails está funcionando",
    "cliente": false,
    "origem": "lib/email.ts"
@@ -5739,11 +5744,6 @@
    "texto": "você é leitor: pode ver e exportar, sem alterar",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
-  },
-  {
-   "texto": "{contas} recebem o e-mail “A Ferramenta UEQ tem uma nova versão no ar”, cada uma no idioma escolhido em Minha conta. E-mail enviado não volta.",
-   "cliente": true,
-   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/EnvioDeEmail.tsx"
   },
   {
    "texto": "{datas} · concluída",
