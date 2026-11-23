@@ -233,5 +233,6 @@ describe("rota das âncoras em documentos divididos", () => {
         for (const parte of secao.partes) expect(lerPagina(doc, secao.slug, parte.slug)?.pagina.titulo).toBe(parte.titulo);
       }
     }
-  });
+    // Lê e renderiza todos os documentos: com os outros arquivos de teste rodando junto, passa dos 5 s padrão
+  }, 30_000);
 });

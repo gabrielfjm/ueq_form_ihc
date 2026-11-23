@@ -61,24 +61,42 @@ describe("preencherPlanilhaOficial", () => {
     expect(new Set(nomes)).toEqual(new Set(Object.values(IDIOMA_NA_PLANILHA)));
   });
 
-  it("apaga os resultados gravados do exemplo e pede ao Excel para recalcular ao abrir", () => {
+  it("grava o resultado de toda fórmula e ainda pede ao Excel para recalcular ao abrir", () => {
+    // Sem o valor gravado, o Modo de Exibição Protegido e o LibreOffice mostram as abas vazias
     expect(texto(preenchida, "xl/workbook.xml")).toMatch(/<calcPr [^>]*fullCalcOnLoad="1"/);
+    const contar = (arquivos: Record<string, Uint8Array>, caminho: string, padrao: RegExp) => (texto(arquivos, caminho).match(padrao) ?? []).length;
     for (const caminho of Object.keys(preenchida).filter((c) => /^xl\/worksheets\/sheet\d+\.xml$/.test(c))) {
-      const formulas = texto(preenchida, caminho).match(/<c [^>]*>(<f[^>]*\/>|<f[^>]*>[^<]*<\/f>)<v>/g);
-      expect(formulas, caminho).toBeNull();
+      const formulas = contar(preenchida, caminho, /<f[ >/]/g);
+      expect(contar(preenchida, caminho, /(<f[^>]*\/>|<f[^>]*>[^<]*<\/f>)<v>[^<]*<\/v><\/c>/g), caminho).toBe(formulas);
+      // As fórmulas continuam as do modelo
+      expect(formulas, caminho).toBe(contar(original, caminho, /<f[ >/]/g));
     }
-    // As fórmulas continuam as mesmas, só sem o valor calculado
-    const contar = (arquivos: Record<string, Uint8Array>, caminho: string) => (texto(arquivos, caminho).match(/<f[ >/]/g) ?? []).length;
-    expect(contar(preenchida, "xl/worksheets/sheet7.xml")).toBe(contar(original, "xl/worksheets/sheet7.xml"));
+    // Results!L3 (média da Atratividade) não é mais a do exemplo dos autores
+    const atratividade = (arquivos: Record<string, Uint8Array>) => /<c r="L3"[^>]*><f>[^<]*<\/f><v>([^<]*)<\/v>/.exec(texto(arquivos, "xl/worksheets/sheet4.xml"))?.[1];
+    expect(atratividade(preenchida)).not.toBe(atratividade(original));
   });
 
-  it("não mexe em gráficos, estilos, imagens nem nas outras partes do arquivo", () => {
+  it("atualiza os números que os gráficos guardam e não mexe em estilos, imagens nem nas outras partes", () => {
+    // chart3 mostra as médias das escalas, Results!L3:L8
+    const grafico = texto(preenchida, "xl/charts/chart3.xml");
+    const pontos = [.../<c:f>Results!\$L\$3:\$L\$8<\/c:f><c:numCache>(.*?)<\/c:numCache>/s.exec(grafico)![1]!.matchAll(/<c:v>([^<]*)<\/c:v>/g)].map((v) => Number(v[1]));
+    const medias = [3, 4, 5, 6, 7, 8].map((linha) => Number(new RegExp(`<c r="L${linha}"[^>]*>.*?<v>([^<]*)</v>`).exec(texto(preenchida, "xl/worksheets/sheet4.xml"))![1]));
+    expect(pontos).toEqual(medias);
     const mudam = new Set(["xl/workbook.xml", "xl/sharedStrings.xml"]);
     for (const [caminho, conteudo] of Object.entries(original)) {
-      if (mudam.has(caminho) || /^xl\/worksheets\/sheet\d+\.xml$/.test(caminho)) continue;
+      if (mudam.has(caminho) || /^xl\/(worksheets\/sheet|charts\/chart)\d+\.xml$/.test(caminho)) continue;
       expect(Buffer.from(preenchida[caminho]!).equals(Buffer.from(conteudo)), caminho).toBe(true);
     }
     expect(Object.keys(preenchida).sort()).toEqual(Object.keys(original).sort());
+  });
+
+  it("tira as importâncias de exemplo da aba KPI_Calculation, que a ferramenta não pergunta", () => {
+    // KPI_Calculation é sheet11.xml; A4:F1004 são as notas de importância das escalas
+    const entradas = (arquivos: Record<string, Uint8Array>) =>
+      [...texto(arquivos, "xl/worksheets/sheet11.xml").matchAll(/<c r="([A-F])(\d+)"[^>]*(?<!\/)>(?:(?!<\/c>).)*?<v>[^<]*<\/v><\/c>/gs)]
+        .filter(([celula, , linha]) => Number(linha) >= 4 && !celula.includes("<f"));
+    expect(entradas(original).length).toBeGreaterThan(0);
+    expect(entradas(preenchida)).toEqual([]);
   });
 
   it("sem participantes, sai a planilha vazia", () => {

@@ -55,10 +55,11 @@ describe("preencherPlanilhaOficial com o modelo do UEQ-S", () => {
     expect(new Set(nomes)).toEqual(new Set(Object.values(IDIOMA_NA_PLANILHA)));
   });
 
-  it("apaga os resultados gravados e pede ao Excel para recalcular ao abrir", () => {
+  it("grava o resultado de toda fórmula e ainda pede ao Excel para recalcular ao abrir", () => {
     expect(texto(preenchida, "xl/workbook.xml")).toMatch(/<calcPr [^>]*fullCalcOnLoad="1"/);
     for (const caminho of Object.keys(preenchida).filter((c) => /^xl\/worksheets\/sheet\d+\.xml$/.test(c))) {
-      expect(texto(preenchida, caminho).match(/<c [^>]*>(<f[^>]*\/>|<f[^>]*>[^<]*<\/f>)<v>/g), caminho).toBeNull();
+      const formulas = (texto(preenchida, caminho).match(/<f[ >/]/g) ?? []).length;
+      expect((texto(preenchida, caminho).match(/(<f[^>]*\/>|<f[^>]*>[^<]*<\/f>)<v>[^<]*<\/v><\/c>/g) ?? []).length, caminho).toBe(formulas);
     }
     expect(Object.keys(preenchida).sort()).toEqual(Object.keys(original).sort());
   });

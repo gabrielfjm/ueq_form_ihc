@@ -1,9 +1,12 @@
-import { deflateSync, strFromU8, strToU8, unzipSync } from "fflate";
+import { deflateRawSync } from "node:zlib";
+import { strFromU8, strToU8, unzipSync } from "fflate";
 import type { CodigoIdioma } from "@/idiomas";
+import { Calculo, chave, colunaParaNumero, ehErro, formatarNumero, lerFormula, type Aba, type Formula, type Valor } from "./planilha-calculo";
 
 // docs/ueq-protocolo.md, seção 9.4: a exportação é a própria planilha oficial de análise (data/planilha-oficial/),
-// com as respostas em Data!A4 e o idioma na aba Read_First. Tudo o que a planilha calcula continua nas fórmulas
-// dela: aqui só se escrevem os dados de entrada, como quem cola as respostas à mão
+// com as respostas em Data!A4 e o idioma na aba Read_First. As fórmulas continuam as da planilha. A ferramenta
+// também as calcula (planilha-calculo.ts) e grava os resultados, como o Excel faz ao salvar: assim o arquivo
+// baixado já mostra tudo no Modo de Exibição Protegido, no LibreOffice e nas pré-visualizações, que não recalculam
 
 export type ModeloPlanilha = {
   arquivo: string;
@@ -11,13 +14,17 @@ export type ModeloPlanilha = {
   colunas: number;
   // onde a aba Read_First guarda o idioma
   celulaIdioma: string;
+  // entradas de exemplo que a ferramenta não coleta e que, mantidas, misturariam dados fictícios aos do estudo
+  entradasSemDados?: readonly { aba: string; colunas: string; aPartirDaLinha: number }[];
 };
 
-// UEQ Data Analysis Tool V15: os 26 itens em Data!A4:Z, o idioma em Read_First!B5
+// UEQ Data Analysis Tool V15: os 26 itens em Data!A4:Z, o idioma em Read_First!B5. A aba KPI_Calculation pede
+// a importância de cada escala (extensão KPI do UEQ), que a ferramenta não pergunta: as notas do exemplo saem
 export const PLANILHA_UEQ: ModeloPlanilha = {
   arquivo: "data/planilha-oficial/UEQ_Data_Analysis_Tool_V15.xlsx",
   colunas: 26,
   celulaIdioma: "B5",
+  entradasSemDados: [{ aba: "KPI_Calculation", colunas: "A:F", aPartirDaLinha: 4 }],
 };
 
 // UEQ-S Data Analysis Tool V15: os 8 itens do UEQ-S em Data!A4:H, o idioma em Read_First!B4
@@ -99,12 +106,152 @@ function escreverIdioma(xml: string, indice: number, endereco: string): string {
   return xml.replace(celula[0], `<c r="${endereco}"${atributos} t="s"><v>${indice}</v></c>`);
 }
 
-// Os resultados que vêm gravados no modelo são os dos dados de exemplo. Sem eles, quem abre a planilha não vê
-// número errado antes do recálculo; com fullCalcOnLoad, o Excel recalcula tudo ao abrir
-function apagarResultadosGravados(xml: string): string {
+function desescaparXml(texto: string): string {
+  return texto.replace(/&(lt|gt|quot|apos|amp|#x[0-9a-f]+|#\d+);/gi, (_, e: string) => {
+    if (e === "lt") return "<";
+    if (e === "gt") return ">";
+    if (e === "quot") return '"';
+    if (e === "apos") return "'";
+    if (e === "amp") return "&";
+    return String.fromCodePoint(e[1] === "x" || e[1] === "X" ? parseInt(e.slice(2), 16) : Number(e.slice(1)));
+  });
+}
+
+// ---------- leitura do modelo ----------
+
+const RE_CELULA = /<c r="([A-Z]+)(\d+)"([^>]*?)(?:\/>|>(.*?)<\/c>)/gs;
+
+// Texto de um <si> dos textos compartilhados: junta os trechos <t> (texto com formatação vem em vários)
+function textoDoSi(si: string): string {
+  return desescaparXml([...si.replace(/<rPh\b.*?<\/rPh>/gs, "").matchAll(/<t(?:\s[^>]*)?>(.*?)<\/t>/gs)].map((t) => t[1]).join(""));
+}
+
+function constanteDaCelula(atributos: string, corpo: string, textos: readonly string[]): Valor {
+  const tipo = /\st="([^"]*)"/.exec(atributos)?.[1];
+  if (tipo === "inlineStr") return textoDoSi(/<is>(.*?)<\/is>/s.exec(corpo)?.[1] ?? "");
+  const v = /<v>([^<]*)<\/v>/.exec(corpo)?.[1];
+  if (v === undefined) return null;
+  if (tipo === "s") return textos[Number(v)] ?? "";
+  if (tipo === "str") return desescaparXml(v);
+  if (tipo === "b") return v === "1";
+  if (tipo === "e") return { erro: v as "#N/A" };
+  return Number(v);
+}
+
+// Constantes e fórmulas de uma aba. Nas fórmulas compartilhadas, só a primeira célula traz o texto; as outras
+// usam a mesma árvore deslocada (dl, dc), como o Excel
+function lerAba(nome: string, xml: string, textos: readonly string[]): Aba {
+  const constantes = new Map<number, Valor>();
+  const formulas = new Map<number, Formula>();
+  const mestras = new Map<string, { linha: number; coluna: number; no: Formula["no"] }>();
+  const filhas: { k: number; linha: number; coluna: number; si: string }[] = [];
+  for (const [, letras, numero, atributos, corpo] of xml.matchAll(RE_CELULA)) {
+    const linha = Number(numero), coluna = colunaParaNumero(letras!);
+    const k = chave(linha, coluna);
+    const f = corpo ? /<f([^>]*?)(?:\/>|>([^<]*)<\/f>)/.exec(corpo) : null;
+    if (!f) {
+      const valor = corpo ? constanteDaCelula(atributos!, corpo, textos) : null;
+      if (valor !== null) constantes.set(k, valor);
+      continue;
+    }
+    const si = /\ssi="(\d+)"/.exec(f[1]!)?.[1];
+    if (f[2] !== undefined && f[2] !== "") {
+      const no = lerFormula(desescaparXml(f[2]), nome);
+      formulas.set(k, { no, dl: 0, dc: 0 });
+      if (si !== undefined) mestras.set(si, { linha, coluna, no });
+    } else if (si !== undefined) {
+      filhas.push({ k, linha, coluna, si });
+    }
+  }
+  for (const filha of filhas) {
+    const mestra = mestras.get(filha.si);
+    if (!mestra) throw new Error(`Fórmula compartilhada ${filha.si} sem a célula principal na aba ${nome}`);
+    formulas.set(filha.k, { no: mestra.no, dl: filha.linha - mestra.linha, dc: filha.coluna - mestra.coluna });
+  }
+  return { constantes, formulas };
+}
+
+// Tira o valor de exemplo das células de entrada que a ferramenta não preenche, mantendo o estilo
+function esvaziarEntradas(xml: string, colunas: string, aPartirDaLinha: number): string {
+  const [de, ate] = colunas.split(":").map(colunaParaNumero) as [number, number];
+  return xml.replace(RE_CELULA, (celula, letras: string, numero: string, atributos: string, corpo?: string) => {
+    const coluna = colunaParaNumero(letras);
+    if (Number(numero) < aPartirDaLinha || coluna < de || coluna > ate || !corpo || corpo.includes("<f")) return celula;
+    return `<c r="${letras}${numero}"${atributos.replace(/\s+t="[^"]*"/, "")}/>`;
+  });
+}
+
+// ---------- resultados gravados ----------
+
+type CelulaCalculada = { aba: string; linha: number; coluna: number; endereco: string; atributos: string; formula: string };
+// O XML de uma aba com fórmulas, cortado em volta de cada célula calculada: a exportação só intercala os valores
+type AbaCalculada = { caminho: string; pedacos: string[]; celulas: CelulaCalculada[] };
+
+function cortarAba(nome: string, caminho: string, xml: string): AbaCalculada {
+  const pedacos: string[] = [];
+  const celulas: CelulaCalculada[] = [];
+  let ultimo = 0;
+  for (const m of xml.matchAll(RE_CELULA)) {
+    const corpo = m[4];
+    const f = corpo ? /<f[^>]*?(?:\/>|>[^<]*<\/f>)/.exec(corpo) : null;
+    if (!f) continue;
+    pedacos.push(xml.slice(ultimo, m.index));
+    celulas.push({
+      aba: nome,
+      linha: Number(m[2]),
+      coluna: colunaParaNumero(m[1]!),
+      endereco: `${m[1]}${m[2]}`,
+      atributos: m[3]!.replace(/\s+t="[^"]*"/, ""),
+      formula: f[0],
+    });
+    ultimo = m.index + m[0].length;
+  }
+  pedacos.push(xml.slice(ultimo));
+  return { caminho, pedacos, celulas };
+}
+
+function valorEmXml(valor: Valor): { tipo: string; v: string } {
+  if (ehErro(valor)) return { tipo: ' t="e"', v: `<v>${valor.erro}</v>` };
+  if (typeof valor === "boolean") return { tipo: ' t="b"', v: `<v>${valor ? 1 : 0}</v>` };
+  // Sem xml:space, o Excel corta o espaço das pontas ao ler (há rótulos da aba Items que terminam em espaço)
+  if (typeof valor === "string") {
+    const espaco = /^\s|\s$/.test(valor) ? ' xml:space="preserve"' : "";
+    return { tipo: ' t="str"', v: `<v${espaco}>${escaparXml(valor)}</v>` };
+  }
+  const n = valor ?? 0;
+  return { tipo: "", v: `<v>${Object.is(n, -0) ? 0 : n}</v>` };
+}
+
+function montarAba(aba: AbaCalculada, calculo: Calculo): string {
+  const partes: string[] = [aba.pedacos[0]!];
+  aba.celulas.forEach((celula, i) => {
+    const { tipo, v } = valorEmXml(calculo.valor(celula.aba, celula.linha, celula.coluna));
+    partes.push(`<c r="${celula.endereco}"${celula.atributos}${tipo}>${celula.formula}${v}</c>`, aba.pedacos[i + 1]!);
+  });
+  return partes.join("");
+}
+
+// Os gráficos guardam uma cópia dos números que mostram (numCache/strCache); sem atualizar, exibiriam o exemplo
+function montarGrafico(xml: string, calculo: Calculo): string {
   return xml.replace(
-    /<c ([^>]*?)>(<f[^>]*\/>|<f[^>]*>[^<]*<\/f>)<v>[^<]*<\/v><\/c>/g,
-    (_, atributos: string, formula: string) => `<c ${atributos.replace(/\s+t="[^"]*"/, "")}>${formula}</c>`,
+    /<c:(numRef|strRef)><c:f>([^<]*)<\/c:f><c:(numCache|strCache)>(.*?)<\/c:\3><\/c:\1>/gs,
+    (original, tipoRef: string, formula: string, tipoCache: string, cache: string) => {
+      const no = lerFormula(desescaparXml(formula), "");
+      if (no.tipo !== "ref") return original;
+      const { aba, l1, c1, l2, c2 } = no.ref;
+      const valores: Valor[] = [];
+      for (let l = l1; l <= l2; l++) for (let c = c1; c <= c2; c++) valores.push(calculo.valor(aba, l, c));
+      const pontos = valores
+        .map((valor, idx) => {
+          if (tipoCache === "numCache") return typeof valor === "number" ? `<c:pt idx="${idx}"><c:v>${valor}</c:v></c:pt>` : "";
+          if (valor === null || ehErro(valor)) return "";
+          const texto = typeof valor === "number" ? formatarNumero(valor) : String(valor);
+          return `<c:pt idx="${idx}"><c:v>${escaparXml(texto)}</c:v></c:pt>`;
+        })
+        .join("");
+      const formato = /<c:formatCode>.*?<\/c:formatCode>/s.exec(cache)?.[0] ?? "";
+      return `<c:${tipoRef}><c:f>${formula}</c:f><c:${tipoCache}>${formato}<c:ptCount val="${valores.length}"/>${pontos}</c:${tipoCache}></c:${tipoRef}>`;
+    },
   );
 }
 
@@ -131,7 +278,8 @@ function comprimir(nome: string, conteudo: Uint8Array): Entrada {
   const guardar = /\.(png|jpe?g|gif)$/i.test(nome);
   return {
     nome: strToU8(nome),
-    comprimido: guardar ? conteudo : deflateSync(conteudo, { level: 6 }),
+    // zlib nativo do Node: as abas calculadas (uns 6 MB de XML) são comprimidas a cada exportação
+    comprimido: guardar ? conteudo : deflateRawSync(conteudo, { level: 6 }),
     crc: crc32(conteudo),
     tamanho: conteudo.length,
     metodo: guardar ? 0 : 8,
@@ -206,32 +354,66 @@ type ModeloPreparado = {
   xmlTextos: string;
   // "<t>Portuguese</t>" → índice do texto compartilhado
   indiceDoTexto: Map<string, number>;
+  // abas lidas para o cálculo, pelo nome
+  abas: Map<string, Aba>;
+  // cabeçalho da aba Data (linhas 1 a 3), que as fórmulas também leem
+  cabecalhoDados: Map<number, Valor>;
+  calculadas: AbaCalculada[];
+  graficos: Map<string, string>;
 };
 
-const preparados = new WeakMap<Uint8Array, ModeloPreparado>();
+const preparados = new WeakMap<Uint8Array, Map<ModeloPlanilha, ModeloPreparado>>();
 
-function preparar(modelo: Uint8Array): ModeloPreparado {
-  const pronto = preparados.get(modelo);
+function abasDoLivro(arquivos: Record<string, Uint8Array>): { nome: string; caminho: string }[] {
+  return [...ler(arquivos, "xl/workbook.xml").matchAll(/<sheet [^>]*name="([^"]+)"/g)].map(([, nome]) => ({
+    nome: desescaparXml(nome!),
+    caminho: arquivoDaAba(arquivos, nome!),
+  }));
+}
+
+function preparar(modelo: Uint8Array, formato: ModeloPlanilha): ModeloPreparado {
+  let porFormato = preparados.get(modelo);
+  const pronto = porFormato?.get(formato);
   if (pronto) return pronto;
 
   const arquivos = unzipSync(modelo);
   const abaDados = arquivoDaAba(arquivos, "Data");
   const abaLeitura = arquivoDaAba(arquivos, "Read_First");
-  for (const caminho of Object.keys(arquivos)) {
-    if (/^xl\/worksheets\/sheet\d+\.xml$/.test(caminho) && caminho !== abaDados) {
-      arquivos[caminho] = strToU8(apagarResultadosGravados(ler(arquivos, caminho)));
-    }
+  for (const entrada of formato.entradasSemDados ?? []) {
+    const caminho = arquivoDaAba(arquivos, entrada.aba);
+    arquivos[caminho] = strToU8(esvaziarEntradas(ler(arquivos, caminho), entrada.colunas, entrada.aPartirDaLinha));
   }
+  // Os valores gravados são calculados de novo a cada exportação; fullCalcOnLoad faz o Excel conferir ao abrir
   const livro = ler(arquivos, "xl/workbook.xml").replace(/<calcPr([^>]*?)\s*\/>/, (_, atributos: string) =>
     `<calcPr${atributos.replace(/\s+fullCalcOnLoad="[^"]*"/, "")} fullCalcOnLoad="1"/>`,
   );
   arquivos["xl/workbook.xml"] = strToU8(livro);
 
   const xmlTextos = ler(arquivos, TEXTOS_COMPARTILHADOS);
-  const indiceDoTexto = new Map([...xmlTextos.matchAll(/<si>(.*?)<\/si>/gs)].map((si, indice) => [si[1]!, indice]));
+  const sis = [...xmlTextos.matchAll(/<si>(.*?)<\/si>/gs)];
+  const indiceDoTexto = new Map(sis.map((si, indice) => [si[1]!, indice]));
+  const textos = sis.map((si) => textoDoSi(si[1]!));
+
+  const abas = new Map<string, Aba>();
+  const calculadas: AbaCalculada[] = [];
+  for (const { nome, caminho } of abasDoLivro(arquivos)) {
+    const xml = ler(arquivos, caminho);
+    const aba = lerAba(nome, xml, textos);
+    abas.set(nome, aba);
+    if (aba.formulas.size > 0) calculadas.push(cortarAba(nome, caminho, xml));
+  }
+  const dados = abas.get("Data")!;
+  const cabecalhoDados = new Map([...dados.constantes].filter(([k]) => Math.floor(k / 16384) < PRIMEIRA_LINHA_DE_DADOS));
+  const graficos = new Map(
+    Object.keys(arquivos)
+      .filter((caminho) => /^xl\/charts\/chart\d+\.xml$/.test(caminho))
+      .map((caminho) => [caminho, ler(arquivos, caminho)]),
+  );
+
+  const mudam = new Set([abaDados, abaLeitura, ...calculadas.map((aba) => aba.caminho), ...graficos.keys()]);
   const prontas = new Map<string, Entrada>();
   for (const [caminho, conteudo] of Object.entries(arquivos)) {
-    if (caminho !== abaDados && caminho !== abaLeitura) prontas.set(caminho, comprimir(caminho, conteudo));
+    if (!mudam.has(caminho)) prontas.set(caminho, comprimir(caminho, conteudo));
   }
   const preparado: ModeloPreparado = {
     ordem: Object.keys(arquivos),
@@ -242,9 +424,30 @@ function preparar(modelo: Uint8Array): ModeloPreparado {
     xmlLeitura: ler(arquivos, abaLeitura),
     xmlTextos,
     indiceDoTexto,
+    abas,
+    cabecalhoDados,
+    calculadas,
+    graficos,
   };
-  preparados.set(modelo, preparado);
+  if (!porFormato) preparados.set(modelo, (porFormato = new Map()));
+  porFormato.set(formato, preparado);
   return preparado;
+}
+
+// As abas do modelo com as respostas do estudo na Data e o idioma na Read_First, para o cálculo
+function abasComOsDados(preparado: ModeloPreparado, linhas: readonly (readonly number[])[], idioma: string, celulaIdioma: string) {
+  const abas = new Map(preparado.abas);
+  const dados = new Map(preparado.cabecalhoDados);
+  linhas.forEach((valores, posicao) => {
+    valores.forEach((valor, coluna) => dados.set(chave(PRIMEIRA_LINHA_DE_DADOS + posicao, coluna + 1), valor));
+  });
+  abas.set("Data", { constantes: dados, formulas: new Map() });
+  const leitura = preparado.abas.get("Read_First")!;
+  const [, letras, numero] = /^([A-Z]+)(\d+)$/.exec(celulaIdioma)!;
+  const constantes = new Map(leitura.constantes);
+  constantes.set(chave(Number(numero), colunaParaNumero(letras!)), idioma);
+  abas.set("Read_First", { constantes, formulas: leitura.formulas });
+  return abas;
 }
 
 export function preencherPlanilhaOficial(
@@ -262,8 +465,9 @@ export function preencherPlanilhaOficial(
     }
   }
 
-  const modeloPreparado = preparar(modelo);
-  const nome = escaparXml(IDIOMA_NA_PLANILHA[idioma]);
+  const modeloPreparado = preparar(modelo, formato);
+  const nomeDoIdioma = IDIOMA_NA_PLANILHA[idioma];
+  const nome = escaparXml(nomeDoIdioma);
   let indice = modeloPreparado.indiceDoTexto.get(`<t>${nome}</t>`);
   let textos: Entrada | undefined;
   if (indice === undefined) {
@@ -277,12 +481,20 @@ export function preencherPlanilhaOficial(
   const dados = comprimir(modeloPreparado.abaDados, strToU8(escreverDados(modeloPreparado.xmlDados, linhas, formato.colunas)));
   const leitura = comprimir(modeloPreparado.abaLeitura, strToU8(escreverIdioma(modeloPreparado.xmlLeitura, indice, formato.celulaIdioma)));
 
+  const calculo = new Calculo(abasComOsDados(modeloPreparado, linhas, nomeDoIdioma, formato.celulaIdioma));
+  const calculadas = new Map(
+    modeloPreparado.calculadas.map((aba) => [aba.caminho, comprimir(aba.caminho, strToU8(montarAba(aba, calculo)))]),
+  );
+  const graficos = new Map(
+    [...modeloPreparado.graficos].map(([caminho, xml]) => [caminho, comprimir(caminho, strToU8(montarGrafico(xml, calculo)))]),
+  );
+
   return montarZip(
     modeloPreparado.ordem.map((caminho) => {
       if (caminho === modeloPreparado.abaDados) return dados;
       if (caminho === modeloPreparado.abaLeitura) return leitura;
       if (caminho === TEXTOS_COMPARTILHADOS && textos) return textos;
-      return modeloPreparado.prontas.get(caminho)!;
+      return calculadas.get(caminho) ?? graficos.get(caminho) ?? modeloPreparado.prontas.get(caminho)!;
     }),
   );
 }
