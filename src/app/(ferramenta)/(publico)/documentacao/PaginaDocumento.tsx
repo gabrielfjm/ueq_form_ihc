@@ -55,7 +55,7 @@ export async function PaginaDocumento({ documento, abertura }: { documento: Docu
               <Link href="/documentacao">{t("Documentação")}</Link> <span aria-hidden="true">›</span> {t(atual.titulo)}
             </p>
           )}
-          <div className={estilos.linhaTitulo}>
+          <div className={estilos.tituloComAjuda}>
             <h1 className={estilos.titulo} lang={visaoGeral ? undefined : lang}>{visaoGeral ? t("Documentação") : (renderizado?.titulo ?? documento.rotulo)}</h1>
             <BotaoAjuda pagina="documentacao" comTour={comTour} />
           </div>

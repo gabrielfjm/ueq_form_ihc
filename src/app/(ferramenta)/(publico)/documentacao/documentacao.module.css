@@ -26,8 +26,9 @@
   font-size: var(--texto-sm);
 }
 
-/* Título com o botão (?) da ajuda ao lado, como nas páginas do pesquisador */
-.linhaTitulo {
+/* Título com o botão (?) da ajuda ao lado, como nas páginas do pesquisador. Não usar .linhaTitulo aqui:
+   esse nome é das linhas da lista de páginas, cujo ::after cobre a linha inteira e engoliria o clique no (?) */
+.tituloComAjuda {
   display: flex;
   align-items: center;
   gap: 16px;
