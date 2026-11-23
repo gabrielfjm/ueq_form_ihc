@@ -42,13 +42,13 @@ test("o tour abre só no primeiro acesso, avança pelo clique na ação e pode s
   await boasVindas.getByRole("button", { name: "Começar o tour" }).click();
 
   // Sem estudos, o tour cria o estudo de exemplo e pede o clique nele
-  await expect(page.getByText("Passo 1 de 10")).toBeVisible({ timeout: 30_000 });
+  await expect(page.getByText("Passo 1 de 12")).toBeVisible({ timeout: 30_000 });
   await page.getByRole("link", { name: "Exemplo do tour: app de delivery" }).click();
-  await expect(page.getByText("Passo 2 de 10")).toBeVisible();
+  await expect(page.getByText("Passo 2 de 12")).toBeVisible();
   await expect(page).toHaveURL(/\/estudos\/[^/]+$/);
 
   await page.getByRole("button", { name: "Pular tutorial" }).click();
-  await expect(page.getByText(/Passo \d+ de 10/)).toBeHidden();
+  await expect(page.getByText(/Passo \d+ de 12/)).toBeHidden();
   await page.reload();
   await expect(page.getByRole("heading", { name: "Exemplo do tour: app de delivery" })).toBeVisible();
   await expect(boasVindas).toBeHidden();

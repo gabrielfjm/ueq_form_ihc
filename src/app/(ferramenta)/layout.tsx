@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { infoIdioma } from "@/idiomas";
+import { ProvedorEspera } from "@/componentes/espera/AvisoEspera";
 import { ProvedorTraducao } from "@/traducao/cliente";
 import { dicionarioDoCliente, idiomaExibido, tradutor } from "@/traducao/servidor";
 import { classesDasFontes } from "../fontes";
@@ -14,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 // Layout raiz da ferramenta do pesquisador, no idioma da conta (Minha conta › Idioma); antes de entrar,
-// no último escolhido neste navegador. O link do participante (/r/...) tem o seu próprio layout raiz,
+// no último escolhido neste navegador. O aviso de espera cobre toda a ferramenta (páginas, downloads e envios). O link do participante (/r/...) tem o seu próprio layout raiz,
 // porque o idioma dele é o escolhido por quem responde. O <html lang> e a direção acompanham (WCAG 3.1.1)
 export default async function LayoutFerramenta({ children }: Readonly<{ children: React.ReactNode }>) {
   const [t, { idioma, dicionario }, exibido] = await Promise.all([tradutor(), dicionarioDoCliente(), idiomaExibido()]);
@@ -26,7 +27,7 @@ export default async function LayoutFerramenta({ children }: Readonly<{ children
           {t("Pular para o conteúdo")}
         </a>
         <ProvedorTraducao idioma={idioma} lang={info.lang} dicionario={dicionario}>
-          {children}
+          <ProvedorEspera>{children}</ProvedorEspera>
         </ProvedorTraducao>
       </body>
     </html>

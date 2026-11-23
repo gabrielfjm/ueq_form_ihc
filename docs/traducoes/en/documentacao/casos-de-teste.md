@@ -1,18 +1,18 @@
 # Test cases and scenarios
 
-The tests that already exist in the UEQ Tool, organized into **25 scenarios** and **208 test cases**: 102 end-to-end, 80 unit and 26 manual. Each case points to the test file, the requirements it verifies and the result of the latest run.
+The tests that already exist in the UEQ Tool, organized into **25 scenarios** and **212 test cases**: 106 end-to-end, 80 unit and 26 manual. Each case points to the test file, the requirements it verifies and the result of the latest run.
 
 The same list is in [casos-de-teste.csv](casos-de-teste.csv). Each scenario and each case cite the [requirements](requisitos.md) they verify; the reverse path, from each requirement to the cases that prove it, is in the [traceability matrix](matriz-rastreabilidade.md).
 
-## Run of 18 Nov 2026
+## Run of 23 Nov 2026
 
 | Level | Tool | Cases | Runs | Passed | Skipped | Failed |
 |---|---|---|---|---|---|---|
-| End-to-end | Playwright 1.64 + axe-core 4.14 | 102 | 224 | 221 | 3 | 0 |
+| End-to-end | Playwright 1.64 + axe-core 4.14 | 106 | 232 | 229 | 3 | 0 |
 | Unit | Vitest 5 | 80 | 574 | 574 | 0 | 0 |
 | Manual | People and Excel | 26 | 2 | 2 | — | — |
 
-- **End-to-end:** each case runs twice, in desktop Chrome and in mobile Chrome (Pixel 7); [CT-E96](#ct-e96) and [CT-E98](#ct-e98) run once per scenario in each. The whole suite passed on the first attempt (217 runs, no failures); [CT-E101](#ct-e101), written later for the AA criteria on the UEQ-S screens, passed in both projects together with the other UEQ-S cases. After the official UEQ-S terms per language, the whole suite ran again with [CT-E102](#ct-e102): 221 runs passed, none failed. The skipped runs are intentional: [CT-E62](casos-de-teste.md#ct-e62) only runs when there is a document in production, and today all of them are published; [CT-E67](casos-de-teste.md#ct-e67) runs only on desktop.
+- **End-to-end:** each case runs twice, in desktop Chrome and in mobile Chrome (Pixel 7); [CT-E96](#ct-e96) and [CT-E98](#ct-e98) run once per scenario in each. The whole suite passed on the first attempt (217 runs, no failures); [CT-E101](#ct-e101), written later for the AA criteria on the UEQ-S screens, passed in both projects together with the other UEQ-S cases. After the official UEQ-S terms per language, the whole suite ran again with [CT-E102](#ct-e102): 221 runs passed, none failed. On 23 Nov 2026, with the wait notice, the whole suite ran again with cases [CT-E103](#ct-e103) to [CT-E106](#ct-e106): 229 runs passed, none failed. In that run [CT-E66](#ct-e66) was fixed, because it still counted 10 steps in the tour, which has had 12 since the documentation help. The skipped runs are intentional: [CT-E62](casos-de-teste.md#ct-e62) only runs when there is a document in production, and today all of them are published; [CT-E67](casos-de-teste.md#ct-e67) runs only on desktop.
 - **Unit:** some cases are parameterized (one per language, one per color pair, one per scenario of the official spreadsheet), which is why there are more runs than cases. No case is skipped: the UEQ-S ones ([CT-U53](#ct-u53)) now run with the official items and benchmark in `data/`. On 22 Nov 2026, when the exported spreadsheet started to come out with the results stored, the unit suite ran again with [CT-U79](#ct-u79) and [CT-U80](#ct-u80): 574 runs, all passed.
 - **Manual:** of the manual cases, only [CT-M15](#ct-m15) and [CT-M26](#ct-m26) were run, with Excel automated by `scripts/planilha-oficial.ps1`, `scripts/planilha-oficial-ueq-s.ps1` and `scripts/planilha-oficial-celulas.ps1`; the other 24 were not run in this round ([Limitations](#limitações)).
 - **Environment:** development server and local PostgreSQL. The run does not exercise production on Vercel, the Claude API or email sending.
@@ -59,7 +59,7 @@ pnpm exec playwright show-report   # relatório com as capturas de daltonismo do
 |---|---|---|---|---|---|
 | <a id="cn01"></a>CN01 | **Access and authentication** | Sign up, log in, log out and protect the researcher area, using only the keyboard and without accessibility violations | [RF01](requisitos.md#rf01), [RF02](requisitos.md#rf02), [RF03](requisitos.md#rf03), [RF11](requisitos.md#rf11), [RNF01](requisitos.md#rnf01), [RNF03](requisitos.md#rnf03), [RNF20](requisitos.md#rnf20) | [CT-E01](casos-de-teste.md#ct-e01), [CT-E02](casos-de-teste.md#ct-e02), [CT-E03](casos-de-teste.md#ct-e03), [CT-E04](casos-de-teste.md#ct-e04), [CT-E06](casos-de-teste.md#ct-e06), [CT-E07](casos-de-teste.md#ct-e07), [CT-E08](casos-de-teste.md#ct-e08), [CT-E90](casos-de-teste.md#ct-e90) | Passed |
 | <a id="cn02"></a>CN02 | **My account** | Edit personal data, change the password while ending other sessions, and delete the account with confirmation | [RF04](requisitos.md#rf04), [RF05](requisitos.md#rf05), [RF06](requisitos.md#rf06), [RNF15](requisitos.md#rnf15), [RNF20](requisitos.md#rnf20), [RNF21](requisitos.md#rnf21) | [CT-E09](casos-de-teste.md#ct-e09), [CT-E10](casos-de-teste.md#ct-e10), [CT-E11](casos-de-teste.md#ct-e11) | Passed |
-| <a id="cn03"></a>CN03 | **Study management** | Create, list, edit, open, close, reopen, copy the link of and delete studies | [RF12](requisitos.md#rf12), [RF13](requisitos.md#rf13), [RF14](requisitos.md#rf14), [RF15](requisitos.md#rf15), [RF16](requisitos.md#rf16), [RF17](requisitos.md#rf17), [RNF01](requisitos.md#rnf01), [RNF20](requisitos.md#rnf20), [RNF21](requisitos.md#rnf21) | [CT-E12](casos-de-teste.md#ct-e12), [CT-E13](casos-de-teste.md#ct-e13), [CT-E14](casos-de-teste.md#ct-e14), [CT-E15](casos-de-teste.md#ct-e15), [CT-E16](casos-de-teste.md#ct-e16), [CT-E17](casos-de-teste.md#ct-e17), [CT-E18](casos-de-teste.md#ct-e18), [CT-E19](casos-de-teste.md#ct-e19), [CT-E88](casos-de-teste.md#ct-e88), [CT-E89](casos-de-teste.md#ct-e89), [CT-E93](casos-de-teste.md#ct-e93) | Passed |
+| <a id="cn03"></a>CN03 | **Study management** | Create, list, edit, open, close, reopen, copy the link of and delete studies | [RF12](requisitos.md#rf12), [RF13](requisitos.md#rf13), [RF14](requisitos.md#rf14), [RF15](requisitos.md#rf15), [RF16](requisitos.md#rf16), [RF17](requisitos.md#rf17), [RNF01](requisitos.md#rnf01), [RNF20](requisitos.md#rnf20), [RNF21](requisitos.md#rnf21) | [CT-E12](casos-de-teste.md#ct-e12), [CT-E13](casos-de-teste.md#ct-e13), [CT-E14](casos-de-teste.md#ct-e14), [CT-E15](casos-de-teste.md#ct-e15), [CT-E16](casos-de-teste.md#ct-e16), [CT-E17](casos-de-teste.md#ct-e17), [CT-E18](casos-de-teste.md#ct-e18), [CT-E19](casos-de-teste.md#ct-e19), [CT-E88](casos-de-teste.md#ct-e88), [CT-E89](casos-de-teste.md#ct-e89), [CT-E93](casos-de-teste.md#ct-e93), [CT-E103](casos-de-teste.md#ct-e103), [CT-E104](casos-de-teste.md#ct-e104), [CT-E105](casos-de-teste.md#ct-e105), [CT-E106](casos-de-teste.md#ct-e106) | Passed |
 | <a id="cn04"></a>CN04 | **Isolation and data protection** | Ensure that a researcher can neither see nor export another researcher's study and that the participant never needs a session | [RF24](requisitos.md#rf24), [RF60](requisitos.md#rf60), [RNF17](requisitos.md#rnf17) | [CT-E05](casos-de-teste.md#ct-e05), [CT-E20](casos-de-teste.md#ct-e20), [CT-E38](casos-de-teste.md#ct-e38), [CT-E41](casos-de-teste.md#ct-e41) | Passed |
 | <a id="cn05"></a>CN05 | **Study participation** | Go through the participant link from consent to the end, including declining, giving up, reloading and trying to answer again | [RF18](requisitos.md#rf18), [RF24](requisitos.md#rf24), [RF25](requisitos.md#rf25), [RF26](requisitos.md#rf26), [RF27](requisitos.md#rf27), [RF29](requisitos.md#rf29), [RF30](requisitos.md#rf30), [RF31](requisitos.md#rf31), [RF32](requisitos.md#rf32), [RF33](requisitos.md#rf33), [RF34](requisitos.md#rf34), [RNF01](requisitos.md#rnf01), [RNF12](requisitos.md#rnf12), [RNF19](requisitos.md#rnf19), [RNF21](requisitos.md#rnf21) | [CT-U30](casos-de-teste.md#ct-u30), [CT-E21](casos-de-teste.md#ct-e21), [CT-E23](casos-de-teste.md#ct-e23), [CT-E26](casos-de-teste.md#ct-e26), [CT-E27](casos-de-teste.md#ct-e27), [CT-E28](casos-de-teste.md#ct-e28), [CT-E52](casos-de-teste.md#ct-e52), [CT-E71](casos-de-teste.md#ct-e71), [CT-E82](casos-de-teste.md#ct-e82), [CT-E83](casos-de-teste.md#ct-e83), [CT-E91](casos-de-teste.md#ct-e91) | Passed |
 | <a id="cn06"></a>CN06 | **Questionnaire accessibility** | Answer using only the keyboard and a screen reader, at 320 px, with focus always visible and the instrument intact | [RF27](requisitos.md#rf27), [RF28](requisitos.md#rf28), [RNF02](requisitos.md#rnf02), [RNF03](requisitos.md#rnf03), [RNF04](requisitos.md#rnf04), [RNF09](requisitos.md#rnf09) | [CT-E22](casos-de-teste.md#ct-e22), [CT-E24](casos-de-teste.md#ct-e24), [CT-E25](casos-de-teste.md#ct-e25) | Passed |
@@ -1393,7 +1393,7 @@ Steps:
 3. Click the highlighted example study.
 4. Click Skip tutorial and reload.
 
-Expected result: "Welcome to UEQ Tool" appears. The tour creates "Tour example: delivery app", shows "Step 1 of 10" and, after the click, "Step 2 of 10". Once skipped, the card disappears, and the welcome screen does not come back on reload. Zero violations.
+Expected result: "Welcome to UEQ Tool" appears. The tour creates "Tour example: delivery app", shows "Step 1 of 12" and, after the click, "Step 2 of 12". Once skipped, the card disappears, and the welcome screen does not come back on reload. Zero violations.
 
 ### CT-E67
 
@@ -2118,6 +2118,81 @@ Steps:
 3. Read items 7 and 8 of the questionnaire.
 
 Expected result: Item 7 says konvencionalna and inventivna and item 8 ends in predvodnička, as in the official list of UEQ-S items (for the same pairs, the full UEQ says neoriginalan/originalan and uobičajen/nov); axe finds no WCAG 2.2 A and AA violation.
+
+### CT-E103
+
+**A slow download shows the notice until the file arrives, with the same name.**
+
+| Field | Value |
+|---|---|
+| Scenario | [CN03 · Study management](#cn03) |
+| Test | `tests/e2e/aviso-espera.spec.ts` › "download demorado mostra o aviso até o arquivo chegar, com o mesmo nome" (a slow download shows the notice until the file arrives, with the same name) |
+| Preconditions | Study open with the 20 responses from the basico fixture; the export held back for 2 s. |
+| Requirements | [RNF20](requisitos.md#rnf20) |
+| Result on 23 Nov 2026 | Passed (mobile and desktop) |
+
+Steps:
+
+1. Open Results.
+2. Click Official UEQ spreadsheet (XLSX).
+
+Expected result: "Preparing the file…" and "The download will start on its own as soon as the file is ready." appear while the spreadsheet is generated. The download arrives with the usual dated name, and the notice disappears.
+
+### CT-E104
+
+**A failed download is reported in a window that closes.**
+
+| Field | Value |
+|---|---|
+| Scenario | [CN03 · Study management](#cn03) |
+| Test | `tests/e2e/aviso-espera.spec.ts` › "download que falha avisa numa janela que fecha" (a failed download is reported in a window that closes) |
+| Preconditions | Study open with responses; the raw responses export answers with error 500. |
+| Requirements | [RNF20](requisitos.md#rnf20) |
+| Result on 23 Nov 2026 | Passed (mobile and desktop) |
+
+Steps:
+
+1. Open Results.
+2. Click Raw responses (CSV).
+3. Click Close.
+
+Expected result: A window in role=alertdialog says "The file could not be downloaded." and "Check your connection and try again.", and Close removes it from the screen.
+
+### CT-E105
+
+**A page that is slow to load shows the notice until it opens.**
+
+| Field | Value |
+|---|---|
+| Scenario | [CN03 · Study management](#cn03) |
+| Test | `tests/e2e/aviso-espera.spec.ts` › "página que demora a carregar mostra o aviso até abrir" (a page that is slow to load shows the notice until it opens) |
+| Preconditions | Study open; the Next RSC requests held back for 2 s. |
+| Requirements | [RNF20](requisitos.md#rnf20) |
+| Result on 23 Nov 2026 | Passed (mobile and desktop) |
+
+Steps:
+
+1. On the study overview, click Responses.
+
+Expected result: "Loading the page…" appears until the Responses page opens, and disappears when the address changes.
+
+### CT-E106
+
+**A slow form repeats in the notice what the button says.**
+
+| Field | Value |
+|---|---|
+| Scenario | [CN03 · Study management](#cn03) |
+| Test | `tests/e2e/aviso-espera.spec.ts` › "formulário que demora repete no aviso o que o botão diz" (a slow form repeats in the notice what the button says) |
+| Preconditions | Researcher logged in at My account › Personal data; the server action held back for 2 s. |
+| Requirements | [RNF20](requisitos.md#rnf20) |
+| Result on 23 Nov 2026 | Passed (mobile and desktop) |
+
+Steps:
+
+1. Click Save changes.
+
+Expected result: The notice says "Saving…" and "Please wait a moment. Do not close or refresh the page." while the action runs, and disappears when it ends.
 
 ## Unit cases
 

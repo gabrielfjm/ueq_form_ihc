@@ -81,6 +81,8 @@ export function ProvedorAcesso({
           ref={conteudo}
           className={modo === "cadastrar" ? `${estilos.janela} ${estilos.janelaCadastro}` : estilos.janela}
           onClickCapture={aoClicar}
+          // Os links Entrar e Criar conta daqui trocam o formulário sem navegar: não há o que esperar
+          data-sem-espera
         >
           <div className={estilos.principal}>
             {/* Entrar e Criar conta têm a mesma estrutura: logotipo, formulário e painel ao lado. Em tela
