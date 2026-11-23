@@ -1,18 +1,18 @@
 # Casos e cenários de teste
 
-Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **208 casos de teste**: 102 de ponta a ponta, 80 de unidade e 26 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
+Os testes que já existem na Ferramenta UEQ, organizados em **25 cenários** e **212 casos de teste**: 106 de ponta a ponta, 80 de unidade e 26 manuais. Cada caso aponta o arquivo do teste, os requisitos que verifica e o resultado da última execução.
 
 A mesma lista está em [casos-de-teste.csv](casos-de-teste.csv). Cada cenário e cada caso citam os [requisitos](requisitos.md) que verificam; o caminho inverso, de cada requisito para os casos que o provam, está na [matriz de rastreabilidade](matriz-rastreabilidade.md).
 
-## Execução de 18/11/2026
+## Execução de 23/11/2026
 
 | Nível | Ferramenta | Casos | Execuções | Passaram | Pulados | Falharam |
 |---|---|---|---|---|---|---|
-| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 102 | 224 | 221 | 3 | 0 |
+| Ponta a ponta | Playwright 1.64 + axe-core 4.14 | 106 | 232 | 229 | 3 | 0 |
 | Unidade | Vitest 5 | 80 | 574 | 574 | 0 | 0 |
 | Manual | Pessoas e Excel | 26 | 2 | 2 | — | — |
 
-- **Ponta a ponta:** cada caso roda duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7); o [CT-E96](#ct-e96) e o [CT-E98](#ct-e98) rodam uma vez por cenário em cada um. A suíte inteira passou de primeira (217 execuções, nenhuma falha); o [CT-E101](#ct-e101), escrito depois para os critérios AA nas telas do UEQ-S, passou nos dois projetos junto com os outros casos do UEQ-S. Depois dos termos oficiais do UEQ-S por idioma, a suíte inteira rodou de novo com o [CT-E102](#ct-e102): 221 execuções passaram, nenhuma falhou. As execuções puladas são de propósito: [CT-E62](casos-de-teste.md#ct-e62) só roda quando há documento em produção, e hoje todos estão publicados; [CT-E67](casos-de-teste.md#ct-e67) roda só no desktop.
+- **Ponta a ponta:** cada caso roda duas vezes, no Chrome de desktop e no Chrome de celular (Pixel 7); o [CT-E96](#ct-e96) e o [CT-E98](#ct-e98) rodam uma vez por cenário em cada um. A suíte inteira passou de primeira (217 execuções, nenhuma falha); o [CT-E101](#ct-e101), escrito depois para os critérios AA nas telas do UEQ-S, passou nos dois projetos junto com os outros casos do UEQ-S. Depois dos termos oficiais do UEQ-S por idioma, a suíte inteira rodou de novo com o [CT-E102](#ct-e102): 221 execuções passaram, nenhuma falhou. Em 23/11/2026, com o aviso de espera, a suíte inteira rodou de novo com os casos [CT-E103](#ct-e103) a [CT-E106](#ct-e106): 229 execuções passaram, nenhuma falhou. Nessa rodada o [CT-E66](#ct-e66) foi corrigido, porque ainda contava 10 passos no tour, que tem 12 desde a ajuda da documentação. As execuções puladas são de propósito: [CT-E62](casos-de-teste.md#ct-e62) só roda quando há documento em produção, e hoje todos estão publicados; [CT-E67](casos-de-teste.md#ct-e67) roda só no desktop.
 - **Unidade:** alguns casos são parametrizados (um por idioma, um por par de cores, um por cenário da planilha oficial), por isso há mais execuções que casos. Nenhum caso fica pulado: os do UEQ-S ([CT-U53](#ct-u53)) passaram a rodar com os itens e o benchmark oficiais em `data/`. Em 22/11/2026, quando a planilha exportada passou a sair com os resultados gravados, a suíte de unidade rodou de novo com o [CT-U79](#ct-u79) e o [CT-U80](#ct-u80): 574 execuções, todas passaram.
 - **Manual:** dos casos manuais, só o [CT-M15](#ct-m15) e o [CT-M26](#ct-m26) foram executados, com o Excel automatizado por `scripts/planilha-oficial.ps1`, `scripts/planilha-oficial-ueq-s.ps1` e `scripts/planilha-oficial-celulas.ps1`; os outros 24 não foram executados nesta rodada ([Limitações](#limitações)).
 - **Ambiente:** servidor de desenvolvimento e PostgreSQL local. A execução não exercita a produção na Vercel, a API do Claude nem o envio de e-mail.
@@ -59,7 +59,7 @@ pnpm exec playwright show-report   # relatório com as capturas de daltonismo do
 |---|---|---|---|---|---|
 | <a id="cn01"></a>CN01 | **Acesso e autenticação** | Cadastrar, entrar, sair e proteger a área do pesquisador, só com teclado e sem violações de acessibilidade | [RF01](requisitos.md#rf01), [RF02](requisitos.md#rf02), [RF03](requisitos.md#rf03), [RF11](requisitos.md#rf11), [RNF01](requisitos.md#rnf01), [RNF03](requisitos.md#rnf03), [RNF20](requisitos.md#rnf20) | [CT-E01](casos-de-teste.md#ct-e01), [CT-E02](casos-de-teste.md#ct-e02), [CT-E03](casos-de-teste.md#ct-e03), [CT-E04](casos-de-teste.md#ct-e04), [CT-E06](casos-de-teste.md#ct-e06), [CT-E07](casos-de-teste.md#ct-e07), [CT-E08](casos-de-teste.md#ct-e08), [CT-E90](casos-de-teste.md#ct-e90) | Passou |
 | <a id="cn02"></a>CN02 | **Minha conta** | Editar dados, trocar a senha derrubando outras sessões e excluir a conta com confirmação | [RF04](requisitos.md#rf04), [RF05](requisitos.md#rf05), [RF06](requisitos.md#rf06), [RNF15](requisitos.md#rnf15), [RNF20](requisitos.md#rnf20), [RNF21](requisitos.md#rnf21) | [CT-E09](casos-de-teste.md#ct-e09), [CT-E10](casos-de-teste.md#ct-e10), [CT-E11](casos-de-teste.md#ct-e11) | Passou |
-| <a id="cn03"></a>CN03 | **Gestão de estudos** | Criar, listar, editar, abrir, encerrar, reabrir, copiar o link e excluir estudos | [RF12](requisitos.md#rf12), [RF13](requisitos.md#rf13), [RF14](requisitos.md#rf14), [RF15](requisitos.md#rf15), [RF16](requisitos.md#rf16), [RF17](requisitos.md#rf17), [RNF01](requisitos.md#rnf01), [RNF20](requisitos.md#rnf20), [RNF21](requisitos.md#rnf21) | [CT-E12](casos-de-teste.md#ct-e12), [CT-E13](casos-de-teste.md#ct-e13), [CT-E14](casos-de-teste.md#ct-e14), [CT-E15](casos-de-teste.md#ct-e15), [CT-E16](casos-de-teste.md#ct-e16), [CT-E17](casos-de-teste.md#ct-e17), [CT-E18](casos-de-teste.md#ct-e18), [CT-E19](casos-de-teste.md#ct-e19), [CT-E88](casos-de-teste.md#ct-e88), [CT-E89](casos-de-teste.md#ct-e89), [CT-E93](casos-de-teste.md#ct-e93) | Passou |
+| <a id="cn03"></a>CN03 | **Gestão de estudos** | Criar, listar, editar, abrir, encerrar, reabrir, copiar o link e excluir estudos | [RF12](requisitos.md#rf12), [RF13](requisitos.md#rf13), [RF14](requisitos.md#rf14), [RF15](requisitos.md#rf15), [RF16](requisitos.md#rf16), [RF17](requisitos.md#rf17), [RNF01](requisitos.md#rnf01), [RNF20](requisitos.md#rnf20), [RNF21](requisitos.md#rnf21) | [CT-E12](casos-de-teste.md#ct-e12), [CT-E13](casos-de-teste.md#ct-e13), [CT-E14](casos-de-teste.md#ct-e14), [CT-E15](casos-de-teste.md#ct-e15), [CT-E16](casos-de-teste.md#ct-e16), [CT-E17](casos-de-teste.md#ct-e17), [CT-E18](casos-de-teste.md#ct-e18), [CT-E19](casos-de-teste.md#ct-e19), [CT-E88](casos-de-teste.md#ct-e88), [CT-E89](casos-de-teste.md#ct-e89), [CT-E93](casos-de-teste.md#ct-e93), [CT-E103](casos-de-teste.md#ct-e103), [CT-E104](casos-de-teste.md#ct-e104), [CT-E105](casos-de-teste.md#ct-e105), [CT-E106](casos-de-teste.md#ct-e106) | Passou |
 | <a id="cn04"></a>CN04 | **Isolamento e proteção de dados** | Garantir que um pesquisador não veja nem exporte o estudo de outro e que o participante nunca precise de sessão | [RF24](requisitos.md#rf24), [RF60](requisitos.md#rf60), [RNF17](requisitos.md#rnf17) | [CT-E05](casos-de-teste.md#ct-e05), [CT-E20](casos-de-teste.md#ct-e20), [CT-E38](casos-de-teste.md#ct-e38), [CT-E41](casos-de-teste.md#ct-e41) | Passou |
 | <a id="cn05"></a>CN05 | **Participação no estudo** | Percorrer o link do participante do consentimento ao fim, inclusive recusar, desistir, recarregar e tentar responder de novo | [RF18](requisitos.md#rf18), [RF24](requisitos.md#rf24), [RF25](requisitos.md#rf25), [RF26](requisitos.md#rf26), [RF27](requisitos.md#rf27), [RF29](requisitos.md#rf29), [RF30](requisitos.md#rf30), [RF31](requisitos.md#rf31), [RF32](requisitos.md#rf32), [RF33](requisitos.md#rf33), [RF34](requisitos.md#rf34), [RNF01](requisitos.md#rnf01), [RNF12](requisitos.md#rnf12), [RNF19](requisitos.md#rnf19), [RNF21](requisitos.md#rnf21) | [CT-U30](casos-de-teste.md#ct-u30), [CT-E21](casos-de-teste.md#ct-e21), [CT-E23](casos-de-teste.md#ct-e23), [CT-E26](casos-de-teste.md#ct-e26), [CT-E27](casos-de-teste.md#ct-e27), [CT-E28](casos-de-teste.md#ct-e28), [CT-E52](casos-de-teste.md#ct-e52), [CT-E71](casos-de-teste.md#ct-e71), [CT-E82](casos-de-teste.md#ct-e82), [CT-E83](casos-de-teste.md#ct-e83), [CT-E91](casos-de-teste.md#ct-e91) | Passou |
 | <a id="cn06"></a>CN06 | **Acessibilidade do questionário** | Responder só com teclado e leitor de tela, em 320 px, com foco sempre visível e o instrumento intacto | [RF27](requisitos.md#rf27), [RF28](requisitos.md#rf28), [RNF02](requisitos.md#rnf02), [RNF03](requisitos.md#rnf03), [RNF04](requisitos.md#rnf04), [RNF09](requisitos.md#rnf09) | [CT-E22](casos-de-teste.md#ct-e22), [CT-E24](casos-de-teste.md#ct-e24), [CT-E25](casos-de-teste.md#ct-e25) | Passou |
@@ -1393,7 +1393,7 @@ Passos:
 3. Clicar no estudo de exemplo destacado.
 4. Clicar em Pular tutorial e recarregar.
 
-Resultado esperado: Aparece "Boas-vindas à Ferramenta UEQ". O tour cria "Exemplo do tour: app de delivery", mostra "Passo 1 de 10" e, com o clique, "Passo 2 de 10". Pulado, o cartão some, e as boas-vindas não voltam ao recarregar. Zero violações.
+Resultado esperado: Aparece "Boas-vindas à Ferramenta UEQ". O tour cria "Exemplo do tour: app de delivery", mostra "Passo 1 de 12" e, com o clique, "Passo 2 de 12". Pulado, o cartão some, e as boas-vindas não voltam ao recarregar. Zero violações.
 
 ### CT-E67
 
@@ -2118,6 +2118,81 @@ Passos:
 3. Ler os itens 7 e 8 do questionário.
 
 Resultado esperado: O item 7 diz konvencionalna e inventivna e o item 8 termina em predvodnička, como na lista oficial dos itens do UEQ-S (nos mesmos pares, o UEQ completo diz neoriginalan/originalan e uobičajen/nov); o axe não acha violação WCAG 2.2 A e AA.
+
+### CT-E103
+
+**Download demorado mostra o aviso até o arquivo chegar, com o mesmo nome.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN03 · Gestão de estudos](#cn03) |
+| Teste | `tests/e2e/aviso-espera.spec.ts` › "download demorado mostra o aviso até o arquivo chegar, com o mesmo nome" |
+| Pré-condições | Estudo aberto com as 20 respostas da fixture basico; a exportação segurada por 2 s. |
+| Requisitos | [RNF20](requisitos.md#rnf20) |
+| Resultado em 23/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir Resultados.
+2. Clicar em Planilha oficial do UEQ (XLSX).
+
+Resultado esperado: "Preparando o arquivo…" e "O download começa sozinho assim que o arquivo ficar pronto." aparecem enquanto a planilha é gerada. O download chega com o nome datado de sempre, e o aviso some.
+
+### CT-E104
+
+**Download que falha avisa numa janela que fecha.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN03 · Gestão de estudos](#cn03) |
+| Teste | `tests/e2e/aviso-espera.spec.ts` › "download que falha avisa numa janela que fecha" |
+| Pré-condições | Estudo aberto com respostas; a exportação das respostas brutas responde com erro 500. |
+| Requisitos | [RNF20](requisitos.md#rnf20) |
+| Resultado em 23/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Abrir Resultados.
+2. Clicar em Respostas brutas (CSV).
+3. Clicar em Fechar.
+
+Resultado esperado: Uma janela em role=alertdialog diz "Não foi possível baixar o arquivo." e "Verifique a conexão e tente de novo.", e Fechar a tira da tela.
+
+### CT-E105
+
+**Página que demora a carregar mostra o aviso até abrir.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN03 · Gestão de estudos](#cn03) |
+| Teste | `tests/e2e/aviso-espera.spec.ts` › "página que demora a carregar mostra o aviso até abrir" |
+| Pré-condições | Estudo aberto; as requisições RSC do Next seguradas por 2 s. |
+| Requisitos | [RNF20](requisitos.md#rnf20) |
+| Resultado em 23/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Na visão geral do estudo, clicar em Respostas.
+
+Resultado esperado: "Carregando a página…" aparece até a página Respostas abrir, e some quando o endereço muda.
+
+### CT-E106
+
+**Formulário que demora repete no aviso o que o botão diz.**
+
+| Campo | Valor |
+|---|---|
+| Cenário | [CN03 · Gestão de estudos](#cn03) |
+| Teste | `tests/e2e/aviso-espera.spec.ts` › "formulário que demora repete no aviso o que o botão diz" |
+| Pré-condições | Pesquisador logado em Minha conta › Dados cadastrais; a ação do servidor segurada por 2 s. |
+| Requisitos | [RNF20](requisitos.md#rnf20) |
+| Resultado em 23/11/2026 | Passou (celular e desktop) |
+
+Passos:
+
+1. Clicar em Salvar alterações.
+
+Resultado esperado: O aviso diz "Salvando…" e "Aguarde um instante. Não feche nem atualize a página." enquanto a ação roda, e some quando ela termina.
 
 ## Casos de unidade
 

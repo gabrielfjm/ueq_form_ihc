@@ -516,6 +516,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUmaVersao.tsx"
   },
   {
+   "texto": "Aguarde um instante. Não feche nem atualize a página.",
+   "cliente": true,
+   "origem": "componentes/espera/AvisoEspera.tsx"
+  },
+  {
    "texto": "Aguarde…",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/SeletorIdioma.tsx"
@@ -904,6 +909,11 @@
    "texto": "Cancelar convite",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
+  },
+  {
+   "texto": "Carregando a página…",
+   "cliente": true,
+   "origem": "componentes/espera/AvisoEspera.tsx"
   },
   {
    "texto": "Carregando…",
@@ -2283,7 +2293,7 @@
   {
    "texto": "Fechar",
    "cliente": true,
-   "origem": "componentes/formulario/MensagemStatus.tsx"
+   "origem": "componentes/espera/AvisoEspera.tsx"
   },
   {
    "texto": "Fechar esta aba e voltar",
@@ -3091,6 +3101,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/page.tsx"
   },
   {
+   "texto": "Não foi possível baixar o arquivo.",
+   "cliente": true,
+   "origem": "componentes/espera/AvisoEspera.tsx"
+  },
+  {
    "texto": "Não foi possível entrar",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/_acesso/FormularioEntrar.tsx"
@@ -3179,6 +3194,11 @@
    "texto": "O controlador dos dados é o pesquisador responsável pelo estudo, com nome e contato no termo de consentimento; a ferramenta só trata os dados em nome dele.",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
+  },
+  {
+   "texto": "O download começa sozinho assim que o arquivo ficar pronto.",
+   "cliente": true,
+   "origem": "componentes/espera/AvisoEspera.tsx"
   },
   {
    "texto": "O e-mail é o que você usa para entrar e como a equipe convida você para um estudo.",
@@ -3754,6 +3774,11 @@
    "texto": "Prefiro não responder",
    "cliente": true,
    "origem": "lib/demografia.ts"
+  },
+  {
+   "texto": "Preparando o arquivo…",
+   "cliente": true,
+   "origem": "componentes/espera/AvisoEspera.tsx"
   },
   {
    "texto": "Preparando…",
@@ -4809,6 +4834,11 @@
    "texto": "Ver todas as notificações",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/SinoNotificacoes.tsx"
+  },
+  {
+   "texto": "Verifique a conexão e tente de novo.",
+   "cliente": true,
+   "origem": "componentes/espera/AvisoEspera.tsx"
   },
   {
    "texto": "Versão",
