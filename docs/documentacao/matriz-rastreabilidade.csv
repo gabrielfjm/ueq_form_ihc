@@ -21,7 +21,7 @@ RF19;Escolher o idioma do estudo;Funcional;Estudos;HU03, HU27;UC06;PE01, PE03;CT
 RF20;Compartilhar estudo;Funcional;Equipe e notificações;HU20;UC11;PE02;CT-E63;Equipe e ajuda;Entregue;(pesquisador)/estudos/[id]/Compartilhar.tsx, (pesquisador)/estudos/[id]/acoes-compartilhar.ts
 RF21;Aceitar ou recusar convite;Funcional;Equipe e notificações;HU20;UC12;PE02;CT-E63;Equipe e ajuda;Entregue;(pesquisador)/SinoNotificacoes.tsx, (pesquisador)/notificacoes/acoes.ts
 RF22;Sino de notificações;Funcional;Equipe e notificações;HU07, HU21;UC13;PE01, PE02;CT-E63, CT-E64, CT-M21;Equipe e ajuda;Entregue;(pesquisador)/SinoNotificacoes.tsx, src/lib/notificacoes.ts
-RF23;Notificações por e-mail;Funcional;Equipe e notificações;HU21;UC03, UC13;PE02;CT-U59;Equipe e ajuda;Entregue;src/lib/email.ts, src/lib/modelo-email.ts, (pesquisador)/conta/PreferenciaEmail.tsx
+RF23;Notificações por e-mail;Funcional;Equipe e notificações;HU21;UC03, UC13;PE02;CT-U59, CT-U81;Equipe e ajuda;Entregue;src/lib/email.ts, src/lib/modelo-email.ts, (pesquisador)/conta/PreferenciaEmail.tsx, (pesquisador)/administracao/protecao/EnvioDeEmail.tsx
 RF24;Responder sem conta;Funcional;Questionário do participante;HU29;UC14;PE04;CT-E05, CT-E21, CT-E52, CT-M14;Sprint 05 · Questionário;Entregue;src/app/r/[slug]/, src/proxy.ts
 RF25;Consentimento;Funcional;Questionário do participante;HU04, HU28, HU37;UC14;PE01, PE04, PE07;CT-E21, CT-E28, CT-E82, CT-E91, CT-E92, CT-U69, CT-M25;Sprint 05 · Questionário;Entregue;src/app/r/[slug]/Termo.tsx, src/app/r/[slug]/termo/, src/lib/termo.ts
 RF26;Distribuir participantes entre as versões;Funcional;Questionário do participante;HU10;UC14;PE01;CT-U30;Sprint 05 · Questionário;Entregue;src/lib/balanceamento.ts
@@ -86,7 +86,7 @@ RNF16;Limite de tentativas de login;Não funcional;Segurança e privacidade;HU22
 RNF17;Acesso só aos próprios estudos;Não funcional;Segurança e privacidade;HU20, HU41;;PE02, PE08;CT-E20, CT-E38, CT-E41;Sprint 04 · Estudos;Entregue;src/lib/estudos.ts
 RNF18;Proteções do navegador;Não funcional;Segurança e privacidade;HU22;;PE02;CT-E73;LGPD;Entregue;next.config.ts
 RNF19;Política de privacidade;Não funcional;Segurança e privacidade;HU17, HU28;;PE01, PE04;CT-E74, CT-E75, CT-E76, CT-E77, CT-E78, CT-E79, CT-E82, CT-E83, CT-M23, CT-M25;LGPD;Entregue;(publico)/privacidade/, src/app/r/[slug]/privacidade/
-RNF20;Retorno de cada ação;Não funcional;Usabilidade;HU06;;PE01;CT-E09, CT-E15, CT-E16, CT-E88, CT-E89, CT-E90, CT-M06, CT-M13;Sprint 04 · Estudos;Entregue;src/componentes/formulario/MensagemStatus.tsx, src/componentes/formulario/BotaoEnvio.tsx
+RNF20;Retorno de cada ação;Não funcional;Usabilidade;HU06;;PE01;CT-E09, CT-E15, CT-E16, CT-E88, CT-E89, CT-E90, CT-E103, CT-E104, CT-E105, CT-E106, CT-M06, CT-M13;Sprint 04 · Estudos;Entregue;src/componentes/formulario/MensagemStatus.tsx, src/componentes/formulario/BotaoEnvio.tsx, src/componentes/espera/AvisoEspera.tsx
 RNF21;Confirmação antes de perder dados;Não funcional;Usabilidade;HU16, HU32;;PE01, PE04;CT-E11, CT-E19, CT-E27, CT-M13, CT-M20;Sprint 04 · Estudos;Entregue;src/componentes/janela/Confirmacao.tsx
 RNF22;Padrão brasileiro de números e datas;Não funcional;Usabilidade;HU11, HU23;;PE01, PE02;CT-U33, CT-U44;Sprint 06 · Resultados;Entregue;src/idiomas/formatar.ts, src/lib/csv.ts
 RNF23;Computador e celular;Não funcional;Plataforma e manutenção;HU29;;PE04;CT-E53, CT-E55, CT-E56, CT-M12;Sprint 00 · Setup;Entregue;playwright.config.ts

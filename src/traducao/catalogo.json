@@ -136,6 +136,11 @@
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
   },
   {
+   "texto": "A Ferramenta UEQ tem uma nova versão no ar",
+   "cliente": false,
+   "origem": "lib/email.ts"
+  },
+  {
    "texto": "A UEQ Data Analysis Tool V15 já preenchida com {quantidade} da versão {nome} que estão na análise. Abra no Excel e clique em Habilitar edição: a planilha recalcula sozinha, com os gráficos, o benchmark e as suspeitas dela.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
@@ -311,7 +316,7 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
   },
   {
-   "texto": "A pessoa precisa ter conta na ferramenta. Ela aceita o convite em Convites.",
+   "texto": "A pessoa precisa ter conta na ferramenta. Ela aceita o convite pelo sino de notificações.",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
@@ -321,9 +326,19 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/SecaoExportar.tsx"
   },
   {
+   "texto": "A planilha oficial do UEQ e do UEQ-S exportada já sai com todos os resultados calculados e os gráficos preenchidos, mesmo no Modo de Exibição Protegido do Excel.",
+   "cliente": false,
+   "origem": "lib/email.ts"
+  },
+  {
    "texto": "A planilha oficial do UEQ ou do UEQ-S já preenchida, CSV e o painel em PDF.",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
+   "texto": "A planilha oficial já sai com os resultados, a ferramenta avisa quando algo está carregando e os e-mails voltaram.",
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "A prévia acompanha o que você digita. O texto fixo do termo vem da própria ferramenta.",
@@ -416,6 +431,16 @@
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
+   "texto": "Abrir a ferramenta",
+   "cliente": false,
+   "origem": "lib/email.ts"
+  },
+  {
+   "texto": "Abrir as notificações",
+   "cliente": false,
+   "origem": "lib/email.ts"
+  },
+  {
    "texto": "Abrir coleta",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/BotaoColeta.tsx"
@@ -434,11 +459,6 @@
    "texto": "Abrir o PDF",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
-  },
-  {
-   "texto": "Abrir os convites na ferramenta",
-   "cliente": false,
-   "origem": "lib/email.ts"
   },
   {
    "texto": "Abrir, encerrar e reabrir",
@@ -774,6 +794,21 @@
    "texto": "Avisar por e-mail",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
+  },
+  {
+   "texto": "Avisar todas as contas da nova versão",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/EnvioDeEmail.tsx"
+  },
+  {
+   "texto": "Avisar todas as contas da nova versão?",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/EnvioDeEmail.tsx"
+  },
+  {
+   "texto": "Aviso da nova versão enviado para {contas}.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "Ações",
@@ -1154,6 +1189,11 @@
    "texto": "Confiabilidade",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
+  },
+  {
+   "texto": "Configurado. Confira com o e-mail de teste: se o servidor recusar, a resposta dele aparece aqui.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "Construíram o benchmark, a versão curta (UEQ-S) e o guia de uso em diferentes cenários de avaliação.",
@@ -1616,7 +1656,7 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/formulario/FormularioEstudo.tsx"
   },
   {
-   "texto": "Desligado. Os avisos ficam só no sino. Configure SMTP_HOST, SMTP_USUARIO e SMTP_SENHA na Vercel.",
+   "texto": "Desligado. Os avisos ficam só no sino. Configure SMTP_HOST, SMTP_PORTA, SMTP_USUARIO, SMTP_SENHA e EMAIL_REMETENTE na Vercel e faça um novo deploy.",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
@@ -1769,6 +1809,11 @@
    "texto": "E-mail de quem vai participar",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
+  },
+  {
+   "texto": "E-mail de teste enviado para {email}. Confira a caixa de entrada e o spam.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "E-mail ou senha não conferem. Confira os dois e tente de novo.",
@@ -1934,6 +1979,21 @@
    "texto": "Entre por aqui.",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/_acesso/acoes.ts"
+  },
+  {
+   "texto": "Enviando…",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/EnvioDeEmail.tsx"
+  },
+  {
+   "texto": "Enviar e-mail de teste",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/EnvioDeEmail.tsx"
+  },
+  {
+   "texto": "Enviar o aviso",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/EnvioDeEmail.tsx"
   },
   {
    "texto": "Envie o link",
@@ -2104,6 +2164,11 @@
    "texto": "Este é o endereço que você manda para os participantes. Ele abre o termo de consentimento e o questionário, em 37 idiomas, enquanto a coleta estiver aberta.",
    "cliente": true,
    "origem": "componentes/tutorial/passos.ts"
+  },
+  {
+   "texto": "Este é o teste pedido na página Proteção de dados, na Administração. Os convites e os avisos do sino saem do mesmo jeito para quem tem conta na ferramenta.",
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Estimulação",
@@ -2921,6 +2986,11 @@
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
   },
   {
+   "texto": "Nenhuma conta recebe os avisos por e-mail.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
+  },
+  {
    "texto": "Nenhuma escala ficou na faixa positiva.",
    "cliente": false,
    "origem": "lib/leitura-rapida.ts"
@@ -3196,9 +3266,19 @@
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
   },
   {
+   "texto": "O convite também aparece no sino de notificações, no alto da ferramenta, com Aceitar e Recusar.",
+   "cliente": false,
+   "origem": "lib/email.ts"
+  },
+  {
    "texto": "O download começa sozinho assim que o arquivo ficar pronto.",
    "cliente": true,
    "origem": "componentes/espera/AvisoEspera.tsx"
+  },
+  {
+   "texto": "O e-mail não saiu. Resposta do servidor: {erro}",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "O e-mail é o que você usa para entrar e como a equipe convida você para um estudo.",
@@ -3209,6 +3289,11 @@
    "texto": "O e-mail é o que você usa para entrar e também como as outras pessoas da equipe convidam você para um estudo.",
    "cliente": true,
    "origem": "lib/ajuda.ts"
+  },
+  {
+   "texto": "O envio de e-mails está funcionando",
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "O estado do estudo mudou em outra aba. Recarregue a página para ver o atual.",
@@ -3446,6 +3531,11 @@
    "origem": "lib/email.ts"
   },
   {
+   "texto": "Olá! Publicamos uma nova versão da ferramenta, com estas correções:",
+   "cliente": false,
+   "origem": "lib/email.ts"
+  },
+  {
    "texto": "Opção",
    "cliente": false,
    "origem": "graficos/Demografia.tsx"
@@ -3479,6 +3569,11 @@
    "texto": "Os 8 pares do UEQ-S",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/PaginaInicial.tsx"
+  },
+  {
+   "texto": "Os convites e os avisos do sino voltaram a chegar por e-mail, no idioma da sua conta.",
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Os dados demográficos são gravados cifrados com AES-256-GCM, com a chave guardada fora do banco: quem tivesse uma cópia do banco não conseguiria lê-los.",
@@ -3561,12 +3656,7 @@
    "origem": "lib/ajuda.ts"
   },
   {
-   "texto": "Para aceitar ou recusar, entre na ferramenta e abra Convites.",
-   "cliente": false,
-   "origem": "lib/email.ts"
-  },
-  {
-   "texto": "Para aceitar ou recusar, entre na ferramenta e abra Convites: {link}",
+   "texto": "Para aceitar ou recusar, abra Notificações na ferramenta: {link}",
    "cliente": false,
    "origem": "lib/email.ts"
   },
@@ -3916,6 +4006,11 @@
    "origem": "lib/ajuda.ts"
   },
   {
+   "texto": "Quando uma página carrega, um arquivo está sendo gerado ou um formulário está sendo enviado, um aviso na tela diz o que está acontecendo.",
+   "cliente": false,
+   "origem": "lib/email.ts"
+  },
+  {
    "texto": "Quando usar",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
@@ -4237,7 +4332,7 @@
   },
   {
    "texto": "Se o botão não funcionar, copie e cole este endereço no navegador:",
-   "cliente": false,
+   "cliente": true,
    "origem": "lib/email.ts"
   },
   {
@@ -4314,6 +4409,11 @@
    "texto": "Senhas",
    "cliente": false,
    "origem": "app/(ferramenta)/(publico)/privacidade/Politica.tsx"
+  },
+  {
+   "texto": "Servidor {servidor}, conta {usuario}, remetente {remetente}.",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/page.tsx"
   },
   {
    "texto": "Sessão",
@@ -4449,6 +4549,11 @@
    "texto": "Tempo para responder",
    "cliente": true,
    "origem": "app/(ferramenta)/(publico)/conteudo.ts"
+  },
+  {
+   "texto": "Teste de envio da Ferramenta UEQ",
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Texto gerado a partir das médias e das faixas de interpretação. Os números estão no gráfico e na tabela logo abaixo.",
@@ -4906,9 +5011,19 @@
    "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
-   "texto": "Você recebe estes avisos porque participa deste estudo. Para parar de receber por e-mail, desligue em Minha conta.",
+   "texto": "Você recebe este aviso porque tem conta na Ferramenta UEQ. Para não receber mais e-mails, desmarque “Receber os avisos também por e-mail” em Minha conta.",
+   "cliente": false,
+   "origem": "lib/email.ts"
+  },
+  {
+   "texto": "Você recebe estes avisos porque participa deste estudo. Para parar de receber por e-mail, desmarque “Receber os avisos também por e-mail” em Minha conta.",
    "cliente": false,
    "origem": "lib/notificacoes.ts"
+  },
+  {
+   "texto": "Você recebeu este e-mail porque pediu um teste do envio.",
+   "cliente": false,
+   "origem": "lib/email.ts"
   },
   {
    "texto": "Você saiu da sua conta.",
@@ -5057,13 +5172,13 @@
   },
   {
    "texto": "conta",
-   "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/page.tsx"
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "contas",
-   "cliente": false,
-   "origem": "app/(ferramenta)/(pesquisador)/administracao/contas/page.tsx"
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "convite pendente",
@@ -5129,6 +5244,16 @@
    "texto": "duas",
    "cliente": true,
    "origem": "lib/leitura-rapida.ts"
+  },
+  {
+   "texto": "e-mail",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
+  },
+  {
+   "texto": "e-mails",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "editou os dados de “{titulo}”.",
@@ -5616,6 +5741,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/FaixaEstudo.tsx"
   },
   {
+   "texto": "{contas} recebem o e-mail “A Ferramenta UEQ tem uma nova versão no ar”, cada uma no idioma escolhido em Minha conta. E-mail enviado não volta.",
+   "cliente": true,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/protecao/EnvioDeEmail.tsx"
+  },
+  {
    "texto": "{datas} · concluída",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/ReguaPeriodo.tsx"
@@ -5644,6 +5774,11 @@
    "texto": "{escala} · {itens}",
    "cliente": false,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/resultados/VisaoUeqS.tsx"
+  },
+  {
+   "texto": "{falhas} não saíram. Resposta do servidor: {erro}",
+   "cliente": false,
+   "origem": "app/(ferramenta)/(pesquisador)/administracao/acoes.ts"
   },
   {
    "texto": "{foraDaAnalise} participações fora da análise.",

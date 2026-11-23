@@ -96,6 +96,21 @@
   font-weight: 700;
 }
 
+/* Proteção de dados › Envio de e-mails: teste e aviso de nova versão, um embaixo do outro */
+.envioEmail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.configuracaoEmail {
+  margin: 8px 0 0;
+  color: var(--tinta-suave);
+  overflow-wrap: anywhere;
+}
+
 /* Formulários das subpáginas (Criar conta, Cenários): uma coluna, na largura de leitura */
 .formularioPagina {
   max-width: 560px;

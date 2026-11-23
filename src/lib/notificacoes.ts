@@ -45,7 +45,7 @@ function emailPadrao(t: Traduzir, para: string, texto: string, endereco: string)
     paragrafos: [],
     botao: { texto: t("Abrir na ferramenta"), href: endereco },
     linkReserva: t("Se o botão não funcionar, copie e cole este endereço no navegador:"),
-    rodape: [t("Você recebe estes avisos porque participa deste estudo. Para parar de receber por e-mail, desligue em Minha conta.")],
+    rodape: [t("Você recebe estes avisos porque participa deste estudo. Para parar de receber por e-mail, desmarque “Receber os avisos também por e-mail” em Minha conta.")],
     assinatura: t("Ferramenta UEQ"),
   };
   return {
