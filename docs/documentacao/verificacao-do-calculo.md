@@ -224,11 +224,12 @@ Os textos (faixa do benchmark) e as contagens (n, distribuição, escalas incons
 
 ### A planilha que a ferramenta exporta
 
-A exportação "Planilha oficial do UEQ (XLSX)" foi conferida de três jeitos:
+A exportação "Planilha oficial do UEQ (XLSX)" foi conferida de quatro jeitos:
 
-1. **Arquivo por arquivo.** Um teste de unidade abre o `.xlsx` gerado e confere que a aba Data tem as respostas a partir da linha 4, que os 255 participantes de exemplo saíram, que o idioma está em `Read_First!B5` e que gráficos, estilos, imagens e as outras partes do arquivo são byte a byte iguais aos do arquivo oficial.
+1. **Arquivo por arquivo.** Um teste de unidade abre o `.xlsx` gerado e confere que a aba Data tem as respostas a partir da linha 4, que os 255 participantes de exemplo saíram, que o idioma está em `Read_First!B5`, que as importâncias de exemplo da aba KPI_Calculation saíram, que toda fórmula traz o resultado gravado e que estilos, imagens e as outras partes do arquivo são byte a byte iguais aos do arquivo oficial. Outro teste lê os resultados gravados nos 11 cenários do UEQ e nos 9 do UEQ-S e compara com o `esperado.json` de cada um, com tolerância relativa de 1e-12.
 2. **No Excel.** A planilha dos 11 cenários, gerada pela ferramenta, foi aberta no Excel sem colar nada e sem mandar recalcular. O Excel recalculou sozinho ao abrir, e os 6.543 valores ficaram idênticos aos da colagem à mão, com os rótulos em português ("Atractividade", "Desagradável").
 3. **Pela tela.** Um teste de ponta a ponta importa 7 cenários (`oficial-exemplo`, `grande`, `inconsistente`, `bordas`, `variancia-zero`, `negativo` e `extremos/n2`) pela tela Importar respostas, confere n, média, DP, IC95, alfa e benchmark de cada escala na tabela do painel com os números da planilha oficial e baixa a planilha da versão. Cinco desses arquivos, baixados da ferramenta rodando, foram abertos no Excel: zero diferenças.
+4. **Sem recalcular, célula a célula.** Arquivo baixado da internet abre no Modo de Exibição Protegido do Excel, que não recalcula; o LibreOffice e as pré-visualizações também mostram só o que está gravado. Por isso a ferramenta calcula as fórmulas e grava os resultados (`src/lib/planilha-calculo.ts`). Em 22/11/2026, `scripts/planilha-oficial-celulas.ps1` abriu cada planilha exportada no Modo de Exibição Protegido e comparou todas as células de todas as abas com as da planilha oficial recalculada pelo Excel com as mesmas respostas: 7 cenários com respostas, o estudo vazio e um cenário em japonês, 166.051 células em cada, nenhuma diferença. No UEQ-S, os 9 cenários e o estudo vazio em chinês, 52.840 células em cada, também sem diferença.
 
 ### UEQ-S
 
