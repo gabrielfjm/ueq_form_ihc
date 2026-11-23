@@ -1,4 +1,4 @@
-// Modelo dos e-mails da ferramenta (convite e avisos do sino), com a identidade de docs/design.md: fundo branco,
+// Modelo dos e-mails da ferramenta (convite, avisos do sino, teste e nova versão), com a identidade de docs/design.md: fundo branco,
 // faixa cinza, tinta escura, azul-petróleo só no que é clicável e a fileira de 7 marcações do logotipo.
 // Programas de e-mail ignoram CSS externo e boa parte do moderno: tudo vai em tabelas com estilo inline,
 // e o texto puro vai junto para quem lê sem HTML. Sem imagens: nada a bloquear, nada a baixar
@@ -70,9 +70,9 @@ export function htmlDoEmail(conteudo: ConteudoEmail): string {
 <div style="display:none;max-height:0;overflow:hidden;opacity:0">${e(conteudo.previa)}</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${COR.faixa}">
 <tr><td align="center" style="padding:32px 16px">
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:${COR.fundo};border:1px solid ${COR.linha};border-radius:4px;font-family:${FONTE};text-align:${lado}">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:${COR.fundo};border:1px solid ${COR.linha};border-radius:2px;font-family:${FONTE};text-align:${lado}">
 <tr><td style="padding:20px 28px;border-bottom:1px solid ${COR.linha}">
-<table role="presentation" cellpadding="0" cellspacing="0" dir="ltr"><tr>${marcacoes()}<td style="padding-left:10px;font-size:17px;font-weight:700;color:${COR.tinta};white-space:nowrap">${e(conteudo.assinatura)}</td></tr></table>
+<table role="presentation" cellpadding="0" cellspacing="0" dir="ltr"><tr>${marcacoes()}<td style="padding-left:12px;font-size:19px;font-weight:700;letter-spacing:-0.015em;line-height:1.15;color:${COR.tinta};white-space:nowrap">${e(conteudo.assinatura)}</td></tr></table>
 </td></tr>
 <tr><td style="padding:28px 28px 8px">
 <h1 style="margin:0 0 16px;font-size:22px;line-height:1.3;font-weight:700;color:${COR.tinta}">${e(conteudo.titulo)}</h1>
@@ -83,7 +83,7 @@ ${paragrafos}${destaque}
 <p style="margin:0 0 4px;font-size:13px;line-height:1.5;color:${COR.tintaFraca}">${e(conteudo.linkReserva)}</p>
 <p style="margin:0 0 24px;font-size:13px;line-height:1.5;word-break:break-all"><a href="${e(conteudo.botao.href)}" style="color:${COR.destaque}">${e(conteudo.botao.href)}</a></p>
 </td></tr>
-<tr><td style="padding:18px 28px 14px;background:${COR.painel};border-top:1px solid ${COR.linha};border-radius:0 0 4px 4px">${rodape}</td></tr>
+<tr><td style="padding:18px 28px 14px;background:${COR.painel};border-top:1px solid ${COR.linha};border-radius:0 0 2px 2px">${rodape}</td></tr>
 </table>
 </td></tr>
 </table>

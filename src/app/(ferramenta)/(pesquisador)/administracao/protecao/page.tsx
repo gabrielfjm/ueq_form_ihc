@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { exigirAdministrador } from "@/lib/administracao";
 import { criptografiaAtiva } from "@/lib/cripto";
-import { emailConfigurado } from "@/lib/email";
+import { banco } from "@/lib/banco";
+import { configuracaoDoEmail } from "@/lib/email";
+import { EnvioDeEmail } from "./EnvioDeEmail";
 import { FaixaCabecalho } from "../../FaixaCabecalho";
 import estilos from "../administracao.module.css";
 import { tradutor } from "@/traducao/servidor";
@@ -15,6 +17,8 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function PaginaProtecao() {
   const t = await tradutor();
   await exigirAdministrador();
+  const email = configuracaoDoEmail();
+  const contasComEmail = await banco.pesquisador.count({ where: { notificacoesPorEmail: true } });
   const situacoes = [
     {
       titulo: t("Criptografia dos dados demográficos (AES-256-GCM)"),
@@ -24,9 +28,21 @@ export default async function PaginaProtecao() {
     },
     {
       titulo: t("Envio de e-mails (convites e notificações)"),
-      ativo: emailConfigurado(),
-      sim: "Configurado.",
-      nao: t("Desligado. Os avisos ficam só no sino. Configure SMTP_HOST, SMTP_USUARIO e SMTP_SENHA na Vercel."),
+      ativo: email.configurado,
+      sim: t("Configurado. Confira com o e-mail de teste: se o servidor recusar, a resposta dele aparece aqui."),
+      nao: t("Desligado. Os avisos ficam só no sino. Configure SMTP_HOST, SMTP_PORTA, SMTP_USUARIO, SMTP_SENHA e EMAIL_REMETENTE na Vercel e faça um novo deploy."),
+      extra: email.configurado && (
+        <>
+          <p className={estilos.configuracaoEmail}>
+            {t("Servidor {servidor}, conta {usuario}, remetente {remetente}.", {
+              servidor: `${email.host}:${email.porta}`,
+              usuario: email.usuario,
+              remetente: email.remetente,
+            })}
+          </p>
+          <EnvioDeEmail contasComEmail={contasComEmail} />
+        </>
+      ),
     },
   ];
   return (
@@ -39,10 +55,11 @@ export default async function PaginaProtecao() {
       />
       <div className={estilos.conteudo}>
         <dl className={estilos.situacao}>
-          {situacoes.map(({ titulo, ativo, sim, nao }) => (
+          {situacoes.map(({ titulo, ativo, sim, nao, extra }) => (
             <div key={titulo}>
-              <dt>{t(titulo)}</dt>
+              <dt>{titulo}</dt>
               <dd className={ativo ? estilos.ativo : estilos.inativo}>{ativo ? sim : nao}</dd>
+              {extra && <dd>{extra}</dd>}
             </div>
           ))}
           <div>

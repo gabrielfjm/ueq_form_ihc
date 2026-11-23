@@ -7,6 +7,8 @@ import { z } from "zod";
 import { Prisma } from "@/generated/prisma/client";
 import { exigirAdministrador } from "@/lib/administracao";
 import { banco } from "@/lib/banco";
+import { emailDeNovaVersao, emailDeTeste, enviarEmailComDetalhe, enviarVarios } from "@/lib/email";
+import { origemDoSite } from "@/lib/endereco";
 import { CENARIOS_DEMONSTRACAO, criarCenario } from "@/lib/cenarios/cenarios";
 import { errosPorCampo, textoDoCampo, type EstadoFormulario } from "@/lib/formulario";
 import { notificar } from "@/lib/notificacoes";
@@ -14,7 +16,7 @@ import { plural } from "@/lib/texto";
 import { gerarHash } from "@/lib/senhas";
 import { email, nome, senhaNova } from "@/lib/validacao-conta";
 import { ehIdioma } from "@/idiomas";
-import { completarCatalogo, tradutor } from "@/traducao/servidor";
+import { completarCatalogo, tradutor, tradutorDoIdioma } from "@/traducao/servidor";
 
 export type CampoNovaConta = "nome" | "email" | "senha";
 
@@ -138,4 +140,43 @@ export async function traduzirInterface(idioma: string): Promise<void> {
   await completarCatalogo(idioma, 270_000);
   revalidatePath("/", "layout");
   redirect(`/administracao/idiomas?traduzido=${idioma}` as Route);
+}
+
+// Proteção de dados › Envio de e-mails: o administrador manda um teste para o próprio e-mail e vê a resposta do
+// servidor quando não dá certo (senha de app errada, porta bloqueada, remetente recusado)
+export async function enviarEmailDeTeste(anterior: EstadoFormulario<never>): Promise<EstadoFormulario<never>> {
+  const t = await tradutor();
+  const administrador = await exigirAdministrador();
+  const envio = anterior.envio + 1;
+  const resultado = await enviarEmailComDetalhe(emailDeTeste(t, administrador.email, await origemDoSite()));
+  if (resultado.enviado) {
+    return { envio, sucesso: t("E-mail de teste enviado para {email}. Confira a caixa de entrada e o spam.", { email: administrador.email }) };
+  }
+  return { envio, erroGeral: t("O e-mail não saiu. Resposta do servidor: {erro}", { erro: resultado.erro }) };
+}
+
+// Aviso de nova versão para todas as contas que recebem os avisos por e-mail, cada uma no idioma dela
+export async function avisarNovaVersao(anterior: EstadoFormulario<never>): Promise<EstadoFormulario<never>> {
+  const t = await tradutor();
+  await exigirAdministrador();
+  const envio = anterior.envio + 1;
+  const contas = await banco.pesquisador.findMany({
+    where: { notificacoesPorEmail: true },
+    select: { email: true, idioma: true },
+    orderBy: { criadoEm: "asc" },
+  });
+  if (contas.length === 0) return { envio, erroGeral: t("Nenhuma conta recebe os avisos por e-mail.") };
+  const origem = await origemDoSite();
+  const emails = await Promise.all(
+    contas.map(async (conta) => emailDeNovaVersao(await tradutorDoIdioma(conta.idioma), conta.email, origem)),
+  );
+  const { enviados, falhas, erro } = await enviarVarios(emails);
+  if (enviados === 0) return { envio, erroGeral: t("O e-mail não saiu. Resposta do servidor: {erro}", { erro: erro ?? "" }) };
+  const mensagem = t("Aviso da nova versão enviado para {contas}.", { contas: plural(enviados, t("conta"), t("contas")) });
+  if (falhas === 0) return { envio, sucesso: mensagem };
+  // Parte saiu: conta como concluído, para a janela fechar e ninguém reenviar a todas as contas sem querer
+  return {
+    envio,
+    sucesso: `${mensagem} ${t("{falhas} não saíram. Resposta do servidor: {erro}", { falhas: plural(falhas, t("e-mail"), t("e-mails")), erro: erro ?? "" })}`,
+  };
 }

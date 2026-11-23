@@ -7,9 +7,9 @@ const base: ConteudoEmail = {
   titulo: "Luiza convidou você para o estudo “Portal do aluno”",
   paragrafos: ["Olá!", "Como editor, você pode editar o estudo."],
   destaque: "Portal do aluno",
-  botao: { texto: "Abrir os convites na ferramenta", href: "https://ferramenta-ueq.vercel.app/notificacoes" },
+  botao: { texto: "Abrir as notificações", href: "https://ferramenta-ueq.vercel.app/notificacoes" },
   linkReserva: "Se o botão não funcionar, copie e cole este endereço no navegador:",
-  rodape: ["Para aceitar ou recusar, entre na ferramenta e abra Convites."],
+  rodape: ["O convite também aparece no sino de notificações, no alto da ferramenta, com Aceitar e Recusar."],
   assinatura: "Ferramenta UEQ",
 };
 
@@ -18,8 +18,8 @@ describe("modelo dos e-mails", () => {
     const html = htmlDoEmail(base);
     expect(html).toContain('<html lang="pt-BR" dir="ltr">');
     expect(html.match(/href="https:\/\/ferramenta-ueq\.vercel\.app\/notificacoes"/g)).toHaveLength(2);
-    expect(html).toContain("Abrir os convites na ferramenta");
-    expect(html).toContain("Para aceitar ou recusar");
+    expect(html).toContain("Abrir as notificações");
+    expect(html).toContain("com Aceitar e Recusar");
     // Sem imagens nem CSS externo: nada para o programa de e-mail bloquear
     expect(html).not.toMatch(/<img|<link|<style/);
   });
@@ -39,7 +39,7 @@ describe("modelo dos e-mails", () => {
   it("tem a mesma mensagem em texto puro", () => {
     const texto = textoDoEmail(base);
     expect(texto.startsWith(base.titulo)).toBe(true);
-    expect(texto).toContain("Abrir os convites na ferramenta: https://ferramenta-ueq.vercel.app/notificacoes");
+    expect(texto).toContain("Abrir as notificações: https://ferramenta-ueq.vercel.app/notificacoes");
     expect(texto.trim().endsWith("Ferramenta UEQ")).toBe(true);
   });
 });

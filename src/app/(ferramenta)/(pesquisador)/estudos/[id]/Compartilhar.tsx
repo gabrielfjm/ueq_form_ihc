@@ -24,7 +24,7 @@ import { BotaoEnvio } from "@/componentes/formulario/BotaoEnvio";
 const STATUS = { PENDENTE: m("Convite pendente"), RECUSADO: "Recusou o convite", ACEITO: null } as const;
 
 // Compartilhar como no Google Docs: convidar pelo e-mail de uma conta já cadastrada, escolher o papel e
-// ver quem tem acesso. O convite chega na ferramenta (Convites) e, com SMTP configurado, por e-mail
+// ver quem tem acesso. O convite chega no sino de notificações e, com SMTP configurado, por e-mail
 export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: string }) {
   const t = useT();
   const [aberta, setAberta] = useState(false);
@@ -96,7 +96,7 @@ export function Compartilhar({ estudoId, titulo }: { estudoId: string; titulo: s
                 name="email"
                 type="email"
                 rotulo={t("E-mail de quem vai participar")}
-                ajuda={t("A pessoa precisa ter conta na ferramenta. Ela aceita o convite em Convites.")}
+                ajuda={t("A pessoa precisa ter conta na ferramenta. Ela aceita o convite pelo sino de notificações.")}
                 autoComplete="off"
                 erro={convite.erros?.email}
                 data-foco-inicial=""
