@@ -343,7 +343,7 @@ export function Tutorial({ primeiroAcesso, pesquisadorId }: { primeiroAcesso: bo
                   className={`${formulario.botao} ${formulario.primario}`}
                   onClick={passo.modo === "proximo" ? avancar : fazerPorMim}
                 >
-                  {estado.passo + 1 === PASSOS.length ? "Concluir" : t("Próximo")}
+                  {estado.passo + 1 === PASSOS.length ? t("Concluir") : t("Próximo")}
                 </button>
               ) : (
                 <button type="button" className={`${formulario.botao} ${formulario.secundario}`} onClick={fazerPorMim}>

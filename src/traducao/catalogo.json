@@ -1111,6 +1111,11 @@
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/Compartilhar.tsx"
   },
   {
+   "texto": "Concluir",
+   "cliente": true,
+   "origem": "componentes/tutorial/Tutorial.tsx"
+  },
+  {
    "texto": "Concluída em",
    "cliente": true,
    "origem": "app/(ferramenta)/(pesquisador)/estudos/[id]/respostas/TabelaParticipacoes.tsx"
